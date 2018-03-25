@@ -15,6 +15,8 @@ class CreateHospitalUsersTable extends Migration
     {
         Schema::create('hospital_users', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('hospital_id')->index();
+            $table->integer('user_id')->index();
             $table->timestamps();
         });
     }

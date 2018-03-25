@@ -15,6 +15,11 @@ class CreateKeysTable extends Migration
     {
         Schema::create('keys', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('title');
+            $table->string('description');
+            $table->smallInteger('status')->default(1);
+            $table->smallInteger('type')->default(1);
+            $table->integer('template_id')->index();
             $table->timestamps();
         });
     }

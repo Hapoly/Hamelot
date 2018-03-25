@@ -15,6 +15,8 @@ class CreateDepartmentPatientsTable extends Migration
     {
         Schema::create('department_patients', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('department_id')->index();
+            $table->integeR('patient_id')->indext();
             $table->timestamps();
         });
     }

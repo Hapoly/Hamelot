@@ -15,6 +15,10 @@ class CreateDepartmentsTable extends Migration
     {
         Schema::create('departments', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('title');
+            $table->string('description');
+            $table->integer('hospital_id')->index();
+            $table->integer('status')->default(1);
             $table->timestamps();
         });
     }

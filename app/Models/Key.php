@@ -16,6 +16,15 @@ class Key extends Model
     public function status_str(){
         return __('key.status.' . $this->status);
     }
+
+
+    const T_INTEGER     = 1;
+    const T_STRING      = 2;
+    const T_BOOLEAN     = 3;
+    public function type_str(){
+        return __('key.type.' . $this->type);
+    }
+
     public function template(){
         return $this->belongsTo('App\Models\Template');
     }
