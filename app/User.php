@@ -12,9 +12,12 @@ class User extends Authenticatable
     const S_INACTIVE    = 2;
 
     public function status_str(){
-        return __('user.status.' . $this->status);
+        return __('users.status_str.' . $this->status);
     }
     
+    public function group_str(){
+        return __('users.group_code_str.' . $this->group_code);
+    }
     /**
      * The attributes that are mass assignable.
      *

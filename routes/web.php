@@ -14,7 +14,11 @@
 Route::get('/', function () {
     return view('welcome');
 });
+Route::middleware(['auth'])->namespace('Admin')->group(function(){
+    Route::resources([
+        'users' => 'Users',
+    ]);
+});
 
 Auth::routes();
-
 Route::get('/home', 'HomeController@index')->name('home');
