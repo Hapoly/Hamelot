@@ -48,29 +48,10 @@ class Users extends Controller{
     return view('admin.users.show', ['exam' => $user]);
   }
   public function create(){
-    return view('admin.users.create', [
-      'subjects'  => Subject::where(['status' => Subject::ACTIVE])->get()
-    ]);
+    return view('admin.users.create');
   }
   public function store(UserRequest $request){
-    $inputs = $request->all();
-    switch($request->type){
-      case 1:
-        $inputs['start_date'] = \App\Drivers\Time::jmktime(0,$request->start_min, $request->start_hour, $request->day, $request->month, $request->year);
-        $inputs['end_date'] = \App\Drivers\Time::jmktime(0,$request->end_min, $request->end_hour, $request->day, $request->month, $request->year);
-        break;
-      case 2:
-        unset($inputs['time']);
-        $inputs['start_date'] = \App\Drivers\Time::jmktime(0,$request->start_min, $request->start_hour, $request->day, $request->month, $request->year);
-        $inputs['end_date'] = \App\Drivers\Time::jmktime(0,$request->end_min, $request->end_hour, $request->day, $request->month, $request->year);
-        break;
-      case 3:
-        unset($inputs['time']);
-        $inputs['start_date'] = \App\Drivers\Time::jmktime(0,0,0 , $request->day, $request->month, $request->year);
-        $inputs['end_date'] = \App\Drivers\Time::jmktime(0,0,0 , $request->day, $request->month, $request->year);
-        break;
-    }
-    $user = Exam::create($inputs);
+    $user = User::create($request->all());
     return redirect()->route('admin.users.show', ['exam' => $user]);
   }
   public function edit(Exam $user){

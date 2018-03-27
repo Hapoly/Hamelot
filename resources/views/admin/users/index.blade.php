@@ -4,7 +4,7 @@
   <div class="container">
     <div class="row">
       <div class="col-md-12">
-        <a href="{{route('users.create')}}" class="btn btn-info" role="button">کاربر جدید</a>
+        <a href="{{route('users.create')}}" class="btn btn-info" role="button">{{__('users.create')}}</a>
       </div>
     </div>
     <div class="row justify-content-center">
@@ -46,9 +46,9 @@
               <form action="{{route('users.destroy', ['user' => $user])}}" style="display: inline" method="POST" class="trash-icon">
                 {{ method_field('DELETE') }}
                 {{ csrf_field() }}
-                <button type="submit" class="btn btn-danger">حذف</button>
+                <button type="submit" class="btn btn-danger">{{__('users.remove')}}</button>
               </form>
-              <a href="{{route('users.edit', ['user' => $user])}}" class="btn btn-info" role="button">ویرایش</a>
+              <a href="{{route('users.edit', ['user' => $user])}}" class="btn btn-info" role="button">{{__('users.edit')}}</a>
             </td>
             </tr>
           @endforeach
@@ -56,8 +56,8 @@
       </table>
     @else
       <div class="row">
-        <div class="col-md-12">
-          {{__('users.not_user_found')}}
+        <div class="col-md-12" style="text-align: center">
+          {{__('users.no_user_found')}}
         </div>
       </div>
     @endif
