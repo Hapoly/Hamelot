@@ -15,7 +15,7 @@ class User extends Authenticatable
         return __('users.status_str.' . $this->status);
     }
     
-    public function group_str(){
+    public function group_code_str(){
         return __('users.group_code_str.' . $this->group_code);
     }
     /**

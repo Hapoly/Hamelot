@@ -20,7 +20,7 @@ class Users extends Controller{
     $links = '';
     $sort = $request->input('sort', '###');
     $search = $request->input('search', '###');
-    
+
     if($sort != '###' && $search == '###'){
       $users = $users->orderBy($request->input('sort'), 'desc');
       $users = $users->paginate(10);
@@ -45,49 +45,34 @@ class Users extends Controller{
     ]);
   }
   public function show(User $user){
-    return view('admin.users.show', ['exam' => $user]);
+    return view('admin.users.show', ['user' => $user]);
   }
   public function create(){
     return view('admin.users.create');
   }
   public function store(UserRequest $request){
-    $user = User::create($request->all());
-    return redirect()->route('admin.users.show', ['exam' => $user]);
-  }
-  public function edit(Exam $user){
-    // $start_date = \App\Drivers\Time::jgetdate($user->start_date);
-    // return $start_date;
-    return view('admin.users.edit', [
-      'subjects'  => Subject::where(['status' => Subject::ACTIVE])->get(),
-      'exam'      => $user,
-    ]);
-  }
-  public function update(UserRequest $request, Exam $user){
     $inputs = $request->all();
-    switch($request->type){
-      case 1:
-        $inputs['start_date'] = \App\Drivers\Time::jmktime(0,$request->start_min, $request->start_hour, $request->day, $request->month, $request->year);
-        $inputs['end_date'] = \App\Drivers\Time::jmktime(0,$request->end_min, $request->end_hour, $request->day, $request->month, $request->year);
-        break;
-      case 2:
-        unset($inputs['time']);
-        $inputs['start_date'] = \App\Drivers\Time::jmktime(0,$request->start_min, $request->start_hour, $request->day, $request->month, $request->year);
-        $inputs['end_date'] = \App\Drivers\Time::jmktime(0,$request->end_min, $request->end_hour, $request->day, $request->month, $request->year);
-        // return $inputs;
-        break;
-      case 3:
-        unset($inputs['time']);
-        $inputs['start_date'] = \App\Drivers\Time::jmktime(0,0,0 , $request->day, $request->month, $request->year);
-        $inputs['end_date'] = \App\Drivers\Time::jmktime(0,0,0 , $request->day, $request->month, $request->year);
-        break;
-    }
-    $user->fill($inputs)->save();
-    return redirect()->route('admin.users.show', ['exam' => $user]);
+    $inputs['password'] = bcrypt($inputs['password']);
+    $user = User::create($inputs);
+    return redirect()->route('users.show', ['user' => $user]);
   }
-  public function destroy(Exam $user){
+  public function edit(User $user){
+    return view('admin.users.edit', ['user' => $user]);
+  }
+  public function update(UserRequest $request, User $user){
+    $inputs = $request->all();
+    if($inputs['password'])
+      $inputs['password'] = bcrypt($inputs['password']);
+    else
+      unset($inputs['password']);
+
+    $user->fill($inputs)->save();
+    return redirect()->route('users.show', ['user' => $user]);
+  }
+  public function destroy(User $user){
     $user->delete();
-    if(URL::route('admin.users.show', ['exam' => $user]) == URL::previous())
-      return redirect()->route('admin.users.index');
+    if(URL::route('users.show', ['user' => $user]) == URL::previous())
+      return redirect()->route('users.index');
     else
       return redirect()->back();
   }

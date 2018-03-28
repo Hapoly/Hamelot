@@ -38,7 +38,7 @@
             <tr>
             <td>{{$user->id}}</td>
             <td><a href="{{route('users.show', ['user' => $user])}}">{{$user->username}}</a></td>
-            <td>{{$user->group_str()}}</td>
+            <td>{{$user->group_code_str()}}</td>
             <td>{{$user->first_name}}</td>
             <td>{{$user->last_name}}</td>
             <td>{{$user->status_str()}}</td>

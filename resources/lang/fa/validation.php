@@ -117,6 +117,14 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'username'      => 'نام کاربری',
+        'password'      => 'کلمه عبور',
+        'first_name'    => 'نام',
+        'last_name'     => 'نام خانوادگی',
+        'prefix'        => 'پیشوند',
+        'status'        => 'وضعیت',
+        'group_code'    => 'گروه کاربری',
+    ],
 
 ];

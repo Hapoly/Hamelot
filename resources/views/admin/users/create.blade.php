@@ -117,7 +117,7 @@
                         </div>
                         <div class="form-group row mb-0">
                             <div class="col-md-12">
-                                <button type="submit" class="btn btn-primary">
+                                <button type="submit" name="action" value="new" class="btn btn-primary">
                                     {{ __('users.save') }}
                                 </button>
                             </div>
