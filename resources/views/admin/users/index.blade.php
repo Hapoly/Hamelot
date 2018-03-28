@@ -57,7 +57,7 @@
     @else
       <div class="row">
         <div class="col-md-12" style="text-align: center">
-          {{__('users.no_user_found')}}
+          {{__('users.no_found')}}
         </div>
       </div>
     @endif

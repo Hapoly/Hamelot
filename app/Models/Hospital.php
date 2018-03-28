@@ -9,12 +9,12 @@ class Hospital extends Model
     protected $primary = 'id';
     protected $table = 'hospitals';
     protected $fillable = ['title', 'address', 'phone', 'mobile', 'image', 'status'];
-    
+
     const S_ACTIVE      = 1;
     const S_INACTIVE    = 2;
 
     public function status_str(){
-        return __('hospital.status.' . $this->status);
+        return __('hospitals.status.' . $this->status);
     }
     public function users(){
         return $this->hasMany('App\User');

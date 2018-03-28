@@ -16,7 +16,14 @@ Route::get('/', function () {
 });
 Route::middleware(['auth'])->namespace('Admin')->group(function(){
     Route::resources([
-        'users' => 'Users',
+        'users'       => 'Users',
+
+        'hospitals'   => 'Hospitals',
+        'departments' => 'Departments',
+        'patients'    => 'Patients',
+        'reports'     => 'Reports',
+
+        'templates'   => 'Templates',
     ]);
 });
 

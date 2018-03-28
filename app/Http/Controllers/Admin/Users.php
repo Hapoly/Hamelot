@@ -11,7 +11,6 @@ use Illuminate\Support\Facades\Storage;
 
 use URL;
 use App\User;
-use App\Subject;
 use App\Http\Requests\UserRequest;
 
 class Users extends Controller{
