@@ -31,8 +31,8 @@
             <img src="{{asset($hospital->image)}}" />
           </div>
           <div class="row">
-            <a href="{{route('users.edit', ['user' => $hospital])}}" class="btn btn-primary" role="button">{{__('users.edit')}}</a>
-            <form action="{{route('users.destroy', ['user' => $hospital])}}" method="post">
+            <a href="{{route('hospitals.edit', ['hospital' => $hospital])}}" class="btn btn-primary" role="button">{{__('hospitals.edit')}}</a>
+            <form action="{{route('hospitals.destroy', ['hospital' => $hospital])}}" method="post">
               {{ method_field('DELETE') }}
               {{ csrf_field() }}
               <button type="submit" class="btn btn-danger">حذف</button>

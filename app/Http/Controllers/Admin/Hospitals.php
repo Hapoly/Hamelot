@@ -60,6 +60,8 @@ class Hospitals extends Controller{
   }
   public function update(HospitalRequest $request, Hospital $hospital){
     $inputs = $request->all();
+    if($request->hasFile('image'))
+      $inputs['image'] = Storage::put('public/hospitals', $request->file('image'));
     $hospital->fill($inputs)->save();
     return redirect()->route('hospitals.show', ['hospital' => $hospital]);
   }
