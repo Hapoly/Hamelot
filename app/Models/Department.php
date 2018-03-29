@@ -14,7 +14,7 @@ class Department extends Model
     const S_INACTIVE    = 2;
 
     public function status_str(){
-        return __('department.status.' . $this->status);
+        return __('departments.status_str.' . $this->status);
     }
     public function patients(){
         return $this->hasMany('App\Models\Patient');

@@ -1,16 +1,14 @@
 <?php
 
 return [
-    'index_title'       => 'بیمارستان‌ها',
+    'index_title'       => 'بخش‌ها',
     'search'            => 'جستجو',
     'row'               => 'ردیف',
 
     'title'             => 'عنوان',
-    'address'           => 'آدرس',
-    'phone'             => 'شماره تماس',
-    'mobile'            => 'موبایل',
+    'description'       => 'توضیحات',
+    'hospital_id'       => 'بیمارستان',
     'status'            => 'وضعیت',
-    'image'             => 'تصویر',
     'operation'         => 'عملیات',
 
     'status_str'        => [
@@ -18,9 +16,9 @@ return [
         '2' => 'غیرفعال',
     ],
 
-    'not_found' => 'بیمارستانی یافت نشد',
+    'not_found' => 'بخشی یافت نشد',
 
-    'create'        => 'بیمارستان جدید',
+    'create'        => 'بخش جدید',
     'save'          => 'ذخیره',
     'edit'          => 'ویرایش',
     'remove'        => 'حذف',
