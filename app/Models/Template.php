@@ -14,7 +14,7 @@ class Template extends Model
     const S_INACTIVE    = 2;
 
     public function status_str(){
-        return __('template.status.' . $this->status);
+        return __('templates.status_str.' . $this->status);
     }
     public function keys(){
         return $this->hasMany('App\Models\Key');
