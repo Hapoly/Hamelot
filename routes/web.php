@@ -24,6 +24,7 @@ Route::middleware(['auth'])->namespace('Admin')->group(function(){
         'reports'     => 'Reports',
 
         'templates'   => 'Templates',
+        'keys'        => 'Keys',
     ]);
 });
 
