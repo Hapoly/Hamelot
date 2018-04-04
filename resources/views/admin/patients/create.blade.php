@@ -4,56 +4,59 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('hospitals.create') }}</div>
+                <div class="card-header">{{ __('patients.create') }}</div>
                 <div class="card-body">
-                    <form method="POST" action="{{ route('hospitals.store') }}" enctype="multipart/form-data">
+                    <form method="POST" action="{{ route('patients.store') }}" enctype="multipart/form-data">
                         @csrf
                         <div class="form-group row">
-                            <label for="title" class="col-md-4 col-form-label text-md-right">{{ __('hospitals.title') }}</label>
+                            <label for="title" class="col-md-4 col-form-label text-md-right">{{ __('patients.first_name') }}</label>
                             <div class="col-md-6">
-                                <input id="title" type="text" class="form-control{{ $errors->has('title') ? ' is-invalid' : '' }}" name="title" value="{{ old('title') }}" required autofocus>
-                                @if ($errors->has('title'))
+                                <input id="first_name" type="text" class="form-control{{ $errors->has('first_name') ? ' is-invalid' : '' }}" name="first_name" value="{{ old('first_name') }}" required autofocus>
+                                @if ($errors->has('first_name'))
                                     <span class="invalid-feedback">
-                                        <strong>{{ $errors->first('title') }}</strong>
+                                        <strong>{{ $errors->first('first_name') }}</strong>
                                     </span>
                                 @endif
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="address" class="col-md-4 col-form-label text-md-right">{{ __('hospitals.address') }}</label>
+                            <label for="title" class="col-md-4 col-form-label text-md-right">{{ __('patients.last_name') }}</label>
                             <div class="col-md-6">
-                                <input id="address" type="text" class="form-control{{ $errors->has('address') ? ' is-invalid' : '' }}" name="address" value="{{ old('address') }}" required>
-                                @if ($errors->has('address'))
+                                <input id="last_name" type="text" class="form-control{{ $errors->has('last_name') ? ' is-invalid' : '' }}" name="last_name" value="{{ old('last_name') }}" required autofocus>
+                                @if ($errors->has('last_name'))
                                     <span class="invalid-feedback">
-                                        <strong>{{ $errors->first('address') }}</strong>
+                                        <strong>{{ $errors->first('last_name') }}</strong>
                                     </span>
                                 @endif
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="phone" class="col-md-4 col-form-label text-md-right">{{ __('hospitals.phone') }}</label>
+                            <label for="title" class="col-md-4 col-form-label text-md-right">{{ __('patients.id_number') }}</label>
                             <div class="col-md-6">
-                                <input id="phone" type="phone" class="form-control{{ $errors->has('phone') ? ' is-invalid' : '' }}" name="phone" value="{{ old('phone') }}" required>
-                                @if ($errors->has('phone'))
+                                <input id="id_number" type="text" class="form-control{{ $errors->has('id_number') ? ' is-invalid' : '' }}" name="id_number" value="{{ old('id_number') }}" required autofocus>
+                                @if ($errors->has('id_number'))
                                     <span class="invalid-feedback">
-                                        <strong>{{ $errors->first('phone') }}</strong>
+                                        <strong>{{ $errors->first('id_number') }}</strong>
                                     </span>
                                 @endif
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="mobile" class="col-md-4 col-form-label text-md-right">{{ __('hospitals.mobile') }}</label>
+                            <label for="gender" class="col-md-4 col-form-label text-md-right">{{ __('patients.gender') }}</label>
                             <div class="col-md-6">
-                                <input id="mobile" type="phone" class="form-control{{ $errors->has('mobile') ? ' is-invalid' : '' }}" name="mobile" value="{{ old('mobile') }}" required>
-                                @if ($errors->has('mobile'))
+                                <select class="form-control" name="gender" id="gender">
+                                    <option value="1">{{__('users.gender_str.1')}}  </option>
+                                    <option value="2">{{__('users.gender_str.2')}}  </option>
+                                </select>
+                                @if ($errors->has('gender'))
                                     <span class="invalid-feedback">
-                                        <strong>{{ $errors->first('mobile') }}</strong>
+                                        <strong>{{ $errors->first('gender') }}</strong>
                                     </span>
                                 @endif
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="image" class="col-md-4 col-form-label text-md-right">{{ __('hospitals.image') }}</label>
+                            <label for="image" class="col-md-4 col-form-label text-md-right">{{ __('patients.image') }}</label>
                             <div class="col-md-6">
                                 <input id="image" type="file" class="form-control{{ $errors->has('image') ? ' is-invalid' : '' }}" name="image" required>
                                 @if ($errors->has('image'))
@@ -64,7 +67,7 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="status" class="col-md-4 col-form-label text-md-right">{{ __('hospitals.status') }}</label>
+                            <label for="status" class="col-md-4 col-form-label text-md-right">{{ __('patients.status') }}</label>
                             <div class="col-md-6">
                                 <select class="form-control" name="status" id="status">
                                     <option value="1">{{__('users.status_str.1')}}  </option>
@@ -80,7 +83,7 @@
                         <div class="form-group row mb-0">
                             <div class="col-md-12">
                                 <button type="submit" name="action" value="new" class="btn btn-primary">
-                                    {{ __('hospitals.save') }}
+                                    {{ __('patients.save') }}
                                 </button>
                             </div>
                         </div>

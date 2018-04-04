@@ -38,7 +38,7 @@
             <td><a href="{{route('keys.show', ['key' => $key])}}">{{$key->title}}</a></td>
             <td>{{$key->description}}</td>
             <td><a href="{{route('templates.show', ['template' => $key->template])}}">{{$key->template->title}}</a></td>
-            <td>{{$key->type_str()}}
+            <td>{{$key->type_str()}}<td>
             <td>{{$key->status_str()}}</td>
             <td>
               <form action="{{route('keys.destroy', ['key' => $key])}}" style="display: inline" method="POST" class="trash-icon">
