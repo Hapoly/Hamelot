@@ -45,8 +45,8 @@
                             <label for="gender" class="col-md-4 col-form-label text-md-right">{{ __('patients.gender') }}</label>
                             <div class="col-md-6">
                                 <select class="form-control" name="gender" id="gender">
-                                    <option value="1">{{__('users.gender_str.1')}}  </option>
-                                    <option value="2">{{__('users.gender_str.2')}}  </option>
+                                    <option value="1">{{__('patients.gender_str.1')}}  </option>
+                                    <option value="2">{{__('patients.gender_str.2')}}  </option>
                                 </select>
                                 @if ($errors->has('gender'))
                                     <span class="invalid-feedback">
@@ -70,8 +70,8 @@
                             <label for="status" class="col-md-4 col-form-label text-md-right">{{ __('patients.status') }}</label>
                             <div class="col-md-6">
                                 <select class="form-control" name="status" id="status">
-                                    <option value="1">{{__('users.status_str.1')}}  </option>
-                                    <option value="2">{{__('users.status_str.2')}}  </option>
+                                    <option value="1">{{__('patients.status_str.1')}}  </option>
+                                    <option value="2">{{__('patients.status_str.2')}}  </option>
                                 </select>
                                 @if ($errors->has('status'))
                                     <span class="invalid-feedback">
