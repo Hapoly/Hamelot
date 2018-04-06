@@ -63,7 +63,12 @@ class Reports extends Controller{
     return redirect()->route('reports.show', ['report' => $report]);
   }
   public function edit(Report $report){
-    return view('admin.reports.edit', ['report' => $report, 'templates' => Template::where('status', Template::S_ACTIVE)->get()]);
+    return view('admin.reports.edit', [
+      'report'    => $report,
+      'keys'      => Key::where('status', Key::S_ACTIVE)->get(),
+      'hospitals' => Hospital::where('status', Hospital::S_ACTIVE)->get(),
+      'patients'  => Patient::where('status', Patient::S_ACTIVE)->get(),
+    ]);
   }
   public function update(ReportRequest $request, Report $report){
     $inputs = $request->all();

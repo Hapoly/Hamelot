@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Drivers\Time;
 
 class Report extends Model
 {
@@ -10,13 +11,7 @@ class Report extends Model
     protected $table = 'reports';
     protected $fillable = ['key_id', 'value', 'date', 'hospital_id', 'patient_id'];
 
-    const S_ACTIVE      = 1;
-    const S_INACTIVE    = 2;
-
-    public function status_str(){
-        return __('reports.status_str.' . $this->status);
-    }
-    public function patients(){
+    public function patient(){
         return $this->belongsTo('App\Models\Patient');
     }
     public function hospital(){
@@ -24,5 +19,9 @@ class Report extends Model
     }
     public function key(){
       return $this->belongsTo('App\Models\Key');
+    }
+
+    public function date_stamp(){
+        return Time::jdate('Y/n/d G:i', $this->created_at->timestamp);
     }
 }

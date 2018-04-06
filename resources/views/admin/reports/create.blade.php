@@ -9,22 +9,22 @@
                     <form method="POST" action="{{ route('reports.store') }}" enctype="multipart/form-data">
                         @csrf
                         <div class="form-group row">
-                          <label for="template_id" class="col-md-4 col-form-label text-md-right">{{ __('reports.key_id') }}</label>
+                          <label for="key_id" class="col-md-4 col-form-label text-md-right">{{ __('reports.key_id') }}</label>
                           <div class="col-md-6">
-                              <select class="form-control" name="template_id" id="template_id">
+                              <select class="form-control" name="key_id" id="key_id">
                                 @foreach($keys as $key)
                                   <option value="{{$key->id}}"> {{$key->template->title}} > {{$key->title}} </option>
                                 @endforeach
                               </select>
-                              @if ($errors->has('template_id'))
+                              @if ($errors->has('key_id'))
                                   <span class="invalid-feedback">
-                                      <strong>{{ $errors->first('template_id') }}</strong>
+                                      <strong>{{ $errors->first('key_id') }}</strong>
                                   </span>
                               @endif
                           </div>
                         </div>
                         <div class="form-group row">
-                          <label for="template_id" class="col-md-4 col-form-label text-md-right">{{ __('reports.patient_id') }}</label>
+                          <label for="patient_id" class="col-md-4 col-form-label text-md-right">{{ __('reports.patient_id') }}</label>
                           <div class="col-md-6">
                               <select class="form-control" name="patient_id" id="patient_id">
                                 @foreach($patients as $patient)
@@ -39,7 +39,7 @@
                           </div>
                         </div>
                         <div class="form-group row">
-                          <label for="template_id" class="col-md-4 col-form-label text-md-right">{{ __('reports.hospital_id') }}</label>
+                          <label for="hospital_id" class="col-md-4 col-form-label text-md-right">{{ __('reports.hospital_id') }}</label>
                           <div class="col-md-6">
                               <select class="form-control" name="hospital_id" id="hospital_id">
                                 @foreach($hospitals as $hospital)
@@ -60,20 +60,6 @@
                                 @if ($errors->has('value'))
                                     <span class="invalid-feedback">
                                         <strong>{{ $errors->first('value') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="status" class="col-md-4 col-form-label text-md-right">{{ __('reports.status') }}</label>
-                            <div class="col-md-6">
-                                <select class="form-control" name="status" id="status">
-                                    <option value="1">{{__('reports.status_str.1')}}  </option>
-                                    <option value="2">{{__('reports.status_str.2')}}  </option>
-                                </select>
-                                @if ($errors->has('status'))
-                                    <span class="invalid-feedback">
-                                        <strong>{{ $errors->first('status') }}</strong>
                                     </span>
                                 @endif
                             </div>

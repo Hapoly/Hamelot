@@ -28,7 +28,6 @@ class ReportRequest extends FormRequest
             'key_id'        => 'required|numeric',
             'hospital_id'   => 'required|numeric',
             'patient_id'    => 'required|numeric',
-            'status'        => 'required|numeric',
         ];
     }
 }

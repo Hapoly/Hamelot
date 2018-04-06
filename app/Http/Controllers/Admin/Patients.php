@@ -37,7 +37,7 @@ class Patients extends Controller{
       $patients = $patients->paginate(10);
     }
     return view('admin.patients.index', [
-      'patients'   => $patients,
+      'patients'    => $patients,
       'links'       => $links,
       'sort'        => $sort,
       'search'      => $search,
