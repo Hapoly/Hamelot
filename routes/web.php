@@ -27,7 +27,7 @@ Route::middleware(['auth'])->namespace('Admin')->group(function(){
         'keys'              => 'Keys',
 
         'hospital_users'    => 'HospitalUsers',
-
+        'department_users'  => 'DepartmentUsers',
 
     ]);
 });

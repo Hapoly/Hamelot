@@ -25,11 +25,8 @@
         <thead>
           <tr>
             <th ><a href="{{route('hospital_users.index',['search' => $search,'sort' => 'id'    ,'page' => $hospital_users->currentPage()])}}">{{__('hospital_users.row')}}</a></th>
-            <th ><a href="{{route('hospital_users.index',['search' => $search,'sort' => 'patient_id'    ,'page' => $hospital_users->currentPage()])}}">{{__('hospital_users.patient_id')}}</a></th>
             <th ><a href="{{route('hospital_users.index',['search' => $search,'sort' => 'hospital_id'    ,'page' => $hospital_users->currentPage()])}}">{{__('hospital_users.hospital_id')}}</a></th>
-            <th ><a href="{{route('hospital_users.index',['search' => $search,'sort' => 'value'    ,'page' => $hospital_users->currentPage()])}}">{{__('hospital_users.value')}}</a></th>
-            <th ><a href="{{route('hospital_users.index',['search' => $search,'sort' => 'date'     ,'page' => $repoers->currentPage()])}}">{{__('hospital_users.date')}}</a></th>
-            <th ><a href="{{route('hospital_users.index',['search' => $search,'sort' => 'status'    ,'page' => $hospital_users->currentPage()])}}">{{__('hospital_users.status')}}</a></th>
+            <th ><a href="{{route('hospital_users.index',['search' => $search,'sort' => 'user_id'    ,'page' => $hospital_users->currentPage()])}}">{{__('hospital_users.user_id')}}</a></th>
             <th >{{__('hospital_users.operation')}}</th>
           </tr>
         </thead>
@@ -37,10 +34,8 @@
           @foreach($hospital_users as $hospital_user)
             <tr>
             <td>{{$hospital_user->id}}</td>
-            <td><a href="{{route('hospital_users.show', ['hospital_user' => $hospital_user])}}">{{$hospital_user->key->title}}</a></td>
-            <td>{{$hospital_user->value}}</td>
-            <td>{{$hospital_user->date_str()}}</td>
-            <td>{{$hospital_user->status_str()}}</td>
+            <td><a href="{{route('hospitals.show', ['hospital' => $hospital_user->hospital])}}">{{$hospital_user->hospital->title}}</a></td>
+            <td><a href="{{route('users.show', ['user' => $hospital_user->user])}}">{{$hospital_user->user->first_name}} {{$hospital_user->user->last_name}}</a></td>
             <td>
               <form action="{{route('hospital_users.destroy', ['hospital_user' => $hospital_user])}}" style="display: inline" method="POST" class="trash-icon">
                 {{ method_field('DELETE') }}
