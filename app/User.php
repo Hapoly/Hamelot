@@ -15,6 +15,12 @@ class User extends Authenticatable
         return __('users.status_str.' . $this->status);
     }
     
+    const G_ADMIN       = 1;
+    const G_MANAGER     = 2;
+    const G_DOCTOR      = 3;
+    const G_NURSE       = 4;
+    const G_PATIENT     = 5;
+
     public function group_code_str(){
         return __('users.group_code_str.' . $this->group_code);
     }
@@ -35,4 +41,8 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function hospitals(){
+        return $this->hasMany('App\Models\HospitalUser');
+    }
 }

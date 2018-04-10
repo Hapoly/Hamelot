@@ -57,7 +57,7 @@ class HospitalUsers extends Controller{
   }
   public function store(HospitalUserRequest $request){
     $hospital_user = HospitalUser::create($request->all());
-    return redirect()->route('hospital_users.show', ['hospital_user' => $hospital_user]);
+    return redirect()->route('users.show', ['user' => $hospital_user->user]);
   }
   public function edit(HospitalUser $hospital_user){
     return view('admin.hospital_users.edit', [

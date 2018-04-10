@@ -17,7 +17,7 @@ class Hospital extends Model
         return __('hospitals.status.' . $this->status);
     }
     public function users(){
-        return $this->hasMany('App\User');
+        return $this->hasMany('App\Models\HospitalUser');
     }
     public function departments(){
         return $this->hasMany('App\Models\Department');
