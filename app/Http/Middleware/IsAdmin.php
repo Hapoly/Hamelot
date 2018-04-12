@@ -16,9 +16,9 @@ class IsAdmin
      */
     public function handle($request, Closure $next)
     {
-        if(Auth::user()->group_code == User::G_ADMIN)
+        if(Auth::user()->group_code == User::G_ADMIN){
             return $next($request);
-        else
+        }else
             return abort(403);
     }
 }

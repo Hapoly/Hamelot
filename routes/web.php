@@ -33,8 +33,6 @@ Route::middleware(['auth', 'IsAdmin'])->namespace('Admin')->group(function(){
 });
 Route::middleware(['auth', 'IsManager'])->namespace('Manager')->group(function(){
     Route::resources([
-        'users'             => 'Users',
-
         'hospitals'         => 'Hospitals',
         'departments'       => 'Departments',
         'patients'          => 'Patients',

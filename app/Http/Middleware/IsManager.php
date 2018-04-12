@@ -16,9 +16,9 @@ class IsManager
      */
     public function handle($request, Closure $next)
     {
-        if(Auth::user()->group_code == User::G_MANAGER)
+        if(Auth::user()->group_code == User::G_MANAGER){
             return $next($request);
-        else
+        }else
             return abort(403);
     }
 }

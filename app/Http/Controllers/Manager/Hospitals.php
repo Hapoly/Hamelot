@@ -11,11 +11,15 @@ use Illuminate\Support\Facades\Storage;
 
 use URL;
 use App\Models\Hospital;
+use App\Models\HospitalUser;
+
 use App\Http\Requests\HospitalRequest;
 
 class Hospitals extends Controller{
   public function index(Request $request){
-    $hospitals = new Hospital;
+    $hospitals = Hospital::whereHas('users', function($query){
+        return $query->where('user_id', Auth::user()->id);
+    });
     $links = '';
     $sort = $request->input('sort', '###');
     $search = $request->input('search', '###');
@@ -53,6 +57,11 @@ class Hospitals extends Controller{
     $inputs = $request->all();
     $inputs['image'] = Storage::put('public/hospitals', $request->file('image'));
     $hospital = Hospital::create($inputs);
+    $hospital_user = new HospitalUser([
+      'user_id' => Auth::user()->id,
+      'hospital_id' => $hospital->id,
+    ]);
+    $hospital_user->save();
     return redirect()->route('hospitals.show', ['hospital' => $hospital]);
   }
   public function edit(Hospital $hospital){
