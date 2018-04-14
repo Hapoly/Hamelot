@@ -27,9 +27,9 @@ class Patient extends Model
         return $this->hasMany('App\Models\Report');
     }
     public function departments(){
-        return $this->hasMany('App\Models\Department');
+        return $this->hasMany('App\Models\DepartmentPatient');
     }
     public function users(){
-        return $this->hasMany('App\User');
+        return $this->hasMany('App\Models\PatientUser');
     }
 }

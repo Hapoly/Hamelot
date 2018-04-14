@@ -11,11 +11,15 @@ use Illuminate\Support\Facades\Storage;
 
 use URL;
 use App\Models\Patient;
+use App\Models\Department;
+use App\Models\Hospital;
+use App\User;
+
 use App\Http\Requests\PatientRequest;
 
 class Patients extends Controller{
   public function index(Request $request){
-    $patients = new Patient;
+    $patients = Auth::user()->patients();
     $links = '';
     $sort = $request->input('sort', '###');
     $search = $request->input('search', '###');
@@ -46,8 +50,20 @@ class Patients extends Controller{
   public function show(Patient $patient){
     return view('manager.patients.show', ['patient' => $patient]);
   }
-  public function create(){
-    return view('manager.patients.create');
+  public function create(Request $request){
+    $departments = Department::whereHas('hospital', function($query){
+      return $query->whereHas('users', function($query){
+        return $query->where('user_id', Auth::user()->id);
+      });
+    })->get();
+
+    if($request->has('department'))
+      return view('manager.patients.create',
+        [
+          'selected_department' => Hospital::where('id', $request->input('department'))->first(),
+          'departments' => $departments,
+        ]);
+    return view('manager.patients.create',['departments' => $departments]);
   }
   public function store(PatientRequest $request){
     $inputs = $request->all();

@@ -14,7 +14,7 @@ class Hospital extends Model
     const S_INACTIVE    = 2;
 
     public function status_str(){
-        return __('hospitals.status.' . $this->status);
+        return __('hospitals.status_str.' . $this->status);
     }
     public function users(){
         return $this->hasMany('App\Models\HospitalUser');

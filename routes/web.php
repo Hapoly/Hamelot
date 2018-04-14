@@ -14,7 +14,7 @@
 Route::get('/', function () {
     return view('welcome');
 });
-Route::middleware(['auth', 'IsAdmin'])->namespace('Admin')->group(function(){
+Route::middleware(['auth', 'IsAdmin'])->namespace('Admin')->prefix('admin')->group(function(){
     Route::resources([
         'users'             => 'Users',
 
@@ -28,10 +28,9 @@ Route::middleware(['auth', 'IsAdmin'])->namespace('Admin')->group(function(){
 
         'hospital_users'    => 'HospitalUsers',
         'department_users'  => 'DepartmentUsers',
-
     ]);
 });
-Route::middleware(['auth', 'IsManager'])->namespace('Manager')->group(function(){
+Route::middleware(['auth', 'IsManager'])->namespace('Manager')->prefix('manager')->group(function(){
     Route::resources([
         'hospitals'         => 'Hospitals',
         'departments'       => 'Departments',
@@ -43,7 +42,6 @@ Route::middleware(['auth', 'IsManager'])->namespace('Manager')->group(function()
 
         'hospital_users'    => 'HospitalUsers',
         'department_users'  => 'DepartmentUsers',
-
     ]);
 });
 

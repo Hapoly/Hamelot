@@ -31,6 +31,53 @@
               <button type="submit" class="btn btn-danger">حذف</button>
             </form>
           </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-8" style="margin-top: 1rem">
+      <a href="{{route('patients.create',['department' => $department])}}" class="btn btn-info" role="button">{{__('patients.create')}}</a>
+    </div>
+    <div class="col-md-8" style="margin-top: 1rem">
+      <div class="card">
+        <div class="card-header">{{__('patients.index_title')}}</div>
+        <div class="card-body">
+          @if(sizeof($department->patients))
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>{{__('patients.row')}}</th>
+                  <th>{{__('patients.first_name')}}</th>
+                  <th>{{__('patients.last_name')}}</th>
+                  <th>{{__('patients.status')}}</th>
+                  <th>{{__('patients.operation')}}</th>
+                </tr>
+              </thead>
+              <tbody>
+                @foreach($department->patients as $patient)
+                  <tr>
+                    <td>{{$patient->id}}</td>
+                    <td><a href="{{route('patients.show', ['patient' => $patient])}}">{{$patient->title}}</a></td>
+                    <td>{{$patient->status_str()}}</td>
+                    <td>
+                      <a href="{{route('patients.edit', ['patient' => $patient])}}" class="btn btn-info" role="button">{{__('patients.edit')}}</a>
+                      <form action="{{route('patients.destroy', ['patient' => $patient])}}" style="display: inline" method="POST" class="trash-icon">
+                        {{ method_field('DELETE') }}
+                        {{ csrf_field() }}
+                        <button type="submit" class="btn btn-danger">{{__('patients.remove')}}</button>
+                      </form>
+                    </td>
+                  </tr>
+                @endforeach
+              </tbody>
+            </table>
+          @else
+            <div class="row">
+              <div class="col-md-12" style="text-align: center">
+                {{__('patients.not_found')}}
+              </div>
+            </div>
+          @endif
+        </div>
       </div>
     </div>
   </div>

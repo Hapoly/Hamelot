@@ -35,7 +35,11 @@
                             <div class="col-md-6">
                                 <select class="form-control" name="hospital_id" id="hospital_id">
                                   @foreach($hospitals as $hospital)
-                                    <option value="{{$hospital->id}}" {{old('hospital_id') == $hospital->id? 'selected': ''}}>{{$hospital->title}}</option>
+                                    @if(isset($selected_hospital))
+                                        <option value="{{$hospital->id}}" {{old('hospital_id', $selected_hospital->id) == $hospital->id? 'selected': ''}}>{{$hospital->title}}</option>
+                                    @else
+                                        <option value="{{$hospital->id}}" {{old('hospital_id') == $hospital->id? 'selected': ''}}>{{$hospital->title}}</option>
+                                    @endif
                                   @endforeach
                                 </select>
                                 @if ($errors->has('hospital_id'))

@@ -17,7 +17,7 @@ class Department extends Model
         return __('departments.status_str.' . $this->status);
     }
     public function patients(){
-        return $this->hasMany('App\Models\Patient');
+        return $this->hasMany('App\Models\DepartmentPatient');
     }
     public function hospital(){
         return $this->belongsTo('App\Models\Hospital');

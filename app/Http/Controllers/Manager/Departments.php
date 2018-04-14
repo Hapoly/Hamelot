@@ -16,7 +16,11 @@ use App\Http\Requests\DepartmentRequest;
 
 class Departments extends Controller{
   public function index(Request $request){
-    $departments = new Department;
+    $departments = Department::whereHas('hospital', function($query){
+      $query->whereHas('users', function($query){
+        $query->where('user_id', Auth::user()->id);
+      });
+    });
     $links = '';
     $sort = $request->input('sort', '###');
     $search = $request->input('search', '###');
@@ -47,9 +51,17 @@ class Departments extends Controller{
   public function show(Department $department){
     return view('manager.departments.show', ['department' => $department]);
   }
-  public function create(){
-    return view('manager.departments.create',
-      ['hospitals' => Hospital::where('status', Hospital::S_ACTIVE)->get()]);
+  public function create(Request $request){
+    $hospitals = Hospital::whereHas('users', function($query){
+      return $query->where('user_id', Auth::user()->id);
+    })->get();
+    if($request->has('hospital'))
+      return view('manager.departments.create',
+        [
+          'selected_hospital' => Hospital::where('id', $request->input('hospital'))->first(),
+          'hospitals' => $hospitals,
+        ]);
+    return view('manager.departments.create',['hospitals' => $hospitals]);
   }
   public function store(DepartmentRequest $request){
     $department = Department::create($request->all());
