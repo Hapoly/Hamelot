@@ -20,8 +20,8 @@
             <div class="col-md-3">:{{__('templates.status')}}</div>
           </div>
           <div class="row">
-            <a href="{{route('templates.edit', ['template' => $template])}}" class="btn btn-primary" role="button">{{__('templates.edit')}}</a>
-            <form action="{{route('templates.destroy', ['template' => $template])}}" method="post">
+            <a href="{{route('manager.templates.edit', ['template' => $template])}}" class="btn btn-primary" role="button">{{__('templates.edit')}}</a>
+            <form action="{{route('manager.templates.destroy', ['template' => $template])}}" method="post">
               {{ method_field('DELETE') }}
               {{ csrf_field() }}
               <button type="submit" class="btn btn-danger">حذف</button>

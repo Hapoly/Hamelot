@@ -28,8 +28,8 @@
             <div class="col-md-3">:{{__('reports.date')}}</div>
           </div>
           <div class="row">
-            <a href="{{route('reports.edit', ['report' => $report])}}" class="btn btn-primary" role="button">{{__('reports.edit')}}</a>
-            <form action="{{route('reports.destroy', ['report' => $report])}}" method="post">
+            <a href="{{route('admin.reports.edit', ['report' => $report])}}" class="btn btn-primary" role="button">{{__('reports.edit')}}</a>
+            <form action="{{route('admin.reports.destroy', ['report' => $report])}}" method="post">
               {{ method_field('DELETE') }}
               {{ csrf_field() }}
               <button type="submit" class="btn btn-danger">حذف</button>

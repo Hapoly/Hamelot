@@ -53,7 +53,7 @@ class Users extends Controller{
     $inputs = $request->all();
     $inputs['password'] = bcrypt($inputs['password']);
     $user = User::create($inputs);
-    return redirect()->route('users.show', ['user' => $user]);
+    return redirect()->route('admin.users.show', ['user' => $user]);
   }
   public function edit(User $user){
     return view('admin.users.edit', ['user' => $user]);
@@ -66,12 +66,12 @@ class Users extends Controller{
       unset($inputs['password']);
 
     $user->fill($inputs)->save();
-    return redirect()->route('users.show', ['user' => $user]);
+    return redirect()->route('admin.users.show', ['user' => $user]);
   }
   public function destroy(User $user){
     $user->delete();
-    if(URL::route('users.show', ['user' => $user]) == URL::previous())
-      return redirect()->route('users.index');
+    if(URL::route('admin.users.show', ['user' => $user]) == URL::previous())
+      return redirect()->route('admin.users.index');
     else
       return redirect()->back();
   }

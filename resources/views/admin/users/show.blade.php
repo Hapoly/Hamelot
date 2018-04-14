@@ -32,8 +32,8 @@
             <div class="col-md-3">:{{__('users.status')}}</div>
           </div>
           <div class="row">
-            <a href="{{route('users.edit', ['user' => $user])}}" class="btn btn-primary" role="button">{{__('users.edit')}}</a>
-            <form action="{{route('users.destroy', ['user' => $user])}}" method="post">
+            <a href="{{route('admin.users.edit', ['user' => $user])}}" class="btn btn-primary" role="button">{{__('users.edit')}}</a>
+            <form action="{{route('admin.users.destroy', ['user' => $user])}}" method="post">
               {{ method_field('DELETE') }}
               {{ csrf_field() }}
               <button type="submit" class="btn btn-danger">حذف</button>
@@ -44,7 +44,7 @@
     </div>
     @if($user->group_code == \App\User::G_MANAGER)
       <div class="col-md-8" style="margin-top: 1rem">
-        <a href="{{route('hospital_users.create')}}" class="btn btn-info" role="button">{{__('hospital_users.create')}}</a>
+        <a href="{{route('admin.hospital_users.create')}}" class="btn btn-info" role="button">{{__('hospital_users.create')}}</a>
       </div>
       <div class="col-md-8" style="margin-top: 1rem">
         <div class="card">
@@ -63,9 +63,9 @@
                   @foreach($user->hospitals as $hospital_user)
                     <tr>
                       <td>{{$hospital_user->hospital->id}}</td>
-                      <td><a href="{{route('hospitals.show', ['hospital_user' => $hospital_user])}}">{{$hospital_user->hospital->title}}</a></td>
+                      <td><a href="{{route('admin.hospitals.show', ['hospital_user' => $hospital_user])}}">{{$hospital_user->hospital->title}}</a></td>
                       <td>
-                        <form action="{{route('hospital_users.destroy', ['hospital_user' => $hospital_user])}}" style="display: inline" method="POST" class="trash-icon">
+                        <form action="{{route('admin.hospital_users.destroy', ['hospital_user' => $hospital_user])}}" style="display: inline" method="POST" class="trash-icon">
                           {{ method_field('DELETE') }}
                           {{ csrf_field() }}
                           <button type="submit" class="btn btn-danger">{{__('hospital_users.remove')}}</button>
@@ -88,7 +88,7 @@
     @endif
     @if($user->group_code == \App\User::G_DOCTOR || $user->group_code == \App\User::G_NURSE)
       <div class="col-md-8" style="margin-top: 1rem">
-        <a href="{{route('department_users.create')}}" class="btn btn-info" role="button">{{__('department_users.create')}}</a>
+        <a href="{{route('admin.department_users.create')}}" class="btn btn-info" role="button">{{__('department_users.create')}}</a>
       </div>
       <div class="col-md-8" style="margin-top: 1rem">
         <div class="card">
@@ -107,9 +107,9 @@
                   @foreach($user->departments as $department_user)
                     <tr>
                       <td>{{$department_user->department->id}}</td>
-                      <td><a href="{{route('departments.show', ['department_user' => $department_user])}}">{{$department_user->department->title}}</a></td>
+                      <td><a href="{{route('admin.departments.show', ['department_user' => $department_user])}}">{{$department_user->department->title}}</a></td>
                       <td>
-                        <form action="{{route('department_users.destroy', ['department_user' => $department_user])}}" style="display: inline" method="POST" class="trash-icon">
+                        <form action="{{route('admin.department_users.destroy', ['department_user' => $department_user])}}" style="display: inline" method="POST" class="trash-icon">
                           {{ method_field('DELETE') }}
                           {{ csrf_field() }}
                           <button type="submit" class="btn btn-danger">{{__('department_users.remove')}}</button>

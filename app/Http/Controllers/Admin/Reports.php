@@ -60,7 +60,7 @@ class Reports extends Controller{
   }
   public function store(ReportRequest $request){
     $report = Report::create($request->all());
-    return redirect()->route('reports.show', ['report' => $report]);
+    return redirect()->route('admin.reports.show', ['report' => $report]);
   }
   public function edit(Report $report){
     return view('admin.reports.edit', [
@@ -75,12 +75,12 @@ class Reports extends Controller{
     if($request->hasFile('image'))
       $inputs['image'] = Storage::put('public/reports', $request->file('image'));
     $report->fill($inputs)->save();
-    return redirect()->route('reports.show', ['report' => $report]);
+    return redirect()->route('admin.reports.show', ['report' => $report]);
   }
   public function destroy(Report $report){
     $report->delete();
-    if(URL::route('reports.show', ['report' => $report]) == URL::previous())
-      return redirect()->route('reports.index');
+    if(URL::route('admin.reports.show', ['report' => $report]) == URL::previous())
+      return redirect()->route('admin.reports.index');
     else
       return redirect()->back();
   }

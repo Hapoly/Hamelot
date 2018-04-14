@@ -6,7 +6,7 @@
             <div class="card">
                 <div class="card-header">{{ __('department_users.edit') }}</div>
                 <div class="card-body">
-                    <form method="POST" action="{{ route('department_users.update', ['department_user' => $department_user]) }}" enctype="multipart/form-data">
+                    <form method="POST" action="{{ route('admin.department_users.update', ['department_user' => $department_user]) }}" enctype="multipart/form-data">
                         {{ method_field('PUT') }}
                         @csrf
                         <div class="form-group row">

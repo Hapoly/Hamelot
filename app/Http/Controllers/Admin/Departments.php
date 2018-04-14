@@ -53,7 +53,7 @@ class Departments extends Controller{
   }
   public function store(DepartmentRequest $request){
     $department = Department::create($request->all());
-    return redirect()->route('departments.show', ['department' => $department]);
+    return redirect()->route('admin.departments.show', ['department' => $department]);
   }
   public function edit(Department $department){
     return view('admin.departments.edit', ['department' => $department, 'hospitals' => Hospital::where('status', Hospital::S_ACTIVE)->get()]);
@@ -63,12 +63,12 @@ class Departments extends Controller{
     if($request->hasFile('image'))
       $inputs['image'] = Storage::put('public/departments', $request->file('image'));
     $department->fill($inputs)->save();
-    return redirect()->route('departments.show', ['department' => $department]);
+    return redirect()->route('admin.departments.show', ['department' => $department]);
   }
   public function destroy(Department $department){
     $department->delete();
-    if(URL::route('departments.show', ['department' => $department]) == URL::previous())
-      return redirect()->route('departments.index');
+    if(URL::route('admin.departments.show', ['department' => $department]) == URL::previous())
+      return redirect()->route('admin.departments.index');
     else
       return redirect()->back();
   }

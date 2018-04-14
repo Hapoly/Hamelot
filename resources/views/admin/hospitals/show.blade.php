@@ -31,8 +31,8 @@
             <img src="{{asset($hospital->image)}}" />
           </div>
           <div class="row">
-            <a href="{{route('hospitals.edit', ['hospital' => $hospital])}}" class="btn btn-primary" role="button">{{__('hospitals.edit')}}</a>
-            <form action="{{route('hospitals.destroy', ['hospital' => $hospital])}}" method="post">
+            <a href="{{route('admin.hospitals.edit', ['hospital' => $hospital])}}" class="btn btn-primary" role="button">{{__('hospitals.edit')}}</a>
+            <form action="{{route('admin.hospitals.destroy', ['hospital' => $hospital])}}" method="post">
               {{ method_field('DELETE') }}
               {{ csrf_field() }}
               <button type="submit" class="btn btn-danger">حذف</button>
@@ -41,7 +41,7 @@
       </div>
     </div>
     <div class="col-md-8" style="margin-top: 1rem">
-      <a href="{{route('departments.create')}}" class="btn btn-info" role="button">{{__('departments.create')}}</a>
+      <a href="{{route('admin.departments.create')}}" class="btn btn-info" role="button">{{__('departments.create')}}</a>
     </div>
     <div class="col-md-8" style="margin-top: 1rem">
       <div class="card">
@@ -62,9 +62,9 @@
                 @foreach($user->departments as $department_user)
                   <tr>
                     <td>{{$department_user->department->id}}</td>
-                    <td><a href="{{route('departments.show', ['department_user' => $department_user])}}">{{$department_user->department->title}}</a></td>
+                    <td><a href="{{route('admin.departments.show', ['department_user' => $department_user])}}">{{$department_user->department->title}}</a></td>
                     <td>
-                      <form action="{{route('departments.destroy', ['department_user' => $department_user])}}" style="display: inline" method="POST" class="trash-icon">
+                      <form action="{{route('admin.departments.destroy', ['department_user' => $department_user])}}" style="display: inline" method="POST" class="trash-icon">
                         {{ method_field('DELETE') }}
                         {{ csrf_field() }}
                         <button type="submit" class="btn btn-danger">{{__('departments.remove')}}</button>

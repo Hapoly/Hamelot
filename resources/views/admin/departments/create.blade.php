@@ -6,7 +6,7 @@
             <div class="card">
                 <div class="card-header">{{ __('departments.create') }}</div>
                 <div class="card-body">
-                    <form method="POST" action="{{ route('departments.store') }}" enctype="multipart/form-data">
+                    <form method="POST" action="{{ route('admin.departments.store') }}" enctype="multipart/form-data">
                         @csrf
                         <div class="form-group row">
                             <label for="title" class="col-md-4 col-form-label text-md-right">{{ __('departments.title') }}</label>

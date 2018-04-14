@@ -53,7 +53,7 @@ class Keys extends Controller{
   }
   public function store(KeyRequest $request){
     $key = Key::create($request->all());
-    return redirect()->route('keys.show', ['key' => $key]);
+    return redirect()->route('admin.keys.show', ['key' => $key]);
   }
   public function edit(Key $key){
     return view('admin.keys.edit', ['key' => $key, 'templates' => Template::where('status', Template::S_ACTIVE)->get()]);
@@ -63,12 +63,12 @@ class Keys extends Controller{
     if($request->hasFile('image'))
       $inputs['image'] = Storage::put('public/keys', $request->file('image'));
     $key->fill($inputs)->save();
-    return redirect()->route('keys.show', ['key' => $key]);
+    return redirect()->route('admin.keys.show', ['key' => $key]);
   }
   public function destroy(Key $key){
     $key->delete();
-    if(URL::route('keys.show', ['key' => $key]) == URL::previous())
-      return redirect()->route('keys.index');
+    if(URL::route('admin.keys.show', ['key' => $key]) == URL::previous())
+      return redirect()->route('admin.keys.index');
     else
       return redirect()->back();
   }

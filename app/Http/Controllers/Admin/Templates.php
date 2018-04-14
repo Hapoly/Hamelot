@@ -52,7 +52,7 @@ class Templates extends Controller{
   public function store(TemplateRequest $request){
     $inputs = $request->all();
     $template = Template::create($inputs);
-    return redirect()->route('templates.show', ['template' => $template]);
+    return redirect()->route('admin.templates.show', ['template' => $template]);
   }
   public function edit(Template $template){
     return view('admin.templates.edit', ['template' => $template]);
@@ -60,12 +60,12 @@ class Templates extends Controller{
   public function update(TemplateRequest $request, Template $template){
     $inputs = $request->all();
     $template->fill($inputs)->save();
-    return redirect()->route('templates.show', ['template' => $template]);
+    return redirect()->route('admin.templates.show', ['template' => $template]);
   }
   public function destroy(Template $template){
     $template->delete();
-    if(URL::route('templates.show', ['template' => $template]) == URL::previous())
-      return redirect()->route('templates.index');
+    if(URL::route('admin.templates.show', ['template' => $template]) == URL::previous())
+      return redirect()->route('admin.templates.index');
     else
       return redirect()->back();
   }

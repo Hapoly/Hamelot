@@ -6,7 +6,7 @@
             <div class="card">
                 <div class="card-header">{{ __('reports.create') }}</div>
                 <div class="card-body">
-                    <form method="POST" action="{{ route('reports.store') }}" enctype="multipart/form-data">
+                    <form method="POST" action="{{ route('admin.reports.store') }}" enctype="multipart/form-data">
                         @csrf
                         <div class="form-group row">
                           <label for="key_id" class="col-md-4 col-form-label text-md-right">{{ __('reports.key_id') }}</label>

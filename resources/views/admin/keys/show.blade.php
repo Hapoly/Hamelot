@@ -28,8 +28,8 @@
             <div class="col-md-3">:{{__('keys.status')}}</div>
           </div>
           <div class="row">
-            <a href="{{route('keys.edit', ['key' => $key])}}" class="btn btn-primary" role="button">{{__('keys.edit')}}</a>
-            <form action="{{route('keys.destroy', ['key' => $key])}}" method="post">
+            <a href="{{route('admin.keys.edit', ['key' => $key])}}" class="btn btn-primary" role="button">{{__('keys.edit')}}</a>
+            <form action="{{route('admin.keys.destroy', ['key' => $key])}}" method="post">
               {{ method_field('DELETE') }}
               {{ csrf_field() }}
               <button type="submit" class="btn btn-danger">حذف</button>

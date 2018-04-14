@@ -6,7 +6,7 @@
             <div class="card">
                 <div class="card-header">{{ __('departments.edit') }}</div>
                 <div class="card-body">
-                    <form method="POST" action="{{ route('departments.update', ['department' => $department]) }}" enctype="multipart/form-data">
+                    <form method="POST" action="{{ route('manager.departments.update', ['department' => $department]) }}" enctype="multipart/form-data">
                         {{ method_field('PUT') }}
                         @csrf
                         <div class="form-group row">

@@ -57,7 +57,7 @@ class HospitalUsers extends Controller{
   }
   public function store(HospitalUserRequest $request){
     $hospital_user = HospitalUser::create($request->all());
-    return redirect()->route('users.show', ['user' => $hospital_user->user]);
+    return redirect()->route('admin.users.show', ['user' => $hospital_user->user]);
   }
   public function edit(HospitalUser $hospital_user){
     return view('admin.hospital_users.edit', [
@@ -71,12 +71,12 @@ class HospitalUsers extends Controller{
     if($request->hasFile('image'))
       $inputs['image'] = Storage::put('public/hospital_users', $request->file('image'));
     $hospital_user->fill($inputs)->save();
-    return redirect()->route('hospital_users.show', ['hospital_user' => $hospital_user]);
+    return redirect()->route('admin.hospital_users.show', ['hospital_user' => $hospital_user]);
   }
   public function destroy(HospitalUser $hospital_user){
     $hospital_user->delete();
-    if(URL::route('hospital_users.show', ['hospital_user' => $hospital_user]) == URL::previous())
-      return redirect()->route('hospital_users.index');
+    if(URL::route('admin.hospital_users.show', ['hospital_user' => $hospital_user]) == URL::previous())
+      return redirect()->route('admin.hospital_users.index');
     else
       return redirect()->back();
   }

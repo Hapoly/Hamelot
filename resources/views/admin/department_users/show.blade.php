@@ -16,8 +16,8 @@
             <div class="col-md-3">:{{__('department_users.user_id')}}</div>
           </div>
           <div class="row">
-            <a href="{{route('department_users.edit', ['department_user' => $department_user])}}" class="btn btn-primary" role="button">{{__('department_users.edit')}}</a>
-            <form action="{{route('department_users.destroy', ['department_user' => $department_user])}}" method="post">
+            <a href="{{route('admin.department_users.edit', ['department_user' => $department_user])}}" class="btn btn-primary" role="button">{{__('department_users.edit')}}</a>
+            <form action="{{route('admin.department_users.destroy', ['department_user' => $department_user])}}" method="post">
               {{ method_field('DELETE') }}
               {{ csrf_field() }}
               <button type="submit" class="btn btn-danger">حذف</button>

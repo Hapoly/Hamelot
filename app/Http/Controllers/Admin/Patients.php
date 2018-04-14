@@ -53,7 +53,7 @@ class Patients extends Controller{
     $inputs = $request->all();
     $inputs['image'] = Storage::put('public/patients', $request->file('image'));
     $patient = Patient::create($inputs);
-    return redirect()->route('patients.show', ['patient' => $patient]);
+    return redirect()->route('admin.patients.show', ['patient' => $patient]);
   }
   public function edit(Patient $patient){
     return view('admin.patients.edit', ['patient' => $patient]);
@@ -63,12 +63,12 @@ class Patients extends Controller{
     if($request->hasFile('image'))
       $inputs['image'] = Storage::put('public/patients', $request->file('image'));
     $patient->fill($inputs)->save();
-    return redirect()->route('patients.show', ['patient' => $patient]);
+    return redirect()->route('admin.patients.show', ['patient' => $patient]);
   }
   public function destroy(Patient $patient){
     $patient->delete();
-    if(URL::route('patients.show', ['patient' => $patient]) == URL::previous())
-      return redirect()->route('patients.index');
+    if(URL::route('admin.patients.show', ['patient' => $patient]) == URL::previous())
+      return redirect()->route('admin.patients.index');
     else
       return redirect()->back();
   }

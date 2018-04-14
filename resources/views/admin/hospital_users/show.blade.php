@@ -16,8 +16,8 @@
             <div class="col-md-3">:{{__('hospital_users.user_id')}}</div>
           </div>
           <div class="row">
-            <a href="{{route('hospital_users.edit', ['hospital_user' => $hospital_user])}}" class="btn btn-primary" role="button">{{__('hospital_users.edit')}}</a>
-            <form action="{{route('hospital_users.destroy', ['hospital_user' => $hospital_user])}}" method="post">
+            <a href="{{route('admin.hospital_users.edit', ['hospital_user' => $hospital_user])}}" class="btn btn-primary" role="button">{{__('hospital_users.edit')}}</a>
+            <form action="{{route('admin.hospital_users.destroy', ['hospital_user' => $hospital_user])}}" method="post">
               {{ method_field('DELETE') }}
               {{ csrf_field() }}
               <button type="submit" class="btn btn-danger">حذف</button>

@@ -6,7 +6,7 @@
             <div class="card">
                 <div class="card-header">{{ __('keys.edit') }}</div>
                 <div class="card-body">
-                    <form method="POST" action="{{ route('keys.update', ['key' => $key]) }}" enctype="multipart/form-data">
+                    <form method="POST" action="{{ route('manager.keys.update', ['key' => $key]) }}" enctype="multipart/form-data">
                         {{ method_field('PUT') }}
                         @csrf
                         <div class="form-group row">

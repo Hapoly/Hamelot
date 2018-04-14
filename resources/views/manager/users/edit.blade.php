@@ -6,7 +6,7 @@
             <div class="card">
                 <div class="card-header">{{ __('users.edit') }}</div>
                 <div class="card-body">
-                    <form method="POST" action="{{ route('users.update', ['user' => $user]) }}">
+                    <form method="POST" action="{{ route('manager.users.update', ['user' => $user]) }}">
                         {{ method_field('PUT') }}
                         @csrf
                         <div class="form-group row">

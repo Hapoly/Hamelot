@@ -57,7 +57,7 @@ class DepartmentUsers extends Controller{
   }
   public function store(DepartmentUserRequest $request){
     $department_user = DepartmentUser::create($request->all());
-    return redirect()->route('department_users.show', ['department_user' => $department_user]);
+    return redirect()->route('admin.department_users.show', ['department_user' => $department_user]);
   }
   public function edit(DepartmentUser $department_user){
     return view('admin.department_users.edit', [
@@ -71,12 +71,12 @@ class DepartmentUsers extends Controller{
     if($request->hasFile('image'))
       $inputs['image'] = Storage::put('public/department_users', $request->file('image'));
     $department_user->fill($inputs)->save();
-    return redirect()->route('department_users.show', ['department_user' => $department_user]);
+    return redirect()->route('admin.department_users.show', ['department_user' => $department_user]);
   }
   public function destroy(DepartmentUser $department_user){
     $department_user->delete();
-    if(URL::route('department_users.show', ['department_user' => $department_user]) == URL::previous())
-      return redirect()->route('department_users.index');
+    if(URL::route('admin.department_users.show', ['department_user' => $department_user]) == URL::previous())
+      return redirect()->route('admin.department_users.index');
     else
       return redirect()->back();
   }
