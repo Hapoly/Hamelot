@@ -26,6 +26,6 @@ class Key extends Model
     }
 
     public function template(){
-        return $this->belongsTo('App\Models\Template');
+        return $this->belongsToMany('App\Models\Template');
     }
 }

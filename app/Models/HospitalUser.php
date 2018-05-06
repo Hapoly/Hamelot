@@ -11,9 +11,9 @@ class HospitalUser extends Model
     protected $fillable = ['hospital_id', 'user_id'];
 
     public function hospital(){
-        return $this->belongsTo('App\Models\Hospital');
+        return $this->belongsToMany('App\Models\Hospital');
     }
     public function user(){
-        return $this->belongsTo('App\User');
+        return $this->belongsToMany('App\User');
     }
 }

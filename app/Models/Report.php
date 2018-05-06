@@ -12,13 +12,13 @@ class Report extends Model
     protected $fillable = ['key_id', 'value', 'date', 'hospital_id', 'patient_id'];
 
     public function patient(){
-        return $this->belongsTo('App\Models\Patient');
+        return $this->belongsToMany('App\Models\Patient');
     }
     public function hospital(){
-        return $this->belongsTo('App\Models\Hospital');
+        return $this->belongsToMany('App\Models\Hospital');
     }
     public function key(){
-      return $this->belongsTo('App\Models\Key');
+      return $this->belongsToMany('App\Models\Key');
     }
 
     public function date_stamp(){

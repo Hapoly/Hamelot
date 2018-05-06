@@ -11,9 +11,9 @@ class DepartmentUser extends Model
     protected $fillable = ['department_id', 'user_id'];
 
     public function department(){
-        return $this->belongsTo('App\Models\Department');
+        return $this->belongsToMany('App\Models\Department');
     }
     public function user(){
-        return $this->belongsTo('App\User');
+        return $this->belongsToMany('App\User');
     }
 }
