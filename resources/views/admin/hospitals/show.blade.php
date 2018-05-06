@@ -52,19 +52,19 @@
               <thead>
                 <tr>
                   <th>{{__('departments.row')}}</th>
-                  <th>{{__('departments.id')}}</th>
                   <th>{{__('departments.title')}}</th>
                   <th>{{__('departments.status')}}</th>
                   <th>{{__('departments.operation')}}</th>
                 </tr>
               </thead>
               <tbody>
-                @foreach($user->departments as $department_user)
+                @foreach($hospital->departments as $department)
                   <tr>
-                    <td>{{$department_user->department->id}}</td>
-                    <td><a href="{{route('admin.departments.show', ['department_user' => $department_user])}}">{{$department_user->department->title}}</a></td>
+                    <td>{{$department->id}}</td>
+                    <td><a href="{{route('admin.departments.show', ['department' => $department])}}">{{$department->title}}</a></td>
+                    <td>{{$department->status_str()}}</td>
                     <td>
-                      <form action="{{route('admin.departments.destroy', ['department_user' => $department_user])}}" style="display: inline" method="POST" class="trash-icon">
+                      <form action="{{route('admin.departments.destroy', ['department' => $department])}}" style="display: inline" method="POST" class="trash-icon">
                         {{ method_field('DELETE') }}
                         {{ csrf_field() }}
                         <button type="submit" class="btn btn-danger">{{__('departments.remove')}}</button>
