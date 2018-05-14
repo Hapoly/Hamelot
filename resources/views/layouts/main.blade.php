@@ -30,7 +30,7 @@
 			<ul class="list-unstyled components">
 				<li>
 					<a href="#userSubmenu" data-toggle="collapse" aria-expanded="false">
-						<i class="glyphicon glyphicon-home"></i>
+						<i class="fa fa-users" aria-hidden="true"></i>
 						کاربران
 					</a>
 					<ul class="collapse list-unstyled" id="userSubmenu">
@@ -45,7 +45,7 @@
 				</li>
 				<li>
 					<a href="#hospitalSubmenu" data-toggle="collapse" aria-expanded="false">
-						<i class="glyphicon glyphicon-duplicate"></i>
+						<i class="fa fa-hospital-o" aria-hidden="true"></i>
 						بیمارستان ها
 					</a>
 					<ul class="collapse list-unstyled" id="hospitalSubmenu">
@@ -59,7 +59,7 @@
 				</li>
 				<li>
 					<a href="#partSubmenu" data-toggle="collapse" aria-expanded="false">
-						<i class="glyphicon glyphicon-duplicate"></i>
+						<i class="fa fa-h-square" aria-hidden="true"></i>
 						بخش ها
 					</a>
 					<ul class="collapse list-unstyled" id="partSubmenu">
@@ -73,7 +73,7 @@
 				</li>
 				<li>
 					<a href="#drSubmenu" data-toggle="collapse" aria-expanded="false">
-						<i class="glyphicon glyphicon-duplicate"></i>
+						<i class="fa fa-user-md" aria-hidden="true"></i>
 						پزشکان
 					</a>
 					<ul class="collapse list-unstyled" id="drSubmenu">
@@ -87,7 +87,7 @@
 				</li>
 				<li>
 					<a href="#nurseSubmenu" data-toggle="collapse" aria-expanded="false">
-						<i class="glyphicon glyphicon-duplicate"></i>
+						<i class="fa fa-heartbeat" aria-hidden="true"></i>
 						پرستاران
 					</a>
 					<ul class="collapse list-unstyled" id="nurseSubmenu">
@@ -101,7 +101,7 @@
 				</li>
 				<li>
 					<a href="#patientSubmenu" data-toggle="collapse" aria-expanded="false">
-						<i class="glyphicon glyphicon-duplicate"></i>
+						<i class="fa fa-wheelchair" aria-hidden="true"></i>
 						بیماران
 					</a>
 					<ul class="collapse list-unstyled" id="patientSubmenu">
@@ -115,7 +115,7 @@
 				</li>
 				<li>
 					<a href="#patientSubmenu" data-toggle="collapse" aria-expanded="false">
-						<i class="glyphicon glyphicon-duplicate"></i>
+						<i class="fa fa-medkit" aria-hidden="true"></i>
 						آزمایشات
 					</a>
 					<ul class="collapse list-unstyled" id="patientSubmenu">
