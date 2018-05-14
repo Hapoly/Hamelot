@@ -12,6 +12,12 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	<!-- Our Custom CSS -->
 	<link rel="stylesheet" href="{{asset('css/style.css')}}">
+	<style>
+		.row {
+			margin-top: 3rem;
+			margin-bottom: 1rem;
+		}
+	</style>
 </head>
 <body>
 	<div class="wrapper" class="toggled">
