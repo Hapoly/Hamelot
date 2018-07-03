@@ -1,4 +1,19 @@
-@import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);/*!
+@import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);
+.login{
+	margin-top: 100px;
+}
+@media (max-width: 768px) {
+	
+}
+@media (min-width: 1200px) {
+	.login{
+		width: 500px;
+	}
+	.register{
+		width: 500px;
+	}
+}
+/*!
  * Bootstrap v4.0.0 (https://getbootstrap.com)
  * Copyright 2011-2018 The Bootstrap Authors
  * Copyright 2011-2018 Twitter, Inc.
