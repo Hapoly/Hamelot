@@ -4,17 +4,17 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('general.login') }}</div>
+            <div class="card login" style="margin-right: auto;margin-left: auto;">
+                <div class="card-header" style="background-color: #2a5477;color: white;text-align: right;">{{ __('general.login') }}</div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
 
                         <div class="form-group row">
-                            <label for="username" class="col-sm-4 col-form-label text-md-right">{{ __('general.username') }}</label>
+                            <label for="username" class="col-sm-3 col-form-label text-md-right">{{ __('general.username') }}</label>
 
-                            <div class="col-md-6">
+                            <div class="col-md-8">
                                 <input id="username" type="text" class="form-control{{ $errors->has('username') ? ' is-invalid' : '' }}" name="username" value="{{ old('username') }}" required autofocus>
 
                                 @if ($errors->has('username'))
@@ -26,9 +26,9 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('general.password') }}</label>
+                            <label for="password" class="col-md-3 col-form-label text-md-right">{{ __('general.password') }}</label>
 
-                            <div class="col-md-6">
+                            <div class="col-md-8">
                                 <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>
 
                                 @if ($errors->has('password'))
@@ -50,7 +50,7 @@
                         </div>
 
                         <div class="form-group row mb-0">
-                            <div class="col-md-8 offset-md-4">
+                            <div class="col-md-8 offset-md-5" style="text-align: center;">
                                 <button type="submit" class="btn btn-primary">
                                     {{ __('general.login') }}
                                 </button>
