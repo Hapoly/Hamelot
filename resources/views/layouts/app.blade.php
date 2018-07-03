@@ -23,6 +23,7 @@
         body {
             direction: rtl;
         }
+        
         th, td {
             text-align: center;
         }
