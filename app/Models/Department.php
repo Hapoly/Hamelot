@@ -20,7 +20,7 @@ class Department extends Model
         return $this->hasMany('App\Models\DepartmentPatient');
     }
     public function hospital(){
-        return $this->belongsToMany('App\Models\Hospital');
+        return $this->belongsTo('App\Models\Hospital');
     }
     public function users(){
         return $this->hasMany('App\User');
