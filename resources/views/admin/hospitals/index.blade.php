@@ -2,16 +2,16 @@
 @section('title', __('hospitals.index.title'))
 @section('content')
 <div class="row" style="margin-bottom:50px;">
-  <div class="col-sm-3">
+  <div class="col-md-4 col-sm-3">
   <a href="{{route('admin.hospitals.create')}}" class="btn add">بیمارستان<i class="fa fa-plus"></i></a>
   </div>
-    <div class="col-sm-9">
-      <form class="navbar-form" role="search" style="margin:auto;width:80%;direction:ltr;float:right" action="{{route('admin.hospitals.index',['sort' => $sort])}}" method="get">
+    <div class="col-md-8 col-sm-9">
+      <form class="navbar-form" role="search" style="margin:auto;width:100%;direction:ltr;float:right" action="{{route('admin.hospitals.index',['sort' => $sort])}}" method="get">
         <div class="input-group add-on">
           <div class="input-group-btn">
             <button class="btn" type="submit"><i class="glyphicon glyphicon-search"></i></button>
           </div>
-          <input class="form-control" placeholder="{{__('hospitals.search')}}" name="search" id="srch-term" value="{{old('search')}}" type="text">
+          <input class="form-control" placeholder="{{__('hospitals.search')}}" style="width:350px" name="search" id="srch-term" value="{{old('search')}}" type="text">
         </div>
       </form>
     </div>
