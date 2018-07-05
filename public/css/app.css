@@ -2,6 +2,12 @@
 .login{
 	margin-top: 100px;
 }
+.card-body{
+    background-color: #f3f3f3;
+}
+.py-4{
+	background-color:white;
+}
 @media (max-width: 768px) {
 	
 }
