@@ -302,6 +302,7 @@ h2{
         /* text-align: center; */
         /* margin-left: -80px !important ; */
     }
+    
     .col-sm-2{
         float:right;
     }
@@ -364,5 +365,8 @@ h2{
     .container {
         width: 100%;
         margin: auto
-    }        
+    }   
+    .navbar-form .input-group>.form-control{
+        width: 350px;
+    }
 }

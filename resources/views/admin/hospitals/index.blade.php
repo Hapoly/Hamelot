@@ -11,7 +11,7 @@
           <div class="input-group-btn">
             <button class="btn" type="submit"><i class="glyphicon glyphicon-search"></i></button>
           </div>
-          <input class="form-control" placeholder="{{__('hospitals.search')}}" style="width:350px" name="search" id="srch-term" value="{{old('search')}}" type="text">
+          <input class="form-control search-box" placeholder="{{__('hospitals.search')}}"  name="search" id="srch-term" value="{{old('search')}}" type="text">
         </div>
       </form>
     </div>
