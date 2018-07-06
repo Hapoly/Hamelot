@@ -50,11 +50,12 @@
                         </div>
 
                         <div class="form-group row mb-0">
-                            <div class="col-md-8 offset-md-5" style="text-align: center;">
+                            <div class="col-md-3" style="text-align: center;">
                                 <button type="submit" class="btn btn-primary">
                                     {{ __('general.login') }}
                                 </button>
-
+                            </div>
+                            <div class="col-md-8">
                                 <a class="btn btn-link" href="{{ route('password.request') }}">
                                     {{ __('general.forgot_password') }}
                                 </a>
