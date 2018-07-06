@@ -32,6 +32,7 @@
 					<a href="#userSubmenu" data-toggle="collapse" aria-expanded="false">
 						<i class="fa fa-users" aria-hidden="true"></i>
 						کاربران
+						
 					</a>
 					<ul class="collapse list-unstyled" id="userSubmenu">
 						<li>
@@ -45,7 +46,7 @@
 				</li>
 				<li>
 					<a href="#hospitalSubmenu" data-toggle="collapse" aria-expanded="false">
-						<i class="fa fa-hospital-o" aria-hidden="true"></i>
+						<i class="fa fa-hospital-o" aria-hidden="false"></i>
 						بیمارستان ها
 					</a>
 					<ul class="collapse list-unstyled" id="hospitalSubmenu">
@@ -132,11 +133,11 @@
 		<!-- Page Content Holder -->
 		<div id="content" style="width:100%">
 			<nav class="navbar navbar-default">
-				<div class="container-fluid">
+				<div class="container-fluid">	
 					<div class="navbar-header navbar-right">
 						<button type="button" id="sidebarCollapse" class="btn btn-info navbar-btn">
 							<i class="glyphicon glyphicon-align-left"></i>
-							<!-- <span>Toggle</span> -->
+							 <!-- <span>Toggle</span>  -->
 						</button>
 					</div>
 					<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">

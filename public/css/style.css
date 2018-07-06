@@ -318,8 +318,11 @@ h2{
         -ms-transform: translateX(50%);
         transform: translateX(50%);
     }
-    #sidebar.active {
+    #sidebar.active  {
         margin-left: 0 !important;
+    }
+    #sidebar.active ul li a {
+        visibility: visible;
     }
 
     #sidebar .sidebar-header h3, #sidebar .CTAs {
@@ -334,6 +337,7 @@ h2{
 
     #sidebar ul li a {
         padding: 0px 0px;
+        visibility: hidden;
     }
 
     #sidebar ul li a span {
