@@ -76,6 +76,9 @@ i, span {
     max-width: 80px;
     text-align: center;
 }
+#sidebar.active ul li ul {
+    padding-right: 1px;
+}
 
 #sidebar.active .sidebar-header h3, #sidebar.active .CTAs {
     display: none;
@@ -90,7 +93,7 @@ i, span {
 }
 
 #sidebar.active ul li a {
-    padding: 20px 10px;
+    /* padding: 20px 10px; */
     text-align: center;
     font-size: 0.85em;
 }
