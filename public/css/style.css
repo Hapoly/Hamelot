@@ -79,6 +79,9 @@ i, span {
 #sidebar.active ul li ul {
     padding-right: 1px;
 }
+#sidebar.active ul li a{
+    margin-bottom: 5px;
+}
 
 #sidebar.active .sidebar-header h3, #sidebar.active .CTAs {
     display: none;
@@ -280,7 +283,9 @@ h2{
     background-color:rgb(245, 245, 245);
     height: 520px;
 }
-
+#sidebar ul li a i{
+    margin-left: 5px;
+}
 /* ---------------------------------------------------
     CONTENT STYLE
 ----------------------------------------------------- */

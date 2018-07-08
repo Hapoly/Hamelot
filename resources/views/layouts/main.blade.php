@@ -32,29 +32,27 @@
 					<a href="#userSubmenu" data-toggle="collapse" aria-expanded="false">
 						<i class="fa fa-users" aria-hidden="true"></i>
 						کاربران
-						
 					</a>
 					<ul class="collapse list-unstyled" id="userSubmenu">
 						<li>
-							<a href="#"> کاربر جدید</a>
+							<a href="{{route('admin.users.create')}}"> کاربر جدید</a>
 						</li>
 						<li>
-							<a href="#"> لیست کل</a>
+							<a href="‌{{route('admin.users.index')}}">  کاربران</a>
 						</li>
 
 					</ul>
 				</li>
 				<li>
 					<a href="#hospitalSubmenu" data-toggle="collapse" aria-expanded="false">
-						<i class="fa fa-hospital-o" aria-hidden="false"></i>
-						بیمارستان ها
+						<i class="fa fa-hospital-o" aria-hidden="false"></i>  بیمارستان ها
 					</a>
 					<ul class="collapse list-unstyled" id="hospitalSubmenu">
 						<li>
-							<a href="#"> بیمارستان جدید</a>
+							<a href="{{route('admin.hospitals.create')}}"> بیمارستان جدید</a>
 						</li>
 						<li>
-							<a href="#"> لیست بیمارستان ها</a>
+							<a href="{{route('admin.hospitals.index')}}"> لیست بیمارستان ها</a>
 						</li>
 					</ul>
 				</li>
@@ -65,10 +63,10 @@
 					</a>
 					<ul class="collapse list-unstyled" id="partSubmenu">
 						<li>
-							<a href="#"> بخش جدید</a>
+							<a href="{{route('admin.departments.create')}}"> بخش جدید</a>
 						</li>
 						<li>
-							<a href="#"> لیست بخش ها</a>
+							<a href="{{route('admin.departments.index')}}"> لیست بخش ها</a>
 						</li>
 					</ul>
 				</li>
@@ -107,10 +105,10 @@
 					</a>
 					<ul class="collapse list-unstyled" id="patientSubmenu">
 						<li>
-							<a href="#"> بیمار جدید</a>
+							<a href="{{route('admin.patients.create')}}"> بیمار جدید</a>
 						</li>
 						<li>
-							<a href="#"> لیست بیماران</a>
+							<a href="{{route('admin.patients.index')}}"> لیست بیماران</a>
 						</li>
 					</ul>
 				</li>
