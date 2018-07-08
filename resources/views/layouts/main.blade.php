@@ -71,7 +71,7 @@
 						</li>
 					</ul>
 				</li>
-				<li>
+				<!-- <li>
 					<a href="#drSubmenu" data-toggle="collapse" aria-expanded="false">
 						<i class="fa fa-user-md" aria-hidden="true"></i>
 						پزشکان
@@ -84,8 +84,8 @@
 							<a href="#"> لیست پزشکان</a>
 						</li>
 					</ul>
-				</li>
-				<li>
+				</li> -->
+				<!-- <li>
 					<a href="#nurseSubmenu" data-toggle="collapse" aria-expanded="false">
 						<i class="fa fa-heartbeat" aria-hidden="true"></i>
 						پرستاران
@@ -98,7 +98,7 @@
 							<a href="#"> لیست پرستاران</a>
 						</li>
 					</ul>
-				</li>
+				</li> -->
 				<li>
 					<a href="#patientSubmenu" data-toggle="collapse" aria-expanded="false">
 						<i class="fa fa-wheelchair" aria-hidden="true"></i>
@@ -113,7 +113,7 @@
 						</li>
 					</ul>
 				</li>
-				<li>
+				<!-- <li>
 					<a href="#patientSubmenu" data-toggle="collapse" aria-expanded="false">
 						<i class="fa fa-medkit" aria-hidden="true"></i>
 						آزمایشات
@@ -126,7 +126,7 @@
 							<a href="#"> لیست آزمایشات</a>
 						</li>
 					</ul>
-				</li>
+				</li> -->
 			</ul>
 		</nav>
 		<!-- Page Content Holder -->
