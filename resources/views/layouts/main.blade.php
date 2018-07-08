@@ -12,6 +12,7 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	<!-- Our Custom CSS -->
 	<link rel="stylesheet" href="{{asset('css/style.css')}}">
+	<link href='http://www.fontonline.ir/css/BRoya.css' rel='stylesheet' type='text/css'>
 	<style>
 		.row {
 			margin-top: 3rem;
