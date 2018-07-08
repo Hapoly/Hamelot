@@ -1,7 +1,7 @@
 @extends('layouts.main')
 @section('content')
 <div class="container">
-  <div class="panel panel-default">
+  <div class="panel panel-default create-card">
     <h2>{{ __('hospitals.create') }}</h2>
     <div class="row">
       <div class="col-md-12">
