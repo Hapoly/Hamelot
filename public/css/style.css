@@ -55,8 +55,12 @@ i, span {
     width: 50%;
 }
 .create-card{
-    width:800px;
+    width:700px;
     margin: auto;
+}
+.create-form{
+    margin-left:10px;
+    margin-right:10px;
 }
 /* ---------------------------------------------------
     SIDEBAR STYLE
@@ -258,6 +262,7 @@ a.article, a.article:hover {
 .card .form-group {
     margin-right: 20px;
 }
+
 .row input{
     width: 93%
 }
