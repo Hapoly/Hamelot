@@ -46,7 +46,8 @@
 				</li>
 				<li>
 					<a href="#hospitalSubmenu" data-toggle="collapse" aria-expanded="false">
-						<i class="fa fa-hospital-o" aria-hidden="false"></i>  بیمارستان ها
+						<i class="fa fa-hospital-o" aria-hidden="false"></i>
+						بیمارستان ها
 					</a>
 					<ul class="collapse list-unstyled" id="hospitalSubmenu">
 						<li>
