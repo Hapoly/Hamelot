@@ -31,7 +31,7 @@
 			<ul class="list-unstyled components">
 				<li>
 					<a href="#userSubmenu" data-toggle="collapse" aria-expanded="false">
-						<i class="fa fa-users" aria-hidden="true"></i>
+						<i class="fa fa-users" aria-hidden="false"></i>
 						کاربران
 					</a>
 					<ul class="collapse list-unstyled" id="userSubmenu">
@@ -39,9 +39,8 @@
 							<a href="{{route('admin.users.create')}}"> کاربر جدید</a>
 						</li>
 						<li>
-							<a href="‌{{route('admin.users.index')}}">  کاربران</a>
+							<a href="{{route('admin.users.index')}}">  کاربران</a>
 						</li>
-
 					</ul>
 				</li>
 				<li>
@@ -60,7 +59,7 @@
 				</li>
 				<li>
 					<a href="#partSubmenu" data-toggle="collapse" aria-expanded="false">
-						<i class="fa fa-h-square" aria-hidden="true"></i>
+						<i class="fa fa-h-square" aria-hidden="false"></i>
 						بخش ها
 					</a>
 					<ul class="collapse list-unstyled" id="partSubmenu">
@@ -102,7 +101,7 @@
 				</li> -->
 				<li>
 					<a href="#patientSubmenu" data-toggle="collapse" aria-expanded="false">
-						<i class="fa fa-wheelchair" aria-hidden="true"></i>
+						<i class="fa fa-wheelchair" aria-hidden="false"></i>
 						بیماران
 					</a>
 					<ul class="collapse list-unstyled" id="patientSubmenu">
