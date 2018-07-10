@@ -9,6 +9,9 @@
 	background-color:#f5f8fa;
 }
 @media (max-width: 768px) {
+	label{
+		text-align: right;
+	}
 	
 }
 @media (min-width: 1200px) {
