@@ -70,7 +70,7 @@
             </div>
           </div>
           <div class="col-md-6">
-             <div class="form-group row">
+             <div class="form-group row" style="margin-right:10px;">
               <div class="col-md-10">
                 <input id="image" type="file" class="form-control{{ $errors->has('image') ? ' is-invalid' : '' }}" name="image" required>
                 @if ($errors->has('image'))
