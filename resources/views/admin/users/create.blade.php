@@ -77,7 +77,7 @@
                     <div class="form-group row create-form">
                         <div class="col-md-6">
                             <div class="form-group row">
-                                <div class="col-md-10">
+                                <div class="col-md-8">
                                     <select class="form-control" name="group_code" id="group_code" style="width:80%;">
                                             <option value="1">{{__('users.group_code_str.1')}}   </option>
                                             <option value="2">{{__('users.group_code_str.2')}} </option>
@@ -91,14 +91,13 @@
                                             </span>
                                         @endif
                                 </div>
-                            
-                                <label for="group_code" class="col-md-2 col-form-label text-center">{{ __('users.group_code') }}</label>
+                                <label for="group_code" class="col-md-4 col-form-label text-center">{{ __('users.group_code') }}</label>
                             </div>
                          </div>
                          <div class="col-md-6">
-                             <div class="form-group row">
-                                <div class="col-md-10">
-                                    <select class="form-control" name="status" id="status">
+                             <div class="form-group row" style="margin-right:1px;">
+                                <div class="col-md-8">
+                                    <select class="form-control" name="status" id="status" style="width:90%">
                                         <option value="1">{{__('users.status_str.1')}}  </option>
                                         <option value="2">{{__('users.status_str.2')}}  </option>
                                     </select>
@@ -108,18 +107,13 @@
                                         </span>
                                     @endif
                                 </div>
-                                <label for="status" class="col-md-2 col-form-label text-center">{{ __('users.status') }}</label>
+                                <label for="status" class="col-md-4 col-form-label text-center">{{ __('users.status') }}</label>
                          </div>
                     </div>
 
-                        
-                        <div class="form-group row mb-0">
-                            <div class="col-md-12">
-                                <button type="submit" name="action" value="new" class="btn btn-primary">
-                                    {{ __('users.save') }}
-                                </button>
-                            </div>
-                        </div>
+                        <button type="submit" name="action" value="new" class="btn btn-primary save-btn">
+                            {{ __('users.save') }}
+                        </button>
                     </form>
                 </div>
             </div>
