@@ -26,6 +26,9 @@
 		<nav id="sidebar">
 			<div class="sidebar-header">
 				<h3>Hamelot</h3>
+				<strong style="font-size:20px;">
+				
+				</strong>
 			</div>
 
 			<ul class="list-unstyled components">
@@ -135,7 +138,7 @@
 				<div class="container-fluid">	
 					<div class="navbar-header navbar-right">
 						<button type="button" id="sidebarCollapse" class="btn btn-info navbar-btn">
-							<i class="glyphicon glyphicon-align-left"></i>
+							<i class="glyphicon glyphicon-align-right"></i>
 							 <!-- <span>Toggle</span>  -->
 						</button>
 					</div>
