@@ -264,7 +264,7 @@ a.article, a.article:hover {
 .card{
     width:60%;
     margin: auto;
-    background-color: rgb(245, 245, 245);
+    /* background-color: rgb(245, 245, 245); */
     height: 400px;
 }
 .card .form-group {
@@ -301,6 +301,9 @@ h2{
 }
 #sidebar ul li a i{
     margin-left: 5px;
+}
+.panel-default{
+    border-color: white;
 }
 /* ---------------------------------------------------
     CONTENT STYLE
@@ -400,7 +403,7 @@ h2{
 }
 .container {
     margin: auto;
-    background-color: #fff;
+    /* background-color: #fff;
     border-color: #e7e7e7;
-    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1); */
 }   
