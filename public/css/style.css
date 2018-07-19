@@ -392,10 +392,15 @@ h2{
 }
 @media (min-width: 1200px){
     .container {
-        width: 100%;
-        margin: auto
+        width: 90%;
     }   
     .navbar-form .input-group>.form-control{
         width: 350px;
     }
 }
+.container {
+    margin: auto;
+    background-color: #fff;
+    border-color: #e7e7e7;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+}   
