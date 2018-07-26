@@ -74,48 +74,6 @@
 						</li>
 					</ul>
 				</li>
-				<!-- <li>
-					<a href="#drSubmenu" data-toggle="collapse" aria-expanded="false">
-						<i class="fa fa-user-md" aria-hidden="true"></i>
-						پزشکان
-					</a>
-					<ul class="collapse list-unstyled" id="drSubmenu">
-						<li>
-							<a href="#"> پزشک جدید</a>
-						</li>
-						<li>
-							<a href="#"> لیست پزشکان</a>
-						</li>
-					</ul>
-				</li> -->
-				<!-- <li>
-					<a href="#nurseSubmenu" data-toggle="collapse" aria-expanded="false">
-						<i class="fa fa-heartbeat" aria-hidden="true"></i>
-						پرستاران
-					</a>
-					<ul class="collapse list-unstyled" id="nurseSubmenu">
-						<li>
-							<a href="#"> پرستار جدید</a>
-						</li>
-						<li>
-							<a href="#"> لیست پرستاران</a>
-						</li>
-					</ul>
-				</li> -->
-				<li>
-					<a href="#patientSubmenu" data-toggle="collapse" aria-expanded="false">
-						<i class="fa fa-wheelchair" aria-hidden="false"></i>
-						بیماران
-					</a>
-					<ul class="collapse list-unstyled" id="patientSubmenu">
-						<li>
-							<a href="{{route('admin.patients.create')}}"> بیمار جدید</a>
-						</li>
-						<li>
-							<a href="{{route('admin.patients.index')}}"> لیست بیماران</a>
-						</li>
-					</ul>
-				</li>
 				<li>
 					<a href="#testtSubmenu" data-toggle="collapse" aria-expanded="false">
 						<i class="fa fa-medkit" aria-hidden="true"></i>
