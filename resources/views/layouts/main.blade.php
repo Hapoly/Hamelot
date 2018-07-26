@@ -116,7 +116,20 @@
 						</li>
 					</ul>
 				</li>
-	
+				<li>
+					<a href="#testtSubmenu" data-toggle="collapse" aria-expanded="false">
+						<i class="fa fa-medkit" aria-hidden="true"></i>
+						آزمایشات
+					</a>
+					<ul class="collapse list-unstyled" id="testtSubmenu">
+						<!-- <li>
+							<a href="#"> آزمایش جدید</a>
+						</li> -->
+						<li>
+							<a href="{{route('admin.tests.index')}}"> لیست آزمایشات</a>
+						</li>
+					</ul>
+				</li>
 			</ul>
 		</nav>
 		<!-- Page Content Holder -->

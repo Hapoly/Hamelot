@@ -22,7 +22,7 @@ Route::middleware(['auth', 'IsAdmin'])->namespace('Admin')->prefix('admin')->nam
         'departments'       => 'Departments',
         'patients'          => 'Patients',
         'reports'           => 'Reports',
-
+        'tests'              => 'Tests',
         'templates'         => 'Templates',
         'keys'              => 'Keys',
 
@@ -36,7 +36,7 @@ Route::middleware(['auth', 'IsManager'])->namespace('Manager')->prefix('manager'
         'departments'       => 'Departments',
         'patients'          => 'Patients',
         'reports'           => 'Reports',
-
+        'tests'             => 'Tests',
         'templates'         => 'Templates',
         'keys'              => 'Keys',
 
