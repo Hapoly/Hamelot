@@ -14,7 +14,7 @@
 Route::get('/', function () {
     return view('welcome');
 });
-Route::middleware(['auth', 'IsAdmin'])->namespace('Panel')->prefix('admin')->name('admin.')->group(function(){
+Route::middleware(['auth', 'IsAdmin'])->namespace('Panel')->prefix('admin')->name('panel.')->group(function(){
     Route::resources([
         'users'             => 'Users',
 

@@ -39,10 +39,10 @@
 					</a>
 					<ul class="collapse list-unstyled" id="userSubmenu">
 						<li>
-							<a href="{{route('admin.users.create')}}"> کاربر جدید</a>
+							<a href="{{route('panel.users.create')}}"> کاربر جدید</a>
 						</li>
 						<li>
-							<a href="{{route('admin.users.index')}}">  کاربران</a>
+							<a href="{{route('panel.users.index')}}">  کاربران</a>
 						</li>
 					</ul>
 				</li>
@@ -53,10 +53,10 @@
 					</a>
 					<ul class="collapse list-unstyled" id="hospitalSubmenu">
 						<li>
-							<a href="{{route('admin.hospitals.create')}}"> بیمارستان جدید</a>
+							<a href="{{route('panel.hospitals.create')}}"> بیمارستان جدید</a>
 						</li>
 						<li>
-							<a href="{{route('admin.hospitals.index')}}"> لیست بیمارستان ها</a>
+							<a href="{{route('panel.hospitals.index')}}"> لیست بیمارستان ها</a>
 						</li>
 					</ul>
 				</li>
@@ -67,10 +67,10 @@
 					</a>
 					<ul class="collapse list-unstyled" id="partSubmenu">
 						<li>
-							<a href="{{route('admin.departments.create')}}"> بخش جدید</a>
+							<a href="{{route('panel.departments.create')}}"> بخش جدید</a>
 						</li>
 						<li>
-							<a href="{{route('admin.departments.index')}}"> لیست بخش ها</a>
+							<a href="{{route('panel.departments.index')}}"> لیست بخش ها</a>
 						</li>
 					</ul>
 				</li>
@@ -84,7 +84,7 @@
 							<a href="#"> آزمایش جدید</a>
 						</li> -->
 						<li>
-							<a href="{{route('admin.tests.index')}}"> لیست آزمایشات</a>
+							<a href="{{route('panel.tests.index')}}"> لیست آزمایشات</a>
 						</li>
 					</ul>
 				</li>

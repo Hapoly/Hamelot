@@ -46,27 +46,9 @@ class Users extends Controller{
   public function show(User $user){
     return view('panel.users.show', ['user' => $user]);
   }
-  /**
-   * create users in user groups
-   */
-  public function createAdmin(){
-    return view('panel.users.create.admin');
+  public function create(){
+    return view('panel.users.create');
   }
-  public function createManager(){
-    return view('panel.users.create.manager');
-  }
-  public function createDoctor(){
-    return view('panel.users.create.doctor');
-  }
-  public function createNurse(){
-    return view('panel.users.create.nurse');
-  }
-  public function createPatient(){
-    return view('panel.users.create.patient');
-  }
-  /**
-   * store users in user groups
-   */
   public function store(UserRequest $request){
     $inputs = $request->all();
     $inputs['password'] = bcrypt($inputs['password']);
