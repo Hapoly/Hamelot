@@ -35,11 +35,23 @@
 				<li>
 					<a href="#userSubmenu" data-toggle="collapse" aria-expanded="false">
 						<i class="fa fa-users" aria-hidden="false"></i>
-						کاربران
+						مدیریت کاربران
 					</a>
 					<ul class="collapse list-unstyled" id="userSubmenu">
 						<li>
-							<a href="{{route('panel.users.create')}}"> کاربر جدید</a>
+							<a href="{{route('panel.users.create.admin')}}"> ادمین جدید</a>
+						</li>
+						<li>
+							<a href="{{route('panel.users.create.manager')}}"> مدیریت جدید</a>
+						</li>
+						<li>
+							<a href="{{route('panel.users.create.doctor')}}"> دکتر جدید</a>
+						</li>
+						<li>
+							<a href="{{route('panel.users.create.nurse')}}"> پرستار جدید</a>
+						</li>
+						<li>
+							<a href="{{route('panel.users.create.patient')}}"> بیمار جدید</a>
 						</li>
 						<li>
 							<a href="{{route('panel.users.index')}}">  کاربران</a>
