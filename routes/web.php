@@ -37,6 +37,13 @@ Route::middleware(['auth', 'IsAdmin'])->namespace('Panel')->prefix('admin')->nam
             Route::get('/nurse', 'Users@createNurse')->name('nurse');
             Route::get('/patient', 'Users@createPatient')->name('patient');
         });
+        Route::prefix('store')->name('store.')->group(function(){
+            Route::post('/admin', 'Users@storeAdmin')->name('admin');
+            Route::post('/manager', 'Users@storeManager')->name('manager');
+            Route::post('/doctor', 'Users@storeDoctor')->name('doctor');
+            Route::post('/nurse', 'Users@storeNurse')->name('nurse');
+            Route::post('/patient', 'Users@storePatient')->name('patient');
+        });
     });
 });
 

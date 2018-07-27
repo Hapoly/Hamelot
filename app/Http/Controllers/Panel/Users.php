@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Storage;
 use URL;
 use App\User;
 use App\Http\Requests\UserRequest;
+use App\Http\Requests\AdminRequest;
 
 class Users extends Controller{
   public function index(Request $request){
@@ -67,6 +68,13 @@ class Users extends Controller{
   /**
    * store users in user groups
    */
+  public function storeAdmin(AdminRequest $request){
+    $inputs = $request->all();
+    $inputs['password'] = bcrypt($inputs['password']);
+    $inputs['group_code'] = User::G_ADMIN;
+    $user = User::create($inputs);
+    return redirect()->route('panel.users.show', ['user' => $user]);
+  }
   public function store(UserRequest $request){
     $inputs = $request->all();
     $inputs['password'] = bcrypt($inputs['password']);
