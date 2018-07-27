@@ -45,6 +45,9 @@ Route::middleware(['auth', 'IsAdmin'])->namespace('Panel')->prefix('admin')->nam
             Route::post('/patient', 'Users@storePatient')->name('patient');
         });
     });
+    Route::get('/test', function(){
+        return view('test');
+    })->name('test');
 });
 
 Auth::routes();

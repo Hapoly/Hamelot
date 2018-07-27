@@ -96,7 +96,7 @@
 							<a href="#"> آزمایش جدید</a>
 						</li> -->
 						<li>
-							<a href="{{route('panel.tests.index')}}"> لیست آزمایشات</a>
+							<a href="{{route('panel.test')}}"> لیست آزمایشات</a>
 						</li>
 					</ul>
 				</li>
