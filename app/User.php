@@ -21,9 +21,6 @@ class User extends Authenticatable
     const G_NURSE       = 4;
     const G_PATIENT     = 5;
 
-    public function group_code_str(){
-        return __('users.group_code_str.' . $this->group_code);
-    }
     /**
      * The attributes that are mass assignable.
      *
@@ -32,6 +29,7 @@ class User extends Authenticatable
     protected $fillable = [
         'username', 'first_name', 'last_name', 'group_code', 'status', 'password',
     ];
+    protected $visible = ['group_str'];
 
     /**
      * The attributes that should be hidden for arrays.
@@ -50,5 +48,9 @@ class User extends Authenticatable
     }
     public function patients(){
         return $this->hasMany('App\Models\PatientUser');
+    }
+
+    public function getGroupStrAttribute(){
+        return __('users.group_code_str.' . $this->group_code);
     }
 }

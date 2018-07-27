@@ -14,10 +14,8 @@
 Route::get('/', function () {
     return view('welcome');
 });
-Route::middleware(['auth', 'IsAdmin'])->namespace('Panel')->prefix('panel')->name('panel.')->group(function(){
+Route::middleware(['auth'])->namespace('Panel')->prefix('panel')->name('panel.')->group(function(){
     Route::resources([
-        'users'             => 'Users',
-
         'hospitals'         => 'Hospitals',
         'departments'       => 'Departments',
         'patients'          => 'Patients',
@@ -30,6 +28,11 @@ Route::middleware(['auth', 'IsAdmin'])->namespace('Panel')->prefix('panel')->nam
         'department_users'  => 'DepartmentUsers',
     ]);
     Route::prefix('users')->name('users.')->group(function(){
+        Route::get('/', 'Users@index')->name('index');
+        Route::get('/{user}', 'Users@show')->name('show');
+        Route::get('/{user}/edit', 'Users@edit')->name('edit');
+        Route::post('/{user}', 'Users@destroy')->name('destroy');
+
         Route::prefix('create')->name('create.')->group(function(){
             Route::get('/admin', 'Users@createAdmin')->name('admin');
             Route::get('/manager', 'Users@createManager')->name('manager');
