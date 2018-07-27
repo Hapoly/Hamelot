@@ -1,2 +1,4 @@
-this is the test blade
-it's exactly in views folder
+@extends('layouts.main')
+@section('title', __('tests.index.title'))
+@section('content')
+@endsection
