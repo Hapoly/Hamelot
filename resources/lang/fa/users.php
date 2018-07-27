@@ -14,6 +14,10 @@ return [
     'last_name'         => 'نام خانوادگی',
     'status'            => 'وضعیت',
     'operation'         => 'عملیات',
+    'degree'            => 'سطح',
+    'field'             => 'فیلد کاری',
+    'gender'            => 'جنسیت',
+    'profile'           => 'تصویر',
 
     'status_str'        => [
         '1' => 'فعال',
