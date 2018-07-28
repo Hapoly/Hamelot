@@ -31,7 +31,7 @@ Route::middleware(['auth'])->namespace('Panel')->prefix('panel')->name('panel.')
         Route::get('/', 'Users@index')->name('index');
         Route::get('/{user}', 'Users@show')->name('show');
         Route::get('/{user}/edit', 'Users@edit')->name('edit');
-        Route::post('/{user}', 'Users@destroy')->name('destroy');
+        Route::get('/{user}/delete', 'Users@destroy')->name('destroy');
 
         Route::prefix('create')->name('create.')->group(function(){
             Route::get('/admin', 'Users@createAdmin')->name('admin');
@@ -46,6 +46,13 @@ Route::middleware(['auth'])->namespace('Panel')->prefix('panel')->name('panel.')
             Route::post('/doctor', 'Users@storeDoctor')->name('doctor');
             Route::post('/nurse', 'Users@storeNurse')->name('nurse');
             Route::post('/patient', 'Users@storePatient')->name('patient');
+        });
+        Route::prefix('update/{user}')->name('update.')->group(function(){
+            Route::post('/admin', 'Users@updateAdmin')->name('admin');
+            Route::post('/manager', 'Users@updateManager')->name('manager');
+            Route::post('/doctor', 'Users@updateDoctor')->name('doctor');
+            Route::post('/nurse', 'Users@updateNurse')->name('nurse');
+            Route::post('/patient', 'Users@updatePatient')->name('patient');
         });
     });
     Route::get('/test', function(){

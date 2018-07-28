@@ -43,14 +43,10 @@
                 <td>{{$user->group_str}}</td>
                 <td>{{$user->first_name}}</td>
                 <td>{{$user->last_name}}</td>
-                <td>{{$user->status_str()}}</td>
+                <td>{{$user->status_str}}</td>
                 <td>
-                  <form action="{{route('panel.users.destroy', ['user' => $user])}}" style="display: inline" method="POST" class="trash-icon">
-                    {{ method_field('DELETE') }}
-                    {{ csrf_field() }}
-                    <button type="submit" class="btn btn-danger">{{__('users.remove')}}</button>
-                  </form>
-                  <a href="{{route('panel.users.edit', ['user' => $user])}}" class="btn btn-info" role="button">{{__('users.edit')}}</a>
+                  <a href="{{route('panel.users.destroy', ['user' => $user])}}" class="btn btn-danger" role="button">{{__('users.destroy')}}</a>
+                  <a href="{{route('panel.users.edit', ['user' => $user])}}" class="btn btn-info" role="button">{{__('users.edit.general')}}</a>
                 </td>
                 </tr>
               @endforeach

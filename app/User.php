@@ -10,10 +10,6 @@ class User extends Authenticatable
     use Notifiable;
     const S_ACTIVE      = 1;
     const S_INACTIVE    = 2;
-
-    public function status_str(){
-        return __('users.status_str.' . $this->status);
-    }
     
     const G_ADMIN       = 1;
     const G_MANAGER     = 2;
@@ -29,7 +25,7 @@ class User extends Authenticatable
     protected $fillable = [
         'username', 'first_name', 'last_name', 'group_code', 'status', 'password',
     ];
-    protected $visible = ['group_str'];
+    protected $visible = ['group_str', 'status_str'];
 
     /**
      * The attributes that should be hidden for arrays.
@@ -52,5 +48,34 @@ class User extends Authenticatable
 
     public function getGroupStrAttribute(){
         return __('users.group_code_str.' . $this->group_code);
+    }
+    public function getStatusStrAttribute(){
+        return __('users.status_str.' . $this->status);
+    }
+    /**
+     * get more info functions
+     */
+    public function nurse(){
+        return $this->hasOne('App\Models\Nurse');
+    }
+    public function doctor(){
+        return $this->hasOne('App\Models\Doctor');
+    }
+    public function patient(){
+        return $this->hasOne('App\Models\Patient');
+    }
+
+    /**
+     * method: has permission to
+     * description: defines if user has permission to an object
+     */
+    public function hasPermissionToUser(User $user){
+        switch($this->group_code){
+            case User::G_ADMIN:
+                return true;
+            default:
+                return false;
+        }
+        return false;
     }
 }

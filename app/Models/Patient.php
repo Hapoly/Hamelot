@@ -3,33 +3,49 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Drivers\Time;
+use App\Models\ConstValue;
 
 class Patient extends Model
 {
     protected $primary = 'id';
     protected $table = 'patients';
-    protected $fillable = ['first_name', 'last_name', 'gender', 'status', 'id_number', 'image'];
+    protected $fillable = ['gender', 'id_number', 'profile', 'user_id', 'birth_date'];
+    protected $visible = ['profile_url', 'birth_date_str', 'age', 'age_str', 'birth_year', 'birth_month', 'birth_day'];
 
-    const S_ACTIVE      = 1;
-    const S_INACTIVE    = 2;
-
-    public function status_str(){
-        return __('patients.status_str.' . $this->status);
+    public function user(){
+        return $this->belongsTo('App\User');
+    }
+    public function getGenderStrAttribute(){
+        return ConstValue::find($this->gender)->value;
+    }
+    public function getBirthDateStrAttribute(){
+        return Time::jdate('d F Y', $this->birth_date);
     }
 
-    const G_MALE        = 1;
-    const G_FEMALE      = 2;
+    public function getBirthYearAttribute(){
+        return Time::jdate('Y', $this->birth_date);
+    }
+    public function getBirthMonthAttribute(){
+        return intval(Time::jdate('m', $this->birth_date));
+    }
+    public function getBirthDayAttribute(){
+        return intval(Time::jdate('d', $this->birth_date));
+    }
 
-    public function gender_str(){
-        return __('patients.gender_str.' . $this->gender);
+    public function getAgeAttribute(){
+        return intval((time() - $this->birth_date)/(3600*24*30*12));
     }
-    public function reports(){
-        return $this->hasMany('App\Models\Report');
+    public function getAgeStrAttribute(){
+        return intval((time() - $this->birth_date)/(3600*24*30*12)) . ' سال';
     }
-    public function departments(){
-        return $this->hasMany('App\Models\DepartmentPatient');
-    }
-    public function users(){
-        return $this->hasMany('App\Models\PatientUser');
+    public function getProfileUrlAttribute(){
+        if($this->profile == 'NuLL')
+            if($this->gender == 19)
+                return url('defaults\male.png');
+            else
+                return url('defaults\female.png');
+        else
+            return url($this->profile);
     }
 }

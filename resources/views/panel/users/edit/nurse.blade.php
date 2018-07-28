@@ -1,18 +1,15 @@
 @extends('layouts.main')
 @section('content')
-<?php
-    echo var_dump($errors->all());
-?>
 <div class="container">
     <div class="panel panel-default create-card">
-         <h2>{{ __('users.create.patient') }}</h2>
+         <h2>{{ __('users.edit.nurse') }}</h2>
          <div class="row">
             <div class="col-md-12">
-                <form method="POST" action="{{ route('panel.users.store.patient') }}" enctype="multipart/form-data">
+                <form method="POST" action="{{ route('panel.users.update.nurse', ['user' => $user]) }}" enctype="multipart/form-data">
                       @csrf
                     <div class="form-group row create-form">
                         <div class="col-md-10">
-                           <input id="username" type="text" class="form-control{{ $errors->has('username') ? ' is-invalid' : '' }}" name="username" value="{{ old('username') }}" required autofocus>
+                           <input id="username" type="text" class="form-control{{ $errors->has('username') ? ' is-invalid' : '' }}" name="username" value="{{ old('username', $user->username) }}" required autofocus>
                                 @if ($errors->has('username'))
                                 <span class="invalid-feedback">
                                     <strong>{{ $errors->first('username') }}</strong>
@@ -24,7 +21,7 @@
 
                     <div class="form-group row create-form">
                         <div class="col-md-10">
-                           <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required >
+                           <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" >
                                 @if ($errors->has('password'))
                                     <span class="invalid-feedback">
                                         <strong>{{ $errors->first('password') }}</strong>
@@ -36,14 +33,14 @@
 
                     <div class="form-group row create-form">
                         <div class="col-md-10">
-                           <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required >
+                           <input id="password-confirm" type="password" class="form-control" name="password_confirmation" >
                         </div>
                          <label for="password-confirm" class="col-md-2 col-form-label text-center">{{ __('users.confirm_password') }}</label>
                     </div>
 
                      <div class="form-group row create-form">
                         <div class="col-md-10">
-                           <input id="first_name" type="text" class="form-control{{ $errors->has('first_name') ? ' is-invalid' : '' }}" name="first_name" value="{{ old('first_name') }}" required>
+                           <input id="first_name" type="text" class="form-control{{ $errors->has('first_name') ? ' is-invalid' : '' }}" name="first_name" value="{{ old('first_name', $user->first_name) }}" required>
                                  @if ($errors->has('first_name'))
                                     <span class="invalid-feedback">
                                         <strong>{{ $errors->first('first_name') }}</strong>
@@ -55,7 +52,7 @@
 
                     <div class="form-group row create-form">
                         <div class="col-md-10">
-                           <input id="last_name" type="text" class="form-control{{ $errors->has('last_name') ? ' is-invalid' : '' }}" name="last_name" value="{{ old('last_name') }}" required>
+                           <input id="last_name" type="text" class="form-control{{ $errors->has('last_name') ? ' is-invalid' : '' }}" name="last_name" value="{{ old('last_name', $user->last_name) }}" required>
                                  @if ($errors->has('last_name'))
                                     <span class="invalid-feedback">
                                         <strong>{{ $errors->first('last_name') }}</strong>
@@ -67,67 +64,56 @@
 
                     <div class="form-group row create-form">
                         <div class="col-md-10">
-                           <input id="id_number" type="text" class="form-control{{ $errors->has('id_number') ? ' is-invalid' : '' }}" name="id_number" value="{{ old('id_number') }}" required autofocus>
-                                @if ($errors->has('id_number'))
+                            <select class="form-control" name="status" id="status" style="width:90%">
+                                <option value="1" {{old('status') == 1? 'selected': ''}} >{{__('users.status_str.1')}}  </option>
+                                <option value="2" {{old('status') == 2? 'selected': ''}} >{{__('users.status_str.2')}}  </option>
+                            </select>
+                            @if ($errors->has('status'))
                                 <span class="invalid-feedback">
-                                    <strong>{{ $errors->first('id_number') }}</strong>
+                                    <strong>{{ $errors->first('status') }}</strong>
                                 </span>
                             @endif
                         </div>
-                         <label for="title" class="col-md-2 col-form-label text-center">{{ __('users.id_number') }}</label>
+                        <label for="status" class="col-md-2 col-form-label text-center">{{ __('users.status') }}</label>
                     </div>
 
                     <div class="form-group row create-form">
                         <div class="col-md-10">
-                            <select class="form-control" name="birth_year" id="birth_year" style="width:90%">
-                                @for($i=1341; $i<1400; $i++)
-                                    <option value="{{$i}}" {{old('birth_year') == $i? 'selected': ''}} > {{$i}}</option>
-                                @endfor
+                            <select class="form-control" name="degree" id="degree" style="width:90%">
+                                @foreach($degrees as $degree)
+                                    <option value="{{$degree->id}}" {{old('degree', $user->nurse->degree) == $degree->id? 'selected': ''}} > {{$degree->value}}</option>
+                                @endforeach
                             </select>
-                            @if ($errors->has('birth_year'))
+                            @if ($errors->has('degree'))
                                 <span class="invalid-feedback">
-                                    <strong>{{ $errors->first('birth_year') }}</strong>
+                                    <strong>{{ $errors->first('degree') }}</strong>
                                 </span>
                             @endif
                         </div>
-                        <label for="birth_year" class="col-md-2 col-form-label text-center">{{ __('users.birth.year') }}</label>
+                        <label for="degree" class="col-md-2 col-form-label text-center">{{ __('users.degree') }}</label>
                     </div>
+
                     <div class="form-group row create-form">
                         <div class="col-md-10">
-                            <select class="form-control" name="birth_month" id="birth_month" style="width:90%">
-                                @for($i=1; $i<12; $i++)
-                                    <option value="{{$i}}" {{old('birth_month') == $i? 'selected': ''}} > {{ __('users.birth.month_str.' . $i) }}</option>
-                                @endfor
+                            <select class="form-control" name="field" id="field" style="width:90%">
+                                @foreach($fields as $field)
+                                    <option value="{{$field->id}}" {{old('field', $user->nurse->field) == $field->id? 'selected': ''}} > {{$field->value}}</option>
+                                @endforeach
                             </select>
-                            @if ($errors->has('birth_month'))
+                            @if ($errors->has('field'))
                                 <span class="invalid-feedback">
-                                    <strong>{{ $errors->first('birth_month') }}</strong>
+                                    <strong>{{ $errors->first('field') }}</strong>
                                 </span>
                             @endif
                         </div>
-                        <label for="birth_month" class="col-md-2 col-form-label text-center">{{ __('users.birth.month') }}</label>
-                    </div>
-                    <div class="form-group row create-form">
-                        <div class="col-md-10">
-                            <select class="form-control" name="birth_day" id="birth_day" style="width:90%">
-                                @for($i=1; $i<31; $i++)
-                                    <option value="{{$i}}" {{old('birth_day') == $i? 'selected': ''}} > {{$i}}</option>
-                                @endfor
-                            </select>
-                            @if ($errors->has('birth_day'))
-                                <span class="invalid-feedback">
-                                    <strong>{{ $errors->first('birth_day') }}</strong>
-                                </span>
-                            @endif
-                        </div>
-                        <label for="birth_day" class="col-md-2 col-form-label text-center">{{ __('users.birth.day') }}</label>
+                        <label for="field" class="col-md-2 col-form-label text-center">{{ __('users.field') }}</label>
                     </div>
 
                     <div class="form-group row create-form">
                         <div class="col-md-10">
                             <select class="form-control" name="gender" id="gender" style="width:90%">
                                 @foreach($genders as $gender)
-                                    <option value="{{$gender->id}}" {{old('gender') == $gender->id? 'selected': ''}} > {{$gender->value}}</option>
+                                    <option value="{{$gender->id}}" {{old('gender', $user->nurse->gender) == $gender->id? 'selected': ''}} > {{$gender->value}}</option>
                                 @endforeach
                             </select>
                             @if ($errors->has('gender'))
@@ -138,7 +124,7 @@
                         </div>
                         <label for="gender" class="col-md-2 col-form-label text-center">{{ __('users.gender') }}</label>
                     </div>
-                    
+
                     <div class="form-group row create-form">
                         <div class="col-md-10">
                             <select class="form-control" name="status" id="status" style="width:90%">
@@ -153,7 +139,7 @@
                         </div>
                         <label for="status" class="col-md-2 col-form-label text-center">{{ __('users.status') }}</label>
                     </div>
-
+                    
                     <div class="form-group row create-form">
                         <div class="col-md-10">
                            <input id="profile" type="file" class="form-control{{ $errors->has('profile') ? ' is-invalid' : '' }}" name="profile">
@@ -165,7 +151,8 @@
                         </div>
                          <label for="profile" class="col-md-2 col-form-label text-center">{{ __('users.profile') }}</label>
                     </div>
-                    <button type="submit" name="action" value="new" class="btn btn-primary save-btn">
+
+                    <button type="submit" name="action" value="edit" class="btn btn-primary save-btn">
                         {{ __('users.save') }}
                     </button>
                     </form>
