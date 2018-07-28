@@ -61,10 +61,7 @@ i, span {
     margin-right: auto;
     width: 50%;
 }
-.create-card{
-    width:600px;
-    margin: auto;
-}
+
 .create-form{
     margin-left:15px;
     margin-right:15px;
@@ -283,6 +280,10 @@ a.article, a.article:hover {
 .row .first{
     margin-top: 50px;
 }
+.test-in{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
 .card .save{
     background-color: #2a5477;
     color: white;
@@ -336,7 +337,10 @@ h2{
         /* text-align: center; */
         /* margin-left: -80px !important ; */
     }
-    
+    .create-card{
+        width:100%;
+        margin: auto;
+    }
     .col-sm-2{
         float:right;
     }
@@ -405,6 +409,10 @@ h2{
     }   
     .navbar-form .input-group>.form-control{
         width: 350px;
+    }
+    .create-card{
+        width:75%;
+        margin: auto;
     }
 }
 .container {

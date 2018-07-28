@@ -1,9 +1,10 @@
 @extends('layouts.main')
 @section('title', __('tests.index.title'))
 @section('content')
+<div class="test">
 <div class="row" style="margin-bottom:50px;">
     <div class="col-md-4 col-sm-3">
-        <a href="#" class="btn add"> افزودن</a>
+        <a href="#" class="btn add" id="add-test" onclick="appendcard()"> افزودن</a>
     </div>
     <div class="col-md-8 col-sm-9">
         <form class="navbar-form" role="search" style="margin:auto;width:100%;direction:ltr;float:right" action="{{route('panel.test')}}" method="get">
@@ -41,13 +42,13 @@
           </tr>
       </tbody>
     </table>
-    <div class="panel panel-default create-card" style="margin-top:10px;">
+    <div class="panel panel-default create-card" id="test-card" style="margin-top:30px;">
         <div class="row">
             <div class="col-md-12">
                 <form method="POST"  enctype="multipart/form-data">
-                    <div class="form-group row create-form">
+                    <div class="form-group test-in create-form">
                         <div class="col-md-10">
-                            <input id="title" type="text" class="form-control" name="title" >
+                            <input id="title" type="text" class="form-control" name="title" style="width:90%;">
                         </div>
                         <label for="title" class="col-md-2 col-form-label text-center">عنوان</label>
                     </div>
@@ -55,7 +56,7 @@
             </div>
             <div class="form-group row create-form">
                 <div class="col-md-12">
-                    <div class="form-group row">
+                    <div class="form-group test-in">
                         <div class="col-md-10">
                             <select class="form-control" name="status" id="status" style="width:90%;text-align:center">
                             <option value="1">13  </option>
@@ -66,9 +67,9 @@
                     </div>
                 </div>
             </div>
-            <div class="form-group row create-form">
+            <div class="form-group create-form">
                 <div class="col-md-12">
-                    <div class="form-group row">
+                    <div class="form-group test-in">
                         <div class="col-md-10">
                             <form>
                                 <div class="form-group">
@@ -82,5 +83,6 @@
             </div>
 
     </div>
+</div>
 </div>
 @endsection

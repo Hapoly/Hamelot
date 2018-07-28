@@ -149,6 +149,12 @@
 			});
 		});
 	</script>
+	<script>
+	function appendcard() {
+    var txt1 = "<p>Text.</p>";            
+    $(".test").append(txt1);    
+	}
+	</script>
 </body>
 
 </html>
