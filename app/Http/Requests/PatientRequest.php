@@ -28,7 +28,12 @@ class PatientRequest extends FormRequest
             'last_name'     => 'required|string',
             'username'      => 'required|string',
             'password'      => 'required_if:action,new|confirmed',
-            'status'        => 'required|numeric'
+            'status'        => 'required|numeric',
+            'profile'       => 'image',
+            'id_number'     => 'required|numeric',
+            'birth_year'    => 'required|numeric|min:1300|max:1400',
+            'birth_month'   => 'required|numeric|min:1|max:12',
+            'birth_day'     => 'required|numeric|min:1|max:31',
         ];
     }
 }
