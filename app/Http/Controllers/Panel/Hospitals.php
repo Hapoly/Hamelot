@@ -51,7 +51,9 @@ class Hospitals extends Controller{
   }
   public function store(HospitalRequest $request){
     $inputs = $request->all();
-    $inputs['image'] = Storage::put('public/hospitals', $request->file('image'));
+    if($request->hasFile('image'))
+      $inputs['image'] = Storage::put('public/hospitals', $request->file('image'));
+    $inputs['image'] = 'NuLL';
     $hospital = Hospital::create($inputs);
     return redirect()->route('panel.hospitals.show', ['hospital' => $hospital]);
   }

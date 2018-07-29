@@ -7,7 +7,7 @@
       <h2>{{ $hospital->title }}</h2>
     </div>
     <div class="row">
-      <img src="{{asset($hospital->image)}}" class="center">
+      <img src="{{asset($hospital->image_url)}}" class="center" style="width: 25%;">
     </div>
     <div class="row">
       <table class="table table-striped">

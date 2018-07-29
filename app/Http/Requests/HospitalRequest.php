@@ -29,7 +29,7 @@ class HospitalRequest extends FormRequest
             'phone'         => 'required|string',
             'mobile'        => 'required|string',
             'status'        => 'required|numeric',
-            'image'         => 'required_if:action,new|image',
+            'image'         => 'image',
         ];
     }
 }
