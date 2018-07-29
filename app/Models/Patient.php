@@ -11,7 +11,7 @@ class Patient extends Model
     protected $primary = 'id';
     protected $table = 'patients';
     protected $fillable = ['gender', 'id_number', 'profile', 'user_id', 'birth_date'];
-    protected $visible = ['profile_url', 'birth_date_str', 'age', 'age_str', 'birth_year', 'birth_month', 'birth_day'];
+    // protected $visible = ['profile_url', 'birth_date_str', 'age', 'age_str', 'birth_year', 'birth_month', 'birth_day'];
 
     public function user(){
         return $this->belongsTo('App\User');
