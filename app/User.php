@@ -25,7 +25,6 @@ class User extends Authenticatable
     protected $fillable = [
         'username', 'first_name', 'last_name', 'group_code', 'status', 'password',
     ];
-    protected $visible = ['group_str', 'status_str'];
 
     /**
      * The attributes that should be hidden for arrays.
@@ -64,7 +63,6 @@ class User extends Authenticatable
     public function patient(){
         return $this->hasOne('App\Models\Patient');
     }
-
     /**
      * method: has permission to
      * description: defines if user has permission to an object
