@@ -2,10 +2,8 @@
 @section('title', __('tests.index.title'))
 @section('content')
 <div class="test">
-<div class="row" style="margin-bottom:50px;">
-    <div class="col-md-4 col-sm-3">
-        <a href="#" class="btn add" id="add-test" onclick="appendcard()"> افزودن</a>
-    </div>
+<!-- <div class="row" style="margin-bottom:50px;">
+    
     <div class="col-md-8 col-sm-9">
         <form class="navbar-form" role="search" style="margin:auto;width:100%;direction:ltr;float:right" action="{{route('panel.test')}}" method="get">
             <div class="input-group add-on">
@@ -16,37 +14,13 @@
             </div>
         </form>
     </div>
-</div>
-
-    <table class="table table-bordered">
-      <thead>
-        <tr>
-          <th ><a href="#">عنوان</a></th>
-          <th ><a href="#">نوع</a></th>
-          <th ><a href="#">توضیحات</a></th>
-          <th >عملیات</th>
-        </tr>
-      </thead>
-      <tbody>
-          <tr>
-          <td>قند</td>
-          <td>13</td>
-          <td>خوب است</td>
-          <td>
-            <form  style="display: inline" method="POST" class="trash-icon">
-              
-              <button type="submit" class="btn btn-danger">حذف</button>
-            </form>
-            <a href="#" class="btn btn-info" role="button">ویرایش</a>
-          </td>
-          </tr>
-      </tbody>
-    </table>
-    <div class="panel panel-default create-card" id="test-card" style="margin-top:30px;">
+</div> -->
+<form>
+    <div class="panel panel-default create-card"  style="margin-top:30px;">
         <div class="row">
             <div class="col-md-12">
                 <form method="POST"  enctype="multipart/form-data">
-                    <div class="form-group test-in create-form">
+                    <div class="form-group test-in create-form" >
                         <div class="col-md-10">
                             <input id="title" type="text" class="form-control" name="title" style="width:90%;">
                         </div>
@@ -81,8 +55,11 @@
                     </div>
                 </div>
             </div>
-
+        </div>
+        <div class="row">
+            <input type="button" onclick="add_time(0)" class="btn accent-color text-primary-color new-meet" value="جلسه جدید">
+        </div>
+    </form>
     </div>
-</div>
 </div>
 @endsection

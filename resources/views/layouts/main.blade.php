@@ -152,7 +152,7 @@
 	<script>
 	function appendcard() {
     var txt1 = "<p>Text.</p>";            
-    $(".test").append(txt1);    
+    $(".test").prepend('#testcard');   
 	}
 	</script>
 </body>
