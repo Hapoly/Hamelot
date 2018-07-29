@@ -15,12 +15,12 @@
         </form>
     </div>
 </div> -->
-
-    <div class="panel panel-default create-card" id="test-card" style="margin-top:30px;">
+<form>
+    <div class="panel panel-default create-card"  style="margin-top:30px;">
         <div class="row">
             <div class="col-md-12">
                 <form method="POST"  enctype="multipart/form-data">
-                    <div class="form-group test-in create-form">
+                    <div class="form-group test-in create-form" >
                         <div class="col-md-10">
                             <input id="title" type="text" class="form-control" name="title" style="width:90%;">
                         </div>
@@ -55,8 +55,11 @@
                     </div>
                 </div>
             </div>
-
+        </div>
+        <div class="row">
+            <input type="button" onclick="add_time(0)" class="btn accent-color text-primary-color new-meet" value="جلسه جدید">
+        </div>
+    </form>
     </div>
-</div>
 </div>
 @endsection
