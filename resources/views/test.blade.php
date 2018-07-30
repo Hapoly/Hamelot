@@ -16,7 +16,7 @@
     </div>
 </div> -->
 <form>
-    <div class="panel panel-default create-card"  style="margin-top:30px;">
+    <div class="panel panel-default create-card"  style="margin-top:30px;" id="times">
     <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
         <div class="row">
             <div class="col-md-12">
