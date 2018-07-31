@@ -25,4 +25,10 @@ class Hospital extends Model
     public function reports(){
         return $this->hasMany('App\Models\Reports');
     }
+    public function getImageUrlAttribute(){
+        if($this->image == 'NuLL')
+            return url('/defaults/hospital.png');
+        else
+            return url($this->image);
+    }
 }

@@ -19,6 +19,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+	<link href='http://www.fontonline.ir/css/BRoya.css' rel='stylesheet' type='text/css'>
     <style>
         body {
             direction: rtl;
@@ -26,6 +27,20 @@
         
         th, td {
             text-align: center;
+        }
+
+		.invalid-feedback{
+			text-align: right;
+        }
+        @font-face {
+            font-family: "IRANSans";
+        
+            src: url(../fonts/IRANSans-light-web.ttf); 
+            /*src: url(../fonts/IRANSans-Medium-web.eot?#iefix) format("embedded-opentype"), url(../fonts/IRANSans-Medium-web.woff)
+            format("woff"), url(../fonts/IRANSans-Medium-web.ttf) format("truetype"), url(../fonts/IRANSans-Medium-web.svg#woff2) format("woff2"); */
+        }
+        *{
+            font-family: "IRANSans";
         }
     </style>
 </head>

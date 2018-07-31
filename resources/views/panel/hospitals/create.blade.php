@@ -51,39 +51,31 @@
           </div>
           <label for="mobile" class="col-md-2 col-form-label text-center">{{ __('hospitals.mobile') }}</label>
         </div>
-
         <div class="form-group row create-form">
-          <div class="col-md-6">
-            <div class="form-group row">
-              <div class="col-md-10">
-                <select class="form-control" name="status" id="status" style="width:80%">
-                  <option value="1">{{__('hospitals.status_str.1')}}  </option>
-                  <option value="2">{{__('hospitals.status_str.2')}}  </option>
-                </select>
-                @if ($errors->has('status'))
-                  <span class="invalid-feedback">
-                    <strong>{{ $errors->first('status') }}</strong>
-                  </span>
-                @endif
-              </div>
-              <label for="status" class="col-md-2 col-form-label text-center">{{ __('hospitals.status') }}</label>
-            </div>
+          <div class="col-md-10">
+            <select class="form-control" name="status" id="status" style="width:90%">
+              <option value="1">{{__('hospitals.status_str.1')}}  </option>
+              <option value="2">{{__('hospitals.status_str.2')}}  </option>
+            </select>
+            @if ($errors->has('status'))
+              <span class="invalid-feedback">
+                <strong>{{ $errors->first('status') }}</strong>
+              </span>
+            @endif
           </div>
-          <div class="col-md-6">
-             <div class="form-group row" style="margin-right:10px;">
-              <div class="col-md-10">
-                <input id="image" type="file" class="form-control{{ $errors->has('image') ? ' is-invalid' : '' }}" name="image" required>
-                @if ($errors->has('image'))
-                  <span class="invalid-feedback">
-                    <strong>{{ $errors->first('image') }}</strong>
-                  </span>
-                @endif
-              </div>
-              <label for="image" class="col-md-2 col-form-label text-center">{{ __('hospitals.image') }}</label>
-            </div>
-          </div>
+          <label for="status" class="col-md-2 col-form-label text-center">{{ __('hospitals.status') }}</label>
         </div>
-
+        <div class="form-group row create-form">
+          <div class="col-md-10">
+            <input id="image" type="file" class="form-control{{ $errors->has('image') ? ' is-invalid' : '' }}" name="image">
+            @if ($errors->has('image'))
+              <span class="invalid-feedback">
+                <strong>{{ $errors->first('image') }}</strong>
+              </span>
+            @endif
+          </div>
+          <label for="image" class="col-md-2 col-form-label text-center">{{ __('hospitals.image') }}</label>
+        </div>
         <button type="submit" name="action" value="new" class="btn btn-primary save-btn">
           {{ __('hospitals.save') }}
         </button>
