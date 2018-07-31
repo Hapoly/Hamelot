@@ -18,14 +18,7 @@ Route::middleware(['auth', 'Permission'])->namespace('Panel')->prefix('panel')->
     Route::resources([
         'hospitals'         => 'Hospitals',
         'departments'       => 'Departments',
-        'patients'          => 'Patients',
-        'reports'           => 'Reports',
-        'tests'              => 'Tests',
-        'templates'         => 'Templates',
-        'keys'              => 'Keys',
-
-        'hospital_users'    => 'HospitalUsers',
-        'department_users'  => 'DepartmentUsers',
+        'reoprt-temapltes'  => 'ReportTemplates',
     ]);
     Route::prefix('users')->name('users.')->group(function(){
         Route::get('/', 'Users@index')->name('index');

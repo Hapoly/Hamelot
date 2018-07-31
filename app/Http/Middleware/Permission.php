@@ -55,6 +55,15 @@ class Permission
         'panel.departments.update'                      => [ 1, 2 ],
         'panel.departments.show'                        => [ 1, 2, 3, 4 ],
         'panel.departments.destroy'                     => [ 1, 2 ],
+
+        'panel.report_templates.index'                  => [ 1, 2, 3, 4 ],
+        'panel.report_templates.create'                 => [ 1 ],
+        'panel.report_templates.store'                  => [ 1 ],
+        'panel.report_templates.edit'                   => [ 1 ],
+        'panel.report_templates.update'                 => [ 1 ],
+        'panel.report_templates.show'                   => [ 1, 2, 3, 4 ],
+        'panel.report_templates.destroy'                => [ 1 ],
+
     ];
     public function handle(Request $request, Closure $next){
         $route = $request->route()->getName();
