@@ -20,6 +20,7 @@ return [
     'profile'           => 'تصویر',
     'id_number'         => 'کدملی',
     'age'               => 'سن',
+    'department_id'     => 'بخش مورد فعالیت',
 
     'birth_date'        => 'تاریخ تولد',
     'birth'             => [
