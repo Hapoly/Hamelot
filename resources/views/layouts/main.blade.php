@@ -18,6 +18,9 @@
 			margin-top: 3rem;
 			margin-bottom: 1rem;
 		}
+		.invalid-feedback{
+			text-align: right;
+		}
 	</style>
 	<!-- jQuery CDN -->
 	<script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
