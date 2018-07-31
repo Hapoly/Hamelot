@@ -11,11 +11,12 @@ use Illuminate\Support\Facades\Storage;
 
 use URL;
 use App\Models\Hospital;
+use App\User;
 use App\Http\Requests\HospitalRequest;
 
 class Hospitals extends Controller{
   public function index(Request $request){
-    $hospitals = new Hospital;
+    $hospitals = Hospital::get();
     $links = '';
     $sort = $request->input('sort', '###');
     $search = $request->input('search', '###');
@@ -44,6 +45,8 @@ class Hospitals extends Controller{
     ]);
   }
   public function show(Hospital $hospital){
+    if(!$hospital->hasPermission())
+      abort(404);
     return view('panel.hospitals.show', ['hospital' => $hospital]);
   }
   public function create(){

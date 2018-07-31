@@ -17,6 +17,7 @@ use App\Models\Doctor;
 use App\Models\Nurse;
 use App\Models\Patient;
 use App\Models\ConstValue;
+use App\Models\Permission;
 
 use App\Http\Requests\UserRequest;
 use App\Http\Requests\AdminRequest;
@@ -26,8 +27,25 @@ use App\Http\Requests\NurseRequest;
 use App\Http\Requests\PatientRequest;
 
 class Users extends Controller{
+  /**
+   * listing the users
+   */
   public function index(Request $request){
+    /* permissions to show and list users in diffrent group codes */
+    if(Auth::user()->group_code == User::G_PATIENT)
+      abort(404);
     $users = new User;
+    if(Auth::user()->group_code != User::G_ADMIN)
+      $users = $users->where([
+        ['group_code', '<>', User::G_ADMIN],
+        ['group_code', '<>', User::G_MANAGER],
+      ]);
+    if(Auth::user()->group_code == User::G_DOCTOR)
+      $users = $users->where(['group_code', '<>', User::G_DOCTOR]);
+    if(Auth::user()->group_code == User::G_NURSE)
+      $users = $users->where(['group_code', '<>', User::G_NURSE]);
+    /* end of permissions section */
+
     $sort = $request->input('sort', '###');
 
     if($request->has('first_name') && $request->first_name != '')
@@ -96,9 +114,10 @@ class Users extends Controller{
     ]);
   }
   public function show(User $user){
+    if(!Auth::user()->hasPermissisonToUser($user))
+      abort(404);
     switch($user->group_code){
       case User::G_ADMIN:
-        if(Auth::user()->hasPermissionToUser($user))
           return view('panel.users.show.admin', ['user' => $user]);
         break;
       case User::G_MANAGER:

@@ -19,5 +19,12 @@ class Users extends Seeder
             'first_name'    => 'علیرضا',
             'last_name'     => 'دربندی',
         ]);
+        DB::table('users')->insert([
+            'username'      => 'manager',
+            'password'      => bcrypt('manager'),
+            'group_code'    => 2,
+            'first_name'    => 'گروس',
+            'last_name'     => 'عبدلملکیان',
+        ]);
     }
 }

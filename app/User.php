@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Notifications\Notifiable;
+use App\Models\Permission;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
@@ -17,6 +18,9 @@ class User extends Authenticatable
     const G_NURSE       = 4;
     const G_PATIENT     = 5;
 
+    public function isAdmin(){
+        return $this->group_code == User::G_ADMIN;
+    }
     /**
      * The attributes that are mass assignable.
      *
@@ -36,7 +40,7 @@ class User extends Authenticatable
     ];
 
     public function hospitals(){
-        return $this->hasMany('App\Models\HospitalUser');
+        return $this->belongsToMany('App\Models\Hospital');
     }
     public function departments(){
         return $this->hasMany('App\Models\DepartmentUser');
@@ -67,10 +71,15 @@ class User extends Authenticatable
      * method: has permission to
      * description: defines if user has permission to an object
      */
-    public function hasPermissionToUser(User $user){
+    public function hasPermissisonToUser(User $user){
         switch($this->group_code){
             case User::G_ADMIN:
                 return true;
+            case User::G_MANAGER:
+                if($user->isAdmin() || $user->group_code == User::G_MANAGER)
+                    return false;
+                else
+                    return true;
             default:
                 return false;
         }

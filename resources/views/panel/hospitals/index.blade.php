@@ -37,7 +37,7 @@
           <td>{{$hospital->address}}</td>
           <td>{{$hospital->phone}}</td>
           <td>{{$hospital->mobile}}</td>
-          <td>{{$hospital->status}}</td>
+          <td>{{$hospital->status_str}}</td>
           <td>
             <form action="{{route('panel.hospitals.destroy', ['hospital' => $hospital])}}" style="display: inline" method="POST" class="trash-icon">
               {{ method_field('DELETE') }}

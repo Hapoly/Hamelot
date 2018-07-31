@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Auth;
 
 class Hospital extends Model
 {
@@ -13,11 +14,17 @@ class Hospital extends Model
     const S_ACTIVE      = 1;
     const S_INACTIVE    = 2;
 
-    public function status_str(){
+    public function getStatusStrAttribute(){
         return __('hospitals.status_str.' . $this->status);
     }
     public function users(){
-        return $this->hasMany('App\Models\HospitalUser');
+        return $this->belongsToMany('App\User');
+    }
+    public function hasPermission(){
+        if(Auth::user()->group_code == 1)
+            return true;
+        else
+            return $this->users()->where('user_id', Auth::user()->id)->first() != null;
     }
     public function departments(){
         return $this->hasMany('App\Models\Department');
@@ -30,5 +37,24 @@ class Hospital extends Model
             return url('/defaults/hospital.png');
         else
             return url($this->image);
+    }
+
+    public function get(){
+        switch(Auth::user()->group_code){
+            case User::G_ADMIN:
+                return (new Hospital);
+            case User::G_MANAGER:
+                return Hospital::whereHas('users', function($query){
+                    return $query->where('id', Auth::user()->id);
+                });
+            case User::G_DOCTOR:
+            case User::G_NURSE:
+            case USER::G_PATIENT:
+                return Hospital::whereHas('departments', function($query){
+                    return $query->whereHas('users', function($query){
+                        return $query->where('id', Auth::user()->id);
+                    });
+                });
+        }
     }
 }

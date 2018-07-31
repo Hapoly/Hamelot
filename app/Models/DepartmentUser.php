@@ -7,6 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class DepartmentUser extends Model
 {
     protected $primary = 'id';
-    protected $table = 'department_users';
+    protected $table = 'department_user';
     protected $fillable = ['user_id', 'department_id'];
 }

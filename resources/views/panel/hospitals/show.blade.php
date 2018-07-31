@@ -1,6 +1,9 @@
 @extends('layouts.main')
 @section('title', $hospital->title)
 @section('content')
+<?php
+  use App\User;
+?>
 <div class="container">
   <div class="panel panel-default">
     <div class="row">
@@ -30,7 +33,7 @@
           </tr>
           <tr>
             <td>{{__('hospitals.status')}}</td>
-            <td>{{$hospital->status_str()}}</td>
+            <td>{{$hospital->status_str}}</td>
           </tr>
         </tbody>
       </table>
@@ -47,6 +50,51 @@
         </form>
       </div>
     </div>
+  </div>
+  <div class="panel panel-default">
+    <h2>{{__('hospital_users.title')}}</h2>
+    @if(Auth::user()->isAdmin())
+      <a href="{{route('panel.departments.create', ['hospital_id' => $hospital->id])}}" class="btn add" style="float:left;margin-left:20px;">{{__('departments.create')}}
+        <i class="fa fa-plus"></i>
+      </a>
+    @endif
+    @if(sizeof($hospital->users))
+      <table class="table">
+        <thead>
+          <tr>
+            <th>{{__('users.row')}}</th>
+            <th>{{__('users.first_name')}}</th>
+            <th>{{__('users.last_name')}}</th>
+            <th>{{__('users.status')}}</th>
+            @if(Auth::user()->isAdmin())
+              <th>{{__('users.operation')}}</th>
+            @endif
+          </tr>
+        </thead>
+        <tbody>
+          @foreach($hospital->users as $user)
+            <tr>
+              <td>{{$user->id}}</td>
+              <td>{{$user->first_name}}</td>
+              <td>{{$user->last_name}}</td>
+              <td>{{$user->status_str}}</td>
+              @if(Auth::user()->isAdmin())
+                <td>
+                  <a href="{{route('panel.users.destroy', ['user' => $user])}}" class="btn btn-danger" role="button">{{__('users.destroy')}}</a>
+                  <a href="{{route('panel.users.edit', ['user' => $user])}}" class="btn btn-info" role="button">{{__('users.edit.general')}}</a>
+                </td>
+              @endif
+            </tr>
+          @endforeach
+        </tbody>
+      </table>
+    @else
+      <div class="row">
+        <div class="col-md-12" style="text-align: center">
+          {{__('hospital_users.not_found')}}
+        </div>
+      </div>
+    @endif
   </div>
   <div class="panel panel-default">
     <h2>{{__('departments.index_title')}}</h2>

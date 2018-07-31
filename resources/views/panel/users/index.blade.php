@@ -72,16 +72,16 @@
           <tbody>
             @foreach($users as $user)
               <tr>
-              <td>{{$user->id}}</td>
-              <td><a href="{{route('panel.users.show', ['user' => $user])}}">{{$user->username}}</a></td>
-              <td>{{$user->group_str}}</td>
-              <td>{{$user->first_name}}</td>
-              <td>{{$user->last_name}}</td>
-              <td>{{$user->status_str}}</td>
-              <td>
-                <a href="{{route('panel.users.destroy', ['user' => $user])}}" class="btn btn-danger" role="button">{{__('users.destroy')}}</a>
-                <a href="{{route('panel.users.edit', ['user' => $user])}}" class="btn btn-info" role="button">{{__('users.edit.general')}}</a>
-              </td>
+                <td>{{$user->id}}</td>
+                <td><a href="{{route('panel.users.show', ['user' => $user])}}">{{$user->username}}</a></td>
+                <td>{{$user->group_str}}</td>
+                <td>{{$user->first_name}}</td>
+                <td>{{$user->last_name}}</td>
+                <td>{{$user->status_str}}</td>
+                <td>
+                  <a href="{{route('panel.users.destroy', ['user' => $user])}}" class="btn btn-danger" role="button">{{__('users.destroy')}}</a>
+                  <a href="{{route('panel.users.edit', ['user' => $user])}}" class="btn btn-info" role="button">{{__('users.edit.general')}}</a>
+                </td>
               </tr>
             @endforeach
           </tbody>

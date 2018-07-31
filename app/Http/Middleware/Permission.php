@@ -3,9 +3,8 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use Auth;
-use App\User;
-class IsAdmin
+
+class Permission
 {
     /**
      * Handle an incoming request.
@@ -16,9 +15,6 @@ class IsAdmin
      */
     public function handle($request, Closure $next)
     {
-        if(Auth::user()->isAdmin()){
-            return $next($request);
-        }else
-            return abort(403);
+        return $next($request);
     }
 }

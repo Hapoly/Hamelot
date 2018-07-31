@@ -1,4 +1,7 @@
 <!DOCTYPE html>
+<?php
+	use App\User;
+?>
 <html dir="rtl">
 <head>
 	<meta charset="utf-8">
@@ -46,12 +49,14 @@
 						مدیریت کاربران
 					</a>
 					<ul class="collapse list-unstyled" id="userSubmenu">
-						<li>
-							<a href="{{route('panel.users.create.admin')}}"> ادمین جدید</a>
-						</li>
-						<li>
-							<a href="{{route('panel.users.create.manager')}}"> مدیریت جدید</a>
-						</li>
+						@if(Auth::user()->isAdmin())
+							<li>
+								<a href="{{route('panel.users.create.admin')}}"> ادمین جدید</a>
+							</li>
+							<li>
+								<a href="{{route('panel.users.create.manager')}}"> مدیریت جدید</a>
+							</li>
+						@endif
 						<li>
 							<a href="{{route('panel.users.create.doctor')}}"> دکتر جدید</a>
 						</li>
@@ -72,9 +77,11 @@
 						بیمارستان ها
 					</a>
 					<ul class="collapse list-unstyled" id="hospitalSubmenu">
+						@if(Auth::user()->isAdmin())
 						<li>
 							<a href="{{route('panel.hospitals.create')}}"> بیمارستان جدید</a>
 						</li>
+						@endif
 						<li>
 							<a href="{{route('panel.hospitals.index')}}"> لیست بیمارستان ها</a>
 						</li>
