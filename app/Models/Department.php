@@ -13,7 +13,7 @@ class Department extends Model
     const S_ACTIVE      = 1;
     const S_INACTIVE    = 2;
 
-    public function status_str(){
+    public function getStatusStrAttribute(){
         return __('departments.status_str.' . $this->status);
     }
     public function patients(){
@@ -24,5 +24,8 @@ class Department extends Model
     }
     public function users(){
         return $this->hasMany('App\User');
+    }
+    public function hasEditPermission(){
+        
     }
 }

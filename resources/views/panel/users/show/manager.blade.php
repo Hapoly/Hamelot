@@ -50,7 +50,7 @@
             <tr>
               <td>{{$department->id}}</td>
               <td><a href="{{route('panel.hospitals.show', ['department' => $department])}}">{{$department->title}}</a></td>
-              <td>{{$department->status_str()}}</td>
+              <td>{{$department->status_str}}</td>
               <td>
                 <form action="{{route('panel.hospitals.destroy', ['department' => $department])}}" style="display: inline" method="POST" class="trash-icon">
                   {{ method_field('DELETE') }}
@@ -87,7 +87,7 @@
             <tr>
               <td>{{$department->id}}</td>
               <td><a href="{{route('panel.departments.show', ['department' => $department])}}">{{$department->title}}</a></td>
-              <td>{{$department->status_str()}}</td>
+              <td>{{$department->status_str}}</td>
               <td>
                 <form action="{{route('panel.departments.destroy', ['department' => $department])}}" style="display: inline" method="POST" class="trash-icon">
                   {{ method_field('DELETE') }}

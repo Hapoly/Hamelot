@@ -4,6 +4,8 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use App\Models\Permission;
+use App\Models\Department;
+use Auth;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
@@ -20,6 +22,18 @@ class User extends Authenticatable
 
     public function isAdmin(){
         return $this->group_code == User::G_ADMIN;
+    }
+    public function isManager(){
+        return $this->group_code == User::G_MANAGER;
+    }
+    public function isDoctor(){
+        return $this->group_code == User::G_DOCTOR;
+    }
+    public function isNurse(){
+        return $this->group_code == User::G_NURSE;
+    }
+    public function isPatient(){
+        return $this->group_code == User::G_PATIENT;
     }
     /**
      * The attributes that are mass assignable.
@@ -42,11 +56,20 @@ class User extends Authenticatable
     public function hospitals(){
         return $this->belongsToMany('App\Models\Hospital');
     }
-    public function departments(){
-        return $this->hasMany('App\Models\DepartmentUser');
+
+    public function hospitalDepartments(){
+        if(Auth::user()->isAdmin())
+            return Department::all();
+        $id = $this->id;
+        return Department::whereHas('hospital', function($query) use ($id){
+            return $query->whereHas('users', function($query) use ($id){
+                return $query->where('users.id', $id);
+            });
+        })->get();
     }
-    public function patients(){
-        return $this->hasMany('App\Models\PatientUser');
+
+    public function departments(){
+        return $this->belongsToMany('App\Models\Department');
     }
 
     public function getGroupStrAttribute(){
@@ -71,13 +94,19 @@ class User extends Authenticatable
      * method: has permission to
      * description: defines if user has permission to an object
      */
-    public function hasPermissisonToUser(User $user){
+    public function hasPermissionToUser(User $user){
         switch($this->group_code){
             case User::G_ADMIN:
                 return true;
             case User::G_MANAGER:
-                if($user->isAdmin() || $user->group_code == User::G_MANAGER)
+                if($user->isAdmin() || $user->isManager())
                     return false;
+                else if($user->group_code == User::G_DOCTOR)
+                    return $user->departments()->whereHas('hospital', function($query){
+                        return $query->whereHas('users', function($query){
+                            return $query->where('users.id', Auth::user()->id);
+                        });
+                    })->first() != null;
                 else
                     return true;
             default:

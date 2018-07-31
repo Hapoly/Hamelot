@@ -24,7 +24,7 @@
             <div class="col-md-3">:{{__('keys.type')}}</div>
           </div>
           <div class="row">
-            <div class="col-md-9">{{$key->status_str()}}</div>
+            <div class="col-md-9">{{$key->status_str}}</div>
             <div class="col-md-3">:{{__('keys.status')}}</div>
           </div>
           <div class="row">

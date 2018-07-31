@@ -128,8 +128,8 @@
                     <div class="form-group row create-form">
                         <div class="col-md-10">
                             <select class="form-control" name="department_id" id="department_id" style="width:90%">
-                                @foreach(Auth::user()->departments as $department)
-                                    <option value="{{$department->id}}" {{old('department_id') == $department->id? 'selected': ''}}>{{$department->title}} - {{$department->hospital->title}}</option>
+                                @foreach(Auth::user()->hospitalDepartments() as $department)
+                                    <option value="{{$department->id}}" {{old('department_id') == $department->id? 'selected': ''}} >{{$department->title}} - {{$department->hospital->title}}</option>
                                 @endforeach
                             </select>
                             @if ($errors->has('department_id'))
@@ -138,7 +138,7 @@
                                 </span>
                             @endif
                         </div>
-                        <label for="status" class="col-md-2 col-form-label text-center">{{ __('users.department_id') }}</label>
+                        <label for="department_id" class="col-md-2 col-form-label text-center">{{ __('users.department_id') }}</label>
                     </div>
                     
                     <div class="form-group row create-form">

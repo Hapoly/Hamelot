@@ -18,6 +18,7 @@ use App\Models\Nurse;
 use App\Models\Patient;
 use App\Models\ConstValue;
 use App\Models\Permission;
+use App\Models\DepartmentUser;
 
 use App\Http\Requests\UserRequest;
 use App\Http\Requests\AdminRequest;
@@ -114,7 +115,7 @@ class Users extends Controller{
     ]);
   }
   public function show(User $user){
-    if(!Auth::user()->hasPermissisonToUser($user))
+    if(!Auth::user()->hasPermissionToUser($user))
       abort(404);
     switch($user->group_code){
       case User::G_ADMIN:
@@ -168,6 +169,10 @@ class Users extends Controller{
     $inputs['password'] = bcrypt($inputs['password']);
     $inputs['group_code'] = User::G_DOCTOR;
     $user = User::create($inputs);
+    $dpeartment_user = DepartmentUser::create([
+      'user_id'       => $user->id,
+      'department_id' => $inputs['department_id'],
+    ]);
     $inputs['user_id'] = $user->id;
     $doctor = Doctor::create($inputs);
     return redirect()->route('panel.users.show', ['user' => $user]);
@@ -180,6 +185,10 @@ class Users extends Controller{
     $inputs['password'] = bcrypt($inputs['password']);
     $inputs['group_code'] = User::G_NURSE;
     $user = User::create($inputs);
+    $dpeartment_user = DepartmentUser::create([
+      'user_id'       => $user->id,
+      'department_id' => $inputs['department_id'],
+    ]);
     $inputs['user_id'] = $user->id;
     $nurse = Nurse::create($inputs);
     return redirect()->route('panel.users.show', ['user' => $user]);
@@ -193,6 +202,10 @@ class Users extends Controller{
     $inputs['group_code'] = User::G_PATIENT;
     $inputs['birth_date'] = Time::jmktime(0, 0, 0, $inputs['birth_day'], $inputs['birth_month'], $inputs['birth_year']);
     $user = User::create($inputs);
+    $dpeartment_user = DepartmentUser::create([
+      'user_id'       => $user->id,
+      'department_id' => $inputs['department_id'],
+    ]);
     $inputs['user_id'] = $user->id;
     $patient = Patient::create($inputs);
     return redirect()->route('panel.users.show', ['user' => $user]);

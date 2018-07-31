@@ -340,6 +340,7 @@ h2{
 .panel-default{
     border-color: white;
     border-radius: 10px;
+    padding-bottom: 25px;
 }
 /* ---------------------------------------------------
     CONTENT STYLE

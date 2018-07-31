@@ -16,7 +16,7 @@
             <div class="col-md-3">:{{__('templates.description')}}</div>
           </div>
           <div class="row">
-            <div class="col-md-9">{{$template->status_str()}}</div>
+            <div class="col-md-9">{{$template->status_str}}</div>
             <div class="col-md-3">:{{__('templates.status')}}</div>
           </div>
           <div class="row">

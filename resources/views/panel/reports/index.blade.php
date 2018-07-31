@@ -40,7 +40,7 @@
             <td><a href="{{route('panel.reports.show', ['report' => $report])}}">{{$report->key->title}}</a></td>
             <td>{{$report->value}}</td>
             <td>{{$report->date_str()}}</td>
-            <td>{{$report->status_str()}}</td>
+            <td>{{$report->status_str}}</td>
             <td>
               <form action="{{route('panel.reports.destroy', ['report' => $report])}}" style="display: inline" method="POST" class="trash-icon">
                 {{ method_field('DELETE') }}

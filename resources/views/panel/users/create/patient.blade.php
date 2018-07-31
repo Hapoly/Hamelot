@@ -153,6 +153,22 @@
 
                     <div class="form-group row create-form">
                         <div class="col-md-10">
+                            <select class="form-control" name="department_id" id="department_id" style="width:90%">
+                                @foreach(Auth::user()->hospitalDepartments() as $department)
+                                    <option value="{{$department->id}}" {{old('department_id') == $department->id? 'selected': ''}} >{{$department->title}} - {{$department->hospital->title}}</option>
+                                @endforeach
+                            </select>
+                            @if ($errors->has('department_id'))
+                                <span class="invalid-feedback">
+                                    <strong>{{ $errors->first('department_id') }}</strong>
+                                </span>
+                            @endif
+                        </div>
+                        <label for="department_id" class="col-md-2 col-form-label text-center">{{ __('users.department_id') }}</label>
+                    </div>
+                    
+                    <div class="form-group row create-form">
+                        <div class="col-md-10">
                            <input id="profile" type="file" class="form-control{{ $errors->has('profile') ? ' is-invalid' : '' }}" name="profile">
                                  @if ($errors->has('profile'))
                                     <span class="invalid-feedback">

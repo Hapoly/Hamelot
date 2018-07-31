@@ -39,7 +39,7 @@
             <td>{{$key->description}}</td>
             <td><a href="{{route('panel.templates.show', ['template' => $key->template])}}">{{$key->template->title}}</a></td>
             <td>{{$key->type_str()}}<td>
-            <td>{{$key->status_str()}}</td>
+            <td>{{$key->status_str}}</td>
             <td>
               <form action="{{route('panel.keys.destroy', ['key' => $key])}}" style="display: inline" method="POST" class="trash-icon">
                 {{ method_field('DELETE') }}

@@ -45,43 +45,6 @@
     </div>
   </div>
   <div class="panel panel-default">
-    <h2>{{__('hospitals.index_title')}}</h2>
-    @if(sizeof($user->hospitals))
-      <table class="table">
-        <thead>
-          <tr>
-            <th>{{__('hospitals.row')}}</th>
-            <th>{{__('hospitals.title')}}</th>
-            <th>{{__('hospitals.status')}}</th>
-            <th>{{__('hospitals.operation')}}</th>
-          </tr>
-        </thead>
-        <tbody>
-          @foreach($user->hospitals as $department)
-            <tr>
-              <td>{{$department->id}}</td>
-              <td><a href="{{route('panel.hospitals.show', ['department' => $department])}}">{{$department->title}}</a></td>
-              <td>{{$department->status_str()}}</td>
-              <td>
-                <form action="{{route('panel.hospitals.destroy', ['department' => $department])}}" style="display: inline" method="POST" class="trash-icon">
-                  {{ method_field('DELETE') }}
-                  {{ csrf_field() }}
-                  <button type="submit" class="btn btn-danger">{{__('hospitals.remove')}}</button>
-                </form>
-              </td>
-            </tr>
-          @endforeach
-        </tbody>
-      </table>
-    @else
-      <div class="row">
-        <div class="col-md-12" style="text-align: center">
-          {{__('hospitals.not_found')}}
-        </div>
-      </div>
-    @endif
-  </div>
-  <div class="panel panel-default">
     <h2>{{__('departments.index_title')}}</h2>
     @if(sizeof($user->departments))
       <table class="table">
@@ -98,7 +61,7 @@
             <tr>
               <td>{{$department->id}}</td>
               <td><a href="{{route('panel.departments.show', ['department' => $department])}}">{{$department->title}}</a></td>
-              <td>{{$department->status_str()}}</td>
+              <td>{{$department->status_str}}</td>
               <td>
                 <form action="{{route('panel.departments.destroy', ['department' => $department])}}" style="display: inline" method="POST" class="trash-icon">
                   {{ method_field('DELETE') }}

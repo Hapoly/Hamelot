@@ -28,18 +28,14 @@ class Permission
         'panel.users.store.nurse'                       => [ 1, 2 ],
         'panel.users.store.patient'                     => [ 1, 2, 3, 4, 5 ],
 
-        'panel.users.edit.admin'                        => [ 1 ],
-        'panel.users.edit.manager'                      => [ 1 ],
-        'panel.users.edit.doctor'                       => [ 1, 2 ],
-        'panel.users.edit.nurse'                        => [ 1, 2 ],
-        'panel.users.edit.patient'                      => [ 1, 2, 3, 4, 5 ],
+        'panel.users.update.admin'                       => [ 1 ],
+        'panel.users.update.manager'                     => [ 1 ],
+        'panel.users.update.doctor'                      => [ 1, 2 ],
+        'panel.users.update.nurse'                       => [ 1, 2 ],
+        'panel.users.update.patient'                     => [ 1, 2, 3, 4, 5 ],
 
-        'panel.users.update.admin'                      => [ 1 ],
-        'panel.users.update.manager'                    => [ 1 ],
-        'panel.users.update.doctor'                     => [ 1, 2 ],
-        'panel.users.update.nurse'                      => [ 1, 2 ],
-        'panel.users.update.patient'                    => [ 1, 2, 3, 4, 5 ],
-
+        'panel.users.edit'                              => [ 1, 2, 3, 4 ],
+        'panel.users.update'                            => [ 1, 2, 3, 4 ],
         'panel.users.show'                              => [ 1, 2, 3, 4, 5 ],
         'panel.users.destroy'                           => [ 1, 2, 3, 4, 5 ],
         'panel.users.index'                             => [ 1, 2, 3, 4 ],
@@ -63,7 +59,8 @@ class Permission
     public function handle(Request $request, Closure $next){
         $route = $request->route()->getName();
         if(!array_key_exists($route, $this->roles))
-            abort(404);
+            // abort(404);
+            die(json_encode($route));
 
         $permissions = $this->roles[$route];
         if(in_array(Auth::user()->group_code, $permissions))

@@ -23,7 +23,7 @@
           </tr>
           <tr>
             <td>{{__('departments.status')}}</td>
-            <td>{{$department->status_str()}}</td>
+            <td>{{$department->status_str}}</td>
           </tr>
         </tbody>
       </table>

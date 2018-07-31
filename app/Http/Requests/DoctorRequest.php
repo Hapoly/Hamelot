@@ -32,7 +32,8 @@ class DoctorRequest extends FormRequest
             'field'         => 'required|numeric',
             'gender'        => 'required|numeric',
             'profile'       => 'image',
-            'status'        => 'required|numeric'
+            'status'        => 'required|numeric',
+            'department_id' => 'required|numeric',
         ];
     }
 }
