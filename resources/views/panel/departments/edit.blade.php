@@ -32,7 +32,7 @@
         </div>
         <div class="form-group row">
           <div class="col-md-10">
-            <select class="form-control" name="hospital_id" id="hospital_id">
+            <select class="form-control" name="hospital_id" id="hospital_id" style="width: 90%;">
               @foreach($hospitals as $hospital)
                 <option value="{{$hospital->id}}" {{old('hospital_id', $department->hospital->id) == $hospital->id? 'selected': ''}}>{{$hospital->title}}</option>
               @endforeach
@@ -47,7 +47,7 @@
         </div>
         <div class="form-group row">
           <div class="col-md-10">
-            <select class="form-control" name="status" id="status">
+            <select class="form-control" name="status" id="status" style="width: 90%;">
               <option value="1" {{(old('status', $department->status) == 1? 'selected': '')}} >{{__('departments.status_str.1')}}  </option>
               <option value="2" {{(old('status', $department->status) == 2? 'selected': '')}} >{{__('departments.status_str.2')}}  </option>
             </select>

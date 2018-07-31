@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Auth;
 
 class Department extends Model
 {
@@ -23,9 +24,18 @@ class Department extends Model
         return $this->belongsTo('App\Models\Hospital');
     }
     public function users(){
-        return $this->hasMany('App\User');
+        return $this->belongsToMany('App\User');
     }
     public function hasEditPermission(){
-        
+        if(Auth::user()->isAdmin())
+            return true;
+        if(Auth::user()->isManager()){
+            return $this->hospital->whereHas('users', function($query){
+                return $query->where('users.id', Auth::user()->id);
+            })->first() != null;
+        }
+        if(Auth::user()->isPatient() || Auth::user()->isNurse() || Auth::user()->isDoctor())
+            return false;
+        return false;
     }
 }

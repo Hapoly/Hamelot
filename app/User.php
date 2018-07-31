@@ -101,7 +101,7 @@ class User extends Authenticatable
             case User::G_MANAGER:
                 if($user->isAdmin() || $user->isManager())
                     return false;
-                else if($user->group_code == User::G_DOCTOR)
+                else if($user->isDoctor() || $user->isNurse() || $user->isPatient())
                     return $user->departments()->whereHas('hospital', function($query){
                         return $query->whereHas('users', function($query){
                             return $query->where('users.id', Auth::user()->id);
@@ -109,9 +109,53 @@ class User extends Authenticatable
                     })->first() != null;
                 else
                     return true;
+            case User::G_DOCTOR:    
+                if($user->isAdmin() || $user->isManager() || $user->isDoctor())
+                    return false;
+                else if($user->isNurse() || $user->isPatient())
+                    return $user->departments()->whereHas('hospital', function($query){
+                        return $query->whereHas('users', function($query){
+                            return $query->where('users.id', Auth::user()->id);
+                        });
+                    })->first() != null;
+            case User::G_NURSE:
+                if($user->isAdmin() || $user->isManager() || $user->isDoctor() || $user->isNurse())
+                    return false;
+                else if($user->isPatient())
+                    return $user->departments()->whereHas('hospital', function($query){
+                        return $query->whereHas('users', function($query){
+                            return $query->where('users.id', Auth::user()->id);
+                        });
+                    })->first() != null;
+            case User::G_PATIENT:
+                return false;
             default:
                 return false;
         }
         return false;
+    }
+    public static function get(){
+        $users = new User;
+        if(Auth::user()->isPatient())
+            abort(404);
+        $users = new User;
+        if(Auth::user()->isManager()){
+            $users = $users->where([
+                ['group_code', '<>', User::G_ADMIN],
+                ['group_code', '<>', User::G_MANAGER],
+            ]);
+            $users = $users->whereHas('departments', function($query){
+                return $query->whereHas('hospital', function($query){
+                    return $query->whereHas('users', function($query){
+                        return $query->where('user_id', Auth::user()->id);
+                    });
+                });
+            });
+        }
+        if(Auth::user()->isDoctor())
+            $users = $users->where(['group_code', '<>', User::G_DOCTOR]);
+        if(Auth::user()->isPatient())
+            $users = $users->where(['group_code', '<>', User::G_NURSE]);
+        return $users;
     }
 }

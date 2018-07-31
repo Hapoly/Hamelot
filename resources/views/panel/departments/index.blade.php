@@ -25,7 +25,7 @@
         <tr>
           <th ><a href="{{route('panel.departments.index',['search' => $search,'sort' => 'id'    ,'page' => $departments->currentPage()])}}">{{__('departments.row')}}</a></th>
           <th ><a href="{{route('panel.departments.index',['search' => $search,'sort' => 'title'    ,'page' => $departments->currentPage()])}}">{{__('departments.title')}}</a></th>
-          <th ><a href="{{route('panel.departments.index',['search' => $search,'sort' => 'hospital_id'    ,'page' => $departments->currentPage()])}}">{{__('departments.hospital_id')}}}</a></th>
+          <th ><a href="{{route('panel.departments.index',['search' => $search,'sort' => 'hospital_id'    ,'page' => $departments->currentPage()])}}">{{__('departments.hospital_id')}}</a></th>
           <th ><a href="{{route('panel.departments.index',['search' => $search,'sort' => 'status'    ,'page' => $departments->currentPage()])}}">{{__('departments.status')}}</a></th>
           <th >{{__('departments.operation')}}</th>
         </tr>
@@ -36,7 +36,7 @@
             <td>{{$department->id}}</td>
             <td><a href="{{route('panel.departments.show', ['department' => $department])}}">{{$department->title}}</a></td>
             <td><a href="{{route('panel.hospitals.show', ['hospital' => $department->hospital])}}">{{$department->hospital->title}}</a></td>
-            <td>{{$department->status}}</td>
+            <td>{{$department->status_str}}</td>
             <td>
               <form action="{{route('panel.departments.destroy', ['department' => $department])}}" style="display: inline" method="POST" class="trash-icon">
                 {{ method_field('DELETE') }}
