@@ -75,6 +75,7 @@
                   {{ csrf_field() }}
                   <button type="submit" class="btn btn-danger">{{__('departments.remove')}}</button>
                 </form>
+                <a class="btn btn-primary" href="{{route('panel.hospitals.edit', ['hospital' => $hospital])}}">{{ __('departments.edit') }}</a>
               </td>
             </tr>
           @endforeach
