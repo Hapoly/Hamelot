@@ -38,18 +38,20 @@
         </tbody>
       </table>
     </div>
-    <div class="row">
-      <div class="col-md-6" style="text-align: center">
-        <a href="{{route('panel.hospitals.edit', ['hospital' => $hospital])}}" class="btn btn-primary" role="button">{{__('hospitals.edit')}}</a>
+    @if(Auth::user()->isAdmin())
+      <div class="row">
+        <div class="col-md-6" style="text-align: center">
+          <a href="{{route('panel.hospitals.edit', ['hospital' => $hospital])}}" class="btn btn-primary" role="button">{{__('hospitals.edit')}}</a>
+        </div>
+        <div class="col-md-6" style="text-align: center">
+          <form action="{{route('panel.hospitals.destroy', ['hospital' => $hospital])}}" method="post">
+            {{ method_field('DELETE') }}
+            {{ csrf_field() }}
+            <button type="submit" class="btn btn-danger">حذف</button>
+          </form>
+        </div>
       </div>
-      <div class="col-md-6" style="text-align: center">
-        <form action="{{route('panel.hospitals.destroy', ['hospital' => $hospital])}}" method="post">
-          {{ method_field('DELETE') }}
-          {{ csrf_field() }}
-          <button type="submit" class="btn btn-danger">حذف</button>
-        </form>
-      </div>
-    </div>
+    @endif
   </div>
   <div class="panel panel-default">
     <h2>{{__('hospital_users.title')}}</h2>

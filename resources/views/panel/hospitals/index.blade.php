@@ -26,7 +26,9 @@
           <th ><a href="{{route('panel.hospitals.index',['search' => $search,'sort' => 'phone'    ,'page' => $hospitals->currentPage()])}}">{{__('hospitals.phone')}}</a></th>
           <th ><a href="{{route('panel.hospitals.index',['search' => $search,'sort' => 'mobile'    ,'page' => $hospitals->currentPage()])}}">{{__('hospitals.mobile')}}</a></th>
           <th ><a href="{{route('panel.hospitals.index',['search' => $search,'sort' => 'status'    ,'page' => $hospitals->currentPage()])}}">{{__('hospitals.status')}}</a></th>
-          <th >{{__('hospitals.operation')}}</th>
+          @if(Auth::user()->isAdmin())
+            <th >{{__('hospitals.operation')}}</th>
+          @endif
         </tr>
       </thead>
       <tbody>
@@ -38,14 +40,16 @@
           <td>{{$hospital->phone}}</td>
           <td>{{$hospital->mobile}}</td>
           <td>{{$hospital->status_str}}</td>
-          <td>
-            <form action="{{route('panel.hospitals.destroy', ['hospital' => $hospital])}}" style="display: inline" method="POST" class="trash-icon">
-              {{ method_field('DELETE') }}
-              {{ csrf_field() }}
-              <button type="submit" class="btn btn-danger">{{__('hospitals.remove')}}</button>
-            </form>
-            <a href="{{route('panel.hospitals.edit', ['hospital' => $hospital])}}" class="btn btn-info" role="button">{{__('hospitals.edit')}}</a>
-          </td>
+          @if(Auth::user()->isAdmin())
+            <td>
+              <form action="{{route('panel.hospitals.destroy', ['hospital' => $hospital])}}" style="display: inline" method="POST" class="trash-icon">
+                {{ method_field('DELETE') }}
+                {{ csrf_field() }}
+                <button type="submit" class="btn btn-danger">{{__('hospitals.remove')}}</button>
+              </form>
+              <a href="{{route('panel.hospitals.edit', ['hospital' => $hospital])}}" class="btn btn-info" role="button">{{__('hospitals.edit')}}</a>
+            </td>
+          @endif
           </tr>
         @endforeach
       </tbody>

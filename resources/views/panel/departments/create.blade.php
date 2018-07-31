@@ -1,13 +1,13 @@
 @extends('layouts.main')
 @section('content')
 <div class="container">
-  <div class="panel panel-default create-card">
+  <div class="panel panel-default create-form">
     <h2>{{ __('departments.create') }}</h2>
     <div class="row">
       <div class="col-md-12">
       <form method="POST" action="{{ route('panel.departments.store') }}" enctype="multipart/form-data">
         @csrf
-        <div class="form-group row create-card">
+        <div class="form-group row create-form">
           <div class="col-md-10">
             <input id="title" type="text" class="form-control{{ $errors->has('title') ? ' is-invalid' : '' }}" name="title" value="{{ old('title') }}" required autofocus>
             @if ($errors->has('title'))
@@ -18,7 +18,7 @@
           </div>
           <label for="title" class="col-md-2 col-form-label text-center">{{ __('departments.title') }}</label>
         </div>
-        <div class="form-group row create-card">
+        <div class="form-group row create-form">
           <div class="col-md-10">
             <input id="description" type="text" class="form-control{{ $errors->has('description') ? ' is-invalid' : '' }}" name="description" value="{{ old('description') }}" required autofocus>
             @if ($errors->has('description'))
@@ -29,7 +29,7 @@
           </div>
           <label for="description" class="col-md-2 col-form-label text-center">{{ __('departments.description') }}</label>
         </div>
-        <div class="form-group row create-card">
+        <div class="form-group row create-form">
           <div class="col-md-10">
             <select class="form-control" name="hospital_id" id="hospital_id" style="width:93%">
               @foreach($hospitals as $hospital)
@@ -44,7 +44,7 @@
           </div>
           <label for="hospital_id" class="col-md-2 col-form-label text-center">{{ __('departments.hospital_id') }}</label>
         </div>
-        <div class="form-group row create-card">
+        <div class="form-group row create-form">
           <div class="col-md-10">
             <select class="form-control" name="status" id="status" style="width:93%">
               <option value="1">{{__('departments.status_str.1')}}  </option>

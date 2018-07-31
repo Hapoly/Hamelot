@@ -1,8 +1,5 @@
 @extends('layouts.main')
 @section('content')
-<?php
-    echo var_dump($errors->all());
-?>
 <div class="container">
     <div class="panel panel-default create-card">
          <h2>{{ __('users.create.patient') }}</h2>

@@ -14,7 +14,7 @@
 Route::get('/', function () {
     return view('welcome');
 });
-Route::middleware(['auth'])->namespace('Panel')->prefix('panel')->name('panel.')->group(function(){
+Route::middleware(['auth', 'Permission'])->namespace('Panel')->prefix('panel')->name('panel.')->group(function(){
     Route::resources([
         'hospitals'         => 'Hospitals',
         'departments'       => 'Departments',

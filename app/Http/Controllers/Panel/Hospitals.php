@@ -50,7 +50,10 @@ class Hospitals extends Controller{
     return view('panel.hospitals.show', ['hospital' => $hospital]);
   }
   public function create(){
-    return view('panel.hospitals.create');
+    if(Auth::user()->isAdmin())
+      return view('panel.hospitals.create');
+    else
+      abort(404);
   }
   public function store(HospitalRequest $request){
     $inputs = $request->all();
