@@ -51,6 +51,14 @@ class Permission
         'panel.hospitals.update'                        => [ 1 ],
         'panel.hospitals.show'                          => [ 1, 2 ],
         'panel.hospitals.destroy'                       => [ 1 ],
+
+        'panel.departments.index'                       => [ 1, 2, 3, 4 ],
+        'panel.departments.create'                      => [ 1, 2 ],
+        'panel.departments.store'                       => [ 1, 2 ],
+        'panel.departments.edit'                        => [ 1, 2 ],
+        'panel.departments.update'                      => [ 1, 2 ],
+        'panel.departments.show'                        => [ 1, 2, 3, 4 ],
+        'panel.departments.destroy'                     => [ 1, 2 ],
     ];
     public function handle(Request $request, Closure $next){
         $route = $request->route()->getName();

@@ -54,12 +54,12 @@
     @endif
   </div>
   <div class="panel panel-default">
-    <h2>{{__('hospital_users.title')}}</h2>
-    @if(Auth::user()->isAdmin())
-      <a href="{{route('panel.departments.create', ['hospital_id' => $hospital->id])}}" class="btn add" style="float:left;margin-left:20px;">{{__('departments.create')}}
-        <i class="fa fa-plus"></i>
-      </a>
-    @endif
+    <div class="panel-heading sub-panel-title">
+      {{__('hospital_users.title')}}
+      @if(Auth::user()->isAdmin())
+        <a href="{{route('panel.departments.create', ['hospital_id' => $hospital->id])}}" class="btn btn-primary sub-panel-add">{{__('departments.create')}}</a>
+      @endif
+    </div>
     @if(sizeof($hospital->users))
       <table class="table">
         <thead>
@@ -99,10 +99,15 @@
     @endif
   </div>
   <div class="panel panel-default">
-    <h2>{{__('departments.index_title')}}</h2>
-    <a href="{{route('panel.departments.create', ['hospital_id' => $hospital->id])}}" class="btn add" style="float:left;margin-left:20px;">{{__('departments.create')}}
-      <i class="fa fa-plus"></i>
-    </a>
+    <div class="sub-panel-title panel-heading">
+      <a href="{{route('panel.departments.create', ['hospital_id' => $hospital->id])}}" class="btn btn-primary sub-panel-add"><i class="fa fa-plus"></i></a>
+      {{__('departments.index_title')}}
+    </div>
+    <div class="col-md-12" style="margin-bottom: 2rem;">
+      <h3>
+        
+      </h3>
+    </div>
     @if(sizeof($hospital->departments))
       <table class="table">
         <thead>

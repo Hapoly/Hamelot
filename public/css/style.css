@@ -74,6 +74,30 @@ i, span {
     margin-top: 40px;
     margin-bottom: 20px;
 }
+
+.sub-panel-title{
+    color: #fff !important;
+    background-color: #2b5477 !important;
+    border-color: #ddd;
+    font-size: 25px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+.sub-panel-add{
+    float: left;
+    border-radius: 16px;
+    background-color: #2b5477;
+    color: #fff;
+    border-color: #fff;
+    line-height: 16px;
+    padding-top: 10px;
+}
+.sub-panel-add:hover{
+    border-radius: 8px;
+    background-color: #fff;
+    color: #000;
+}
+
 /* ---------------------------------------------------
     SIDEBAR STYLE
 ----------------------------------------------------- */
@@ -315,6 +339,7 @@ h2{
 }
 .panel-default{
     border-color: white;
+    border-radius: 10px;
 }
 /* ---------------------------------------------------
     CONTENT STYLE
