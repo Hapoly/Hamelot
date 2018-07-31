@@ -66,7 +66,51 @@
 <script>
 function add_time(){
     $("#times").append(
-        "<p> hello </p>"
+        "<div class='panel panel-default create-card'  style='margin-top:30px;' >"+
+            "<span class='closebtn' onclick='this.parentElement.style.display='none';'>&times;</span>"+ 
+            "<div class='row'>"+
+                "<div class='col-md-12'>"+
+                    "<form method='POST'  enctype='multipart/form-data'>"+
+                        "<div class='form-group test-in create-form' >"+
+                            "<div class='col-md-10'>"+
+                                "<input id='title' type='text' class='form-control' name='title' style='width:90%;'>"+
+                            "</div>"+
+                            "<label for='title' class='col-md-2 col-form-label text-center'>عنوان</label>"+
+                        "</div>"+
+                    "</form>"+
+                "</div>"+
+                "<div class='form-group row create-form'>"+
+                    "<div class='col-md-12'>"+
+                        "<div class='form-group test-in'>"+
+                            "<div class='col-md-10'>"+
+                                "<select class='form-control' name='status' id='status' style='width:90%;text-align:center'>"+
+                                "<option value='1'>13  </option>"+
+                                "<option value='2'>15 </option>"+
+                                "</select>"+
+                            "</div>"+
+                            "<label for='status' class='col-md-2 col-form-label text-center'>نوع</label>"+
+                        "</div>"+
+                    "</div>"+
+                "</div>"+
+                "<div class='form-group create-form'>"+
+                    "<div class='col-md-12'>"+
+                        "<div class='form-group test-in'>"+
+                            "<div class='col-md-10'>"+
+                                "<form>"+
+                                    "<div class='form-group'>"+
+                                    "<textarea class='form-control' rows='3' id='comment' style='width:90%'></textarea>"+
+                                    "</div>"+
+                                "</form>"+
+                            "</div>"+
+                            "<label for='status' class='col-md-2 col-form-label text-center'>توضیحات</label>"+
+                        "</div>"+
+                    "</div>"+
+                "</div>"+
+            "</div>"+
+            "<div class='row'>"+
+                "<input type='button' onclick='add_time()' class='btn accent-color text-primary-color new-meet' value='جلسه جدید'>"+
+            "</div>"+
+        "</div>"
     )
 }
 </script>
