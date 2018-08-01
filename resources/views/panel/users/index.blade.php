@@ -4,6 +4,7 @@
 <?php
   use App\User;
 ?>
+
 <div class="container">
   <div class="row justify-content-center">
     <div class="col-8">
@@ -42,9 +43,9 @@
               </div>
             </div>
             <div class="row" id="more-inputs"></div>
-            <div class="row">
+            <div class="row" style="margin-bottom:2px;margin-top:2px;">
               <div class="col-md-12">
-                <button class="btn btn-default" type="submit">{{__('users.search')}}</a>
+                <button class="btn btn-info" type="submit">{{__('users.search')}}</a>
               </div>
             </div>
             </form>
