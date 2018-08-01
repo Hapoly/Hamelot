@@ -10,6 +10,7 @@ return [
     ],
     'title'         => 'عنوان',
     'description'   => 'توضیحات',
+    'label'         => 'واحد',
     'new_field'     => 'فیلد جدید',
 
 
