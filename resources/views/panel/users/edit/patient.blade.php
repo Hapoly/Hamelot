@@ -1,4 +1,5 @@
 @extends('layouts.main')
+@section('title', __('users.edit.patient'))
 @section('content')
 <?php
     echo var_dump($errors->all());

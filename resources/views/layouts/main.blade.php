@@ -8,7 +8,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-	<title>{{ config('app.name', 'Laravel') }}</title>
+	<title>{{ config('app.name', 'Laravel') }} | @yield('title')</title>
 
 	<!-- Bootstrap CSS CDN -->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -107,12 +107,17 @@
 						آزمایشات
 					</a>
 					<ul class="collapse list-unstyled" id="testtSubmenu">
-						<!-- <li>
-							<a href="#"> آزمایش جدید</a>
-						</li> -->
 						<li>
-							<a href="{{route('panel.test')}}"> لیست آزمایشات</a>
+							<a href="{{route('panel.experiments.index')}}"> لیست آزمایشات</a>
 						</li>
+						<li>
+							<a href="{{route('panel.report_templates.index')}}"> لیست قالب‌ها</a>
+						</li>
+						@if(Auth::user()->isAdmin())
+							<li>
+								<a href="{{route('panel.report_templates.create')}}"> قالب جدید</a>
+							</li>
+						@endif
 					</ul>
 				</li>
 			</ul>

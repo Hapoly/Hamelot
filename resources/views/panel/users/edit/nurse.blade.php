@@ -1,4 +1,5 @@
 @extends('layouts.main')
+@section('title', __('users.edit.nurse'))
 @section('content')
 <div class="container">
     <div class="panel panel-default create-card">
