@@ -35,12 +35,12 @@
                     <div class="col-md-12">
                         <div class="form-group test-in  {{$errors->has('status')? 'has-error has-feedback': ''}}">
                             <div class="col-md-10">
-                                <select class="form-control type" name="status" style="width:90%;text-align:center">
+                                <select class="form-control" name="status" style="width:90%;text-align:center">
                                     <option {{$report_template->status == 1? 'selected': ''}} value="1">{{__('reports.status_str.1')}}</option>
                                     <option {{$report_template->status == 2? 'selected': ''}} value="2">{{__('reports.status_str.2')}}</option>
                                 </select>
                             </div>
-                            <label for="status" class="col-md-2 col-form-label text-center">{{__('reports.type')}}</label>
+                            <label for="status" class="col-md-2 col-form-label text-center">{{__('reports.status')}}</label>
                         </div>
                     </div>
                 </div>

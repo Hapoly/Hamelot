@@ -1,22 +1,11 @@
 @extends('layouts.main')
-@section('title', __('reports.create'))
+@section('title', __('experiments.create'))
 @section('content')
 <div class="test">
-    <form action="{{route('panel.report_templates.store')}}" method="POST">
+    <form action="{{route('panel.experiments.store')}}" method="POST">
         @csrf
         <div class="panel panel-default create-card"  id="field-1" style="margin-top:30px;" >
             <div class="row">
-                <div class="col-md-12">
-                    <div class="form-group test-in create-form {{$errors->has('title')? 'has-error has-feedback': ''}}" >
-                        <div class="col-md-10">
-                            @if($errors->has('title'))
-                                <span class="form-control-feedback error-span">{{$errors->first('title')}}</span>
-                            @endif
-                            <input id="title" type="text" class="form-control" name="title" style="width:90%;" value="{{old('title', '')}}">
-                        </div>
-                        <label for="title" class="col-md-2 col-form-label text-center">{{__('reports.report_title')}}</label>
-                    </div>
-                </div>
                 <div class="form-group create-form">
                     <div class="col-md-12">
                         <div class="form-group test-in  {{$errors->has('description')? 'has-error has-feedback': ''}}">
@@ -26,7 +15,21 @@
                                 @endif
                                 <textarea class="form-control" name="description" rows="3" id="comment" style="width:90%">{{old('description', '')}}</textarea>
                             </div>
-                            <label for="description" class="col-md-2 col-form-label text-center">{{__('reports.report_description')}}</label>
+                            <label for="description" class="col-md-2 col-form-label text-center">{{__('experiments.report_description')}}</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row create-form">
+                    <div class="col-md-12">
+                        <div class="form-group test-in  {{$errors->has('patient_id')? 'has-error has-feedback': ''}}">
+                            <div class="col-md-10">
+                                <select class="form-control" name="patient_id" style="width:90%;text-align:center">
+                                    @foreach(Auth::user()->patients() as $patient)
+                                        <option value="{{$patient->id}}">{{$patient->first_name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <label for="patient_id" class="col-md-2 col-form-label text-center">{{__('experiments.patient_id')}}</label>
                         </div>
                     </div>
                 </div>
@@ -34,242 +37,51 @@
                     <div class="col-md-12">
                         <div class="form-group test-in  {{$errors->has('status')? 'has-error has-feedback': ''}}">
                             <div class="col-md-10">
-                                <select class="form-control type" name="status" style="width:90%;text-align:center">
-                                    <option value="1">{{__('reports.status_str.1')}}</option>
-                                    <option value="2">{{__('reports.status_str.2')}}</option>
+                                <select class="form-control" name="status" style="width:90%;text-align:center">
+
+                                    <option value="1">{{__('experiments.status_str.1')}}</option>
+                                    <option value="2">{{__('experiments.status_str.2')}}</option>
                                 </select>
                             </div>
-                            <label for="status" class="col-md-2 col-form-label text-center">{{__('reports.type')}}</label>
+                            <label for="status" class="col-md-2 col-form-label text-center">{{__('experiments.status')}}</label>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div id="fields">
-            @if(sizeof(old('titles', [])) > 0)
-                @for($i=0; $i<sizeof(old('titles', [])); $i++)
-                    <div class="panel panel-default create-card"  id="field-{{$i+1}}" style="margin-top:30px;" >
-                        <span class="closebtn" onclick="remove_field(1)">&times;</span> 
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group test-in create-form  {{$errors->has('titles.' . $i)? 'has-error has-feedback': ''}}" >
-                                    <div class="col-md-10">
-                                        @if($errors->has('titles.' . $i))
-                                            <span class="form-control-feedback error-span">{{$errors->first('titles.' . $i)}}</span>
-                                        @endif
-                                        <input id="title" type="text" class="form-control" name="titles[]" style="width:90%;" value="{{old('titles.' . $i, '')}}">
-                                    </div>
-                                    <label for="title" class="col-md-2 col-form-label text-center">{{__('reports.title')}}</label>
-                                </div>
-                            </div>
-                            <div class="form-group row create-form">
-                                <div class="col-md-12">
-                                    <div class="form-group test-in {{$errors->has('types.' . $i)? 'has-error has-feedback': ''}}">
-                                        <div class="col-md-10">
-                                            <select class="form-control type" name="types[]" id="type-{{$i+1}}" data-label="quantity-{{$i+1}}" style="width:90%;text-align:center">
-                                                <option value="1" {{old('types.'.$i) == 1? 'selected': ''}} >{{__('reports.type_str.1')}}</option>
-                                                <option value="2" {{old('types.'.$i) == 2? 'selected': ''}} >{{__('reports.type_str.2')}}</option>
-                                                <option value="3" {{old('types.'.$i) == 3? 'selected': ''}} >{{__('reports.type_str.3')}}</option>
-                                                <option value="4" {{old('types.'.$i) == 4? 'selected': ''}} >{{__('reports.type_str.4')}}</option>
-                                                <option value="5" {{old('types.'.$i) == 5? 'selected': ''}} >{{__('reports.type_str.5')}}</option>
-                                            </select>
-                                        </div>
-                                        <label for="type" class="col-md-2 col-form-label text-center">{{__('reports.type')}}</label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="form-group test-in create-form" >
-                                    <div class="col-md-10 {{$errors->has('labels.' . $i)? 'has-error has-feedback': ''}}">
-                                        @if($errors->has('labels.' . $i))
-                                            <span class="form-control-feedback error-span">{{$errors->first('labels.' . $i)}}</span>
-                                        @endif
-                                        <input id="label-{{$i+1}}" type="text" class="form-control" name="labels[]" style="width:90%;" value="{{old('labels.'.$i, '')}}">
-                                    </div>
-                                    <label for="label-{{$i+1}}" class="col-md-2 col-form-label text-center">{{__('reports.label')}}</label>
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="form-group test-in create-form" >
-                                    <div class="col-md-10 {{$errors->has('quantities.' . $i)? 'has-error has-feedback': ''}}">
-                                        @if($errors->has('quantities.' . $i))
-                                            <span class="form-control-feedback error-span">{{$errors->first('quantities.' . $i)}}</span>
-                                        @endif
-                                        <input id="quantity-{{$i+1}}" type="text" class="form-control" name="quantities[]" style="width:90%;" value="{{old('quantities.'.$i, '')}}">
-                                    </div>
-                                    <label for="quantity-{{$i+1}}" class="col-md-2 col-form-label text-center">{{__('reports.quantity')}}</label>
-                                </div>
-                            </div>
-                            <div class="form-group create-form">
-                                <div class="col-md-12">
-                                    <div class="form-group test-in {{$errors->has('descriptions.' . $i)? 'has-error has-feedback': ''}}">
-                                        <div class="col-md-10">
-                                            @if($errors->has('descriptions.' . $i))
-                                                <span class="form-control-feedback error-span">{{$errors->first('descriptions.' . $i)}}</span>
-                                            @endif
-                                            <textarea class="form-control" rows="3" name="descriptions[]" id="comment" style="width:90%">{{old('descriptions.'.$i, '')}}</textarea>
-                                        </div>
-                                        <label for="status" class="col-md-2 col-form-label text-center">{{__('reports.description')}}</label>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                @endfor
-            @else
-                <div class="panel panel-default create-card"  id="field-1" style="margin-top:30px;" >
-                    <span class="closebtn" onclick="remove_field(1)">&times;</span> 
-                    <div class="row">
+        <div class="panel panel-default create-card"  id="field-1" style="margin-top:30px;" >
+            <div class="row">
+                @foreach($report_template->fields as $field)
                         <div class="col-md-12">
-                            <div class="form-group test-in create-form" >
-                                <div class="col-md-10">
-                                    <input id="title" type="text" class="form-control" name="titles[]" style="width:90%;">
-                                </div>
-                                <label for="title" class="col-md-2 col-form-label text-center">{{__('reports.title')}}</label>
-                            </div>
-                        </div>
-                        <div class="form-group row create-form">
-                            <div class="col-md-12">
-                                <div class="form-group test-in">
+                            <div class="form-group test-in create-form {{$errors->has('field_' . $field->id)? 'has-error has-feedback': ''}}" >
+                                @if($field->isInteger())
                                     <div class="col-md-10">
-                                        <select class="form-control type" name="types[]" id="type-1" data-label="quantity-1" style="width:90%;text-align:center">
-                                            <option value="1">{{__('reports.type_str.1')}}</option>
-                                            <option value="2">{{__('reports.type_str.2')}}</option>
-                                            <option value="3">{{__('reports.type_str.3')}}</option>
-                                            <option value="4">{{__('reports.type_str.4')}}</option>
-                                            <option value="5">{{__('reports.type_str.5')}}</option>
-                                        </select>
+                                        @if($errors->has('field_' . $field->id))
+                                            <span class="form-control-feedback error-span">{{$errors->first('field_' . $field->id)}}</span>
+                                        @endif
+                                        <input id="field_{{$field->id}}" type="number" class="form-control" name="field_{{$field->id}}" style="width:90%;" value="{{old('field_' . $field->id, '')}}">
                                     </div>
-                                    <label for="type" class="col-md-2 col-form-label text-center">{{__('reports.type')}}</label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-12">
-                            <div class="form-group test-in create-form" >
-                                <div class="col-md-10">
-                                    <input id="label-1" type="text" class="form-control" name="labels[]" style="width:90%;">
-                                </div>
-                                <label for="label-1" class="col-md-2 col-form-label text-center">{{__('reports.label')}}</label>
-                            </div>
-                        </div>
-                        <div class="col-md-12">
-                            <div class="form-group test-in create-form" >
-                                <div class="col-md-10">
-                                    <input id="quantity-1" type="text" class="form-control" name="quantities[]" style="width:90%;">
-                                </div>
-                                <label for="quantity-1" class="col-md-2 col-form-label text-center">{{__('reports.quantity')}}</label>
-                            </div>
-                        </div>
-                        <div class="form-group create-form">
-                            <div class="col-md-12">
-                                <div class="form-group test-in">
+                                    <label for="field_{{$field->id}}" class="col-md-2 col-form-label text-center">{{$field->title}}</label>
+                                @endif
+                                @if($field->isString())
                                     <div class="col-md-10">
-                                        <div class="form-group">
-                                            <textarea class="form-control" rows="3" name="descriptions[]" id="comment" style="width:90%"></textarea>
-                                        </div>
+                                        @if($errors->has('field_' . $field->id))
+                                            <span class="form-control-feedback error-span">{{$errors->first('field_' . $field->id)}}</span>
+                                        @endif
+                                        <input id="field_{{$field->id}}" type="text" class="form-control" name="field_{{$field->id}}" style="width:90%;" value="{{old('field_' . $field->id, '')}}">
                                     </div>
-                                    <label for="status" class="col-md-2 col-form-label text-center">{{__('reports.description')}}</label>
-                                </div>
+                                    <label for="field_{{$field->id}}" class="col-md-2 col-form-label text-center">{{$field->title}}</label>
+                                @endif
                             </div>
                         </div>
-                    </div>
-                </div>
-            @endif
+                @endforeach
+            </div>
         </div>
         <div class="form-group row mb-0">
             <div class="col-md-12">
-                <button type="button" onclick="add_field()" class="btn accent-color text-primary-color new-meet">{{__('reports.new_field')}}</button>
-                <button type="submit" class="btn btn-info" >{{__('reports.save')}}</button>
+                <button type="submit" class="btn btn-info" >{{__('experiments.save')}}</button>
             </div>
         </div>
     </form>
 </div>
-<script>
-function setOnChange(){
-    $(".type").unbind( "change" );
-    $(".type").change(function(e){
-        let typeId = e.target.id
-        let labelId = $("#" + typeId).attr('data-label');
-        switch($("#"+typeId).val()){
-            case "1":
-            case "3":
-                $("#" + labelId).prop('disabled', false);
-                break;
-            case "4":
-            case "2":
-                $("#" + labelId).prop('disabled', true);
-                break;
-        }
-    })
-
-}
-setOnChange();
-var last_field_index = {{sizeof(old('titles')) + 1}};
-function remove_field(o){
-    $("#field-" + o).remove();
-}
-function add_field(){
-    last_field_index ++;
-    $("#fields").append(
-        "<div class='panel panel-default create-card'  id='field-"+last_field_index+"' style='margin-top:30px;' >"+
-            "<span class='closebtn' onclick='remove_field("+last_field_index+")'>&times;</span>"+ 
-            "<div class='row'>"+
-                "<div class='col-md-12'>"+
-                    "<div class='form-group test-in create-form' >"+
-                        "<div class='col-md-10'>"+
-                            "<input id='title' type='text' class='form-control' name='titles[]' style='width:90%;'>"+
-                        "</div>"+
-                        "<label for='title' class='col-md-2 col-form-label text-center'>{{__('reports.title')}}</label>"+
-                    "</div>"+
-                "</div>"+
-                "<div class='form-group row create-form'>"+
-                "    <div class='col-md-12'>"+
-                "        <div class='form-group test-in'>"+
-                "            <div class='col-md-10'>"+
-                "                <select class='form-control type' name='types[]' id='type-"+last_field_index+"' data-label='quantity-"+last_field_index+"' style='width:90%;text-align:center'>"+
-                "                <option value='1'>{{__('reports.type_str.1')}}</option>"+
-                "                <option value='2'>{{__('reports.type_str.2')}}</option>"+
-                "                <option value='3'>{{__('reports.type_str.3')}}</option>"+
-                "                <option value='4'>{{__('reports.type_str.4')}}</option>"+
-                "                <option value='5'>{{__('reports.type_str.5')}}</option>"+
-                "                </select>"+
-                "            </div>"+
-                "            <label for='type' class='col-md-2 col-form-label text-center'>{{__('reports.type')}}</label>"+
-                "        </div>"+
-                "    </div>"+
-                "</div>"+
-                "<div class='col-md-12'>"+
-                "    <div class='form-group test-in create-form' >"+
-                "        <div class='col-md-10'>"+
-                "            <input type='text' class='form-control' name='labels[]' style='width:90%;'>"+
-                "        </div>"+
-                "        <label  class='col-md-2 col-form-label text-center'>{{__('reports.label')}}</label>"+
-                "    </div>"+
-                "</div>"+
-                "<div class='col-md-12'>"+
-                "   <div class='form-group test-in create-form' >"+
-                "       <div class='col-md-10'>"+
-                "           <input id='quantity-"+last_field_index+"' type='text' class='form-control' name='quantities[]' style='width:90%;'>"+
-                "       </div>"+
-                "       <label for='quantity-"+last_field_index+"' class='col-md-2 col-form-label text-center'>{{__('reports.quantity')}}</label>"+
-                "   </div>"+
-                "</div>"+
-                "<div class='form-group create-form'>"+
-                    "<div class='col-md-12'>"+
-                        "<div class='form-group test-in'>"+
-                            "<div class='col-md-10'>"+
-                                "<div class='form-group'>"+
-                                "<textarea class='form-control' rows='3' id='descriptions' name='descriptions[]' style='width:90%'></textarea>"+
-                                "</div>"+
-                            "</div>"+
-                            "<label for='status' class='col-md-2 col-form-label text-center'>{{__('reports.description')}}</label>"+
-                        "</div>"+
-                    "</div>"+
-                "</div>"+
-            "</div>"+
-        "</div>"
-    );
-    setOnChange();
-}
-</script>
 @endsection

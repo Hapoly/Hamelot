@@ -11,67 +11,74 @@ use Illuminate\Support\Facades\Storage;
 
 use URL;
 use App\Models\ReportField;
+use App\Models\Experiment;
 use App\Models\ReportTemplate;
-use App\Http\Requests\ReportTemplateRequest;
+use App\Http\Requests\ExperimentRequest;
 
 class Experiments extends Controller{
   public function index(Request $request){
-    $report_templates = new ReportTemplate;
+    $experiments = new Experiment;
     $links = '';
     $sort = $request->input('sort', '###');
     $search = $request->input('search', '###');
 
     if($sort != '###' && $search == '###'){
-      $report_templates = $report_templates->orderBy($request->input('sort'), 'desc');
-      $report_templates = $report_templates->paginate(10);
-      $links = $report_templates->appends(['sort' => $request->input('sort')])->links();
+      $experiments = $experiments->orderBy($request->input('sort'), 'desc');
+      $experiments = $experiments->paginate(10);
+      $links = $experiments->appends(['sort' => $request->input('sort')])->links();
     }else if($sort == '###' && $search != '###'){
-      $report_templates = $report_templates->where('title', 'LIKE', "%$search%");
-      $report_templates = $report_templates->paginate(10);
-      $links = $report_templates->appends(['sort' => $request->input('sort')])->links();
+      $experiments = $experiments->where('title', 'LIKE', "%$search%");
+      $experiments = $experiments->paginate(10);
+      $links = $experiments->appends(['sort' => $request->input('sort')])->links();
     }else if($sort != '###' && $search != '###'){
-      $report_templates = $report_templates->where('title', 'LIKE', "%$search%");
-      $report_templates = $report_templates->orderBy($request->input('sort'), 'desc');
-      $report_templates = $report_templates->paginate(10);
-      $links = $report_templates->appends(['sort' => $request->input('sort')])->links();
+      $experiments = $experiments->where('title', 'LIKE', "%$search%");
+      $experiments = $experiments->orderBy($request->input('sort'), 'desc');
+      $experiments = $experiments->paginate(10);
+      $links = $experiments->appends(['sort' => $request->input('sort')])->links();
     }else{
-      $report_templates = $report_templates->paginate(10);
+      $experiments = $experiments->paginate(10);
     }
-    return view('panel.report_templates.index', [
-      'report_templates'   => $report_templates,
+    return view('panel.experiments.index', [
+      'experiments' => $experiments,
       'links'       => $links,
       'sort'        => $sort,
       'search'      => $search,
     ]);
   }
-  public function show(ReportTemplate $report_template){
-    return view('panel.report_templates.show', ['report_template' => $report_template]);
+  public function show(Experiment $experiment){
+    return view('panel.experiments.show', ['experiment' => $experiment]);
   }
-  public function create(){
-    return view('panel.report_templates.create');
+  public function create(Request $request){
+    $report_template = ReportTemplate::find($request->input('report_template', 0));
+    if(!$report_template)
+      abort(404);
+    return view('panel.experiments.create', [
+      'report_template' => $report_template,
+      'patients'        => Auth::user()->patients(),
+    ]);
   }
-  public function store(ReportTemplateRequest $request){
-    $report_template = ReportTemplate::create([
+  public function store(ExperimentRequest $request){
+    $experiment = Experiment::create([
       'title'         => $request->title,
       'description'   => $request->description,
       'status'        => $request->status,
     ]);
-    $report_template->saveFields($request);
-    return redirect()->route('panel.report_templates.show', ['report_template' => $report_template]);
+    $experiment->saveFields($request);
+    return redirect()->route('panel.experiments.show', ['experiment' => $experiment]);
   }
-  public function edit(ReportTemplate $report_template){
-    return view('panel.report_templates.edit', ['report_template' => $report_template]);
+  public function edit(Experiment $experiment){
+    return view('panel.experiments.edit', ['experiment' => $experiment]);
   }
-  public function update(ReportTemplateRequest $request, ReportTemplate $report_template){
+  public function update(ExperimentRequest $request, Experiment $experiment){
     $inputs = $request->all();
-    $report_template->fill($inputs)->save();
-    $report_template->saveFields($request);
-    return redirect()->route('panel.report_templates.show', ['report_template' => $report_template]);
+    $experiment->fill($inputs)->save();
+    $experiment->saveFields($request);
+    return redirect()->route('panel.experiments.show', ['experiment' => $experiment]);
   }
-  public function destroy(ReportTemplate $report_template){
-    $report_template->delete();
-    if(URL::route('panel.report_templates.show', ['report_template' => $report_template]) == URL::previous())
-      return redirect()->route('panel.report_templates.index');
+  public function destroy(Experiment $experiment){
+    $experiment->delete();
+    if(URL::route('panel.experiments.show', ['experiment' => $experiment]) == URL::previous())
+      return redirect()->route('panel.experiments.index');
     else
       return redirect()->back();
   }
