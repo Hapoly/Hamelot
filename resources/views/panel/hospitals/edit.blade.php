@@ -1,4 +1,5 @@
 @extends('layouts.main')
+@section('title', __('hospitals.edit'))
 @section('content')
 <div class="container">
   <div class="panel panel-default create-form">
@@ -77,13 +78,9 @@
           </div>
           <label for="status" class="col-md-2 col-form-label text-center">{{ __('hospitals.status') }}</label>
         </div>
-        <div class="form-group row mb-0">
-          <div class="col-md-12" style="text-align: center">
-            <button type="submit" name="action" value="edit" class="btn btn-primary">
-              {{ __('hospitals.edit') }}
-            </button>
-          </div>
-        </div>
+        @submit(['value' => 'edit'])
+        {{ __('hospitals.edit') }}
+        @endsubmit
       </form>
       </div>
     </div>

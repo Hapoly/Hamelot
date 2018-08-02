@@ -58,12 +58,9 @@
           </div>
           <label for="status" class="col-md-2 col-form-label text-center">{{ __('departments.status') }}</label>
         </div>
-
-      
-            <button type="submit" name="action" value="new" class="btn btn-primary save-btn" >
-              {{ __('departments.save') }}
-            </button>
-          
+        @submit(['value' => 'new'])
+        {{ __('departments.save') }}
+        @endsubmit
       </form>
       </div>
     </div>

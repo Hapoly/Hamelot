@@ -154,9 +154,9 @@
                          <label for="profile" class="col-md-2 col-form-label text-center">{{ __('users.profile') }}</label>
                     </div>
 
-                    <button type="submit" name="action" value="new" class="btn btn-primary save-btn">
+                        @submit_row(['value' => 'save'])
                         {{ __('users.save') }}
-                    </button>
+                        @endsubmit_row
                     </form>
                 </div>
             </div>

@@ -78,9 +78,9 @@
                         <label for="status" class="col-md-2 col-form-label text-center">{{ __('users.status') }}</label>
                     </div>
 
-                        <button type="submit" name="action" value="new" class="btn btn-primary save-btn">
-                            {{ __('users.save') }}
-                        </button>
+                        @submit_row(['value' => 'save'])
+                        {{ __('users.save') }}
+                        @endsubmit_row
                     </form>
                 </div>
             </div>

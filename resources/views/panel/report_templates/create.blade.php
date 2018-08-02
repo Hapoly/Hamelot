@@ -179,7 +179,9 @@
         <div class="form-group row mb-0">
             <div class="col-md-12">
                 <button type="button" onclick="add_field()" class="btn accent-color text-primary-color new-meet">{{__('reports.new_field')}}</button>
-                <button type="submit" class="btn btn-info" >{{__('reports.save')}}</button>
+                @submit(['value' => 'save'])
+                {{ __('reports.save') }}
+                @endsubmit
             </div>
         </div>
     </form>

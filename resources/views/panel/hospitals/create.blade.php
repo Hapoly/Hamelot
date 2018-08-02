@@ -1,4 +1,5 @@
 @extends('layouts.main')
+@section('title', __('hospitals.create'))
 @section('content')
 <div class="container">
   <div class="panel panel-default create-card">
@@ -76,9 +77,9 @@
           </div>
           <label for="image" class="col-md-2 col-form-label text-center">{{ __('hospitals.image') }}</label>
         </div>
-        <button type="submit" name="action" value="new" class="btn btn-primary save-btn">
-          {{ __('hospitals.save') }}
-        </button>
+        @submit(['value' => 'save'])
+        {{ __('hospitals.save') }}
+        @endsubmit
       </form>
       </div>
     </div>

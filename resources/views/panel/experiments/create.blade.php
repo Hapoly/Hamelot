@@ -79,7 +79,9 @@
         </div>
         <div class="form-group row mb-0">
             <div class="col-md-12">
-                <button type="submit" class="btn btn-info" >{{__('experiments.save')}}</button>
+                @submit(['value' => 'new'])
+                {{__('experiments.save')}}
+                @endsubmit
             </div>
         </div>
     </form>
