@@ -165,7 +165,7 @@
                                 </span>
                             @endif
                         </div>
-                        <label for="department_id" class="col-md-2 col-form-label text-center">{{ __('users.department_id') }}</label>
+                        <label for="department_id" class="col-md-2 col-form-label text-center">{{ __('users.patient_department_id') }}</label>
                     </div>
                     
                     <div class="form-group row create-form">
