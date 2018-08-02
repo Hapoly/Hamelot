@@ -132,6 +132,12 @@ return [
         'profile'           => 'تصویر',
         'id_number'         => 'کدملی',
         'birth_date'        => 'تاریخ تولد',
+        'title'             => 'عنوان',
+        'description'       => 'توضیحات',
+        'types.*'           => 'نوع',
+        'labels.*'          => 'واحد',
+        'descriptions.*'    => 'توضیحات',
+        'titles.*'          => 'عنوان',
         'birth'             => [
             'year'  => 'سال تولد',
             'month' => 'ماه تولد',

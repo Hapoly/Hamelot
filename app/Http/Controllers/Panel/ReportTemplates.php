@@ -12,10 +12,11 @@ use Illuminate\Support\Facades\Storage;
 use URL;
 use App\Models\Hospital;
 use App\Models\Department;
-use App\Http\Requests\DepartmentRequest;
+use App\Http\Requests\ReportTemplateRequest;
 
 class ReportTemplates extends Controller{
   public function index(Request $request){
+    return 'test';
     $report_templates = new Department;
     $links = '';
     $sort = $request->input('sort', '###');
@@ -50,14 +51,15 @@ class ReportTemplates extends Controller{
   public function create(){
     return view('panel.report_templates.create');
   }
-  public function store(DepartmentRequest $request){
+  public function store(ReportTemplateRequest $request){
+    return $request->all();
     $department = Department::create($request->all());
     return redirect()->route('panel.report_templates.show', ['department' => $department]);
   }
   public function edit(Department $department){
     return view('panel.report_templates.edit', ['department' => $department, 'hospitals' => Hospital::where('status', Hospital::S_ACTIVE)->get()]);
   }
-  public function update(DepartmentRequest $request, Department $department){
+  public function update(ReportTemplateRequest $request, Department $department){
     $inputs = $request->all();
     if($request->hasFile('image'))
       $inputs['image'] = Storage::put('public/report_templates', $request->file('image'));

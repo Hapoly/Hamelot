@@ -342,6 +342,11 @@ h2{
     border-radius: 10px;
     padding-bottom: 25px;
 }
+.error-span {
+    position: sticky;
+    width: 100%;
+    text-align: right;
+}
 /* ---------------------------------------------------
     CONTENT STYLE
 ----------------------------------------------------- */
