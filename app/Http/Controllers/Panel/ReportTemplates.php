@@ -10,14 +10,13 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 use URL;
-use App\Models\Hospital;
-use App\Models\Department;
+use App\Models\ReportField;
+use App\Models\ReportTemplate;
 use App\Http\Requests\ReportTemplateRequest;
 
 class ReportTemplates extends Controller{
   public function index(Request $request){
-    return 'test';
-    $report_templates = new Department;
+    $report_templates = new ReportTemplate;
     $links = '';
     $sort = $request->input('sort', '###');
     $search = $request->input('search', '###');
@@ -45,30 +44,33 @@ class ReportTemplates extends Controller{
       'search'      => $search,
     ]);
   }
-  public function show(Department $department){
-    return view('panel.report_templates.show', ['department' => $department]);
+  public function show(ReportTemplate $report_template){
+    return view('panel.report_templates.show', ['report_template' => $report_template]);
   }
   public function create(){
     return view('panel.report_templates.create');
   }
   public function store(ReportTemplateRequest $request){
-    return $request->all();
-    $department = Department::create($request->all());
-    return redirect()->route('panel.report_templates.show', ['department' => $department]);
+    $report_template = ReportTemplate::create([
+      'title'         => $request->title,
+      'description'   => $request->description,
+      'status'        => $request->status,
+    ]);
+    $report_template->saveFields($request);
+    return redirect()->route('panel.report_templates.show', ['report_template' => $report_template]);
   }
-  public function edit(Department $department){
-    return view('panel.report_templates.edit', ['department' => $department, 'hospitals' => Hospital::where('status', Hospital::S_ACTIVE)->get()]);
+  public function edit(ReportTemplate $report_template){
+    return view('panel.report_templates.edit', ['report_template' => $report_template]);
   }
-  public function update(ReportTemplateRequest $request, Department $department){
+  public function update(ReportTemplateRequest $request, ReportTemplate $report_template){
     $inputs = $request->all();
-    if($request->hasFile('image'))
-      $inputs['image'] = Storage::put('public/report_templates', $request->file('image'));
-    $department->fill($inputs)->save();
-    return redirect()->route('panel.report_templates.show', ['department' => $department]);
+    $report_template->fill($inputs)->save();
+    $report_template->saveFields($request);
+    return redirect()->route('panel.report_templates.show', ['report_template' => $report_template]);
   }
-  public function destroy(Department $department){
-    $department->delete();
-    if(URL::route('panel.report_templates.show', ['department' => $department]) == URL::previous())
+  public function destroy(ReportTemplate $report_template){
+    $report_template->delete();
+    if(URL::route('panel.report_templates.show', ['report_template' => $report_template]) == URL::previous())
       return redirect()->route('panel.report_templates.index');
     else
       return redirect()->back();

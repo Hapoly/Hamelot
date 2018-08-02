@@ -18,7 +18,7 @@ class CreateReportFieldsTable extends Migration
             $table->string('title', 32);
             $table->string('description', 200);
             $table->string('label', 8);
-            $table->integer('report_temaplte_id')->index();
+            $table->integer('report_template_id')->index();
             $table->smallInteger('type');
             $table->string('quantity', 32)->default('NuLL');
             $table->timestamps();

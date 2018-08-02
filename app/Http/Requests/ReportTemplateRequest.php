@@ -29,6 +29,7 @@ class ReportTemplateRequest extends FormRequest
             'status'        => 'required|numeric|in:1,2',
             'titles.*'      => 'required|string|max:32',
             'descriptions.*'=> 'required|string|max:200',
+            'labels.*'      => 'required|string|max:32',
             'types.*'       => 'required|numeric|in:1,2,3,4',
         ];
     }

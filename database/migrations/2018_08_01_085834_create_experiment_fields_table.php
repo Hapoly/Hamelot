@@ -19,9 +19,10 @@ class CreateExperimentFieldsTable extends Migration
             $table->integer('experiment_id')->index();
             // values
             $table->integer('value_integer')->default(0);
-            $table->longText('value_string')->default('NuLL');
+            $table->string('value_string', 500)->default('NuLL');
             $table->decimal('value_decimal', 12, 4)->default(0);
             $table->boolean('value_boolean')->default(false);
+            $table->string('value_image', 64)->default('NuLL');
             $table->timestamps();
         });
     }

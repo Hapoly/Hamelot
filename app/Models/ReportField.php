@@ -21,6 +21,7 @@ class ReportField extends Model
     const T_STRING      = 2;
     const T_FLOAT       = 3;
     const T_BOLLEAN     = 4;
+    const T_IMAGE       = 5;
     public function getTypeStrAttribute(){
         return __('reports.type_str.' . $this->type);
     }
