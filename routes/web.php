@@ -49,9 +49,14 @@ Route::middleware(['auth', 'Permission'])->namespace('Panel')->prefix('panel')->
             Route::post('/patient', 'Users@updatePatient')->name('patient');
         });
     });
-    Route::get('/test', function(){
-        return view('test');
-    })->name('test');
+    Route::prefix('search')->name('search.')->group(function(){
+        Route::get('/patients', 'Search@patients')->name('patients');
+        Route::get('/patient-departments', 'Search@departmentsOfPatient')->name('patient-departments');
+        // Route::get('/departments/{query}', 'Search@hospitals')->name('hospitals');
+        // Route::get('/departments/{user}/{query}', 'Search@hospitals')->name('hospitals');
+        // Route::get('/hospitals/{query}', 'Search@patients')->name('patients');
+        // Route::get('/hospitals/{user}/{query}', 'Search@patients')->name('patients');
+    });
 });
 
 Auth::routes();

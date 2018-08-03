@@ -2,6 +2,7 @@
 
 return [
     'create'    => 'آزمایش جدید',
+    'save'      => 'ذخیره',
 
     'status'    => 'وضعیت',
     'status_str'    => [
@@ -14,5 +15,6 @@ return [
     'day'   => 'روز',
     'hour'  => 'ساعت',
     'min'   => 'دقیقه',
-    'patient_id'    => 'بیمار',
+    'patient_name'      => 'بیمار',
+    'department_id'     => 'بخش',
 ];

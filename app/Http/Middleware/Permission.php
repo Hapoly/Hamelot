@@ -73,6 +73,9 @@ class Permission
         'panel.experiments.show'                        => [ 1, 2, 3, 4 ],
         'panel.experiments.destroy'                     => [ 1, 2, 3, 4 ],
 
+        'panel.search.patients'                         => [ 1, 2, 3, 4 ],
+        'panel.search.patient-departments'              => [ 1, 2, 3, 4 ],
+
     ];
     public function handle(Request $request, Closure $next){
         $route = $request->route()->getName();

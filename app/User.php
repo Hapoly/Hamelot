@@ -75,13 +75,13 @@ class User extends Authenticatable
     public function patients(){
         switch($this->group_code){
             case User::G_ADMIN:
-                return User::where('group_code', User::G_PATIENT);
+                return User::where('group_code', User::G_PATIENT)->get();
             case User::G_MANAGER:
                 User::whereHas('hospital', function($query){
                     return $query->whereHas('users', function($query){
                         return $query->where('users.id', $this->id)->where('users.group_code', User::G_PATIENT);
                     });
-                });
+                })->get();
             case User::G_DOCTOR:
             case User::G_NURSE:
                 return User::whereHas('departments', function($query){
@@ -90,7 +90,7 @@ class User extends Authenticatable
                             return $query->where('users.id', $this->id)->where('users.group_code', User::G_PATIENT);
                         });
                     });
-                });
+                })->get();
             default:
                 return [];
         }

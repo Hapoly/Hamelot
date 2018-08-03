@@ -77,9 +77,7 @@
                         </div>
                         <label for="status" class="col-md-2 col-form-label text-center">{{ __('users.status') }}</label>
                     </div>
-                        @submit_row(['value' => 'save'])
-                        {{ __('users.save') }}
-                        @endsubmit_row
+                        @submit_row(['value' => 'save', 'label' => __('users.save')])
                     </form>
                 </div>
             </div>
