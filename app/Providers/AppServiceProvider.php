@@ -18,8 +18,18 @@ class AppServiceProvider extends ServiceProvider
         Schema::defaultStringLength(191);
 
         // blade aliases
-        Blade::component('components.buttons.submit', 'submit');
-        Blade::component('components.forms.submit_row', 'submit_row');
+        Blade::include('components.buttons.submit', 'submit');
+        Blade::include('components.forms.submit_row', 'submit_row');
+
+        Blade::include('components.forms.inputs.text', 'input_text');
+        Blade::include('components.forms.inputs.select', 'input_select');
+        Blade::include('components.forms.inputs.image', 'input_image');
+
+        Blade::component('components.forms.structures.create', 'form_create');
+        Blade::component('components.forms.structures.edit', 'form_edit');
+        Blade::include('components.forms.structures.operations.th', 'operation_th');
+
+        Blade::component('components.forms.structures.table', 'table');
     }
 
     /**

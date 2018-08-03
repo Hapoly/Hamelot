@@ -1,5 +1,5 @@
 @extends('layouts.main')
-@section('title', __('departments.index.title'))
+@section('title', __('departments.index_title'))
 @section('content')
 <div class="row" style="margin-bottom:50px;">
   <div class="col-md-4 col-sm-3">
@@ -19,44 +19,29 @@
     </form>
   </div>
   </div>
-    @if(sizeof($departments))
-    <table class="table table-bordered">
-      <thead>
+    @table([
+      'route' => 'panel.departments.index', 
+      'hasAny' => sizeof($departments), 
+      'not_found' => __('departments.not_found'),
+      'items' => $departments, 
+      'search'  => $search,
+      'cols' => [
+        'id'          => __('departments.row'),
+        'title'       => __('departments.title'),
+        'hospital_id' => __('departments.hospital_id'),
+        'status'      => __('departments.status'),
+        'NuLL'        => __('departments.operation'),
+      ]])
+      @foreach($departments as $department)
         <tr>
-          <th ><a href="{{route('panel.departments.index',['search' => $search,'sort' => 'id'    ,'page' => $departments->currentPage()])}}">{{__('departments.row')}}</a></th>
-          <th ><a href="{{route('panel.departments.index',['search' => $search,'sort' => 'title'    ,'page' => $departments->currentPage()])}}">{{__('departments.title')}}</a></th>
-          <th ><a href="{{route('panel.departments.index',['search' => $search,'sort' => 'hospital_id'    ,'page' => $departments->currentPage()])}}">{{__('departments.hospital_id')}}</a></th>
-          <th ><a href="{{route('panel.departments.index',['search' => $search,'sort' => 'status'    ,'page' => $departments->currentPage()])}}">{{__('departments.status')}}</a></th>
-          <th >{{__('departments.operation')}}</th>
+          <td>{{$department->id}}</td>
+          <td><a href="{{route('panel.departments.show', ['department' => $department])}}">{{$department->title}}</a></td>
+          <td><a href="{{route('panel.hospitals.show', ['hospital' => $department->hospital])}}">{{$department->hospital->title}}</a></td>
+          <td>{{$department->status_str}}</td>
+          @operation_th(['base' => 'panel.departments', 'label' => 'department', 'item' => $department, 'remove_label' => __('departments.remove'), 'edit_label' => __('departments.edit')])
         </tr>
-      </thead>
-      <tbody>
-          @foreach($departments as $department)
-            <tr>
-            <td>{{$department->id}}</td>
-            <td><a href="{{route('panel.departments.show', ['department' => $department])}}">{{$department->title}}</a></td>
-            <td><a href="{{route('panel.hospitals.show', ['hospital' => $department->hospital])}}">{{$department->hospital->title}}</a></td>
-            <td>{{$department->status_str}}</td>
-            <td>
-              <form action="{{route('panel.departments.destroy', ['department' => $department])}}" style="display: inline" method="POST" class="trash-icon">
-                {{ method_field('DELETE') }}
-                {{ csrf_field() }}
-                <button type="submit" class="btn btn-danger">{{__('departments.remove')}}</button>
-              </form>
-              <a href="{{route('panel.departments.edit', ['department' => $department])}}" class="btn btn-info" role="button">{{__('departments.edit')}}</a>
-            </td>
-            </tr>
-          @endforeach
-        </tbody>
-      </table>
-    @else
-      <div class="row">
-        <div class="col-md-12" style="text-align: center">
-          {{__('departments.not_found')}}
-        </div>
-      </div>
-    @endif
-    </table>
+      @endforeach
+    @endtable
   </div>
   <div class="row" style="text-align: center;">
     {{$departments->links()}}

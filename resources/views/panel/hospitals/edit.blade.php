@@ -2,88 +2,20 @@
 @section('title', __('hospitals.edit'))
 @section('content')
 <div class="container">
-  <div class="panel panel-default create-form">
-    <h2>{{ __('hospitals.edit') }}</h2>
-    <div class="row">
-      <div class="col-md-12">
-      <form method="POST" action="{{ route('panel.hospitals.update', ['hospital' => $hospital]) }}" enctype="multipart/form-data">
-        {{ method_field('PUT') }}
-        @csrf
-        <div class="form-group row create-form">
-          <div class="col-md-10">
-            <input id="title" type="text" class="form-control{{ $errors->has('title') ? ' is-invalid' : '' }}" name="title" value="{{ old('title', $hospital->title) }}" required autofocus>
-            @if ($errors->has('title'))
-              <span class="invalid-feedback">
-                <strong>{{ $errors->first('title') }}</strong>
-              </span>
-            @endif
-          </div>
-          <label for="title" class="col-md-2 col-form-label text-center">{{ __('hospitals.title') }}</label>
-        </div>
-        <div class="form-group row create-form">
-          <div class="col-md-10">
-            <input id="address" type="text" class="form-control{{ $errors->has('address') ? ' is-invalid' : '' }}" name="address" value="{{ old('address', $hospital->address) }}" required autofocus>
-            @if ($errors->has('address'))
-              <span class="invalid-feedback">
-                <strong>{{ $errors->first('address') }}</strong>
-              </span>
-            @endif
-          </div>
-          <label for="address" class="col-md-2 col-form-label text-center">{{ __('hospitals.address') }}</label>
-        </div>
-        <div class="form-group row create-form">
-          <div class="col-md-10">
-            <input id="phone" type="text" class="form-control{{ $errors->has('phone') ? ' is-invalid' : '' }}" name="phone" value="{{ old('phone', $hospital->phone) }}" required autofocus>
-            @if ($errors->has('phone'))
-              <span class="invalid-feedback">
-                <strong>{{ $errors->first('phone') }}</strong>
-              </span>
-            @endif
-          </div>
-          <label for="phone" class="col-md-2 col-form-label text-center">{{ __('hospitals.phone') }}</label>
-        </div>
-        <div class="form-group row create-form">
-          <div class="col-md-10">
-            <input id="mobile" type="text" class="form-control{{ $errors->has('mobile') ? ' is-invalid' : '' }}" name="mobile" value="{{ old('mobile', $hospital->mobile) }}" required autofocus>
-            @if ($errors->has('mobile'))
-              <span class="invalid-feedback">
-                <strong>{{ $errors->first('mobile') }}</strong>
-              </span>
-            @endif
-          </div>
-          <label for="mobile" class="col-md-2 col-form-label text-center">{{ __('hospitals.mobile') }}</label>
-        </div>
-        <div class="form-group row create-form">
-          <div class="col-md-10">
-            <input id="image" type="file" class="form-control{{ $errors->has('image') ? ' is-invalid' : '' }}" name="image">
-            @if ($errors->has('image'))
-              <span class="invalid-feedback">
-                <strong>{{ $errors->first('image') }}</strong>
-              </span>
-            @endif
-          </div>
-          <label for="image" class="col-md-2 col-form-label text-center">{{ __('hospitals.image') }}</label>
-        </div>
-        <div class="form-group row create-form">
-          <div class="col-md-10">
-            <select class="form-control" name="status" id="status" style="width: 90%">
-              <option value="1" {{old('status', $hospital->status) == 1? 'selected': ''}} >{{__('hospitals.status_str.1')}}  </option>
-              <option value="2" {{old('status', $hospital->status) == 2? 'selected': ''}} >{{__('hospitals.status_str.2')}}  </option>
-            </select>
-            @if ($errors->has('status'))
-              <span class="invalid-feedback">
-                <strong>{{ $errors->first('status') }}</strong>
-              </span>
-            @endif
-          </div>
-          <label for="status" class="col-md-2 col-form-label text-center">{{ __('hospitals.status') }}</label>
-        </div>
-        @submit(['value' => 'edit'])
-        {{ __('hospitals.edit') }}
-        @endsubmit
-      </form>
-      </div>
-    </div>
-  </div>
+  @form_create(['action' => route('panel.hospitals.update', ['hospital' => $hospital]), 'title' => __('hospitals.create')])
+    @input_text(['name' => 'title', 'value' => old('title', $hospital->title), 'label' => __('hospitals.title'), 'required' => true])
+    @input_text(['name' => 'address', 'value' => old('address', $hospital->address), 'label' => __('hospitals.address'), 'required' => true])
+    @input_text(['name' => 'phone', 'value' => old('phone', $hospital->phone), 'label' => __('hospitals.phone'), 'required' => true])
+    @input_text(['name' => 'mobile', 'value' => old('mobile', $hospital->mobile), 'label' => __('hospitals.mobile'), 'required' => true])
+    <?php
+        $status_rows = [
+        [ 'value' => 1, 'label' => __('hospitals.status_str.1') ],
+        [ 'value' => 2, 'label' => __('hospitals.status_str.2') ],
+        ];
+    ?>
+    @input_select(['name' => 'status', 'value' => old('status', $hospital->status), 'label' => __('hospitals.status'), 'required' => true, 'rows' => $status_rows])
+    @input_image(['name' => 'image', 'label' => __('hospitals.image'), 'required' => true])
+    @submit_row(['value' => 'new', 'label' => __('hospitals.save')])
+  @endform_create
 </div>
 @endsection
