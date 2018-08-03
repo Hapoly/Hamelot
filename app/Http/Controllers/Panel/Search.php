@@ -30,10 +30,7 @@ class Search extends Controller{
     return $results;
   }
   public function departmentsOfPatient(Request $request){
-    $user = User::
-        whereRaw("concat(first_name, ' ', last_name) LIKE '%" . $request->input('term') . "%'")
-      ->where('group_code', User::G_PATIENT)
-      ->first();
+    $user = User::getByName($request->term);
     if($user){
       return $user->departments;
     }else

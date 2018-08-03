@@ -96,6 +96,13 @@ class User extends Authenticatable
         }
     }
 
+    public static function getByName($name){
+        return User::
+            whereRaw("concat(first_name, ' ', last_name) LIKE '%$name%'")
+                ->where('group_code', User::G_PATIENT)
+                ->first();
+    }
+
     public function getGroupStrAttribute(){
         return __('users.group_code_str.' . $this->group_code);
     }

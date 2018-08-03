@@ -15,6 +15,7 @@ return [
     'day'   => 'روز',
     'hour'  => 'ساعت',
     'min'   => 'دقیقه',
+    'date'  => 'تاریخ',
     'patient_name'      => 'بیمار',
     'department_id'     => 'بخش',
 ];

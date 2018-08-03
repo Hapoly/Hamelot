@@ -9,7 +9,10 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
+use App\Drivers\Time;
+
 use URL;
+use App\User;
 use App\Models\ReportField;
 use App\Models\Experiment;
 use App\Models\ReportTemplate;
@@ -58,11 +61,13 @@ class Experiments extends Controller{
     ]);
   }
   public function store(ExperimentRequest $request){
-    $experiment = Experiment::create([
-      'title'         => $request->title,
-      'description'   => $request->description,
-      'status'        => $request->status,
-    ]);
+    $patient = User::getByName($request->patient_name);
+    if(!$patient)
+      abort(404);
+    $inputs = $request->all();
+    $inputs['user_id'] = $patient->id;
+    $inputs['date'] = Time::jmktime(0, 0, 0, $inputs['day'], $inputs['month'], $inputs['year']);
+    $experiment = Experiment::create($inputs);
     $experiment->saveFields($request);
     return redirect()->route('panel.experiments.show', ['experiment' => $experiment]);
   }
