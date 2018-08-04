@@ -30,11 +30,11 @@ class Experiments extends Controller{
       $experiments = $experiments->paginate(10);
       $links = $experiments->appends(['sort' => $request->input('sort')])->links();
     }else if($sort == '###' && $search != '###'){
-      $experiments = $experiments->where('title', 'LIKE', "%$search%");
+      $experiments = $experiments->whereHas('report_template', function($query){ return $query->where('title', 'LIKE', "%$search%");});
       $experiments = $experiments->paginate(10);
       $links = $experiments->appends(['sort' => $request->input('sort')])->links();
     }else if($sort != '###' && $search != '###'){
-      $experiments = $experiments->where('title', 'LIKE', "%$search%");
+      $experiments = $experiments->whereHas('report_template', function($query){ return $query->where('title', 'LIKE', "%$search%");});
       $experiments = $experiments->orderBy($request->input('sort'), 'desc');
       $experiments = $experiments->paginate(10);
       $links = $experiments->appends(['sort' => $request->input('sort')])->links();
@@ -72,10 +72,18 @@ class Experiments extends Controller{
     return redirect()->route('panel.experiments.show', ['experiment' => $experiment]);
   }
   public function edit(Experiment $experiment){
-    return view('panel.experiments.edit', ['experiment' => $experiment]);
+    return view('panel.experiments.edit', [
+      'patients'        => Auth::user()->patients(),
+      'experiment'      => $experiment,
+    ]);
   }
   public function update(ExperimentRequest $request, Experiment $experiment){
+    $patient = User::getByName($request->patient_name);
+    if(!$patient)
+      abort(404);
     $inputs = $request->all();
+    $inputs['user_id'] = $patient->id;
+    $inputs['date'] = Time::jmktime(0, 0, 0, $inputs['day'], $inputs['month'], $inputs['year']);
     $experiment->fill($inputs)->save();
     $experiment->saveFields($request);
     return redirect()->route('panel.experiments.show', ['experiment' => $experiment]);

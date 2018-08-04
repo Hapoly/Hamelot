@@ -103,6 +103,10 @@ class User extends Authenticatable
                 ->first();
     }
 
+    public function getFullNameAttribute(){
+        return $this->first_name . ' ' . $this->last_name;
+    }
+
     public function getGroupStrAttribute(){
         return __('users.group_code_str.' . $this->group_code);
     }

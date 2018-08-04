@@ -57,7 +57,7 @@
       </div>
     </div>
   @endif
-  <div class="container" style="text-align:center;margin-top:30px;">
+  <div class="container" style="text-align:center">
     {{$report_templates->links()}}
   </div>
 </div>

@@ -2,8 +2,7 @@
 @section('title', __('experiments.create'))
 @section('content')
 <div class="test">
-    <form action="{{route('panel.experiments.store')}}" method="POST">
-        @csrf
+    @form_create(['action' => route('panel.experiments.store'), 'title' => __('experiments.create')])
         <div class="panel panel-default create-card"  id="field-1" style="margin-top:30px;" >
             <div class="row">
                 @autocomplete(['name' => 'patient_name', 'label' => __('experiments.patient_name'), 'value' => old('patient_name'), 'required' => true])
@@ -44,13 +43,28 @@
                     @if($field->isInteger())
                         @input_number(['label' => $field->title, 'name' => 'field_' . $field->id, 'value' => old('field_' . $field->id, ''), 'required' => false])
                     @endif
+                    @if($field->isFloat())
+                        @input_number(['label' => $field->title, 'name' => 'field_' . $field->id, 'value' => old('field_' . $field->id, ''), 'required' => false])
+                    @endif
 					@if($field->isString())
                         @input_text(['label' => $field->title, 'name' => 'field_' . $field->id, 'value' => old('field_' . $field->id, ''), 'required' => false])
+                    @endif
+                    @if($field->isImage())
+                        @input_image(['label' => $field->title, 'name' => 'field_' . $field->id, 'required' => false])
+                    @endif
+					@if($field->isBoolean())
+                        <?php
+                            $rows = [
+                                [ 'value' => "1", 'label' => __('general.select_str.1') ],
+                                [ 'value' => "2", 'label' => __('general.select_str.2') ],
+                            ];
+                        ?>
+                        @input_select(['label' => $field->title, 'name' => 'field_' . $field->id, 'value' => old('field_' . $field->id, ''), 'required' => false, 'rows' => $rows])
                     @endif
                 @endforeach
             </div>
         </div>
         @submit_row(['value' => 'new', 'label' => __('experiments.save')])
-    </form>
+    @endform_create
 </div>
 @endsection

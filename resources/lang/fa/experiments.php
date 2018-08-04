@@ -3,6 +3,11 @@
 return [
     'create'    => 'آزمایش جدید',
     'save'      => 'ذخیره',
+    'index'     => 'آزمایشات',
+    'row'       => 'ردیف',
+    'title'     => 'آزمایش',
+    'operation' => 'عملیات',
+    'remove'    => 'حذف',
 
     'status'    => 'وضعیت',
     'status_str'    => [
@@ -18,4 +23,5 @@ return [
     'date'  => 'تاریخ',
     'patient_name'      => 'بیمار',
     'department_id'     => 'بخش',
+    'edit'              => 'ویرایش',
 ];

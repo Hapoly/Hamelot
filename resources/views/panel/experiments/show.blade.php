@@ -7,22 +7,9 @@
 <div class="container">
   <div class="panel panel-default">
     <div class="row">
-      <table class="table table-striped">
-        <tbody>
-          <tr>
-            <td>{{__('reports.title')}}</td>
-            <td>{{$experiment->report_template->title}}</td>
-          </tr>
-          <tr>
-            <td>{{__('experiments.date')}}</td>
-            <td>{{$experiment->date_str}}</td>
-          </tr>
-          <tr>
-            <td>{{__('experiments.patient_name')}}</td>
-            <td>{{$experiment->user->first_name}} {{$experiment->user->last_name}}</td>
-          </tr>
-        </tbody>
-      </table>
+      <div class="col-md-4" style="text-align: center" >{{__('reports.title')}}: {{$experiment->report_template->title}}</div>
+      <div class="col-md-4" style="text-align: center" >{{__('experiments.patient_name')}}: {{$experiment->user->first_name}} {{$experiment->user->last_name}}</div>
+      <div class="col-md-4" style="text-align: center" >{{__('experiments.date')}}: {{$experiment->date_str}}</div>
     </div>
   </div>
   <div class="panel panel-default">
@@ -32,11 +19,23 @@
           @foreach($experiment->fields as $field)
             <tr>
               <td>{{$field->title}}</td>
-              <td>{{$field->value}}</td>
+              <td>{{$field->literal_value}}</td>
             </tr>
           @endforeach
         </tbody>
       </table>
+    </div>
+    <div class="row">
+      <div class="col-md-6" style="text-align: center">
+        <a href="{{route('panel.experiments.edit', ['experiment' => $experiment])}}" class="btn btn-primary" role="button">{{__('experiments.edit')}}</a>
+      </div>
+      <div class="col-md-6" style="text-align: center">
+        <form action="{{route('panel.experiments.destroy', ['experiment' => $experiment])}}" method="post">
+          {{ method_field('DELETE') }}
+          {{ csrf_field() }}
+          <button type="submit" class="btn btn-danger">حذف</button>
+        </form>
+      </div>
     </div>
   </div>
 </div>
