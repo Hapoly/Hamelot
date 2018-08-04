@@ -57,8 +57,6 @@
       </div>
     </div>
   @endif
-  <div class="container" style="text-align:center;">
-    {{$experiments->links()}}
-  </div>
+  @pagination(['links' => $experiments->links()])
 </div>
 @endsection

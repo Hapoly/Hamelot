@@ -43,8 +43,6 @@
       </tr>
     @endforeach
   @endtable
-  <div class="container" style="text-align:center;margin-top:30px;">
-    {{$hospitals->links()}}
-  </div>
+  @pagination(['links' => $hospitals->links()])
 </div>
 @endsection

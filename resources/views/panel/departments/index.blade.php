@@ -43,7 +43,5 @@
       @endforeach
     @endtable
   </div>
-  <div class="row" style="text-align: center;">
-    {{$departments->links()}}
-  </div>
+  @pagination(['links' => $departments->links()])
 @endsection

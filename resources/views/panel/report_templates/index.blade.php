@@ -57,8 +57,6 @@
       </div>
     </div>
   @endif
-  <div class="container" style="text-align:center">
-    {{$report_templates->links()}}
-  </div>
+  @pagination(['links' => $report_templates->links()])
 </div>
 @endsection
