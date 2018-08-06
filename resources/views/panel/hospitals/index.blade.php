@@ -18,7 +18,7 @@
   </div>
   @table([
     'route' => 'panel.hospitals.index', 
-    'hasAny' => sizeof($hospitals), 
+    'hasAny' => sizeof($hospitals) > 0, 
     'not_found' => __('hospitals.not_found'),
     'items' => $hospitals, 
     'search'  => $search,
