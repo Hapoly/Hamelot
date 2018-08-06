@@ -12,15 +12,15 @@ class HospitalUsers extends Seeder
      */
     public function run()
     {
-        DB::table('hopital_user')->insert([
+        DB::table('hospital_user')->insert([
             'hospital_id'   => 1,
             'user_id'       => 2
         ]);
-        DB::table('hopital_user')->insert([
+        DB::table('hospital_user')->insert([
             'hospital_id'   => 1,
             'user_id'       => 3
         ]);
-        DB::table('hopital_user')->insert([
+        DB::table('hospital_user')->insert([
             'hospital_id'   => 2,
             'user_id'       => 3
         ]);
