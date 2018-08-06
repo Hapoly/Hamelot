@@ -93,9 +93,7 @@
       {{__('users.no_found')}}
     </div>
     @endif
-    <div class="col-10" style="text-align: center; direction: ltr;">
-      {{$links}}
-    </div>
+    @pagination(['links' => $links])
   </div>
 </div>
 <script>

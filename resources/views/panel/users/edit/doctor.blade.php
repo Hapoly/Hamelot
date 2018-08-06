@@ -1,4 +1,5 @@
 @extends('layouts.main')
+@section('title', __('users.edit.doctor'))
 @section('content')
 <div class="container">
     <div class="panel panel-default create-card">
@@ -151,10 +152,7 @@
                         </div>
                          <label for="profile" class="col-md-2 col-form-label text-center">{{ __('users.profile') }}</label>
                     </div>
-
-                    <button type="submit" name="action" value="edit" class="btn btn-primary save-btn">
-                        {{ __('users.save') }}
-                    </button>
+                        @submit_row(['value' => 'save', 'label' => __('users.save')])
                     </form>
                 </div>
             </div>

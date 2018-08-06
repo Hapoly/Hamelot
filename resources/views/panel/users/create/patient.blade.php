@@ -1,4 +1,5 @@
 @extends('layouts.main')
+@section('title', __('users.create.patient'))
 @section('content')
 <div class="container">
     <div class="panel panel-default create-card">
@@ -164,7 +165,7 @@
                                 </span>
                             @endif
                         </div>
-                        <label for="department_id" class="col-md-2 col-form-label text-center">{{ __('users.department_id') }}</label>
+                        <label for="department_id" class="col-md-2 col-form-label text-center">{{ __('users.patient_department_id') }}</label>
                     </div>
                     
                     <div class="form-group row create-form">
@@ -178,9 +179,7 @@
                         </div>
                          <label for="profile" class="col-md-2 col-form-label text-center">{{ __('users.profile') }}</label>
                     </div>
-                    <button type="submit" name="action" value="new" class="btn btn-primary save-btn">
-                        {{ __('users.save') }}
-                    </button>
+                        @submit_row(['value' => 'save', 'label' => __('users.save')])
                     </form>
                 </div>
             </div>

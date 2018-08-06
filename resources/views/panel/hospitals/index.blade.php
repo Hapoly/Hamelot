@@ -1,5 +1,5 @@
 @extends('layouts.main')
-@section('title', __('hospitals.index.title'))
+@section('title', __('hospitals.index_title'))
 @section('content')
 <div class="row" style="margin-bottom:50px;">
   <div class="col-md-4 col-sm-3">
@@ -16,53 +16,33 @@
       </form>
     </div>
   </div>
-  @if(sizeof($hospitals))
-    <table class="table table-bordered">
-      <thead>
-        <tr>
-          <th ><a href="{{route('panel.hospitals.index',['search' => $search,'sort' => 'id'    ,'page' => $hospitals->currentPage()])}}">{{__('hospitals.row')}}</a></th>
-          <th ><a href="{{route('panel.hospitals.index',['search' => $search,'sort' => 'title'    ,'page' => $hospitals->currentPage()])}}">{{__('hospitals.title')}}</a></th>
-          <th ><a href="{{route('panel.hospitals.index',['search' => $search,'sort' => 'address'    ,'page' => $hospitals->currentPage()])}}">{{__('hospitals.address')}}</a></th>
-          <th ><a href="{{route('panel.hospitals.index',['search' => $search,'sort' => 'phone'    ,'page' => $hospitals->currentPage()])}}">{{__('hospitals.phone')}}</a></th>
-          <th ><a href="{{route('panel.hospitals.index',['search' => $search,'sort' => 'mobile'    ,'page' => $hospitals->currentPage()])}}">{{__('hospitals.mobile')}}</a></th>
-          <th ><a href="{{route('panel.hospitals.index',['search' => $search,'sort' => 'status'    ,'page' => $hospitals->currentPage()])}}">{{__('hospitals.status')}}</a></th>
-          @if(Auth::user()->isAdmin())
-            <th >{{__('hospitals.operation')}}</th>
-          @endif
-        </tr>
-      </thead>
-      <tbody>
-        @foreach($hospitals as $hospital)
-          <tr>
-          <td>{{$hospital->id}}</td>
-          <td><a href="{{route('panel.hospitals.show', ['hospital' => $hospital])}}">{{$hospital->title}}</a></td>
-          <td>{{$hospital->address}}</td>
-          <td>{{$hospital->phone}}</td>
-          <td>{{$hospital->mobile}}</td>
-          <td>{{$hospital->status_str}}</td>
-          @if(Auth::user()->isAdmin())
-            <td>
-              <form action="{{route('panel.hospitals.destroy', ['hospital' => $hospital])}}" style="display: inline" method="POST" class="trash-icon">
-                {{ method_field('DELETE') }}
-                {{ csrf_field() }}
-                <button type="submit" class="btn btn-danger">{{__('hospitals.remove')}}</button>
-              </form>
-              <a href="{{route('panel.hospitals.edit', ['hospital' => $hospital])}}" class="btn btn-info" role="button">{{__('hospitals.edit')}}</a>
-            </td>
-          @endif
-          </tr>
-        @endforeach
-      </tbody>
-    </table>
-  @else
-    <div class="row">
-      <div class="col-md-12" style="text-align: center">
-        {{__('hospitals.not_found')}}
-      </div>
-    </div>
-  @endif
-  <div class="container" style="text-align:center;margin-top:30px;">
-    {{$hospitals->links()}}
-  </div>
+  @table([
+    'route' => 'panel.hospitals.index', 
+    'hasAny' => sizeof($hospitals), 
+    'not_found' => __('hospitals.not_found'),
+    'items' => $hospitals, 
+    'search'  => $search,
+    'cols' => [
+      'id'          => __('hospitals.row'),
+      'title'       => __('hospitals.title'),
+      'address'     => __('hospitals.address'),
+      'phone'       => __('hospitals.phone'),
+      'mobile'      => __('hospitals.mobile'),
+      'status'      => __('hospitals.status'),
+      'NuLL'        => __('hospitals.operation'),
+    ]])
+    @foreach($hospitals as $hospital)
+      <tr>
+        <td>{{$hospital->id}}</td>
+        <td><a href="{{route('panel.hospitals.show', ['hospit$hospital' => $hospital])}}">{{$hospital->title}}</a></td>
+        <td>{{$hospital->address_summary}}</td>
+        <td>{{$hospital->phone}}</td>
+        <td>{{$hospital->mobile}}</td>
+        <td>{{$hospital->status_str}}</td>
+        @operation_th(['base' => 'panel.hospitals', 'label' => 'hospital', 'item' => $hospital, 'remove_label' => __('hospitals.remove'), 'edit_label' => __('hospitals.edit')])
+      </tr>
+    @endforeach
+  @endtable
+  @pagination(['links' => $hospitals->links()])
 </div>
 @endsection

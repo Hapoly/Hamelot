@@ -72,6 +72,41 @@ class User extends Authenticatable
         return $this->belongsToMany('App\Models\Department');
     }
 
+    public function patients(){
+        switch($this->group_code){
+            case User::G_ADMIN:
+                return User::where('group_code', User::G_PATIENT)->get();
+            case User::G_MANAGER:
+                User::whereHas('hospital', function($query){
+                    return $query->whereHas('users', function($query){
+                        return $query->where('users.id', $this->id)->where('users.group_code', User::G_PATIENT);
+                    });
+                })->get();
+            case User::G_DOCTOR:
+            case User::G_NURSE:
+                return User::whereHas('departments', function($query){
+                    return $query->whereHas('hospital', function($query){
+                        return $query->whereHas('users', function($query){
+                            return $query->where('users.id', $this->id)->where('users.group_code', User::G_PATIENT);
+                        });
+                    });
+                })->get();
+            default:
+                return [];
+        }
+    }
+
+    public static function getByName($name){
+        return User::
+            whereRaw("concat(first_name, ' ', last_name) LIKE '%$name%'")
+                ->where('group_code', User::G_PATIENT)
+                ->first();
+    }
+
+    public function getFullNameAttribute(){
+        return $this->first_name . ' ' . $this->last_name;
+    }
+
     public function getGroupStrAttribute(){
         return __('users.group_code_str.' . $this->group_code);
     }

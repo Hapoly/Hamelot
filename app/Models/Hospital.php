@@ -17,6 +17,9 @@ class Hospital extends Model {
     public function getStatusStrAttribute(){
         return __('hospitals.status_str.' . $this->status);
     }
+    public function getAddressSummaryAttribute(){
+        return substr($this->address, 0, 30) . '...';
+    }
     public function users(){
         return $this->belongsToMany('App\User');
     }

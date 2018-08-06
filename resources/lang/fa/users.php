@@ -21,6 +21,7 @@ return [
     'id_number'         => 'کدملی',
     'age'               => 'سن',
     'department_id'     => 'بخش مورد فعالیت',
+    'patient_department_id' => 'بخش',
 
     'birth_date'        => 'تاریخ تولد',
     'birth'             => [
