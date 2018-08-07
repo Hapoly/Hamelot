@@ -24,10 +24,14 @@ class Hospital extends Model {
         return $this->belongsToMany('App\User');
     }
     public function hasPermission(){
-        if(Auth::user()->group_code == 1)
+        if(Auth::user()->isAdmin())
             return true;
-        else
+        else if(Auth::user()->isManager())
             return $this->users()->where('user_id', Auth::user()->id)->first() != null;
+        else
+            return $this->departments()->whereHas('users', function($query){
+                return $this->where('users.id', Auth::user()->id);
+            });
     }
     public function departments(){
         return $this->hasMany('App\Models\Department');

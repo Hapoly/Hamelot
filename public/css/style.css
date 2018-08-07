@@ -84,6 +84,7 @@ i, span {
     border-top-right-radius: 10px;
 }
 .sub-panel-add{
+    margin-top: -5px;
     float: left;
     border-radius: 16px;
     background-color: #2b5477;

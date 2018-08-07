@@ -28,18 +28,20 @@
         </tbody>
       </table>
     </div>
-    <div class="row">
-      <div class="col-md-6" style="text-align: center">
-        <a href="{{route('panel.departments.edit', ['department' => $department])}}" class="btn btn-primary" role="button">{{__('departments.edit')}}</a>
+    @if(Auth::user()->isAdmin() || Auth::user()->isManager())
+      <div class="row">
+        <div class="col-md-6" style="text-align: center">
+          <a href="{{route('panel.departments.edit', ['department' => $department])}}" class="btn btn-primary" role="button">{{__('departments.edit')}}</a>
+        </div>
+        <div class="col-md-6" style="text-align: center">
+          <form action="{{route('panel.departments.destroy', ['department' => $department])}}" method="post">
+            {{ method_field('DELETE') }}
+            {{ csrf_field() }}
+            <button type="submit" class="btn btn-danger">حذف</button>
+          </form>
+        </div>
       </div>
-      <div class="col-md-6" style="text-align: center">
-        <form action="{{route('panel.departments.destroy', ['department' => $department])}}" method="post">
-          {{ method_field('DELETE') }}
-          {{ csrf_field() }}
-          <button type="submit" class="btn btn-danger">حذف</button>
-        </form>
-      </div>
-    </div>
+    @endif
   </div>
 </div>
 @endsection

@@ -103,11 +103,6 @@
       <a href="{{route('panel.departments.create', ['hospital_id' => $hospital->id])}}" class="btn btn-primary sub-panel-add"><i class="fa fa-plus"></i></a>
       {{__('departments.index_title')}}
     </div>
-    <div class="col-md-12" style="margin-bottom: 2rem;">
-      <h3>
-        
-      </h3>
-    </div>
     @if(sizeof($hospital->departments))
       <table class="table">
         <thead>
@@ -124,14 +119,18 @@
               <td>{{$department->id}}</td>
               <td><a href="{{route('panel.departments.show', ['department' => $department])}}">{{$department->title}}</a></td>
               <td>{{$department->status_str}}</td>
-              <td>
-                <form action="{{route('panel.departments.destroy', ['department' => $department])}}" style="display: inline" method="POST" class="trash-icon">
-                  {{ method_field('DELETE') }}
-                  {{ csrf_field() }}
-                  <button type="submit" class="btn btn-danger">{{__('departments.remove')}}</button>
-                </form>
-                <a class="btn btn-primary" href="{{route('panel.hospitals.edit', ['hospital' => $hospital])}}">{{ __('departments.edit') }}</a>
-              </td>
+              @if(Auth::user()->isAdmin() || Auth::user()->isManager())
+                <td>
+                  <form action="{{route('panel.departments.destroy', ['department' => $department])}}" style="display: inline" method="POST" class="trash-icon">
+                    {{ method_field('DELETE') }}
+                    {{ csrf_field() }}
+                    <button type="submit" class="btn btn-danger">{{__('departments.remove')}}</button>
+                  </form>
+                  <a class="btn btn-primary" href="{{route('panel.hospitals.edit', ['hospital' => $hospital])}}">{{ __('departments.edit') }}</a>
+                </td>
+              @else
+                <td>-</td>
+              @endif
             </tr>
           @endforeach
         </tbody>

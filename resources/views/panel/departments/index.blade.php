@@ -3,7 +3,9 @@
 @section('content')
 <div class="row" style="margin-bottom:50px;">
   <div class="col-md-4 col-sm-3">
-    <a href="{{route('panel.departments.create')}}" class="btn add"> {{__('departments.create')}}</a>
+    @if(Auth::user()->isAdmin() || Auth::user()->isManager())
+      <a href="{{route('panel.departments.create')}}" class="btn add"> {{__('departments.create')}}</a>
+    @endif
   </div>
   <div class="col-md-8 col-sm-9">
     <form class="navbar-form" role="search" style="margin:auto;width:100%;direction:ltr;float:right" action="{{route('panel.departments.index',['sort' => $sort])}}" method="get">
@@ -38,7 +40,11 @@
           <td><a href="{{route('panel.departments.show', ['department' => $department])}}">{{$department->title}}</a></td>
           <td><a href="{{route('panel.hospitals.show', ['hospital' => $department->hospital])}}">{{$department->hospital->title}}</a></td>
           <td>{{$department->status_str}}</td>
-          @operation_th(['base' => 'panel.departments', 'label' => 'department', 'item' => $department, 'remove_label' => __('departments.remove'), 'edit_label' => __('departments.edit')])
+          @if(Auth::user()->isAdmin() || Auth::user()->isManager())
+            @operation_th(['base' => 'panel.departments', 'label' => 'department', 'item' => $department, 'remove_label' => __('departments.remove'), 'edit_label' => __('departments.edit')])
+          @else
+            <td>-</td>
+          @endif
         </tr>
       @endforeach
     @endtable
