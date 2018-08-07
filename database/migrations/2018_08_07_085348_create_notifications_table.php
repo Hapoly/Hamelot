@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateExperimentsTable extends Migration
+class CreateNotificationsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,13 @@ class CreateExperimentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('experiments', function (Blueprint $table) {
+        Schema::create('notifications', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->index();
-            $table->integer('report_template_id')->index();
-            $table->integer('department_id')->index();
-            $table->integer('date')->default(0);
+            $table->smallInteger('type')->default(1);
+            $table->string('title', 64)->default('NuLL');
+            $table->string('body', 128)->default('NuLL');
+            $table->string('data', 128)->default('NuLL');
             $table->smallInteger('status')->default(1);
             $table->timestamps();
         });
@@ -31,6 +32,6 @@ class CreateExperimentsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('experiments');
+        Schema::dropIfExists('notifications');
     }
 }

@@ -9,12 +9,21 @@ class Permission extends Model
 {
     protected $primary = 'id';
     protected $table = 'permissions';
-    protected $fillable = ['group_code', 'label'];
+    protected $fillable = ['patient_id', 'doctor_id', 'status'];
 
-    public static function has($label){
-        return  Permission::where([
-            'label'         => $label,
-            'group_code'    => Auth::user()->group_code,
-        ])->first() != null;
+    public function patient(){
+        return $this->belongsTo('App\Models\User', 'patient_id');
+    }
+    public function doctor(){
+        return $this->belongsTo('App\Models\User', 'doctor_id');
+    }
+
+
+    const STATUS_PENDING    = 1;
+    const STATUS_ACCEPTED   = 2;
+    const STATUS_REFUSED    = 3;
+
+    public function getStatusStrAttribute(){
+        return __('permisisons.status_str.' . $this->status);
     }
 }

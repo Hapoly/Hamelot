@@ -13,7 +13,6 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(Users::class);
         $this->call(Consts::class);
-        $this->call(Permissions::class);
         $this->call(Departments::class);
         $this->call(Hospitals::class);
         $this->call(HospitalUsers::class);
