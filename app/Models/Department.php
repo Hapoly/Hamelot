@@ -18,6 +18,20 @@ class Department extends Model
     public function getStatusStrAttribute(){
         return __('departments.status_str.' . $this->status);
     }
+    public static function get(){
+        if(Auth::user()->isAdmin())
+            return (new Department);
+        else if(Auth::user()->isManager())
+            return Department::whereHas('hospital', function($query){
+                return $query->whereHas('users', function($query){
+                    return $query->where('users.id', Auth::user()->id);
+                });
+            });
+        else
+            return Department::whereHas('users', function($query){
+                return $query->where('users.id', Auth::user()->id);
+            });
+    }
     public function hospital(){
         return $this->belongsTo('App\Models\Hospital');
     }
