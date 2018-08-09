@@ -39,14 +39,19 @@
         </tbody>
       </table>
     </div>
-    <div class="row">
-      <div class="col-md-6" style="text-align: center">
-        <a href="{{route('panel.users.edit', ['user' => $user])}}" class="btn btn-primary" role="button">{{__('users.edit.general')}}</a>
+    @if(Auth::user()->isAdmin())
+      <div class="row">
+        <div class="col-md-6" style="text-align: center">
+          <a href="{{route('panel.users.edit', ['user' => $user])}}" class="btn btn-primary" role="button">{{__('users.edit.general')}}</a>
+          @if(Auth::user()->isDoctor())
+            <a href="{{route('panel.permissions.create', ['user' => $user])}}" class="btn btn-primary" role="button">{{__('permissions.create')}}</a>
+          @endif
+        </div>
+        <div class="col-md-6" style="text-align: center">
+          <a href="{{route('panel.users.destroy', ['user' => $user])}}" class="btn btn-danger" role="button">{{__('users.destroy')}}</a>
+        </div>
       </div>
-      <div class="col-md-6" style="text-align: center">
-        <a href="{{route('panel.users.destroy', ['user' => $user])}}" class="btn btn-danger" role="button">{{__('users.destroy')}}</a>
-      </div>
-    </div>
+    @endif
   </div>
   <div class="panel panel-default">
     <h2>{{__('departments.index_title')}}</h2>
@@ -66,13 +71,17 @@
               <td>{{$department->id}}</td>
               <td><a href="{{route('panel.departments.show', ['department' => $department])}}">{{$department->title}}</a></td>
               <td>{{$department->status_str}}</td>
-              <td>
-                <form action="{{route('panel.departments.destroy', ['department' => $department])}}" style="display: inline" method="POST" class="trash-icon">
-                  {{ method_field('DELETE') }}
-                  {{ csrf_field() }}
-                  <button type="submit" class="btn btn-danger">{{__('departments.remove')}}</button>
-                </form>
-              </td>
+              @if(Auth::user()->isAdmin() || Auth::user()->isManager())
+                <td>
+                  <form action="{{route('panel.departments.destroy', ['department' => $department])}}" style="display: inline" method="POST" class="trash-icon">
+                    {{ method_field('DELETE') }}
+                    {{ csrf_field() }}
+                    <button type="submit" class="btn btn-danger">{{__('departments.remove')}}</button>
+                  </form>
+                </td>
+              @else
+                <td>-</td>
+              @endif
             </tr>
           @endforeach
         </tbody>

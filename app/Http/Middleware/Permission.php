@@ -40,12 +40,12 @@ class Permission
         'panel.users.destroy'                           => [ 1, 2, 3, 4, 5 ],
         'panel.users.index'                             => [ 1, 2, 3, 4 ],
 
-        'panel.hospitals.index'                         => [ 1, 2 ],
+        'panel.hospitals.index'                         => [ 1, 2, 3, 4, 5 ],
         'panel.hospitals.create'                        => [ 1 ],
         'panel.hospitals.store'                         => [ 1 ],
         'panel.hospitals.edit'                          => [ 1 ],
         'panel.hospitals.update'                        => [ 1 ],
-        'panel.hospitals.show'                          => [ 1, 2 ],
+        'panel.hospitals.show'                          => [ 1, 2, 3, 4, 5 ],
         'panel.hospitals.destroy'                       => [ 1 ],
 
         'panel.departments.index'                       => [ 1, 2, 3, 4 ],
@@ -53,7 +53,7 @@ class Permission
         'panel.departments.store'                       => [ 1, 2 ],
         'panel.departments.edit'                        => [ 1, 2 ],
         'panel.departments.update'                      => [ 1, 2 ],
-        'panel.departments.show'                        => [ 1, 2, 3, 4 ],
+        'panel.departments.show'                        => [ 1, 2, 3, 4, 5 ],
         'panel.departments.destroy'                     => [ 1, 2 ],
 
         'panel.report_templates.index'                  => [ 1, 2, 3, 4 ],
@@ -76,6 +76,8 @@ class Permission
         'panel.search.patients'                         => [ 1, 2, 3, 4 ],
         'panel.search.patient-departments'              => [ 1, 2, 3, 4 ],
 
+        'panel.permissions.create'                      => [ 4 ],
+
     ];
     public function handle(Request $request, Closure $next){
         $route = $request->route()->getName();
@@ -87,6 +89,7 @@ class Permission
         if(in_array(Auth::user()->group_code, $permissions))
             return $next($request);
         else
+            // die($permissions);
             abort(404);
     }
 }

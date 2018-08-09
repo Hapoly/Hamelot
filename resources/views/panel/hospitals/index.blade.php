@@ -18,7 +18,7 @@
   </div>
   @table([
     'route' => 'panel.hospitals.index', 
-    'hasAny' => sizeof($hospitals), 
+    'hasAny' => sizeof($hospitals) > 0, 
     'not_found' => __('hospitals.not_found'),
     'items' => $hospitals, 
     'search'  => $search,
@@ -39,7 +39,11 @@
         <td>{{$hospital->phone}}</td>
         <td>{{$hospital->mobile}}</td>
         <td>{{$hospital->status_str}}</td>
-        @operation_th(['base' => 'panel.hospitals', 'label' => 'hospital', 'item' => $hospital, 'remove_label' => __('hospitals.remove'), 'edit_label' => __('hospitals.edit')])
+        @if(Auth::user()->isAdmin())
+          @operation_th(['base' => 'panel.hospitals', 'label' => 'hospital', 'item' => $hospital, 'remove_label' => __('hospitals.remove'), 'edit_label' => __('hospitals.edit')])
+        @else
+          <td>-</td>
+        @endif
       </tr>
     @endforeach
   @endtable

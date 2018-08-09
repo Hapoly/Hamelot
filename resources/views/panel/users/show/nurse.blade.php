@@ -62,13 +62,17 @@
               <td>{{$department->id}}</td>
               <td><a href="{{route('panel.departments.show', ['department' => $department])}}">{{$department->title}}</a></td>
               <td>{{$department->status_str}}</td>
-              <td>
-                <form action="{{route('panel.departments.destroy', ['department' => $department])}}" style="display: inline" method="POST" class="trash-icon">
-                  {{ method_field('DELETE') }}
-                  {{ csrf_field() }}
-                  <button type="submit" class="btn btn-danger">{{__('departments.remove')}}</button>
-                </form>
-              </td>
+              @if(Auth::user()->isAdmin() || Auth::user()->isManager())
+                <td>
+                  <form action="{{route('panel.departments.destroy', ['department' => $department])}}" style="display: inline" method="POST" class="trash-icon">
+                    {{ method_field('DELETE') }}
+                    {{ csrf_field() }}
+                    <button type="submit" class="btn btn-danger">{{__('departments.remove')}}</button>
+                  </form>
+                </td>
+              @else
+                <td>-</td>
+              @endif
             </tr>
           @endforeach
         </tbody>

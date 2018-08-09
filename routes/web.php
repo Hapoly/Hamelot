@@ -21,6 +21,9 @@ Route::middleware(['auth', 'Permission'])->namespace('Panel')->prefix('panel')->
         'report_templates'  => 'ReportTemplates',
         'experiments'       => 'Experiments',
     ]);
+    Route::prefix('permissions')->name('permissions.')->group(function(){
+        Route::get('/create/{user}', 'PermissionController@create')->name('create');
+    });
     Route::prefix('users')->name('users.')->group(function(){
         Route::get('/', 'Users@index')->name('index');
         Route::get('/{user}', 'Users@show')->name('show');
