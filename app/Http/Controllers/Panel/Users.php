@@ -20,6 +20,8 @@ use App\Models\ConstValue;
 use App\Models\Permission;
 use App\Models\DepartmentUser;
 
+use App\Models\Hospital;
+
 use App\Http\Requests\UserRequest;
 use App\Http\Requests\AdminRequest;
 use App\Http\Requests\ManagerRequest;
@@ -43,6 +45,21 @@ class Users extends Controller{
     
     if($request->has('last_name')  && $request->last_name != '')
       $users = $users->where('last_name', 'LIKE' , '%'.$request->last_name.'%');
+
+    // return $request->all();
+    $hospital_id = $request->input('hospital_id', 0);
+    $department_id = $request->input('department_id', 0);
+    if($hospital_id != 0){
+      if($department_id != 0){
+        $users = $users->whereHas('departments', function($query) use($department_id){
+          return $query->where('departments.id', $department_id);
+        });
+      }else{
+        $users = $users->whereHas('departments', function($query) use ($hospital_id){
+          return $query->where('departments.hospital_id', $hospital_id);
+        });
+      }
+    }
     if($request->group_code != 0){
       $users = $users->where('group_code', $request->group_code);
       switch($request->group_code){
@@ -91,6 +108,7 @@ class Users extends Controller{
       'doctor_degrees'  => ConstValue::doctor_degrees()->get(),
       'nurse_fields'    => ConstValue::nurse_fields()->get(),
       'nurse_degrees'   => ConstValue::nurse_degrees()->get(),
+      'hospitals'       => Hospital::all(),
       'filters'         => [
         'first_name'    => $request->first_name,
         'last_name'     => $request->last_name,
@@ -100,6 +118,9 @@ class Users extends Controller{
         'doctor_field'  => $request->doctor_field,
         'nurse_degree'  => $request->nurse_degree,
         'nurse_field'   => $request->nurse_field,
+        'hospital_id'   => $hospital_id,
+        'hospital'      => Hospital::find($hospital_id),
+        'department_id' => $department_id,
       ],
     ]);
   }

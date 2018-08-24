@@ -16,3 +16,7 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+// system apis
+Route::name('api.panel.')->group(function(){
+    Route::post('/departments', 'Api\Panel@departments')->name('departments');
+});
