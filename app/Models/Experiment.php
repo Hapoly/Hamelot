@@ -11,7 +11,7 @@ class Experiment extends Model
 {
     protected $primary = 'id';
     protected $table = 'experiments';
-    protected $fillable = ['user_id', 'report_template_id', 'date', 'status'];
+    protected $fillable = ['user_id', 'report_template_id', 'date', 'status', 'department_id'];
 
     const STATUS_ACTIVE     = 1;
     const STATIC_INCACTIVE  = 2;
@@ -25,8 +25,8 @@ class Experiment extends Model
     public function user(){
         return $this->belongsTo('App\User');
     }
-    public function departments(){
-        return $this->belongsToMany('App\Models\Department');
+    public function department(){
+        return $this->belongsTo('App\Models\Department');
     }
     public function fields(){
         return $this->hasMany('App\Models\ExperimentField');
