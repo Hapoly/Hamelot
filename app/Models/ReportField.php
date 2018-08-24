@@ -8,7 +8,7 @@ class ReportField extends Model
 {
     protected $primary = 'id';
     protected $table = 'report_fields';
-    protected $fillable = ['title', 'description', 'type', 'label', 'report_template_id', 'status'];
+    protected $fillable = ['title', 'quantity', 'description', 'type', 'label', 'report_template_id', 'status'];
 
     const S_ACTIVE      = 1;
     const S_INACTIVE    = 2;
@@ -40,5 +40,11 @@ class ReportField extends Model
     }
     public function isImage(){
         return $this->type == ReportField::T_IMAGE;
+    }
+    public function getQuantityStrAttribute(){
+        if($this->quantity == 'NuLL')
+            return '-';
+        else
+            return $this->quantity;
     }
 }

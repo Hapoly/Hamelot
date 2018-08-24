@@ -60,6 +60,7 @@
             <th>{{__('reports.row')}}</th>
             <th>{{__('reports.title')}}</th>
             <th>{{__('reports.type')}}</th>
+            <th>{{__('reports.quantity')}}</th>
             <th>{{__('reports.description')}}</th>
           </tr>
         </thead>
@@ -69,6 +70,7 @@
               <td>{{$i+1}}</td>
               <td>{{$field->title}}</td>
               <td>{{$field->type_str}}</td>
+              <td>{{$field->quantity_str}}</td>
               <td>{{$field->description}}</td>
             </tr>
           @endforeach
