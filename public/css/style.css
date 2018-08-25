@@ -515,3 +515,6 @@ h2{
     background-color: #527796;
     border-color: #ddd;
 }
+.label-col{
+    float: right;
+}

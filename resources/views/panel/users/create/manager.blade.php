@@ -9,6 +9,7 @@
                 <form method="POST" action="{{ route('panel.users.store.manager') }}" enctype="multipart/form-data">
                       @csrf
                     <div class="form-group row create-form">
+                        <label for="title" class="col-md-2 label-col col-form-label text-center">{{ __('users.username') }}</label>
                         <div class="col-md-10">
                            <input id="username" type="text" class="form-control{{ $errors->has('username') ? ' is-invalid' : '' }}" name="username" value="{{ old('username') }}" required autofocus>
                                 @if ($errors->has('username'))
@@ -17,10 +18,10 @@
                                 </span>
                             @endif
                         </div>
-                         <label for="title" class="col-md-2 col-form-label text-center">{{ __('users.username') }}</label>
                     </div>
 
                     <div class="form-group row create-form">
+                        <label for="password" class="col-md-2 label-col col-form-label text-center">{{ __('users.password') }}</label>
                         <div class="col-md-10">
                            <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required >
                                 @if ($errors->has('password'))
@@ -29,17 +30,17 @@
                                     </span>
                                 @endif
                         </div>
-                         <label for="password" class="col-md-2 col-form-label text-center">{{ __('users.password') }}</label>
                     </div>
 
                     <div class="form-group row create-form">
+                        <label for="password-confirm" class="col-md-2 label-col col-form-label text-center">{{ __('users.confirm_password') }}</label>
                         <div class="col-md-10">
                            <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required >
                         </div>
-                         <label for="password-confirm" class="col-md-2 col-form-label text-center">{{ __('users.confirm_password') }}</label>
                     </div>
 
                      <div class="form-group row create-form">
+                        <label for="first_name" class="col-md-2 label-col col-form-label text-center">{{ __('users.first_name') }}</label>
                         <div class="col-md-10">
                            <input id="first_name" type="text" class="form-control{{ $errors->has('first_name') ? ' is-invalid' : '' }}" name="first_name" value="{{ old('first_name') }}" required>
                                  @if ($errors->has('first_name'))
@@ -47,11 +48,11 @@
                                         <strong>{{ $errors->first('first_name') }}</strong>
                                     </span>
                                 @endif
-                        </div>
-                         <label for="first_name" class="col-md-2 col-form-label text-center">{{ __('users.first_name') }}</label>
+                        </div> 
                     </div>
 
                     <div class="form-group row create-form">
+                        <label for="last_name" class="col-md-2 label-col col-form-label text-center">{{ __('users.last_name') }}</label>
                         <div class="col-md-10">
                            <input id="last_name" type="text" class="form-control{{ $errors->has('last_name') ? ' is-invalid' : '' }}" name="last_name" value="{{ old('last_name') }}" required>
                                  @if ($errors->has('last_name'))
@@ -60,10 +61,10 @@
                                     </span>
                                 @endif
                         </div>
-                         <label for="last_name" class="col-md-2 col-form-label text-center">{{ __('users.last_name') }}</label>
                     </div>
 
                     <div class="form-group row create-form">
+                        <label for="status" class="col-md-2 label-col col-form-label text-center">{{ __('users.status') }}</label>
                         <div class="col-md-10">
                             <select class="form-control" name="status" id="status" style="width:90%">
                                 <option value="1">{{__('users.status_str.1')}}  </option>
@@ -75,7 +76,6 @@
                                 </span>
                             @endif
                         </div>
-                        <label for="status" class="col-md-2 col-form-label text-center">{{ __('users.status') }}</label>
                     </div>
                         @submit_row(['value' => 'save', 'label' => __('users.save')])
                     </form>
