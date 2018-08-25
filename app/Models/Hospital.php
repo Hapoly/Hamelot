@@ -46,7 +46,7 @@ class Hospital extends Model {
             return url($this->image);
     }
 
-    public static function get(){
+    public static function fetch(){
         switch(Auth::user()->group_code){
             case User::G_ADMIN:
                 return (new Hospital);
