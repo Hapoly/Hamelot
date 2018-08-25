@@ -24,6 +24,8 @@
           <th >{{__('experiments.title')}}</th>
           <th >{{__('experiments.patient_name')}}</th>
           <th >{{__('experiments.date')}}</th>
+          <th >{{__('experiments.department_id')}}</th>
+          <th >{{__('departments.hospital_id')}}</th>
           @if(Auth::user()->isAdmin())
             <th >{{__('experiments.operation')}}</th>
           @endif
@@ -36,6 +38,8 @@
           <td><a href="{{route('panel.experiments.show', ['experiment' => $experiment])}}">{{$experiment->report_template->title}}</a></td>
           <td><a href="{{route('panel.users.show', ['user' => $experiment->user])}}">{{$experiment->user->full_name}}</a></td>
           <td>{{$experiment->date_str}}</td>
+          <td>{{$experiment->department->title}}</td>
+          <td>{{$experiment->department->hospital->title}}</td>
           @if(Auth::user()->isAdmin())
             <td>
               <form action="{{route('panel.experiments.destroy', ['experiment' => $experiment])}}" style="display: inline" method="POST" class="trash-icon">

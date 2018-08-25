@@ -42,6 +42,30 @@
                 </div>
               </div>
             </div>
+            <div class="row">
+              <div class="col-md-6" id="departments">
+                @if(isset($filters['hospital']))
+                  <div class="form-group">
+                    <select class="form-control" name="department_id" style="width: 100%">
+                      <option value="0" {{$filters['department_id'] ? 'selected': ''}}>تمام بخش‌ها</option>
+                      @foreach($filters['hospital']->departments as $department)
+                        <option value="{{$department->id}}" {{$filters['department_id'] == $department->id? 'selected': ''}}>{{$department->title}}</option>
+                      @endforeach
+                    </select>
+                  </div>
+                @endif
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <select class="form-control" name="hospital_id" id="hospital-id" style="width: 100%">
+                    <option value="0">همه بیمارستان ها</option>
+                    @foreach($hospitals as $hospital)
+                      <option value="{{$hospital->id}}" {{$filters['hospital_id'] == $hospital->id? 'selected': ''}}>{{$hospital->title}}</option>
+                    @endforeach
+                  </select>
+                </div>
+              </div>
+            </div>
             <div class="row" id="more-inputs"></div>
             <div class="row" style="margin-bottom:2px;margin-top:2px;">
               <div class="col-md-12">
@@ -248,6 +272,34 @@
         $('#gender-input').html('');
         break;
     }
+
+    // departments
+
+    $('#hospital-id').change(function(){
+      var settings = {
+        "async": true,
+        "crossDomain": true,
+        "url": "{{route('api.panel.departments')}}",
+        "method": "POST",
+        "headers": {
+          "content-type": "application/json"
+        },
+        "processData": false,
+        "data": "{\"hospital_id\": "+ $('#hospital-id').val() +"}"
+      }
+      $.ajax(settings).done(function (response) {
+        let departments = '';
+        for(let i=0; i<response.length; i++)
+          departments += '<option value="'+ response[i].id +'">'+ response[i].title +'</option>';
+        $('#departments').html(
+          '<div class="form-group">'+
+          '  <select class="form-control" name="department_id" style="width: 100%">'+
+          '    <option value="0">تمام بخش‌ها</option>'+ departments+
+          '  </select>'+
+          '</div>'
+        );
+      });
+    })
   })
 </script>
 @endsection
