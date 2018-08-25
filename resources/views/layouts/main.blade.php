@@ -64,7 +64,7 @@
 								</form>
 								<a class="exit" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">{{ __('general.logout') }}</a>
 							</li>
-							<li>
+							<li id="login-name">
 								<a href="#">{{Auth::user()->prefix}} {{ Auth::user()->first_name }} {{Auth::user()->last_name}}</a>
 							</li>
 						</ul>

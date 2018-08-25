@@ -28,7 +28,7 @@ a, a:hover, a:focus {
     text-decoration: none;
     transition: all 0.3s;
 }
-
+/* navbar */
 .navbar {
     padding: 15px 10px;
     background: #fff;
@@ -43,7 +43,7 @@ a, a:hover, a:focus {
     outline: none !important;
     border: none;
 }
-
+/* end navbar */
 .line {
     width: 100%;
     height: 1px;
@@ -260,7 +260,6 @@ a.article, a.article:hover {
   }
   .form-control{width:20%}
   .navbar-nav > li > a {
-    
     padding-bottom: 15px;
     padding-top: 15px;
   }
@@ -355,6 +354,7 @@ h2{
     padding: 20px;
     min-height: 100vh;
     transition: all 0.3s;
+    width: 100%;
 }
 .add{
     background-color: #37709e;
@@ -366,7 +366,22 @@ h2{
 /* ---------------------------------------------------
     MEDIAQUERIES
 ----------------------------------------------------- */
+@media(max-width: 400px){
+    .container{
+        padding-right: 0;
+        padding-left: 0;
+    }
+}
 @media (max-width: 768px) {
+    .navbar-collapse.collapse{
+        display: block;
+    }
+    .navbar-collapse .nav #login-name{
+        display: none;
+    }
+    .exit{
+        border-right: 0;
+    }
     .container{
         width: 100%;
     }
@@ -434,15 +449,12 @@ h2{
     #sidebar {
         margin-left: 0;
     }
-    #sidebarCollapse span {
-        display: none;
-    }
     .table{
         width: 100%;
-        
     }
 }
-@media (min-width: 1200px){
+/* @media(min-width:) */
+@media (min-width: 768px){
     .container {
         width: 90%;
     }   
