@@ -4,7 +4,6 @@
 <?php
   use App\User;
 ?>
-
 <div class="container">
   <div class="row justify-content-center">
     <div class="col-8">
@@ -276,6 +275,10 @@
     // departments
 
     $('#hospital-id').change(function(){
+      if($('#hospital-id').val() == 0){
+        $('#departments').html('');
+        return;
+      }
       var settings = {
         "async": true,
         "crossDomain": true,
