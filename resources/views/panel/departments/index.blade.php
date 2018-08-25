@@ -12,8 +12,7 @@
       <div class="input-group add-on">
         <div class="input-group-btn">
           <button class="btn" type="submit">
-          {{__('departments.search')}}
-          <!-- <i class="glyphicon glyphicon-search"></i> -->
+          <i class="glyphicon glyphicon-search"></i>
           </button>
         </div>
         <input class="form-control search-box" placeholder="{{__('departments.index_title')}}"  name="search" id="srch-term" value="{{old('search')}}" type="text">
