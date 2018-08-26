@@ -24,6 +24,10 @@
             <td>{{$permission->patient->last_name}}</td>
           </tr>
           <tr>
+            <td>{{__('users.id_number')}}</td>
+            <td>{{$permission->patient->patient->id_number}}</td>
+          </tr>
+          <tr>
             <td>{{__('users.status')}}</td>
             <td>{{$permission->patient->status_str}}</td>
           </tr>
@@ -62,6 +66,9 @@
             @if(!$permission->canceled())
               <button type="submit" name="action" value="cancel" class="btn btn-warning">{{__('permissions.cancel')}}</button>
             @endif
+          @endif
+          @if($permission->accepted() && !Auth::user()->isPatient())
+            <a href="{{route('panel.permissions.show_profile', ['user' => $permission->patient])}}" class="btn btn-info">{{__('permissions.show_profile')}}</a>
           @endif
         </div>
       </form>

@@ -81,6 +81,7 @@ class Permission
         'panel.permissions.send'                        => [ 2, 3, 4, 5 ],
 
         'panel.permissions.show'                        => [ 1, 2, 3, 4, 5 ],
+        'panel.permissions.show_profile'                => [ 1, 2, 3, 4 ],
         'panel.permissions.inline_update'               => [ 1, 2, 3, 4, 5 ],
         'panel.permissions.edit'                        => [ 1, 2, 3, 4, 5 ],
         'panel.permissions.update'                      => [ 1, 2, 3, 4, 5 ],

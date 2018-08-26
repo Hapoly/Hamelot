@@ -25,7 +25,10 @@ Route::middleware(['auth', 'Permission'])->namespace('Panel')->prefix('panel')->
         Route::get('/create', 'Permissions@create')->name('create');
         Route::post('/check', 'Permissions@check')->name('check');
         Route::post('/send/{user}', 'Permissions@send')->name('send');
+        
         Route::get('/show/{permission}', 'Permissions@show')->name('show');
+        Route::get('/show_profile/{user}', 'Permissions@showProfile')->name('show_profile');
+
         Route::post('/update-inline/{permission}', 'Permissions@inlineUpdate')->name('inline_update');
 
         Route::get('/', 'Permissions@index')->name('index');
