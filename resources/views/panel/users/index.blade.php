@@ -95,7 +95,7 @@
           </thead>
           <tbody>
             @foreach($users as $user)
-              <tr>
+              <tr class="user-td">
                 <td>{{$user->id}}</td>
                 <td><a href="{{route('panel.users.show', ['user' => $user])}}">{{$user->username}}</a></td>
                 <td>{{$user->group_str}}</td>

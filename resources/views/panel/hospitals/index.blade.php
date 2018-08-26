@@ -32,7 +32,7 @@
       'NuLL'        => __('hospitals.operation'),
     ]])
     @foreach($hospitals as $hospital)
-      <tr>
+      <tr class="hospital-td">
         <td>{{$hospital->id}}</td>
         <td><a href="{{route('panel.hospitals.show', ['hospit$hospital' => $hospital])}}">{{$hospital->title}}</a></td>
         <td>{{$hospital->address_summary}}</td>
