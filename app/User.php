@@ -211,4 +211,12 @@ class User extends Authenticatable
             ]);
         }
     }
+
+
+    public function permissions(){
+        return $this->hasMany('App\Models\Permission', 'requester_id');
+    }
+    public function requests(){
+        return $this->hasMany('App\Models\Permissions', 'patient_id');
+    }
 }

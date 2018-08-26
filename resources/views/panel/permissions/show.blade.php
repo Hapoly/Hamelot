@@ -1,5 +1,5 @@
 @extends('layouts.main')
-@section('title', $hospital->title)
+@section('title', $permission->patient->full_name)
 @section('content')
 <?php
   use App\User;
@@ -7,141 +7,72 @@
 <div class="container">
   <div class="panel panel-default">
     <div class="row">
-      <h2>{{ $hospital->title }}</h2>
+      <img src="{{$permission->patient->patient->profile_url}}" class="center" style="width: 25%">
     </div>
     <div class="row">
-      <img src="{{asset($hospital->image_url)}}" class="center" style="width: 25%;">
+      <h2>{{ $permission->patient->first_name }} {{ $permission->patient->last_name }}</h2>
     </div>
     <div class="row">
       <table class="table table-striped">
         <tbody>
           <tr>
-            <td>{{__('hospitals.title')}}</td>
-            <td>{{$hospital->title}}</td>
+            <td>{{__('users.first_name')}}</td>
+            <td>{{$permission->patient->first_name}}</td>
           </tr>
           <tr>
-            <td>{{__('hospitals.address')}}</td>
-            <td>{{$hospital->address}}</td>
+            <td>{{__('users.last_name')}}</td>
+            <td>{{$permission->patient->last_name}}</td>
           </tr>
           <tr>
-            <td>{{__('hospitals.phone')}}</td>
-            <td>{{$hospital->phone}}</td>
+            <td>{{__('users.id_number')}}</td>
+            <td>{{$permission->patient->patient->id_number}}</td>
           </tr>
           <tr>
-            <td>{{__('hospitals.mobile')}}</td>
-            <td>{{$hospital->mobile}}</td>
+            <td>{{__('users.status')}}</td>
+            <td>{{$permission->patient->status_str}}</td>
           </tr>
           <tr>
-            <td>{{__('hospitals.status')}}</td>
-            <td>{{$hospital->status_str}}</td>
+            <td>{{__('users.gender')}}</td>
+            <td>{{$permission->patient->patient->gender_str}}</td>
+          </tr>
+          <tr>
+            <td>{{__('users.birth_date')}}</td>
+            <td>{{$permission->patient->patient->birth_date_str}}</td>
+          </tr>
+          <tr>
+            <td>{{__('users.age')}}</td>
+            <td>{{$permission->patient->patient->age_str}}</td>
+          </tr>
+          <tr>
+            <td>{{__('permissions.status')}}</td>
+            <td>{{$permission->status_str_with_date}}</td>
           </tr>
         </tbody>
       </table>
     </div>
-    @if(Auth::user()->isAdmin())
-      <div class="row">
-        <div class="col-md-6" style="text-align: center">
-          <a href="{{route('panel.hospitals.edit', ['hospital' => $hospital])}}" class="btn btn-primary" role="button">{{__('hospitals.edit')}}</a>
-        </div>
-        <div class="col-md-6" style="text-align: center">
-          <form action="{{route('panel.hospitals.destroy', ['hospital' => $hospital])}}" method="post">
-            {{ method_field('DELETE') }}
-            {{ csrf_field() }}
-            <button type="submit" class="btn btn-danger">حذف</button>
-          </form>
-        </div>
-      </div>
-    @endif
-  </div>
-  <div class="panel panel-default">
-    <div class="panel-heading sub-panel-title">
-      {{__('hospital_users.title')}}
-      @if(Auth::user()->isAdmin())
-        <a href="{{route('panel.departments.create', ['hospital_id' => $hospital->id])}}" class="btn btn-primary sub-panel-add">{{__('departments.create')}}</a>
-      @endif
-    </div>
-    @if(sizeof($hospital->users))
-      <table class="table">
-        <thead>
-          <tr>
-            <th>{{__('users.row')}}</th>
-            <th>{{__('users.first_name')}}</th>
-            <th>{{__('users.last_name')}}</th>
-            <th>{{__('users.status')}}</th>
-            @if(Auth::user()->isAdmin())
-              <th>{{__('users.operation')}}</th>
+    <div class="row">
+      <form action="{{route('panel.permissions.inline_update', ['permission' => $permission])}}" method="post">
+        {{csrf_field()}}
+        <div class="col-md-12" style="text-align: center">
+          @if(Auth::user()->isAdmin() || Auth::user()->id == $permission->patient_id)
+            @if($permission->pending())
+              <button type="submit" name="action" value="accept" class="btn btn-primary">{{__('permissions.accept')}}</button>
+              <button type="submit" name="action" value="refuse" class="btn btn-danger">{{__('permissions.refuse')}}</button>
+            @elsif($permission->accepted())
+              <button type="submit" name="action" value="cancel" class="btn btn-warning">{{__('permissions.cancel')}}</button>
             @endif
-          </tr>
-        </thead>
-        <tbody>
-          @foreach($hospital->users as $user)
-            <tr>
-              <td>{{$user->id}}</td>
-              <td>{{$user->first_name}}</td>
-              <td>{{$user->last_name}}</td>
-              <td>{{$user->status_str}}</td>
-              @if(Auth::user()->isAdmin())
-                <td>
-                  <a href="{{route('panel.users.destroy', ['user' => $user])}}" class="btn btn-danger" role="button">{{__('users.destroy')}}</a>
-                  <a href="{{route('panel.users.edit', ['user' => $user])}}" class="btn btn-info" role="button">{{__('users.edit.general')}}</a>
-                </td>
-              @endif
-            </tr>
-          @endforeach
-        </tbody>
-      </table>
-    @else
-      <div class="row">
-        <div class="col-md-12" style="text-align: center">
-          {{__('hospital_users.not_found')}}
+          @endif
+          @if(Auth::user()->isAdmin() || Auth::user()->id == $permission->requester_id)
+            @if(!$permission->canceled())
+              <button type="submit" name="action" value="cancel" class="btn btn-warning">{{__('permissions.cancel')}}</button>
+            @endif
+          @endif
+          @if($permission->accepted() && !Auth::user()->isPatient())
+            <a href="{{route('panel.permissions.show_profile', ['user' => $permission->patient])}}" class="btn btn-info">{{__('permissions.show_profile')}}</a>
+          @endif
         </div>
-      </div>
-    @endif
-  </div>
-  <div class="panel panel-default">
-    <div class="sub-panel-title panel-heading">
-      <a href="{{route('panel.departments.create', ['hospital_id' => $hospital->id])}}" class="btn btn-primary sub-panel-add"><i class="fa fa-plus"></i></a>
-      {{__('departments.index_title')}}
+      </form>
     </div>
-    @if(sizeof($hospital->departments))
-      <table class="table">
-        <thead>
-          <tr>
-            <th>{{__('departments.row')}}</th>
-            <th>{{__('departments.title')}}</th>
-            <th>{{__('departments.status')}}</th>
-            <th>{{__('departments.operation')}}</th>
-          </tr>
-        </thead>
-        <tbody>
-          @foreach($hospital->departments as $department)
-            <tr>
-              <td>{{$department->id}}</td>
-              <td><a href="{{route('panel.departments.show', ['department' => $department])}}">{{$department->title}}</a></td>
-              <td>{{$department->status_str}}</td>
-              @if(Auth::user()->isAdmin() || Auth::user()->isManager())
-                <td>
-                  <form action="{{route('panel.departments.destroy', ['department' => $department])}}" style="display: inline" method="POST" class="trash-icon">
-                    {{ method_field('DELETE') }}
-                    {{ csrf_field() }}
-                    <button type="submit" class="btn btn-danger">{{__('departments.remove')}}</button>
-                  </form>
-                  <a class="btn btn-primary" href="{{route('panel.hospitals.edit', ['hospital' => $hospital])}}">{{ __('departments.edit') }}</a>
-                </td>
-              @else
-                <td>-</td>
-              @endif
-            </tr>
-          @endforeach
-        </tbody>
-      </table>
-    @else
-      <div class="row">
-        <div class="col-md-12" style="text-align: center">
-          {{__('department_users.not_found')}}
-        </div>
-      </div>
-    @endif
   </div>
 </div>
 @endsection

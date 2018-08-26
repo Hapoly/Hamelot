@@ -65,6 +65,7 @@
           <tr>
             <th>{{__('departments.row')}}</th>
             <th>{{__('departments.title')}}</th>
+            <th>{{__('departments.hospital_id')}}</th>
             <th>{{__('departments.status')}}</th>
             <th>{{__('departments.operation')}}</th>
           </tr>
@@ -74,6 +75,7 @@
             <tr>
               <td>{{$department->id}}</td>
               <td><a href="{{route('panel.departments.show', ['department' => $department])}}">{{$department->title}}</a></td>
+              <td><a href="{{route('panel.hospitals.show', ['hospital' => $department->hospital])}}">{{$department->hospital->title}}</a></td>
               <td>{{$department->status_str}}</td>
               @if(Auth::user()->isAdmin() || Auth::user()->isManager())
                 <td>

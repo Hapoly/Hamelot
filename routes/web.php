@@ -24,10 +24,12 @@ Route::middleware(['auth', 'Permission'])->namespace('Panel')->prefix('panel')->
     Route::prefix('permissions')->name('permissions.')->group(function(){
         Route::get('/create', 'Permissions@create')->name('create');
         Route::post('/check', 'Permissions@check')->name('check');
-        Route::post('/store', 'Permissions@store')->name('store');
+        Route::post('/send/{user}', 'Permissions@send')->name('send');
         
-        Route::get('/{permission}/edit', 'Permissions@edit')->name('edit');
-        Route::post('/{permission}/edit', 'Permissions@update')->name('update');
+        Route::get('/show/{permission}', 'Permissions@show')->name('show');
+        Route::get('/show_profile/{user}', 'Permissions@showProfile')->name('show_profile');
+
+        Route::post('/update-inline/{permission}', 'Permissions@inlineUpdate')->name('inline_update');
 
         Route::get('/', 'Permissions@index')->name('index');
         Route::get('/destroy/{permissions}', 'Permissions@destroy')->name('destroy');

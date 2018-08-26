@@ -76,9 +76,13 @@ class Permission
         'panel.search.patients'                         => [ 1, 2, 3, 4 ],
         'panel.search.patient-departments'              => [ 1, 2, 3, 4 ],
 
-        'panel.permissions.create'                      => [ 1, 2, 3, 4, 5 ],
-        'panel.permissions.check'                       => [ 1, 2, 3, 4, 5 ],
-        'panel.permissions.store'                       => [ 1, 2, 3, 4, 5 ],
+        'panel.permissions.create'                      => [ 2, 3, 4, 5 ],
+        'panel.permissions.check'                       => [ 2, 3, 4, 5 ],
+        'panel.permissions.send'                        => [ 2, 3, 4, 5 ],
+
+        'panel.permissions.show'                        => [ 1, 2, 3, 4, 5 ],
+        'panel.permissions.show_profile'                => [ 1, 2, 3, 4 ],
+        'panel.permissions.inline_update'               => [ 1, 2, 3, 4, 5 ],
         'panel.permissions.edit'                        => [ 1, 2, 3, 4, 5 ],
         'panel.permissions.update'                      => [ 1, 2, 3, 4, 5 ],
         'panel.permissions.index'                       => [ 1, 2, 3, 4, 5 ],

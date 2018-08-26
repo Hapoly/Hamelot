@@ -3,15 +3,26 @@
 @section('content')
 <div class="container">
   @if($result == 'not_found')
-    <div class="alert alert-danger" role="alert" style="margin-left: 15px; margin-right: 15px;">
+    <div class="alert alert-danger" role="alert">
       {{__('permissions.not_found')}}
     </div>
   @endif
+  @if($result == 'found')
+    <div class="alert alert-success" role="alert">
+      {{__('permissions.found')}}
+    </div>
+  @endif
+  @if($result == 'exists')
+    <div class="alert alert-info" role="alert">
+      {{__('permissions.exists')}}
+    </div>
+  @endif
   @form_create(['action' => route('panel.permissions.check'), 'title' => __('permissions.create')])
+    <p style="margin: 20px 40px; text-align: justify">{{__('permissions.form_info')}}</p>
     @input_text(['name' => 'id_number', 'value' => isset($id_number)? $id_number: '', 'label' => __('permissions.id_number'), 'required' => true])
     @submit_row(['value' => 'new', 'label' => __('permissions.save')])
   @endform_create
-  @if($result == 'found')
+  @if($result == 'found' || $result == 'exists')
     <div class="panel panel-default">
       <div class="row">
         <img src="{{$patient->patient->profile_url}}" class="center" style="width: 25%">
@@ -49,17 +60,14 @@
           </tbody>
         </table>
       </div>
-      @if(Auth::user()->isAdmin())
+      @if($result == 'found')
         <div class="row">
-          <div class="col-md-6" style="text-align: center">
-            <a href="{{route('panel.users.edit', ['user' => $patient])}}" class="btn btn-primary" role="button">{{__('users.edit.general')}}</a>
-            @if(Auth::user()->isDoctor())
-              <a href="{{route('panel.permissions.create', ['user' => $patient])}}" class="btn btn-primary" role="button">{{__('permissions.create')}}</a>
-            @endif
-          </div>
-          <div class="col-md-6" style="text-align: center">
-            <a href="{{route('panel.users.destroy', ['user' => $patient])}}" class="btn btn-danger" role="button">{{__('users.destroy')}}</a>
-          </div>
+          <form action="{{route('panel.permissions.send', ['user' => $patient])}}" method="post">
+            {{csrf_field()}}
+            <div class="col-md-12" style="text-align: center">
+              <button type="submit" class="btn btn-primary">{{__('permissions.confirm')}}</button>
+            </div>
+          </form>
         </div>
       @endif
     </div>
