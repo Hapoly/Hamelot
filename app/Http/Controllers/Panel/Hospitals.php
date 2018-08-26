@@ -16,7 +16,7 @@ use App\Http\Requests\HospitalRequest;
 
 class Hospitals extends Controller{
   public function index(Request $request){
-    $hospitals = Hospital::get();
+    $hospitals = Hospital::fetch();
     $links = '';
     $sort = $request->input('sort', '###');
     $search = $request->input('search', '###');
