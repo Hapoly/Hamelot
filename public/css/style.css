@@ -452,6 +452,60 @@ h2{
     .table{
         width: 100%;
     }
+    table, thead, tbody, th, td, tr { 
+        display: block; 
+        text-align: right;
+    }
+    thead tr { 
+		position: absolute;
+		top: -9999px;
+		left: -9999px;
+    }
+    tr {
+        border: 1px solid #ccc;
+       overflow: scroll;
+   }
+   
+   td { 
+       /* Behave  like a "row" */
+       border: none;
+       border-bottom: 1px solid #eee; 
+       position: relative;
+       padding-left: 50%; 
+       text-align: left
+   }
+   
+   td:before { 
+       /* Now like a table header */
+       position: absolute;
+       /* Top/left values mimic padding */
+       top: 6px;
+       left: 130px;
+       width: 45%; 
+       padding-right: 10px; 
+       white-space: nowrap;
+   }
+   th{
+    text-align: left;
+    }
+    tbody tr td:before{
+        text-align: right;
+        color:grey;
+    }
+    .tbody{
+        width: 100%;
+    }
+    .dep-td td:nth-of-type(1):before { content: " ردیف";}
+    .dep-td td:nth-of-type(2):before { content: " عنوان";}
+    .dep-td td:nth-of-type(3):before { content: " بیمارستان";}
+    .dep-td td:nth-of-type(4):before { content: " وضعیت";}
+    .dep-td td:nth-of-type(5):before { content: " عملیات";}
+
+    .rep-td td:nth-of-type(1):before { content: " ردیف";}
+    .rep-td td:nth-of-type(2):before { content: " عنوان";}
+    .rep-td td:nth-of-type(3):before { content: " تعداد فیلد ها";}
+    .rep-td td:nth-of-type(4):before { content: " وضعیت";}
+    .rep-td td:nth-of-type(5):before { content: " عملیات";}
 }
 /* @media(min-width:) */
 @media (min-width: 768px){

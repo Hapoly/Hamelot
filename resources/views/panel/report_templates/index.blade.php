@@ -31,7 +31,7 @@
       </thead>
       <tbody>
         @foreach($report_templates as $report_template)
-          <tr>
+          <tr class="rep-td">
           <td>{{$report_template->id}}</td>
           <td><a href="{{route('panel.report_templates.show', ['report_template' => $report_template])}}">{{$report_template->title}}</a></td>
           <td>{{$report_template->field_count}}</td>
