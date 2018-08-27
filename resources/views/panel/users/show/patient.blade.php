@@ -59,12 +59,14 @@
   </div>
   <div class="panel panel-default">
     <h2>{{__('departments.index_title')}}</h2>
+    @tagline{{__('departments.tag_line_patient')}}@endtagline
     @if(sizeof($user->departments))
       <table class="table">
         <thead>
           <tr>
             <th>{{__('departments.row')}}</th>
             <th>{{__('departments.title')}}</th>
+            <th>{{__('departments.hospital_id')}}</th>
             <th>{{__('departments.status')}}</th>
             <th>{{__('departments.operation')}}</th>
           </tr>
@@ -74,6 +76,7 @@
             <tr>
               <td>{{$department->id}}</td>
               <td><a href="{{route('panel.departments.show', ['department' => $department])}}">{{$department->title}}</a></td>
+              <td><a href="{{route('panel.hospitals.show', ['hospital' => $department->hospital])}}">{{$department->hospital->title}}</a></td>
               <td>{{$department->status_str}}</td>
               @if(Auth::user()->isAdmin() || Auth::user()->isManager())
                 <td>

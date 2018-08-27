@@ -18,7 +18,7 @@
     </div>
   @endif
   @form_create(['action' => route('panel.permissions.check'), 'title' => __('permissions.create')])
-    <p style="margin: 20px 40px; text-align: justify">{{__('permissions.form_info')}}</p>
+    @tagline{{__('permissions.form_info')}}@endtagline
     @input_text(['name' => 'id_number', 'value' => isset($id_number)? $id_number: '', 'label' => __('permissions.id_number'), 'required' => true])
     @submit_row(['value' => 'new', 'label' => __('permissions.save')])
   @endform_create

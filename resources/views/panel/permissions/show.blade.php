@@ -68,7 +68,7 @@
             @endif
           @endif
           @if($permission->accepted() && !Auth::user()->isPatient())
-            <a href="{{route('panel.permissions.show_profile', ['user' => $permission->patient])}}" class="btn btn-info">{{__('permissions.show_profile')}}</a>
+            <a href="{{route('panel.users.show', ['user' => $permission->patient])}}" class="btn btn-info">{{__('permissions.show_profile')}}</a>
           @endif
         </div>
       </form>
