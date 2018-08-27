@@ -35,7 +35,7 @@ class Users extends Controller{
    */
   public function index(Request $request){
     /* permissions to show and list users in diffrent group codes */
-    $users = User::get();
+    $users = User::fetch();
     /* end of permissions section */
 
     $sort = $request->input('sort', '###');

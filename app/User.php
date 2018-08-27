@@ -145,16 +145,20 @@ class User extends Authenticatable
                 else
                     return true;
             case User::G_DOCTOR:    
-                if($user->isAdmin() || $user->isManager() || $user->isDoctor())
+                if($user->isAdmin() || $user->isManager())
                     return false;
-                else if($user->isNurse() || $user->isPatient())
-                    return $user->departments()->whereHas('hospital', function($query){
+                else if($user->isDoctor() || $user->isNurse())
+                    return true;
+                else if($user->isPatient())
+                    $reqular =  $user->departments()->whereHas('hospital', function($query){
                         return $query->whereHas('departments', function($query){
                             return $query->whereHas('users', function($query){
                                 return $query->where('users.id', Auth::user()->id);
                             });
                         });
                     })->first() != null;
+                    $permission = $user->permissions()->where('requester_id', $this->id)->first() != null;
+                    return $reqular || $permission;
             case User::G_NURSE:
                 if($user->isAdmin() || $user->isManager() || $user->isDoctor() || $user->isNurse())
                     return false;
@@ -171,10 +175,9 @@ class User extends Authenticatable
         }
         return false;
     }
-    public static function get(){
+    public static function fetch(){
         if(Auth::user()->isPatient()){
-            abort(404);
-            return '';
+            return User::where('groupd_code', User::DOCTOR);
         }else if(Auth::user()->isAdmin()){
             return new User;
         }else if(Auth::user()->isManager()){
@@ -189,15 +192,17 @@ class User extends Authenticatable
                 });
             });
         }else if(Auth::user()->isDoctor()){
-            return User::whereHas('departments', function($query){
-                return $query->whereHas('users', function($query){
-                    return $query->where('users.id', Auth::user()->id);
-                });
-            })->where([
+            return User::where([
                 ['group_code', '<>', User::G_ADMIN],
                 ['group_code', '<>', User::G_MANAGER],
                 ['group_code', '<>', User::G_DOCTOR]
-            ]);
+            ])->whereHas('departments', function($query){
+                return $query->whereHas('users', function($query){
+                    return $query->where('users.id', Auth::user()->id);
+                });
+            })->orWhereHas('requests', function($query){
+                return $query->where('requester_id', Auth::user()->id)->where('status', Permission::ACCEPTED);
+            });
         }else if(Auth::user()->isNurse()){
             return User::whereHas('departments', function($query){
                 return $query->whereHas('users', function($query){
@@ -217,6 +222,6 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\Permission', 'requester_id');
     }
     public function requests(){
-        return $this->hasMany('App\Models\Permissions', 'patient_id');
+        return $this->hasMany('App\Models\Permission', 'patient_id');
     }
 }
