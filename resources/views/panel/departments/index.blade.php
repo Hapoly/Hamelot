@@ -34,7 +34,7 @@
         'NuLL'        => __('departments.operation'),
       ]])
       @foreach($departments as $department)
-        <tr>
+        <tr class="dep-td">
           <td>{{$department->id}}</td>
           <td><a href="{{route('panel.departments.show', ['department' => $department])}}">{{$department->title}}</a></td>
           <td><a href="{{route('panel.hospitals.show', ['hospital' => $department->hospital])}}">{{$department->hospital->title}}</a></td>

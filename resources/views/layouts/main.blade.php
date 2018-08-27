@@ -50,25 +50,33 @@
 		<div id="content" style="width:100%">
 			<nav class="navbar navbar-default">
 				<div class="container-fluid">	
-					<div class="navbar-header navbar-right">
-						<button type="button" id="sidebarCollapse" class="btn btn-info navbar-btn">
-							<i class="glyphicon glyphicon-align-right"></i>
-							 <!-- <span>Toggle</span>  -->
-						</button>
+					<div class="row" style="margin:0;">
+						<div class="col-md-6 exit-col">
+							<div class="collapse navbar-collapse">
+								<ul class="nav navbar-nav navbar-left">
+									<li>
+										<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+											@csrf
+										</form>
+										<a class="exit" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">{{ __('general.logout') }}</a>
+									</li>
+									<li id="login-name">
+										<a href="#">{{Auth::user()->prefix}} {{ Auth::user()->first_name }} {{Auth::user()->last_name}}</a>
+									</li>
+								</ul>
+							</div>
+						</div>
+						<div class="col-md-6 collapse-col">
+							<div class="navbar-header navbar-right">
+								<button type="button" id="sidebarCollapse" class="btn btn-info navbar-btn">
+									<i class="glyphicon glyphicon-align-right"></i>
+									<!-- <span>Toggle</span>  -->
+								</button>
+							</div>
+						</div>
 					</div>
-					<div class="collapse navbar-collapse">
-						<ul class="nav navbar-nav navbar-left">
-							<li>
-								<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-									@csrf
-								</form>
-								<a class="exit" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">{{ __('general.logout') }}</a>
-							</li>
-							<li id="login-name">
-								<a href="#">{{Auth::user()->prefix}} {{ Auth::user()->first_name }} {{Auth::user()->last_name}}</a>
-							</li>
-						</ul>
-					</div>
+					
+					
 				</div>
 			</nav>
 			<div class="container">

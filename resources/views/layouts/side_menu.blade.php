@@ -2,7 +2,9 @@
 	<li>
 		<a href="#userSubmenu" data-toggle="collapse" aria-expanded="false">
 			<i class="fa fa-users" aria-hidden="false"></i>
+			<span>
 			مدیریت کاربران
+			</span>
 		</a>
 		<ul class="collapse list-unstyled" id="userSubmenu">
 			@if(Auth::user()->isAdmin())
@@ -30,7 +32,9 @@
 	<li>
 		<a href="#hospitalSubmenu" data-toggle="collapse" aria-expanded="false">
 			<i class="fa fa-hospital-o" aria-hidden="false"></i>
+			<span>
 			بیمارستان ها
+			</span>
 		</a>
 		<ul class="collapse list-unstyled" id="hospitalSubmenu">
 			@if(Auth::user()->isAdmin())
@@ -46,7 +50,9 @@
 	<li>
 		<a href="#partSubmenu" data-toggle="collapse" aria-expanded="false">
 			<i class="fa fa-h-square" aria-hidden="false"></i>
+			<span>
 			بخش ها
+			</span>
 		</a>
 		<ul class="collapse list-unstyled" id="partSubmenu">
 			<li>
@@ -60,7 +66,9 @@
 	<li>
 		<a href="#testtSubmenu" data-toggle="collapse" aria-expanded="false">
 			<i class="fa fa-medkit" aria-hidden="true"></i>
+			<span>
 			آزمایشات
+			</span>
 		</a>
 		<ul class="collapse list-unstyled" id="testtSubmenu">
 			<li>
