@@ -35,7 +35,14 @@ class Users extends Controller{
    */
   public function index(Request $request){
     /* permissions to show and list users in diffrent group codes */
-    $users = User::fetch();
+    $users = null;
+    if($request->has('group_code'))
+      if($request->group_code == 5)
+        $users = User::fetchPatients();
+      else
+        $users = User::fetch();
+    else
+        $users = User::fetch();
     /* end of permissions section */
 
     $sort = $request->input('sort', '###');
@@ -45,8 +52,7 @@ class Users extends Controller{
     
     if($request->has('last_name')  && $request->last_name != '')
       $users = $users->where('last_name', 'LIKE' , '%'.$request->last_name.'%');
-
-    // return $request->all();
+        
     $hospital_id = $request->input('hospital_id', 0);
     $department_id = $request->input('department_id', 0);
     if($hospital_id != 0){

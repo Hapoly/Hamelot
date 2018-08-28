@@ -1,9 +1,12 @@
+<?php
+	use App\User;
+?>
 <ul class="list-unstyled components">
 	<li>
 		<a href="#userSubmenu" data-toggle="collapse" aria-expanded="false">
 			<i class="fa fa-users" aria-hidden="false"></i>
 			<span>
-			مدیریت کاربران
+			کاربران
 			</span>
 		</a>
 		<ul class="collapse list-unstyled" id="userSubmenu">
@@ -14,19 +17,34 @@
 				<li>
 					<a href="{{route('panel.users.create.manager')}}"> مدیریت جدید</a>
 				</li>
+				<li>
+					<a href="{{route('panel.users.create.doctor')}}"> دکتر جدید</a>
+				</li>
+				<li>
+					<a href="{{route('panel.users.create.nurse')}}"> پرستار جدید</a>
+				</li>
+				<li>
+					<a href="{{route('panel.users.create.patient')}}"> بیمار جدید</a>
+				</li>
+				<li>
+					<a href="{{route('panel.users.index')}}">  کاربران</a>
+				</li>
 			@endif
-			<li>
-				<a href="{{route('panel.users.create.doctor')}}"> دکتر جدید</a>
-			</li>
-			<li>
-				<a href="{{route('panel.users.create.nurse')}}"> پرستار جدید</a>
-			</li>
-			<li>
-				<a href="{{route('panel.users.create.patient')}}"> بیمار جدید</a>
-			</li>
-			<li>
-				<a href="{{route('panel.users.index')}}">  کاربران</a>
-			</li>
+			@if(Auth::user()->isManager())
+				<li>
+					<a href="{{route('panel.users.index')}}">  کاربران</a>
+				</li>
+			@endif
+			@if(Auth::user()->isDoctor() || Auth::user()->isNurse())
+				<li>
+					<a href="{{route('panel.users.index', ['group_code' => User::G_PATIENT])}}">  بیماران من</a>
+				</li>
+			@endif
+			@if(!Auth::user()->isAdmin())
+				<li>
+					<a href="{{route('panel.users.index')}}">  سایر کاربران</a>
+				</li>
+			@endif
 		</ul>
 	</li>
 	<li>

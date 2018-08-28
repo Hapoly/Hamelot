@@ -176,45 +176,23 @@ class User extends Authenticatable
         return false;
     }
     public static function fetch(){
-        if(Auth::user()->isPatient()){
-            return User::where('groupd_code', User::DOCTOR);
-        }else if(Auth::user()->isAdmin()){
+        if(Auth::user()->isAdmin())
             return new User;
-        }else if(Auth::user()->isManager()){
+        else
             return User::where([
                 ['group_code', '<>', User::G_ADMIN],
                 ['group_code', '<>', User::G_MANAGER],
-            ])->whereHas('departments', function($query){
-                return $query->whereHas('hospital', function($query){
-                    return $query->whereHas('users', function($query){
-                        return $query->where('users.id', Auth::user()->id);
-                    });
-                });
-            });
-        }else if(Auth::user()->isDoctor()){
-            return User::where([
-                ['group_code', '<>', User::G_ADMIN],
-                ['group_code', '<>', User::G_MANAGER],
-                ['group_code', '<>', User::G_DOCTOR]
-            ])->whereHas('departments', function($query){
-                return $query->whereHas('users', function($query){
-                    return $query->where('users.id', Auth::user()->id);
-                });
-            })->orWhereHas('requests', function($query){
-                return $query->where('requester_id', Auth::user()->id)->where('status', Permission::ACCEPTED);
-            });
-        }else if(Auth::user()->isNurse()){
-            return User::whereHas('departments', function($query){
-                return $query->whereHas('users', function($query){
-                    return $query->where('users.id', Auth::user()->id);
-                });
-            })->where([
-                ['group_code', '<>', User::G_ADMIN],
-                ['group_code', '<>', User::G_MANAGER],
-                ['group_code', '<>', User::G_DOCTOR],
-                ['group_code', '<>', User::G_NURSE]
+                ['group_code', '<>', User::G_PATIENT],
             ]);
-        }
+    }
+
+    public static function fetchPatients(){
+        if(Auth::user()->isAdmin())
+            return new User;
+        else
+            return User::whereHas('requests', function($query){
+                return $query->where('requester_id', Auth::user()->id);
+            });
     }
 
 
