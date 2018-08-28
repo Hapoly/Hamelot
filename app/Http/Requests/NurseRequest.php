@@ -32,7 +32,9 @@ class NurseRequest extends FormRequest
             'field'         => 'required|numeric',
             'gender'        => 'required|numeric',
             'profile'       => 'image',
-            'status'        => 'required|numeric'
+            'status'        => 'required|numeric',
+            'public'        => 'required|numeric',
+            'msc'           => 'required|string|max:16',
         ];
     }
 }

@@ -125,6 +125,34 @@
                         </div>
                         <label for="gender" class="col-md-2 col-form-label text-center">{{ __('users.gender') }}</label>
                     </div>
+                    
+                    <div class="form-group row create-form">
+                        <div class="col-md-10">
+                           <input id="msc" type="text" class="form-control{{ $errors->has('msc') ? ' is-invalid' : '' }}" name="msc" value="{{ old('msc', $user->nurse->msc_str) }}" required autofocus>
+                                @if ($errors->has('msc'))
+                                <span class="invalid-feedback">
+                                    <strong>{{ $errors->first('msc') }}</strong>
+                                </span>
+                            @endif
+                        </div>
+                         <label for="title" class="col-md-2 col-form-label text-center">{{ __('users.msc') }}</label>
+                    </div>
+
+                    <div class="form-group row create-form">
+                        <div class="col-md-10">
+                            <select class="form-control" name="public" id="public" style="width:90%">
+                                <option value="1" {{old('public', $user->nurse->public) == 1? 'selected': ''}} >{{__('users.public_str.1')}}  </option>
+                                <option value="2" {{old('public', $user->nurse->public) == 2? 'selected': ''}} >{{__('users.public_str.2')}}  </option>
+                            </select>
+                            @if ($errors->has('public'))
+                                <span class="invalid-feedback">
+                                    <strong>{{ $errors->first('public') }}</strong>
+                                </span>
+                            @endif
+                        </div>
+                        <label for="status" class="col-md-2 col-form-label text-center">{{ __('users.public') }}</label>
+                    </div>
+
 
                     <div class="form-group row create-form">
                         <div class="col-md-10">

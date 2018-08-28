@@ -9,9 +9,22 @@ class Nurse extends Model
 {
     protected $primary = 'id';
     protected $table = 'nurses';
-    protected $fillable = ['degree', 'field', 'user_id', 'profile', 'gender'];
+    protected $fillable = ['degree', 'field', 'user_id', 'profile', 'gender', 'public', 'msc'];
     protected $visible = ['degree_str', 'field_str', 'profile_url'];
 
+    protected $public_lang = [
+        1   => 'عمومی',
+        2   => 'خصوصی',
+    ];
+    public function getPublicStrAttribute(){
+        return $this->public_lang[$this->public];
+    }
+    public function getMscStrAttribute(){
+        if($this->msc == 'NuLL')
+            return '';
+        else
+            return $this->msc;
+    }
     public function user(){
         return $this->belongsTo('App\User');
     }

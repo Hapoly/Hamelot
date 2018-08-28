@@ -22,6 +22,13 @@ return [
     'age'               => 'سن',
     'department_id'     => 'بخش مورد فعالیت',
     'patient_department_id' => 'بخش',
+    'public'            => 'وضعیت نمایش',
+    'msc'               => 'کدنظام پزشکی',
+
+    'public_str'        => [
+        1   => 'عمومی',
+        2   => 'خصوصی',
+    ],
 
     'birth_date'        => 'تاریخ تولد',
     'birth'             => [
