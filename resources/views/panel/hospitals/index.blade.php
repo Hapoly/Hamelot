@@ -42,7 +42,7 @@
         @if(Auth::user()->isAdmin())
           @operation_th(['base' => 'panel.hospitals', 'label' => 'hospital', 'item' => $hospital, 'remove_label' => __('hospitals.remove'), 'edit_label' => __('hospitals.edit')])
         @else
-          <td>-</td>
+          <td><a class="btn btn-default" href="{{route('panel.hospitals.show', ['hospit$hospital' => $hospital])}}">{{__('hospitals.show')}}</a></td>
         @endif
       </tr>
     @endforeach
