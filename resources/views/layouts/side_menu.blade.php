@@ -106,13 +106,13 @@
 	</li>
 	@if(Auth::user()->isManager() || Auth::user()->isAdmin())
 		<li>
-			<a href="#partSubmenu" data-toggle="collapse" aria-expanded="false">
+			<a href="#requestSubmenu" data-toggle="collapse" aria-expanded="false">
 				<i class="fa fa-h-square" aria-hidden="false"></i>
 				<span>
 				درخواست‌‌های عضویت
 				</span>
 			</a>
-			<ul class="collapse list-unstyled" id="partSubmenu">
+			<ul class="collapse list-unstyled" id="requestSubmenu">
 				<li>
 					<a href="{{route('panel.department_users.index')}}"> لیست درخواست‌ها</a>
 				</li>

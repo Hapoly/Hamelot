@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Auth;
 
 class DepartmentUser extends Model
 {
@@ -30,5 +31,18 @@ class DepartmentUser extends Model
     }
     public function department(){
         return $this->belongsTo('App\Models\Department');
+    }
+
+    public static function fetch(){
+        if(Auth::user()->isAdmin())
+            return new DepartmentUser;
+        else
+            return DepartmentUser::whereHas('department', function($query){
+                return $query->whereHas('hospital', function($query){
+                    return $query->whereHas('users', function($query){
+                        return $query->where('users.id', Auth::user()->id);
+                    });
+                });
+            });
     }
 }

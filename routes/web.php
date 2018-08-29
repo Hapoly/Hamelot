@@ -27,7 +27,6 @@ Route::middleware(['auth', 'Permission'])->namespace('Panel')->prefix('panel')->
         Route::post('/send/{user}', 'Permissions@send')->name('send');
         
         Route::get('/show/{permission}', 'Permissions@show')->name('show');
-        Route::get('/show_profile/{user}', 'Permissions@showProfile')->name('show_profile');
 
         Route::post('/update-inline/{permission}', 'Permissions@inlineUpdate')->name('inline_update');
 
@@ -64,6 +63,14 @@ Route::middleware(['auth', 'Permission'])->namespace('Panel')->prefix('panel')->
     });
     Route::prefix('department-users')->name('department_users.')->group(function(){
         Route::get('/send/{user}/{department}', 'DepartmentUsers@send')->name('send');
+        Route::get('/', 'DepartmentUsers@index')->name('index');
+        
+        Route::get('/show/{department_user}', 'DepartmentUsers@show')->name('show');
+
+        Route::post('/update-inline/{department_user}', 'DepartmentUsers@inlineUpdate')->name('inline_update');
+
+        Route::get('/', 'DepartmentUsers@index')->name('index');
+        Route::get('/destroy/{department_users}', 'DepartmentUsers@destroy')->name('destroy');
     });
     Route::prefix('search')->name('search.')->group(function(){
         Route::get('/patients', 'Search@patients')->name('patients');
