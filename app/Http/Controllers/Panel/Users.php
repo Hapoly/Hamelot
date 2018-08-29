@@ -230,26 +230,23 @@ class Users extends Controller{
    * edit users
    */
   public function edit(User $user){
+    if(!(Auth::user()->isAdmin() || $user->id == Auth::user()->id))
+      abort(403);
     switch($user->group_code){
       case User::G_ADMIN:
-        if(Auth::user()->hasPermissionToUser($user))
-          return view('panel.users.edit.admin', ['user' => $user]);
+        return view('panel.users.edit.admin', ['user' => $user]);
         break;
       case User::G_MANAGER:
-        if(Auth::user()->hasPermissionToUser($user))
-          return view('panel.users.edit.manager', ['user' => $user]);
+        return view('panel.users.edit.manager', ['user' => $user]);
         break;
       case User::G_DOCTOR:
-        if(Auth::user()->hasPermissionToUser($user))
-          return view('panel.users.edit.doctor', ['user' => $user, 'degrees' => ConstValue::doctor_degrees()->get(), 'fields' => ConstValue::doctor_fields()->get(), 'genders' => ConstValue::genders()->get()]);
+        return view('panel.users.edit.doctor', ['user' => $user, 'degrees' => ConstValue::doctor_degrees()->get(), 'fields' => ConstValue::doctor_fields()->get(), 'genders' => ConstValue::genders()->get()]);
         break;
       case User::G_NURSE:
-        if(Auth::user()->hasPermissionToUser($user))
-          return view('panel.users.edit.nurse', ['user' => $user, 'degrees' => ConstValue::nurse_degrees()->get(), 'fields' => ConstValue::nurse_fields()->get(), 'genders' => ConstValue::genders()->get()]);
+        return view('panel.users.edit.nurse', ['user' => $user, 'degrees' => ConstValue::nurse_degrees()->get(), 'fields' => ConstValue::nurse_fields()->get(), 'genders' => ConstValue::genders()->get()]);
         break;
       case User::G_PATIENT:
-        if(Auth::user()->hasPermissionToUser($user))
-          return view('panel.users.edit.patient', ['user' => $user, 'genders' => ConstValue::genders()->get()]);
+        return view('panel.users.edit.patient', ['user' => $user, 'genders' => ConstValue::genders()->get()]);
         break;
     }
     abort(404);
@@ -318,6 +315,8 @@ class Users extends Controller{
     return redirect()->route('panel.users.show', ['user' => $user]);
   }
   public function destroy(User $user){
+    if(Auth::user()->isAdmin() || $user->id == Auth::user()->id)
+      abort(403);
     $user->delete();
     if(URL::route('panel.users.show', ['user' => $user]) == URL::previous())
       return redirect()->route('panel.users.index');

@@ -103,8 +103,12 @@
                 <td>{{$user->last_name}}</td>
                 <td>{{$user->status_str}}</td>
                 <td>
-                  <a href="{{route('panel.users.destroy', ['user' => $user])}}" class="btn btn-danger" role="button">{{__('users.destroy')}}</a>
-                  <a href="{{route('panel.users.edit', ['user' => $user])}}" class="btn btn-info" role="button">{{__('users.edit.general')}}</a>
+                  @if(Auth::user()->isAdmin())
+                    <a href="{{route('panel.users.destroy', ['user' => $user])}}" class="btn btn-danger" role="button">{{__('users.destroy')}}</a>
+                    <a href="{{route('panel.users.edit', ['user' => $user])}}" class="btn btn-info" role="button">{{__('users.edit.general')}}</a>
+                  @else
+                    غیر قابل دسترسی
+                  @endif
                 </td>
               </tr>
             @endforeach
