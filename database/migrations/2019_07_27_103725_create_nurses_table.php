@@ -20,7 +20,6 @@ class CreateNursesTable extends Migration
             $table->smallInteger('field')   ->index()   ->default(0)        ;
             $table->string('profile', 64)               ->default('NuLL')   ;
             $table->smallInteger('gender')              ->default(0)        ;
-            $table->smallInteger('public')              ->default(1)        ;
             $table->string('msc', 16)                   ->default('NuLL')   ;
             $table->timestamps();
         });

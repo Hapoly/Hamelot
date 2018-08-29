@@ -62,6 +62,9 @@ Route::middleware(['auth', 'Permission'])->namespace('Panel')->prefix('panel')->
             Route::post('/patient', 'Users@updatePatient')->name('patient');
         });
     });
+    Route::prefix('department-users')->name('department_users.')->group(function(){
+        Route::get('/send/{user}/{department}', 'DepartmentUsers@send')->name('send');
+    });
     Route::prefix('search')->name('search.')->group(function(){
         Route::get('/patients', 'Search@patients')->name('patients');
         Route::get('/patient-departments', 'Search@departmentsOfPatient')->name('patient-departments');

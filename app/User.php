@@ -19,6 +19,17 @@ class User extends Authenticatable
     const G_DOCTOR      = 3;
     const G_NURSE       = 4;
     const G_PATIENT     = 5;
+    
+    const T_PUBLIC = 1;
+    const T_PRIVATE = 2;
+    
+    protected $public_lang = [
+        1   => 'عمومی',
+        2   => 'خصوصی',
+    ];
+    public function getPublicStrAttribute(){
+        return $this->public_lang[$this->public];
+    }
 
     public function isAdmin(){
         return $this->group_code == User::G_ADMIN;
@@ -183,6 +194,7 @@ class User extends Authenticatable
                 ['group_code', '<>', User::G_ADMIN],
                 ['group_code', '<>', User::G_MANAGER],
                 ['group_code', '<>', User::G_PATIENT],
+                ['public', '=', User::T_PUBLIC],
             ]);
     }
 

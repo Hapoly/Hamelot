@@ -21,6 +21,7 @@ class CreateUsersTable extends Migration
             $table->string('last_name');
             $table->smallInteger('status')->default(1);
             $table->smallInteger('group_code')->default(1);
+            $table->smallInteger('public')->default(1);
             $table->rememberToken();
             $table->timestamps();
         });

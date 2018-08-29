@@ -17,6 +17,7 @@ class CreateDepartmentUserTable extends Migration
             $table->increments('id');
             $table->integer('user_id')->index();
             $table->integer('department_id')->index();
+            $table->smallInteger('status')->default(1);
             $table->timestamps();
         });
     }

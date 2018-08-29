@@ -3,6 +3,7 @@
 @section('content')
 <?php
   use App\User;
+  use App\Department;
 ?>
 <div class="container">
   <div class="panel panel-default">
@@ -100,16 +101,21 @@
   </div>
   <div class="panel panel-default">
     <div class="sub-panel-title panel-heading">
-      <a href="{{route('panel.departments.create', ['hospital_id' => $hospital->id])}}" class="btn btn-primary sub-panel-add"><i class="fa fa-plus"></i></a>
+      @if($hospital->hasPermission())
+        <a href="{{route('panel.departments.create', ['hospital_id' => $hospital->id])}}" class="btn btn-primary sub-panel-add"><i class="fa fa-plus"></i></a>
+      @endif
       {{__('departments.index_title')}}
     </div>
-    @if(sizeof($hospital->departments))
+    @if(sizeof($hospital->departments()))
       <table class="table">
         <thead>
           <tr>
             <th>{{__('departments.row')}}</th>
             <th>{{__('departments.title')}}</th>
             <th>{{__('departments.status')}}</th>
+            @if(Auth::user()->isDoctor() || Auth::user()->isNurse())
+              <th>{{__('department_users.join_status')}}</th>
+            @endif
             <th>{{__('departments.operation')}}</th>
           </tr>
         </thead>
@@ -119,18 +125,31 @@
               <td>{{$department->id}}</td>
               <td><a href="{{route('panel.departments.show', ['department' => $department])}}">{{$department->title}}</a></td>
               <td>{{$department->status_str}}</td>
-              @if(Auth::user()->isAdmin() || Auth::user()->isManager())
-                <td>
-                  <form action="{{route('panel.departments.destroy', ['department' => $department])}}" style="display: inline" method="POST" class="trash-icon">
-                    {{ method_field('DELETE') }}
-                    {{ csrf_field() }}
-                    <button type="submit" class="btn btn-danger">{{__('departments.remove')}}</button>
-                  </form>
-                  <a class="btn btn-primary" href="{{route('panel.hospitals.edit', ['hospital' => $hospital])}}">{{ __('departments.edit') }}</a>
-                </td>
-              @else
-                <td>-</td>
+              @if(Auth::user()->isDoctor() || Auth::user()->isNurse())
+                @if($department->lastRequest())
+                  <td>{{$department->lastRequest()->status_str}}</td>
+                @else
+                  <td> - </td>
+                @endif
               @endif
+              <td>
+                @if(Auth::user()->isAdmin() || Auth::user()->isManager())
+                    <form action="{{route('panel.departments.destroy', ['department' => $department])}}" style="display: inline" method="POST" class="trash-icon">
+                      {{ method_field('DELETE') }}
+                      {{ csrf_field() }}
+                      <button type="submit" class="btn btn-danger">{{__('departments.remove')}}</button>
+                    </form>
+                    <a class="btn btn-primary" href="{{route('panel.hospitals.edit', ['hospital' => $hospital])}}">{{ __('departments.edit') }}</a>
+                @elseif(Auth::user()->isDoctor() || Auth::user()->isNurse())
+                  @if($department->canJoin())
+                    <a class="btn btn-primary" href="{{route('panel.department_users.send', ['user' => Auth::user(), 'department' => $department])}}">{{ __('department_users.send') }}</a>
+                  @else
+                    -
+                  @endif
+                @else
+                  -
+                @endif
+              </td>
             </tr>
           @endforeach
         </tbody>

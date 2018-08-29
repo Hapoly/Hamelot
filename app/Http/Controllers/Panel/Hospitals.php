@@ -45,8 +45,6 @@ class Hospitals extends Controller{
     ]);
   }
   public function show(Hospital $hospital){
-    if(!$hospital->hasPermission())
-      abort(404);
     return view('panel.hospitals.show', ['hospital' => $hospital]);
   }
   public function create(){

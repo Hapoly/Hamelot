@@ -87,6 +87,8 @@ class Permission
         'panel.permissions.index'                       => [ 1, 2, 3, 4, 5 ],
         'panel.permissions.destroy'                     => [ 1, 2, 3, 4, 5 ],
 
+        'panel.department_users.send'                   => [ 3, 4 ],
+
     ];
     public function handle(Request $request, Closure $next){
         $route = $request->route()->getName();

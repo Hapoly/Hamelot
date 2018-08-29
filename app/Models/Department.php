@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Auth;
 use User;
+use App\Models\DepartmentUser;
 
 class Department extends Model
 {
@@ -38,6 +39,9 @@ class Department extends Model
     public function users(){
         return $this->belongsToMany('App\User');
     }
+    public function requests(){
+        return $this->hasMany('App\Models\DepartmentUser', 'department_id');
+    }
     public function patients(){
         return $this->users()->where('group_code', User::G_PATIENT);
     }
@@ -58,5 +62,30 @@ class Department extends Model
         if(Auth::user()->isPatient() || Auth::user()->isNurse() || Auth::user()->isDoctor())
             return false;
         return false;
+    }
+
+    public function joined(){
+        return $this->users()->where('users.id', Auth::user()->id)->where('department_user.status', DepartmentUser::ACCEPTED)->first() != null;
+    }
+    public function pending(){
+        return $this->users()->where('users.id', Auth::user()->id)->where('department_user.status', DepartmentUser::PENDNIG)->first() != null;
+    }
+    public function hasRequest(){
+        return $this->users()->where('users.id', Auth::user()->id)->first() != null;
+    }
+    public function lastRequest(){
+        return $this->requests()->where([
+            'user_id'   => Auth::user()->id,
+        ])->orderBy('created_at', 'desc')->first();
+    }
+    public function canJoin(){
+        $lastRequest = $this->lastRequest();
+        if($lastRequest){
+            if($lastRequest->status == DepartmentUser::REFUSED || $lastRequest->status == DepartmentUser::CANCELED)
+                return true;
+            else
+                return false;
+        }else
+            return true;
     }
 }
