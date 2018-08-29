@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Auth;
 use App\User;
+use App\Models\DepartmentUser;
 
 class Hospital extends Model {
     protected $primary = 'id';
@@ -42,22 +43,28 @@ class Hospital extends Model {
             return url($this->image);
     }
 
-    public static function fetch(){
+    public static function fetch($joined){
         switch(Auth::user()->group_code){
             case User::G_ADMIN:
                 return (new Hospital);
             case User::G_MANAGER:
-                return Hospital::whereHas('users', function($query){
-                    return $query->where('users.id', Auth::user()->id);
-                });
+                if($joined)
+                    return Hospital::whereHas('users', function($query){
+                        return $query->where('users.id', Auth::user()->id);
+                    });
+                else
+                    return new Hospital;
             case User::G_DOCTOR:
             case User::G_NURSE:
             case USER::G_PATIENT:
-                return Hospital::whereHas('departments', function($query){
-                    return $query->whereHas('users', function($query){
-                        return $query->where('users.id', Auth::user()->id);
+                if($joined)
+                    return Hospital::whereHas('departments', function($query){
+                        return $query->whereHas('requests', function($query){
+                            return $query->where('department_user.user_id', Auth::user()->id)->where('status', DepartmentUser::ACCEPTED);
+                        });
                     });
-                });
+                else
+                    return new Hospital;
         }
     }
 }
