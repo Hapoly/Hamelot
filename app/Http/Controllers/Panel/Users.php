@@ -114,7 +114,7 @@ class Users extends Controller{
       'doctor_degrees'  => ConstValue::doctor_degrees()->get(),
       'nurse_fields'    => ConstValue::nurse_fields()->get(),
       'nurse_degrees'   => ConstValue::nurse_degrees()->get(),
-      'hospitals'       => Hospital::fetch()->get(),
+      'hospitals'       => Hospital::fetch(true)->get(),
       'filters'         => [
         'first_name'    => $request->first_name,
         'last_name'     => $request->last_name,

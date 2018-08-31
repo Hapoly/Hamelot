@@ -63,6 +63,11 @@
 			<li>
 				<a href="{{route('panel.hospitals.index')}}"> لیست بیمارستان ها</a>
 			</li>
+			@if(Auth::user()->isDoctor() || Auth::user()->isNurse())
+				<li>
+					<a href="{{route('panel.hospitals.index', ['joined' => true])}}"> بیمارستان‌های من</a>
+				</li>
+			@endif
 		</ul>
 	</li>
 	<li>

@@ -3,7 +3,9 @@
 @section('content')
 <div class="row" style="margin-bottom:50px;">
   <div class="col-md-4 col-sm-3">
-  <a href="{{route('panel.hospitals.create')}}" class="btn add"> بیمارستان جدید</a>
+    @if(Auth::user()->isAdmin() || Auth::user()->isManager())
+      <a href="{{route('panel.hospitals.create')}}" class="btn add"> بیمارستان جدید</a>
+    @endif
   </div>
     <div class="col-md-8 col-sm-9">
       <form class="navbar-form" role="search" style="margin:auto;width:100%;direction:ltr;float:right" action="{{route('panel.hospitals.index',['sort' => $sort])}}" method="get">
