@@ -16,7 +16,7 @@ use App\Http\Requests\DepartmentRequest;
 
 class Departments extends Controller{
   public function index(Request $request){
-    $departments = Department::get();
+    $departments = Department::fetch($joined=$request->input('joined', false));
     $links = '';
     $sort = $request->input('sort', '###');
     $search = $request->input('search', '###');

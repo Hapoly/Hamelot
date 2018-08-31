@@ -214,4 +214,7 @@ class User extends Authenticatable
     public function requests(){
         return $this->hasMany('App\Models\Permission', 'patient_id');
     }
+    public function departmenReuqests(){
+        return $this->hasMany('App\Models\DepartmentUser', 'user_id');
+    }
 }

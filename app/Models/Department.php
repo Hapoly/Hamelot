@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Auth;
-use User;
+use App\User;
 use App\Models\DepartmentUser;
 
 class Department extends Model
@@ -19,8 +19,10 @@ class Department extends Model
     public function getStatusStrAttribute(){
         return __('departments.status_str.' . $this->status);
     }
-    public static function get(){
-        if(Auth::user()->isAdmin())
+    public static function fetch($joined){
+        if(!$joined)
+            return (new Department);
+        else if(Auth::user()->isAdmin())
             return (new Department);
         else if(Auth::user()->isManager())
             return Department::whereHas('hospital', function($query){

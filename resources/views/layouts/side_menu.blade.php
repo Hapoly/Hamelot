@@ -86,6 +86,11 @@
 			<li>
 				<a href="{{route('panel.departments.index')}}"> لیست بخش ها</a>
 			</li>
+			@if(Auth::user()->isDoctor() || Auth::user()->isNurse())
+				<li>
+					<a href="{{route('panel.departments.index', ['joined' => true])}}"> بخش‌های من</a>
+				</li>
+			@endif
 		</ul>
 	</li>
 	<li>

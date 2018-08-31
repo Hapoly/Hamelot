@@ -43,6 +43,17 @@ class Hospital extends Model {
             return url($this->image);
     }
 
+    public function getJoinedAttribute(){
+        if(Auth::user()->isManager())
+            return $this->users()->where('users.id', Auth::user()->id)->first() != null;
+        else if(Auth::user()->isAdmin() || Auth::user()->isPatient())
+            return false;
+        else
+            return $this->departments()->whereHas('users', function($query){
+                return $query->where(['users.id'=> Auth::user()->id]);
+            })->first() != null;
+    }
+
     public static function fetch($joined){
         switch(Auth::user()->group_code){
             case User::G_ADMIN:
