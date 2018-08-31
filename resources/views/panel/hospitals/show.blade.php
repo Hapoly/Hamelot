@@ -39,7 +39,7 @@
         </tbody>
       </table>
     </div>
-    @if(Auth::user()->isAdmin())
+    @if($hospital->has_permission)
       <div class="row">
         <div class="col-md-6" style="text-align: center">
           <a href="{{route('panel.hospitals.edit', ['hospital' => $hospital])}}" class="btn btn-primary" role="button">{{__('hospitals.edit')}}</a>
@@ -102,7 +102,7 @@
   </div>
   <div class="panel panel-default">
     <div class="sub-panel-title panel-heading">
-      @if($hospital->hasPermission())
+      @if($hospital->has_permission)
         <a href="{{route('panel.departments.create', ['hospital_id' => $hospital->id])}}" class="btn btn-primary sub-panel-add"><i class="fa fa-plus"></i></a>
       @endif
       {{__('departments.index_title')}}
@@ -134,7 +134,7 @@
                 @endif
               @endif
               <td>
-                @if(Auth::user()->isAdmin() || Auth::user()->isManager())
+                @if($hospital->has_permission)
                     <form action="{{route('panel.departments.destroy', ['department' => $department])}}" style="display: inline" method="POST" class="trash-icon">
                       {{ method_field('DELETE') }}
                       {{ csrf_field() }}

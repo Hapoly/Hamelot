@@ -24,11 +24,13 @@ class Hospital extends Model {
     public function users(){
         return $this->belongsToMany('App\User');
     }
-    public function hasPermission(){
+    public function getHasPermissionAttribute(){
         if(Auth::user()->isAdmin())
             return true;
         else if(Auth::user()->isManager())
-            return $this->users()->where('user_id', Auth::user()->id)->first() != null;
+            return $this->users()->where('users.id', Auth::user()->id)->first() != null;
+        else
+            return false;
     }
     public function departments(){
         return $this->hasMany('App\Models\Department');

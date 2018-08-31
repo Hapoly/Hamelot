@@ -102,7 +102,7 @@
   </div>
   <div class="panel panel-default">
     <div class="sub-panel-title panel-heading">
-      @if($hospital->hasPermission())
+      @if($hospital->has_permission)
         <a href="{{route('panel.departments.create', ['hospital_id' => $hospital->id])}}" class="btn btn-primary sub-panel-add"><i class="fa fa-plus"></i></a>
       @endif
       {{__('departments.index_title')}}
