@@ -10,7 +10,7 @@ use App\Models\DepartmentUser;
 class Hospital extends Model {
     protected $primary = 'id';
     protected $table = 'hospitals';
-    protected $fillable = ['title', 'address', 'phone', 'mobile', 'image', 'status', 'city_id'];
+    protected $fillable = ['title', 'address', 'phone', 'mobile', 'image', 'status'];
 
     const S_ACTIVE      = 1;
     const S_INACTIVE    = 2;
@@ -23,9 +23,6 @@ class Hospital extends Model {
     }
     public function users(){
         return $this->belongsToMany('App\User');
-    }
-    public function city(){
-        return $this->belongsTo('App\Models\City');
     }
     public function getHasPermissionAttribute(){
         if(Auth::user()->isAdmin())
