@@ -116,37 +116,41 @@
 	</li>
 	@if(Auth::user()->isManager() || Auth::user()->isAdmin())
 		<li>
-			<a href="#requestSubmenu" data-toggle="collapse" aria-expanded="false">
+			<a href="#department-requests" data-toggle="collapse" aria-expanded="false">
 				<i class="fa fa-h-square" aria-hidden="false"></i>
 				<span>
 				درخواست‌‌های عضویت
 				</span>
 			</a>
-			<ul class="collapse list-unstyled" id="requestSubmenu">
+			<ul class="collapse list-unstyled" id="department-requests">
 				<li>
 					<a href="{{route('panel.department_users.index')}}"> لیست درخواست‌ها</a>
 				</li>
 			</ul>
 		</li>
 	@endif
-	@if(!Auth::user()->isManager())
-		<li>
-			<a href="#requestSubmenu" data-toggle="collapse" aria-expanded="false">
-				<i class="fa fa-h-square" aria-hidden="false"></i>
-				<span>
-				درخواست‌های دسترسی
-				</span>
-			</a>
-			<ul class="collapse list-unstyled" id="requestSubmenu">
-				@if(!Auth::user()->isPatient())
-					<li>
-						<a href="{{route('panel.permissions.create')}}"> درخواست جدید</a>
-					</li>
-				@endif
+	<li>
+		<a href="#patient-requests" data-toggle="collapse" aria-expanded="false">
+			<i class="fa fa-h-square" aria-hidden="false"></i>
+			<span>
+			درخواست‌های دسترسی
+			</span>
+		</a>
+		<ul class="collapse list-unstyled" id="patient-requests">
+			@if(!Auth::user()->isPatient() && !Auth::user()->isManager())
+				<li>
+					<a href="{{route('panel.permissions.create')}}"> درخواست جدید</a>
+				</li>
+			@endif
+			@if(!Auth::user()->isAdmin())
 				<li>
 					<a href="{{route('panel.permissions.index')}}">  درخواست‌های من</a>
 				</li>
-			</ul>
-		</li>
-	@endif
+			@else
+				<li>
+					<a href="{{route('panel.permissions.index')}}">  درخواست‌ها</a>
+				</li>
+			@endif
+		</ul>
+	</li>
 </ul>

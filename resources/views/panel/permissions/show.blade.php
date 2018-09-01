@@ -6,9 +6,11 @@
 ?>
 <div class="container">
   <div class="panel panel-default">
-    <div class="row">
-      <img src="{{$permission->patient->patient->profile_url}}" class="center" style="width: 25%">
-    </div>
+    @if(Auth::user()->isPatient() || Auth::user()->isDoctor() || Auth::user()->isNurse())
+      <div class="row">
+        <img src="{{$permission->patient->patient->profile_url}}" class="center" style="width: 25%">
+      </div>
+    @endif
     <div class="row">
       @if(Auth::user()->isDoctor() || Auth::user()->isNurse())
         <h3>{{ $permission->patient->first_name }} {{ $permission->patient->last_name }}</h3>
@@ -77,14 +79,51 @@
               <td>{{__('users.msc')}}</td>
               <td>{{$permission->requester->msc_str}}</td>
             </tr>
+          @else
+            <tr>
+              <th></th>
+              <th>{{__('permissions.requester_id')}}</th>
+              <th>{{__('permissions.patient_id')}}</th>
+            </tr>
+            <tr>
+              <td>{{__('users.first_name')}}</td>
+              <td>{{$permission->requester->first_name}}</td>
+              <td>{{$permission->patient->first_name}}</td>
+            </tr>
+            <tr>
+              <td>{{__('users.last_name')}}</td>
+              <td>{{$permission->requester->last_name}}</td>
+              <td>{{$permission->patient->last_name}}</td>
+            </tr>
+            <tr>
+              <td>{{__('users.status')}}</td>
+              <td>{{$permission->requester->status_str}}</td>
+              <td>{{$permission->patient->status_str}}</td>
+            </tr>
+            <tr>
+              <td>{{__('users.field')}}</td>
+              <td>{{$permission->requester->field_str}}</td>
+              <td>{{$permission->patient->field_str}}</td>
+            </tr>
+            <tr>
+              <td>{{__('users.degree')}}</td>
+              <td>{{$permission->requester->degree_str}}</td>
+              <td>{{$permission->patient->degree_str}}</td>
+            </tr>
+            <tr>
+              <td>{{__('users.msc')}}</td>
+              <td>{{$permission->requester->msc_str}}</td>
+              <td>{{$permission->patient->msc_str}}</td>
+            </tr>
           @endif
           <tr>
               <td>{{__('users.status')}}</td>
-              <td>{{$permission->status_str}}</td>
+              <td colspan="2">{{$permission->status_str}}</td>
           </tr>
         </tbody>
       </table>
     </div>
+    @if($permission->edit_access)
     <div class="row">
       <form action="{{route('panel.permissions.inline_update', ['permission' => $permission])}}" method="post">
         {{csrf_field()}}
@@ -108,6 +147,7 @@
         </div>
       </form>
     </div>
+    @endif
   </div>
 </div>
 @endsection

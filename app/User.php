@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use App\Models\Permission;
 use App\Models\Department;
+use App\Models\DepartmentUser;
 use Auth;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -83,7 +84,7 @@ class User extends Authenticatable
     }
 
     public function departments(){
-        return $this->belongsToMany('App\Models\Department');
+        return $this->belongsToMany('App\Models\Department')->where('department_user.status', DepartmentUser::ACCEPTED);
     }
 
     public function patients(){

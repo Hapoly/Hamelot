@@ -68,7 +68,32 @@ class Permission extends Model
         return Auth::user()->isAdmin() || Auth::user()->id == $this->patient_id || Auth::user()->id == $this->requester_id;
     }
 
+    public function getEditAccessAttribute(){
+        if(Auth::user()->isAdmin())
+            return true;
+        else if(Auth::user()->isManager())
+            return false;
+        else if(Auth::user()->isDoctor() || Auth::user()->isNurse()){
+            return $this->requester_id == Auth::user()->id;
+        }else{
+            return $this->patient_id == Auth::user()->id;
+        }
+    }
+
     public static function fetch(){
-        return Permission::where('patient_id', Auth::user()->id)->orWhere('requester_id' , Auth::user()->id);
+        if(Auth::user()->isAdmin())
+            return new Permission;
+        else if(Auth::user()->isManager()){
+            return Permission::whereHas('requester', function($query){
+                return $query->whereHas('departments', function($query){
+                    return $query->whereHas('hospital', function($query){
+                        return $query->whereHas('users', function($query){
+                            return $query->where('users.id', Auth::user()->id);
+                        });
+                    });
+                });
+            });
+        }else
+            return Permission::where('patient_id', Auth::user()->id)->orWhere('requester_id' , Auth::user()->id);
     }
 }

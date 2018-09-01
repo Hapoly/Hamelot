@@ -3,7 +3,7 @@
 @section('content')
 <div class="row" style="margin-bottom:50px;">
   <div class="col-md-4 col-sm-3">
-    @if(!Auth::user()->isPatient())
+    @if(!Auth::user()->isPatient() && !Auth::user()->isManager() && !Auth::user()->isAdmin())
       <a href="{{route('panel.permissions.create')}}" class="btn add"> دسترسی جدید</a>
     @endif
   </div>
