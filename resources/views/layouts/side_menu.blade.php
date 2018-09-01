@@ -138,8 +138,13 @@
 				</span>
 			</a>
 			<ul class="collapse list-unstyled" id="requestSubmenu">
+				@if(!Auth::user()->isPatient())
+					<li>
+						<a href="{{route('panel.permissions.create')}}"> درخواست جدید</a>
+					</li>
+				@endif
 				<li>
-					<a href="{{route('panel.permissions.create')}}"> درخواست جدید</a>
+					<a href="{{route('panel.permissions.index')}}">  درخواست‌های من</a>
 				</li>
 			</ul>
 		</li>

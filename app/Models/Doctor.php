@@ -14,7 +14,7 @@ class Doctor extends Model
 
     public function getMscStrAttribute(){
         if($this->msc == 'NuLL')
-            return '';
+            return '-';
         else
             return $this->msc;
     }

@@ -26,11 +26,15 @@
           </tr>
           <tr>
             <td>{{__('users.field')}}</td>
-            <td>{{$user->doctor->field_str}}</td>
+            <td>{{$user->field_str}}</td>
           </tr>
           <tr>
             <td>{{__('users.degree')}}</td>
-            <td>{{$user->doctor->degree_str}}</td>
+            <td>{{$user->degree_str}}</td>
+          </tr>
+          <tr>
+            <td>{{__('users.msc')}}</td>
+            <td>{{$user->msc_str}}</td>
           </tr>
         </tbody>
       </table>
@@ -46,51 +50,53 @@
       </div>
     @endif
   </div>
-  <div class="panel panel-default">
-    <div class="sub-panel-title panel-heading">
-      {{__('departments.index_title')}}
-    </div>
-    @if(sizeof($user->departments))
-      <table class="table">
-        <thead>
-          <tr>
-            <th>{{__('departments.row')}}</th>
-            <th>{{__('departments.title')}}</th>
-            <th>{{__('departments.status')}}</th>
-            <th>{{__('departments.operation')}}</th>
-          </tr>
-        </thead>
-        <tbody>
-          @foreach($user->departments as $department)
-            <tr>
-              <td>{{$department->id}}</td>
-              <td><a href="{{route('panel.departments.show', ['department' => $department])}}">{{$department->title}}</a></td>
-              <td>{{$department->status_str}}</td>
-              @if($department->hasEditPermission())
-                <td>
-                  <form action="{{route('panel.departments.destroy', ['department' => $department])}}" style="display: inline" method="POST" class="trash-icon">
-                    {{ method_field('DELETE') }}
-                    {{ csrf_field() }}
-                    <button type="submit" class="btn btn-danger">{{__('departments.remove')}}</button>
-                  </form>
-                  <a class="btn btn-primary" href="{{route('panel.departments.edit', ['department' => $department])}}">{{ __('departments.edit') }}</a>
-                </td>
-              @else
-                <td>
-                  {{__('departments.no_access')}}
-                </td>
-              @endif
-            </tr>
-          @endforeach
-        </tbody>
-      </table>
-    @else
-      <div class="row">
-        <div class="col-md-12" style="text-align: center">
-          {{__('departments.not_found')}}
-        </div>
+  @if($user->permission_to_departments)
+    <div class="panel panel-default">
+      <div class="sub-panel-title panel-heading">
+        {{__('departments.index_title')}}
       </div>
-    @endif
-  </div>
+      @if(sizeof($user->departments))
+        <table class="table">
+          <thead>
+            <tr>
+              <th>{{__('departments.row')}}</th>
+              <th>{{__('departments.title')}}</th>
+              <th>{{__('departments.status')}}</th>
+              <th>{{__('departments.operation')}}</th>
+            </tr>
+          </thead>
+          <tbody>
+            @foreach($user->departments as $department)
+              <tr>
+                <td>{{$department->id}}</td>
+                <td><a href="{{route('panel.departments.show', ['department' => $department])}}">{{$department->title}}</a></td>
+                <td>{{$department->status_str}}</td>
+                @if($department->hasEditPermission())
+                  <td>
+                    <form action="{{route('panel.departments.destroy', ['department' => $department])}}" style="display: inline" method="POST" class="trash-icon">
+                      {{ method_field('DELETE') }}
+                      {{ csrf_field() }}
+                      <button type="submit" class="btn btn-danger">{{__('departments.remove')}}</button>
+                    </form>
+                    <a class="btn btn-primary" href="{{route('panel.departments.edit', ['department' => $department])}}">{{ __('departments.edit') }}</a>
+                  </td>
+                @else
+                  <td>
+                    {{__('departments.no_access')}}
+                  </td>
+                @endif
+              </tr>
+            @endforeach
+          </tbody>
+        </table>
+      @else
+        <div class="row">
+          <div class="col-md-12" style="text-align: center">
+            {{__('departments.not_found')}}
+          </div>
+        </div>
+      @endif
+    </div>
+  @endif
 </div>
 @endsection

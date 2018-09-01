@@ -4,80 +4,79 @@
 <?php
   use App\User;
 ?>
-<div class="container">
+<div class="filter-panel">
   <div class="row justify-content-center">
     <div class="col-8">
       <div class="panel panel-default">
         <div class="panel-heading">جستجو</div>
           <div class="panel-body">
             <form>
-            <div class="row">
-              <div class="col-md-6">
-                <div class="input-group">
-                  <span class="input-group-addon">نام خانوادگی</span>
-                  <input type="text" class="form-control" value="{{isset($filters)? $filters['last_name']: ''}}" name="last_name" placeholder="ناصحی">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="input-group">
+                    <span class="input-group-addon">نام خانوادگی</span>
+                    <input type="text" class="form-control" value="{{isset($filters)? $filters['last_name']: ''}}" name="last_name" placeholder="ناصحی">
+                  </div>
+                </div>
+                <div class="col-md-6">            
+                  <div class="input-group">
+                    <span class="input-group-addon">نام</span>
+                    <input type="text" class="form-control" value="{{isset($filters)? $filters['first_name']: ''}}" name="first_name" placeholder="احمد">
+                  </div>
                 </div>
               </div>
-              <div class="col-md-6">            
-                <div class="input-group">
-                  <span class="input-group-addon">نام</span>
-                  <input type="text" class="form-control" value="{{isset($filters)? $filters['first_name']: ''}}" name="first_name" placeholder="احمد">
+              <div class="row">
+                <div class="col-md-6" id="gender-input">
                 </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-6" id="gender-input">
-              </div>
-              <div class="col-md-6">
-                <div class="form-group">
-                  <select class="form-control" name="group_code" id="group-code" style="width: 100%">
-                    <option value="0">تمام گروه‌های کاربری</option>
-                    <option {{isset($filters)? ($filters['group_code'] == User::G_ADMIN? 'selected': ''): ''}} value="{{User::G_ADMIN}}">ادمین</option>
-                    <option {{isset($filters)? ($filters['group_code'] == User::G_MANAGER? 'selected': ''): ''}} value="{{User::G_MANAGER}}">مدیریت</option>
-                    <option {{isset($filters)? ($filters['group_code'] == User::G_DOCTOR? 'selected': ''): ''}} value="{{User::G_DOCTOR}}">دکتر</option>
-                    <option {{isset($filters)? ($filters['group_code'] == User::G_NURSE? 'selected': ''): ''}} value="{{User::G_NURSE}}">پرستار</option>
-                    <option {{isset($filters)? ($filters['group_code'] == User::G_PATIENT? 'selected': ''): ''}} value="{{User::G_PATIENT}}">بیمار</option>
-                  </select>
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-6" id="departments">
-                @if(isset($filters['hospital']))
+                <div class="col-md-6">
                   <div class="form-group">
-                    <select class="form-control" name="department_id" style="width: 100%">
-                      <option value="0" {{$filters['department_id'] ? 'selected': ''}}>تمام بخش‌ها</option>
-                      @foreach($filters['hospital']->departments as $department)
-                        <option value="{{$department->id}}" {{$filters['department_id'] == $department->id? 'selected': ''}}>{{$department->title}}</option>
+                    <select class="form-control" name="group_code" id="group-code" style="width: 100%">
+                      <option value="0">تمام گروه‌های کاربری</option>
+                      <option {{isset($filters)? ($filters['group_code'] == User::G_ADMIN? 'selected': ''): ''}} value="{{User::G_ADMIN}}">ادمین</option>
+                      <option {{isset($filters)? ($filters['group_code'] == User::G_MANAGER? 'selected': ''): ''}} value="{{User::G_MANAGER}}">مدیریت</option>
+                      <option {{isset($filters)? ($filters['group_code'] == User::G_DOCTOR? 'selected': ''): ''}} value="{{User::G_DOCTOR}}">دکتر</option>
+                      <option {{isset($filters)? ($filters['group_code'] == User::G_NURSE? 'selected': ''): ''}} value="{{User::G_NURSE}}">پرستار</option>
+                      <option {{isset($filters)? ($filters['group_code'] == User::G_PATIENT? 'selected': ''): ''}} value="{{User::G_PATIENT}}">بیمار</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6" id="departments">
+                  @if(isset($filters['hospital']))
+                    <div class="form-group">
+                      <select class="form-control" name="department_id" style="width: 100%">
+                        <option value="0" {{$filters['department_id'] ? 'selected': ''}}>تمام بخش‌ها</option>
+                        @foreach($filters['hospital']->departments as $department)
+                          <option value="{{$department->id}}" {{$filters['department_id'] == $department->id? 'selected': ''}}>{{$department->title}}</option>
+                        @endforeach
+                      </select>
+                    </div>
+                  @endif
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <select class="form-control" name="hospital_id" id="hospital-id" style="width: 100%">
+                      <option value="0">همه بیمارستان ها</option>
+                      @foreach($hospitals as $hospital)
+                        <option value="{{$hospital->id}}" {{$filters['hospital_id'] == $hospital->id? 'selected': ''}}>{{$hospital->title}}</option>
                       @endforeach
                     </select>
                   </div>
-                @endif
-              </div>
-              <div class="col-md-6">
-                <div class="form-group">
-                  <select class="form-control" name="hospital_id" id="hospital-id" style="width: 100%">
-                    <option value="0">همه بیمارستان ها</option>
-                    @foreach($hospitals as $hospital)
-                      <option value="{{$hospital->id}}" {{$filters['hospital_id'] == $hospital->id? 'selected': ''}}>{{$hospital->title}}</option>
-                    @endforeach
-                  </select>
                 </div>
               </div>
-            </div>
-            <div class="row" id="more-inputs"></div>
-            <div class="row" style="margin-bottom:2px;margin-top:2px;">
-              <div class="col-md-12">
-                <button class="btn btn-info" type="submit">{{__('users.search')}}</a>
+              <div class="row" id="more-inputs"></div>
+              <div class="row" style="margin-bottom:2px;margin-top:2px;">
+                <div class="col-md-12">
+                  <button class="btn btn-info" type="submit">{{__('users.search')}}</a>
+                </div>
               </div>
-            </div>
             </form>
           </div>
         </div>
       </div>
     </div>
   </div>
-  <br />
   <div class="row">
     @if(sizeof($users))
       <div class="col-10">

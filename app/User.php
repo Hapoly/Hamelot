@@ -54,6 +54,9 @@ class User extends Authenticatable
     protected $fillable = [
         'username', 'first_name', 'last_name', 'group_code', 'status', 'password',
     ];
+    protected $appends = [
+        'permission_to_info', 'permission_to_history', 'permission_to_departments',
+    ];
 
     /**
      * The attributes that should be hidden for arrays.
@@ -175,13 +178,44 @@ class User extends Authenticatable
         }
         return false;
     }
-    public function getPermissionToHistoryAttribute(User $user){
-        switch($this->group_code){
+    public function getPermissionToHistoryAttribute(){
+        switch(Auth::user()->group_code){
             case User::G_ADMIN:
                 return true;
             case User::G_MANAGER:
                 return false;
+            case User::G_DOCTOR:
+            case User::G_NURSE:
+                return User::whereHas('permissions', function($query){
+                    return $query->where([
+                            ['requester_id' => Auth::user()->id],
+                            ['status'       => Permission::ACCEPTED]]);
+                })->first() != null;
+            case User::G_PATIENT:
+                return $this->id == Auth::user()->id;
         }
+        return false;
+    }
+
+    public function getPermissionToDepartmentsAttribute(){
+        switch(Auth::user()->group_code){
+            case User::G_ADMIN:
+                return true;
+            case User::G_MANAGER:
+                return User::whereHas('departments', function($query){
+                    return $query->whereHas('hospital', function($query){
+                        return $query->whereHas('users', function($query){
+                            return $query->where('users.id', Auth::user()->id);
+                        });
+                    });
+                })->first() != null;
+            case User::G_DOCTOR:
+            case User::G_NURSE:
+                return $this->id == Auth::user()->id;
+            case User::G_PATIENT:
+                return false;
+        }
+        return false;
     }
 
     public static function fetch(){
@@ -215,4 +249,51 @@ class User extends Authenticatable
     public function departmenReuqests(){
         return $this->hasMany('App\Models\DepartmentUser', 'user_id');
     }
+
+    /**
+     * doctors and nurses attributes
+     */
+    public function getFieldStrAttribute(){
+        if($this->isDoctor())
+            return $this->doctor->field_str;
+        else if($this->isNurse())
+            return $this->nurse->field_str;
+        return null;
+    }
+    public function getDegreeStrAttribute(){
+        if($this->isDoctor())
+            return $this->doctor->degree_str;
+        else if($this->isNurse())
+            return $this->nurse->degree_str;
+        return null;
+    }
+    public function getMscStrAttribute(){
+        if($this->isDoctor())
+            return $this->doctor->msc_str;
+        else if($this->isNurse())
+            return $this->nurse->msc_str;
+        return null;
+    }
+    public function getFieldAttribute(){
+        if($this->isDoctor())
+            return $this->doctor->field;
+        else if($this->isNurse())
+            return $this->nurse->field;
+        return null;
+    }
+    public function getDegreeAttribute(){
+        if($this->isDoctor())
+            return $this->doctor->degree;
+        else if($this->isNurse())
+            return $this->nurse->degree;
+        return null;
+    }
+    public function getMscAttribute(){
+        if($this->isDoctor())
+            return $this->doctor->msc;
+        else if($this->isNurse())
+            return $this->nurse->msc;
+        return null;
+    }
+
 }

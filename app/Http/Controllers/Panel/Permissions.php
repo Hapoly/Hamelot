@@ -101,8 +101,4 @@ class Permissions extends Controller{
         }else
             abort(404);
     }
-
-    public function showProfile(Request $request, User $user){
-        return view('panel.permissions.show_profile', ['user' => $user]);
-    }
 }

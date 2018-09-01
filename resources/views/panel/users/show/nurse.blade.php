@@ -26,11 +26,15 @@
           </tr>
           <tr>
             <td>{{__('users.field')}}</td>
-            <td>{{$user->nurse->field_str}}</td>
+            <td>{{$user->field_str}}</td>
           </tr>
           <tr>
             <td>{{__('users.degree')}}</td>
-            <td>{{$user->nurse->degree_str}}</td>
+            <td>{{$user->degree_str}}</td>
+          </tr>
+          <tr>
+            <td>{{__('users.msc')}}</td>
+            <td>{{$user->msc_str}}</td>
           </tr>
         </tbody>
       </table>

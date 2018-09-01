@@ -3,7 +3,9 @@
 @section('content')
 <div class="row" style="margin-bottom:50px;">
   <div class="col-md-4 col-sm-3">
-  <a href="{{route('panel.permissions.create')}}" class="btn add"> دسترسی جدید</a>
+    @if(!Auth::user()->isPatient())
+      <a href="{{route('panel.permissions.create')}}" class="btn add"> دسترسی جدید</a>
+    @endif
   </div>
     <div class="col-md-8 col-sm-9">
       <form class="navbar-form" role="search" style="margin:auto;width:100%;direction:ltr;float:right" action="{{route('panel.permissions.index',['sort' => $sort])}}" method="get">
@@ -59,7 +61,7 @@
                 @if($permission->pending())
                   <button type="submit" name="action" value="accept" class="btn btn-primary">{{__('permissions.accept')}}</button>
                   <button type="submit" name="action" value="refuse" class="btn btn-danger">{{__('permissions.refuse')}}</button>
-                @elsif($permission->accepted())
+                @elseif($permission->accepted())
                   <button type="submit" name="action" value="cancel" class="btn btn-warning">{{__('permissions.cancel')}}</button>
                 @endif
               @endif

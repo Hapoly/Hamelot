@@ -10,42 +10,77 @@
       <img src="{{$permission->patient->patient->profile_url}}" class="center" style="width: 25%">
     </div>
     <div class="row">
-      <h2>{{ $permission->patient->first_name }} {{ $permission->patient->last_name }}</h2>
+      @if(Auth::user()->isDoctor() || Auth::user()->isNurse())
+        <h3>{{ $permission->patient->first_name }} {{ $permission->patient->last_name }}</h3>
+      @elseif(Auth::user()->isPatient())
+        <h3>{{ $permission->requester->first_name }} {{ $permission->requester->last_name }} ({{$permission->requester->group_str}})</h3>
+      @endif
     </div>
     <div class="row">
       <table class="table table-striped">
-        <tbody>
+        <tbody> 
+          @if(Auth::user()->isDoctor() || Auth::user()->isNurse())
+            <tr>
+              <td>{{__('users.first_name')}}</td>
+              <td>{{$permission->patient->first_name}}</td>
+            </tr>
+            <tr>
+              <td>{{__('users.last_name')}}</td>
+              <td>{{$permission->patient->last_name}}</td>
+            </tr>
+            <tr>
+              <td>{{__('users.id_number')}}</td>
+              <td>{{$permission->patient->patient->id_number}}</td>
+            </tr>
+            <tr>
+              <td>{{__('users.status')}}</td>
+              <td>{{$permission->patient->status_str}}</td>
+            </tr>
+            <tr>
+              <td>{{__('users.gender')}}</td>
+              <td>{{$permission->patient->patient->gender_str}}</td>
+            </tr>
+            <tr>
+              <td>{{__('users.birth_date')}}</td>
+              <td>{{$permission->patient->patient->birth_date_str}}</td>
+            </tr>
+            <tr>
+              <td>{{__('users.age')}}</td>
+              <td>{{$permission->patient->patient->age_str}}</td>
+            </tr>
+            <tr>
+              <td>{{__('permissions.status')}}</td>
+              <td>{{$permission->status_str_with_date}}</td>
+            </tr>
+          @elseif(Auth::user()->isPatient())
+            <tr>
+              <td>{{__('users.first_name')}}</td>
+              <td>{{$permission->requester->first_name}}</td>
+            </tr>
+            <tr>
+              <td>{{__('users.last_name')}}</td>
+              <td>{{$permission->requester->last_name}}</td>
+            </tr>
+            <tr>
+              <td>{{__('users.status')}}</td>
+              <td>{{$permission->requester->status_str}}</td>
+            </tr>
+            <tr>
+              <td>{{__('users.field')}}</td>
+              <td>{{$permission->requester->field_str}}</td>
+            </tr>
+            <tr>
+              <td>{{__('users.degree')}}</td>
+              <td>{{$permission->requester->degree_str}}</td>
+            </tr>
+            <tr>
+              <td>{{__('users.msc')}}</td>
+              <td>{{$permission->requester->msc_str}}</td>
+            </tr>
+          @endif
           <tr>
-            <td>{{__('users.first_name')}}</td>
-            <td>{{$permission->patient->first_name}}</td>
-          </tr>
-          <tr>
-            <td>{{__('users.last_name')}}</td>
-            <td>{{$permission->patient->last_name}}</td>
-          </tr>
-          <tr>
-            <td>{{__('users.id_number')}}</td>
-            <td>{{$permission->patient->patient->id_number}}</td>
-          </tr>
-          <tr>
-            <td>{{__('users.status')}}</td>
-            <td>{{$permission->patient->status_str}}</td>
-          </tr>
-          <tr>
-            <td>{{__('users.gender')}}</td>
-            <td>{{$permission->patient->patient->gender_str}}</td>
-          </tr>
-          <tr>
-            <td>{{__('users.birth_date')}}</td>
-            <td>{{$permission->patient->patient->birth_date_str}}</td>
-          </tr>
-          <tr>
-            <td>{{__('users.age')}}</td>
-            <td>{{$permission->patient->patient->age_str}}</td>
-          </tr>
-          <tr>
-            <td>{{__('permissions.status')}}</td>
-            <td>{{$permission->status_str_with_date}}</td>
+              <td>{{__('users.status')}}</td>
+              <td>{{$permission->status_str}}</td>
           </tr>
         </tbody>
       </table>
@@ -58,7 +93,7 @@
             @if($permission->pending())
               <button type="submit" name="action" value="accept" class="btn btn-primary">{{__('permissions.accept')}}</button>
               <button type="submit" name="action" value="refuse" class="btn btn-danger">{{__('permissions.refuse')}}</button>
-            @elsif($permission->accepted())
+            @elseif($permission->accepted())
               <button type="submit" name="action" value="cancel" class="btn btn-warning">{{__('permissions.cancel')}}</button>
             @endif
           @endif

@@ -55,7 +55,7 @@ class Users extends Seeder
             'degree'        => 2,
             'field'         => 2,
             'profile'       => 'NuLL',
-            'gender'        => 20,
+            'gender'        => 19,
         ]);
 
         DB::table('users')->insert([
@@ -71,7 +71,7 @@ class Users extends Seeder
             'degree'        => 2,
             'field'         => 2,
             'profile'       => 'NuLL',
-            'gender'        => 20,
+            'gender'        => 19,
         ]);
 
         /**
