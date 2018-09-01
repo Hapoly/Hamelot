@@ -40,9 +40,17 @@
 					<a href="{{route('panel.users.index', ['group_code' => User::G_PATIENT])}}">  بیماران من</a>
 				</li>
 			@endif
-			@if(!Auth::user()->isAdmin())
+			@if(!Auth::user()->isAdmin() && !Auth::user()->isPatient())
 				<li>
 					<a href="{{route('panel.users.index')}}">  سایر کاربران</a>
+				</li>
+			@endif
+			@if(Auth::user()->isPatient())
+				<li>
+					<a href="{{route('panel.users.index', ['group_code' => User::G_DOCTOR])}}"> پزشکان</a>
+				</li>
+				<li>
+					<a href="{{route('panel.users.index', ['group_code' => User::G_NURSE])}}"> پرستاران</a>
 				</li>
 			@endif
 		</ul>

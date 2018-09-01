@@ -150,11 +150,11 @@ class User extends Authenticatable
                 return true;
             case User::G_MANAGER:
                 if($this->isManager())
-                    return true;
+                    return $this->public == User::T_PUBLIC;
                 else if($this->isAdmin())
                     return false;
                 else if($this->isDoctor() || $this->isNurse())
-                    return true;
+                    return $this->public == User::T_PUBLIC;
                 else
                     return User::whereHas('permissions', function($query){
                         return $query->whereHas('requester', function($query){
@@ -172,8 +172,10 @@ class User extends Authenticatable
             case User::G_PATIENT:
                 if($this->isPatient())
                     return $this->permissions()->where('user_id', $this->id)->where('status', User::ACCEPTED)->first() != null;
+                else if($this->isAdmin() || $this->isManager())
+                    return false;
                 else
-                    return true;
+                    return $this->public == User::T_PUBLIC;
             default:
                 return false;
         }
