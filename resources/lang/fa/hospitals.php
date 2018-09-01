@@ -12,6 +12,8 @@ return [
     'status'            => 'وضعیت',
     'image'             => 'تصویر',
     'operation'         => 'عملیات',
+    'city_id'           => 'شهر',
+    'province_id'       => 'استان',
 
     'status_str'        => [
         '1' => 'فعال',

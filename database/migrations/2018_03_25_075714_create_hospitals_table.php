@@ -20,6 +20,7 @@ class CreateHospitalsTable extends Migration
             $table->string('phone');
             $table->string('mobile');
             $table->string('image');
+            $table->integer('city_id')->index();
             $table->smallInteger('status')->default(1);
             $table->timestamps();
         });

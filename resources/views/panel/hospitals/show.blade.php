@@ -36,6 +36,10 @@
             <td>{{__('hospitals.status')}}</td>
             <td>{{$hospital->status_str}}</td>
           </tr>
+          <tr>
+            <td>{{__('hospitals.city_id')}}</td>
+            <td>{{$hospital->city->title}}</td>
+          </tr>
         </tbody>
       </table>
     </div>
