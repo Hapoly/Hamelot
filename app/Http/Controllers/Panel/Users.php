@@ -131,7 +131,7 @@ class Users extends Controller{
     ]);
   }
   public function show(User $user){
-    if(!Auth::user()->hasPermissionToUser($user))
+    if(!$user->permission_to_info)
       abort(404);
     switch($user->group_code){
       case User::G_ADMIN:

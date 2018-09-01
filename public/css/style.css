@@ -370,10 +370,6 @@ h2{
     MEDIAQUERIES
 ----------------------------------------------------- */
 @media(max-width: 400px){
-    .container{
-        padding-right: 0;
-        padding-left: 0;
-    }
 }
 @media (max-width: 768px) {
     .navbar-collapse.collapse{
@@ -384,9 +380,6 @@ h2{
     }
     .exit{
         border-right: 0;
-    }
-    .container{
-        width: 100%;
     }
     #sidebar {
         min-width: 0px;
@@ -528,9 +521,6 @@ h2{
 }
 /* @media(min-width:) */
 @media (min-width: 768px){
-    .container {
-        width: 90%;
-    }   
     .create-card{
         width:100%;
         margin: auto;
@@ -542,12 +532,6 @@ h2{
         width: 80%;
     }
 }
-.container {
-    margin: auto;
-    /* background-color: #fff;
-    border-color: #e7e7e7;
-    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1); */
-}   
 .accent-color { 
     background: #448AFF !important; 
     color: white;
@@ -637,4 +621,9 @@ h2{
 }
 .exit-col{
     float: left;
+}
+.container {
+    margin: 0;
+    padding: 0;
+    width: 100%;
 }

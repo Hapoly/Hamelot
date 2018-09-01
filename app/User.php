@@ -140,52 +140,50 @@ class User extends Authenticatable
      * method: has permission to
      * description: defines if user has permission to an object
      */
-    public function hasPermissionToUser(User $user){
-        switch($this->group_code){
+    public function getPermissionToInfoAttribute(){
+        switch(Auth::user()->group_code){
             case User::G_ADMIN:
                 return true;
             case User::G_MANAGER:
-                if($user->isAdmin() || $user->isManager())
+                if($this->isManager())
+                    return true;
+                else if($this->isAdmin())
                     return false;
-                else if($user->isDoctor() || $user->isNurse() || $user->isPatient())
-                    return $user->departments()->whereHas('hospital', function($query){
-                        return $query->whereHas('users', function($query){
-                            return $query->where('users.id', Auth::user()->id);
-                        });
-                    })->first() != null;
+                else if($this->isDoctor() || $this->isNurse())
+                    return true;
                 else
-                    return true;
-            case User::G_DOCTOR:    
-                if($user->isAdmin() || $user->isManager())
-                    return false;
-                else if($user->isDoctor() || $user->isNurse())
-                    return true;
-                else if($user->isPatient())
-                    $reqular =  $user->departments()->whereHas('hospital', function($query){
-                        return $query->whereHas('departments', function($query){
-                            return $query->whereHas('users', function($query){
-                                return $query->where('users.id', Auth::user()->id);
+                    return User::whereHas('permissions', function($query){
+                        return $query->whereHas('requester', function($query){
+                            return $query->whereHas('departments', function($query){
+                                return $query->whereHas('hospital', function($query){
+                                    return $query->whereHas('users', function($query){
+                                        return $query->where('users.id', Auth::user()->id);
+                                    });
+                                });
                             });
                         });
                     })->first() != null;
-                    $permission = $user->permissions()->where('requester_id', $this->id)->first() != null;
-                    return $reqular || $permission;
+            case User::G_DOCTOR:
             case User::G_NURSE:
-                if($user->isAdmin() || $user->isManager() || $user->isDoctor() || $user->isNurse())
-                    return false;
-                else if($user->isPatient())
-                    return $user->departments()->whereHas('hospital', function($query){
-                        return $query->whereHas('users', function($query){
-                            return $query->where('users.id', Auth::user()->id);
-                        });
-                    })->first() != null;
             case User::G_PATIENT:
-                return false;
+                if($this->isPatient())
+                    return $this->permissions()->where('user_id', $this->id)->where('status', User::ACCEPTED)->first() != null;
+                else
+                    return true;
             default:
                 return false;
         }
         return false;
     }
+    public function getPermissionToHistoryAttribute(User $user){
+        switch($this->group_code){
+            case User::G_ADMIN:
+                return true;
+            case User::G_MANAGER:
+                return false;
+        }
+    }
+
     public static function fetch(){
         if(Auth::user()->isAdmin())
             return new User;

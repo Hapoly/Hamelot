@@ -129,4 +129,19 @@
 			</ul>
 		</li>
 	@endif
+	@if(!Auth::user()->isManager())
+		<li>
+			<a href="#requestSubmenu" data-toggle="collapse" aria-expanded="false">
+				<i class="fa fa-h-square" aria-hidden="false"></i>
+				<span>
+				درخواست‌های دسترسی
+				</span>
+			</a>
+			<ul class="collapse list-unstyled" id="requestSubmenu">
+				<li>
+					<a href="{{route('panel.permissions.create')}}"> درخواست جدید</a>
+				</li>
+			</ul>
+		</li>
+	@endif
 </ul>

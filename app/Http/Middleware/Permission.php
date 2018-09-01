@@ -98,9 +98,9 @@ class Permission
             die(json_encode($route));
 
         $permissions = $this->roles[$route];
-        if(in_array(Auth::user()->group_code, $permissions))
+        if(in_array(Auth::user()->group_code, $permissions)){
             return $next($request);
-        else
+        }else
             // die($permissions);
             abort(404);
     }
