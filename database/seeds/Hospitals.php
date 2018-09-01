@@ -18,7 +18,6 @@ class Hospitals extends Seeder
             'phone'         => '23892398',
             'mobile'        => '0923427384',
             'image'         => 'NuLL',
-            'city_id'       => 1,
         ]);
         DB::table('hospitals')->insert([
             'title'         => 'پورسینا',
@@ -26,7 +25,6 @@ class Hospitals extends Seeder
             'phone'         => '2342454',
             'mobile'        => '02934823',
             'image'         => 'NuLL',
-            'city_id'       => 1,
         ]);
     }
 }
