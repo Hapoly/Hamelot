@@ -30,6 +30,9 @@ class HospitalRequest extends FormRequest
             'mobile'        => 'required|string',
             'status'        => 'required|numeric',
             'image'         => 'image',
+            'lon'           => 'required|string',
+            'lat'           => 'required|string',
+            'city_id'       => 'required|numeric',
         ];
     }
 }

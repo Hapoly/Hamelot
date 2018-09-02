@@ -2,7 +2,7 @@
 @section('title', __('hospitals.edit'))
 @section('content')
 <div class="container">
-  @form_create(['action' => route('panel.hospitals.update', ['hospital' => $hospital]), 'title' => __('hospitals.create')])
+  @form_edit(['action' => route('panel.hospitals.update', ['hospital' => $hospital]), 'title' => __('hospitals.edit')])
     @input_text(['name' => 'title', 'value' => old('title', $hospital->title), 'label' => __('hospitals.title'), 'required' => true])
     @input_text(['name' => 'address', 'value' => old('address', $hospital->address), 'label' => __('hospitals.address'), 'required' => true])
     @input_text(['name' => 'phone', 'value' => old('phone', $hospital->phone), 'label' => __('hospitals.phone'), 'required' => true])
@@ -15,7 +15,8 @@
     ?>
     @input_select(['name' => 'status', 'value' => old('status', $hospital->status), 'label' => __('hospitals.status'), 'required' => true, 'rows' => $status_rows])
     @input_image(['name' => 'image', 'label' => __('hospitals.image'), 'required' => true])
-    @submit_row(['value' => 'new', 'label' => __('hospitals.save')])
+    @input_city(['city_id' => old('city_id', $hospital->city_id), 'lon' => old('lon', $hospital->lon), 'lat' => old('lat', $hospital->lat), 'province_id' => old('province_id', $hospital->city->province_id)])
+    @submit_row(['value' => 'edit', 'label' => __('hospitals.save')])
   @endform_create
 </div>
 @endsection

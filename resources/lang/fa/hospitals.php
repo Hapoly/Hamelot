@@ -14,6 +14,9 @@ return [
     'operation'         => 'عملیات',
     'city_id'           => 'شهر',
     'province_id'       => 'استان',
+    'lon'               => 'عرض جغرافیایی',
+    'lat'               => 'طول جغرافیایی',
+    'please_choose'     => 'لطفا انتخاب کنید',
 
     'status_str'        => [
         '1' => 'فعال',

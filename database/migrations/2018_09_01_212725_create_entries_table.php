@@ -16,8 +16,8 @@ class CreateEntriesTable extends Migration
         Schema::create('entries', function (Blueprint $table) {
             $table->increments('id');
             $table->string('title', 64)->index()->default('NuLL');
-            $table->decimal('lon', 6, 4)->index()->default(0);
-            $table->decimal('lat', 6, 4)->index()->default(0);
+            $table->decimal('lon', 12, 10)->index()->default(0);
+            $table->decimal('lat', 12, 10)->index()->default(0);
             $table->integer('city_id')->index()->default(0);
             $table->integer('province_id')->index()->default(0);
             

@@ -22,8 +22,8 @@ class CreatePoliclinicsTable extends Migration
             $table->smallInteger('status')->default(1);
             $table->string('phone', 32)->default('NuLL');
             $table->integer('city_id')->default(0)->index();
-            $table->decimal('lon', 6, 4)->default(0);
-            $table->decimal('lat', 6, 4)->default(0);
+            $table->decimal('lon', 12, 10)->default(0);
+            $table->decimal('lat', 12, 10)->default(0);
             $table->timestamps();
         });
     }

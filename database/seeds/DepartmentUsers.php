@@ -16,6 +16,7 @@ class DepartmentUsers extends Seeder
             'department_id'     => 1,
             'user_id'           => 4,
             'status'            => 2,
+            'type'              => 1,
         ]);
         // DB::table('department_user')->insert([
         //     'department_id'     => 2,

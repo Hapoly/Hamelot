@@ -5,12 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Auth;
 use App\User;
+use App\Models\Entry;
 use App\Models\DepartmentUser;
 
 class Hospital extends Model {
     protected $primary = 'id';
     protected $table = 'hospitals';
-    protected $fillable = ['title', 'address', 'phone', 'mobile', 'image', 'status'];
+    protected $fillable = ['title', 'address', 'phone', 'mobile', 'image', 'status', 'lon', 'lat', 'city_id'];
 
     const S_ACTIVE      = 1;
     const S_INACTIVE    = 2;
@@ -79,5 +80,35 @@ class Hospital extends Model {
                 else
                     return new Hospital;
         }
+    }
+
+    public function city(){
+        return $this->belongsTo('App\Models\City');
+    }
+
+    public function save(array $options = []){
+        parent::save($options);
+        $entry = Entry::where('target_id', $this->id)->where('type', Entry::HOSPITAL)->first();
+        $data = [
+            'target_id'     => $this->id,
+            'title'         => $this->title,
+            'lon'           => $this->lon,
+            'lat'           => $this->lat,
+            'city_id'       => $this->city_id,
+            'province_id'   => $this->city->province_id,
+            'status'        => $this->status,
+            'type'          => Entry::HOSPITAL,
+        ];
+        if($entry){
+            $entry->fill($data);
+            $entry->save();  
+        }else{
+            Entry::create($data);
+        }   
+    }
+
+    public function delete(){
+        parent::delete();
+        Entry::where('target_id', $this->id)->where('type', Entry::HOSPITAL)->delete();
     }
 }

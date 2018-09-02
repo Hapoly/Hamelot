@@ -20,8 +20,8 @@ class CreateHospitalsTable extends Migration
             $table->string('phone');
             $table->string('mobile');
             $table->string('image');
-            $table->decimal('lon', 6, 4)->default(0);
-            $table->decimal('lat', 6, 4)->default(0);
+            $table->decimal('lon', 12, 10)->default(0);
+            $table->decimal('lat', 12, 10)->default(0);
             $table->integer('city_id')->default(0)->index();
             $table->smallInteger('status')->default(1);
             $table->timestamps();

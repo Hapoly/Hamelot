@@ -40,12 +40,12 @@ class Permission
         'panel.users.index'                             => [ 1, 2, 3, 4, 5 ],
 
         'panel.hospitals.index'                         => [ 1, 2, 3, 4, 5 ],
-        'panel.hospitals.create'                        => [ 1 ],
-        'panel.hospitals.store'                         => [ 1 ],
-        'panel.hospitals.edit'                          => [ 1 ],
-        'panel.hospitals.update'                        => [ 1 ],
+        'panel.hospitals.create'                        => [ 1, 2 ],
+        'panel.hospitals.store'                         => [ 1, 2 ],
+        'panel.hospitals.edit'                          => [ 1, 2 ],
+        'panel.hospitals.update'                        => [ 1, 2 ],
         'panel.hospitals.show'                          => [ 1, 2, 3, 4, 5 ],
-        'panel.hospitals.destroy'                       => [ 1 ],
+        'panel.hospitals.destroy'                       => [ 1, 2 ],
 
         'panel.departments.index'                       => [ 1, 2, 3, 4 ],
         'panel.departments.create'                      => [ 1, 2 ],

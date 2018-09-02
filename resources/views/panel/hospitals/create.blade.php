@@ -15,6 +15,7 @@
     ?>
     @input_select(['name' => 'status', 'value' => old('status', ''), 'label' => __('hospitals.status'), 'required' => true, 'rows' => $status_rows])
     @input_image(['name' => 'image', 'label' => __('hospitals.image'), 'required' => true])
+    @input_city(['city_id' => old('city_id'), 'province_id' => old('province_id'), 'lon' => old('lon'), 'lat' => old('lat')])
     @submit_row(['value' => 'new', 'label' => __('hospitals.save')])
   @endform_create
 </div>

@@ -17,8 +17,8 @@ class CreateCitiesTable extends Migration
             $table->increments('id');
             $table->string('title', 32);
             $table->integer('province_id')->index();
-            $table->decimal('lon', 6, 4)->default(0);
-            $table->decimal('lat', 6, 4)->default(0);
+            $table->decimal('lon', 12, 10)->default(0);
+            $table->decimal('lat', 12, 10)->default(0);
             $table->timestamps();
         });
     }

@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Storage;
 
 use URL;
 use App\Models\Hospital;
+use App\Models\Province;
+use App\Models\City;
 use App\User;
 use App\Http\Requests\HospitalRequest;
 
@@ -48,10 +50,10 @@ class Hospitals extends Controller{
     return view('panel.hospitals.show', ['hospital' => $hospital]);
   }
   public function create(){
-    if(Auth::user()->isAdmin())
-      return view('panel.hospitals.create');
-    else
-      abort(404);
+    return view('panel.hospitals.create', [
+      'provinces' => Province::all(),
+      'cities'    => json_encode(City::all()),
+    ]);
   }
   public function store(HospitalRequest $request){
     $inputs = $request->all();
@@ -62,7 +64,11 @@ class Hospitals extends Controller{
     return redirect()->route('panel.hospitals.show', ['hospital' => $hospital]);
   }
   public function edit(Hospital $hospital){
-    return view('panel.hospitals.edit', ['hospital' => $hospital]);
+    return view('panel.hospitals.edit', [
+      'hospital'  => $hospital,
+      'provinces' => Province::all(),
+      'cities'    => City::all()
+    ]);
   }
   public function update(HospitalRequest $request, Hospital $hospital){
     $inputs = $request->all();
