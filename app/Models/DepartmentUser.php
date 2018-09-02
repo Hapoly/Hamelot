@@ -9,7 +9,7 @@ class DepartmentUser extends Model
 {
     protected $primary = 'id';
     protected $table = 'department_user';
-    protected $fillable = ['user_id', 'department_id', 'status'];
+    protected $fillable = ['user_id', 'department_id', 'status', 'type'];
     protected $appends = ['status_str', 'type_str'];
 
     const PENDING   = 1;
