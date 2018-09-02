@@ -8,7 +8,7 @@ class Entry extends Model
 {
     protected $primary = 'id';
     protected $table = 'entries';
-    protected $fillable = ['title', 'lon', 'lat', 'target_id', 'type', 'status'];
+    protected $fillable = ['title', 'lon', 'lat', 'target_id', 'type', 'status', 'city_id', 'province_id', 'field_id', 'degree_id'];
 
     const HOSPITAL      = 1;
     const POLICLINIC    = 2;
@@ -52,5 +52,19 @@ class Entry extends Model
             default:
                 return null;
         }
+    }
+
+    public function degree(){
+        return $this->hasOne('App\Models\ConstValue');
+    }
+    public function field(){
+        return $this->hasOne('App\Models\ConstValue');
+    }
+
+    public function city(){
+        return $this->hasOne('App\Models\City');
+    }
+    public function province(){
+        return $this->hasOne('App\Models\Province');
     }
 }

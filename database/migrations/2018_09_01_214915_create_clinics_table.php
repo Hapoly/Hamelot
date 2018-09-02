@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateHospitalsTable extends Migration
+class CreateClinicsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,17 +13,17 @@ class CreateHospitalsTable extends Migration
      */
     public function up()
     {
-        Schema::create('hospitals', function (Blueprint $table) {
+        Schema::create('clinics', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('title');
-            $table->string('address');
-            $table->string('phone');
-            $table->string('mobile');
-            $table->string('image');
+            $table->string('address', 200)->default('NuLL');
+            $table->string('description', 200);
+            $table->smallInteger('type')->default(1);
+            $table->smallInteger('status')->default(1);
+            $table->integer('doctor_id')->index();
+            $table->string('phone', 32)->default('NuLL');
+            $table->integer('city_id')->default(0)->index();
             $table->decimal('lon', 6, 4)->default(0);
             $table->decimal('lat', 6, 4)->default(0);
-            $table->integer('city_id')->default(0)->index();
-            $table->smallInteger('status')->default(1);
             $table->timestamps();
         });
     }
@@ -35,6 +35,6 @@ class CreateHospitalsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('hospitals');
+        Schema::dropIfExists('clinics');
     }
 }

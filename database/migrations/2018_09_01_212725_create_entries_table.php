@@ -20,6 +20,9 @@ class CreateEntriesTable extends Migration
             $table->decimal('lat', 6, 4)->index()->default(0);
             $table->integer('city_id')->index()->default(0);
             $table->integer('province_id')->index()->default(0);
+            
+            $table->integer('field_id')->index()->default(0);
+            $table->integer('degree_id')->index()->default(0);
 
             $table->smallInteger('type')->index();
             $table->integer('target_id')->index();
