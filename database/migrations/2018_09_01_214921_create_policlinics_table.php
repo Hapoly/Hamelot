@@ -17,10 +17,11 @@ class CreatePoliclinicsTable extends Migration
             $table->increments('id');
             $table->string('title', 32);
             $table->string('address', 200)->default('NuLL');
-            $table->string('description', 200);
             $table->smallInteger('type')->default(1);
+            $table->string('image');
             $table->smallInteger('status')->default(1);
             $table->string('phone', 32)->default('NuLL');
+            $table->string('mobile', 32)->default('NuLL');
             $table->integer('city_id')->default(0)->index();
             $table->decimal('lon', 12, 10)->default(0);
             $table->decimal('lat', 12, 10)->default(0);

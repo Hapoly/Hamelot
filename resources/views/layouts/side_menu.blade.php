@@ -56,26 +56,53 @@
 		</ul>
 	</li>
 	<li>
-		<a href="#hospitalSubmenu" data-toggle="collapse" aria-expanded="false">
+		<a href="#healthunitmenu" data-toggle="collapse" aria-expanded="false">
 			<i class="fa fa-hospital-o" aria-hidden="false"></i>
 			<span>
-			بیمارستان ها
+			واحد‌های درمانی
 			</span>
 		</a>
-		<ul class="collapse list-unstyled" id="hospitalSubmenu">
-			@if(Auth::user()->isAdmin())
+		<ul class="collapse list-unstyled" id="healthunitmenu">
 			<li>
-				<a href="{{route('panel.hospitals.create')}}"> بیمارستان جدید</a>
+				<a href="#hospitals" data-toggle="collapse" aria-expanded="false">
+					<span>بیمارستان‌ها</span>
+				</a>
+				<ul class="collapse list-unstyled" id="hospitals">
+					@if(Auth::user()->isAdmin() || Auth::user()->isManager())
+						<li>
+							<a href="{{route('panel.hospitals.create')}}"> بیمارستان جدید</a>
+						</li>
+					@endif
+					<li>
+						<a href="{{route('panel.hospitals.index')}}"> لیست بیمارستان ها</a>
+					</li>
+					@if(!(Auth::user()->isPatient() || Auth::user()->isAdmin()))
+						<li>
+							<a href="{{route('panel.hospitals.index', ['joined' => true])}}"> بیمارستان‌های من</a>
+						</li>
+					@endif
+				</ul>
 			</li>
-			@endif
 			<li>
-				<a href="{{route('panel.hospitals.index')}}"> لیست بیمارستان ها</a>
+				<a href="#policlinics" data-toggle="collapse" aria-expanded="false">
+					<span>درمانگاه‌ها</span>
+				</a>
+				<ul class="collapse list-unstyled" id="policlinics">
+					@if(Auth::user()->isAdmin() || Auth::user()->isManager())
+						<li>
+							<a href="{{route('panel.policlinics.create')}}"> درمانگاه جدید</a>
+						</li>
+					@endif
+					<li>
+						<a href="{{route('panel.policlinics.index')}}"> لیست درمانگاه ها</a>
+					</li>
+					@if(!(Auth::user()->isPatient() || Auth::user()->isAdmin()))
+						<li>
+							<a href="{{route('panel.policlinics.index', ['joined' => true])}}"> درمانگاه‌های من</a>
+						</li>
+					@endif
+				</ul>
 			</li>
-			@if(Auth::user()->isDoctor() || Auth::user()->isNurse())
-				<li>
-					<a href="{{route('panel.hospitals.index', ['joined' => true])}}"> بیمارستان‌های من</a>
-				</li>
-			@endif
 		</ul>
 	</li>
 	<li>

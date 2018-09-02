@@ -11,7 +11,7 @@
       <h2>{{ $hospital->title }}</h2>
     </div>
     <div class="row">
-      <img src="{{asset($hospital->image_url)}}" class="center" style="width: 25%;">
+      <img src="{{$hospital->image_url}}" class="center" style="width: 25%;">
     </div>
     <div class="row">
       <table class="table table-striped">
@@ -26,11 +26,11 @@
           </tr>
           <tr>
             <td>{{__('hospitals.phone')}}</td>
-            <td>{{$hospital->phone}}</td>
+            <td>{{$hospital->phone_str}}</td>
           </tr>
           <tr>
             <td>{{__('hospitals.mobile')}}</td>
-            <td>{{$hospital->mobile}}</td>
+            <td>{{$hospital->mobile_str}}</td>
           </tr>
           <tr>
             <td>{{__('hospitals.status')}}</td>
@@ -61,9 +61,6 @@
   <div class="panel panel-default">
     <div class="panel-heading sub-panel-title">
       {{__('hospital_users.title')}}
-      @if(Auth::user()->isAdmin())
-        <a href="{{route('panel.departments.create', ['hospital_id' => $hospital->id])}}" class="btn btn-primary sub-panel-add">{{__('departments.create')}}</a>
-      @endif
     </div>
     @if(sizeof($hospital->users))
       <table class="table">
@@ -88,7 +85,7 @@
               @if(Auth::user()->isAdmin())
                 <td>
                   <a href="{{route('panel.users.destroy', ['user' => $user])}}" class="btn btn-danger" role="button">{{__('users.destroy')}}</a>
-                  <a href="{{route('panel.users.edit', ['user' => $user])}}" class="btn btn-info" role="button">{{__('users.edit.general')}}</a>
+                  <a href="{{route('panel.users.edit', ['user' => $user])}}" class="btn btn-primary" role="button">{{__('users.edit.general')}}</a>
                   <a href="{{route('panel.users.show', ['user' => $user])}}" class="btn btn-info" role="button">{{__('users.show')}}</a>
                 </td>
               @endif
@@ -145,6 +142,7 @@
                       <button type="submit" class="btn btn-danger">{{__('departments.remove')}}</button>
                     </form>
                     <a class="btn btn-primary" href="{{route('panel.hospitals.edit', ['hospital' => $hospital])}}">{{ __('departments.edit') }}</a>
+                    <a href="{{route('panel.departments.show', ['user' => $user])}}" class="btn btn-info" role="button">{{__('departments.show')}}</a>
                 @elseif(Auth::user()->isDoctor() || Auth::user()->isNurse())
                   @if($department->canJoin())
                     <a class="btn btn-primary" href="{{route('panel.department_users.send', ['user' => Auth::user(), 'department' => $department])}}">{{ __('department_users.send') }}</a>

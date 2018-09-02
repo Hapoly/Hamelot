@@ -111,4 +111,17 @@ class Hospital extends Model {
         parent::delete();
         Entry::where('target_id', $this->id)->where('type', Entry::HOSPITAL)->delete();
     }
+
+    public function getPhoneStrAttribute(){
+        if($this->phone == 'NuLL')
+            return '-';
+        else
+            return $this->phone;
+    }
+    public function getMobileStrAttribute(){
+        if($this->mobile == 'NuLL')
+            return '-';
+        else
+            return $this->mobile;
+    }
 }
