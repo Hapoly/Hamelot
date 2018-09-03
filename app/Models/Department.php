@@ -42,10 +42,7 @@ class Department extends Model
         return $this->belongsToMany('App\User');
     }
     public function requests(){
-        return $this->hasMany('App\Models\DepartmentUser', 'department_id');
-    }
-    public function patients(){
-        return $this->users()->where('group_code', User::G_PATIENT);
+        return $this->hasMany('App\Models\DepartmentUser', 'department_id')->where('type', DepartmentUser::DEPARTMENT);
     }
     public function doctors(){
         return $this->users()->where('group_code', User::G_DOCTOR);
@@ -81,6 +78,8 @@ class Department extends Model
         ])->orderBy('created_at', 'desc')->first();
     }
     public function canJoin(){
+        if(Auth::user()->isAdmin() || Auth::user()->isManager() || Auth::user()->isPatient())
+            return false;
         $lastRequest = $this->lastRequest();
         if($lastRequest){
             if($lastRequest->status == DepartmentUser::REFUSED || $lastRequest->status == DepartmentUser::CANCELED)

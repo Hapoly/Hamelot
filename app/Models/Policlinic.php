@@ -10,7 +10,7 @@ class Policlinic extends Model
 {
     protected $primary = 'id';
     protected $table = 'policlinics';
-    protected $fillable = ['title', 'address', 'description', 'image', 'type', 'status', 'phone', 'lon', 'lat', 'city_id'];
+    protected $fillable = ['title', 'address', 'description', 'image', 'type', 'status', 'public', 'phone', 'mobile', 'lon', 'lat', 'city_id'];
     protected $appends = ['image_url'];
 
     const ACTIVE    = 1;
@@ -31,6 +31,17 @@ class Policlinic extends Model
     ];
     public function getTypeStrAttribute(){
         return $this->type_lang[$this->type];
+    }
+
+
+    const T_PUBLIC  = 1;
+    const T_PRIVATE = 2;
+    private $public_lang = [
+        1   => 'عمومی',
+        2   => 'خصوصی',
+    ];
+    public function getPublicStrAttribute(){
+        return $this->public_lang[$this->public];
     }
 
     public function city(){
@@ -88,9 +99,13 @@ class Policlinic extends Model
             'lat'           => $this->lat,
             'city_id'       => $this->city_id,
             'province_id'   => $this->city->province_id,
-            'status'        => $this->status,
             'type'          => Entry::POLICLINIC,
         ];
+        if($this->status)
+            $data['status'] = ($this->status == Policlinic::ACTIVE && $this->public == Policlinic::T_PUBLIC)? Entry::ACTIVE: Entry::INACTIVE;
+        else
+            $data['status'] = (env('POLICLINIC_STATUS_DEFAULT') == Policlinic::ACTIVE && $this->public == Policlinic::T_PUBLIC)? Entry::ACTIVE: Entry::INACTIVE;
+
         if($entry){
             $entry->fill($data);
             $entry->save();  
@@ -128,5 +143,55 @@ class Policlinic extends Model
 
     public function getAddressSummaryAttribute(){
         return substr($this->address, 0, 30) . '...';
+    }
+
+
+    public function requests(){
+        return $this->hasMany('App\Models\DepartmentUser', 'department_id')->where('type', DepartmentUser::DEPARTMENT);
+    }
+    public function doctors(){
+        return $this->users()->where('group_code', User::G_DOCTOR);
+    }
+    public function nurses(){
+        return $this->users()->where('group_code', User::G_NURSE);
+    }
+    public function hasEditPermission(){
+        if(Auth::user()->isAdmin())
+            return true;
+        if(Auth::user()->isManager()){
+            return $this->hospital->whereHas('users', function($query){
+                return $query->where('users.id', Auth::user()->id);
+            })->first() != null;
+        }
+        if(Auth::user()->isPatient() || Auth::user()->isNurse() || Auth::user()->isDoctor())
+            return false;
+        return false;
+    }
+
+    public function joined(){
+        return $this->users()->where('users.id', Auth::user()->id)->where('department_user.status', DepartmentUser::ACCEPTED)->first() != null;
+    }
+    public function pending(){
+        return $this->users()->where('users.id', Auth::user()->id)->where('department_user.status', DepartmentUser::PENDNIG)->first() != null;
+    }
+    public function hasRequest(){
+        return $this->users()->where('users.id', Auth::user()->id)->first() != null;
+    }
+    public function lastRequest(){
+        return $this->requests()->where([
+            'user_id'   => Auth::user()->id,
+        ])->orderBy('created_at', 'desc')->first();
+    }
+    public function canJoin(){
+        if(Auth::user()->isAdmin() || Auth::user()->isManager() || Auth::user()->isPatient())
+            return false;
+        $lastRequest = $this->lastRequest();
+        if($lastRequest){
+            if($lastRequest->status == DepartmentUser::REFUSED || $lastRequest->status == DepartmentUser::CANCELED)
+                return true;
+            else
+                return false;
+        }else
+            return true;
     }
 }

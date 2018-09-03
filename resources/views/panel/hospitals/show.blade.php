@@ -145,7 +145,7 @@
                     <a href="{{route('panel.departments.show', ['user' => $user])}}" class="btn btn-info" role="button">{{__('departments.show')}}</a>
                 @elseif(Auth::user()->isDoctor() || Auth::user()->isNurse())
                   @if($department->canJoin())
-                    <a class="btn btn-primary" href="{{route('panel.department_users.send', ['user' => Auth::user(), 'department' => $department])}}">{{ __('department_users.send') }}</a>
+                    <a class="btn btn-primary" href="{{route('panel.department_users.send_department', ['user' => Auth::user(), 'department' => $department])}}">{{ __('department_users.send') }}</a>
                   @else
                     -
                   @endif

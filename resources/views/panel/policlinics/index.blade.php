@@ -27,7 +27,7 @@
     'cols' => [
       'id'          => __('policlinics.row'),
       'title'       => __('policlinics.title'),
-      'address'     => __('policlinics.address'),
+      'city'        => __('policlinics.city_id'),
       'phone'       => __('policlinics.phone'),
       'mobile'      => __('policlinics.mobile'),
       'status'      => __('policlinics.status'),
@@ -37,9 +37,9 @@
       <tr class="policlinic-td {{$policlinic->joined? 'tr-highlight': ''}}">
         <td>{{$policlinic->id}}</td>
         <td><a href="{{route('panel.policlinics.show', ['$policlinic' => $policlinic])}}">{{$policlinic->title}}</a></td>
-        <td>{{$policlinic->address_summary}}</td>
-        <td>{{$policlinic->phone}}</td>
-        <td>{{$policlinic->mobile}}</td>
+        <td>{{$policlinic->city->title}}</td>
+        <td>{{$policlinic->phone_str}}</td>
+        <td>{{$policlinic->mobile_str}}</td>
         <td>{{$policlinic->status_str}}</td>
         @if(Auth::user()->isAdmin())
           @operation_th(['base' => 'panel.policlinics', 'label' => 'policlinic', 'item' => $policlinic, 'remove_label' => __('policlinics.remove'), 'edit_label' => __('policlinics.edit')])

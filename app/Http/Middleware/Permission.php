@@ -94,7 +94,8 @@ class Permission
         'panel.permissions.index'                       => [ 1, 2, 3, 4, 5 ],
         'panel.permissions.destroy'                     => [ 1, 2, 3, 4, 5 ],
 
-        'panel.department_users.send'                   => [ 3, 4 ],
+        'panel.department_users.send_department'        => [ 3, 4 ],
+        'panel.department_users.send_policlinic'        => [ 3, 4 ],
         'panel.department_users.index'                  => [ 1, 2 ],
 
 

@@ -28,7 +28,7 @@
         </tbody>
       </table>
     </div>
-    @if(Auth::user()->isAdmin() || Auth::user()->isManager())
+    @if($department->has_permission)
       <div class="row">
         <div class="col-md-6" style="text-align: center">
           <a href="{{route('panel.departments.edit', ['department' => $department])}}" class="btn btn-primary" role="button">{{__('departments.edit')}}</a>
@@ -39,6 +39,13 @@
             {{ csrf_field() }}
             <button type="submit" class="btn btn-danger">حذف</button>
           </form>
+        </div>
+      </div>
+    @endif
+    @if($department->canJoin())
+      <div class="row">
+        <div class="col-md-12" style="text-align: center">
+          <a class="btn btn-primary" href="{{route('panel.department_users.send_department', ['user' => Auth::user(), 'department' => $department])}}">{{ __('department_users.send') }}</a>
         </div>
       </div>
     @endif

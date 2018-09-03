@@ -57,6 +57,13 @@
         </div>
       </div>
     @endif
+    @if($policlinic->canJoin())
+      <div class="row">
+        <div class="col-md-12" style="text-align: center">
+          <a class="btn btn-primary" href="{{route('panel.department_users.send_policlinic', ['user' => Auth::user(), 'policlinic' => $policlinic])}}">{{ __('department_users.send') }}</a>
+        </div>
+      </div>
+    @endif
   </div>
   <div class="panel panel-default">
     <div class="panel-heading sub-panel-title">

@@ -45,11 +45,12 @@ class DepartmentUsers extends Controller{
     ]);
   }
 
-  public function send(Request $request, User $user, Department $department){
+  public function sendDepartment(Request $request, User $user, Department $department){
     DepartmentUser::create([
       'user_id'       => $user->id,
       'department_id' => $department->id,
       'status'        => DepartmentUser::PENDING,
+      'type'          => DepartmentUser::DEPARTMENT,
     ]);
     return redirect()->back();
   }

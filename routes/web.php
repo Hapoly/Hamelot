@@ -64,7 +64,8 @@ Route::middleware(['auth', 'Permission'])->namespace('Panel')->prefix('panel')->
         });
     });
     Route::prefix('department-users')->name('department_users.')->group(function(){
-        Route::get('/send/{user}/{department}', 'DepartmentUsers@send')->name('send');
+        Route::get('/send-department/{user}/{department}', 'DepartmentUsers@sendDepartment')->name('send_department');
+        Route::get('/send-policlinic/{user}/{policlinic}', 'DepartmentUsers@sendPoliclinic')->name('send_policlinic');
         Route::get('/', 'DepartmentUsers@index')->name('index');
         
         Route::get('/show/{department_user}', 'DepartmentUsers@show')->name('show');

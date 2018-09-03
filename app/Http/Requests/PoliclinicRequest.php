@@ -28,11 +28,11 @@ class PoliclinicRequest extends FormRequest
             'address'       => 'required|string',
             'phone'         => 'required|string',
             'mobile'        => 'required|string',
-            'status'        => 'required|numeric',
             'image'         => 'image',
             'lon'           => 'required|string',
             'lat'           => 'required|string',
             'city_id'       => 'required|numeric',
+            'type'          => 'required|numeric',
         ];
     }
 }
