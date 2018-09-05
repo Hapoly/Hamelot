@@ -31,7 +31,7 @@ Route::middleware(['auth', 'Permission'])->namespace('Panel')->prefix('panel')->
         
         Route::get('/show/{permission}', 'Permissions@show')->name('show');
 
-        Route::post('/update-inline/{permission}', 'Permissions@inlineUpdate')->name('inline_update');
+        Route::post('/edit/{permission}', 'Permissions@inlineUpdate')->name('inline_update');
 
         Route::get('/', 'Permissions@index')->name('index');
         Route::get('/destroy/{permissions}', 'Permissions@destroy')->name('destroy');
@@ -65,21 +65,28 @@ Route::middleware(['auth', 'Permission'])->namespace('Panel')->prefix('panel')->
         });
     });
     Route::prefix('department-users')->name('department_users.')->group(function(){
-        Route::get('/send-department/{user}/{department}', 'DepartmentUsers@sendDepartment')->name('send_department');
-        Route::get('/send-policlinic/{user}/{policlinic}', 'DepartmentUsers@sendPoliclinic')->name('send_policlinic');
-        Route::get('/', 'DepartmentUsers@index')->name('index');
+        Route::get('/create-policlinic-manager', 'UnitUsers@createPoloclinicManager')->name('create_policlinic_manager');
+        Route::get('/create-policlinic-member', 'UnitUsers@createPoloclinicMember')->name('create_policlinic_member');
+        Route::get('/create-department-member', 'UnitUsers@createDepartmentMember')->name('create_department_member');
+        Route::get('/create-hospital-manager', 'UnitUsers@createHospitalManager')->name('create_hospital_manager');
+        Route::post('/store', 'UnitUsers@store')->name('store');
+
+        Route::get('/send-department/{user}/{department}', 'UnitUsers@sendDepartment')->name('send_department');
+        Route::get('/send-policlinic/{user}/{policlinic}', 'UnitUsers@sendPoliclinic')->name('send_policlinic');
+        Route::get('/', 'UnitUsers@index')->name('index');
         
-        Route::get('/show/{department_user}', 'DepartmentUsers@show')->name('show');
+        Route::get('/show/{department_user}', 'UnitUsers@show')->name('show');
 
-        Route::post('/update-inline/{department_user}', 'DepartmentUsers@inlineUpdate')->name('inline_update');
+        Route::post('/update-inline/{department_user}', 'UnitUsers@inlineUpdate')->name('inline_update');
 
-        Route::get('/', 'DepartmentUsers@index')->name('index');
-        Route::get('/destroy/{department_users}', 'DepartmentUsers@destroy')->name('destroy');
+        Route::get('/', 'UnitUsers@index')->name('index');
+        Route::get('/destroy/{department_users}', 'UnitUsers@destroy')->name('destroy');
     });
     Route::prefix('search')->name('search.')->group(function(){
         Route::get('/patients', 'Search@patients')->name('patients');
         Route::get('/patient-departments', 'Search@departmentsOfPatient')->name('patient-departments');
-        Route::get('/doctors', 'Search@doctors')->name('doctors');
+        Route::get('/members', 'Search@members')->name('members');
+        Route::get('/managers', 'Search@managers')->name('managers');
     });
 });
 

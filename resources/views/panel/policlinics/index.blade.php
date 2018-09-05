@@ -42,7 +42,7 @@
         <td>{{$policlinic->mobile_str}}</td>
         <td>{{$policlinic->status_str}}</td>
         @if(Auth::user()->isAdmin())
-          @operation_th(['base' => 'panel.policlinics', 'label' => 'policlinic', 'item' => $policlinic, 'remove_label' => __('policlinics.remove'), 'edit_label' => __('policlinics.edit')])
+          @operation_th(['base' => 'panel.policlinics', 'label' => 'policlinic', 'item' => $policlinic, 'remove_label' => __('policlinics.remove'), 'edit_label' => __('policlinics.edit'), 'show_label' => __('policlinics.show')])
         @else
           <td><a class="btn btn-default" href="{{route('panel.policlinics.show', ['$policlinic' => $policlinic])}}">{{__('policlinics.show')}}</a></td>
         @endif

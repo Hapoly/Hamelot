@@ -52,4 +52,36 @@ class Search extends Controller{
     }
     return $results;
   }
+  public function members(Request $request){
+    $users = User::
+      whereRaw("concat(first_name, ' ', last_name) LIKE '%" . $request->input('term') . "%'")
+      ->where('group_code', '<>', User::G_PATIENT)
+      ->where('group_code', '<>', User::G_ADMIN)
+      ->where('group_code', '<>', User::G_MANAGER)
+      ->get();
+    $results = [];
+    foreach($users as $user){
+      array_push($results, [
+        'id'    => $user->id,
+        'label' => $user->first_name . ' ' . $user->last_name . ' (' . $user->group_str . ')',
+        'value' => $user->first_name . ' ' . $user->last_name,
+      ]);
+    }
+    return $results;
+  }
+  public function managers(Request $request){
+    $users = User::
+      whereRaw("concat(first_name, ' ', last_name) LIKE '%" . $request->input('term') . "%'")
+      ->where('group_code', User::G_MANAGER)
+      ->get();
+    $results = [];
+    foreach($users as $user){
+      array_push($results, [
+        'id'    => $user->id,
+        'label' => $user->first_name . ' ' . $user->last_name . ' (' . $user->group_str . ')',
+        'value' => $user->first_name . ' ' . $user->last_name,
+      ]);
+    }
+    return $results;
+  }
 }

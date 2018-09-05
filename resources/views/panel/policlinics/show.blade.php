@@ -84,7 +84,7 @@
         </thead>
         <tbody>
           @foreach($policlinic->users as $user)
-            <tr>
+            <tr class="{{$user->id == Auth::user()->id? 'tr-highlight':''}}">
               <td>{{$user->id}}</td>
               <td>{{$user->first_name}}</td>
               <td>{{$user->last_name}}</td>

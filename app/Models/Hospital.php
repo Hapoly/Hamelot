@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Auth;
 use App\User;
 use App\Models\Entry;
-use App\Models\DepartmentUser;
+use App\Models\UnitUser;
 
 class Hospital extends Model {
     protected $primary = 'id';
@@ -74,7 +74,7 @@ class Hospital extends Model {
                 if($joined)
                     return Hospital::whereHas('departments', function($query){
                         return $query->whereHas('requests', function($query){
-                            return $query->where('department_user.user_id', Auth::user()->id)->where('status', DepartmentUser::ACCEPTED);
+                            return $query->where('department_user.user_id', Auth::user()->id)->where('status', UnitUser::ACCEPTED);
                         });
                     });
                 else

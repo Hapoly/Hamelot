@@ -7,7 +7,7 @@ return [
     'row'               => 'ردیف',
 
     'user_id'           => 'کاربر',
-    'department_id'     => 'بخش‌ها',
+    'department_id'     => 'بخش',
     'status'            => 'وضعیت',
     'operation'         => 'عملیات',
 
@@ -26,4 +26,16 @@ return [
     'send'          => 'درخواست عضویت',
     'join_status'   => 'وضعیت عضویت',
     'show'          => 'نمایش',
+
+    'full_name'     => 'نام کاربر',
+
+    'policlinic_type'   => 'دسترسی به درمانگاه',
+    'department_type'   => 'دسترسی به بخش یکی از بیمارستان ها',
+
+    'policlinic_id' => 'درمانگاه',
+    'permission'    => 'سطح دسترسی',
+    'permission_str'    => [
+        1   => 'مدیریت',
+        2   => 'اعضا',
+    ],
 ];

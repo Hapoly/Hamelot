@@ -33,7 +33,7 @@
         <td><a href="{{route('panel.departments.show', ['department' => $department_user->department])}}">{{$department_user->department->title}}</a></td>
         <td>{{$department_user->status_str}}</td>
         @if(Auth::user()->isAdmin())
-          @operation_th(['base' => 'panel.department_users', 'label' => 'hospital', 'item' => $hospital, 'remove_label' => __('department_users.remove'), 'edit_label' => __('department_users.edit')])
+                    
         @else
           <td><a class="btn btn-default" href="{{route('panel.department_users.show', ['department_user' => $department_user])}}">{{__('department_users.show')}}</a></td>
         @endif

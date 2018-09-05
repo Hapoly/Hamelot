@@ -56,6 +56,7 @@ class Policlinic extends Model
     }
 
     public function getJoinedAttribute(){
+        return false;
         if(Auth::user()->isManager())
             return $this->users()->where('users.id', Auth::user()->id)->first() != null;
         else if(Auth::user()->isAdmin() || Auth::user()->isPatient())
@@ -82,7 +83,7 @@ class Policlinic extends Model
             case USER::G_PATIENT:
                 if($joined)
                     return Policlinic::whereHas('requests', function($query){
-                        return $query->where('department_user.user_id', Auth::user()->id)->where('status', DepartmentUser::ACCEPTED);
+                        return $query->where('department_user.user_id', Auth::user()->id)->where('status', UnitUser::ACCEPTED);
                     });
                 else
                     return Policlinic::where('public', Policlinic::T_PUBLIC);
@@ -147,7 +148,13 @@ class Policlinic extends Model
 
 
     public function requests(){
-        return $this->hasMany('App\Models\DepartmentUser', 'department_id')->where('type', DepartmentUser::DEPARTMENT);
+        return $this->hasMany('App\Models\UnitUser', 'department_id')->where('type', UnitUser::POLICLINIC);
+    }
+
+    public function users(){
+        return $this->belongsToMany('App\User', 'department_user', 'department_id')
+                    ->wherePivot('status', UnitUser::ACCEPTED)
+                    ->wherePivot('type', UnitUser::POLICLINIC);
     }
     public function doctors(){
         return $this->users()->where('group_code', User::G_DOCTOR);
@@ -169,10 +176,10 @@ class Policlinic extends Model
     }
 
     public function joined(){
-        return $this->users()->where('users.id', Auth::user()->id)->where('department_user.status', DepartmentUser::ACCEPTED)->first() != null;
+        return $this->users()->where('users.id', Auth::user()->id)->where('department_user.status', UnitUser::ACCEPTED)->first() != null;
     }
     public function pending(){
-        return $this->users()->where('users.id', Auth::user()->id)->where('department_user.status', DepartmentUser::PENDNIG)->first() != null;
+        return $this->users()->where('users.id', Auth::user()->id)->where('department_user.status', UnitUser::PENDNIG)->first() != null;
     }
     public function hasRequest(){
         return $this->users()->where('users.id', Auth::user()->id)->first() != null;
@@ -187,7 +194,7 @@ class Policlinic extends Model
             return false;
         $lastRequest = $this->lastRequest();
         if($lastRequest){
-            if($lastRequest->status == DepartmentUser::REFUSED || $lastRequest->status == DepartmentUser::CANCELED)
+            if($lastRequest->status == UnitUser::REFUSED || $lastRequest->status == UnitUser::CANCELED)
                 return true;
             else
                 return false;

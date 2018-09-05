@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateDepartmentUserTable extends Migration
+class CreateUnitUserTable extends Migration
 {
     /**
      * Run the migrations.
@@ -18,6 +18,7 @@ class CreateDepartmentUserTable extends Migration
             $table->integer('user_id')->index();
             $table->integer('department_id')->index();
             $table->smallInteger('type');
+            $table->smallInteger('permission')->default(1);
             $table->smallInteger('status')->default(1);
             $table->timestamps();
         });

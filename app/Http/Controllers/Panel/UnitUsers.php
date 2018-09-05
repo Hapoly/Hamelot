@@ -6,13 +6,15 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 use App\Models\Department;
+use App\Models\Policlinic;
 use App\User;
-use App\Models\DepartmentUser;
+use App\Models\UnitUser;
+use App\Http\Requests\UnitUserManageRequest;
 use URL;
 
-class DepartmentUsers extends Controller{
+class UnitUsers extends Controller{
   public function index(Request $request){
-    $department_users = DepartmentUser::fetch();
+    $department_users = UnitUser::fetch();
     $links = '';
     $sort = $request->input('sort', '###');
     $search = $request->input('search', '###');
@@ -46,12 +48,36 @@ class DepartmentUsers extends Controller{
   }
 
   public function sendDepartment(Request $request, User $user, Department $department){
-    DepartmentUser::create([
+    UnitUser::create([
       'user_id'       => $user->id,
       'department_id' => $department->id,
-      'status'        => DepartmentUser::PENDING,
-      'type'          => DepartmentUser::DEPARTMENT,
+      'status'        => UnitUser::PENDING,
+      'type'          => UnitUser::DEPARTMENT,
     ]);
     return redirect()->back();
+  }
+
+  public function createPoloclinicManager(Request $request){
+    return view('panel.department_users.policlinic.manager.create',[
+      'policlinics' => Policlinic::fetch(true)->get(),
+    ]);
+  }
+  public function store(UnitUserManageRequest $request){
+    $user = User::whereRaw("concat(first_name, ' ', last_name) = '". $request->full_name ."'")->first();
+    if(!$user)
+      return redirect()->route('panel.department_users.index');
+    $inputs['doctor_id'] = $user->id;
+    switch($request->type){
+      case 1: // policlinic manager
+        UnitUser::create([
+          'department_id' => $request->department_id,
+          'user_id'       => $user->id,
+          'type'          => UnitUser::POLICLINIC,
+          'permission'    => UnitUser::MANAGER,
+          'status'        => UnitUser::ACCEPTED,
+        ]);
+        return redirect()->route('panel.policlinics.show', ['policlinic' => $request->department_id]);
+    }
+    return $request->all();
   }
 }

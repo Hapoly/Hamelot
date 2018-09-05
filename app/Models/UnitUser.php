@@ -5,11 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Auth;
 
-class DepartmentUser extends Model
+class UnitUser extends Model
 {
     protected $primary = 'id';
     protected $table = 'department_user';
-    protected $fillable = ['user_id', 'department_id', 'status', 'type'];
+    protected $fillable = ['user_id', 'department_id', 'status', 'type', 'permission'];
     protected $appends = ['status_str', 'type_str'];
 
     const PENDING   = 1;
@@ -35,9 +35,9 @@ class DepartmentUser extends Model
 
     public static function fetch(){
         if(Auth::user()->isAdmin())
-            return new DepartmentUser;
+            return new UnitUser;
         else
-            return DepartmentUser::whereHas('department', function($query){
+            return UnitUser::whereHas('department', function($query){
                 return $query->whereHas('hospital', function($query){
                     return $query->whereHas('users', function($query){
                         return $query->where('users.id', Auth::user()->id);
@@ -46,13 +46,25 @@ class DepartmentUser extends Model
             });
     }
 
-    const POLICLINIC = 1;
-    const DEPARTMENT = 2;
+    const POLICLINIC    = 1;
+    const DEPARTMENT    = 2;
+    const HOSPITAL      = 3;
     private $type_lang = [
-        1 => 'عضویت بخش',
-        2 => 'عضویت درمانگاه',
+        1   => 'بخش',
+        2   => 'درمانگاه',
+        3   => 'بیمارستان'
     ];
     public function getTypeStrAttribute(){
         return $this->type_lang[$this->type];
+    }
+
+    const MEMBER = 1;
+    const MANAGER = 2;
+    private $permission_lang = [
+        1   => 'عضو',
+        2   => 'مدیریت',
+    ];
+    public function getPermissionStrAttribute(){
+        return $this->permisison_lang[$this->permission];
     }
 }

@@ -1,6 +1,6 @@
 <div class="form-group row create-form">
     <div class="col-md-10">
-        <select class="form-control" name="{{$name}}" id="{{$name}}" style="width:93%">
+        <select class="form-control" name="{{$name}}" id="{{$name}}" style="width:93%" {{isset($disabled)? ($disabled? 'disabled': ''): ''}}>
             @foreach($rows as $row)
                 <option value="{{$row['value']}}" {{$value == $row['value'] ? 'selected': ''}}>{{$row['label']}}</option>
             @endforeach

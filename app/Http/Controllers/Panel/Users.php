@@ -18,7 +18,7 @@ use App\Models\Nurse;
 use App\Models\Patient;
 use App\Models\ConstValue;
 use App\Models\Permission;
-use App\Models\DepartmentUser;
+use App\Models\UnitUser;
 
 use App\Models\Hospital;
 
@@ -185,7 +185,7 @@ class Users extends Controller{
     $inputs['password'] = bcrypt($inputs['password']);
     $inputs['group_code'] = User::G_DOCTOR;
     $user = User::create($inputs);
-    $dpeartment_user = DepartmentUser::create([
+    $dpeartment_user = UnitUser::create([
       'user_id'       => $user->id,
       'department_id' => $inputs['department_id'],
     ]);
@@ -201,7 +201,7 @@ class Users extends Controller{
     $inputs['password'] = bcrypt($inputs['password']);
     $inputs['group_code'] = User::G_NURSE;
     $user = User::create($inputs);
-    $dpeartment_user = DepartmentUser::create([
+    $dpeartment_user = UnitUser::create([
       'user_id'       => $user->id,
       'department_id' => $inputs['department_id'],
     ]);
@@ -218,7 +218,7 @@ class Users extends Controller{
     $inputs['group_code'] = User::G_PATIENT;
     $inputs['birth_date'] = Time::jmktime(0, 0, 0, $inputs['birth_day'], $inputs['birth_month'], $inputs['birth_year']);
     $user = User::create($inputs);
-    $dpeartment_user = DepartmentUser::create([
+    $dpeartment_user = UnitUser::create([
       'user_id'       => $user->id,
       'department_id' => $inputs['department_id'],
     ]);

@@ -5,7 +5,7 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use App\Models\Permission;
 use App\Models\Department;
-use App\Models\DepartmentUser;
+use App\Models\UnitUser;
 use Auth;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -84,7 +84,7 @@ class User extends Authenticatable
     }
 
     public function departments(){
-        return $this->belongsToMany('App\Models\Department')->where('department_user.status', DepartmentUser::ACCEPTED);
+        return $this->belongsToMany('App\Models\Department')->where('department_user.status', UnitUser::ACCEPTED);
     }
 
     public function patients(){
@@ -250,7 +250,7 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\Permission', 'patient_id');
     }
     public function departmenReuqests(){
-        return $this->hasMany('App\Models\DepartmentUser', 'user_id');
+        return $this->hasMany('App\Models\UnitUser', 'user_id');
     }
 
     /**
