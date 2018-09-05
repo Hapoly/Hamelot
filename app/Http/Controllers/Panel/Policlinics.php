@@ -58,8 +58,7 @@ class Policlinics extends Controller{
   public function store(PoliclinicRequest $request){
     $inputs = $request->all();
     if($request->hasFile('image'))
-      $inputs['image'] = Storage::put('public/policlinics', $request->file('image'));
-    $inputs['image'] = 'NuLL';
+      $inputs['image'] = Storage::disk('public')->put('/policlinics', $request->file('image'));
     $policlinic = Policlinic::create($inputs);
     return redirect()->route('panel.policlinics.show', ['policlinic' => $policlinic]);
   }
@@ -73,7 +72,7 @@ class Policlinics extends Controller{
   public function update(PoliclinicRequest $request, Policlinic $policlinic){
     $inputs = $request->all();
     if($request->hasFile('image'))
-      $inputs['image'] = Storage::put('public/policlinics', $request->file('image'));
+      $inputs['image'] = Storage::disk('public')->put('/policlinics', $request->file('image'));
     $policlinic->fill($inputs)->save();
     return redirect()->route('panel.policlinics.show', ['policlinic' => $policlinic]);
   }

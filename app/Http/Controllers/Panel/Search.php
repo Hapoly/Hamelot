@@ -36,4 +36,20 @@ class Search extends Controller{
     }else
       return [];
   }
+  public function doctors(Request $request){
+    $users = User::
+      whereRaw("concat(first_name, ' ', last_name) LIKE '%" . $request->input('term') . "%'")
+      ->where('group_code', User::G_DOCTOR)
+      ->select(['first_name', 'last_name', 'id'])
+      ->get();
+    $results = [];
+    foreach($users as $user){
+      array_push($results, [
+        'id'    => $user->id,
+        'label' => $user->first_name . ' ' . $user->last_name,
+        'value' => $user->first_name . ' ' . $user->last_name,
+      ]);
+    }
+    return $results;
+  }
 }

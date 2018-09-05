@@ -76,7 +76,7 @@ class Policlinic extends Model
                         return $query->where('users.id', Auth::user()->id);
                     });
                 else
-                    return new Policlinic;
+                    return Policlinic::where('public', Policlinic::T_PUBLIC);
             case User::G_DOCTOR:
             case User::G_NURSE:
             case USER::G_PATIENT:
@@ -85,7 +85,7 @@ class Policlinic extends Model
                         return $query->where('department_user.user_id', Auth::user()->id)->where('status', DepartmentUser::ACCEPTED);
                     });
                 else
-                    return new Policlinic;
+                    return Policlinic::where('public', Policlinic::T_PUBLIC);
         }
     }
 

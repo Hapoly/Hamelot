@@ -5,8 +5,8 @@
   @form_create(['action' => route('panel.policlinics.store'), 'title' => __('policlinics.create')])
     @input_text(['name' => 'title', 'value' => old('title', ''), 'label' => __('policlinics.title'), 'required' => true])
     @input_text(['name' => 'address', 'value' => old('address', ''), 'label' => __('policlinics.address'), 'required' => true])
-    @input_text(['name' => 'phone', 'value' => old('phone', ''), 'label' => __('policlinics.phone'), 'required' => true])
-    @input_text(['name' => 'mobile', 'value' => old('mobile', ''), 'label' => __('policlinics.mobile'), 'required' => true])
+    @input_text(['name' => 'phone', 'value' => old('phone', ''), 'label' => __('policlinics.phone'), 'required' => false])
+    @input_text(['name' => 'mobile', 'value' => old('mobile', ''), 'label' => __('policlinics.mobile'), 'required' => false])
     @tagline
       {{__('policlinics.public_description')}}
     @endtagline

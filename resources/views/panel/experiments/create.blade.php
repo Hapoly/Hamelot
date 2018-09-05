@@ -5,7 +5,7 @@
     @form_create(['action' => route('panel.experiments.store'), 'title' => __('experiments.create')])
         <div class="panel panel-default create-card"  id="field-1" style="margin-top:30px;" >
             <div class="row">
-                @autocomplete(['name' => 'patient_name', 'label' => __('experiments.patient_name'), 'value' => old('patient_name'), 'required' => true])
+                @autocomplete(['name' => 'patient_name', 'label' => __('experiments.patient_name'), 'value' => old('patient_name'), 'required' => true, 'route' => 'patients'])
 				<script>
                     $(document).ready(function(){
                         $("#patient_name").change(function(){

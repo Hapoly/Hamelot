@@ -61,7 +61,7 @@ class Departments extends Controller{
   public function update(DepartmentRequest $request, Department $department){
     $inputs = $request->all();
     if($request->hasFile('image'))
-      $inputs['image'] = Storage::put('public/departments', $request->file('image'));
+      $inputs['image'] = Storage::disk('public')->put('/departments', $request->file('image'));
     $department->fill($inputs)->save();
     return redirect()->route('panel.departments.show', ['department' => $department]);
   }

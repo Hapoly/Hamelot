@@ -103,6 +103,26 @@
 					@endif
 				</ul>
 			</li>
+			<li>
+				<a href="#clinics" data-toggle="collapse" aria-expanded="false">
+					<span>مطب‌ها</span>
+				</a>
+				<ul class="collapse list-unstyled" id="clinics">
+					@if(Auth::user()->isAdmin() || Auth::user()->isDoctor())
+						<li>
+							<a href="{{route('panel.clinics.create')}}"> مطب جدید</a>
+						</li>
+					@endif
+					<li>
+						<a href="{{route('panel.clinics.index')}}"> لیست مطب ها</a>
+					</li>
+					@if(!(Auth::user()->isPatient() || Auth::user()->isAdmin() || Auth::user()->isManager()))
+						<li>
+							<a href="{{route('panel.clinics.index', ['joined' => true])}}"> مطب‌های من</a>
+						</li>
+					@endif
+				</ul>
+			</li>
 		</ul>
 	</li>
 	<li>
@@ -152,7 +172,7 @@
 	@if(Auth::user()->isManager() || Auth::user()->isAdmin())
 		<li>
 			<a href="#department-requests" data-toggle="collapse" aria-expanded="false">
-				<i class="fa fa-h-square" aria-hidden="false"></i>
+				<i class="fa fa-user-md" aria-hidden="false"></i>
 				<span>
 				درخواست‌‌های عضویت
 				</span>
@@ -166,13 +186,13 @@
 	@endif
 	<li>
 		<a href="#patient-requests" data-toggle="collapse" aria-expanded="false">
-			<i class="fa fa-h-square" aria-hidden="false"></i>
+			<i class="fa fa-stethoscope" aria-hidden="false"></i>
 			<span>
 			درخواست‌های دسترسی
 			</span>
 		</a>
 		<ul class="collapse list-unstyled" id="patient-requests">
-			@if(!Auth::user()->isPatient() && !Auth::user()->isManager())
+			@if(!Auth::user()->isPatient() && !Auth::user()->isManager() && !Auth::user()->isAdmin())
 				<li>
 					<a href="{{route('panel.permissions.create')}}"> درخواست جدید</a>
 				</li>

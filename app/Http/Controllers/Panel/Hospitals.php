@@ -58,8 +58,7 @@ class Hospitals extends Controller{
   public function store(HospitalRequest $request){
     $inputs = $request->all();
     if($request->hasFile('image'))
-      $inputs['image'] = Storage::put('public/hospitals', $request->file('image'));
-    $inputs['image'] = 'NuLL';
+      $inputs['image'] = Storage::disk('public')->put('/hospitals', $request->file('image'));
     $hospital = Hospital::create($inputs);
     return redirect()->route('panel.hospitals.show', ['hospital' => $hospital]);
   }
@@ -73,7 +72,7 @@ class Hospitals extends Controller{
   public function update(HospitalRequest $request, Hospital $hospital){
     $inputs = $request->all();
     if($request->hasFile('image'))
-      $inputs['image'] = Storage::put('public/hospitals', $request->file('image'));
+      $inputs['image'] = Storage::disk('public')->put('/hospitals', $request->file('image'));
     $hospital->fill($inputs)->save();
     return redirect()->route('panel.hospitals.show', ['hospital' => $hospital]);
   }

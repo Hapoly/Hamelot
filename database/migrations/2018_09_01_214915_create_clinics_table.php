@@ -16,9 +16,10 @@ class CreateClinicsTable extends Migration
         Schema::create('clinics', function (Blueprint $table) {
             $table->increments('id');
             $table->string('address', 200)->default('NuLL');
-            $table->smallInteger('type')->default(1);
-            $table->string('image');
-            $table->smallInteger('status')->default(1);
+            $table->smallInteger('type')->default(env('CLINIC_TYPE_DEFAULT'));
+            $table->smallInteger('public')->default(env('CLINIC_PUBLIC_DEFAULT'));
+            $table->smallInteger('status')->default(env('CLINIC_STATUS_DEFAULT'));
+            $table->string('image')->default('NuLL');
             $table->integer('doctor_id')->index();
             $table->string('phone', 32)->default('NuLL');
             $table->string('mobile', 32)->default('NuLL');

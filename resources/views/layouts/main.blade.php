@@ -33,7 +33,6 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>  
 	<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyCF40Q8udTOhpGY3FSk17gr_-9tQTchliY"></script>
-  	<script src="{{asset('js/gllpMap.js')}}"></script>  
 </head>
 <body>
 	<div class="wrapper" class="toggled">

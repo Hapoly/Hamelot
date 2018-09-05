@@ -180,7 +180,7 @@ class Users extends Controller{
   public function storeDoctor(DoctorRequest $request){
     $inputs = $request->all();
     if($request->hasFile('profile')){
-      $inputs['profile'] = Storage::put('public/users', $request->file('profile'));
+      $inputs['profile'] = Storage::disk('public')->put('/users', $request->file('profile'));
     }
     $inputs['password'] = bcrypt($inputs['password']);
     $inputs['group_code'] = User::G_DOCTOR;
@@ -196,7 +196,7 @@ class Users extends Controller{
   public function storeNurse(NurseRequest $request){
     $inputs = $request->all();
     if($request->hasFile('profile')){
-      $inputs['profile'] = Storage::put('public/users', $request->file('profile'));
+      $inputs['profile'] = Storage::disk('public')->put('/users', $request->file('profile'));
     }
     $inputs['password'] = bcrypt($inputs['password']);
     $inputs['group_code'] = User::G_NURSE;
@@ -212,7 +212,7 @@ class Users extends Controller{
   public function storePatient(PatientRequest $request){
     $inputs = $request->all();
     if($request->hasFile('profile')){
-      $inputs['profile'] = Storage::put('public/users', $request->file('profile'));
+      $inputs['profile'] = Storage::disk('public')->put('/users', $request->file('profile'));
     }
     $inputs['password'] = bcrypt($inputs['password']);
     $inputs['group_code'] = User::G_PATIENT;
@@ -277,7 +277,7 @@ class Users extends Controller{
   public function updateDoctor(DoctorRequest $request, User $user){
     $inputs = $request->all();
     if($request->hasFile('profile')){
-      $inputs['profile'] = Storage::put('public/users', $request->file('profile'));
+      $inputs['profile'] = Storage::disk('public')->put('/users', $request->file('profile'));
     }
     if($inputs['password'])
       $inputs['password'] = bcrypt($inputs['password']);
@@ -297,7 +297,7 @@ class Users extends Controller{
   public function updateNurse(NurseRequest $request, User $user){
     $inputs = $request->all();
     if($request->hasFile('profile')){
-      $inputs['profile'] = Storage::put('public/users', $request->file('profile'));
+      $inputs['profile'] = Storage::disk('public')->put('/users', $request->file('profile'));
     }
     if($inputs['password'])
       $inputs['password'] = bcrypt($inputs['password']);

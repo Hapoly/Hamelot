@@ -55,6 +55,14 @@ class Permission
         'panel.policlinics.show'                        => [ 1, 2, 3, 4, 5 ],
         'panel.policlinics.destroy'                     => [ 1, 2 ],
 
+        'panel.clinics.index'                           => [ 1, 2, 3, 4, 5 ],
+        'panel.clinics.create'                          => [ 1, 2 ],
+        'panel.clinics.store'                           => [ 1, 2 ],
+        'panel.clinics.edit'                            => [ 1, 2 ],
+        'panel.clinics.update'                          => [ 1, 2 ],
+        'panel.clinics.show'                            => [ 1, 2, 3, 4, 5 ],
+        'panel.clinics.destroy'                         => [ 1, 2 ],
+
         'panel.departments.index'                       => [ 1, 2, 3, 4 ],
         'panel.departments.create'                      => [ 1, 2 ],
         'panel.departments.store'                       => [ 1, 2 ],
@@ -82,6 +90,7 @@ class Permission
 
         'panel.search.patients'                         => [ 1, 2, 3, 4 ],
         'panel.search.patient-departments'              => [ 1, 2, 3, 4 ],
+        'panel.search.doctors'                          => [ 1, 2, 3, 4 ],
 
         'panel.permissions.create'                      => [ 2, 3, 4 ],
         'panel.permissions.check'                       => [ 2, 3, 4 ],

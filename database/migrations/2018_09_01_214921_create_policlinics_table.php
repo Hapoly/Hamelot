@@ -17,7 +17,7 @@ class CreatePoliclinicsTable extends Migration
             $table->increments('id');
             $table->string('title', 32);
             $table->string('address', 200)->default('NuLL');
-            $table->string('image');
+            $table->string('image')->default('NuLL');
             $table->smallInteger('status')->default(env('POLICLINIC_STATUS_DEFAULT'));
             $table->smallInteger('type')->default(env('POLICLINIC_TYPE_DEFAULT'));
             $table->smallInteger('public')->default(env('POLICLINIC_PUBLIC_DEFAULT'));

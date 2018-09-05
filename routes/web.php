@@ -19,6 +19,7 @@ Route::middleware(['auth', 'Permission'])->namespace('Panel')->prefix('panel')->
         'hospitals'         => 'Hospitals',
         'policlinics'       => 'Policlinics',
         'clinics'           => 'Clinics',
+        'clinics'           => 'Clinics',
         'departments'       => 'Departments',
         'report_templates'  => 'ReportTemplates',
         'experiments'       => 'Experiments',
@@ -78,10 +79,7 @@ Route::middleware(['auth', 'Permission'])->namespace('Panel')->prefix('panel')->
     Route::prefix('search')->name('search.')->group(function(){
         Route::get('/patients', 'Search@patients')->name('patients');
         Route::get('/patient-departments', 'Search@departmentsOfPatient')->name('patient-departments');
-        // Route::get('/departments/{query}', 'Search@hospitals')->name('hospitals');
-        // Route::get('/departments/{user}/{query}', 'Search@hospitals')->name('hospitals');
-        // Route::get('/hospitals/{query}', 'Search@patients')->name('patients');
-        // Route::get('/hospitals/{user}/{query}', 'Search@patients')->name('patients');
+        Route::get('/doctors', 'Search@doctors')->name('doctors');
     });
 });
 

@@ -15,7 +15,7 @@
                     response( cache[ term ] );
                     return;
                 }
-                $.getJSON( "{{route('panel.search.patients')}}", request, function( data, status, xhr ) {
+                $.getJSON( "{{route('panel.search.' . $route)}}", request, function( data, status, xhr ) {
                     cache[ term ] = data;
                     response( data );
                 });

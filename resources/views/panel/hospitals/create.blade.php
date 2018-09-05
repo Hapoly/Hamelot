@@ -5,8 +5,8 @@
   @form_create(['action' => route('panel.hospitals.store'), 'title' => __('hospitals.create')])
     @input_text(['name' => 'title', 'value' => old('title', ''), 'label' => __('hospitals.title'), 'required' => true])
     @input_text(['name' => 'address', 'value' => old('address', ''), 'label' => __('hospitals.address'), 'required' => true])
-    @input_text(['name' => 'phone', 'value' => old('phone', ''), 'label' => __('hospitals.phone'), 'required' => true])
-    @input_text(['name' => 'mobile', 'value' => old('mobile', ''), 'label' => __('hospitals.mobile'), 'required' => true])
+    @input_text(['name' => 'phone', 'value' => old('phone', ''), 'label' => __('hospitals.phone'), 'required' => false])
+    @input_text(['name' => 'mobile', 'value' => old('mobile', ''), 'label' => __('hospitals.mobile'), 'required' => false])
     <?php
         $status_rows = [
         [ 'value' => 1, 'label' => __('hospitals.status_str.1') ],

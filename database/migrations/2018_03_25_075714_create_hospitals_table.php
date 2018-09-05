@@ -19,7 +19,7 @@ class CreateHospitalsTable extends Migration
             $table->string('address');
             $table->string('phone', 32)->default('NuLL');
             $table->string('mobile', 32)->default('NuLL');
-            $table->string('image');
+            $table->string('image')->default('NuLL');
             $table->decimal('lon', 12, 10)->default(0);
             $table->decimal('lat', 12, 10)->default(0);
             $table->integer('city_id')->default(0)->index();

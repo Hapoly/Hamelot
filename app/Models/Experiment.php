@@ -51,7 +51,7 @@ class Experiment extends Model
                     'experiment_id'     => $this->id,
                     'report_field_id'   => $field->id,
                 ];
-                $eField['value_image'] = Storage::put('public/experiments', $request->file('field_' . $field->id));
+                $inputs['value_image'] = Storage::disk('public')->put('/experiments', $request->file('field_' . $field->id));
                 ExperimentField::create($eField);
             }else{
                 $field_value = $request->input('field_' . $field->id, 'NuLL');
