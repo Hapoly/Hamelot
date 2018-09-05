@@ -179,7 +179,7 @@
 			</a>
 			<ul class="collapse list-unstyled" id="department-requests">
 				<li>
-					<a href="{{route('panel.department_users.index')}}"> لیست درخواست‌ها</a>
+					<a href="{{route('panel.unit_users.index')}}"> لیست درخواست‌ها</a>
 				</li>
 			</ul>
 		</li>

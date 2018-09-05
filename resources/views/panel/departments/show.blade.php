@@ -45,7 +45,7 @@
     @if($department->canJoin())
       <div class="row">
         <div class="col-md-12" style="text-align: center">
-          <a class="btn btn-primary" href="{{route('panel.department_users.send_department', ['user' => Auth::user(), 'department' => $department])}}">{{ __('department_users.send') }}</a>
+          <a class="btn btn-primary" href="{{route('panel.unit_users.send_department', ['user' => Auth::user(), 'department' => $department])}}">{{ __('unit_users.send') }}</a>
         </div>
       </div>
     @endif

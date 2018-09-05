@@ -60,14 +60,14 @@
     @if($policlinic->canJoin())
       <div class="row">
         <div class="col-md-12" style="text-align: center">
-          <a class="btn btn-primary" href="{{route('panel.department_users.send_policlinic', ['user' => Auth::user(), 'policlinic' => $policlinic])}}">{{ __('department_users.send') }}</a>
+          <a class="btn btn-primary" href="{{route('panel.unit_users.send_policlinic', ['user' => Auth::user(), 'policlinic' => $policlinic])}}">{{ __('unit_users.send') }}</a>
         </div>
       </div>
     @endif
   </div>
   <div class="panel panel-default">
     <div class="panel-heading sub-panel-title">
-      {{__('department_users.title')}}
+      {{__('unit_users.title')}}
     </div>
     @if(sizeof($policlinic->users))
       <table class="table">
@@ -103,7 +103,7 @@
     @else
       <div class="row">
         <div class="col-md-12" style="text-align: center">
-          {{__('department_users.not_found')}}
+          {{__('unit_users.not_found')}}
         </div>
       </div>
     @endif

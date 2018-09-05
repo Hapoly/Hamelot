@@ -14,33 +14,33 @@ use URL;
 
 class UnitUsers extends Controller{
   public function index(Request $request){
-    $department_users = UnitUser::fetch();
+    $unit_users = UnitUser::fetch();
     $links = '';
     $sort = $request->input('sort', '###');
     $search = $request->input('search', '###');
 
     if($sort != '###' && $search == '###'){
-      $department_users = $department_users->orderBy($request->input('sort'), 'desc');
-      $department_users = $department_users->paginate(10);
-      $links = $department_users->appends(['sort' => $request->input('sort')])->links();
+      $unit_users = $unit_users->orderBy($request->input('sort'), 'desc');
+      $unit_users = $unit_users->paginate(10);
+      $links = $unit_users->appends(['sort' => $request->input('sort')])->links();
     }else if($sort == '###' && $search != '###'){
-      $department_users = $department_users->whereHas('user', function($query){
+      $unit_users = $unit_users->whereHas('user', function($query){
         return $query->whereRaw("first_name + ' ' + last_name LIKE '%$search%'");
       });
-      $department_users = $department_users->paginate(10);
-      $links = $department_users->appends(['sort' => $request->input('sort')])->links();
+      $unit_users = $unit_users->paginate(10);
+      $links = $unit_users->appends(['sort' => $request->input('sort')])->links();
     }else if($sort != '###' && $search != '###'){
-      $department_users = $department_users->whereHas('user', function($query){
+      $unit_users = $unit_users->whereHas('user', function($query){
         return $query->whereRaw("first_name + ' ' + last_name LIKE '%$search%'");
       });
-      $department_users = $department_users->orderBy($request->input('sort'), 'desc');
-      $department_users = $department_users->paginate(10);
-      $links = $department_users->appends(['sort' => $request->input('sort')])->links();
+      $unit_users = $unit_users->orderBy($request->input('sort'), 'desc');
+      $unit_users = $unit_users->paginate(10);
+      $links = $unit_users->appends(['sort' => $request->input('sort')])->links();
     }else{
-      $department_users = $department_users->paginate(10);
+      $unit_users = $unit_users->paginate(10);
     }
-    return view('panel.department_users.index', [
-      'department_users'   => $department_users,
+    return view('panel.unit_users.index', [
+      'unit_users'   => $unit_users,
       'links'       => $links,
       'sort'        => $sort,
       'search'      => $search,
@@ -58,14 +58,14 @@ class UnitUsers extends Controller{
   }
 
   public function createPoloclinicManager(Request $request){
-    return view('panel.department_users.policlinic.manager.create',[
+    return view('panel.unit_users.policlinic.manager.create',[
       'policlinics' => Policlinic::fetch(true)->get(),
     ]);
   }
   public function store(UnitUserManageRequest $request){
     $user = User::whereRaw("concat(first_name, ' ', last_name) = '". $request->full_name ."'")->first();
     if(!$user)
-      return redirect()->route('panel.department_users.index');
+      return redirect()->route('panel.unit_users.index');
     $inputs['doctor_id'] = $user->id;
     switch($request->type){
       case 1: // policlinic manager

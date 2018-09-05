@@ -115,7 +115,7 @@
             <th>{{__('departments.title')}}</th>
             <th>{{__('departments.status')}}</th>
             @if(Auth::user()->isDoctor() || Auth::user()->isNurse())
-              <th>{{__('department_users.join_status')}}</th>
+              <th>{{__('unit_users.join_status')}}</th>
             @endif
             <th>{{__('departments.operation')}}</th>
           </tr>
@@ -143,7 +143,7 @@
                     <a class="btn btn-primary" href="{{route('panel.hospitals.edit', ['hospital' => $hospital])}}">{{ __('departments.edit') }}</a>
                 @elseif(Auth::user()->isDoctor() || Auth::user()->isNurse())
                   @if($department->canJoin())
-                    <a class="btn btn-primary" href="{{route('panel.department_users.send', ['user' => Auth::user(), 'department' => $department])}}">{{ __('department_users.send') }}</a>
+                    <a class="btn btn-primary" href="{{route('panel.unit_users.send', ['user' => Auth::user(), 'department' => $department])}}">{{ __('unit_users.send') }}</a>
                   @else
                     -
                   @endif
@@ -158,7 +158,7 @@
     @else
       <div class="row">
         <div class="col-md-12" style="text-align: center">
-          {{__('department_users.not_found')}}
+          {{__('unit_users.not_found')}}
         </div>
       </div>
     @endif
