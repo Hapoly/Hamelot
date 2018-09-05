@@ -4,7 +4,9 @@
 <div class="container">
   @form_create(['action' => route('panel.clinics.store'), 'title' => __('clinics.create')])
     @input_text(['name' => 'address', 'value' => old('address', ''), 'label' => __('clinics.address'), 'required' => true])
-    @autocomplete(['name' => 'doctor_name', 'label' => __('clinics.doctor_name'), 'value' => old('doctor_name'), 'required' => true, 'route' => 'doctors'])
+    @if(Auth::user()->isAdmin())
+      @autocomplete(['name' => 'doctor_name', 'label' => __('clinics.doctor_name'), 'value' => old('doctor_name'), 'required' => true, 'route' => 'doctors'])
+    @endif
     @input_text(['name' => 'phone', 'value' => old('phone', ''), 'label' => __('clinics.phone'), 'required' => false])
     @input_text(['name' => 'mobile', 'value' => old('mobile', ''), 'label' => __('clinics.mobile'), 'required' => false])
     @tagline

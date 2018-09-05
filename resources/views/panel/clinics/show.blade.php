@@ -11,9 +11,6 @@
       <h2>{{ $clinic->doctor->full_name }}</h2>
     </div>
     <div class="row">
-      <img src="{{$clinic->image_url}}" class="center" style="width: 25%;">
-    </div>
-    <div class="row">
       <table class="table table-striped">
         <tbody>
           <tr>
@@ -33,13 +30,20 @@
             <td>{{$clinic->status_str}}</td>
           </tr>
           <tr>
+            <td>{{__('clinics.public')}}</td>
+            <td>{{$clinic->public_str}}</td>
+          </tr>
+          <tr>
+            <td>{{__('clinics.type')}}</td>
+            <td>{{$clinic->type_str}}</td>
+          </tr>
+          <tr>
             <td>{{__('clinics.city_id')}}</td>
             <td>{{$clinic->city->title}}</td>
           </tr>
         </tbody>
       </table>
     </div>
-    {{$clinic->has_permission}}
     @if($clinic->has_permission)
       <div class="row">
         <div class="col-md-6" style="text-align: center">

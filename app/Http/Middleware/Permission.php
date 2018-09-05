@@ -56,12 +56,12 @@ class Permission
         'panel.policlinics.destroy'                     => [ 1, 2 ],
 
         'panel.clinics.index'                           => [ 1, 2, 3, 4, 5 ],
-        'panel.clinics.create'                          => [ 1, 2 ],
-        'panel.clinics.store'                           => [ 1, 2 ],
-        'panel.clinics.edit'                            => [ 1, 2 ],
-        'panel.clinics.update'                          => [ 1, 2 ],
+        'panel.clinics.create'                          => [ 1, 3 ],
+        'panel.clinics.store'                           => [ 1, 3 ],
+        'panel.clinics.edit'                            => [ 1, 3 ],
+        'panel.clinics.update'                          => [ 1, 3 ],
         'panel.clinics.show'                            => [ 1, 2, 3, 4, 5 ],
-        'panel.clinics.destroy'                         => [ 1, 2 ],
+        'panel.clinics.destroy'                         => [ 1, 3 ],
 
         'panel.departments.index'                       => [ 1, 2, 3, 4 ],
         'panel.departments.create'                      => [ 1, 2 ],

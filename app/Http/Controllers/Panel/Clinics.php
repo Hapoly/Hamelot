@@ -64,6 +64,8 @@ class Clinics extends Controller{
     $inputs['doctor_id'] = $doctor->id;
     if($request->hasFile('image'))
       $inputs['image'] = Storage::disk('public')->put('/clinics', $request->file('image'));
+    if(Auth::user()->isDoctor())
+      $inputs['doctor_id'] = Auth::user()->id;
     $clinic = Clinic::create($inputs);
     return redirect()->route('panel.clinics.show', ['clinic' => $clinic]);
   }
@@ -78,6 +80,8 @@ class Clinics extends Controller{
     $inputs = $request->all();
     if($request->hasFile('image'))
       $inputs['image'] = Storage::disk('public')->put('/clinics', $request->file('image'));
+    if(Auth::user()->isDoctor())
+      $inputs['doctor_id'] = Auth::user()->id;
     $clinic->fill($inputs)->save();
     return redirect()->route('panel.clinics.show', ['clinic' => $clinic]);
   }
