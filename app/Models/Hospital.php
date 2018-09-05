@@ -74,7 +74,7 @@ class Hospital extends Model {
                 if($joined)
                     return Hospital::whereHas('departments', function($query){
                         return $query->whereHas('requests', function($query){
-                            return $query->where('department_user.user_id', Auth::user()->id)->where('status', UnitUser::ACCEPTED);
+                            return $query->where('unit_user.user_id', Auth::user()->id)->where('status', UnitUser::ACCEPTED);
                         });
                     });
                 else

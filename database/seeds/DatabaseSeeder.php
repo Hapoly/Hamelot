@@ -15,7 +15,6 @@ class DatabaseSeeder extends Seeder
         $this->call(Consts::class);
         $this->call(Departments::class);
         $this->call(Hospitals::class);
-        $this->call(HospitalUsers::class);
         $this->call(UnitUsers::class);
         $this->call(ReportTemplates::class);
         $this->call(Cities::class);

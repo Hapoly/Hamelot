@@ -26,16 +26,16 @@
       'status'        => __('unit_users.status'),
       'NuLL'          => __('unit_users.operation'),
     ]])
-    @foreach($unit_users as $department_user)
+    @foreach($unit_users as $unit_user)
       <tr class="hospital-td">
-        <td>{{$department_user->id}}</td>
-        <td><a href="{{route('panel.users.show', ['user' => $department_user->user])}}">{{$department_user->user->full_name}}</a></td>
-        <td><a href="{{route('panel.departments.show', ['department' => $department_user->department])}}">{{$department_user->department->title}}</a></td>
-        <td>{{$department_user->status_str}}</td>
+        <td>{{$unit_user->id}}</td>
+        <td><a href="{{route('panel.users.show', ['user' => $unit_user->user])}}">{{$unit_user->user->full_name}}</a></td>
+        <td><a href="{{route('panel.departments.show', ['department' => $unit_user->department])}}">{{$unit_user->department->title}}</a></td>
+        <td>{{$unit_user->status_str}}</td>
         @if(Auth::user()->isAdmin())
                     
         @else
-          <td><a class="btn btn-default" href="{{route('panel.unit_users.show', ['department_user' => $department_user])}}">{{__('unit_users.show')}}</a></td>
+          <td><a class="btn btn-default" href="{{route('panel.unit_users.show', ['unit_user' => $unit_user])}}">{{__('unit_users.show')}}</a></td>
         @endif
       </tr>
     @endforeach

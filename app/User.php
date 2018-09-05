@@ -84,7 +84,7 @@ class User extends Authenticatable
     }
 
     public function departments(){
-        return $this->belongsToMany('App\Models\Department')->where('department_user.status', UnitUser::ACCEPTED);
+        return $this->belongsToMany('App\Models\Department')->where('unit_user.status', UnitUser::ACCEPTED);
     }
 
     public function patients(){

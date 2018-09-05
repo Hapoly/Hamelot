@@ -8,7 +8,7 @@ use Auth;
 class UnitUser extends Model
 {
     protected $primary = 'id';
-    protected $table = 'department_user';
+    protected $table = 'unit_user';
     protected $fillable = ['user_id', 'department_id', 'status', 'type', 'permission'];
     protected $appends = ['status_str', 'type_str'];
 

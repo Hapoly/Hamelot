@@ -83,7 +83,7 @@ class Policlinic extends Model
             case USER::G_PATIENT:
                 if($joined)
                     return Policlinic::whereHas('requests', function($query){
-                        return $query->where('department_user.user_id', Auth::user()->id)->where('status', UnitUser::ACCEPTED);
+                        return $query->where('unit_user.user_id', Auth::user()->id)->where('status', UnitUser::ACCEPTED);
                     });
                 else
                     return Policlinic::where('public', Policlinic::T_PUBLIC);
@@ -152,7 +152,7 @@ class Policlinic extends Model
     }
 
     public function users(){
-        return $this->belongsToMany('App\User', 'department_user', 'department_id')
+        return $this->belongsToMany('App\User', 'unit_user', 'department_id')
                     ->wherePivot('status', UnitUser::ACCEPTED)
                     ->wherePivot('type', UnitUser::POLICLINIC);
     }
@@ -176,10 +176,10 @@ class Policlinic extends Model
     }
 
     public function joined(){
-        return $this->users()->where('users.id', Auth::user()->id)->where('department_user.status', UnitUser::ACCEPTED)->first() != null;
+        return $this->users()->where('users.id', Auth::user()->id)->where('unit_user.status', UnitUser::ACCEPTED)->first() != null;
     }
     public function pending(){
-        return $this->users()->where('users.id', Auth::user()->id)->where('department_user.status', UnitUser::PENDNIG)->first() != null;
+        return $this->users()->where('users.id', Auth::user()->id)->where('unit_user.status', UnitUser::PENDNIG)->first() != null;
     }
     public function hasRequest(){
         return $this->users()->where('users.id', Auth::user()->id)->first() != null;

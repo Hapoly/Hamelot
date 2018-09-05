@@ -75,9 +75,9 @@ Route::middleware(['auth', 'Permission'])->namespace('Panel')->prefix('panel')->
         Route::get('/send-policlinic/{user}/{policlinic}', 'UnitUsers@sendPoliclinic')->name('send_policlinic');
         Route::get('/', 'UnitUsers@index')->name('index');
         
-        Route::get('/show/{department_user}', 'UnitUsers@show')->name('show');
+        Route::get('/show/{unit_user}', 'UnitUsers@show')->name('show');
 
-        Route::post('/update-inline/{department_user}', 'UnitUsers@inlineUpdate')->name('inline_update');
+        Route::post('/update-inline/{unit_user}', 'UnitUsers@inlineUpdate')->name('inline_update');
 
         Route::get('/', 'UnitUsers@index')->name('index');
         Route::get('/destroy/{unit_users}', 'UnitUsers@destroy')->name('destroy');

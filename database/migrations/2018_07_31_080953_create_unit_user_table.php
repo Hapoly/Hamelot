@@ -13,10 +13,10 @@ class CreateUnitUserTable extends Migration
      */
     public function up()
     {
-        Schema::create('department_user', function (Blueprint $table) {
+        Schema::create('unit_user', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->index();
-            $table->integer('department_id')->index();
+            $table->integer('unit_id')->index();
             $table->smallInteger('type');
             $table->smallInteger('permission')->default(1);
             $table->smallInteger('status')->default(1);
@@ -31,6 +31,6 @@ class CreateUnitUserTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('department_user');
+        Schema::dropIfExists('unit_user');
     }
 }
