@@ -26,14 +26,14 @@
                                 for(let i=0; i<response.length; i++){
                                     result_str += '\n<option value="'+response[i].id+'">'+response[i].title+'</option>'
                                 }
-                                $("#department_id").empty();
-                                $("#department_id").append(result_str);
+                                $("#unit_id").empty();
+                                $("#unit_id").append(result_str);
                             });
                         });
                     })
                 </script>
                 <input hidden name="report_template_id" value="{{$report_template->id}}" />
-                @input_select(['name' => 'department_id', 'value' => old('department_id', ''), 'label' => __('experiments.department_id'), 'required' => true, 'rows' => []])
+                @input_select(['name' => 'unit_id', 'value' => old('unit_id', ''), 'label' => __('experiments.unit_id'), 'required' => true, 'rows' => []])
                 @input_date(['name' => '', 'year' => old('year'), 'month' => old('month'), 'day' => old('day')])
             </div>
         </div>

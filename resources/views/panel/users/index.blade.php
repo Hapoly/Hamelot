@@ -45,10 +45,10 @@
                 <div class="col-md-6" id="departments">
                   @if(isset($filters['hospital']))
                     <div class="form-group">
-                      <select class="form-control" name="department_id" style="width: 100%">
-                        <option value="0" {{$filters['department_id'] ? 'selected': ''}}>تمام بخش‌ها</option>
+                      <select class="form-control" name="unit_id" style="width: 100%">
+                        <option value="0" {{$filters['unit_id'] ? 'selected': ''}}>تمام بخش‌ها</option>
                         @foreach($filters['hospital']->departments as $department)
-                          <option value="{{$department->id}}" {{$filters['department_id'] == $department->id? 'selected': ''}}>{{$department->title}}</option>
+                          <option value="{{$department->id}}" {{$filters['unit_id'] == $department->id? 'selected': ''}}>{{$department->title}}</option>
                         @endforeach
                       </select>
                     </div>
@@ -299,7 +299,7 @@
           departments += '<option value="'+ response[i].id +'">'+ response[i].title +'</option>';
         $('#departments').html(
           '<div class="form-group">'+
-          '  <select class="form-control" name="department_id" style="width: 100%">'+
+          '  <select class="form-control" name="unit_id" style="width: 100%">'+
           '    <option value="0">تمام بخش‌ها</option>'+ departments+
           '  </select>'+
           '</div>'

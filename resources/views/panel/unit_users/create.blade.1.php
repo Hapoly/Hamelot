@@ -35,20 +35,20 @@
         ]);
       }
     ?>
-    @input_select(['name' => 'department_id', 'value' => old('department_id', ''), 'label' => __('unit_users.department_id'), 'required' => true, 'rows' => $department_strs, 'disabled' => false])
+    @input_select(['name' => 'unit_id', 'value' => old('unit_id', ''), 'label' => __('unit_users.unit_id'), 'required' => true, 'rows' => $department_strs, 'disabled' => false])
     @submit_row(['value' => 'new', 'label' => __('unit_users.save')])
   @endform_create
   <script>
     $(document).ready(function(){
       $('#type_{{UnitUser::POLICLINIC}}').change(function(){
-        $('#department_id').prop('disabled', true);
+        $('#unit_id').prop('disabled', true);
         $('#policlinic_id').prop('disabled', false);
         $('#permission').prop('disabled', false);
       });
       $('#type_{{UnitUser::DEPARTMENT}}').change(function(){
         $('#policlinic_id').prop('disabled', true);
         $('#permission').prop('disabled', true);
-        $('#department_id').prop('disabled', false);
+        $('#unit_id').prop('disabled', false);
       });
     });
   </script>

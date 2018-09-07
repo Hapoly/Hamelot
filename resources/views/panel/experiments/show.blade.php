@@ -10,7 +10,7 @@
       <div class="col-md-4" style="text-align: center;" >{{__('reports.title')}}: {{$experiment->report_template->title}}</div>
       <div class="col-md-4" style="text-align: center;" >{{__('experiments.patient_name')}}: {{$experiment->user->first_name}} {{$experiment->user->last_name}}</div>
       <div class="col-md-4" style="text-align: center;" >{{__('experiments.date')}}: {{$experiment->date_str}}</div>
-      <div class="col-md-4" style="text-align: center; margin-top: 15px;" >{{__('experiments.department_id')}}: {{$experiment->department->title}}</div>
+      <div class="col-md-4" style="text-align: center; margin-top: 15px;" >{{__('experiments.unit_id')}}: {{$experiment->department->title}}</div>
       <div class="col-md-4" style="text-align: center; margin-top: 15px;" >{{__('departments.hospital_id')}}: {{$experiment->department->hospital->title}}</div>
     </div>
   </div>

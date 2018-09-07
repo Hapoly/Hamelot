@@ -11,7 +11,7 @@ class Experiment extends Model
 {
     protected $primary = 'id';
     protected $table = 'experiments';
-    protected $fillable = ['user_id', 'report_template_id', 'date', 'status', 'department_id'];
+    protected $fillable = ['user_id', 'report_template_id', 'date', 'status', 'unit_id'];
 
     const STATUS_ACTIVE     = 1;
     const STATIC_INCACTIVE  = 2;

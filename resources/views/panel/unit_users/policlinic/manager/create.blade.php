@@ -13,7 +13,7 @@
         ]);
       }
     ?>
-    @input_select(['name' => 'department_id', 'value' => old('department_id', ''), 'label' => __('unit_users.policlinic_id'), 'required' => true, 'rows' => $policlinic_strs])
+    @input_select(['name' => 'unit_id', 'value' => old('unit_id', ''), 'label' => __('unit_users.policlinic_id'), 'required' => true, 'rows' => $policlinic_strs])
     <input hidden value="1" name="type" />
     @submit_row(['value' => 'new', 'label' => __('unit_users.save')])
   @endform_create

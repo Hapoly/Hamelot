@@ -20,8 +20,8 @@ return [
     'profile'           => 'تصویر',
     'id_number'         => 'کدملی',
     'age'               => 'سن',
-    'department_id'     => 'بخش مورد فعالیت',
-    'patient_department_id' => 'بخش',
+    'unit_id'     => 'بخش مورد فعالیت',
+    'patient_unit_id' => 'بخش',
     'public'            => 'وضعیت نمایش',
     'msc'               => 'کدنظام پزشکی',
 

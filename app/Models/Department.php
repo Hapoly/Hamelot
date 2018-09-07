@@ -39,12 +39,12 @@ class Department extends Model
         return $this->belongsTo('App\Models\Hospital');
     }
     public function users(){
-        return $this->belongsToMany('App\User', 'unit_user', 'department_id')
+        return $this->belongsToMany('App\User', 'unit_user', 'unit_id')
                     ->wherePivot('status', UnitUser::ACCEPTED)
                     ->wherePivot('type', UnitUser::DEPARTMENT);
     }
     public function requests(){
-        return $this->hasMany('App\Models\UnitUser', 'department_id')->where('type', UnitUser::DEPARTMENT);
+        return $this->hasMany('App\Models\UnitUser', 'unit_id')->where('type', UnitUser::DEPARTMENT);
     }
     public function doctors(){
         return $this->users()->where('group_code', User::G_DOCTOR);

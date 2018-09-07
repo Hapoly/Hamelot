@@ -9,7 +9,7 @@ class UnitUser extends Model
 {
     protected $primary = 'id';
     protected $table = 'unit_user';
-    protected $fillable = ['user_id', 'department_id', 'status', 'type', 'permission'];
+    protected $fillable = ['user_id', 'unit_id', 'status', 'type', 'permission'];
     protected $appends = ['status_str', 'type_str'];
 
     const PENDING   = 1;
@@ -46,8 +46,8 @@ class UnitUser extends Model
             });
     }
 
-    const POLICLINIC    = 1;
-    const DEPARTMENT    = 2;
+    const DEPARTMENT    = 1;
+    const POLICLINIC    = 2;
     const HOSPITAL      = 3;
     private $type_lang = [
         1   => 'بخش',

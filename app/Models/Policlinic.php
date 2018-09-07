@@ -148,19 +148,27 @@ class Policlinic extends Model
 
 
     public function requests(){
-        return $this->hasMany('App\Models\UnitUser', 'department_id')->where('type', UnitUser::POLICLINIC);
+        return $this->hasMany('App\Models\UnitUser', 'unit_id')->where('type', UnitUser::POLICLINIC);
     }
 
     public function users(){
-        return $this->belongsToMany('App\User', 'unit_user', 'department_id')
+        return $this->belongsToMany('App\User', 'unit_user', 'unit_id')
                     ->wherePivot('status', UnitUser::ACCEPTED)
-                    ->wherePivot('type', UnitUser::POLICLINIC);
+                    ->wherePivot('type', UnitUser::POLICLINIC)
+                    ->wherePivot('permission', UnitUser::MEMBER);
     }
     public function doctors(){
         return $this->users()->where('group_code', User::G_DOCTOR);
     }
     public function nurses(){
         return $this->users()->where('group_code', User::G_NURSE);
+    }
+
+    public function admins(){
+        return $this->belongsToMany('App\User', 'unit_user', 'unit_id')
+                    ->wherePivot('status', UnitUser::ACCEPTED)
+                    ->wherePivot('type', UnitUser::POLICLINIC)
+                    ->wherePivot('permission', UnitUser::MANAGER);
     }
     public function hasEditPermission(){
         if(Auth::user()->isAdmin())

@@ -27,7 +27,7 @@
     'cols' => [
       'id'          => __('hospitals.row'),
       'title'       => __('hospitals.title'),
-      'address'     => __('hospitals.address'),
+      'address'     => __('hospitals.city_id'),
       'phone'       => __('hospitals.phone'),
       'mobile'      => __('hospitals.mobile'),
       'status'      => __('hospitals.status'),
@@ -37,12 +37,12 @@
       <tr class="hospital-td {{$hospital->joined? 'tr-highlight': ''}}">
         <td>{{$hospital->id}}</td>
         <td><a href="{{route('panel.hospitals.show', ['hospit$hospital' => $hospital])}}">{{$hospital->title}}</a></td>
-        <td>{{$hospital->address_summary}}</td>
+        <td>{{$hospital->city->title}}</td>
         <td>{{$hospital->phone}}</td>
         <td>{{$hospital->mobile}}</td>
         <td>{{$hospital->status_str}}</td>
         @if(Auth::user()->isAdmin())
-          @operation_th(['base' => 'panel.hospitals', 'label' => 'hospital', 'item' => $hospital, 'remove_label' => __('hospitals.remove'), 'edit_label' => __('hospitals.edit')])
+          @operation_th(['base' => 'panel.hospitals', 'label' => 'hospital', 'item' => $hospital, 'remove_label' => __('hospitals.remove'), 'edit_label' => __('hospitals.edit'), 'show_label' => __('hospitals.show')])
         @else
           <td><a class="btn btn-default" href="{{route('panel.hospitals.show', ['$hospital' => $hospital])}}">{{__('hospitals.show')}}</a></td>
         @endif

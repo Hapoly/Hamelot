@@ -50,7 +50,7 @@ class UnitUsers extends Controller{
   public function sendDepartment(Request $request, User $user, Department $department){
     UnitUser::create([
       'user_id'       => $user->id,
-      'department_id' => $department->id,
+      'unit_id' => $department->id,
       'status'        => UnitUser::PENDING,
       'type'          => UnitUser::DEPARTMENT,
     ]);
@@ -70,13 +70,13 @@ class UnitUsers extends Controller{
     switch($request->type){
       case 1: // policlinic manager
         UnitUser::create([
-          'department_id' => $request->department_id,
+          'unit_id' => $request->unit_id,
           'user_id'       => $user->id,
           'type'          => UnitUser::POLICLINIC,
           'permission'    => UnitUser::MANAGER,
           'status'        => UnitUser::ACCEPTED,
         ]);
-        return redirect()->route('panel.policlinics.show', ['policlinic' => $request->department_id]);
+        return redirect()->route('panel.policlinics.show', ['policlinic' => $request->unit_id]);
     }
     return $request->all();
   }

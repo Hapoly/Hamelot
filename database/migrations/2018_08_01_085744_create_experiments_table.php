@@ -17,7 +17,7 @@ class CreateExperimentsTable extends Migration
             $table->increments('id');
             $table->integer('user_id')->index();
             $table->integer('report_template_id')->index();
-            $table->integer('department_id')->index();
+            $table->integer('unit_id')->index();
             $table->integer('date')->default(0);
             $table->smallInteger('status')->default(1);
             $table->timestamps();

@@ -22,7 +22,7 @@
     'cols' => [
       'id'            => __('unit_users.row'),
       'user_id'       => __('unit_users.user_id'),
-      'department_id' => __('unit_users.department_id'),
+      'unit_id' => __('unit_users.unit_id'),
       'status'        => __('unit_users.status'),
       'NuLL'          => __('unit_users.operation'),
     ]])

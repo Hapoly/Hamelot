@@ -25,7 +25,7 @@ class ExperimentRequest extends FormRequest
     {
         return [
             'patient_name'          => 'required|string',
-            'department_id'         => 'required_if:action,new|numeric',
+            'unit_id'         => 'required_if:action,new|numeric',
             'report_template_id'    => 'required|numeric',
             'year'                  => 'required|numeric',
             'month'                 => 'required|numeric',

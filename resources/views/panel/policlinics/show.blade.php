@@ -67,7 +67,50 @@
   </div>
   <div class="panel panel-default">
     <div class="panel-heading sub-panel-title">
-      {{__('unit_users.title')}}
+      {{__('unit_users.manager_title')}}
+    </div>
+    @if(sizeof($policlinic->admins))
+      <table class="table">
+        <thead>
+          <tr>
+            <th>{{__('users.row')}}</th>
+            <th>{{__('users.first_name')}}</th>
+            <th>{{__('users.last_name')}}</th>
+            <th>{{__('users.status')}}</th>
+            @if(Auth::user()->isAdmin())
+              <th>{{__('users.operation')}}</th>
+            @endif
+          </tr>
+        </thead>
+        <tbody>
+          @foreach($policlinic->users as $user)
+            <tr class="{{$user->id == Auth::user()->id? 'tr-highlight':''}}">
+              <td>{{$user->id}}</td>
+              <td>{{$user->first_name}}</td>
+              <td>{{$user->last_name}}</td>
+              <td>{{$user->status_str}}</td>
+              @if(Auth::user()->isAdmin())
+                <td>
+                  <a href="{{route('panel.users.destroy', ['user' => $user])}}" class="btn btn-danger" role="button">{{__('users.destroy')}}</a>
+                  <a href="{{route('panel.users.edit', ['user' => $user])}}" class="btn btn-info" role="button">{{__('users.edit.general')}}</a>
+                  <a href="{{route('panel.users.show', ['user' => $user])}}" class="btn btn-info" role="button">{{__('users.show')}}</a>
+                </td>
+              @endif
+            </tr>
+          @endforeach
+        </tbody>
+      </table>
+    @else
+      <div class="row">
+        <div class="col-md-12" style="text-align: center">
+          {{__('unit_users.manager_not_found')}}
+        </div>
+      </div>
+    @endif
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading sub-panel-title">
+      {{__('unit_users.member_title')}}
     </div>
     @if(sizeof($policlinic->users))
       <table class="table">
@@ -103,7 +146,7 @@
     @else
       <div class="row">
         <div class="col-md-12" style="text-align: center">
-          {{__('unit_users.not_found')}}
+          {{__('unit_users.member_not_found')}}
         </div>
       </div>
     @endif

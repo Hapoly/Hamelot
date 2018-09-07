@@ -64,7 +64,7 @@ Route::middleware(['auth', 'Permission'])->namespace('Panel')->prefix('panel')->
             Route::post('/patient', 'Users@updatePatient')->name('patient');
         });
     });
-    Route::prefix('department-users')->name('unit_users.')->group(function(){
+    Route::prefix('unit-users')->name('unit_users.')->group(function(){
         Route::get('/create-policlinic-manager', 'UnitUsers@createPoloclinicManager')->name('create_policlinic_manager');
         Route::get('/create-policlinic-member', 'UnitUsers@createPoloclinicMember')->name('create_policlinic_member');
         Route::get('/create-department-member', 'UnitUsers@createDepartmentMember')->name('create_department_member');

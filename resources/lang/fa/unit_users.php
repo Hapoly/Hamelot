@@ -1,13 +1,12 @@
 <?php
 
 return [
-    'index_title'       => 'دسترسی بخش‌ها',
-    'title'             => 'اعضا',
+    'index_title'       => 'دسترسی‌ها',
     'search'            => 'جستجو',
     'row'               => 'ردیف',
 
     'user_id'           => 'کاربر',
-    'department_id'     => 'بخش',
+    'unit_id'     => 'بخش',
     'status'            => 'وضعیت',
     'operation'         => 'عملیات',
 
@@ -15,8 +14,6 @@ return [
         '1'     => 'فعال',
         '2'     => 'غیرفعال',
     ],
-
-    'not_found' => 'شخصی موجود نیست',
 
     'create'        => 'دسترسی جدید',
     'save'          => 'ذخیره',
@@ -38,4 +35,9 @@ return [
         1   => 'مدیریت',
         2   => 'اعضا',
     ],
+
+    'manager_title'     => 'کادر مدیریت',
+    'member_title'      => 'پرسنل',
+    'member_not_found'  => 'هیچ پرسنلی وجود ندارد',
+    'manager_not_found' => 'کادر مدیریت خالیست',
 ];

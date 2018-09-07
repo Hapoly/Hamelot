@@ -54,11 +54,11 @@ class Users extends Controller{
       $users = $users->where('last_name', 'LIKE' , '%'.$request->last_name.'%');
         
     $hospital_id = $request->input('hospital_id', 0);
-    $department_id = $request->input('department_id', 0);
+    $unit_id = $request->input('unit_id', 0);
     if($hospital_id != 0){
-      if($department_id != 0){
-        $users = $users->whereHas('departments', function($query) use($department_id){
-          return $query->where('departments.id', $department_id);
+      if($unit_id != 0){
+        $users = $users->whereHas('departments', function($query) use($unit_id){
+          return $query->where('departments.id', $unit_id);
         });
       }else{
         $users = $users->whereHas('departments', function($query) use ($hospital_id){
@@ -126,7 +126,7 @@ class Users extends Controller{
         'nurse_field'   => $request->nurse_field,
         'hospital_id'   => $hospital_id,
         'hospital'      => Hospital::find($hospital_id),
-        'department_id' => $department_id,
+        'unit_id' => $unit_id,
       ],
     ]);
   }
@@ -187,7 +187,7 @@ class Users extends Controller{
     $user = User::create($inputs);
     $dpeartment_user = UnitUser::create([
       'user_id'       => $user->id,
-      'department_id' => $inputs['department_id'],
+      'unit_id' => $inputs['unit_id'],
     ]);
     $inputs['user_id'] = $user->id;
     $doctor = Doctor::create($inputs);
@@ -203,7 +203,7 @@ class Users extends Controller{
     $user = User::create($inputs);
     $dpeartment_user = UnitUser::create([
       'user_id'       => $user->id,
-      'department_id' => $inputs['department_id'],
+      'unit_id' => $inputs['unit_id'],
     ]);
     $inputs['user_id'] = $user->id;
     $nurse = Nurse::create($inputs);
@@ -220,7 +220,7 @@ class Users extends Controller{
     $user = User::create($inputs);
     $dpeartment_user = UnitUser::create([
       'user_id'       => $user->id,
-      'department_id' => $inputs['department_id'],
+      'unit_id' => $inputs['unit_id'],
     ]);
     $inputs['user_id'] = $user->id;
     $patient = Patient::create($inputs);

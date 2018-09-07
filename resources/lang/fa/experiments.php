@@ -22,6 +22,6 @@ return [
     'min'   => 'دقیقه',
     'date'  => 'تاریخ',
     'patient_name'      => 'بیمار',
-    'department_id'     => 'بخش',
+    'unit_id'     => 'بخش',
     'edit'              => 'ویرایش',
 ];
