@@ -83,7 +83,7 @@
           </tr>
         </thead>
         <tbody>
-          @foreach($policlinic->users as $user)
+          @foreach($policlinic->admins as $user)
             <tr class="{{$user->id == Auth::user()->id? 'tr-highlight':''}}">
               <td>{{$user->id}}</td>
               <td>{{$user->first_name}}</td>

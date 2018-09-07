@@ -1,6 +1,41 @@
 @extends('layouts.main')
 @section('title', __('hospitals.index_title'))
 @section('content')
+<div class="filter-panel">
+  <div class="row justify-content-center">
+    <div class="col-8">
+      <div class="panel panel-default">
+        <div class="panel-heading">جستجو</div>
+        <div class="panel-body">
+          <form>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="input-group">
+                  <span class="input-group-addon">آدرس</span>
+                  <input type="text" class="form-control" value="{{isset($filters)? $filters['address']: ''}}" name="address" placeholder="خیابان شهربازی">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="input-group">
+                  <span class="input-group-addon">نام بیمارستان</span>
+                  <input type="text" class="form-control" value="{{isset($filters)? $filters['title']: ''}}" name="title" placeholder="هفده شهریور">
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              @filter_city()
+            </div>
+            <div class="row" style="margin-bottom:2px;margin-top:2px;">
+              <div class="col-md-12">
+                <button class="btn btn-info" type="submit">{{__('users.search')}}</a>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 <div class="row" style="margin-bottom:50px;">
   <div class="col-md-4 col-sm-3">
     @if(Auth::user()->isAdmin() || Auth::user()->isManager())

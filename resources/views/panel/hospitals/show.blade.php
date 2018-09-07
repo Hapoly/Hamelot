@@ -62,7 +62,7 @@
     <div class="panel-heading sub-panel-title">
       {{__('hospital_users.title')}}
     </div>
-    @if(sizeof($hospital->users))
+    @if(sizeof($hospital->managers))
       <table class="table">
         <thead>
           <tr>
@@ -76,18 +76,14 @@
           </tr>
         </thead>
         <tbody>
-          @foreach($hospital->users as $user)
+          @foreach($hospital->managers as $user)
             <tr>
               <td>{{$user->id}}</td>
               <td>{{$user->first_name}}</td>
               <td>{{$user->last_name}}</td>
               <td>{{$user->status_str}}</td>
               @if(Auth::user()->isAdmin())
-                <td>
-                  <a href="{{route('panel.users.destroy', ['user' => $user])}}" class="btn btn-danger" role="button">{{__('users.destroy')}}</a>
-                  <a href="{{route('panel.users.edit', ['user' => $user])}}" class="btn btn-primary" role="button">{{__('users.edit.general')}}</a>
-                  <a href="{{route('panel.users.show', ['user' => $user])}}" class="btn btn-info" role="button">{{__('users.show')}}</a>
-                </td>
+                @operation_th(['base' => 'panel.users', 'label' => 'user', 'item' => $user, 'remove_label' => __('users.remove'), 'edit_label' => __('users.edit_str'), 'show_label' => __('users.show')])
               @endif
             </tr>
           @endforeach
@@ -127,32 +123,17 @@
               <td>{{$department->id}}</td>
               <td><a href="{{route('panel.departments.show', ['department' => $department])}}">{{$department->title}}</a></td>
               <td>{{$department->status_str}}</td>
-              @if(Auth::user()->isDoctor() || Auth::user()->isNurse())
-                @if($department->lastRequest())
-                  <td>{{$department->lastRequest()->status_str}}</td>
+              @if($hospital->has_permission)
+                @operation_th(['base' => 'panel.departments', 'label' => 'department', 'item' => $department, 'remove_label' => __('departments.remove'), 'edit_label' => __('departments.edit'), 'show_label' => __('departments.show')])
+              @elseif(Auth::user()->isDoctor() || Auth::user()->isNurse())
+                @if($department->canJoin())
+                  <td><a class="btn btn-primary" href="{{route('panel.unit_users.send_department', ['user' => Auth::user(), 'department' => $department])}}">{{ __('unit_users.send') }}</a></td>
                 @else
-                  <td> - </td>
+                  <td>-</td>
                 @endif
+              @else
+                <td>-</td>
               @endif
-              <td>
-                @if($hospital->has_permission)
-                    <form action="{{route('panel.departments.destroy', ['department' => $department])}}" style="display: inline" method="POST" class="trash-icon">
-                      {{ method_field('DELETE') }}
-                      {{ csrf_field() }}
-                      <button type="submit" class="btn btn-danger">{{__('departments.remove')}}</button>
-                    </form>
-                    <a class="btn btn-primary" href="{{route('panel.hospitals.edit', ['hospital' => $hospital])}}">{{ __('departments.edit') }}</a>
-                    <a href="{{route('panel.departments.show', ['user' => $user])}}" class="btn btn-info" role="button">{{__('departments.show')}}</a>
-                @elseif(Auth::user()->isDoctor() || Auth::user()->isNurse())
-                  @if($department->canJoin())
-                    <a class="btn btn-primary" href="{{route('panel.unit_users.send_department', ['user' => Auth::user(), 'department' => $department])}}">{{ __('unit_users.send') }}</a>
-                  @else
-                    -
-                  @endif
-                @else
-                  -
-                @endif
-              </td>
             </tr>
           @endforeach
         </tbody>

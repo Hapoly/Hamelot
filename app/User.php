@@ -69,7 +69,17 @@ class User extends Authenticatable
     ];
 
     public function hospitals(){
-        return $this->belongsToMany('App\Models\Hospital');
+        return $this->belongsToMany('App\Models\Hospital', 'unit_user', 'user_id', 'unit_id')
+                    ->wherePivot('type', UnitUser::HOSPITAL)
+                    ->wherePivot('permission', UnitUser::MANAGER)
+                    ->wherePivot('status', UnitUser::ACCEPTED);
+    }
+
+    public function policlinics(){
+        return $this->belongsToMany('App\Models\Policlinic', 'unit_user', 'user_id', 'unit_id')
+                    ->wherePivot('type', UnitUser::POLICLINIC)
+                    ->wherePivot('permission', UnitUser::MANAGER)
+                    ->wherePivot('status', UnitUser::ACCEPTED);
     }
 
     public function hospitalDepartments(){
@@ -84,7 +94,10 @@ class User extends Authenticatable
     }
 
     public function departments(){
-        return $this->belongsToMany('App\Models\Department')->where('unit_user.status', UnitUser::ACCEPTED);
+        return $this->belongsToMany('App\Models\Department', 'unit_user', 'user_id', 'unit_id')
+                    ->wherePivot('type', UnitUser::DEPARTMENT)
+                    ->wherePivot('permission', UnitUser::MEMBER)
+                    ->wherePivot('status', UnitUser::ACCEPTED);;
     }
 
     public function patients(){

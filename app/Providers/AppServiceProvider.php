@@ -26,6 +26,7 @@ class AppServiceProvider extends ServiceProvider
         Blade::include('components.forms.inputs.radio', 'input_radio');
         Blade::include('components.forms.inputs.geo_picker', 'input_geo_picker');
         Blade::include('components.forms.inputs.city', 'input_city');
+        Blade::include('components.forms.inputs.filter_city', 'filter_city');
         Blade::include('components.forms.inputs.number', 'input_number');
         Blade::include('components.forms.inputs.date', 'input_date');
         Blade::include('components.forms.inputs.select', 'input_select');

@@ -62,6 +62,12 @@ class UnitUsers extends Controller{
       'policlinics' => Policlinic::fetch(true)->get(),
     ]);
   }
+
+  public function createPoloclinicMember(Request $request){
+    return view('panel.unit_users.policlinic.member.create',[
+      'policlinics' => Policlinic::fetch(true)->get(),
+    ]);
+  }
   public function store(UnitUserManageRequest $request){
     $user = User::whereRaw("concat(first_name, ' ', last_name) = '". $request->full_name ."'")->first();
     if(!$user)
@@ -69,13 +75,46 @@ class UnitUsers extends Controller{
     $inputs['doctor_id'] = $user->id;
     switch($request->type){
       case 1: // policlinic manager
-        UnitUser::create([
-          'unit_id' => $request->unit_id,
-          'user_id'       => $user->id,
-          'type'          => UnitUser::POLICLINIC,
-          'permission'    => UnitUser::MANAGER,
-          'status'        => UnitUser::ACCEPTED,
-        ]);
+        $unit_user = UnitUser::where('unit_id', $request->unit_id)
+                              ->where('user_id', $user->id)
+                              ->where('type', UnitUser::POLICLINIC)
+                              ->where('permission', UnitUser::MANAGER)
+                              ->first();
+        if($unit_user){
+          if(!$unit_user->status == UnitUser::ACCEPTED){
+            $unit_user->status = UnitUser::PENDING;
+            $unit_user->save();
+          }
+        }else{
+          UnitUser::create([
+            'unit_id' => $request->unit_id,
+            'user_id'       => $user->id,
+            'type'          => UnitUser::POLICLINIC,
+            'permission'    => UnitUser::MANAGER,
+            'status'        => UnitUser::ACCEPTED,
+          ]);
+        }
+        return redirect()->route('panel.policlinics.show', ['policlinic' => $request->unit_id]);
+      case 2: // policlinic member
+        $unit_user = UnitUser::where('unit_id', $request->unit_id)
+                              ->where('user_id', $user->id)
+                              ->where('type', UnitUser::POLICLINIC)
+                              ->where('permission', UnitUser::MEMBER)
+                              ->first();
+        if($unit_user){
+          if(!$unit_user->status == UnitUser::ACCEPTED){
+            $unit_user->status = UnitUser::PENDING;
+            $unit_user->save();
+          }
+        }else{
+          UnitUser::create([
+            'unit_id' => $request->unit_id,
+            'user_id'       => $user->id,
+            'type'          => UnitUser::POLICLINIC,
+            'permission'    => UnitUser::MEMBER,
+            'status'        => UnitUser::ACCEPTED,
+          ]);
+        }
         return redirect()->route('panel.policlinics.show', ['policlinic' => $request->unit_id]);
     }
     return $request->all();

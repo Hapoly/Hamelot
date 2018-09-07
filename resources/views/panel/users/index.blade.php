@@ -9,118 +9,116 @@
     <div class="col-8">
       <div class="panel panel-default">
         <div class="panel-heading">جستجو</div>
-          <div class="panel-body">
-            <form>
-              <div class="row">
-                <div class="col-md-6">
-                  <div class="input-group">
-                    <span class="input-group-addon">نام خانوادگی</span>
-                    <input type="text" class="form-control" value="{{isset($filters)? $filters['last_name']: ''}}" name="last_name" placeholder="ناصحی">
-                  </div>
-                </div>
-                <div class="col-md-6">            
-                  <div class="input-group">
-                    <span class="input-group-addon">نام</span>
-                    <input type="text" class="form-control" value="{{isset($filters)? $filters['first_name']: ''}}" name="first_name" placeholder="احمد">
-                  </div>
+        <div class="panel-body">
+          <form>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="input-group">
+                  <span class="input-group-addon">نام خانوادگی</span>
+                  <input type="text" class="form-control" value="{{isset($filters)? $filters['last_name']: ''}}" name="last_name" placeholder="ناصحی">
                 </div>
               </div>
-              <div class="row">
-                <div class="col-md-6" id="gender-input">
-                </div>
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <select class="form-control" name="group_code" id="group-code" style="width: 100%">
-                      <option value="0">تمام گروه‌های کاربری</option>
-                      <option {{isset($filters)? ($filters['group_code'] == User::G_ADMIN? 'selected': ''): ''}} value="{{User::G_ADMIN}}">ادمین</option>
-                      <option {{isset($filters)? ($filters['group_code'] == User::G_MANAGER? 'selected': ''): ''}} value="{{User::G_MANAGER}}">مدیریت</option>
-                      <option {{isset($filters)? ($filters['group_code'] == User::G_DOCTOR? 'selected': ''): ''}} value="{{User::G_DOCTOR}}">دکتر</option>
-                      <option {{isset($filters)? ($filters['group_code'] == User::G_NURSE? 'selected': ''): ''}} value="{{User::G_NURSE}}">پرستار</option>
-                      <option {{isset($filters)? ($filters['group_code'] == User::G_PATIENT? 'selected': ''): ''}} value="{{User::G_PATIENT}}">بیمار</option>
-                    </select>
-                  </div>
+              <div class="col-md-6">            
+                <div class="input-group">
+                  <span class="input-group-addon">نام</span>
+                  <input type="text" class="form-control" value="{{isset($filters)? $filters['first_name']: ''}}" name="first_name" placeholder="احمد">
                 </div>
               </div>
-              <div class="row">
-                <div class="col-md-6" id="departments">
-                  @if(isset($filters['hospital']))
-                    <div class="form-group">
-                      <select class="form-control" name="unit_id" style="width: 100%">
-                        <option value="0" {{$filters['unit_id'] ? 'selected': ''}}>تمام بخش‌ها</option>
-                        @foreach($filters['hospital']->departments as $department)
-                          <option value="{{$department->id}}" {{$filters['unit_id'] == $department->id? 'selected': ''}}>{{$department->title}}</option>
-                        @endforeach
-                      </select>
-                    </div>
-                  @endif
+            </div>
+            <div class="row">
+              <div class="col-md-6" id="gender-input">
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <select class="form-control" name="group_code" id="group-code" style="width: 100%">
+                    <option value="0">تمام گروه‌های کاربری</option>
+                    <option {{isset($filters)? ($filters['group_code'] == User::G_ADMIN? 'selected': ''): ''}} value="{{User::G_ADMIN}}">ادمین</option>
+                    <option {{isset($filters)? ($filters['group_code'] == User::G_MANAGER? 'selected': ''): ''}} value="{{User::G_MANAGER}}">مدیریت</option>
+                    <option {{isset($filters)? ($filters['group_code'] == User::G_DOCTOR? 'selected': ''): ''}} value="{{User::G_DOCTOR}}">دکتر</option>
+                    <option {{isset($filters)? ($filters['group_code'] == User::G_NURSE? 'selected': ''): ''}} value="{{User::G_NURSE}}">پرستار</option>
+                    <option {{isset($filters)? ($filters['group_code'] == User::G_PATIENT? 'selected': ''): ''}} value="{{User::G_PATIENT}}">بیمار</option>
+                  </select>
                 </div>
-                <div class="col-md-6">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6" id="departments">
+                @if(isset($filters['hospital']))
                   <div class="form-group">
-                    <select class="form-control" name="hospital_id" id="hospital-id" style="width: 100%">
-                      <option value="0">همه بیمارستان ها</option>
-                      @foreach($hospitals as $hospital)
-                        <option value="{{$hospital->id}}" {{$filters['hospital_id'] == $hospital->id? 'selected': ''}}>{{$hospital->title}}</option>
+                    <select class="form-control" name="unit_id" style="width: 100%">
+                      <option value="0" {{$filters['unit_id'] ? 'selected': ''}}>تمام بخش‌ها</option>
+                      @foreach($filters['hospital']->departments as $department)
+                        <option value="{{$department->id}}" {{$filters['unit_id'] == $department->id? 'selected': ''}}>{{$department->title}}</option>
                       @endforeach
                     </select>
                   </div>
+                @endif
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <select class="form-control" name="hospital_id" id="hospital-id" style="width: 100%">
+                    <option value="0">همه بیمارستان ها</option>
+                    @foreach($hospitals as $hospital)
+                      <option value="{{$hospital->id}}" {{$filters['hospital_id'] == $hospital->id? 'selected': ''}}>{{$hospital->title}}</option>
+                    @endforeach
+                  </select>
                 </div>
               </div>
-              <div class="row" id="more-inputs"></div>
-              <div class="row" style="margin-bottom:2px;margin-top:2px;">
-                <div class="col-md-12">
-                  <button class="btn btn-info" type="submit">{{__('users.search')}}</a>
-                </div>
+            </div>
+            <div class="row" id="more-inputs"></div>
+            <div class="row" style="margin-bottom:2px;margin-top:2px;">
+              <div class="col-md-12">
+                <button class="btn btn-info" type="submit">{{__('users.search')}}</a>
               </div>
-            </form>
-          </div>
+            </div>
+          </form>
         </div>
       </div>
     </div>
   </div>
-  <div class="row">
-    @if(sizeof($users))
-      <div class="col-10">
-        <table class="table table-striped">
-          <thead>
-            <tr>
-              <th><a href="{{route('panel.users.index')}}">{{__('users.row')}}</a></th>
-              <th><a href="{{route('panel.users.index')}}">{{__('users.username')}}</a></th>
-              <th><a href="{{route('panel.users.index')}}">{{__('users.group_code')}}</a></th>
-              <th><a href="{{route('panel.users.index')}}">{{__('users.first_name')}}</a></th>
-              <th><a href="{{route('panel.users.index')}}">{{__('users.last_name')}}</a></th>
-              <th><a href="{{route('panel.users.index')}}">{{__('users.status')}}</a></th>
-              <th >{{__('users.operation')}}</th>
+</div>
+<div class="row">
+  @if(sizeof($users))
+    <div class="col-10">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th><a href="{{route('panel.users.index')}}">{{__('users.row')}}</a></th>
+            <th><a href="{{route('panel.users.index')}}">{{__('users.username')}}</a></th>
+            <th><a href="{{route('panel.users.index')}}">{{__('users.group_code')}}</a></th>
+            <th><a href="{{route('panel.users.index')}}">{{__('users.first_name')}}</a></th>
+            <th><a href="{{route('panel.users.index')}}">{{__('users.last_name')}}</a></th>
+            <th><a href="{{route('panel.users.index')}}">{{__('users.status')}}</a></th>
+            <th >{{__('users.operation')}}</th>
+          </tr>
+        </thead>
+        <tbody>
+          @foreach($users as $user)
+            <tr class="user-td">
+              <td>{{$user->id}}</td>
+              <td><a href="{{route('panel.users.show', ['user' => $user])}}">{{$user->username}}</a></td>
+              <td>{{$user->group_str}}</td>
+              <td>{{$user->first_name}}</td>
+              <td>{{$user->last_name}}</td>
+              <td>{{$user->status_str}}</td>
+              <td>
+                @if(Auth::user()->isAdmin())
+                  @operation_th(['base' => 'panel.users', 'label' => 'user', 'item' => $user, 'remove_label' => __('users.remove'), 'edit_label' => __('users.edit_str'), 'show_label' => __('users.show')])
+                @else
+                  غیر قابل دسترسی
+                @endif
+              </td>
             </tr>
-          </thead>
-          <tbody>
-            @foreach($users as $user)
-              <tr class="user-td">
-                <td>{{$user->id}}</td>
-                <td><a href="{{route('panel.users.show', ['user' => $user])}}">{{$user->username}}</a></td>
-                <td>{{$user->group_str}}</td>
-                <td>{{$user->first_name}}</td>
-                <td>{{$user->last_name}}</td>
-                <td>{{$user->status_str}}</td>
-                <td>
-                  @if(Auth::user()->isAdmin())
-                    <a href="{{route('panel.users.destroy', ['user' => $user])}}" class="btn btn-danger" role="button">{{__('users.destroy')}}</a>
-                    <a href="{{route('panel.users.edit', ['user' => $user])}}" class="btn btn-info" role="button">{{__('users.edit.general')}}</a>
-                  @else
-                    غیر قابل دسترسی
-                  @endif
-                </td>
-              </tr>
-            @endforeach
-          </tbody>
-        </table>
-      </div>
-    @else
-    <div class="col-md-12" style="text-align: center">
-      {{__('users.no_found')}}
+          @endforeach
+        </tbody>
+      </table>
     </div>
-    @endif
-    @pagination(['links' => $links])
+  @else
+  <div class="col-md-12" style="text-align: center">
+    {{__('users.no_found')}}
   </div>
+  @endif
+  @pagination(['links' => $links])
 </div>
 <script>
   $(document).ready(function(){

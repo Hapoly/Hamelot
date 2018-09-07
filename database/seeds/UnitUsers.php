@@ -19,24 +19,24 @@ class UnitUsers extends Seeder
             'type'              => 2,
         ]);
         DB::table('unit_user')->insert([
-            'unit_id'   => 1,
+            'unit_id'       => 1,
             'user_id'       => 2,
             'type'          => 3,
-            'permission'    => 1,
+            'permission'    => 2,
             'status'        => 2,
         ]);
         DB::table('unit_user')->insert([
-            'unit_id'   => 1,
+            'unit_id'       => 1,
             'user_id'       => 3,
             'type'          => 3,
-            'permission'    => 1,
+            'permission'    => 2,
             'status'        => 2,
         ]);
         DB::table('unit_user')->insert([
-            'unit_id'   => 2,
+            'unit_id'       => 2,
             'user_id'       => 3,
             'type'          => 3,
-            'permission'    => 1,
+            'permission'    => 2,
             'status'        => 2,
         ]);
         // DB::table('unit_user')->insert([

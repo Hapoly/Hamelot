@@ -23,8 +23,19 @@ class Hospital extends Model {
         return substr($this->address, 0, 30) . '...';
     }
     public function users(){
-        return $this->belongsToMany('App\User');
+        return $this->belongsToMany('App\User', 'unit_user', 'unit_id')
+                    ->wherePivot('type', UnitUser::HOSPITAL)
+                    ->wherePivot('permission', UnitUser::MEMBER)
+                    ->wherePivot('status', UnitUser::ACCEPTED);
     }
+
+    public function managers(){
+        return $this->belongsToMany('App\User', 'unit_user', 'unit_id')
+                    ->wherePivot('type', UnitUser::HOSPITAL)
+                    ->wherePivot('permission', UnitUser::MANAGER)
+                    ->wherePivot('status', UnitUser::ACCEPTED);
+    }
+
     public function getHasPermissionAttribute(){
         if(Auth::user()->isAdmin())
             return true;

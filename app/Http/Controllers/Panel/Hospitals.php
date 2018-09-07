@@ -44,6 +44,8 @@ class Hospitals extends Controller{
       'links'       => $links,
       'sort'        => $sort,
       'search'      => $search,
+      'provinces'   => Province::all(),
+      'cities'      => City::all()
     ]);
   }
   public function show(Hospital $hospital){
