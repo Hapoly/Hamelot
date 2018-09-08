@@ -171,15 +171,23 @@
 	</li>
 	@if(Auth::user()->isManager() || Auth::user()->isAdmin())
 		<li>
-			<a href="#department-requests" data-toggle="collapse" aria-expanded="false">
+			<a href="#unit-user-requests" data-toggle="collapse" aria-expanded="false">
 				<i class="fa fa-user-md" aria-hidden="false"></i>
 				<span>
 				درخواست‌‌های عضویت
 				</span>
 			</a>
-			<ul class="collapse list-unstyled" id="department-requests">
+			<ul class="collapse list-unstyled" id="unit-user-requests">
 				<li>
 					<a href="{{route('panel.unit_users.index')}}"> لیست درخواست‌ها</a>
+				</li>
+				<li>
+					<a href="#unit-user-new" data-toggle="collapse" aria-expanded="false"><span>عضو جدید</span></a>
+					<ul class="collapse list-unstyled" id="unit-user-new">
+						<li>
+							kjdnvkjn
+						</li>
+					</ul>
 				</li>
 			</ul>
 		</li>
