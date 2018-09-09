@@ -24,6 +24,10 @@ Route::middleware(['auth', 'Permission'])->namespace('Panel')->prefix('panel')->
         'report_templates'  => 'ReportTemplates',
         'experiments'       => 'Experiments',
     ]);
+
+    Route::prefix('print')->name('prints.')->group(function(){
+        Route::get('/hospitals', 'Prints@hospitals')->name('hospitals');
+    });
     Route::prefix('permissions')->name('permissions.')->group(function(){
         Route::get('/create', 'Permissions@create')->name('create');
         Route::post('/check', 'Permissions@check')->name('check');

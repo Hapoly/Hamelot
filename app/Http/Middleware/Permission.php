@@ -105,16 +105,16 @@ class Permission
         'panel.permissions.index'                           => [ 1, 2, 3, 4, 5 ],
         'panel.permissions.destroy'                         => [ 1, 2, 3, 4, 5 ],
 
-        'panel.unit_users.send_department'            => [ 3, 4 ],
-        'panel.unit_users.send_policlinic'            => [ 3, 4 ],
-        'panel.unit_users.index'                      => [ 1, 2 ],
-        'panel.unit_users.create_policlinic_manager'  => [ 1, 2 ],
-        'panel.unit_users.create_policlinic_member'   => [ 1, 2 ],
-        'panel.unit_users.create_department_manager'  => [ 1, 2 ],
-        'panel.unit_users.create_hospital_member'     => [ 1, 2 ],
-        'panel.unit_users.store'                      => [ 1, 2 ],
+        'panel.unit_users.send_department'                  => [ 3, 4 ],
+        'panel.unit_users.send_policlinic'                  => [ 3, 4 ],
+        'panel.unit_users.index'                            => [ 1, 2 ],
+        'panel.unit_users.create_policlinic_manager'        => [ 1, 2 ],
+        'panel.unit_users.create_policlinic_member'         => [ 1, 2 ],
+        'panel.unit_users.create_department_manager'        => [ 1, 2 ],
+        'panel.unit_users.create_hospital_member'           => [ 1, 2 ],
+        'panel.unit_users.store'                            => [ 1, 2 ],
 
-
+        'panel.prints.hospitals'                            => [1, 2, 3, 4, 5],
 
     ];
     public function handle(Request $request, Closure $next){
