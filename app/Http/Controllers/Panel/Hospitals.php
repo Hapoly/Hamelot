@@ -21,29 +21,43 @@ class Hospitals extends Controller{
     $hospitals = Hospital::fetch($joined=$request->input('joined', false));
     $links = '';
     $sort = $request->input('sort', '###');
-    $search = $request->input('search', '###');
 
-    if($sort != '###' && $search == '###'){
-      $hospitals = $hospitals->orderBy($request->input('sort'), 'desc');
-      $hospitals = $hospitals->paginate(10);
-      $links = $hospitals->appends(['sort' => $request->input('sort')])->links();
-    }else if($sort == '###' && $search != '###'){
-      $hospitals = $hospitals->where('title', 'LIKE', "%$search%");
-      $hospitals = $hospitals->paginate(10);
-      $links = $hospitals->appends(['sort' => $request->input('sort')])->links();
-    }else if($sort != '###' && $search != '###'){
-      $hospitals = $hospitals->where('title', 'LIKE', "%$search%");
-      $hospitals = $hospitals->orderBy($request->input('sort'), 'desc');
-      $hospitals = $hospitals->paginate(10);
-      $links = $hospitals->appends(['sort' => $request->input('sort')])->links();
+    if($request->has('title'))
+      $hospitals = $hospitals->whereRaw("title LIKE '%". $request->title ."%'");
+    if($request->has('address'))
+      $hospitals = $hospitals->whereRaw("address LIKE '%". $request->address ."%'");
+    if($request->has('status') && $request->status != 0)
+      $hospitals = $hospitals->where('status', $request->status);
+    if($request->has('province_id') && $request->province_id != 0){
+      if($request->has('city_id') && $request->city_id != 0){
+        $hospitals = $hospitals->where('city_id', $request->city_id);
+      }else{
+        $province_id = $request->province_id;
+        $hospitals = $hospitals->whereHas('city', function($query) use ($province_id){
+          return $query->where('province_id', $province_id);
+        });
+      }
     }else{
-      $hospitals = $hospitals->paginate(10);
+      if($request->has('city_id') && $request->city_id != 0){
+        $hospitals = $hospitals->where('city_id', $request->city_id);
+      }
     }
+    if($request->has('sort'))
+      $hospitals = $hospitals->orderBy($request->input('sort'), 'desc');
+    $hospitals = $hospitals->paginate(10);
+    
     return view('panel.hospitals.index', [
       'hospitals'   => $hospitals,
       'links'       => $links,
       'sort'        => $sort,
-      'search'      => $search,
+      'search'      => parse_url(url()->full())['query'],
+      'filters'     => [
+        'title'       => $request->input('title', ''),
+        'address'     => $request->input('address', ''),
+        'province_id' => $request->input('province_id', ''),
+        'city_id'     => $request->input('city_id', ''),
+        'status'      => $request->input('status'),
+      ],
       'provinces'   => Province::all(),
       'cities'      => City::all()
     ]);

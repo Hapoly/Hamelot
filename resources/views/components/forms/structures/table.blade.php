@@ -6,7 +6,7 @@
                     @if($k=='NuLL')
                         <th>{{$col}}</th>
                     @else
-                        <th><a href="{{route($route,['search' => $search,'sort' => $k,'page' => $items->currentPage()])}}">{{$col}}</a></th>
+                        <th><a href="{{route($route,[$search,'sort' => $k,'page' => $items->currentPage()])}}">{{$col}}</a></th>
                     @endif
                 @endforeach
             </tr>

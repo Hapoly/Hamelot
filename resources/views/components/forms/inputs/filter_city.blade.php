@@ -3,7 +3,7 @@
         <select class="form-control" name="city_id" id="city_id" style="width: 100%">
             <option value="0">تمام شهرها</option>
             @foreach($cities as $city)
-                <option value="{{$city->id}}">{{$city->title}}</option>
+                <option value="{{$city->id}}" {{$city_id == $city->id ? 'selected': ''}}>{{$city->title}}</option>
             @endforeach
         </select>
     </div>
@@ -13,7 +13,7 @@
         <select class="form-control" name="province_id" id="province_id" style="width: 100%">
             <option value="0">تمام استان‌ها</option>
             @foreach($provinces as $province)
-                <option value="{{$province->id}}">{{$province->title}}</option>
+                <option value="{{$province->id}}" {{$province_id == $province->id ? 'selected': ''}}>{{$province->title}}</option>
             @endforeach
         </select>
     </div>

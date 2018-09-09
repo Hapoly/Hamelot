@@ -23,7 +23,19 @@
               </div>
             </div>
             <div class="row">
-              @filter_city()
+              @filter_city(['province_id' => isset($filters)? $filters['province_id']: 0, 'city_id' => isset($filters)? $filters['city_id']: 0])
+            </div>
+            <div class="row" style="margin-top: 15px">
+              <div class="col-md-6"></div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <select class="form-control" name="status" id="status" style="width: 100%">
+                    <option value="0">تمام وضعیت‌ها</option>
+                    <option value="1" {{isset($filters)? ($filters['status'] == 1? 'selected': '') : ''}}>{{__('hospitals.status_str.1')}}</option>
+                    <option value="2" {{isset($filters)? ($filters['status'] == 2? 'selected': '') : ''}}>{{__('hospitals.status_str.2')}}</option>
+                  </select>
+                </div>
+              </div>
             </div>
             <div class="row" style="margin-bottom:2px;margin-top:2px;">
               <div class="col-md-12">
@@ -37,27 +49,11 @@
   </div>
 </div>
 <div class="row" style="margin-bottom:50px;">
-  <div class="col-md-4 col-sm-3">
-    @if(Auth::user()->isAdmin() || Auth::user()->isManager())
-      <a href="{{route('panel.hospitals.create')}}" class="btn add"> بیمارستان جدید</a>
-    @endif
-  </div>
-    <div class="col-md-8 col-sm-9">
-      <form class="navbar-form" role="search" style="margin:auto;width:100%;direction:ltr;float:right" action="{{route('panel.hospitals.index',['sort' => $sort])}}" method="get">
-        <div class="input-group add-on">
-          <div class="input-group-btn">
-            <button class="btn" type="submit"><i class="glyphicon glyphicon-search"></i></button>
-          </div>
-          <input class="form-control search-box" placeholder="{{__('hospitals.search')}}"  name="search" id="srch-term" value="{{old('search')}}" type="text">
-        </div>
-      </form>
-    </div>
-  </div>
   @table([
     'route' => 'panel.hospitals.index', 
     'hasAny' => sizeof($hospitals) > 0, 
     'not_found' => __('hospitals.not_found'),
-    'items' => $hospitals, 
+    'items' => $hospitals,
     'search'  => $search,
     'cols' => [
       'id'          => __('hospitals.row'),
