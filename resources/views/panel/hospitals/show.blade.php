@@ -57,6 +57,13 @@
         </div>
       </div>
     @endif
+    <div class="row">
+      <div class="col-md-12" style="text-align: center">
+        <a style="margin: 0px 5px" class="btn btn-default" href="{{route('panel.prints.hospitals.members', ['hospital' => $hospital])}}">{{__('hospitals.print_members')}}</a>
+        <a style="margin: 0px 5px" class="btn btn-default" href="{{route('panel.prints.hospitals.departments', ['hospital' => $hospital])}}">{{__('hospitals.print_departments')}}</a>
+        <a style="margin: 0px 5px" class="btn btn-default" href="{{route('panel.prints.hospitals.info', ['hospital' => $hospital])}}">{{__('hospitals.print_info')}}</a>
+      </div>
+    </div>
   </div>
   <div class="panel panel-default">
     <div class="panel-heading sub-panel-title">

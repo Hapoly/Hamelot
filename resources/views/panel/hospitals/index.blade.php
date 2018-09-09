@@ -39,8 +39,8 @@
             </div>
             <div class="row" style="margin-bottom:2px;margin-top:2px;">
               <div class="col-md-6" style="text-align: left">
-                <a style="margin: 0px 5px" class="btn btn-default" href="{{route('panel.prints.hospitals', [$search, 'page' => $hospitals->currentPage()])}}">{{__('hospitals.print_this_page')}}</a>
-                <a style="margin: 0px 5px" class="btn btn-default" href="{{route('panel.prints.hospitals', [$search, 'page' => 0])}}">{{__('hospitals.print_all')}}</a>
+                <a style="margin: 0px 5px" class="btn btn-default" href="{{route('panel.prints.hospitals.index', [$search, 'page' => $hospitals->currentPage()])}}">{{__('hospitals.print_this_page')}}</a>
+                <a style="margin: 0px 5px" class="btn btn-default" href="{{route('panel.prints.hospitals.index', [$search, 'page' => 0])}}">{{__('hospitals.print_all')}}</a>
               </div>
               <div class="col-md-6">
                 <button class="btn btn-info" type="submit">{{__('hospitals.search')}}</button>

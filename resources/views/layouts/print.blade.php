@@ -1,6 +1,6 @@
 <html>
     <head>
-        <title>yield('title')</title>
+        <title>@yield('title')</title>
         <style>
             table {
                 width: 80%;
@@ -21,6 +21,9 @@
                 padding-right: 10px;
                 padding-top: 10px;
                 padding-bottom: 10px;
+            }
+            h3 {
+                text-align: center;
             }
         </style>
     </head>

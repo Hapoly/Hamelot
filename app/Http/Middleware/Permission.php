@@ -114,7 +114,10 @@ class Permission
         'panel.unit_users.create_hospital_member'           => [ 1, 2 ],
         'panel.unit_users.store'                            => [ 1, 2 ],
 
-        'panel.prints.hospitals'                            => [1, 2, 3, 4, 5],
+        'panel.prints.hospitals.index'                      => [1, 2, 3, 4, 5],
+        'panel.prints.hospitals.members'                    => [1, 2, 3, 4, 5],
+        'panel.prints.hospitals.departments'                => [1, 2, 3, 4, 5],
+        'panel.prints.hospitals.info'                       => [1, 2, 3, 4, 5],
 
     ];
     public function handle(Request $request, Closure $next){

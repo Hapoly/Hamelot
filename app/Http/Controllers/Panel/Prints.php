@@ -46,8 +46,23 @@ class Prints extends Controller{
         $hospitals = $hospitals->get();
     }else
       $hospitals = $hospitals->paginate(10);
-    return view('panel.prints.hospitals', [
+    return view('panel.prints.hospitals.index', [
       'hospitals'  => $hospitals,
+    ]);
+  }
+  public function hospitalMembers(Hospital $hospital){
+    return view('panel.prints.hospitals.members', [
+      'hospital'  => $hospital,
+    ]);
+  }
+  public function hospitalInfo(Hospital $hospital){
+    return view('panel.prints.hospitals.info', [
+      'hospital'  => $hospital,
+    ]);
+  }
+  public function hospitalDepartments(Hospital $hospital){
+    return view('panel.prints.hospitals.departments', [
+      'hospital'  => $hospital,
     ]);
   }
 }

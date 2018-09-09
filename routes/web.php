@@ -25,8 +25,13 @@ Route::middleware(['auth', 'Permission'])->namespace('Panel')->prefix('panel')->
         'experiments'       => 'Experiments',
     ]);
 
-    Route::prefix('print')->name('prints.')->group(function(){
-        Route::get('/hospitals', 'Prints@hospitals')->name('hospitals');
+    Route::prefix('prints')->name('prints.')->group(function(){
+        Route::prefix('hospitals')->name('hospitals.')->group(function(){
+            Route::get('/', 'Prints@hospitals')->name('index');
+            Route::get('/members/{hospital}', 'Prints@hospitalMembers')->name('members');
+            Route::get('/departments/{hospital}', 'Prints@hospitalDepartments')->name('departments');
+            Route::get('/info/{hospital}', 'Prints@hospitalInfo')->name('info');
+        });
     });
     Route::prefix('permissions')->name('permissions.')->group(function(){
         Route::get('/create', 'Permissions@create')->name('create');

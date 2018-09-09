@@ -37,4 +37,7 @@ return [
 
     'print_this_page'   => 'چاپ این صفحه',
     'print_all'         => 'چاپ کل اطلاعات',
+    'print_members'     => 'چاپ لیست پرسنل',
+    'print_departments' => 'چاپ لیست بخش‌ها',
+    'print_info'        => 'چاپ تمام اطلاعات',
 ];
