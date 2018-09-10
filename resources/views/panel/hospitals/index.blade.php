@@ -77,7 +77,9 @@
         <td>{{$hospital->mobile}}</td>
         <td>{{$hospital->status_str}}</td>
         @if(Auth::user()->isAdmin())
-          @operation_th(['base' => 'panel.hospitals', 'label' => 'hospital', 'item' => $hospital, 'remove_label' => __('hospitals.remove'), 'edit_label' => __('hospitals.edit'), 'show_label' => __('hospitals.show')])
+          <td>
+            @operation_th(['base' => 'panel.hospitals', 'label' => 'hospital', 'item' => $hospital, 'remove_label' => __('hospitals.remove'), 'edit_label' => __('hospitals.edit'), 'show_label' => __('hospitals.show')])
+          <td>
         @else
           <td><a class="btn btn-default" href="{{route('panel.hospitals.show', ['$hospital' => $hospital])}}">{{__('hospitals.show')}}</a></td>
         @endif

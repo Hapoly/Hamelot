@@ -63,7 +63,7 @@
       @if($result == 'found')
         <div class="row">
           <form action="{{route('panel.permissions.send', ['user' => $patient])}}" method="post">
-            {{csrf_field()}}
+            @csrf
             <div class="col-md-12" style="text-align: center">
               <button type="submit" class="btn btn-primary">{{__('permissions.confirm')}}</button>
             </div>

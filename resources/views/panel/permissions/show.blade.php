@@ -126,7 +126,7 @@
     @if($permission->edit_access)
     <div class="row">
       <form action="{{route('panel.permissions.inline_update', ['permission' => $permission])}}" method="post">
-        {{csrf_field()}}
+        @csrf
         <div class="col-md-12" style="text-align: center">
           @if(Auth::user()->isAdmin() || Auth::user()->id == $permission->patient_id)
             @if($permission->pending())

@@ -24,8 +24,9 @@ class UnitUserRequest extends FormRequest
     public function rules()
     {
         return [
-            'user_id'           => 'required|numeric',
-            'unit_id'     => 'required|numeric',
+            'full_name'         => 'required|string',
+            'unit_id'           => 'required|numeric',
+            'permission'        => 'required|numeric',
         ];
     }
 }

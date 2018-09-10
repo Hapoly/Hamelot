@@ -42,7 +42,9 @@
         <td>{{$clinic->mobile_str}}</td>
         <td>{{$clinic->status_str}}</td>
         @if($clinic->has_permission)
-          @operation_th(['base' => 'panel.clinics', 'label' => 'clinic', 'item' => $clinic, 'remove_label' => __('clinics.remove'), 'edit_label' => __('clinics.edit'), 'show_label' => __('clinics.show')])
+          <td>
+            @operation_th(['base' => 'panel.clinics', 'label' => 'clinic', 'item' => $clinic, 'remove_label' => __('clinics.remove'), 'edit_label' => __('clinics.edit'), 'show_label' => __('clinics.show')])
+          </td>
         @else
           <td><a class="btn btn-default" href="{{route('panel.clinics.show', ['$clinic' => $clinic])}}">{{__('clinics.show')}}</a></td>
         @endif

@@ -103,7 +103,9 @@
               <td>{{$user->status_str}}</td>
               <td>
                 @if(Auth::user()->isAdmin())
-                  @operation_th(['base' => 'panel.users', 'label' => 'user', 'item' => $user, 'remove_label' => __('users.remove'), 'edit_label' => __('users.edit_str'), 'show_label' => __('users.show')])
+                  <td>
+                    @operation_th(['base' => 'panel.users', 'label' => 'user', 'item' => $user, 'remove_label' => __('users.remove'), 'edit_label' => __('users.edit_str'), 'show_label' => __('users.show')])
+                  </td>
                 @else
                   غیر قابل دسترسی
                 @endif

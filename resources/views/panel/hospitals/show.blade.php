@@ -90,7 +90,9 @@
               <td>{{$user->last_name}}</td>
               <td>{{$user->status_str}}</td>
               @if(Auth::user()->isAdmin())
-                @operation_th(['base' => 'panel.users', 'label' => 'user', 'item' => $user, 'remove_label' => __('users.remove'), 'edit_label' => __('users.edit_str'), 'show_label' => __('users.show')])
+                <td>
+                  @operation_th(['base' => 'panel.users', 'label' => 'user', 'item' => $user, 'remove_label' => __('users.remove'), 'edit_label' => __('users.edit_str'), 'show_label' => __('users.show')])
+                </td>
               @endif
             </tr>
           @endforeach
@@ -131,7 +133,9 @@
               <td><a href="{{route('panel.departments.show', ['department' => $department])}}">{{$department->title}}</a></td>
               <td>{{$department->status_str}}</td>
               @if($hospital->has_permission)
-                @operation_th(['base' => 'panel.departments', 'label' => 'department', 'item' => $department, 'remove_label' => __('departments.remove'), 'edit_label' => __('departments.edit'), 'show_label' => __('departments.show')])
+                <td>
+                  @operation_th(['base' => 'panel.departments', 'label' => 'department', 'item' => $department, 'remove_label' => __('departments.remove'), 'edit_label' => __('departments.edit'), 'show_label' => __('departments.show')])
+                </td>
               @elseif(Auth::user()->isDoctor() || Auth::user()->isNurse())
                 @if($department->canJoin())
                   <td><a class="btn btn-primary" href="{{route('panel.unit_users.send_department', ['user' => Auth::user(), 'department' => $department])}}">{{ __('unit_users.send') }}</a></td>

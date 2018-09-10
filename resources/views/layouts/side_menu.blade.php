@@ -182,7 +182,8 @@
 			</a>
 			<ul class="collapse list-unstyled" id="unit-user-requests">
 				<li><a href="{{route('panel.unit_users.index')}}"> لیست درخواست‌ها</a></li>
-				<li><a href="{{route('panel.unit_users.create')}}"> درخواست جدید</a></li>
+				<li><a href="{{route('panel.unit_users.create.manager')}}"> مدیر جدید</a></li>
+				<li><a href="{{route('panel.unit_users.create.member')}}"> پرسنل جدید</a></li>
 			</ul>
 		</li>
 	@endif

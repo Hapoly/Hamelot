@@ -5,11 +5,10 @@ namespace App\Http\Controllers\Panel;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-use App\Models\Department;
-use App\Models\Policlinic;
+use App\Models\Unit;
 use App\User;
 use App\Models\UnitUser;
-use App\Http\Requests\UnitUserManageRequest;
+use App\Http\Requests\UnitUserRequest;
 use URL;
 
 class UnitUsers extends Controller{
@@ -57,122 +56,30 @@ class UnitUsers extends Controller{
     return redirect()->back();
   }
 
-  public function createPoloclinicManager(Request $request){
-    return view('panel.unit_users.policlinic.manager.create',[
-      'policlinics' => Policlinic::fetch(true)->get(),
+  public function createManager(Request $request){
+    return view('panel.unit_users.create.manager', [
+      'units'   => Unit::fetch(true)->get(),
+      'unit_id' => $request->input('unit_id', 0),
+    ]);
+  }
+  public function createMember(Request $request){
+    return view('panel.unit_users.create.member', [
+      'units'   => Unit::fetch(true)->get(),
+      'unit_id' => $request->input('unit_id', 0),
     ]);
   }
 
-  public function createPoloclinicMember(Request $request){
-    return view('panel.unit_users.policlinic.member.create',[
-      'policlinics' => Policlinic::fetch(true)->get(),
-    ]);
-  }
-
-  public function createHospitalManager(Request $request){
-    return view('panel.unit_users.hospial.manager.create', [
-      'hospitals' => Hospital::fetch(true)->get(),
-    ]);
-  }
-
-  public function createDepartmentMember(Request $request){
-    return view('panel.unit_users.department.member.create', [
-      'departments' => Department::fetch(true)->get(),
-    ]);
-  }
-
-  public function store(UnitUserManageRequest $request){
+  public function store(UnitUserRequest $request){
     $user = User::whereRaw("concat(first_name, ' ', last_name) = '". $request->full_name ."'")->first();
     if(!$user)
       return redirect()->route('panel.unit_users.index');
-    $inputs['doctor_id'] = $user->id;
-    switch($request->type){
-      case 1: // policlinic manager
-        $unit_user = UnitUser::where('unit_id', $request->unit_id)
-                              ->where('user_id', $user->id)
-                              ->where('type', UnitUser::POLICLINIC)
-                              ->where('permission', UnitUser::MANAGER)
-                              ->first();
-        if($unit_user){
-          if(!$unit_user->status == UnitUser::ACCEPTED){
-            $unit_user->status = UnitUser::PENDING;
-            $unit_user->save();
-          }
-        }else{
-          UnitUser::create([
-            'unit_id' => $request->unit_id,
-            'user_id'       => $user->id,
-            'type'          => UnitUser::POLICLINIC,
-            'permission'    => UnitUser::MANAGER,
-            'status'        => UnitUser::ACCEPTED,
-          ]);
-        }
-        return redirect()->route('panel.policlinics.show', ['policlinic' => $request->unit_id]);
-      case 2: // policlinic member
-        $unit_user = UnitUser::where('unit_id', $request->unit_id)
-                              ->where('user_id', $user->id)
-                              ->where('type', UnitUser::POLICLINIC)
-                              ->where('permission', UnitUser::MEMBER)
-                              ->first();
-        if($unit_user){
-          if(!$unit_user->status == UnitUser::ACCEPTED){
-            $unit_user->status = UnitUser::PENDING;
-            $unit_user->save();
-          }
-        }else{
-          UnitUser::create([
-            'unit_id' => $request->unit_id,
-            'user_id'       => $user->id,
-            'type'          => UnitUser::POLICLINIC,
-            'permission'    => UnitUser::MEMBER,
-            'status'        => UnitUser::ACCEPTED,
-          ]);
-        }
-        return redirect()->route('panel.policlinics.show', ['policlinic' => $request->unit_id]);
-      case 3: // hospital manager
-        $unit_user = UnitUser::where('unit_id', $request->unit_id)
-                              ->where('user_id', $user->id)
-                              ->where('type', UnitUser::HOSPITAL)
-                              ->where('permission', UnitUser::MANAGER)
-                              ->first();
-        if($unit_user){
-          if(!$unit_user->status == UnitUser::ACCEPTED){
-            $unit_user->status = UnitUser::PENDING;
-            $unit_user->save();
-          }
-        }else{
-          UnitUser::create([
-            'unit_id' => $request->unit_id,
-            'user_id'       => $user->id,
-            'type'          => UnitUser::HOSPITAL,
-            'permission'    => UnitUser::MANAGER,
-            'status'        => UnitUser::ACCEPTED,
-          ]);
-        }
-        return redirect()->route('panel.hospitals.show', ['hospital' => $request->unit_id]);
-      case 4: // department member
-        $unit_user = UnitUser::where('unit_id', $request->unit_id)
-                              ->where('user_id', $user->id)
-                              ->where('type', UnitUser::DEPARTMENT)
-                              ->where('permission', UnitUser::MEMBER)
-                              ->first();
-        if($unit_user){
-          if(!$unit_user->status == UnitUser::ACCEPTED){
-            $unit_user->status = UnitUser::PENDING;
-            $unit_user->save();
-          }
-        }else{
-          UnitUser::create([
-            'unit_id'       => $request->unit_id,
-            'user_id'       => $user->id,
-            'type'          => UnitUser::DEPARTMENT,
-            'permission'    => UnitUser::MEMBER,
-            'status'        => UnitUser::ACCEPTED,
-          ]);
-        }
-        return redirect()->route('panel.departments.show', ['departments' => $request->unit_id]);
-    }
-    return $request->all();
+    UnitUser::create([
+      'unit_id'     => $request->unit_id,
+      'user_id'     => $user->id,
+      'permission'  => $request->permission,
+      'status'      => UnitUser::ACCEPTED,
+    ]);
+    return redirect()->route('panel.units.show', ['unit' => $request->unit_id]);
   }
   public function inlineUpdate(Request $request, UnitUser $unit_user){
     if($request->has('action')){

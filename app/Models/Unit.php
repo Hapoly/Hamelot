@@ -9,8 +9,7 @@ use App\Models\Entry;
 use App\User;
 use Auth;
 
-class Unit extends Model
-{
+class Unit extends Model{
     protected $primary = 'id';
     protected $table = 'units';
     protected $fillable = ['title', 'address', 'phone', 'mobile', 'image', 'lon', 'lat', 'city_id', 'group_code', 'type', 'public', 'status', 'parent_id'];
@@ -55,8 +54,8 @@ class Unit extends Model
     public function requests(){
         return $this->belongsToMany('App\User', 'unit_user', 'unit_id');
     }
-    public function users(){
-        return $this->belongsToMany('App\User', 'unit_user', 'unit_parent_id')
+    public function members(){
+        return $this->belongsToMany('App\User', 'unit_user', 'unit_id')
                     ->wherePivot('permission', UnitUser::MEMBER)
                     ->wherePivot('status', UnitUser::ACCEPTED);
     }
@@ -166,7 +165,7 @@ class Unit extends Model
     }
     public function getJoinedAttribute(){
         if(Auth::user()->isManager())
-            return $this->users()->where('users.id', Auth::user()->id)->first() != null;
+            return $this->members()->where('users.id', Auth::user()->id)->first() != null;
         else if(Auth::user()->isAdmin() || Auth::user()->isPatient())
             return false;
         else
