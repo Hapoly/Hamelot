@@ -79,10 +79,10 @@ Route::middleware(['auth', 'Permission'])->namespace('Panel')->prefix('panel')->
         Route::get('/create-member', 'UnitUsers@createMember')->name('create.member');
         Route::post('/store', 'UnitUsers@store')->name('store');
 
-        Route::get('/send/{user}/{unit}/{permission}', 'UnitUsers@send')->name('send');
+        Route::get('/send/{unit}', 'UnitUsers@send')->name('send');
         Route::get('/show/{unit_user}', 'UnitUsers@show')->name('show');
 
-        Route::post('/update-inline/{unit_user}', 'UnitUsers@inlineUpdate')->name('inline_update');
+        Route::get('/update-inline/{unit_user}/{action}', 'UnitUsers@inlineUpdate')->name('inline_update');
         
         Route::get('/', 'UnitUsers@index')->name('index');
         Route::get('/destroy/{unit_users}', 'UnitUsers@destroy')->name('destroy');

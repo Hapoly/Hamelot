@@ -72,14 +72,6 @@ class Permission
         'panel.clinics.show'                                => [ 1, 2, 3, 4, 5 ],
         'panel.clinics.destroy'                             => [ 1, 3 ],
 
-        'panel.departments.index'                           => [ 1, 2, 3, 4 ],
-        'panel.departments.create'                          => [ 1, 2 ],
-        'panel.departments.store'                           => [ 1, 2 ],
-        'panel.departments.edit'                            => [ 1, 2 ],
-        'panel.departments.update'                          => [ 1, 2 ],
-        'panel.departments.show'                            => [ 1, 2, 3, 4, 5 ],
-        'panel.departments.destroy'                         => [ 1, 2 ],
-
         'panel.report_templates.index'                      => [ 1, 2, 3, 4 ],
         'panel.report_templates.create'                     => [ 1 ],
         'panel.report_templates.store'                      => [ 1 ],
@@ -114,12 +106,12 @@ class Permission
         'panel.permissions.index'                           => [ 1, 2, 3, 4, 5 ],
         'panel.permissions.destroy'                         => [ 1, 2, 3, 4, 5 ],
 
-        'panel.unit_users.send_department'                  => [ 3, 4 ],
-        'panel.unit_users.send_policlinic'                  => [ 3, 4 ],
+        'panel.unit_users.send'                             => [ 2, 3, 4 ],
         'panel.unit_users.index'                            => [ 1, 2 ],
         'panel.unit_users.create.member'                    => [ 1, 2 ],
         'panel.unit_users.create.manager'                   => [ 1, 2 ],
         'panel.unit_users.store'                            => [ 1, 2 ],
+        'panel.unit_users.inline_update'                    => [ 1, 2 ],
 
         'panel.prints.hospitals.index'                      => [1, 2, 3, 4, 5],
         'panel.prints.hospitals.members'                    => [1, 2, 3, 4, 5],

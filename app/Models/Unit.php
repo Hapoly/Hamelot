@@ -52,18 +52,20 @@ class Unit extends Model{
     }
 
     public function requests(){
-        return $this->belongsToMany('App\User', 'unit_user', 'unit_id');
+        return $this->hasMany('App\Models\UnitUser');
     }
     public function members(){
         return $this->belongsToMany('App\User', 'unit_user', 'unit_id')
                     ->wherePivot('permission', UnitUser::MEMBER)
-                    ->wherePivot('status', UnitUser::ACCEPTED);
+                    ->wherePivot('status', UnitUser::ACCEPTED)
+                    ->withPivot('id');
     }
 
     public function managers(){
         return $this->belongsToMany('App\User', 'unit_user', 'unit_id')
                     ->wherePivot('permission', UnitUser::MANAGER)
-                    ->wherePivot('status', UnitUser::ACCEPTED);
+                    ->wherePivot('status', UnitUser::ACCEPTED)
+                    ->withPivot('id');
     }
 
     public function getImageUrlAttribute(){
@@ -165,12 +167,24 @@ class Unit extends Model{
     }
     public function getJoinedAttribute(){
         if(Auth::user()->isManager())
-            return $this->members()->where('users.id', Auth::user()->id)->first() != null;
+            return $this->requests()->where('user_id', Auth::user()->id)->first() != null;
         else if(Auth::user()->isAdmin() || Auth::user()->isPatient())
             return false;
         else
-            return $this->departments()->whereHas('users', function($query){
-                return $query->where(['users.id'=> Auth::user()->id]);
-            })->first() != null;
+            return $this->requests()->where('user_id', Auth::user()->id)->first() != null;
+    }
+    public function getCanJoinAttribute(){
+        if(Auth::user()->isManager())
+            return $this->requests()->where('user_id', Auth::user()->id)->first() == null;
+        else if(Auth::user()->isAdmin() || Auth::user()->isPatient())
+            return false;
+        else
+            return $this->requests()->where('user_id', Auth::user()->id)->first() == null;
+    }
+    public function getJoinedStatusAttribute(){
+        return $this->requests()->where('user_id', Auth::user()->id)->first()->status;
+    }
+    public function getJoinedStatusStrAttribute(){
+        return $this->requests()->where('user_id', Auth::user()->id)->first()->status_str;
     }
 }

@@ -30,26 +30,7 @@ class UnitUser extends Model
         return $this->belongsTo('App\User');
     }
     public function unit(){
-        switch($this->type){
-            case UnitUser::HOSPITAL:
-                return $this->belongsTo('App\Models\Hospital', 'unit_id');
-            case UnitUser::DEPARTMENT:
-                return $this->belongsTo('App\Models\Department', 'unit_id');
-            case UnitUser::POLICLINIC:
-                return $this->belongsTo('App\Models\Policlinic', 'unit_id');
-        }
-    }
-    public function unit_parent(){
-        switch($this->type){
-            case UnitUser::HOSPITAL:
-            case UnitUser::DEPARTMENT:
-                return $this->belongsTo('App\Models\HOSPITAL', 'unit_id');
-            case UnitUser::POLICLINIC:
-                return $this->belongsTo('App\Models\Policlinic', 'unit_id');
-        }
-    }
-    public function unitParent(){
-        return $this->belongsTo('App\Models\Hospital', 'unit_id');
+        return $this->belongsTo('App\Models\Unit', 'unit_id');
     }
 
     public static function fetch($type, $permission){
@@ -94,6 +75,40 @@ class UnitUser extends Model
         else if(Auth::user()->isManager()){
             return $this->unit_parent->managers()->where('users.id', Auth::user()->id)->first() != null;
         }else
+            return false;
+    }
+
+    public function canAccept(){
+        if($this->status != UnitUser::PENDING)
+            return false;
+        $user = Auth::user();
+        if($user->isAdmin())
+            return true;
+        else if($user->isManager())
+            return $this->unit->managers()->where('users.id', $user->id)->first() != null;
+        else
+            return false;
+    }
+    public function canRefuse(){
+        if($this->status != UnitUser::PENDING)
+            return false;
+        $user = Auth::user();
+        if($user->isAdmin())
+            return true;
+        else if($user->isManager())
+            return $this->unit->managers()->where('users.id', $user->id)->first() != null;
+        else
+            return false;
+    }
+    public function canCancel(){
+        if($this->status != UnitUser::ACCEPTED)
+            return false;
+        $user = Auth::user();
+        if($user->isAdmin())
+            return true;
+        else if($user->isManager())
+            return $this->unit->managers()->where('users.id', $user->id)->first() != null;
+        else
             return false;
     }
 }

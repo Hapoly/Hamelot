@@ -10,6 +10,7 @@ use App\User;
 use App\Models\UnitUser;
 use App\Http\Requests\UnitUserRequest;
 use URL;
+use Auth;
 
 class UnitUsers extends Controller{
   public function index(Request $request){
@@ -81,30 +82,51 @@ class UnitUsers extends Controller{
     ]);
     return redirect()->route('panel.units.show', ['unit' => $request->unit_id]);
   }
-  public function inlineUpdate(Request $request, UnitUser $unit_user){
-    if($request->has('action')){
-        switch($request->action){
-            case 'accept':
-                if($unit_user->canAccept()){
-                    $unit_user->status = UnitUser::ACCEPTED;
-                    $unit_user->save();
-                }
-                break;
-            case 'refuse':
-                if($unit_user->canRefuse()){
-                    $unit_user->status = UnitUser::REFUSED;
-                    $unit_user->save();
-                }
-                break;
-            case 'cancel':
-                if($unit_user->canCancel()){
-                    $unit_user->status = UnitUser::CANCELED;
-                    $unit_user->save();
-                }
-                break;
-        }
-        return redirect()->route('panel.unit_$unit_users.show', ['unit_$unit_user' => $unit_user]);
-    }else
-        abort(404);
-}
+  public function inlineUpdate(Request $request, UnitUser $unit_user, $action){
+    switch($action){
+        case 'accept':
+            if($unit_user->canAccept()){
+                $unit_user->status = UnitUser::ACCEPTED;
+                $unit_user->save();
+            }
+            break;
+        case 'refuse':
+            if($unit_user->canRefuse()){
+                $unit_user->status = UnitUser::REFUSED;
+                $unit_user->save();
+            }
+            break;
+        case 'cancel':
+            if($unit_user->canCancel()){
+                $unit_user->status = UnitUser::CANCELED;
+                $unit_user->save();
+            }
+            break;
+    }
+    return redirect()->back();
+  }
+  public function send(Request $request, Unit $unit){
+    if(!$unit->can_join)
+      abort(403);
+    $user = Auth::user();
+    if($user->isManager()){
+      UnitUser::create([
+        'unit_id' => $unit->id,
+        'user_id' => $user->id,
+        'permission'  => UnitUser::MANAGER,
+        'status'  => UnitUser::PENDING,
+      ]);
+      return redirect()->back();
+    }else if($user->isDoctor() || $user->isNurse()){
+      UnitUser::create([
+        'unit_id' => $unit->id,
+        'user_id' => $user->id,
+        'permission'  => UnitUser::MEMBER,
+        'status'  => UnitUser::PENDING,
+      ]);
+      return redirect()->back();
+    }else{
+      abort(403);
+    }
+  }
 }

@@ -33,35 +33,23 @@
       <tr>
         <td>{{$unit_user->id}}</td>
         <td><a href="{{route('panel.users.show', ['user' => $unit_user->user])}}">{{$unit_user->user->full_name}}</a></td>
-        @switch($unit_user->type)
-          @case(UnitUser::HOSPITAL)
-            <td><a href="{{route('panel.hospitals.show', ['hospital' => $unit_user->unit])}}">{{$unit_user->unit->title}}</a></td>
-            @break
-          @case(UnitUser::DEPARTMENT)
-            <td><a href="{{route('panel.departments.show', ['hospital' => $unit_user->unit])}}">{{$unit_user->unit->title}}</a></td>
-            @break
-          @case(UnitUser::POLICLINIC)
-            <td><a href="{{route('panel.policlinics.show', ['hospital' => $unit_user->unit])}}">{{$unit_user->unit->title}}</a></td>
-            @break
-        @endswitch
+        <td><a href="{{route('panel.units.show', ['hospital' => $unit_user->unit])}}">{{$unit_user->unit->title}}</a></td>
         <td>{{$unit_user->status_str}}</td>
-        @if($unit_user->has_manager_permission)
-          <form method="POST" action="{{route('panel.unit_users.inline_update', ['unit_user' => $unit_user])}}">
-            @csrf
-            @if($unit_user->accepted())
-              <td><button class="btn btn-default" type="submit" name="action" value="cancel">{{__('unit_users.cancel')}}</button></td>
-            @elseif($unit_user->pending())
-              <td>
-                <button class="btn btn-primary" type="submit" name="action" value="accept">{{__('unit_users.accept')}}</button>
-                <button class="btn btn-danger" type="submit" name="action" value="refuse">{{__('unit_users.refuse')}}</button>
-              </td>
-            @else
-              <td> - </td>
-            @endif
-          </form>
-        @else
-          <td><a class="btn btn-default" href="{{route('panel.unit_users.show', ['unit_user' => $unit_user])}}">{{__('unit_users.show')}}</a></td>
-        @endif
+        <td>
+          @if($unit_user->has_manager_permission)
+              @if($unit_user->accepted())
+                <a class="btn btn-default" href="{{route('panel.unit_users.inline_update', ['unit_user' => $unit_user, 'action' => 'cancel'])}}">{{__('unit_users.cancel')}}</a></td>
+              @elseif($unit_user->pending())
+                <a class="btn btn-primary" href="{{route('panel.unit_users.inline_update', ['unit_user' => $unit_user, 'action' => 'accept'])}}">{{__('unit_users.accept')}}</a>
+                <a class="btn btn-danger" href="{{route('panel.unit_users.inline_update', ['unit_user' => $unit_user, 'action' => 'refuse'])}}">{{__('unit_users.refuse')}}</a>
+              @else
+                -
+              @endif
+            </form>
+          @else
+            <a class="btn btn-default" href="{{route('panel.unit_users.show', ['unit_user' => $unit_user])}}">{{__('unit_users.show')}}</a><
+          @endif
+        </td>
       </tr>
     @endforeach
   @endtable

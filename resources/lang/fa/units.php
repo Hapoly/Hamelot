@@ -58,6 +58,8 @@ return [
 
     'root_parent'       => 'ریشه',
     'parent_id'         => 'واحد مادر',
+
+    'joined_status'     => 'وضعیت دسترسی',
   
     'not_found'         => 'موردی یافت نشد',
 ];

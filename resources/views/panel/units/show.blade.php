@@ -40,6 +40,12 @@
             <td>{{__('units.city_id')}}</td>
             <td>{{$unit->city->title}}</td>
           </tr>
+          @if(!(Auth::user()->isAdmin() || Auth::user()->isPatient()))
+            <tr>
+              <td>{{__('units.joined_status')}}</td>
+              <td>{{$unit->joined_status_str}}</td>
+            </tr>
+          @endif
         </tbody>
       </table>
     </div>
@@ -56,6 +62,13 @@
           </form>
         </div>
       </div>
+    @endif
+    @if($unit->can_join)
+    <div class="row">
+      <div class="col-md-12" style="text-align: center">
+        <a style="margin: 0px 5px" class="btn btn-primary" href="{{route('panel.unit_users.send', ['unit' => $unit])}}">{{__('unit_users.send')}}</a>
+      </div>
+    </div>
     @endif
     <div class="row">
       <div class="col-md-12" style="text-align: center">
@@ -139,6 +152,7 @@
               @if(Auth::user()->isAdmin())
                 <td>
                   @operation_th(['base' => 'panel.users', 'label' => 'user', 'item' => $user, 'remove_label' => __('users.remove'), 'edit_label' => __('users.edit_str'), 'show_label' => __('users.show')])
+                  <a class="btn btn-warning" href="{{route('panel.unit_users.inline_update', ['unit_user' => $user->pivot->id, 'action' => 'cancel'])}}">{{__('unit_users.cancel')}}</a>
                 </td>
               @endif
             </tr>
