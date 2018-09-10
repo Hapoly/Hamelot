@@ -9,22 +9,14 @@ use App\Models\Entry;
 use App\Models\UnitUser;
 
 class Hospital extends Model {
-    protected $primary = 'id';
-    protected $table = 'hospitals';
-    protected $fillable = ['title', 'address', 'phone', 'mobile', 'image', 'status', 'lon', 'lat', 'city_id'];
-
-    const S_ACTIVE      = 1;
-    const S_INACTIVE    = 2;
-
-    public function getStatusStrAttribute(){
-        return __('hospitals.status_str.' . $this->status);
-    }
-    public function getAddressSummaryAttribute(){
-        return substr($this->address, 0, 30) . '...';
+    
+    public function requests(){
+        return $this->belongsToMany('App\User', 'unit_user', 'unit_id')
+                    ->wherePivot('type', UnitUser::HOSPITAL);
     }
     public function users(){
-        return $this->belongsToMany('App\User', 'unit_user', 'unit_id')
-                    ->wherePivot('type', UnitUser::HOSPITAL)
+        return $this->belongsToMany('App\User', 'unit_user', 'unit_parent_id')
+                    ->wherePivot('type', UnitUser::DEPARTMENT)
                     ->wherePivot('permission', UnitUser::MEMBER)
                     ->wherePivot('status', UnitUser::ACCEPTED);
     }
@@ -47,16 +39,6 @@ class Hospital extends Model {
     public function departments(){
         return $this->hasMany('App\Models\Department');
     }
-    public function reports(){
-        return $this->hasMany('App\Models\Reports');
-    }
-    public function getImageUrlAttribute(){
-        if($this->image == 'NuLL')
-            return url('/defaults/hospital.png');
-        else
-            return url($this->image);
-    }
-
     public function getJoinedAttribute(){
         if(Auth::user()->isManager())
             return $this->users()->where('users.id', Auth::user()->id)->first() != null;
@@ -93,46 +75,5 @@ class Hospital extends Model {
         }
     }
 
-    public function city(){
-        return $this->belongsTo('App\Models\City');
-    }
 
-    public function save(array $options = []){
-        parent::save($options);
-        $entry = Entry::where('target_id', $this->id)->where('type', Entry::HOSPITAL)->first();
-        $data = [
-            'target_id'     => $this->id,
-            'title'         => $this->title,
-            'lon'           => $this->lon,
-            'lat'           => $this->lat,
-            'city_id'       => $this->city_id,
-            'province_id'   => $this->city->province_id,
-            'status'        => $this->status,
-            'type'          => Entry::HOSPITAL,
-        ];
-        if($entry){
-            $entry->fill($data);
-            $entry->save();  
-        }else{
-            Entry::create($data);
-        }   
-    }
-
-    public function delete(){
-        parent::delete();
-        Entry::where('target_id', $this->id)->where('type', Entry::HOSPITAL)->delete();
-    }
-
-    public function getPhoneStrAttribute(){
-        if($this->phone == 'NuLL')
-            return '-';
-        else
-            return $this->phone;
-    }
-    public function getMobileStrAttribute(){
-        if($this->mobile == 'NuLL')
-            return '-';
-        else
-            return $this->mobile;
-    }
 }

@@ -34,16 +34,6 @@ class Policlinic extends Model
     }
 
 
-    const T_PUBLIC  = 1;
-    const T_PRIVATE = 2;
-    private $public_lang = [
-        1   => 'عمومی',
-        2   => 'خصوصی',
-    ];
-    public function getPublicStrAttribute(){
-        return $this->public_lang[$this->public];
-    }
-
     public function city(){
         return $this->belongsTo('App\Models\City');
     }
@@ -164,7 +154,7 @@ class Policlinic extends Model
         return $this->users()->where('group_code', User::G_NURSE);
     }
 
-    public function admins(){
+    public function managers(){
         return $this->belongsToMany('App\User', 'unit_user', 'unit_id')
                     ->wherePivot('status', UnitUser::ACCEPTED)
                     ->wherePivot('type', UnitUser::POLICLINIC)

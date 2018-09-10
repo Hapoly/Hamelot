@@ -47,6 +47,15 @@ class Permission
         'panel.hospitals.show'                              => [ 1, 2, 3, 4, 5 ],
         'panel.hospitals.destroy'                           => [ 1, 2 ],
 
+
+        'panel.units.index'                                 => [ 1, 2, 3, 4, 5 ],
+        'panel.units.create'                                => [ 1, 2 ],
+        'panel.units.store'                                 => [ 1, 2 ],
+        'panel.units.edit'                                  => [ 1, 2 ],
+        'panel.units.update'                                => [ 1, 2 ],
+        'panel.units.show'                                  => [ 1, 2, 3, 4, 5 ],
+        'panel.units.destroy'                               => [ 1, 2 ],
+
         'panel.policlinics.index'                           => [ 1, 2, 3, 4, 5 ],
         'panel.policlinics.create'                          => [ 1, 2 ],
         'panel.policlinics.store'                           => [ 1, 2 ],
@@ -110,7 +119,7 @@ class Permission
         'panel.unit_users.index'                            => [ 1, 2 ],
         'panel.unit_users.create_policlinic_manager'        => [ 1, 2 ],
         'panel.unit_users.create_policlinic_member'         => [ 1, 2 ],
-        'panel.unit_users.create_department_manager'        => [ 1, 2 ],
+        'panel.unit_users.create_department_member'         => [ 1, 2 ],
         'panel.unit_users.create_hospital_member'           => [ 1, 2 ],
         'panel.unit_users.store'                            => [ 1, 2 ],
 

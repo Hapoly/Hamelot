@@ -26,7 +26,8 @@ class CreateEntriesTable extends Migration
 
             $table->smallInteger('type')->index();
             $table->integer('target_id')->index();
-
+            $table->smallInteger('group_code')->index();
+            $table->smallInteger('public')->index();
             $table->smallInteger('status')->indext()->default(1);
             $table->timestamps();
         });

@@ -10,44 +10,44 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 use URL;
-use App\Models\Hospital;
+use App\Models\Unit;
 use App\Models\Province;
 use App\Models\City;
 use App\User;
-use App\Http\Requests\HospitalRequest;
+use App\Http\Requests\UnitRequest;
 
-class Hospitals extends Controller{
+class Units extends Controller{
   public function index(Request $request){
-    $hospitals = Hospital::fetch($request->input('joined', false));
+    $units = Unit::fetch($request->input('joined', false));
     $links = '';
     $sort = $request->input('sort', '###');
 
     if($request->has('title'))
-      $hospitals = $hospitals->whereRaw("title LIKE '%". $request->title ."%'");
+      $units = $units->whereRaw("title LIKE '%". $request->title ."%'");
     if($request->has('address'))
-      $hospitals = $hospitals->whereRaw("address LIKE '%". $request->address ."%'");
+      $units = $units->whereRaw("address LIKE '%". $request->address ."%'");
     if($request->has('status') && $request->status != 0)
-      $hospitals = $hospitals->where('status', $request->status);
+      $units = $units->where('status', $request->status);
     if($request->has('province_id') && $request->province_id != 0){
       if($request->has('city_id') && $request->city_id != 0){
-        $hospitals = $hospitals->where('city_id', $request->city_id);
+        $units = $units->where('city_id', $request->city_id);
       }else{
         $province_id = $request->province_id;
-        $hospitals = $hospitals->whereHas('city', function($query) use ($province_id){
+        $units = $units->whereHas('city', function($query) use ($province_id){
           return $query->where('province_id', $province_id);
         });
       }
     }else{
       if($request->has('city_id') && $request->city_id != 0){
-        $hospitals = $hospitals->where('city_id', $request->city_id);
+        $units = $units->where('city_id', $request->city_id);
       }
     }
     if($request->has('sort'))
-      $hospitals = $hospitals->orderBy($request->input('sort'), 'desc');
-    $hospitals = $hospitals->paginate(10);
+      $units = $units->orderBy($request->input('sort'), 'desc');
+    $units = $units->paginate(10);
     
-    return view('panel.hospitals.index', [
-      'hospitals'   => $hospitals,
+    return view('panel.units.index', [
+      'units'       => $units,
       'links'       => $links,
       'sort'        => $sort,
       'search'      => isset(parse_url(url()->full())['query'])? parse_url(url()->full())['query']: '',
@@ -62,40 +62,40 @@ class Hospitals extends Controller{
       'cities'      => City::all()
     ]);
   }
-  public function show(Hospital $hospital){
-    return view('panel.hospitals.show', ['hospital' => $hospital]);
+  public function show(Unit $unit){
+    return view('panel.units.show', ['unit' => $unit]);
   }
   public function create(){
-    return view('panel.hospitals.create', [
+    return view('panel.units.create', [
       'provinces' => Province::all(),
       'cities'    => json_encode(City::all()),
     ]);
   }
-  public function store(HospitalRequest $request){
+  public function store(UnitRequest $request){
     $inputs = $request->all();
     if($request->hasFile('image'))
-      $inputs['image'] = Storage::disk('public')->put('/hospitals', $request->file('image'));
-    $hospital = Hospital::create($inputs);
-    return redirect()->route('panel.hospitals.show', ['hospital' => $hospital]);
+      $inputs['image'] = Storage::disk('public')->put('/units', $request->file('image'));
+    $unit = Unit::create($inputs);
+    return redirect()->route('panel.units.show', ['unit' => $unit]);
   }
-  public function edit(Hospital $hospital){
-    return view('panel.hospitals.edit', [
-      'hospital'  => $hospital,
+  public function edit(Unit $unit){
+    return view('panel.units.edit', [
+      'unit'  => $unit,
       'provinces' => Province::all(),
       'cities'    => City::all()
     ]);
   }
-  public function update(HospitalRequest $request, Hospital $hospital){
+  public function update(UnitRequest $request, Unit $unit){
     $inputs = $request->all();
     if($request->hasFile('image'))
-      $inputs['image'] = Storage::disk('public')->put('/hospitals', $request->file('image'));
-    $hospital->fill($inputs)->save();
-    return redirect()->route('panel.hospitals.show', ['hospital' => $hospital]);
+      $inputs['image'] = Storage::disk('public')->put('/units', $request->file('image'));
+    $unit->fill($inputs)->save();
+    return redirect()->route('panel.units.show', ['unit' => $unit]);
   }
-  public function destroy(Hospital $hospital){
-    $hospital->delete();
-    if(URL::route('panel.hospitals.show', ['hospital' => $hospital]) == URL::previous())
-      return redirect()->route('panel.hospitals.index');
+  public function destroy(Unit $unit){
+    $unit->delete();
+    if(URL::route('panel.units.show', ['unit' => $unit]) == URL::previous())
+      return redirect()->route('panel.units.index');
     else
       return redirect()->back();
   }

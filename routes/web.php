@@ -16,6 +16,7 @@ Route::get('/', function () {
 });
 Route::middleware(['auth', 'Permission'])->namespace('Panel')->prefix('panel')->name('panel.')->group(function(){
     Route::resources([
+        'units'             => 'Units',
         'hospitals'         => 'Hospitals',
         'policlinics'       => 'Policlinics',
         'clinics'           => 'Clinics',
@@ -26,10 +27,10 @@ Route::middleware(['auth', 'Permission'])->namespace('Panel')->prefix('panel')->
     ]);
 
     Route::prefix('prints')->name('prints.')->group(function(){
-        Route::prefix('hospitals')->name('hospitals.')->group(function(){
-            Route::get('/', 'Prints@hospitals')->name('index');
+        Route::prefix('units')->name('units.')->group(function(){
+            Route::get('/', 'Prints@units')->name('index');
             Route::get('/members/{hospital}', 'Prints@hospitalMembers')->name('members');
-            Route::get('/departments/{hospital}', 'Prints@hospitalDepartments')->name('departments');
+            Route::get('/sub-units/{hospital}', 'Prints@hospitalDepartments')->name('sub_units');
             Route::get('/info/{hospital}', 'Prints@hospitalInfo')->name('info');
         });
     });
@@ -80,14 +81,11 @@ Route::middleware(['auth', 'Permission'])->namespace('Panel')->prefix('panel')->
         Route::get('/create-hospital-manager', 'UnitUsers@createHospitalManager')->name('create_hospital_manager');
         Route::post('/store', 'UnitUsers@store')->name('store');
 
-        Route::get('/send-department/{user}/{department}', 'UnitUsers@sendDepartment')->name('send_department');
-        Route::get('/send-policlinic/{user}/{policlinic}', 'UnitUsers@sendPoliclinic')->name('send_policlinic');
-        Route::get('/', 'UnitUsers@index')->name('index');
-        
+        Route::get('/send/{user}/{unit}/{permission}', 'UnitUsers@send')->name('send');
         Route::get('/show/{unit_user}', 'UnitUsers@show')->name('show');
 
         Route::post('/update-inline/{unit_user}', 'UnitUsers@inlineUpdate')->name('inline_update');
-
+        
         Route::get('/', 'UnitUsers@index')->name('index');
         Route::get('/destroy/{unit_users}', 'UnitUsers@destroy')->name('destroy');
     });

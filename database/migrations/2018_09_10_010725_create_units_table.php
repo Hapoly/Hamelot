@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePoliclinicsTable extends Migration
+class CreateUnitsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,19 +13,21 @@ class CreatePoliclinicsTable extends Migration
      */
     public function up()
     {
-        Schema::create('policlinics', function (Blueprint $table) {
+        Schema::create('units', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('title', 32);
-            $table->string('address', 200)->default('NuLL');
-            $table->string('image')->default('NuLL');
-            $table->smallInteger('status')->default(env('POLICLINIC_STATUS_DEFAULT'));
-            $table->smallInteger('type')->default(env('POLICLINIC_TYPE_DEFAULT'));
-            $table->smallInteger('public')->default(env('POLICLINIC_PUBLIC_DEFAULT'));
+            $table->string('title');
+            $table->string('address');
             $table->string('phone', 32)->default('NuLL');
             $table->string('mobile', 32)->default('NuLL');
-            $table->integer('city_id')->default(0)->index();
+            $table->string('image')->default('NuLL');
             $table->decimal('lon', 12, 10)->default(0);
             $table->decimal('lat', 12, 10)->default(0);
+            $table->integer('city_id')->default(0)->index();
+            $table->smallInteger('group_code');
+
+            $table->smallInteger('status')->default(env('UNIT_STATUS_DEFAULT'));
+            $table->smallInteger('type')->default(env('UNIT_TYPE_DEFAULT'));
+            $table->smallInteger('public')->default(env('UNIT_PUBLIC_DEFAULT'));
             $table->timestamps();
         });
     }
@@ -37,6 +39,6 @@ class CreatePoliclinicsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('policlinics');
+        Schema::dropIfExists('units');
     }
 }

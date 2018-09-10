@@ -1,5 +1,6 @@
 <?php
 	use App\User;
+	use App\Models\UnitUser;
 ?>
 <ul class="list-unstyled components">
 	<li>
@@ -63,6 +64,8 @@
 			</span>
 		</a>
 		<ul class="collapse list-unstyled" id="healthunitmenu">
+			<li><a href="{{route('panel.units.index')}}">لیست واحدها</a></li>
+			<li><a href="{{route('panel.units.create')}}">واحد جدید</a></li>
 			<li>
 				<a href="#hospitals" data-toggle="collapse" aria-expanded="false">
 					<span>بیمارستان‌ها</span>
@@ -179,14 +182,21 @@
 			</a>
 			<ul class="collapse list-unstyled" id="unit-user-requests">
 				<li>
-					<a href="{{route('panel.unit_users.index')}}"> لیست درخواست‌ها</a>
+					<a href="#unit-users-requests-index" data-toggle="collapse" aria-expanded="false"> لیست درخواست‌ها</a>
+					<ul class="collapse list-unstyled" id="unit-users-requests-index">
+						<a href="{{route('panel.unit_users.index', ['type' => UnitUser::HOSPITAL, 'permission' => UnitUser::MANAGER])}}">مدیریت بیمارستان‌ ها</a>
+						<a href="{{route('panel.unit_users.index', ['type' => UnitUser::DEPARTMENT, 'permission' => UnitUser::MEMBER])}}">پرسنل بخش ها</a>
+						<a href="{{route('panel.unit_users.index', ['type' => UnitUser::POLICLINIC, 'permission' => UnitUser::MANAGER])}}">مدیریت درمانگاه‌ها</a>
+						<a href="{{route('panel.unit_users.index', ['type' => UnitUser::POLICLINIC, 'permission' => UnitUser::MEMBER])}}">پرسنل درمانگاه‌ها</a>
+					</ul>
 				</li>
 				<li>
 					<a href="#unit-user-new" data-toggle="collapse" aria-expanded="false"><span>عضو جدید</span></a>
 					<ul class="collapse list-unstyled" id="unit-user-new">
-						<li>
-							kjdnvkjn
-						</li>
+						<li><a href="{{route('panel.unit_users.create_hospital_manager')}}">مدیر بیمارستان</a></li>
+						<li><a href="{{route('panel.unit_users.create_department_member')}}">پرسنل بخش</a></li>
+						<li><a href="{{route('panel.unit_users.create_policlinic_manager')}}">مدیر درمانگاه</a></li>
+						<li><a href="{{route('panel.unit_users.create_policlinic_member')}}">پرسنل درمانگاه</a></li>
 					</ul>
 				</li>
 			</ul>

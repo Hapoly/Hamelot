@@ -9,7 +9,7 @@ class UnitUser extends Model
 {
     protected $primary = 'id';
     protected $table = 'unit_user';
-    protected $fillable = ['user_id', 'unit_id', 'status', 'type', 'permission'];
+    protected $fillable = ['user_id', 'unit_id', 'unit_parent_id', 'status', 'type', 'permission'];
     protected $appends = ['status_str', 'type_str'];
 
     const PENDING   = 1;
@@ -29,21 +29,39 @@ class UnitUser extends Model
     public function user(){
         return $this->belongsTo('App\User');
     }
-    public function department(){
-        return $this->belongsTo('App\Models\Department');
+    public function unit(){
+        switch($this->type){
+            case UnitUser::HOSPITAL:
+                return $this->belongsTo('App\Models\Hospital', 'unit_id');
+            case UnitUser::DEPARTMENT:
+                return $this->belongsTo('App\Models\Department', 'unit_id');
+            case UnitUser::POLICLINIC:
+                return $this->belongsTo('App\Models\Policlinic', 'unit_id');
+        }
+    }
+    public function unit_parent(){
+        switch($this->type){
+            case UnitUser::HOSPITAL:
+            case UnitUser::DEPARTMENT:
+                return $this->belongsTo('App\Models\HOSPITAL', 'unit_id');
+            case UnitUser::POLICLINIC:
+                return $this->belongsTo('App\Models\Policlinic', 'unit_id');
+        }
+    }
+    public function unitParent(){
+        return $this->belongsTo('App\Models\Hospital', 'unit_id');
     }
 
-    public static function fetch(){
+    public static function fetch($type, $permission){
         if(Auth::user()->isAdmin())
             return new UnitUser;
-        else
-            return UnitUser::whereHas('department', function($query){
-                return $query->whereHas('hospital', function($query){
-                    return $query->whereHas('users', function($query){
-                        return $query->where('users.id', Auth::user()->id);
-                    });
+        else if(Auth::user()->isManager()){
+            return UnitUser::whereHas('unit_parent', function($query){
+                return $query->whereHas('managers', function($query){
+                    return $query->where('users.id', Auth::user()->id);
                 });
             });
+        }
     }
 
     const DEPARTMENT    = 1;
@@ -66,5 +84,28 @@ class UnitUser extends Model
     ];
     public function getPermissionStrAttribute(){
         return $this->permisison_lang[$this->permission];
+    }
+
+
+    public function pending(){
+        return $this->status == Permission::PENDING;
+    }
+    public function accepted(){
+        return $this->status == Permission::ACCEPTED;
+    }
+    public function refused(){
+        return $this->status == Permission::REFUSED;
+    }
+    public function canceled(){
+        return $this->status == Permission::CANCELED;
+    }
+
+    public function getHasManagerPermissionAttribute(){
+        if(Auth::user()->isAdmin())
+            return true;
+        else if(Auth::user()->isManager()){
+            return $this->unit_parent->managers()->where('users.id', Auth::user()->id)->first() != null;
+        }else
+            return false;
     }
 }

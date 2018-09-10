@@ -20,6 +20,7 @@ class CreateUnitUserTable extends Migration
             $table->smallInteger('type');
             $table->smallInteger('permission')->default(1);
             $table->smallInteger('status')->default(1);
+            $table->boolean('system_reserved')->default(false)->index();
             $table->timestamps();
         });
     }

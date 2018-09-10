@@ -14,7 +14,7 @@ use URL;
 
 class UnitUsers extends Controller{
   public function index(Request $request){
-    $unit_users = UnitUser::fetch();
+    $unit_users = UnitUser::fetch($request->type, $request->permission);
     $links = '';
     $sort = $request->input('sort', '###');
     $search = $request->input('search', '###');
@@ -78,7 +78,7 @@ class UnitUsers extends Controller{
   public function createDepartmentMember(Request $request){
     return view('panel.unit_users.department.member.create', [
       'departments' => Department::fetch(true)->get(),
-    ])
+    ]);
   }
 
   public function store(UnitUserManageRequest $request){
@@ -163,7 +163,7 @@ class UnitUsers extends Controller{
           }
         }else{
           UnitUser::create([
-            'unit_id' => $request->unit_id,
+            'unit_id'       => $request->unit_id,
             'user_id'       => $user->id,
             'type'          => UnitUser::DEPARTMENT,
             'permission'    => UnitUser::MEMBER,
@@ -174,4 +174,30 @@ class UnitUsers extends Controller{
     }
     return $request->all();
   }
+  public function inlineUpdate(Request $request, UnitUser $unit_user){
+    if($request->has('action')){
+        switch($request->action){
+            case 'accept':
+                if($unit_user->canAccept()){
+                    $unit_user->status = UnitUser::ACCEPTED;
+                    $unit_user->save();
+                }
+                break;
+            case 'refuse':
+                if($unit_user->canRefuse()){
+                    $unit_user->status = UnitUser::REFUSED;
+                    $unit_user->save();
+                }
+                break;
+            case 'cancel':
+                if($unit_user->canCancel()){
+                    $unit_user->status = UnitUser::CANCELED;
+                    $unit_user->save();
+                }
+                break;
+        }
+        return redirect()->route('panel.unit_$unit_users.show', ['unit_$unit_user' => $unit_user]);
+    }else
+        abort(404);
+}
 }
