@@ -13,12 +13,11 @@ class Unit extends Model
 {
     protected $primary = 'id';
     protected $table = 'units';
-    protected $fillable = ['title', 'address', 'phone', 'mobile', 'image', 'lon', 'lat', 'city_id', 'group_code', 'type', 'public', 'status'];
-
+    protected $fillable = ['title', 'address', 'phone', 'mobile', 'image', 'lon', 'lat', 'city_id', 'group_code', 'type', 'public', 'status', 'parent_id'];
+    protected $appends = ['complete_title'];
 
     const S_ACTIVE      = 1;
     const S_INACTIVE    = 2;
-
     public function getStatusStrAttribute(){
         return __('units.status_str.' . $this->status);
     }
@@ -35,6 +34,9 @@ class Unit extends Model
         return __('units.type_str.' . $this->type);
     }
 
+    public function getCompleteTitleAttribute(){
+        return $this->title;
+    }
     public function getAddressSummaryAttribute(){
         return substr($this->address, 0, 30) . '...';
     }
@@ -42,6 +44,29 @@ class Unit extends Model
     public function reports(){
         return $this->hasMany('App\Models\Reports');
     }
+
+    public function parent(){
+        return $this->belongsTo('App\Models\Unit', 'parent_id');
+    }
+    public function sub_units(){
+        return $this->hasMany('App\Models\Unit', 'parent_id');
+    }
+
+    public function requests(){
+        return $this->belongsToMany('App\User', 'unit_user', 'unit_id');
+    }
+    public function users(){
+        return $this->belongsToMany('App\User', 'unit_user', 'unit_parent_id')
+                    ->wherePivot('permission', UnitUser::MEMBER)
+                    ->wherePivot('status', UnitUser::ACCEPTED);
+    }
+
+    public function managers(){
+        return $this->belongsToMany('App\User', 'unit_user', 'unit_id')
+                    ->wherePivot('permission', UnitUser::MANAGER)
+                    ->wherePivot('status', UnitUser::ACCEPTED);
+    }
+
     public function getImageUrlAttribute(){
         if($this->image == 'NuLL')
             return url('/defaults/hospital.png');
@@ -54,9 +79,15 @@ class Unit extends Model
         return $this->belongsTo('App\Models\City');
     }
 
+    private $group_code_to_type = [
+        Unit::HOSPITAL      => Entry::HOSPITAL,
+        Unit::DEPARTMENT    => Entry::DEPARTMENT,
+        Unit::POLICLINIC    => Entry::POLICLINIC,
+        Unit::CLINIC        => Entry::CLINIC,
+    ];
     public function save(array $options = []){
         parent::save($options);
-        $entry = Entry::where('target_id', $this->id)->where('type', $this->group_code)->first();
+        $entry = Entry::where('target_id', $this->id)->where('type', $this->group_code_to_type[$this->group_code])->first();
         $data = [
             'target_id'     => $this->id,
             'title'         => $this->title,
@@ -70,7 +101,7 @@ class Unit extends Model
             'type'          => $this->type,
         ];
         if($this->status)
-            $entry['status'] = $this->status;
+            $data['status'] = $this->status;
 
         if($entry){
             $entry->fill($data);
@@ -101,7 +132,7 @@ class Unit extends Model
     const HOSPITAL      = 1;
     const DEPARTMENT    = 2;
     const POLICLINIC    = 3;
-    const CLINIT        = 4;
+    const CLINIC        = 4;
     public function getGroupStrAttribute(){
         return __('units.group_code_str.' . $this->group_code);
     }
@@ -122,5 +153,25 @@ class Unit extends Model
             case USER::G_PATIENT:
                 return Unit::where('public', Unit::T_PUBLIC);
         }
+    }
+
+
+    public function getHasPermissionAttribute(){
+        if(Auth::user()->isAdmin())
+            return true;
+        else if(Auth::user()->isManager())
+            return $this->managers()->where('users.id', Auth::user()->id)->first() != null;
+        else
+            return false;
+    }
+    public function getJoinedAttribute(){
+        if(Auth::user()->isManager())
+            return $this->users()->where('users.id', Auth::user()->id)->first() != null;
+        else if(Auth::user()->isAdmin() || Auth::user()->isPatient())
+            return false;
+        else
+            return $this->departments()->whereHas('users', function($query){
+                return $query->where(['users.id'=> Auth::user()->id]);
+            })->first() != null;
     }
 }

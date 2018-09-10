@@ -28,6 +28,8 @@ class CreateUnitsTable extends Migration
             $table->smallInteger('status')->default(env('UNIT_STATUS_DEFAULT'));
             $table->smallInteger('type')->default(env('UNIT_TYPE_DEFAULT'));
             $table->smallInteger('public')->default(env('UNIT_PUBLIC_DEFAULT'));
+
+            $table->integer('parent_id')->index()->default(0);
             $table->timestamps();
         });
     }

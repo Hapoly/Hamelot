@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class PoliclinicRequest extends FormRequest
+class UnitRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,14 +26,18 @@ class PoliclinicRequest extends FormRequest
         return [
             'title'         => 'required|string',
             'address'       => 'required|string',
-            'phone'         => 'string',
-            'mobile'        => 'string',
+            'phone'         => 'required|string',
+            'mobile'        => 'required|string',
             'image'         => 'image',
             'lon'           => 'required|string',
             'lat'           => 'required|string',
             'city_id'       => 'required|numeric',
-            'type'          => 'required|numeric',
+            'parent_id'     => 'required|numeric',
+
+            'status'        => 'required|numeric',
             'public'        => 'required|numeric',
+            'type'          => 'required|numeric',
+            'group_code'    => 'required|numeric',
         ];
     }
 }

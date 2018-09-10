@@ -8,23 +8,28 @@ class Entry extends Model
 {
     protected $primary = 'id';
     protected $table = 'entries';
-    protected $fillable = ['title', 'lon', 'lat', 'target_id', 'type', 'status', 'city_id', 'province_id', 'field_id', 'degree_id', 'public'];
+    protected $fillable = [
+        'title',
+        'lon', 'lat', 'city_id', 'province_id',
+        'target_id', 
+        'field_id', 'degree_id',
+        'type', 'status', 'public', 'group_code'];
 
     const HOSPITAL      = 1;
-    const POLICLINIC    = 2;
-    const CLINIC        = 3;
+    const DEPARTMENT    = 2;
+    const POLICLINIC    = 3;
+    const CLINIC        = 4;
     const DOCTOR        = 4;
     const NURSE         = 5;
+    public function getGroupCodeStrAttribute(){
+        return __('units.group_code_str.' . $this->group_code);
+    }
 
-    private $type_lang = [
-        1   => 'بیمارستان',
-        2   => 'درمانگاه',
-        3   => 'مطب',
-        4   => 'دکتر',
-        5   => 'پرستار',
-    ];
+
+    const ACTUAL    = 1;
+    const VIRTUAL   = 2;
     public function getTypeStrAttribute(){
-        return $this->type_lang[$this->type];
+        return __('units.type_str.' . $this->type);
     }
 
     const ACTIVE    = 1;

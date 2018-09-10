@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Storage;
 
 use URL;
 use App\Models\Unit;
+use App\Models\UnitUser;
 use App\Models\Province;
 use App\Models\City;
 use App\User;
@@ -65,10 +66,19 @@ class Units extends Controller{
   public function show(Unit $unit){
     return view('panel.units.show', ['unit' => $unit]);
   }
-  public function create(){
+  public function create(Request $request){
+    $parents = new Unit;
+    if(Auth::user()->isAdmin())
+      $parents = $parents->all();
+    else
+      $parents = Unit::whereHas('managers', function($query){
+        return $query->where('users.id', Auth::user()->id);
+      })->get();
     return view('panel.units.create', [
       'provinces' => Province::all(),
       'cities'    => json_encode(City::all()),
+      'parents'   => $parents,
+      'parent_id' => $request->input('unit_id', 0),
     ]);
   }
   public function store(UnitRequest $request){
@@ -76,13 +86,23 @@ class Units extends Controller{
     if($request->hasFile('image'))
       $inputs['image'] = Storage::disk('public')->put('/units', $request->file('image'));
     $unit = Unit::create($inputs);
+    if(!Auth::user()->isAdmin())
+      UnitUser::create([
+        'unit_id' => $unit->id,
+        'user_id' => Auth::user()->id,
+        'status'  => UnitUser::ACCEPTED,
+      ]);
     return redirect()->route('panel.units.show', ['unit' => $unit]);
   }
   public function edit(Unit $unit){
+    $parents = Unit::whereHas('managers', function($query){
+      return $query->where('users.id', Auth::user()->id);
+    });
     return view('panel.units.edit', [
-      'unit'  => $unit,
+      'unit'      => $unit,
       'provinces' => Province::all(),
-      'cities'    => City::all()
+      'cities'    => City::all(),
+      'parents'   => $parents,
     ]);
   }
   public function update(UnitRequest $request, Unit $unit){

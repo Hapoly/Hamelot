@@ -67,7 +67,7 @@
   </div>
   <div class="panel panel-default">
     <div class="panel-heading sub-panel-title">
-      {{__('unit_users.title')}}
+      {{__('unit_users.index_title')}}
     </div>
     @if(sizeof($unit->managers))
       <table class="table">
@@ -107,21 +107,21 @@
   <div class="panel panel-default">
     <div class="sub-panel-title panel-heading">
       @if($unit->has_permission)
-        <a href="{{route('panel.sub_units.create', ['unit_id' => $unit->id])}}" class="btn btn-primary sub-panel-add"><i class="fa fa-plus"></i></a>
+        <a href="{{route('panel.units.create', ['unit_id' => $unit->id])}}" class="btn btn-primary sub-panel-add"><i class="fa fa-plus"></i></a>
       @endif
-      {{__('sub_units.index_title')}}
+      {{__('units.index_title')}}
     </div>
     @if(sizeof($unit->sub_units))
       <table class="table">
         <thead>
           <tr>
-            <th>{{__('sub_units.row')}}</th>
-            <th>{{__('sub_units.title')}}</th>
-            <th>{{__('sub_units.status')}}</th>
+            <th>{{__('units.row')}}</th>
+            <th>{{__('units.title')}}</th>
+            <th>{{__('units.status')}}</th>
             @if(Auth::user()->isDoctor() || Auth::user()->isNurse())
               <th>{{__('unit_users.join_status')}}</th>
             @endif
-            <th>{{__('sub_units.operation')}}</th>
+            <th>{{__('units.operation')}}</th>
           </tr>
         </thead>
         <tbody>

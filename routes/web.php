@@ -75,10 +75,7 @@ Route::middleware(['auth', 'Permission'])->namespace('Panel')->prefix('panel')->
         });
     });
     Route::prefix('unit-users')->name('unit_users.')->group(function(){
-        Route::get('/create-policlinic-manager', 'UnitUsers@createPoloclinicManager')->name('create_policlinic_manager');
-        Route::get('/create-policlinic-member', 'UnitUsers@createPoloclinicMember')->name('create_policlinic_member');
-        Route::get('/create-department-member', 'UnitUsers@createDepartmentMember')->name('create_department_member');
-        Route::get('/create-hospital-manager', 'UnitUsers@createHospitalManager')->name('create_hospital_manager');
+        Route::get('/create', 'UnitUsers@create')->name('create');
         Route::post('/store', 'UnitUsers@store')->name('store');
 
         Route::get('/send/{user}/{unit}/{permission}', 'UnitUsers@send')->name('send');

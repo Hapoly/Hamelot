@@ -17,7 +17,6 @@ class CreateUnitUserTable extends Migration
             $table->increments('id');
             $table->integer('user_id')->index();
             $table->integer('unit_id')->index();
-            $table->smallInteger('type');
             $table->smallInteger('permission')->default(1);
             $table->smallInteger('status')->default(1);
             $table->boolean('system_reserved')->default(false)->index();

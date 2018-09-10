@@ -9,7 +9,7 @@ class UnitUser extends Model
 {
     protected $primary = 'id';
     protected $table = 'unit_user';
-    protected $fillable = ['user_id', 'unit_id', 'unit_parent_id', 'status', 'type', 'permission'];
+    protected $fillable = ['user_id', 'unit_id', 'status', 'permission'];
     protected $appends = ['status_str', 'type_str'];
 
     const PENDING   = 1;
@@ -63,19 +63,7 @@ class UnitUser extends Model
             });
         }
     }
-
-    const DEPARTMENT    = 1;
-    const POLICLINIC    = 2;
-    const HOSPITAL      = 3;
-    private $type_lang = [
-        1   => 'بخش',
-        2   => 'درمانگاه',
-        3   => 'بیمارستان'
-    ];
-    public function getTypeStrAttribute(){
-        return $this->type_lang[$this->type];
-    }
-
+    
     const MEMBER = 1;
     const MANAGER = 2;
     private $permission_lang = [

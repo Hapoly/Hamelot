@@ -40,4 +40,6 @@ return [
     'member_title'      => 'پرسنل',
     'member_not_found'  => 'هیچ پرسنلی وجود ندارد',
     'manager_not_found' => 'کادر مدیریت خالیست',
+
+    'not_found'         => 'موردی یافت نشد',
 ];

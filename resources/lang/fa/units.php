@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'index_title'       => 'بیمارستان‌ها',
+    'index_title'       => 'واحدها',
     'search'            => 'جستجو',
     'row'               => 'ردیف',
 
@@ -29,7 +29,7 @@ return [
     'print_this_page'   => 'چاپ این صفحه',
     'print_all'         => 'چاپ کل اطلاعات',
     'print_members'     => 'چاپ لیست پرسنل',
-    'print_departments' => 'چاپ لیست بخش‌ها',
+    'print_sub_units'   => 'چاپ لیست بخش‌ها',
     'print_info'        => 'چاپ تمام اطلاعات',
 
     'public'            => 'نمایش عموم',
@@ -54,5 +54,10 @@ return [
         '3' => 'درمانگاه',
         '4' => 'مطب',
     ],
-    
+
+
+    'root_parent'       => 'ریشه',
+    'parent_id'         => 'واحد مادر',
+  
+    'not_found'         => 'موردی یافت نشد',
 ];
