@@ -165,7 +165,16 @@
                                 @endif
                         </div>
                     </div>
-                        @submit_row(['value' => 'save', 'label' => __('users.save')])
+
+                    <?php
+                        $public_rows = [
+                        [ 'value' => 1, 'label' => __('users.public_str.1') ],
+                        [ 'value' => 2, 'label' => __('users.public_str.2') ],
+                        ];
+                    ?>
+                    @input_select(['name' => 'public', 'value' => old('public', ''), 'label' => __('users.public'), 'required' => true, 'rows' => $public_rows])
+                    
+                    @submit_row(['value' => 'save', 'label' => __('users.save')])
                     </form>
                 </div>
             </div>

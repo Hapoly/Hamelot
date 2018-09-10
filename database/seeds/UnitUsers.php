@@ -15,26 +15,15 @@ class UnitUsers extends Seeder
     {
         UnitUser::create([
             'unit_id'       => 1,
-            'user_id'       => 4,
-            'status'        => 2,
-        ]);
-        UnitUser::create([
-            'unit_id'       => 1,
             'user_id'       => 2,
-            'permission'    => 2,
             'status'        => 2,
-        ]);
-        UnitUser::create([
-            'unit_id'       => 1,
-            'user_id'       => 3,
-            'permission'    => 2,
-            'status'        => 2,
+            'permission'    => UnitUser::MANAGER,
         ]);
         UnitUser::create([
             'unit_id'       => 2,
             'user_id'       => 3,
-            'permission'    => 2,
             'status'        => 2,
+            'permission'    => UnitUser::MANAGER,
         ]);
     }
 }

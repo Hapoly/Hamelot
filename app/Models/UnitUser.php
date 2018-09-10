@@ -111,4 +111,30 @@ class UnitUser extends Model
         else
             return false;
     }
+
+    public function save(array $attributes = []){
+        parent::save($attributes);
+        foreach($this->unit->sub_units as $unit){
+            $unit_user = UnitUser::where('unit_id', $unit->id)
+                                 ->where('user_id', $this->user_id)
+                                 ->first();
+            if($unit_user){
+                $unit_user->status = $this->status;
+                $unit_user->save();
+            }else
+                $unit_user = UnitUser::create([
+                    'unit_id'           => $unit->id,
+                    'user_id'           => $this->user_id,
+                    'permission'        => $this->permission,
+                    'system_reserved'   => true,
+                    'status'            => $this->status
+                ]);
+        }
+    }
+    public function delete(){
+        foreach($this->unit->sub_units as $unit){
+            UnitUser::where('user_id', $this->user_id)->where('unit_id', $this->unit_id)->delete();
+        }
+        parent::delete();
+    }
 }

@@ -38,4 +38,35 @@ class Doctor extends Model
         else
             return url($this->profile);
     }
+
+    public function save(array $options = []){
+        parent::save($options);
+        $entry = Entry::where('target_id', $this->id)->where('group_code', Entry::DOCTOR)->first();
+        $data = [
+            'target_id'     => $this->id,
+            'title'         => $this->user->full_name,
+
+            'degree'        => $this->degree,
+            'field'         => $this->field,
+            
+            'group_code'    => Entry::DOCTOR,
+            'public'        => $this->user->public,
+        ];
+        
+        if($this->status)
+            $data['status'] = $this->status;
+
+        if($entry){
+            $entry->fill($data);
+            $entry->save();  
+        }else{
+            Entry::create($data);
+        }   
+    }
+
+    public function delete(){
+        parent::delete();
+        Storage::disk('public')->delete($this->image);
+        Entry::where('target_id', $this->id)->where('group_code', Entry::DOCTOR)->delete();
+    }
 }

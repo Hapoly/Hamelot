@@ -158,7 +158,7 @@ class Users extends Controller{
   public function createAdmin()   { return view('panel.users.create.admin');    }
   public function createManager() { return view('panel.users.create.manager');  }
   public function createDoctor()  { return view('panel.users.create.doctor', ['degrees' => ConstValue::doctor_degrees()->get(), 'fields' => ConstValue::doctor_fields()->get(), 'genders' => ConstValue::genders()->get()]);   }
-  public function createNurse()  { return view('panel.users.create.nurse', ['degrees' => ConstValue::nurse_degrees()->get(), 'fields' => ConstValue::nurse_fields()->get(), 'genders' => ConstValue::genders()->get()]);   }
+  public function createNurse()   { return view('panel.users.create.nurse', ['degrees' => ConstValue::nurse_degrees()->get(), 'fields' => ConstValue::nurse_fields()->get(), 'genders' => ConstValue::genders()->get()]);   }
   public function createPatient() { return view('panel.users.create.patient', ['genders' => ConstValue::genders()->get()]);  }
   /**
    * store users in user groups
@@ -185,10 +185,6 @@ class Users extends Controller{
     $inputs['password'] = bcrypt($inputs['password']);
     $inputs['group_code'] = User::G_DOCTOR;
     $user = User::create($inputs);
-    $dpeartment_user = UnitUser::create([
-      'user_id'       => $user->id,
-      'unit_id' => $inputs['unit_id'],
-    ]);
     $inputs['user_id'] = $user->id;
     $doctor = Doctor::create($inputs);
     return redirect()->route('panel.users.show', ['user' => $user]);
@@ -201,10 +197,6 @@ class Users extends Controller{
     $inputs['password'] = bcrypt($inputs['password']);
     $inputs['group_code'] = User::G_NURSE;
     $user = User::create($inputs);
-    $dpeartment_user = UnitUser::create([
-      'user_id'       => $user->id,
-      'unit_id' => $inputs['unit_id'],
-    ]);
     $inputs['user_id'] = $user->id;
     $nurse = Nurse::create($inputs);
     return redirect()->route('panel.users.show', ['user' => $user]);
@@ -218,10 +210,6 @@ class Users extends Controller{
     $inputs['group_code'] = User::G_PATIENT;
     $inputs['birth_date'] = Time::jmktime(0, 0, 0, $inputs['birth_day'], $inputs['birth_month'], $inputs['birth_year']);
     $user = User::create($inputs);
-    $dpeartment_user = UnitUser::create([
-      'user_id'       => $user->id,
-      'unit_id' => $inputs['unit_id'],
-    ]);
     $inputs['user_id'] = $user->id;
     $patient = Patient::create($inputs);
     return redirect()->route('panel.users.show', ['user' => $user]);

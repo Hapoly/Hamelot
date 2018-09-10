@@ -34,12 +34,8 @@ class Entry extends Model
 
     const ACTIVE    = 1;
     const INACTIVE  = 2;
-    private $status_lang = [
-        1   => 'فعال',
-        2   => 'غیرفعال',
-    ];
     public function getStatusStrAttribute(){
-        return $this->status_lang[$this->status];
+        return __('units.status_str.' . $this->status);
     }
 
     public function target(){

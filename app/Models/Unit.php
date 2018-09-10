@@ -80,7 +80,7 @@ class Unit extends Model{
         return $this->belongsTo('App\Models\City');
     }
 
-    private $group_code_to_type = [
+    private $group_code_to_gc = [
         Unit::HOSPITAL      => Entry::HOSPITAL,
         Unit::DEPARTMENT    => Entry::DEPARTMENT,
         Unit::POLICLINIC    => Entry::POLICLINIC,
@@ -88,7 +88,7 @@ class Unit extends Model{
     ];
     public function save(array $options = []){
         parent::save($options);
-        $entry = Entry::where('target_id', $this->id)->where('type', $this->group_code_to_type[$this->group_code])->first();
+        $entry = Entry::where('target_id', $this->id)->where('group_code', $this->group_code_to_gc[$this->group_code])->first();
         $data = [
             'target_id'     => $this->id,
             'title'         => $this->title,
@@ -113,8 +113,9 @@ class Unit extends Model{
     }
 
     public function delete(){
+        Storage::disk('public')->delete($this->image);
+        Entry::where('target_id', $this->id)->where('group_code', $this->group_code_to_gc[$this->group_code])->delete();
         parent::delete();
-        Entry::where('target_id', $this->id)->where('type', Entry::HOSPITAL)->delete();
     }
 
     public function getPhoneStrAttribute(){
