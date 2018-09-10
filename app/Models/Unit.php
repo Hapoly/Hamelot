@@ -98,10 +98,10 @@ class Unit extends Model
             return $this->mobile;
     }
 
-
-    const DEPARTMENT    = 1;
-    const POLICLINIC    = 2;
-    const HOSPITAL      = 3;
+    const HOSPITAL      = 1;
+    const DEPARTMENT    = 2;
+    const POLICLINIC    = 3;
+    const CLINIT        = 4;
     public function getGroupStrAttribute(){
         return __('units.group_code_str.' . $this->group_code);
     }

@@ -1,7 +1,7 @@
 <div class="form-group row create-form">
     <div class="col-md-10">
         <select class="form-control" name="province_id" id="province_id" style="width:93%">
-            <option disabled selected value="0">{{__('hospitals.please_choose')}}</option>
+            <option disabled selected value="0">{{__('units.please_choose')}}</option>
             @foreach($provinces as $province)
                 <option value="{{$province->id}}">{{$province->title}}</option>
             @endforeach
@@ -12,12 +12,12 @@
             </span>
         @endif
     </div>
-    <label for="province_id" class="col-md-2 col-form-label text-center">{{(__('hospitals.province_id'))}}</label>
+    <label for="province_id" class="col-md-2 col-form-label text-center">{{(__('units.province_id'))}}</label>
 </div>
 <div class="form-group row create-form">
     <div class="col-md-10">
         <select class="form-control" name="city_id" id="city_id" style="width:93%">
-            <option disabled selected value="0">{{__('hospitals.please_choose')}}</option>
+            <option disabled selected value="0">{{__('units.please_choose')}}</option>
         </select>
         @if ($errors->has('city_id'))
             <span class="invalid-feedback">
@@ -25,7 +25,7 @@
             </span>
         @endif
     </div>
-    <label for="city_id" class="col-md-2 col-form-label text-center">{{(__('hospitals.city_id'))}}</label>
+    <label for="city_id" class="col-md-2 col-form-label text-center">{{(__('units.city_id'))}}</label>
 </div>
 <div class="form-group row create-form">
     <div class="col-md-10">
@@ -36,7 +36,7 @@
         </span>
     @endif
     </div>
-    <label for="lon" class="col-md-2 col-form-label text-center">{{__('hospitals.lon')}}</label>
+    <label for="lon" class="col-md-2 col-form-label text-center">{{__('units.lon')}}</label>
 </div>
 <div class="form-group row create-form">
     <div class="col-md-10">
@@ -47,7 +47,7 @@
         </span>
     @endif
     </div>
-    <label for="lat" class="col-md-2 col-form-label text-center">{{__('hospitals.lat')}}</label>
+    <label for="lat" class="col-md-2 col-form-label text-center">{{__('units.lat')}}</label>
 </div>
 <script>
     $(document).ready(function(){
@@ -55,7 +55,7 @@
         function updateCities(){
             console.log('test');
             let pid = $('#province_id').val();
-            let cid_arr = '<option disabled selected>{{__('hospitals.please_choose')}}</option>';
+            let cid_arr = '<option disabled selected>{{__('units.please_choose')}}</option>';
             for(let i=0; i<cities.length; i++)
                 if(cities[i].province_id == pid)
                     cid_arr += ('<option value="'+cities[i].id+'">'+cities[i].title+'</option>');
