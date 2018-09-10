@@ -19,8 +19,7 @@ use App\Models\Patient;
 use App\Models\ConstValue;
 use App\Models\Permission;
 use App\Models\UnitUser;
-
-use App\Models\Hospital;
+use App\Models\Unit;
 
 use App\Http\Requests\UserRequest;
 use App\Http\Requests\AdminRequest;
@@ -53,16 +52,16 @@ class Users extends Controller{
     if($request->has('last_name')  && $request->last_name != '')
       $users = $users->where('last_name', 'LIKE' , '%'.$request->last_name.'%');
         
-    $hospital_id = $request->input('hospital_id', 0);
     $unit_id = $request->input('unit_id', 0);
-    if($hospital_id != 0){
+    $unit_id = $request->input('unit_id', 0);
+    if($unit_id != 0){
       if($unit_id != 0){
         $users = $users->whereHas('departments', function($query) use($unit_id){
           return $query->where('departments.id', $unit_id);
         });
       }else{
-        $users = $users->whereHas('departments', function($query) use ($hospital_id){
-          return $query->where('departments.hospital_id', $hospital_id);
+        $users = $users->whereHas('departments', function($query) use ($unit_id){
+          return $query->where('departments.unit_id', $unit_id);
         });
       }
     }
@@ -114,7 +113,7 @@ class Users extends Controller{
       'doctor_degrees'  => ConstValue::doctor_degrees()->get(),
       'nurse_fields'    => ConstValue::nurse_fields()->get(),
       'nurse_degrees'   => ConstValue::nurse_degrees()->get(),
-      'hospitals'       => Hospital::fetch(true)->get(),
+      'units'           => Unit::fetch(true)->get(),
       'filters'         => [
         'first_name'    => $request->first_name,
         'last_name'     => $request->last_name,
@@ -124,8 +123,8 @@ class Users extends Controller{
         'doctor_field'  => $request->doctor_field,
         'nurse_degree'  => $request->nurse_degree,
         'nurse_field'   => $request->nurse_field,
-        'hospital_id'   => $hospital_id,
-        'hospital'      => Hospital::find($hospital_id),
+        'unit_id'       => $unit_id,
+        'unit'          => Unit::find($unit_id),
         'unit_id' => $unit_id,
       ],
     ]);
@@ -303,7 +302,7 @@ class Users extends Controller{
     return redirect()->route('panel.users.show', ['user' => $user]);
   }
   public function destroy(User $user){
-    if(Auth::user()->isAdmin() || $user->id == Auth::user()->id)
+    if(!(Auth::user()->isAdmin() || $user->id == Auth::user()->id))
       abort(403);
     $user->delete();
     if(URL::route('panel.users.show', ['user' => $user]) == URL::previous())

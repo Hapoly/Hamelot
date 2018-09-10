@@ -4,9 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Models\ConstValue;
+use Illuminate\Support\Facades\Storage;
 
-class Doctor extends Model
-{
+class Doctor extends Model{
     protected $primary = 'id';
     protected $table = 'doctors';
     protected $fillable = ['degree', 'field', 'user_id', 'profile', 'gender', 'msc'];
@@ -18,7 +18,6 @@ class Doctor extends Model
         else
             return $this->msc;
     }
-
 
     public function user(){
         return $this->belongsTo('App\User');
@@ -51,6 +50,7 @@ class Doctor extends Model
             
             'group_code'    => Entry::DOCTOR,
             'public'        => $this->user->public,
+            'type'          => Entry::ACTUAL,
         ];
         
         if($this->status)

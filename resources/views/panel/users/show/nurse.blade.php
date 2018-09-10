@@ -49,29 +49,29 @@
     </div>
   </div>
   <div class="panel panel-default">
-    <h2>{{__('departments.index_title')}}</h2>
-    @if(sizeof($user->departments))
+    <h2>{{__('units.index_title')}}</h2>
+    @if(sizeof($user->units))
       <table class="table">
         <thead>
           <tr>
-            <th>{{__('departments.row')}}</th>
-            <th>{{__('departments.title')}}</th>
-            <th>{{__('departments.status')}}</th>
-            <th>{{__('departments.operation')}}</th>
+            <th>{{__('units.row')}}</th>
+            <th>{{__('units.title')}}</th>
+            <th>{{__('units.status')}}</th>
+            <th>{{__('units.operation')}}</th>
           </tr>
         </thead>
         <tbody>
-          @foreach($user->departments as $department)
+          @foreach($user->units as $unit)
             <tr>
-              <td>{{$department->id}}</td>
-              <td><a href="{{route('panel.departments.show', ['department' => $department])}}">{{$department->title}}</a></td>
-              <td>{{$department->status_str}}</td>
+              <td>{{$unit->id}}</td>
+              <td><a href="{{route('panel.units.show', ['unit' => $unit])}}">{{$unit->title}}</a></td>
+              <td>{{$unit->status_str}}</td>
               @if(Auth::user()->isAdmin() || Auth::user()->isManager())
                 <td>
-                  <form action="{{route('panel.departments.destroy', ['department' => $department])}}" style="display: inline" method="POST" class="trash-icon">
+                  <form action="{{route('panel.units.destroy', ['unit' => $unit])}}" style="display: inline" method="POST" class="trash-icon">
                     {{ method_field('DELETE') }}
                     {{ csrf_field() }}
-                    <button type="submit" class="btn btn-danger">{{__('departments.remove')}}</button>
+                    <button type="submit" class="btn btn-danger">{{__('units.remove')}}</button>
                   </form>
                 </td>
               @else
@@ -84,7 +84,7 @@
     @else
       <div class="row">
         <div class="col-md-12" style="text-align: center">
-          {{__('departments.not_found')}}
+          {{__('units.not_found')}}
         </div>
       </div>
     @endif

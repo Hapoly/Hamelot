@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Models\ConstValue;
+use Illuminate\Support\Facades\Storage;
 
 class Nurse extends Model
 {
@@ -49,7 +50,7 @@ class Nurse extends Model
             
             'group_code'    => Entry::NURSE,
             'public'        => $this->user->public,
-            'type'          => $this->type,
+            'type'          => Entry::ACTUAL,
         ];
         if($this->status)
             $data['status'] = $this->status;

@@ -113,7 +113,7 @@
                     
                     <div class="form-group row create-form">
                         <div class="col-md-10">
-                           <input id="msc" type="text" class="form-control{{ $errors->has('msc') ? ' is-invalid' : '' }}" name="msc" value="{{ old('msc', $user->nurse->msc_str) }}" required autofocus>
+                           <input id="msc" type="text" class="form-control{{ $errors->has('msc') ? ' is-invalid' : '' }}" name="msc" value="{{ old('msc') }}" required autofocus>
                                 @if ($errors->has('msc'))
                                 <span class="invalid-feedback">
                                     <strong>{{ $errors->first('msc') }}</strong>
@@ -126,8 +126,8 @@
                     <div class="form-group row create-form">
                         <div class="col-md-10">
                             <select class="form-control" name="public" id="public" style="width:90%">
-                                <option value="1" {{old('public', $user->nurse->public) == 1? 'selected': ''}} >{{__('users.public_str.1')}}  </option>
-                                <option value="2" {{old('public', $user->nurse->public) == 2? 'selected': ''}} >{{__('users.public_str.2')}}  </option>
+                                <option value="1" {{old('public') == 1? 'selected': ''}} >{{__('users.public_str.1')}}  </option>
+                                <option value="2" {{old('public') == 2? 'selected': ''}} >{{__('users.public_str.2')}}  </option>
                             </select>
                             @if ($errors->has('public'))
                                 <span class="invalid-feedback">

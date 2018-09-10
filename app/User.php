@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Notifications\Notifiable;
+use App\Models\Entry;
 use App\Models\Permission;
 use App\Models\Department;
 use App\Models\UnitUser;
@@ -68,36 +69,9 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function hospitals(){
-        return $this->belongsToMany('App\Models\Hospital', 'unit_user', 'user_id', 'unit_id')
-                    ->wherePivot('type', UnitUser::HOSPITAL)
-                    ->wherePivot('permission', UnitUser::MANAGER)
+    public function units(){
+        return $this->belongsToMany('App\Models\Unit', 'unit_user', 'user_id', 'unit_id')
                     ->wherePivot('status', UnitUser::ACCEPTED);
-    }
-
-    public function policlinics(){
-        return $this->belongsToMany('App\Models\Policlinic', 'unit_user', 'user_id', 'unit_id')
-                    ->wherePivot('type', UnitUser::POLICLINIC)
-                    ->wherePivot('permission', UnitUser::MANAGER)
-                    ->wherePivot('status', UnitUser::ACCEPTED);
-    }
-
-    public function hospitalDepartments(){
-        if(Auth::user()->isAdmin())
-            return Department::all();
-        $id = $this->id;
-        return Department::whereHas('hospital', function($query) use ($id){
-            return $query->whereHas('users', function($query) use ($id){
-                return $query->where('users.id', $id);
-            });
-        })->get();
-    }
-
-    public function departments(){
-        return $this->belongsToMany('App\Models\Department', 'unit_user', 'user_id', 'unit_id')
-                    ->wherePivot('type', UnitUser::DEPARTMENT)
-                    ->wherePivot('permission', UnitUser::MEMBER)
-                    ->wherePivot('status', UnitUser::ACCEPTED);;
     }
 
     public function patients(){
@@ -312,4 +286,15 @@ class User extends Authenticatable
         return null;
     }
 
+    public function delete(){
+        switch($this->group_code){
+            case User::G_DOCTOR:
+                $this->doctor->delete();
+            case User::G_NURSE:
+                $this->nurse->delete();
+        }
+        Entry::where('target_id', $this->id)->delete();
+        UnitUser::where('user_id', $this->id)->delete();
+        parent::delete();
+    }
 }
