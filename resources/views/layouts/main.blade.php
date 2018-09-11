@@ -15,7 +15,7 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 	<!-- Our Custom CSS -->
-	<link rel="stylesheet" href="{{asset('css/style.css')}}">
+	<link rel="stylesheet" href="{{asset('css/style.css')}}?v={{hash_file('md5', 'css/style.css')}}">
 	<link href='http://www.fontonline.ir/css/BRoya.css' rel='stylesheet' type='text/css'>
 	<style>
 		.row {
@@ -41,7 +41,7 @@
 			<div class="sidebar-header">
 				<h3>Hamelot</h3>
 				<strong style="font-size:20px;">
-				
+				`
 				</strong>
 			</div>
 			@component('layouts.side_menu')

@@ -1,5 +1,5 @@
 @extends('layouts.print')
-@section('title', 'پرسنل ' . $hospital->title)
+@section('title', 'پرسنل ' . $unit->title)
 @section('content')
     <h3>کادر مدیریت</h3>
     <table>
@@ -10,7 +10,7 @@
             <th>وضعیت</th>
         </thead>
         <tbody>
-            @foreach($hospital->managers as $index => $user)
+            @foreach($unit->managers as $index => $user)
             <tr>
                 <td>{{$index + 1}}</td>
                 <td>{{$user->first_name}}</td>
@@ -27,13 +27,12 @@
             <th>نام</th>
             <th>نام خانوادگی</th>
             <th>گروه کاربری</th>
-            <th>بخش</th>
             <th>سطح علمی</th>
             <th>تخصص</th>
             <th>وضعیت</th>
         </thead>
         <tbody>
-            @foreach($hospital->users as $index => $user)
+            @foreach($unit->members as $index => $user)
             <tr>
                 <td>{{$index + 1}}</td>
                 <td>{{$user->first_name}}</td>

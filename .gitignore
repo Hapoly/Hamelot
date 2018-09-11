@@ -13,9 +13,5 @@ yarn-error.log
 .env
 
 /public/users
-/public/departments
-/public/clinics
-/public/policlinics
-/public/hospitals
 /public/experiments
 /public/units

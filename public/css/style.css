@@ -16,6 +16,19 @@
 body {
     background: #fafafa;
 }
+.checkbox {
+    margin-bottom: 4rem;
+}
+.checkbox-label {
+    position: absolute !important;
+    width: auto !important;
+    right: 35px !important;
+}
+.checkbox-input {
+    position: absolute !important;
+    width: auto !important;
+    right: 15px !important;
+}
 
 p {
     font-size: 1.1em;

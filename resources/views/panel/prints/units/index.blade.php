@@ -11,14 +11,14 @@
             <th>وضعیت</th>
         </thead>
         <tbody>
-            @foreach($hospitals as $index => $hospital)
+            @foreach($units as $index => $unit)
             <tr>
                 <td>{{$index + 1}}</td>
-                <td>{{$hospital->title}}</td>
-                <td>{{$hospital->city->province->title}}</td>
-                <td>{{$hospital->city->title}}</td>
-                <td>{{$hospital->address}}</td>
-                <td>{{$hospital->status_str}}</td>
+                <td>{{$unit->title}}</td>
+                <td>{{$unit->city->province->title}}</td>
+                <td>{{$unit->city->title}}</td>
+                <td>{{$unit->address}}</td>
+                <td>{{$unit->status_str}}</td>
             </tr>
             @endforeach
         </tbody>

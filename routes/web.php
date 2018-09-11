@@ -17,11 +17,6 @@ Route::get('/', function () {
 Route::middleware(['auth', 'Permission'])->namespace('Panel')->prefix('panel')->name('panel.')->group(function(){
     Route::resources([
         'units'             => 'Units',
-        'hospitals'         => 'Hospitals',
-        'policlinics'       => 'Policlinics',
-        'clinics'           => 'Clinics',
-        'clinics'           => 'Clinics',
-        'departments'       => 'Departments',
         'report_templates'  => 'ReportTemplates',
         'experiments'       => 'Experiments',
     ]);
@@ -29,9 +24,9 @@ Route::middleware(['auth', 'Permission'])->namespace('Panel')->prefix('panel')->
     Route::prefix('prints')->name('prints.')->group(function(){
         Route::prefix('units')->name('units.')->group(function(){
             Route::get('/', 'Prints@units')->name('index');
-            Route::get('/members/{hospital}', 'Prints@hospitalMembers')->name('members');
-            Route::get('/sub-units/{hospital}', 'Prints@hospitalDepartments')->name('sub_units');
-            Route::get('/info/{hospital}', 'Prints@hospitalInfo')->name('info');
+            Route::get('/members/{unit}', 'Prints@unitMembers')->name('members');
+            Route::get('/sub-units/{unit}', 'Prints@subUnits')->name('sub_units');
+            Route::get('/info/{unit}', 'Prints@unitInfo')->name('info');
         });
     });
     Route::prefix('permissions')->name('permissions.')->group(function(){

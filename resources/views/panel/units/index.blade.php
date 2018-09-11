@@ -37,6 +37,12 @@
                 </div>
               </div>
             </div>
+            <div class="row">
+              <div class="checkbox">
+                <input class="checkbox-input" name="root" type="checkbox" value="" {{isset($filters)? ($filters['root']? 'checked': ''): ''}}>
+                <label class="checkbox-label" >فقط نمایش واحده‌های ریشه</label>
+              </div>
+            </div>
             <div class="row" style="margin-bottom:2px;margin-top:2px;">
               <div class="col-md-6" style="text-align: left">
                 <a style="margin: 0px 5px" class="btn btn-default" href="{{route('panel.prints.units.index', [$search, 'page' => $units->currentPage()])}}">{{__('units.print_this_page')}}</a>

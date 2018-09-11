@@ -23,6 +23,8 @@ class Units extends Controller{
     $links = '';
     $sort = $request->input('sort', '###');
 
+    if($request->has('root'))
+      $units =$units->where('parent_id', 0);
     if($request->has('title'))
       $units = $units->whereRaw("title LIKE '%". $request->title ."%'");
     if($request->has('address'))
@@ -58,6 +60,7 @@ class Units extends Controller{
         'province_id' => $request->input('province_id', ''),
         'city_id'     => $request->input('city_id', ''),
         'status'      => $request->input('status'),
+        'root'        => $request->has('root'),
       ],
       'provinces'   => Province::all(),
       'cities'      => City::all()

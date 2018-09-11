@@ -9,60 +9,62 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
-use App\Models\Hospital;
+use App\Models\Unit;
 
 class Prints extends Controller{
-  public function hospitals(Request $request){
-    $hospitals = Hospital::fetch($joined=$request->input('joined', false));
+  public function units(Request $request){
+    $units = Unit::fetch($joined=$request->input('joined', false));
     $links = '';
     $sort = $request->input('sort', '###');
-
+    
+    if($request->has('root'))
+      $units = $units->where('parent_id', 0);
     if($request->has('title'))
-      $hospitals = $hospitals->whereRaw("title LIKE '%". $request->title ."%'");
+      $units = $units->whereRaw("title LIKE '%". $request->title ."%'");
     if($request->has('address'))
-      $hospitals = $hospitals->whereRaw("address LIKE '%". $request->address ."%'");
+      $units = $units->whereRaw("address LIKE '%". $request->address ."%'");
     if($request->has('status') && $request->status != 0)
-      $hospitals = $hospitals->where('status', $request->status);
+      $units = $units->where('status', $request->status);
     if($request->has('province_id') && $request->province_id != 0){
       if($request->has('city_id') && $request->city_id != 0){
-        $hospitals = $hospitals->where('city_id', $request->city_id);
+        $units = $units->where('city_id', $request->city_id);
       }else{
         $province_id = $request->province_id;
-        $hospitals = $hospitals->whereHas('city', function($query) use ($province_id){
+        $units = $units->whereHas('city', function($query) use ($province_id){
           return $query->where('province_id', $province_id);
         });
       }
     }else{
       if($request->has('city_id') && $request->city_id != 0){
-        $hospitals = $hospitals->where('city_id', $request->city_id);
+        $units = $units->where('city_id', $request->city_id);
       }
     }
     if($request->has('sort'))
-      $hospitals = $hospitals->orderBy($request->input('sort'), 'desc');
+      $units = $units->orderBy($request->input('sort'), 'desc');
     if($request->has('page')){
       if($request->page != 0)
-        $hospitals = $hospitals->paginate(10);  
+        $units = $units->paginate(10);  
       else
-        $hospitals = $hospitals->get();
+        $units = $units->get();
     }else
-      $hospitals = $hospitals->paginate(10);
-    return view('panel.prints.hospitals.index', [
-      'hospitals'  => $hospitals,
+      $units = $units->paginate(10);
+    return view('panel.prints.units.index', [
+      'units'  => $units,
     ]);
   }
-  public function hospitalMembers(Hospital $hospital){
-    return view('panel.prints.hospitals.members', [
-      'hospital'  => $hospital,
+  public function unitMembers(Unit $unit){
+    return view('panel.prints.units.members', [
+      'unit'  => $unit,
     ]);
   }
-  public function hospitalInfo(Hospital $hospital){
-    return view('panel.prints.hospitals.info', [
-      'hospital'  => $hospital,
+  public function unitInfo(Unit $unit){
+    return view('panel.prints.units.info', [
+      'unit'  => $unit,
     ]);
   }
-  public function hospitalDepartments(Hospital $hospital){
-    return view('panel.prints.hospitals.departments', [
-      'hospital'  => $hospital,
+  public function subUnits(Unit $unit){
+    return view('panel.prints.units.sub_units', [
+      'unit'  => $unit,
     ]);
   }
 }
