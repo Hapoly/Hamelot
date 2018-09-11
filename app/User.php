@@ -57,7 +57,8 @@ class User extends Authenticatable
         'username', 'first_name', 'last_name', 'group_code', 'status', 'password', 'public',
     ];
     protected $appends = [
-        'permission_to_info', 'permission_to_history', 'permission_to_departments',
+        'permission_to_read_info',  'permission_to_read_history',   'permission_to_read_units',
+        'permission_to_write_info', 'permission_to_write_history',  'permission_to_write_units',
     ];
 
     /**
@@ -131,44 +132,10 @@ class User extends Authenticatable
      * method: has permission to
      * description: defines if user has permission to an object
      */
-    public function getPermissionToInfoAttribute(){
-        switch(Auth::user()->group_code){
-            case User::G_ADMIN:
-                return true;
-            case User::G_MANAGER:
-                if($this->isManager())
-                    return $this->public == User::T_PUBLIC;
-                else if($this->isAdmin())
-                    return false;
-                else if($this->isDoctor() || $this->isNurse())
-                    return $this->public == User::T_PUBLIC;
-                else
-                    return User::whereHas('permissions', function($query){
-                        return $query->whereHas('requester', function($query){
-                            return $query->whereHas('departments', function($query){
-                                return $query->whereHas('hospital', function($query){
-                                    return $query->whereHas('users', function($query){
-                                        return $query->where('users.id', Auth::user()->id);
-                                    });
-                                });
-                            });
-                        });
-                    })->first() != null;
-            case User::G_DOCTOR:
-            case User::G_NURSE:
-            case User::G_PATIENT:
-                if($this->isPatient())
-                    return $this->permissions()->where('user_id', $this->id)->where('status', User::ACCEPTED)->first() != null;
-                else if($this->isAdmin() || $this->isManager())
-                    return false;
-                else
-                    return $this->public == User::T_PUBLIC;
-            default:
-                return false;
-        }
-        return false;
+    public function getPermissionToReadInfoAttribute(){
+        return true;
     }
-    public function getPermissionToHistoryAttribute(){
+    public function getPermissionToReadHistoryAttribute(){
         switch(Auth::user()->group_code){
             case User::G_ADMIN:
                 return true;
@@ -186,26 +153,32 @@ class User extends Authenticatable
         }
         return false;
     }
-
-    public function getPermissionToDepartmentsAttribute(){
+    public function getPermissionToReadUnitsAttribute(){
+        return true;
+    }
+    public function getPermissionToWriteInfoAttribute(){
+        return Auth::user()->isAdmin();
+    }
+    public function getPermissionToWriteHistoryAttribute(){
         switch(Auth::user()->group_code){
             case User::G_ADMIN:
                 return true;
             case User::G_MANAGER:
-                return User::whereHas('departments', function($query){
-                    return $query->whereHas('hospital', function($query){
-                        return $query->whereHas('users', function($query){
-                            return $query->where('users.id', Auth::user()->id);
-                        });
-                    });
-                })->first() != null;
+                return false;
             case User::G_DOCTOR:
             case User::G_NURSE:
-                return $this->id == Auth::user()->id;
+                return User::whereHas('permissions', function($query){
+                    return $query->where([
+                            ['requester_id' => Auth::user()->id],
+                            ['status'       => Permission::ACCEPTED]]);
+                })->first() != null;
             case User::G_PATIENT:
-                return false;
+                return $this->id == Auth::user()->id;
         }
         return false;
+    }
+    public function getPermissionToWriteUnitsAttribute(){
+        return Auth::user()->isAdmin() || Auth::user()->isManager();
     }
 
     public static function fetch(){

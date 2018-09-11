@@ -58,15 +58,25 @@ class UnitUsers extends Controller{
   }
 
   public function createManager(Request $request){
+    $user = User::find($request->input('user_id', 0));
+    $full_name = '';
+    if($user)
+      $full_name = $user->full_name;
     return view('panel.unit_users.create.manager', [
       'units'   => Unit::fetch(true)->get(),
       'unit_id' => $request->input('unit_id', 0),
+      'full_name' => $full_name,
     ]);
   }
   public function createMember(Request $request){
+    $user = User::find($request->input('user_id', 0));
+    $full_name = '';
+    if($user)
+      $full_name = $user->full_name;
     return view('panel.unit_users.create.member', [
       'units'   => Unit::fetch(true)->get(),
       'unit_id' => $request->input('unit_id', 0),
+      'full_name' => $full_name,
     ]);
   }
 

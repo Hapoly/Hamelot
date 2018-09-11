@@ -6,7 +6,7 @@
 ?>
 <div class="container">
   @form_create(['action' => route('panel.unit_users.store'), 'title' => __('unit_users.create.manager')])
-    @autocomplete(['name' => 'full_name', 'label' => __('unit_users.full_name'), 'value' => old('full_name'), 'required' => true, 'route' => 'managers'])
+    @autocomplete(['name' => 'full_name', 'label' => __('unit_users.full_name'), 'value' => old('full_name', $full_name), 'required' => true, 'route' => 'managers'])
     <?php
       $unit_strs = [];
       foreach($units as $unit){

@@ -39,7 +39,7 @@
         </tbody>
       </table>
     </div>
-    @if(Auth::user()->isAdmin())
+    @if(Auth::user()->permission_to_write_info)
       <div class="row">
         <div class="col-md-6" style="text-align: center">
           <a href="{{route('panel.users.edit', ['user' => $user])}}" class="btn btn-primary" role="button">{{__('users.edit.general')}}</a>
@@ -50,39 +50,42 @@
       </div>
     @endif
   </div>
-  @if($user->permission_to_departments)
+  @if($user->permission_to_read_units)
     <div class="panel panel-default">
       <div class="sub-panel-title panel-heading">
-        {{__('departments.index_title')}}
+        @if($user->permission_to_write_units)
+          <a href="{{route('panel.unit_users.create.member', ['user_id' => $user->id])}}" class="btn btn-primary sub-panel-add"><i class="fa fa-plus"></i></a>
+        @endif
+        {{__('units.index_title')}}
       </div>
-      @if(sizeof($user->departments))
+      @if(sizeof($user->units))
         <table class="table">
           <thead>
             <tr>
-              <th>{{__('departments.row')}}</th>
-              <th>{{__('departments.title')}}</th>
-              <th>{{__('departments.status')}}</th>
-              <th>{{__('departments.operation')}}</th>
+              <th>{{__('units.row')}}</th>
+              <th>{{__('units.title')}}</th>
+              <th>{{__('units.status')}}</th>
+              <th>{{__('units.operation')}}</th>
             </tr>
           </thead>
           <tbody>
-            @foreach($user->departments as $department)
+            @foreach($user->units as $unit)
               <tr>
-                <td>{{$department->id}}</td>
-                <td><a href="{{route('panel.departments.show', ['department' => $department])}}">{{$department->title}}</a></td>
-                <td>{{$department->status_str}}</td>
-                @if($department->hasEditPermission())
+                <td>{{$unit->id}}</td>
+                <td><a href="{{route('panel.units.show', ['unit' => $unit])}}">{{$unit->title}}</a></td>
+                <td>{{$unit->status_str}}</td>
+                @if($unit->hasEditPermission())
                   <td>
-                    <form action="{{route('panel.departments.destroy', ['department' => $department])}}" style="display: inline" method="POST" class="trash-icon">
+                    <form action="{{route('panel.units.destroy', ['unit' => $unit])}}" style="display: inline" method="POST" class="trash-icon">
                       {{ method_field('DELETE') }}
                       {{ csrf_field() }}
-                      <button type="submit" class="btn btn-danger">{{__('departments.remove')}}</button>
+                      <button type="submit" class="btn btn-danger">{{__('units.remove')}}</button>
                     </form>
-                    <a class="btn btn-primary" href="{{route('panel.departments.edit', ['department' => $department])}}">{{ __('departments.edit') }}</a>
+                    <a class="btn btn-primary" href="{{route('panel.units.edit', ['unit' => $unit])}}">{{ __('units.edit') }}</a>
                   </td>
                 @else
                   <td>
-                    {{__('departments.no_access')}}
+                    {{__('units.no_access')}}
                   </td>
                 @endif
               </tr>
@@ -92,7 +95,7 @@
       @else
         <div class="row">
           <div class="col-md-12" style="text-align: center">
-            {{__('departments.not_found')}}
+            {{__('units.not_found')}}
           </div>
         </div>
       @endif

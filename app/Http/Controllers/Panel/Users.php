@@ -130,7 +130,7 @@ class Users extends Controller{
     ]);
   }
   public function show(User $user){
-    if(!$user->permission_to_info)
+    if(!$user->permission_to_read_info)
       abort(404);
     switch($user->group_code){
       case User::G_ADMIN:
