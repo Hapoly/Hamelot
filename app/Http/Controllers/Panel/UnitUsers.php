@@ -40,7 +40,7 @@ class UnitUsers extends Controller{
       $unit_users = $unit_users->paginate(10);
     }
     return view('panel.unit_users.index', [
-      'unit_users'   => $unit_users,
+      'unit_users'  => $unit_users,
       'links'       => $links,
       'sort'        => $sort,
       'search'      => $search,

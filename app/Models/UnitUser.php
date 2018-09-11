@@ -32,7 +32,7 @@ class UnitUser extends Model
         if(Auth::user()->isAdmin())
             return new UnitUser;
         else if(Auth::user()->isManager()){
-            return UnitUser::whereHas('unit_parent', function($query){
+            return UnitUser::whereHas('unit', function($query){
                 return $query->whereHas('managers', function($query){
                     return $query->where('users.id', Auth::user()->id);
                 });
@@ -68,7 +68,7 @@ class UnitUser extends Model
         if(Auth::user()->isAdmin())
             return true;
         else if(Auth::user()->isManager()){
-            return $this->unit_parent->managers()->where('users.id', Auth::user()->id)->first() != null;
+            return $this->unit->managers()->where('users.id', Auth::user()->id)->first() != null;
         }else
             return false;
     }
