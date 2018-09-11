@@ -134,7 +134,7 @@ class UnitUsers extends Controller{
         'permission'  => UnitUser::MEMBER,
         'status'  => UnitUser::PENDING,
       ]);
-      return redirect()->back();
+      return redirect()->back()->with('success', __('unit_users.success_sent_message'));
     }else{
       abort(403);
     }

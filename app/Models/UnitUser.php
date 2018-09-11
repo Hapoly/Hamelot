@@ -16,14 +16,9 @@ class UnitUser extends Model
     const ACCEPTED  = 2;
     const REFUSED   = 3;
     const CANCELED  = 4;
-    private $status_lang = [
-        1   => 'در انتظار',
-        2   => 'تایید شده',
-        3   => 'رد شده',
-        4   => 'منقضی شده',
-    ];
+    const NOT_SENT  = 5;
     public function getStatusStrAttribute(){
-        return $this->status_lang[$this->status];
+        return __('unit_users.status_str.' . $this->status);
     }
 
     public function user(){

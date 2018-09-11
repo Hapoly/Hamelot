@@ -6,6 +6,11 @@
   use App\Department;
 ?>
 <div class="container">
+  @if(session()->has('success'))
+    <div class="alert alert-success" role="alert">
+      {{session()->get('success')}}
+    </div>
+  @endif
   <div class="panel panel-default">
     <div class="row">
       <h2>{{ $unit->title }}</h2>

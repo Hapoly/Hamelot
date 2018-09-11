@@ -66,7 +66,7 @@ class Units extends Controller{
       'cities'      => City::all()
     ]);
   }
-  public function show(Unit $unit){
+  public function show(Request $request, Unit $unit){
     return view('panel.units.show', ['unit' => $unit]);
   }
   public function create(Request $request){

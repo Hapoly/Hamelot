@@ -186,6 +186,10 @@ class Unit extends Model{
         return $this->requests()->where('user_id', Auth::user()->id)->first()->status;
     }
     public function getJoinedStatusStrAttribute(){
-        return $this->requests()->where('user_id', Auth::user()->id)->first()->status_str;
+        $request = $this->requests()->where('user_id', Auth::user()->id)->first();
+        if($request)
+            return $request->status_str;
+        else
+            return __('unit_users.status_str.5');
     }
 }
