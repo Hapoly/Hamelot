@@ -43,7 +43,11 @@
             </div>
             <div class="row" id="more-inputs"></div>
             <div class="row" style="margin-bottom:2px;margin-top:2px;">
-              <div class="col-md-12">
+              <div class="col-md-6" style="text-align: left">
+                <a style="margin: 0px 5px" class="btn btn-default" href="{{route('panel.prints.users.index', [$search, 'page' => $users->currentPage()])}}">{{__('users.print_this_page')}}</a>
+                <a style="margin: 0px 5px" class="btn btn-default" href="{{route('panel.prints.users.index', [$search, 'page' => 0])}}">{{__('users.print_all')}}</a>
+              </div>
+              <div class="col-md-6">
                 <button class="btn btn-info" type="submit">{{__('users.search')}}</a>
               </div>
             </div>

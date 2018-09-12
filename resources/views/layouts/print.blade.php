@@ -9,8 +9,8 @@
             html {
                 direction: rtl;
             }
-            th {
-                text-align: right;
+            th, td {
+                text-align: center;
             }
             table, th, td, tr {
                 border-style: solid;
@@ -18,7 +18,6 @@
                 border-spacing: 0px;
             }
             th, td {
-                padding-right: 10px;
                 padding-top: 10px;
                 padding-bottom: 10px;
             }

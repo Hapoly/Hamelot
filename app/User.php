@@ -218,21 +218,21 @@ class User extends Authenticatable
             return $this->doctor->field_str;
         else if($this->isNurse())
             return $this->nurse->field_str;
-        return null;
+        return ' - ';
     }
     public function getDegreeStrAttribute(){
         if($this->isDoctor())
             return $this->doctor->degree_str;
         else if($this->isNurse())
             return $this->nurse->degree_str;
-        return null;
+        return ' - ';
     }
     public function getMscStrAttribute(){
         if($this->isDoctor())
             return $this->doctor->msc_str;
         else if($this->isNurse())
             return $this->nurse->msc_str;
-        return null;
+        return ' - ';
     }
     public function getFieldAttribute(){
         if($this->isDoctor())
@@ -254,6 +254,27 @@ class User extends Authenticatable
         else if($this->isNurse())
             return $this->nurse->msc;
         return null;
+    }
+    /**
+     * patients attributes
+     */
+    public function getIdNumberAttribute(){
+        if($this->isPatient())
+            return $this->patient->id_number;
+        else
+            return ' - ';
+    }
+    public function getAgeAttribute(){
+        if($this->isPatient())
+            return $this->patient->age;
+        else
+            return ' - ';
+    }
+    public function getAgeStrAttribute(){
+        if($this->isPatient())
+            return $this->patient->age_str;
+        else
+            return ' - ';
     }
 
     public function delete(){

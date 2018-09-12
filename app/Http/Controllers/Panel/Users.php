@@ -114,6 +114,7 @@ class Users extends Controller{
       'nurse_fields'    => ConstValue::nurse_fields()->get(),
       'nurse_degrees'   => ConstValue::nurse_degrees()->get(),
       'units'           => Unit::fetch(true)->get(),
+      'search'      => isset(parse_url(url()->full())['query'])? parse_url(url()->full())['query']: '',
       'filters'         => [
         'first_name'    => $request->first_name,
         'last_name'     => $request->last_name,

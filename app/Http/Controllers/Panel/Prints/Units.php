@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Panel;
+namespace App\Http\Controllers\Panel\Prints;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Storage;
 
 use App\Models\Unit;
 
-class Prints extends Controller{
+class Units extends Controller{
   public function units(Request $request){
     $units = Unit::fetch($joined=$request->input('joined', false));
     $links = '';
@@ -64,6 +64,11 @@ class Prints extends Controller{
   }
   public function subUnits(Unit $unit){
     return view('panel.prints.units.sub_units', [
+      'unit'  => $unit,
+    ]);
+  }
+  public function experiments(Unit $unit){
+    return view('panel.prints.units.experiments', [
       'unit'  => $unit,
     ]);
   }

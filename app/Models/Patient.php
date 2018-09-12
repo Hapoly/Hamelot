@@ -39,6 +39,7 @@ class Patient extends Model
     public function getAgeStrAttribute(){
         return intval((time() - $this->birth_date)/(3600*24*30*12)) . ' سال';
     }
+
     public function getProfileUrlAttribute(){
         if($this->profile == 'NuLL')
             if($this->gender == 19)

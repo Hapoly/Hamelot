@@ -30,7 +30,7 @@ Route::middleware(['auth', 'Permission'])->namespace('Panel')->prefix('panel')->
             Route::get('/experiments/{unit}', 'Units@experiments')->name('experiments');
         });
         Route::prefix('users')->name('users.')->group(function(){
-            Route::get('/patients', 'Users@patients')->name('patients');
+            Route::get('/', 'Users@users')->name('index');
             Route::get('/info/{user}', 'Users@userInfo')->name('info');
             Route::get('/experiments', 'Users@experiments')->name('experiments');
             Route::get('/patients/{user}', 'Users@doctorPatients')->name('doctor.patients');
