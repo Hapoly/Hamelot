@@ -56,12 +56,12 @@ class Users extends Controller{
     $unit_id = $request->input('unit_id', 0);
     if($unit_id != 0){
       if($unit_id != 0){
-        $users = $users->whereHas('departments', function($query) use($unit_id){
-          return $query->where('departments.id', $unit_id);
+        $users = $users->whereHas('units', function($query) use($unit_id){
+          return $query->where('units.id', $unit_id);
         });
       }else{
-        $users = $users->whereHas('departments', function($query) use ($unit_id){
-          return $query->where('departments.unit_id', $unit_id);
+        $users = $users->whereHas('units', function($query) use ($unit_id){
+          return $query->where('units.unit_id', $unit_id);
         });
       }
     }

@@ -8,9 +8,9 @@ use App\Models\Hospital;
 use URL;
 
 class Panel extends Controller{
-    public function departments(Request $request){
+    public function units(Request $request){
         $hospital = Hospital::find($request->hospital_id);
         if(!$hospital) return [];
-        return $hospital->departments;
+        return $hospital->units;
     }
 }

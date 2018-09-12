@@ -14,7 +14,7 @@
                             var settings = {
                                 "async": true,
                                 "crossDomain": true,
-                                "url": "{{route('panel.search.patient-departments')}}",
+                                "url": "{{route('panel.search.patient-units')}}",
                                 "method": "GET",
                                 "headers": {},
                                 "data": {
@@ -34,17 +34,17 @@
                 </script>
                 <input hidden name="report_template_id" value="{{$experiment->report_template->id}}" />
                 <?php
-                    $department_rows = [[
+                    $unit_rows = [[
                         'value' => 0,
                         'label'  => 'انتخاب نشده',
                     ]];
-                    foreach($experiment->user->departments as $department)
-                        array_push($department_rows, [
-                            'value' => $department->id,
-                            'label' => $department->title,
+                    foreach($experiment->user->units as $unit)
+                        array_push($unit_rows, [
+                            'value' => $unit->id,
+                            'label' => $unit->title,
                         ]);
                 ?>
-                @input_select(['name' => 'unit_id', 'value' => old('unit_id', ''), 'label' => __('experiments.unit_id'), 'required' => true, 'rows' => $department_rows])
+                @input_select(['name' => 'unit_id', 'value' => old('unit_id', ''), 'label' => __('experiments.unit_id'), 'required' => true, 'rows' => $unit_rows])
                 @input_date(['name' => '', 'year' => old('year'), 'month' => old('month'), 'day' => old('day')])
             </div>
         </div>

@@ -35,9 +35,6 @@ return [
 
     'full_name'     => 'نام کاربر',
 
-    'policlinic_type'   => 'دسترسی به درمانگاه',
-    'department_type'   => 'دسترسی به بخش یکی از بیمارستان ها',
-
     'policlinic_id' => 'درمانگاه',
     'permission'    => 'سطح دسترسی',
     'permission_str'    => [

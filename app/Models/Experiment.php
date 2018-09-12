@@ -25,8 +25,8 @@ class Experiment extends Model
     public function user(){
         return $this->belongsTo('App\User');
     }
-    public function department(){
-        return $this->belongsTo('App\Models\Department');
+    public function unit(){
+        return $this->belongsTo('App\Models\Unit');
     }
     public function fields(){
         return $this->hasMany('App\Models\ExperimentField');

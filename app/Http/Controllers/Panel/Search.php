@@ -29,13 +29,6 @@ class Search extends Controller{
     }
     return $results;
   }
-  public function departmentsOfPatient(Request $request){
-    $user = User::getByName($request->term);
-    if($user){
-      return $user->departments;
-    }else
-      return [];
-  }
   public function doctors(Request $request){
     $users = User::
       whereRaw("concat(first_name, ' ', last_name) LIKE '%" . $request->input('term') . "%'")

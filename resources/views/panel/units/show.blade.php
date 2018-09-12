@@ -3,7 +3,7 @@
 @section('content')
 <?php
   use App\User;
-  use App\Department;
+  use App\Unit;
 ?>
 <div class="container">
   @if(session()->has('success'))

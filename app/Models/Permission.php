@@ -85,11 +85,9 @@ class Permission extends Model
             return new Permission;
         else if(Auth::user()->isManager()){
             return Permission::whereHas('requester', function($query){
-                return $query->whereHas('departments', function($query){
-                    return $query->whereHas('hospital', function($query){
-                        return $query->whereHas('users', function($query){
-                            return $query->where('users.id', Auth::user()->id);
-                        });
+                return $query->whereHas('units', function($query){
+                    return $query->whereHas('users', function($query){
+                        return $query->where('users.id', Auth::user()->id);
                     });
                 });
             });

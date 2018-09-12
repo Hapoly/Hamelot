@@ -18,5 +18,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 // system apis
 Route::name('api.panel.')->group(function(){
-    Route::post('/departments', 'Api\Panel@departments')->name('departments');
+    Route::post('/units', 'Api\Panel@units')->name('units');
 });

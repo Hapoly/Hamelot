@@ -5,7 +5,7 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use App\Models\Entry;
 use App\Models\Permission;
-use App\Models\Department;
+use App\Models\Unit;
 use App\Models\UnitUser;
 use Auth;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -87,7 +87,7 @@ class User extends Authenticatable
                 })->get();
             case User::G_DOCTOR:
             case User::G_NURSE:
-                return User::whereHas('departments', function($query){
+                return User::whereHas('units', function($query){
                     return $query->whereHas('hospital', function($query){
                         return $query->whereHas('users', function($query){
                             return $query->where('users.id', $this->id)->where('users.group_code', User::G_PATIENT);

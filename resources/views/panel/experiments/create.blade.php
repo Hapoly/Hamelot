@@ -14,7 +14,7 @@
                             var settings = {
                                 "async": true,
                                 "crossDomain": true,
-                                "url": "{{route('panel.search.patient-departments')}}",
+                                "url": "{{route('panel.search.patients')}}",
                                 "method": "GET",
                                 "headers": {},
                                 "data": {

@@ -47,10 +47,10 @@ class UnitUsers extends Controller{
     ]);
   }
 
-  public function sendDepartment(Request $request, User $user, Department $department){
+  public function sendUnit(Request $request, User $user, Unit $unit){
     UnitUser::create([
       'user_id'       => $user->id,
-      'unit_id' => $department->id,
+      'unit_id'       => $unit->id,
       'status'        => UnitUser::PENDING,
       'type'          => UnitUser::DEPARTMENT,
     ]);

@@ -90,7 +90,6 @@ class Permission
         'panel.experiments.destroy'                         => [ 1, 2, 3, 4 ],
 
         'panel.search.patients'                             => [ 1, 2, 3, 4 ],
-        'panel.search.patient-departments'                  => [ 1, 2, 3, 4 ],
         'panel.search.doctors'                              => [ 1, 2, 3, 4 ],
         'panel.search.managers'                             => [ 1, 2, 3, 4 ],
         'panel.search.members'                              => [ 1, 2, 3, 4 ],

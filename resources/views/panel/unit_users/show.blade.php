@@ -3,7 +3,7 @@
 @section('content')
 <?php
   use App\User;
-  use App\Department;
+  use App\Unit;
 ?>
 <div class="container">
   <div class="panel panel-default">
@@ -58,7 +58,7 @@
     <div class="panel-heading sub-panel-title">
       {{__('hospital_users.title')}}
       @if(Auth::user()->isAdmin())
-        <a href="{{route('panel.departments.create', ['hospital_id' => $hospital->id])}}" class="btn btn-primary sub-panel-add">{{__('departments.create')}}</a>
+        <a href="{{route('panel.units.create', ['hospital_id' => $hospital->id])}}" class="btn btn-primary sub-panel-add">{{__('units.create')}}</a>
       @endif
     </div>
     @if(sizeof($hospital->users))
@@ -103,47 +103,47 @@
   <div class="panel panel-default">
     <div class="sub-panel-title panel-heading">
       @if($hospital->has_permission)
-        <a href="{{route('panel.departments.create', ['hospital_id' => $hospital->id])}}" class="btn btn-primary sub-panel-add"><i class="fa fa-plus"></i></a>
+        <a href="{{route('panel.units.create', ['hospital_id' => $hospital->id])}}" class="btn btn-primary sub-panel-add"><i class="fa fa-plus"></i></a>
       @endif
-      {{__('departments.index_title')}}
+      {{__('units.index_title')}}
     </div>
-    @if(sizeof($hospital->departments()))
+    @if(sizeof($hospital->units()))
       <table class="table">
         <thead>
           <tr>
-            <th>{{__('departments.row')}}</th>
-            <th>{{__('departments.title')}}</th>
-            <th>{{__('departments.status')}}</th>
+            <th>{{__('units.row')}}</th>
+            <th>{{__('units.title')}}</th>
+            <th>{{__('units.status')}}</th>
             @if(Auth::user()->isDoctor() || Auth::user()->isNurse())
               <th>{{__('unit_users.join_status')}}</th>
             @endif
-            <th>{{__('departments.operation')}}</th>
+            <th>{{__('units.operation')}}</th>
           </tr>
         </thead>
         <tbody>
-          @foreach($hospital->departments as $department)
+          @foreach($hospital->units as $unit)
             <tr>
-              <td>{{$department->id}}</td>
-              <td><a href="{{route('panel.departments.show', ['department' => $department])}}">{{$department->title}}</a></td>
-              <td>{{$department->status_str}}</td>
+              <td>{{$unit->id}}</td>
+              <td><a href="{{route('panel.units.show', ['unit' => $unit])}}">{{$unit->title}}</a></td>
+              <td>{{$unit->status_str}}</td>
               @if(Auth::user()->isDoctor() || Auth::user()->isNurse())
-                @if($department->lastRequest())
-                  <td>{{$department->lastRequest()->status_str}}</td>
+                @if($unit->lastRequest())
+                  <td>{{$unit->lastRequest()->status_str}}</td>
                 @else
                   <td> - </td>
                 @endif
               @endif
               <td>
                 @if(Auth::user()->isAdmin() || Auth::user()->isManager())
-                    <form action="{{route('panel.departments.destroy', ['department' => $department])}}" style="display: inline" method="POST" class="trash-icon">
+                    <form action="{{route('panel.units.destroy', ['unit' => $unit])}}" style="display: inline" method="POST" class="trash-icon">
                       {{ method_field('DELETE') }}
                       {{ csrf_field() }}
-                      <button type="submit" class="btn btn-danger">{{__('departments.remove')}}</button>
+                      <button type="submit" class="btn btn-danger">{{__('units.remove')}}</button>
                     </form>
-                    <a class="btn btn-primary" href="{{route('panel.hospitals.edit', ['hospital' => $hospital])}}">{{ __('departments.edit') }}</a>
+                    <a class="btn btn-primary" href="{{route('panel.hospitals.edit', ['hospital' => $hospital])}}">{{ __('units.edit') }}</a>
                 @elseif(Auth::user()->isDoctor() || Auth::user()->isNurse())
-                  @if($department->canJoin())
-                    <a class="btn btn-primary" href="{{route('panel.unit_users.send', ['user' => Auth::user(), 'department' => $department])}}">{{ __('unit_users.send') }}</a>
+                  @if($unit->canJoin())
+                    <a class="btn btn-primary" href="{{route('panel.unit_users.send', ['user' => Auth::user(), 'unit' => $unit])}}">{{ __('unit_users.send') }}</a>
                   @else
                     -
                   @endif
