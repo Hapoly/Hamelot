@@ -8,7 +8,7 @@
   <div class="panel panel-default">
     <div class="row">
       <div class="col-md-4" style="text-align: center;" >{{__('reports.title')}}: {{$experiment->report_template->title}}</div>
-      <div class="col-md-4" style="text-align: center;" >{{__('experiments.patient_name')}}: {{$experiment->user->first_name}} {{$experiment->user->last_name}}</div>
+      <div class="col-md-4" style="text-align: center;" >{{__('experiments.user_id')}}: {{$experiment->user->first_name}} {{$experiment->user->last_name}}</div>
       <div class="col-md-4" style="text-align: center;" >{{__('experiments.date')}}: {{$experiment->date_str}}</div>
       <div class="col-md-4" style="text-align: center; margin-top: 15px;" >{{__('experiments.unit_id')}}: {{$experiment->unit->title}}</div>
       <div class="col-md-4" style="text-align: center; margin-top: 15px;" >{{__('units.hospital_id')}}: {{$experiment->unit->hospital->title}}</div>

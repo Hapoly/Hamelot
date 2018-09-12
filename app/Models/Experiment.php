@@ -74,4 +74,23 @@ class Experiment extends Model
             }
         }
     }
+
+    public static function fetch(){
+        switch(Auth::user()->group_code){
+            case User::G_ADMIN:
+                return (new Experiment);
+            case User::G_MANAGER:
+                abort(403);
+                return;
+            case User::G_DOCTOR:
+            case User::G_NURSE:
+                return Experiment::whereHas('user',function($query){
+                    return $query->whereHas('visitors', function($query){
+                        return $query->where('users.id', Auth::user()->id);
+                    });
+                });
+            default:
+                return Experiment::where('user_id', Auth::user()->id);
+        }
+    }
 }

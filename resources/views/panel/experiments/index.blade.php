@@ -22,7 +22,7 @@
         <tr>
           <th >{{__('experiments.row')}}</th>
           <th >{{__('experiments.title')}}</th>
-          <th >{{__('experiments.patient_name')}}</th>
+          <th >{{__('experiments.user_id')}}</th>
           <th >{{__('experiments.date')}}</th>
           <th >{{__('experiments.unit_id')}}</th>
           @if(Auth::user()->isAdmin())

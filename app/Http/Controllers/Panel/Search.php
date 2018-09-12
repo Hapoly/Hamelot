@@ -14,9 +14,8 @@ use App\User;
 
 class Search extends Controller{
   public function patients(Request $request){
-    $users = User::
-        whereRaw("concat(first_name, ' ', last_name) LIKE '%" . $request->input('term') . "%'")
-      ->where('group_code', User::G_PATIENT)
+    $users = Auth::user()->patients()
+      ->whereRaw("concat(first_name, ' ', last_name) LIKE '%" . $request->input('term') . "%'")
       ->select(['first_name', 'last_name', 'id'])
       ->get();
     $results = [];
@@ -25,6 +24,19 @@ class Search extends Controller{
         'id'    => $user->id,
         'label' => $user->first_name . ' ' . $user->last_name,
         'value' => $user->first_name . ' ' . $user->last_name,
+      ]);
+    }
+    return $results;
+  }
+  public function units(Request $request){
+    $units = Auth::user()->units()->whereRaw("title LIKE '%". $request->input('term') ."%'")
+                          ->get();
+    $results = [];
+    foreach($units as $unit){
+      array_push($results, [
+        'id'    => $unit->id,
+        'label' => $unit->complete_title,
+        'value' => $unit->complete_title,
       ]);
     }
     return $results;

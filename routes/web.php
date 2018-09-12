@@ -84,7 +84,7 @@ Route::middleware(['auth', 'Permission'])->namespace('Panel')->prefix('panel')->
     });
     Route::prefix('search')->name('search.')->group(function(){
         Route::get('/patients', 'Search@patients')->name('patients');
-        Route::get('/patient-units', 'Search@unitsOfPatient')->name('patient-units');
+        Route::get('/units', 'Search@units')->name('units');
         Route::get('/members', 'Search@members')->name('members');
         Route::get('/managers', 'Search@managers')->name('managers');
     });

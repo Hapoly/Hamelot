@@ -15,6 +15,9 @@ class Unit extends Model{
     protected $fillable = ['title', 'address', 'phone', 'mobile', 'image', 'lon', 'lat', 'city_id', 'group_code', 'type', 'public', 'status', 'parent_id'];
     protected $appends = ['complete_title'];
 
+    public static function getByTitle($title){
+        return Unit::where('title', $title)->first();
+    }
     const S_ACTIVE      = 1;
     const S_INACTIVE    = 2;
     public function getStatusStrAttribute(){
@@ -34,7 +37,10 @@ class Unit extends Model{
     }
 
     public function getCompleteTitleAttribute(){
-        return $this->title;
+        if($this->parent_id == 0)
+            return $this->title;
+        else
+            return $this->title . ' - '. $this->parent->title;
     }
     public function getAddressSummaryAttribute(){
         return substr($this->address, 0, 30) . '...';

@@ -75,27 +75,23 @@ class User extends Authenticatable
                     ->wherePivot('status', UnitUser::ACCEPTED);
     }
 
+    public function visitors(){
+        if(!Auth::user()->isPatient())
+            abort(404);
+        else
+            return User::whereHas('permissions', function($query){
+                return $query->where('status', Permission::ACCEPTED)
+                            ->where('patient_id', $this->id);
+            });
+    }
     public function patients(){
-        switch($this->group_code){
-            case User::G_ADMIN:
-                return User::where('group_code', User::G_PATIENT)->get();
-            case User::G_MANAGER:
-                User::whereHas('hospital', function($query){
-                    return $query->whereHas('users', function($query){
-                        return $query->where('users.id', $this->id)->where('users.group_code', User::G_PATIENT);
-                    });
-                })->get();
-            case User::G_DOCTOR:
-            case User::G_NURSE:
-                return User::whereHas('units', function($query){
-                    return $query->whereHas('hospital', function($query){
-                        return $query->whereHas('users', function($query){
-                            return $query->where('users.id', $this->id)->where('users.group_code', User::G_PATIENT);
-                        });
-                    });
-                })->get();
-            default:
-                return [];
+        if(Auth::user()->isDoctor() || Auth::user()->isNurse()){
+            return User::whereHas('requests', function($query){
+                return $query->where('status', Permission::ACCEPTED)
+                            ->where('requester_id', $this->id);
+            });
+        }else{
+            abort(403);
         }
     }
 
@@ -206,6 +202,7 @@ class User extends Authenticatable
     public function permissions(){
         return $this->hasMany('App\Models\Permission', 'requester_id');
     }
+    
     public function requests(){
         return $this->hasMany('App\Models\Permission', 'patient_id');
     }
@@ -269,5 +266,9 @@ class User extends Authenticatable
         Entry::where('target_id', $this->id)->delete();
         UnitUser::where('user_id', $this->id)->delete();
         parent::delete();
+    }
+
+    public function experiments(){
+        return $this->hasMany('App\Models\Experiment', 'user_id');
     }
 }

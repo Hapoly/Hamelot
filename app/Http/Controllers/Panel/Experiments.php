@@ -16,11 +16,12 @@ use App\User;
 use App\Models\ReportField;
 use App\Models\Experiment;
 use App\Models\ReportTemplate;
+use App\Models\Unit;
 use App\Http\Requests\ExperimentRequest;
 
 class Experiments extends Controller{
   public function index(Request $request){
-    $experiments = new Experiment;
+    $experiments = Experiment::fetch();
     $links = '';
     $sort = $request->input('sort', '###');
     $search = $request->input('search', '###');
@@ -57,15 +58,12 @@ class Experiments extends Controller{
       abort(404);
     return view('panel.experiments.create', [
       'report_template' => $report_template,
-      'patients'        => Auth::user()->patients(),
+      'patients'        => Auth::user()->patients()->get(),
+      'units'           => Auth::user()->units()->get(),
     ]);
   }
   public function store(ExperimentRequest $request){
-    $patient = User::getByName($request->patient_name);
-    if(!$patient)
-      abort(404);
     $inputs = $request->all();
-    $inputs['user_id'] = $patient->id;
     $inputs['date'] = Time::jmktime(0, 0, 0, $inputs['day'], $inputs['month'], $inputs['year']);
     $experiment = Experiment::create($inputs);
     $experiment->saveFields($request);
@@ -73,16 +71,13 @@ class Experiments extends Controller{
   }
   public function edit(Experiment $experiment){
     return view('panel.experiments.edit', [
-      'patients'        => Auth::user()->patients(),
+      'patients'        => Auth::user()->patients()->get(),
+      'units'           => Auth::user()->units()->get(),
       'experiment'      => $experiment,
     ]);
   }
   public function update(ExperimentRequest $request, Experiment $experiment){
-    $patient = User::getByName($request->patient_name);
-    if(!$patient)
-      abort(404);
     $inputs = $request->all();
-    $inputs['user_id'] = $patient->id;
     $inputs['date'] = Time::jmktime(0, 0, 0, $inputs['day'], $inputs['month'], $inputs['year']);
     $experiment->fill($inputs)->save();
     $experiment->saveFields($request);

@@ -39,13 +39,6 @@ class Permission
         'panel.users.destroy'                               => [ 1 ],
         'panel.users.index'                                 => [ 1, 2, 3, 4, 5 ],
 
-        'panel.hospitals.index'                             => [ 1, 2, 3, 4, 5 ],
-        'panel.hospitals.create'                            => [ 1, 2 ],
-        'panel.hospitals.store'                             => [ 1, 2 ],
-        'panel.hospitals.edit'                              => [ 1, 2 ],
-        'panel.hospitals.update'                            => [ 1, 2 ],
-        'panel.hospitals.show'                              => [ 1, 2, 3, 4, 5 ],
-        'panel.hospitals.destroy'                           => [ 1, 2 ],
 
 
         'panel.units.index'                                 => [ 1, 2, 3, 4, 5 ],
@@ -56,21 +49,6 @@ class Permission
         'panel.units.show'                                  => [ 1, 2, 3, 4, 5 ],
         'panel.units.destroy'                               => [ 1, 2 ],
 
-        'panel.policlinics.index'                           => [ 1, 2, 3, 4, 5 ],
-        'panel.policlinics.create'                          => [ 1, 2 ],
-        'panel.policlinics.store'                           => [ 1, 2 ],
-        'panel.policlinics.edit'                            => [ 1, 2 ],
-        'panel.policlinics.update'                          => [ 1, 2 ],
-        'panel.policlinics.show'                            => [ 1, 2, 3, 4, 5 ],
-        'panel.policlinics.destroy'                         => [ 1, 2 ],
-
-        'panel.clinics.index'                               => [ 1, 2, 3, 4, 5 ],
-        'panel.clinics.create'                              => [ 1, 3 ],
-        'panel.clinics.store'                               => [ 1, 3 ],
-        'panel.clinics.edit'                                => [ 1, 3 ],
-        'panel.clinics.update'                              => [ 1, 3 ],
-        'panel.clinics.show'                                => [ 1, 2, 3, 4, 5 ],
-        'panel.clinics.destroy'                             => [ 1, 3 ],
 
         'panel.report_templates.index'                      => [ 1, 2, 3, 4 ],
         'panel.report_templates.create'                     => [ 1 ],
@@ -90,6 +68,7 @@ class Permission
         'panel.experiments.destroy'                         => [ 1, 2, 3, 4 ],
 
         'panel.search.patients'                             => [ 1, 2, 3, 4 ],
+        'panel.search.units'                                => [ 1, 2, 3, 4 ],
         'panel.search.doctors'                              => [ 1, 2, 3, 4 ],
         'panel.search.managers'                             => [ 1, 2, 3, 4 ],
         'panel.search.members'                              => [ 1, 2, 3, 4 ],

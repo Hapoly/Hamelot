@@ -4,13 +4,13 @@ namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Hospital;
+use App\Models\Unit;
 use URL;
 
 class Panel extends Controller{
     public function units(Request $request){
-        $hospital = Hospital::find($request->hospital_id);
-        if(!$hospital) return [];
-        return $hospital->units;
+        $unit = Unit::find($request->unit_id);
+        if(!$unit) return [];
+        return $unit->units;
     }
 }
