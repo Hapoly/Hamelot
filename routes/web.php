@@ -21,12 +21,19 @@ Route::middleware(['auth', 'Permission'])->namespace('Panel')->prefix('panel')->
         'experiments'       => 'Experiments',
     ]);
 
-    Route::prefix('prints')->name('prints.')->group(function(){
+    Route::prefix('prints')->name('prints.')->namespace('Prints')->group(function(){
         Route::prefix('units')->name('units.')->group(function(){
-            Route::get('/', 'Prints@units')->name('index');
-            Route::get('/members/{unit}', 'Prints@unitMembers')->name('members');
-            Route::get('/sub-units/{unit}', 'Prints@subUnits')->name('sub_units');
-            Route::get('/info/{unit}', 'Prints@unitInfo')->name('info');
+            Route::get('/', 'Units@units')->name('index');
+            Route::get('/members/{unit}', 'Units@unitMembers')->name('members');
+            Route::get('/sub-units/{unit}', 'Units@subUnits')->name('sub_units');
+            Route::get('/info/{unit}', 'Units@unitInfo')->name('info');
+            Route::get('/experiments/{unit}', 'Units@experiments')->name('experiments');
+        });
+        Route::prefix('users')->name('users.')->group(function(){
+            Route::get('/patients', 'Users@patients')->name('patients');
+            Route::get('/info/{user}', 'Users@userInfo')->name('info');
+            Route::get('/experiments', 'Users@experiments')->name('experiments');
+            Route::get('/patients/{user}', 'Users@doctorPatients')->name('doctor.patients');
         });
     });
     Route::prefix('permissions')->name('permissions.')->group(function(){
