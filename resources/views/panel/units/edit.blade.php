@@ -44,8 +44,9 @@
         $group_code_rows = [
           [ 'value' => 1, 'label' => __('units.group_code_str.1') ],
           [ 'value' => 2, 'label' => __('units.group_code_str.2') ],
-          [ 'value' => 2, 'label' => __('units.group_code_str.3') ],
-          [ 'value' => 2, 'label' => __('units.group_code_str.4') ],
+          [ 'value' => 3, 'label' => __('units.group_code_str.3') ],
+          [ 'value' => 4, 'label' => __('units.group_code_str.4') ],
+          [ 'value' => 5, 'label' => __('units.group_code_str.5') ],
         ];
     ?>
     @input_select(['name' => 'group_code', 'value' => old('group_code', $unit->group_code), 'label' => __('units.group_code'), 'required' => true, 'rows' => $group_code_rows])
