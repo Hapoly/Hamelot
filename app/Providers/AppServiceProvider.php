@@ -32,6 +32,7 @@ class AppServiceProvider extends ServiceProvider
         Blade::include('components.forms.inputs.select', 'input_select');
         Blade::include('components.forms.inputs.image', 'input_image');
         Blade::include('components.forms.inputs.autocomplete', 'autocomplete');
+        Blade::include('components.forms.inputs.filter_autocomplete', 'filter_autocomplete');
 
         Blade::component('components.forms.structures.create', 'form_create');
         Blade::component('components.forms.structures.edit', 'form_edit');

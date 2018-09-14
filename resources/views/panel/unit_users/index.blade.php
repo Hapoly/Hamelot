@@ -4,6 +4,51 @@
 <?php
   use App\Models\UnitUser;
 ?>
+<div class="filter-panel">
+  <div class="row justify-content-center">
+    <div class="col-8">
+      <div class="panel panel-default">
+        <div class="panel-heading">جستجو</div>
+        <div class="panel-body">
+          <form>
+            <div class="row">
+              @filter_autocomplete(['name' => 'user_id', 'label' => __('unit_users.user_id'), 'value' => old('user_id', isset($filters)? $filters['full_name']: ''), 'required' => true, 'route' => 'members'])
+              <div class="col-md-6">
+                <div class="from-group">
+                  <select class="form-control" name="unit_id" id="unit_id" style="width: 100%">
+                    <option value="0">تمام واحد ها</option>
+                    @foreach($units as $unit)
+                      <option value="{{$unit->id}}">{{$unit->complete_title}}</option>
+                    @endforeach
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6"></div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <select class="form-control" name="status" id="status" style="width: 100%">
+                    <option value="0">تمام وضعیت‌ها</option>
+                    <option value="1" {{isset($filters)? ($filters['status'] == 1? 'selected': '') : ''}}>{{__('unit_users.status_str.1')}}</option>
+                    <option value="2" {{isset($filters)? ($filters['status'] == 2? 'selected': '') : ''}}>{{__('unit_users.status_str.2')}}</option>
+                    <option value="3" {{isset($filters)? ($filters['status'] == 3? 'selected': '') : ''}}>{{__('unit_users.status_str.3')}}</option>
+                    <option value="4" {{isset($filters)? ($filters['status'] == 4? 'selected': '') : ''}}>{{__('unit_users.status_str.4')}}</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="row" style="margin-bottom:2px;margin-top:2px;text-align: left;">
+              <div class="col-md-6">
+                <button class="btn btn-info" type="submit">{{__('unit_users.search')}}</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 <div class="row" style="margin-bottom:50px;">
   @table([
     'route' => 'panel.unit_users.index', 

@@ -9,6 +9,10 @@
         <div class="panel-body">
           <form>
             <div class="row">
+              @filter_autocomplete(['name' => 'requester_id', 'label' => __('permissions.requester_id'), 'value' => old('requester_id', isset($filters)? $filters['requester_name']: ''), 'required' => true, 'route' => 'members'])
+              @filter_autocomplete(['name' => 'patient_id', 'label' => __('permissions.patient_id'), 'value' => old('patient_id', isset($filters)? $filters['patient_name']: ''), 'required' => true, 'route' => 'patients'])
+            </div>
+            <div class="row">
               <div class="col-md-6"></div>
               <div class="col-md-6">
                 <div class="form-group">
@@ -61,11 +65,11 @@
     @foreach($permissions as $permission)
       <tr>
         <td>{{$permission->id}}</td>
-        @if(!Auth::user()->isPatient())
-          <td>{{$permission->patient->full_name}}</td>
-        @endif
         @if(Auth::user()->isAdmin() || Auth::user()->isPatient())
           <td>{{$permission->requester->full_name}}</td>
+        @endif
+        @if(!Auth::user()->isPatient())
+          <td>{{$permission->patient->full_name}}</td>
         @endif
         <td>{{$permission->status_str}}</td>
         <td>{{$permission->date_str}}</td>

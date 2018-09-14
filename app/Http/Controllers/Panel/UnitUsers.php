@@ -18,32 +18,30 @@ class UnitUsers extends Controller{
     $links = '';
     $sort = $request->input('sort', '###');
     $search = $request->input('search', '###');
-
-    if($sort != '###' && $search == '###'){
-      $unit_users = $unit_users->orderBy($request->input('sort'), 'desc');
-      $unit_users = $unit_users->paginate(10);
-      $links = $unit_users->appends(['sort' => $request->input('sort')])->links();
-    }else if($sort == '###' && $search != '###'){
-      $unit_users = $unit_users->whereHas('user', function($query){
-        return $query->whereRaw("first_name + ' ' + last_name LIKE '%$search%'");
-      });
-      $unit_users = $unit_users->paginate(10);
-      $links = $unit_users->appends(['sort' => $request->input('sort')])->links();
-    }else if($sort != '###' && $search != '###'){
-      $unit_users = $unit_users->whereHas('user', function($query){
-        return $query->whereRaw("first_name + ' ' + last_name LIKE '%$search%'");
-      });
-      $unit_users = $unit_users->orderBy($request->input('sort'), 'desc');
-      $unit_users = $unit_users->paginate(10);
-      $links = $unit_users->appends(['sort' => $request->input('sort')])->links();
-    }else{
-      $unit_users = $unit_users->paginate(10);
+    if($request->has('status') && $request->status != 0)
+      $unit_users = $unit_users->where('status', $request->status);
+    if($request->has('unit_id') && $request->unit_id != 0)
+      $unit_users = $unit_users->where('unit_id', $request->unit_id);
+    if($request->has('full_name')){
+      $user = User::getByName($request->full_name);
+      if($user){
+        $unit_users = $unit_users->where('user_id', $user->id);
+      }
     }
+    if($request->has('sort'))
+      $unit_users = $unit_users->orderBy($request->input('sort'), 'desc');
+    $unit_users = $unit_users->paginate(10);
     return view('panel.unit_users.index', [
       'unit_users'  => $unit_users,
+      'units'       => Unit::fetch(true)->get(),
       'links'       => $links,
       'sort'        => $sort,
-      'search'      => $search,
+      'search'          => isset(parse_url(url()->full())['query'])? parse_url(url()->full())['query']: '',
+      'filters'         => [
+        'status'              => $request->input('status', 0),
+        'full_name'           => $request->input('full_name', ''),
+        'patient_name'        => $request->input('patient_id', ''),
+      ],
     ]);
   }
 

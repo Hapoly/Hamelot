@@ -22,6 +22,17 @@ class Permissions extends Controller{
 
         if($request->has('status') && $request->status != 0)
             $permissions = $permissions->where('status', $request->status);
+        if($request->has('requester_id')){
+            $requester = User::getByName($request->requester_id);
+            if($requester){
+                $permissions = $permissions->where('requester_id', $requester->id);
+            }
+        }
+        if($request->has('patient_id')){
+            $patient = User::getByName($request->patient_id);
+            if($patient)
+                $permissions = $permissions->where('patient_id', $patient->id);
+        }
         if($request->has('sort'))
             $permissions = $permissions->orderBy($request->input('sort'), 'desc');
         $permissions = $permissions->paginate(10);
@@ -32,6 +43,8 @@ class Permissions extends Controller{
             'search'          => isset(parse_url(url()->full())['query'])? parse_url(url()->full())['query']: '',
             'filters'         => [
               'status'              => $request->input('status', 0),
+              'requester_name'      => $request->input('requester_id', ''),
+              'patient_name'        => $request->input('patient_id', ''),
             ],
         ]);
     }

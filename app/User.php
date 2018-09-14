@@ -86,7 +86,7 @@ class User extends Authenticatable
 
     public static function getByName($name){
         return User::
-            whereRaw("concat(first_name, ' ', last_name) LIKE '%$name%'")
+            whereRaw("concat(first_name, ' ', last_name) = '$name'")
                 ->where('group_code', User::G_PATIENT)
                 ->first();
     }

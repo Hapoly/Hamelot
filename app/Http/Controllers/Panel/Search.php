@@ -14,9 +14,14 @@ use App\User;
 
 class Search extends Controller{
   public function patients(Request $request){
-    $users = Auth::user()->patients()
-      ->whereRaw("concat(first_name, ' ', last_name) LIKE '%" . $request->input('term') . "%'")
-      ->select(['first_name', 'last_name', 'id'])
+    $users = null;
+    if(Auth::user()->isAdmin())
+      $users = User::where('group_code', User::G_PATIENT);
+    else
+      $users = Auth::user()->patients();
+
+    $users = $users->whereRaw("concat(first_name, ' ', last_name) LIKE '%" . $request->input('term') . "%'")
+      ->select(['first_name', 'last_name', 'users.id'])
       ->get();
     $results = [];
     foreach($users as $user){
