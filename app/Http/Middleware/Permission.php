@@ -104,6 +104,7 @@ class Permission
         'panel.prints.users.visitors'                       => [ 1, 2, 3, 4, 5 ],
 
         'panel.prints.experiments.show'                     => [ 1, 2, 3, 4, 5 ],
+        'panel.prints.experiments.index'                    => [ 1, 2, 3, 4, 5 ],
     ];
     public function handle(Request $request, Closure $next){
         $route = $request->route()->getName();

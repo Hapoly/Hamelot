@@ -24,14 +24,8 @@ class Permission extends Model
     const ACCEPTED  = 2;
     const REFUSED   = 3;
     const CANCELED  = 4;
-    private $status_lang = [
-        1   => 'در انتظار',
-        2   => 'تایید شده',
-        3   => 'رد شده',
-        4   => 'منقضی شده',
-    ];
     public function getStatusStrAttribute(){
-        return $this->status_lang[$this->status];
+        return __('permissions.status_str.' . $this->status);
     }
     public function getStatusStrWithDateAttribute(){
         if($this->pending())

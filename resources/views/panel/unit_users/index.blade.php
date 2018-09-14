@@ -5,17 +5,6 @@
   use App\Models\UnitUser;
 ?>
 <div class="row" style="margin-bottom:50px;">
-    <div class="col-md-8 col-sm-9">
-      <form class="navbar-form" role="search" style="margin:auto;width:100%;direction:ltr;float:right" action="{{route('panel.unit_users.index',['sort' => $sort])}}" method="get">
-        <div class="input-group add-on">
-          <div class="input-group-btn">
-            <button class="btn" type="submit"><i class="glyphicon glyphicon-search"></i></button>
-          </div>
-          <input class="form-control search-box" placeholder="{{__('unit_users.search')}}"  name="search" id="srch-term" value="{{old('search')}}" type="text">
-        </div>
-      </form>
-    </div>
-  </div>
   @table([
     'route' => 'panel.unit_users.index', 
     'hasAny' => sizeof($unit_users) > 0, 

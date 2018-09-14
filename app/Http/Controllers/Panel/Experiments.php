@@ -17,6 +17,8 @@ use App\Models\ReportField;
 use App\Models\Experiment;
 use App\Models\ReportTemplate;
 use App\Models\Unit;
+use App\Models\City;
+use App\Models\Province;
 use App\Http\Requests\ExperimentRequest;
 
 class Experiments extends Controller{
@@ -24,29 +26,51 @@ class Experiments extends Controller{
     $experiments = Experiment::fetch();
     $links = '';
     $sort = $request->input('sort', '###');
-    $search = $request->input('search', '###');
 
-    if($sort != '###' && $search == '###'){
-      $experiments = $experiments->orderBy($request->input('sort'), 'desc');
-      $experiments = $experiments->paginate(10);
-      $links = $experiments->appends(['sort' => $request->input('sort')])->links();
-    }else if($sort == '###' && $search != '###'){
-      $experiments = $experiments->whereHas('report_template', function($query){ return $query->where('title', 'LIKE', "%$search%");});
-      $experiments = $experiments->paginate(10);
-      $links = $experiments->appends(['sort' => $request->input('sort')])->links();
-    }else if($sort != '###' && $search != '###'){
-      $experiments = $experiments->whereHas('report_template', function($query){ return $query->where('title', 'LIKE', "%$search%");});
-      $experiments = $experiments->orderBy($request->input('sort'), 'desc');
-      $experiments = $experiments->paginate(10);
-      $links = $experiments->appends(['sort' => $request->input('sort')])->links();
+    if($request->has('unit_id') && $request->unit_id != 0)
+      $experiments = $experiments->where('unit_id', $request->unit_id);
+    if($request->has('status') && $request->status != 0)
+      $experiments = $experiments->where('status', $request->status);
+    if($request->has('province_id') && $request->province_id != 0){
+      if($request->has('city_id') && $request->city_id != 0){
+        $city_id = $request->city_id;
+        $experiments = $experiments->whereHas('unit', function($query) use($city_id){
+          return $query->where('city_id', $city_id);
+        });
+      }else{
+        $province_id = $request->province_id;
+        $experiments = $experiments->whereHas('unit', function($query) use($province_id){
+          return $query->whereHas('city', function($query) use ($province_id){
+            return $query->where('province_id', $province_id);
+          });
+        });
+      }
     }else{
-      $experiments = $experiments->paginate(10);
+      if($request->has('city_id') && $request->city_id != 0){
+        $city_id = $request->city_id;
+        $experiments = $experiments->whereHas('unit', function($query) use($city_id){
+          return $query->where('city_id', $city_id);
+        });
+      }
     }
+    if($request->has('sort'))
+      $experiments = $experiments->orderBy($request->input('sort'), 'desc');
+    $experiments = $experiments->paginate(10);
+    
     return view('panel.experiments.index', [
       'experiments' => $experiments,
+      'units'       => Auth::user()->units,
+      'cities'      => City::all(),
+      'provinces'   => Province::all(),
       'links'       => $links,
       'sort'        => $sort,
-      'search'      => $search,
+      'search'      => isset(parse_url(url()->full())['query'])? parse_url(url()->full())['query']: '',
+      'filters'     => [
+        'unit_id'     => $request->input('unit_id', ''),
+        'province_id' => $request->input('province_id', ''),
+        'city_id'     => $request->input('city_id', ''),
+        'status'      => $request->input('status'),
+      ],
     ]);
   }
   public function show(Experiment $experiment){

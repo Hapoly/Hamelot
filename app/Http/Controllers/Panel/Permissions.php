@@ -19,33 +19,20 @@ class Permissions extends Controller{
         $permissions = Permission::fetch();
         $links = '';
         $sort = $request->input('sort', '###');
-        $search = $request->input('search', '###');
 
-        if($sort != '###' && $search == '###'){
+        if($request->has('status') && $request->status != 0)
+            $permissions = $permissions->where('status', $request->status);
+        if($request->has('sort'))
             $permissions = $permissions->orderBy($request->input('sort'), 'desc');
-            $permissions = $permissions->paginate(10);
-            $links = $permissions->appends(['sort' => $request->input('sort')])->links();
-        }else if($sort == '###' && $search != '###'){
-            $permissions = $permissions->whereHas('patient', function($query){
-                return $query->whereRaw("first_name + ' ' + last_name LIKE '%$search%'");
-            });
-            $permissions = $permissions->paginate(10);
-            $links = $permissions->appends(['sort' => $request->input('sort')])->links();
-        }else if($sort != '###' && $search != '###'){
-            $permissions = $permissions->whereHas('patient', function($query){
-                return $query->whereRaw("first_name + ' ' + last_name LIKE '%$search%'");
-            });
-            $permissions = $permissions->orderBy($request->input('sort'), 'desc');
-            $permissions = $permissions->paginate(10);
-            $links = $permissions->appends(['sort' => $request->input('sort')])->links();
-        }else{
-            $permissions = $permissions->paginate(10);
-        }
+        $permissions = $permissions->paginate(10);
         return view('panel.permissions.index', [
             'permissions'   => $permissions,
             'links'         => $links,
             'sort'          => $sort,
-            'search'        => $search,
+            'search'          => isset(parse_url(url()->full())['query'])? parse_url(url()->full())['query']: '',
+            'filters'         => [
+              'status'              => $request->input('status', 0),
+            ],
         ]);
     }
     public function create(Request $request){

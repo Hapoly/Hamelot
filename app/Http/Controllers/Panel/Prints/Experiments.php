@@ -12,17 +12,38 @@ use Illuminate\Support\Facades\Storage;
 use App\Models\Experiment;
 
 class Experiments extends Controller{
-  public function experiments(Request $request){
+  public function index(Request $request){
+    
     $experiments = Experiment::fetch();
     $links = '';
     $sort = $request->input('sort', '###');
-    
-    if($request->has('first_name'))
-      $experiments = $experiments->whereRaw("first_name LIKE '%". $request->first_name ."%'");
-    if($request->has('last_name'))
-      $experiments = $experiments->whereRaw("last_name LIKE '%". $request->last_name ."%'");
-    if($request->has('group_code'))
-      $experiments = $experiments->whereRaw("group_code LIKE '%". $request->group_code ."%'");
+
+    if($request->has('unit_id') && $request->unit_id != 0)
+      $experiments = $experiments->where('unit_id', $request->unit_id);
+    if($request->has('status') && $request->status != 0)
+      $experiments = $experiments->where('status', $request->status);
+    if($request->has('province_id') && $request->province_id != 0){
+      if($request->has('city_id') && $request->city_id != 0){
+        $city_id = $request->city_id;
+        $experiments = $experiments->whereHas('unit', function($query) use($city_id){
+          return $query->where('city_id', $city_id);
+        });
+      }else{
+        $province_id = $request->province_id;
+        $experiments = $experiments->whereHas('unit', function($query) use($province_id){
+          return $query->whereHas('city', function($query) use ($province_id){
+            return $query->where('province_id', $province_id);
+          });
+        });
+      }
+    }else{
+      if($request->has('city_id') && $request->city_id != 0){
+        $city_id = $request->city_id;
+        $experiments = $experiments->whereHas('unit', function($query) use($city_id){
+          return $query->where('city_id', $city_id);
+        });
+      }
+    }
     if($request->has('sort'))
       $experiments = $experiments->orderBy($request->input('sort'), 'desc');
     if($request->has('page')){

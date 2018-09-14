@@ -1,38 +1,24 @@
 @extends('layouts.print')
-@section('title', 'کاربران')
+@section('title', __('experiments.index_title'))
 @section('content')
     <table>
         <thead>
-            <th>{{__('users.row')}}</th>
-            @if(Auth::user()->isAdmin())
-                <th>{{__('users.username')}}</th>
-            @endif
-            <th>{{__('users.first_name')}}</th>
-            <th>{{__('users.last_name')}}</th>
-            <th>{{__('users.group_code')}}</th>
-            <th>{{__('users.id_number')}}</th>
-            <th>{{__('users.age')}}</th>
-            <th>{{__('users.degree')}}</th>
-            <th>{{__('users.field')}}</th>
-            <th>{{__('users.msc')}}</th>
-            <th>{{__('users.status')}}</th>
+            <th>{{__('experiments.row')}}</th>
+            <th>{{__('templates.title')}}</th>
+            <th>{{__('experiments.user_id')}}</th>
+            <th>{{__('experiments.unit_id')}}</th>
+            <th>{{__('experiments.date')}}</th>
+            <th>{{__('experiments.status')}}</th>
         </thead>
         <tbody>
-            @foreach($users as $index => $user)
+            @foreach($experiments as $index => $experiment)
             <tr>
                 <td>{{$index + 1}}</td>
-                @if(Auth::user()->isAdmin())
-                    <td>{{$user->username}}</td>
-                @endif
-                <td>{{$user->first_name}}</td>
-                <td>{{$user->last_name}}</td>
-                <td>{{$user->group_str}}</td>
-                <td>{{$user->id_number}}</td>
-                <td>{{$user->age_str}}</td>
-                <td>{{$user->degree_str}}</td>
-                <td>{{$user->field_str}}</td>
-                <td>{{$user->msc_str}}</td>
-                <td>{{$user->status_str}}</td>
+                <td>{{$experiment->report_template->title}}</td>
+                <td>{{$experiment->user->full_name}}</td>
+                <td>{{$experiment->unit->title}}</td>
+                <td>{{$experiment->date_str}}</td>
+                <td>{{$experiment->status_str}}</td>
             </tr>
             @endforeach
         </tbody>
