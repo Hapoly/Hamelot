@@ -18,24 +18,26 @@ class Entry extends Model
     const HOSPITAL      = 1;
     const DEPARTMENT    = 2;
     const POLICLINIC    = 3;
-    const CLINIC        = 4;
-    const DOCTOR        = 4;
-    const NURSE         = 5;
+    const LABRATORY     = 4;
+    const CLINIC        = 5;
+    const DOCTOR        = 6;
+    const NURSE         = 7;
+    
     public function getGroupCodeStrAttribute(){
-        return __('units.group_code_str.' . $this->group_code);
+        return __('entries.group_code_str.' . $this->group_code);
     }
 
 
     const ACTUAL    = 1;
     const VIRTUAL   = 2;
     public function getTypeStrAttribute(){
-        return __('units.type_str.' . $this->type);
+        return __('entries.type_str.' . $this->type);
     }
 
     const ACTIVE    = 1;
     const INACTIVE  = 2;
     public function getStatusStrAttribute(){
-        return __('units.status_str.' . $this->status);
+        return __('entries.status_str.' . $this->status);
     }
 
     public function target(){

@@ -91,6 +91,7 @@ class Unit extends Model{
         Unit::DEPARTMENT    => Entry::DEPARTMENT,
         Unit::POLICLINIC    => Entry::POLICLINIC,
         Unit::CLINIC        => Entry::CLINIC,
+        Unit::LABRATORY     => Entry::LABRATORY,
     ];
     public function save(array $options = []){
         parent::save($options);
@@ -141,6 +142,7 @@ class Unit extends Model{
     const DEPARTMENT    = 2;
     const POLICLINIC    = 3;
     const CLINIC        = 4;
+    const LABRATORY     = 5;
     public function getGroupStrAttribute(){
         return __('units.group_code_str.' . $this->group_code);
     }
