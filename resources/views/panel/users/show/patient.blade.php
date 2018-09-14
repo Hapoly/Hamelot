@@ -79,15 +79,55 @@
           </tr>
         </thead>
         <tbody>
-          @foreach($user->visitors()->get() as $user)
+          @foreach($user->visitors()->get() as $visitor)
             <tr>
-              <td>{{$user->id}}</td>
-              <td><a href="{{route('panel.users.show', ['user' => $user])}}">{{$user->full_name}}</a></td>
-              <td>{{$user->group_str}}</td>
-              <td>{{$user->status_str}}</td>
+              <td>{{$visitor->id}}</td>
+              <td><a href="{{route('panel.users.show', ['user' => $visitor])}}">{{$visitor->full_name}}</a></td>
+              <td>{{$visitor->group_str}}</td>
+              <td>{{$visitor->status_str}}</td>
               @if(Auth::user()->isAdmin())
                 <td>
-                  @operation_th(['base' => 'panel.users', 'label' => 'user', 'item' => $user, 'remove_label' => __('users.remove'), 'edit_label' => __('users.edit_str'), 'show_label' => __('users.show')])
+                  @operation_th(['base' => 'panel.users', 'label' => 'user', 'item' => $visitor, 'remove_label' => __('users.remove'), 'edit_label' => __('users.edit_str'), 'show_label' => __('users.show')])
+                </td>
+              @else
+                <td>-</td>
+              @endif
+            </tr>
+          @endforeach
+        </tbody>
+      </table>
+    @else
+      <div class="row">
+        <div class="col-md-12" style="text-align: center">
+          {{__('permissions.not_found')}}
+        </div>
+      </div>
+    @endif
+  </div>
+  <div class="panel panel-default">
+    <h2>{{__('experiments.index_title')}}</h2>
+    @tagline{{__('experiments.tag_line_patients')}}@endtagline
+    @if(sizeof($user->experiments()))
+      <table class="table">
+        <thead>
+          <tr>
+            <th>{{__('experiments.row')}}</th>
+            <th>{{__('experiments.title')}}</th>
+            <th>{{__('experiments.user_id')}}</th>
+            <th>{{__('experiments.status')}}</th>
+            <th>{{__('experiments.operation')}}</th>
+          </tr>
+        </thead>
+        <tbody>
+          @foreach($user->experiments()->get() as $experiment)
+            <tr>
+              <td>{{$experiment->id}}</td>
+              <td><a href="{{route('panel.report_templates.show', ['report_template' => $experiment->report_template])}}">{{$experiment->report_template->title}}</a></td>
+              <td>{{$experiment->user->full_name}}</td>
+              <td>{{$experiment->status_str}}</td>
+              @if(Auth::user()->isAdmin())
+                <td>
+                  @operation_th(['base' => 'panel.users', 'label' => 'user', 'item' => $experiment, 'remove_label' => __('users.remove'), 'edit_label' => __('users.edit_str'), 'show_label' => __('users.show')])
                 </td>
               @else
                 <td>-</td>

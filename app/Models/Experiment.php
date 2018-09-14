@@ -93,17 +93,33 @@ class Experiment extends Model
             case User::G_ADMIN:
                 return (new Experiment);
             case User::G_MANAGER:
-                abort(403);
-                return;
+                return Experiment::whereHas('unit', function($query){
+                    return $query->whereHas('managers', function($query){
+                        return $query->where('users.id', Auth::user()->id);
+                    });
+                });
             case User::G_DOCTOR:
             case User::G_NURSE:
-                return Experiment::whereHas('user',function($query){
-                    return $query->whereHas('visitors', function($query){
-                        return $query->where('users.id', Auth::user()->id);
+                return Experiment::whereHas('user', function($query){
+                    return $query->whereHas('requests', function($query){
+                        return $query->where('permissions.status', Permission::ACCEPTED)
+                                     ->where('permissions.requester_id', Auth::user()->id);
                     });
                 });
             default:
                 return Experiment::where('user_id', Auth::user()->id);
         }
+    }
+
+    public function getHasPermissionToWriteAttribute(){
+        $user = Auth::user();
+        if($user->isAdmin())
+            return true;
+        else if($user->isManager())
+            return $this->unit->managers()->where('users.id', $user->id)->first() != null;
+        else if($user->isDoctor() || $user->isNurse())
+            return $this->unit->members()->where('users.id', $user->id)->first() != null;
+        else
+            return $this->user_id == $user->id;
     }
 }

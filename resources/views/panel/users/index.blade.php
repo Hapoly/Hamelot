@@ -91,7 +91,7 @@
                   </td>
                 @else
                   <td>
-                    غیر قابل دسترسی
+                    <a href="{{route('panel.users.show', ['user' => $user])}}" class="btn btn-default">{{__('users.show')}}</a>
                   </td>
                 @endif
             </tr>

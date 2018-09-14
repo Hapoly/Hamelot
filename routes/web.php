@@ -37,6 +37,9 @@ Route::middleware(['auth', 'Permission'])->namespace('Panel')->prefix('panel')->
             Route::get('/visitors/{user}', 'Users@visitors')->name('visitors');
             Route::get('/units/{user}', 'Users@units')->name('units');
         });
+        Route::prefix('experiments')->name('experiments.')->group(function(){
+            Route::get('/{experiment}', 'Experiments@show')->name('show');
+        });
     });
     Route::prefix('permissions')->name('permissions.')->group(function(){
         Route::get('/create', 'Permissions@create')->name('create');

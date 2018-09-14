@@ -80,14 +80,8 @@ class User extends Authenticatable
                     ->wherePivot('status', Permission::ACCEPTED);
     }
     public function patients(){
-        if($this->isDoctor() || $this->isNurse()){
-            return User::whereHas('requests', function($query){
-                return $query->where('status', Permission::ACCEPTED)
-                            ->where('requester_id', $this->id);
-            });
-        }else{
-            return null;
-        }
+        return $this->belongsToMany('App\User', 'permissions', 'requester_id', 'patient_id')
+                    ->wherePivot('status', Permission::ACCEPTED);
     }
 
     public static function getByName($name){
@@ -188,9 +182,7 @@ class User extends Authenticatable
         if(Auth::user()->isAdmin())
             return new User;
         else
-            return User::whereHas('requests', function($query){
-                return $query->where('requester_id', Auth::user()->id);
-            });
+            return Auth::user()->patients();
     }
 
 

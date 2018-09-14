@@ -38,6 +38,11 @@
         </form>
       </div>
     </div>
+    <div class="row">
+      <div class="col-md-12" style="text-align: center">
+        <a style="margin: 0px 5px" class="btn btn-default" href="{{route('panel.prints.experiments.show', ['experiment' => $experiment])}}">{{__('experiments.print')}}</a>
+      </div>
+    </div>
   </div>
 </div>
 @endsection
