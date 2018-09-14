@@ -10,6 +10,17 @@ namespace App\Drivers;
  * @version 1.0.0
  */
 class Time {
+  public static function year(){
+    return Time::jdate('Y', time(), '', 'Asia/Tehran', 'en');
+  }
+
+  public static function month(){
+    return Time::jdate('m', time(), '', 'Asia/Tehran', 'en');
+  }
+
+  public static function day(){
+    return Time::jdate('d', time(), '', 'Asia/Tehran', 'en');
+  }
   /**
    * gets a timestamp and returns the date in that format
    * @param string $format

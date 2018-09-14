@@ -76,14 +76,8 @@ class User extends Authenticatable
     }
 
     public function visitors(){
-        if(!$this->isPatient()){
-            return null;
-        }else{
-            return User::whereHas('permissions', function($query){
-                return $query->where('status', Permission::ACCEPTED)
-                            ->where('patient_id', $this->id);
-            });
-        }
+        return $this->belongsToMany('App\User', 'permissions', 'patient_id', 'requester_id')
+                    ->wherePivot('status', Permission::ACCEPTED);
     }
     public function patients(){
         if($this->isDoctor() || $this->isNurse()){

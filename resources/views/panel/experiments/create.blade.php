@@ -1,6 +1,9 @@
 @extends('layouts.main')
 @section('title', __('experiments.create'))
 @section('content')
+<?php
+    use App\Drivers\Time;
+?>
 <div class="test">
     @form_create(['action' => route('panel.experiments.store'), 'title' => __('experiments.create')])
         <div class="panel panel-default create-card"  id="field-1" style="margin-top:30px;" >
@@ -29,7 +32,7 @@
                         ]);
                 ?>
                 @input_select(['name' => 'unit_id', 'value' => old('unit_id', 'N'), 'label' => __('experiments.unit_id'), 'required' => true, 'rows' => $unit_rows])
-                @input_date(['name' => '', 'year' => old('year'), 'month' => old('month'), 'day' => old('day')])
+                @input_date(['name' => '', 'year' => old('year', Time::year()), 'month' => old('month', Time::month()), 'day' => old('day', Time::day())])
                 <input hidden name="report_template_id" value="{{$report_template->id}}" />
             </div>
         </div>

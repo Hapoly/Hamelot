@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\ExperimentField;
 use App\Drivers\Time;
 use Storage;
+use Auth;
+use App\User;
 
 class Experiment extends Model
 {
@@ -43,6 +45,17 @@ class Experiment extends Model
     public function getDateStrAttribute(){
         return Time::jdate('d F Y', $this->date);
     }
+    
+    public function getYearAttribute(){
+        return Time::jdate('Y', $this->date, '', 'Asia/Tehran', 'en');
+    }
+    public function getMonthAttribute(){
+        return Time::jdate('m', $this->date, '', 'Asia/Tehran', 'en');
+    }
+    public function getDayAttribute(){
+        return Time::jdate('d', $this->date, '', 'Asia/Tehran', 'en');
+    }
+
     public function saveFields($request){
         ExperimentField::where('experiment_id', $this->id)->delete();
         foreach($this->report_template->fields as $field){

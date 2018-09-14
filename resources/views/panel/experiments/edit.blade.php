@@ -29,7 +29,8 @@
                         ]);
                 ?>
                 @input_select(['name' => 'unit_id', 'value' => old('unit_id', $experiment->unit_id), 'label' => __('experiments.unit_id'), 'required' => true, 'rows' => $unit_rows])
-                @input_date(['name' => '', 'year' => old('year'), 'month' => old('month'), 'day' => old('day')])
+                @input_date(['name' => '', 'year' => old('year', $experiment->year), 'month' => old('month', $experiment->month), 'day' => old('day', $experiment->day)])
+                <input hidden name="report_template_id" value="{{$experiment->report_template->id}}" />
             </div>
         </div>
         <div class="panel panel-default create-card"  id="field-1" style="margin-top:30px;" >
