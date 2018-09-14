@@ -39,17 +39,31 @@
         </tbody>
       </table>
     </div>
-    <div class="row">
-      <div class="col-md-6" style="text-align: center">
-        <a href="{{route('panel.users.edit', ['user' => $user])}}" class="btn btn-primary" role="button">{{__('users.edit.general')}}</a>
+    @if(Auth::user()->permission_to_write_info)
+      <div class="row">
+        <div class="col-md-6" style="text-align: center">
+          <a href="{{route('panel.users.edit', ['user' => $user])}}" class="btn btn-primary" role="button">{{__('users.edit.general')}}</a>
+        </div>
+        <div class="col-md-6" style="text-align: center">
+          <a href="{{route('panel.users.destroy', ['user' => $user])}}" class="btn btn-danger" role="button">{{__('users.remove')}}</a>
+        </div>
       </div>
-      <div class="col-md-6" style="text-align: center">
-        <a href="{{route('panel.users.destroy', ['user' => $user])}}" class="btn btn-danger" role="button">{{__('users.destroy')}}</a>
+    @endif
+    <div class="row">
+      <div class="col-md-12" style="text-align: center">
+        <a style="margin: 0px 5px" class="btn btn-default" href="{{route('panel.prints.users.info', ['user' => $user])}}">{{__('users.print_info')}}</a>
+        <a style="margin: 0px 5px" class="btn btn-default" href="{{route('panel.prints.users.units', ['user' => $user])}}">{{__('users.print_units')}}</a>
+        <a style="margin: 0px 5px" class="btn btn-default" href="{{route('panel.prints.users.patients', ['user' => $user])}}">{{__('users.print_patients')}}</a>
       </div>
     </div>
   </div>
   <div class="panel panel-default">
-    <h2>{{__('units.index_title')}}</h2>
+    <div class="panel-heading sub-panel-title">
+      @if($user->has_permission_to_request_unit)
+        <a href="{{route('panel.unit_users.create.member', ['user_id' => $user->id])}}" class="btn btn-primary sub-panel-add"><i class="fa fa-plus"></i></a>
+      @endif
+      {{__('units.index_title')}}
+    </div>
     @if(sizeof($user->units))
       <table class="table">
         <thead>
@@ -68,11 +82,7 @@
               <td>{{$unit->status_str}}</td>
               @if(Auth::user()->isAdmin() || Auth::user()->isManager())
                 <td>
-                  <form action="{{route('panel.units.destroy', ['unit' => $unit])}}" style="display: inline" method="POST" class="trash-icon">
-                    {{ method_field('DELETE') }}
-                    {{ csrf_field() }}
-                    <button type="submit" class="btn btn-danger">{{__('units.remove')}}</button>
-                  </form>
+                  @operation_th(['base' => 'panel.units', 'label' => 'unit', 'item' => $unit, 'remove_label' => __('units.remove'), 'edit_label' => __('units.edit'), 'show_label' => __('units.show')])
                 </td>
               @else
                 <td>-</td>

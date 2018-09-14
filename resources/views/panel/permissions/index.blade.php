@@ -65,7 +65,7 @@
                   <button type="submit" name="action" value="cancel" class="btn btn-warning">{{__('permissions.cancel')}}</button>
                 @endif
               @endif
-              @if(Auth::user()->isAdmin() || Auth::user()->id == $permission->requester_id)
+              @if(Auth::user()->id == $permission->requester_id)
                 @if(!$permission->canceled())
                   <button type="submit" name="action" value="cancel" class="btn btn-warning">{{__('permissions.cancel')}}</button>
                 @endif

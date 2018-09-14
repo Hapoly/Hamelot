@@ -76,22 +76,23 @@ class User extends Authenticatable
     }
 
     public function visitors(){
-        if(!Auth::user()->isPatient())
-            abort(404);
-        else
+        if(!$this->isPatient()){
+            return null;
+        }else{
             return User::whereHas('permissions', function($query){
                 return $query->where('status', Permission::ACCEPTED)
                             ->where('patient_id', $this->id);
             });
+        }
     }
     public function patients(){
-        if(Auth::user()->isDoctor() || Auth::user()->isNurse()){
+        if($this->isDoctor() || $this->isNurse()){
             return User::whereHas('requests', function($query){
                 return $query->where('status', Permission::ACCEPTED)
                             ->where('requester_id', $this->id);
             });
         }else{
-            abort(403);
+            return null;
         }
     }
 
@@ -291,5 +292,9 @@ class User extends Authenticatable
 
     public function experiments(){
         return $this->hasMany('App\Models\Experiment', 'user_id');
+    }
+
+    public function getHasPermissionToRequestUnitAttribute(){
+        return Auth::user()->isAdmin() || Auth::user()->isManager();
     }
 }

@@ -63,12 +63,14 @@
       <table class="table table-striped">
         <thead>
           <tr>
-            <th><a href="{{route('panel.users.index')}}">{{__('users.row')}}</a></th>
-            <th><a href="{{route('panel.users.index')}}">{{__('users.username')}}</a></th>
-            <th><a href="{{route('panel.users.index')}}">{{__('users.group_code')}}</a></th>
-            <th><a href="{{route('panel.users.index')}}">{{__('users.first_name')}}</a></th>
-            <th><a href="{{route('panel.users.index')}}">{{__('users.last_name')}}</a></th>
-            <th><a href="{{route('panel.users.index')}}">{{__('users.status')}}</a></th>
+            <th>{{__('users.row')}}</th>
+            @if(Auth::user()->isAdmin())
+                <th><a href="{{route('panel.users.index')}}">{{__('users.username')}}</a></th>
+            @endif
+            <th><a href="{{route('panel.users.index')}}">{{__('users.first_name')}}</th>
+            <th><a href="{{route('panel.users.index')}}">{{__('users.last_name')}}</th>
+            <th><a href="{{route('panel.users.index')}}">{{__('users.group_code')}}</th>
+            <th><a href="{{route('panel.users.index')}}">{{__('users.status')}}</th>
             <th >{{__('users.operation')}}</th>
           </tr>
         </thead>
@@ -76,10 +78,12 @@
           @foreach($users as $user)
             <tr class="user-td">
               <td>{{$user->id}}</td>
-              <td><a href="{{route('panel.users.show', ['user' => $user])}}">{{$user->username}}</a></td>
-              <td>{{$user->group_str}}</td>
+              @if(Auth::user()->isAdmin())
+                <td><a href="{{route('panel.users.show', ['user' => $user])}}">{{$user->username}}</a></td>
+              @endif
               <td>{{$user->first_name}}</td>
               <td>{{$user->last_name}}</td>
+              <td>{{$user->group_str}}</td>
               <td>{{$user->status_str}}</td>
                 @if(Auth::user()->isAdmin())
                   <td>

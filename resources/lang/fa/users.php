@@ -26,9 +26,9 @@ return [
     'msc'               => 'کدنظام پزشکی',
 
     'show'              => 'نمایش',
-    'remove'            => 'حذف',
     'edit_str'          => 'ویرایش',
 
+    'visitors'          => 'پزشکان و پرستاران',
 
     'public_str'        => [
         1   => 'عمومی',
@@ -86,5 +86,13 @@ return [
         'general'   => 'ویرایش',
     ],
     'save'          => 'ذخیره',
-    'destroy'        => 'حذف',
+    'remove'        => 'حذف',
+
+    'print_this_page'           => 'چاپ این صفحه',
+    'print_all'                 => 'چاپ تمام اطلاعات',
+    'print_info'                => 'چاپ اطلاعات کاربر',
+    'print_units'               => 'چاپ واحد‌های کاربر',
+    'print_experiments'         => 'چاپ آزمایشات کاربر',
+    'print_patients'            => 'چاپ بیماران کاربر',
+    'print_visitors'            => 'چاپ لیست پزشکان و پرستاران',
 ];

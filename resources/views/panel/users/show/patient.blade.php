@@ -56,35 +56,38 @@
         </div>
       </div>
     @endif
+    <div class="row">
+      <div class="col-md-12" style="text-align: center">
+        <a style="margin: 0px 5px" class="btn btn-default" href="{{route('panel.prints.users.info', ['user' => $user])}}">{{__('users.print_info')}}</a>
+        <a style="margin: 0px 5px" class="btn btn-default" href="{{route('panel.prints.users.experiments', ['user' => $user])}}">{{__('users.print_experiments')}}</a>
+        <a style="margin: 0px 5px" class="btn btn-default" href="{{route('panel.prints.users.visitors', ['user' => $user])}}">{{__('users.print_visitors')}}</a>
+      </div>
+    </div>
   </div>
   <div class="panel panel-default">
-    <h2>{{__('units.index_title')}}</h2>
-    @tagline{{__('units.tag_line_patient')}}@endtagline
-    @if(sizeof($user->units))
+    <h2>{{__('permissions.index_title')}}</h2>
+    @tagline{{__('permissions.tag_line_patients')}}@endtagline
+    @if(sizeof($user->visitors()))
       <table class="table">
         <thead>
           <tr>
-            <th>{{__('units.row')}}</th>
-            <th>{{__('units.title')}}</th>
-            <th>{{__('units.hospital_id')}}</th>
-            <th>{{__('units.status')}}</th>
-            <th>{{__('units.operation')}}</th>
+            <th>{{__('permissions.row')}}</th>
+            <th>{{__('permissions.requester_id')}}</th>
+            <th>{{__('users.group_code')}}</th>
+            <th>{{__('permissions.status')}}</th>
+            <th>{{__('permissions.operation')}}</th>
           </tr>
         </thead>
         <tbody>
-          @foreach($user->units as $unit)
+          @foreach($user->visitors()->get() as $user)
             <tr>
-              <td>{{$unit->id}}</td>
-              <td><a href="{{route('panel.units.show', ['unit' => $unit])}}">{{$unit->title}}</a></td>
-              <td><a href="{{route('panel.hospitals.show', ['hospital' => $unit->hospital])}}">{{$unit->hospital->title}}</a></td>
-              <td>{{$unit->status_str}}</td>
-              @if(Auth::user()->isAdmin() || Auth::user()->isManager())
+              <td>{{$user->id}}</td>
+              <td><a href="{{route('panel.users.show', ['user' => $user])}}">{{$user->full_name}}</a></td>
+              <td>{{$user->group_str}}</td>
+              <td>{{$user->status_str}}</td>
+              @if(Auth::user()->isAdmin())
                 <td>
-                  <form action="{{route('panel.units.destroy', ['unit' => $unit])}}" style="display: inline" method="POST" class="trash-icon">
-                    {{ method_field('DELETE') }}
-                    {{ csrf_field() }}
-                    <button type="submit" class="btn btn-danger">{{__('units.remove')}}</button>
-                  </form>
+                  @operation_th(['base' => 'panel.users', 'label' => 'user', 'item' => $user, 'remove_label' => __('users.remove'), 'edit_label' => __('users.edit_str'), 'show_label' => __('users.show')])
                 </td>
               @else
                 <td>-</td>
@@ -96,7 +99,7 @@
     @else
       <div class="row">
         <div class="col-md-12" style="text-align: center">
-          {{__('units.not_found')}}
+          {{__('permissions.not_found')}}
         </div>
       </div>
     @endif

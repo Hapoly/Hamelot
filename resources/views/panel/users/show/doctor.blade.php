@@ -45,10 +45,17 @@
           <a href="{{route('panel.users.edit', ['user' => $user])}}" class="btn btn-primary" role="button">{{__('users.edit.general')}}</a>
         </div>
         <div class="col-md-6" style="text-align: center">
-          <a href="{{route('panel.users.destroy', ['user' => $user])}}" class="btn btn-danger" role="button">{{__('users.destroy')}}</a>
+          <a href="{{route('panel.users.destroy', ['user' => $user])}}" class="btn btn-danger" role="button">{{__('users.remove')}}</a>
         </div>
       </div>
     @endif
+    <div class="row">
+      <div class="col-md-12" style="text-align: center">
+        <a style="margin: 0px 5px" class="btn btn-default" href="{{route('panel.prints.users.info', ['user' => $user])}}">{{__('users.print_info')}}</a>
+        <a style="margin: 0px 5px" class="btn btn-default" href="{{route('panel.prints.users.units', ['user' => $user])}}">{{__('users.print_units')}}</a>
+        <a style="margin: 0px 5px" class="btn btn-default" href="{{route('panel.prints.users.patients', ['user' => $user])}}">{{__('users.print_patients')}}</a>
+      </div>
+    </div>
   </div>
   @if($user->permission_to_read_units)
     <div class="panel panel-default">
@@ -74,14 +81,9 @@
                 <td>{{$unit->id}}</td>
                 <td><a href="{{route('panel.units.show', ['unit' => $unit])}}">{{$unit->title}}</a></td>
                 <td>{{$unit->status_str}}</td>
-                @if($unit->hasEditPermission())
+                @if($unit->has_permission)
                   <td>
-                    <form action="{{route('panel.units.destroy', ['unit' => $unit])}}" style="display: inline" method="POST" class="trash-icon">
-                      {{ method_field('DELETE') }}
-                      {{ csrf_field() }}
-                      <button type="submit" class="btn btn-danger">{{__('units.remove')}}</button>
-                    </form>
-                    <a class="btn btn-primary" href="{{route('panel.units.edit', ['unit' => $unit])}}">{{ __('units.edit') }}</a>
+                    @operation_th(['base' => 'panel.units', 'label' => 'unit', 'item' => $unit, 'remove_label' => __('units.remove'), 'edit_label' => __('units.edit'), 'show_label' => __('units.show')])
                   </td>
                 @else
                   <td>

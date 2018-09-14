@@ -36,8 +36,13 @@ class Users extends Controller{
       'users'  => $users,
     ]);
   }
-  public function doctorPatients(User $user){
+  public function patients(User $user){
     return view('panel.prints.users.patients', [
+      'user'  => $user,
+    ]);
+  }
+  public function visitors(User $user){
+    return view('panel.prints.users.visitors', [
       'user'  => $user,
     ]);
   }
@@ -48,6 +53,11 @@ class Users extends Controller{
   }
   public function experiments(User $user){
     return view('panel.prints.users.experiments', [
+      'user'  => $user,
+    ]);
+  }
+  public function units(User $user){
+    return view('panel.prints.users.units', [
       'user'  => $user,
     ]);
   }

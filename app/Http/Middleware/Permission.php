@@ -91,11 +91,17 @@ class Permission
         'panel.unit_users.store'                            => [ 1, 2 ],
         'panel.unit_users.inline_update'                    => [ 1, 2 ],
 
-        'panel.prints.units.index'                          => [1, 2, 3, 4, 5],
-        'panel.prints.units.members'                        => [1, 2, 3, 4, 5],
-        'panel.prints.units.sub_units'                      => [1, 2, 3, 4, 5],
-        'panel.prints.units.info'                           => [1, 2, 3, 4, 5],
-        'panel.prints.users.index'                          => [1, 2, 3, 4, 5],
+        'panel.prints.units.index'                          => [ 1, 2, 3, 4, 5 ],
+        'panel.prints.units.members'                        => [ 1, 2, 3, 4, 5 ],
+        'panel.prints.units.sub_units'                      => [ 1, 2, 3, 4, 5 ],
+        'panel.prints.units.info'                           => [ 1, 2, 3, 4, 5 ],
+        
+        'panel.prints.users.index'                          => [ 1, 2, 3, 4, 5 ],
+        'panel.prints.users.info'                           => [ 1, 2, 3, 4, 5 ],
+        'panel.prints.users.units'                          => [ 1, 2, 3, 4, 5 ],
+        'panel.prints.users.experiments'                    => [ 1, 2, 3, 4, 5 ],
+        'panel.prints.users.patients'                       => [ 1, 2, 3, 4, 5 ],
+        'panel.prints.users.visitors'                       => [ 1, 2, 3, 4, 5 ],
 
     ];
     public function handle(Request $request, Closure $next){

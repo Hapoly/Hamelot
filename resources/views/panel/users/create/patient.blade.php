@@ -158,7 +158,7 @@
                         <label for="unit_id" class="col-md-2 label-col col-form-label text-center">{{ __('users.patient_unit_id') }}</label>
                         <div class="col-md-10">
                             <select class="form-control" name="unit_id" id="unit_id" style="width:90%">
-                                @foreach(Auth::user()->hospitalUnits() as $unit)
+                                @foreach(Auth::user()->units as $unit)
                                     <option value="{{$unit->id}}" {{old('unit_id') == $unit->id? 'selected': ''}} >{{$unit->title}} - {{$unit->hospital->title}}</option>
                                 @endforeach
                             </select>

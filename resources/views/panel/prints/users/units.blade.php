@@ -1,5 +1,5 @@
 @extends('layouts.print')
-@section('title', 'بخش‌های ' . $unit->title)
+@section('title', 'بخش‌های ' . $user->full_name)
 @section('content')
     <h3>بخش‌ها</h3>
     <table>
@@ -14,16 +14,16 @@
             <th>وضعیت</th>
         </thead>
         <tbody>
-            @foreach($unit->sub_units as $index => $sub_unit)
+            @foreach($user->units as $index => $unit)
             <tr>
                 <td>{{$index + 1}}</td>
-                <td>{{$sub_unit->title}}</td>
-                <td>{{$sub_unit->address}}</td>
-                <td>{{$sub_unit->group_str}}</td>
-                <td>{{$sub_unit->public_str}}</td>
-                <td>{{$sub_unit->phone_str}}</td>
-                <td>{{$sub_unit->mobile_str}}</td>
-                <td>{{$sub_unit->status_str}}</td>
+                <td>{{$unit->title}}</td>
+                <td>{{$unit->address}}</td>
+                <td>{{$unit->group_str}}</td>
+                <td>{{$unit->public_str}}</td>
+                <td>{{$unit->phone_str}}</td>
+                <td>{{$unit->mobile_str}}</td>
+                <td>{{$unit->status_str}}</td>
             </tr>
             @endforeach
         </tbody>

@@ -33,7 +33,9 @@ Route::middleware(['auth', 'Permission'])->namespace('Panel')->prefix('panel')->
             Route::get('/', 'Users@users')->name('index');
             Route::get('/info/{user}', 'Users@userInfo')->name('info');
             Route::get('/experiments', 'Users@experiments')->name('experiments');
-            Route::get('/patients/{user}', 'Users@doctorPatients')->name('doctor.patients');
+            Route::get('/patients/{user}', 'Users@patients')->name('patients');
+            Route::get('/visitors/{user}', 'Users@visitors')->name('visitors');
+            Route::get('/units/{user}', 'Users@units')->name('units');
         });
     });
     Route::prefix('permissions')->name('permissions.')->group(function(){

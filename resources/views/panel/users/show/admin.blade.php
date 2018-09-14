@@ -34,6 +34,11 @@
         </div>
       </div>
     @endif
+    <div class="row">
+      <div class="col-md-12" style="text-align: center">
+        <a style="margin: 0px 5px" class="btn btn-default" href="{{route('panel.prints.users.info', ['user' => $user])}}">{{__('users.print_info')}}</a>
+      </div>
+    </div>
   </div>
 </div>
 @endsection

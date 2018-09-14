@@ -74,20 +74,20 @@
       'status'      => __('units.status'),
       'NuLL'        => __('units.operation'),
     ]])
-    @foreach($units as $hospital)
-      <tr class="hospital-td {{$hospital->joined? 'tr-highlight': ''}}">
-        <td>{{$hospital->id}}</td>
-        <td><a href="{{route('panel.units.show', ['hospit$hospital' => $hospital])}}">{{$hospital->title}}</a></td>
-        <td>{{$hospital->city->title}}</td>
-        <td>{{$hospital->phone}}</td>
-        <td>{{$hospital->mobile}}</td>
-        <td>{{$hospital->status_str}}</td>
+    @foreach($units as $unit)
+      <tr class="unit-td {{$unit->joined? 'tr-highlight': ''}}">
+        <td>{{$unit->id}}</td>
+        <td><a href="{{route('panel.units.show', ['hospit$unit' => $unit])}}">{{$unit->title}}</a></td>
+        <td>{{$unit->city->title}}</td>
+        <td>{{$unit->phone}}</td>
+        <td>{{$unit->mobile}}</td>
+        <td>{{$unit->status_str}}</td>
         @if(Auth::user()->isAdmin())
           <td>
-            @operation_th(['base' => 'panel.units', 'label' => 'hospital', 'item' => $hospital, 'remove_label' => __('units.remove'), 'edit_label' => __('units.edit'), 'show_label' => __('units.show')])
+            @operation_th(['base' => 'panel.units', 'label' => 'unit', 'item' => $unit, 'remove_label' => __('units.remove'), 'edit_label' => __('units.edit'), 'show_label' => __('units.show')])
           </td>
         @else
-          <td><a class="btn btn-default" href="{{route('panel.units.show', ['$hospital' => $hospital])}}">{{__('units.show')}}</a></td>
+          <td><a class="btn btn-default" href="{{route('panel.units.show', ['$unit' => $unit])}}">{{__('units.show')}}</a></td>
         @endif
       </tr>
     @endforeach
