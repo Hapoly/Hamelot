@@ -72,6 +72,7 @@ class Permission
         'panel.search.doctors'                              => [ 1, 2, 3, 4 ],
         'panel.search.managers'                             => [ 1, 2, 3, 4 ],
         'panel.search.members'                              => [ 1, 2, 3, 4 ],
+        'panel.search.joiners'                              => [ 1, 2, 3, 4 ],
 
         'panel.permissions.create'                          => [ 2, 3, 4 ],
         'panel.permissions.check'                           => [ 2, 3, 4 ],
@@ -105,6 +106,9 @@ class Permission
 
         'panel.prints.experiments.show'                     => [ 1, 2, 3, 4, 5 ],
         'panel.prints.experiments.index'                    => [ 1, 2, 3, 4, 5 ],
+
+        'panel.prints.unit_users.index'                     => [ 1, 2, 3, 4, 5 ],
+        'panel.prints.permissions.index'                    => [ 1, 2, 3, 4, 5 ],
     ];
     public function handle(Request $request, Closure $next){
         $route = $request->route()->getName();

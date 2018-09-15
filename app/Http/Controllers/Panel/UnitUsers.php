@@ -17,13 +17,12 @@ class UnitUsers extends Controller{
     $unit_users = UnitUser::fetch($request->type, $request->permission);
     $links = '';
     $sort = $request->input('sort', '###');
-    $search = $request->input('search', '###');
     if($request->has('status') && $request->status != 0)
       $unit_users = $unit_users->where('status', $request->status);
     if($request->has('unit_id') && $request->unit_id != 0)
       $unit_users = $unit_users->where('unit_id', $request->unit_id);
-    if($request->has('full_name')){
-      $user = User::getByName($request->full_name);
+    if($request->has('user_id')){
+      $user = User::getByName($request->user_id);
       if($user){
         $unit_users = $unit_users->where('user_id', $user->id);
       }
@@ -39,7 +38,7 @@ class UnitUsers extends Controller{
       'search'          => isset(parse_url(url()->full())['query'])? parse_url(url()->full())['query']: '',
       'filters'         => [
         'status'              => $request->input('status', 0),
-        'full_name'           => $request->input('full_name', ''),
+        'user_id'             => $request->input('user_id', ''),
         'patient_name'        => $request->input('patient_id', ''),
       ],
     ]);

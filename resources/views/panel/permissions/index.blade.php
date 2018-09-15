@@ -9,8 +9,18 @@
         <div class="panel-body">
           <form>
             <div class="row">
-              @filter_autocomplete(['name' => 'requester_id', 'label' => __('permissions.requester_id'), 'value' => old('requester_id', isset($filters)? $filters['requester_name']: ''), 'required' => true, 'route' => 'members'])
-              @filter_autocomplete(['name' => 'patient_id', 'label' => __('permissions.patient_id'), 'value' => old('patient_id', isset($filters)? $filters['patient_name']: ''), 'required' => true, 'route' => 'patients'])
+              @if(Auth::user()->isAdmin())
+                @filter_autocomplete(['name' => 'requester_id', 'label' => __('permissions.requester_id'), 'value' => old('requester_id', isset($filters)? $filters['requester_name']: ''), 'required' => true, 'route' => 'members'])
+                @filter_autocomplete(['name' => 'patient_id', 'label' => __('permissions.patient_id'), 'value' => old('patient_id', isset($filters)? $filters['patient_name']: ''), 'required' => true, 'route' => 'patients'])
+              @endif
+              @if(Auth::user()->isDoctor() || Auth::user()->isNurse())
+                <div class="col-md-6"></div>
+                @filter_autocomplete(['name' => 'patient_id', 'label' => __('permissions.patient_id'), 'value' => old('patient_id', isset($filters)? $filters['patient_name']: ''), 'required' => true, 'route' => 'patients'])
+              @endif
+              @if(Auth::user()->isPatient())
+                @filter_autocomplete(['name' => 'requester_id', 'label' => __('permissions.requester_id'), 'value' => old('requester_id', isset($filters)? $filters['requester_name']: ''), 'required' => true, 'route' => 'members'])
+                <div class="col-md-6"></div>
+              @endif
             </div>
             <div class="row">
               <div class="col-md-6"></div>
@@ -26,9 +36,13 @@
                 </div>
               </div>
             </div>
-            <div class="row" style="margin-bottom:2px;margin-top:2px;text-align: left;">
-              <div class="col-md-6">
+            <div class="row" style="margin-bottom:2px;margin-top:2px;">
+              <div class="col-md-6" style="text-align: left;">
                 <button class="btn btn-info" type="submit">{{__('permissions.search')}}</button>
+              </div>
+              <div class="col-md-6" style="text-align: right;">
+                <a class="btn btn-default" href="{{route('panel.prints.permissions.index', [$search, 'page' => 0])}}">{{__('permissions.print_all')}}</a>
+                <a class="btn btn-default" href="{{route('panel.prints.permissions.index', [$search, 'page' => $permissions->currentPage()])}}">{{__('permissions.print_this_page')}}</a>
               </div>
             </div>
           </form>

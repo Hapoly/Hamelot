@@ -41,6 +41,13 @@ Route::middleware(['auth', 'Permission'])->namespace('Panel')->prefix('panel')->
             Route::get('/{experiment}', 'Experiments@show')->name('show');
             Route::get('/', 'Experiments@index')->name('index');
         });
+
+        Route::prefix('unit-users')->name('unit_users.')->group(function(){
+            Route::get('/', 'UnitUsers@index')->name('index');
+        });
+        Route::prefix('permissions')->name('permissions.')->group(function(){
+            Route::get('/', 'Permissions@index')->name('index');
+        });
     });
     Route::prefix('permissions')->name('permissions.')->group(function(){
         Route::get('/create', 'Permissions@create')->name('create');
@@ -100,6 +107,7 @@ Route::middleware(['auth', 'Permission'])->namespace('Panel')->prefix('panel')->
         Route::get('/units', 'Search@units')->name('units');
         Route::get('/members', 'Search@members')->name('members');
         Route::get('/managers', 'Search@managers')->name('managers');
+        Route::get('/joiners', 'Search@joiners')->name('joiners');
     });
 });
 

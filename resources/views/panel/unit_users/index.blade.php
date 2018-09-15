@@ -12,7 +12,7 @@
         <div class="panel-body">
           <form>
             <div class="row">
-              @filter_autocomplete(['name' => 'user_id', 'label' => __('unit_users.user_id'), 'value' => old('user_id', isset($filters)? $filters['full_name']: ''), 'required' => true, 'route' => 'members'])
+              @filter_autocomplete(['name' => 'user_id', 'label' => __('unit_users.user_id'), 'value' => old('user_id', isset($filters)? $filters['user_id']: ''), 'required' => true, 'route' => 'joiners'])
               <div class="col-md-6">
                 <div class="from-group">
                   <select class="form-control" name="unit_id" id="unit_id" style="width: 100%">
@@ -38,9 +38,13 @@
                 </div>
               </div>
             </div>
-            <div class="row" style="margin-bottom:2px;margin-top:2px;text-align: left;">
-              <div class="col-md-6">
+            <div class="row" style="margin-bottom:2px;margin-top:2px;">
+              <div class="col-md-6" style="text-align: left;">
                 <button class="btn btn-info" type="submit">{{__('unit_users.search')}}</button>
+              </div>
+              <div class="col-md-6" style="text-align: right;">
+                <a class="btn btn-default" href="{{route('panel.prints.unit_users.index', [$search, 'page' => 0])}}">{{__('unit_users.print_all')}}</a>
+                <a class="btn btn-default" href="{{route('panel.prints.unit_users.index', [$search, 'page' => $unit_users->currentPage()])}}">{{__('unit_users.print_this_page')}}</a>
               </div>
             </div>
           </form>

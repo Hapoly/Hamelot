@@ -28,7 +28,7 @@ class UnitUser extends Model
         return $this->belongsTo('App\Models\Unit', 'unit_id');
     }
 
-    public static function fetch($type, $permission){
+    public static function fetch(){
         if(Auth::user()->isAdmin())
             return new UnitUser;
         else if(Auth::user()->isManager()){
@@ -42,12 +42,8 @@ class UnitUser extends Model
     
     const MEMBER = 1;
     const MANAGER = 2;
-    private $permission_lang = [
-        1   => 'عضو',
-        2   => 'مدیریت',
-    ];
     public function getPermissionStrAttribute(){
-        return $this->permisison_lang[$this->permission];
+        return __('unit_users.permission_str.' . $this->permission);
     }
 
 
