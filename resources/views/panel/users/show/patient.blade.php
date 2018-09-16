@@ -52,7 +52,7 @@
           @endif
         </div>
         <div class="col-md-6" style="text-align: center">
-          <a href="{{route('panel.users.destroy', ['user' => $user])}}" class="btn btn-danger" role="button">{{__('users.destroy')}}</a>
+          <a href="{{route('panel.users.destroy', ['user' => $user])}}" class="btn btn-danger" role="button">{{__('users.remove')}}</a>
         </div>
       </div>
     @endif

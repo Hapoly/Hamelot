@@ -9,10 +9,11 @@ use App\Models\Unit;
 use App\Models\UnitUser;
 use Auth;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Laravel\Passport\HasApiTokens;
 
 class User extends Authenticatable
 {
-    use Notifiable;
+    use Notifiable, HasApiTokens;
     const S_ACTIVE      = 1;
     const S_INACTIVE    = 2;
     

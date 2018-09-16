@@ -127,16 +127,15 @@
                         <label for="gender" class="col-md-2 label-col col-form-label text-center">{{ __('users.gender') }}</label>
                         <div class="col-md-10">
                             <select class="form-control" name="gender" id="gender" style="width:90%">
-                                @foreach($genders as $gender)
-                                    <option value="{{$gender->id}}" {{old('gender') == $gender->id? 'selected': ''}} > {{$gender->value}}</option>
-                                @endforeach
+                                <option value="1" {{old('gender') == 1? 'selected': ''}} > {{ــ('users.gender_str.1')}}</option>
+                                <option value="2" {{old('gender') == 2? 'selected': ''}} > {{__('users.gender_str.2')}}</option>
                             </select>
                             @if ($errors->has('gender'))
                                 <span class="invalid-feedback">
                                     <strong>{{ $errors->first('gender') }}</strong>
                                 </span>
                             @endif
-                        </div>
+                        </div> 
                     </div>
                     
                     <div class="form-group row create-form">

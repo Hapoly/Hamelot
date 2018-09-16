@@ -124,9 +124,8 @@
                     <div class="form-group row create-form">
                         <div class="col-md-10">
                             <select class="form-control" name="gender" id="gender" style="width:90%">
-                                @foreach($genders as $gender)
-                                    <option value="{{$gender->id}}" {{old('gender', $user->gender) == $gender->id? 'selected': ''}} > {{$gender->value}}</option>
-                                @endforeach
+                                <option value="1" {{old('gender', $user->doctor->gender) == 1? 'selected': ''}} > {{__('users.gender_str.1')}}</option>
+                                <option value="2" {{old('gender', $user->doctor->gender) == 2? 'selected': ''}} > {{__('users.gender_str.2')}}</option>
                             </select>
                             @if ($errors->has('gender'))
                                 <span class="invalid-feedback">

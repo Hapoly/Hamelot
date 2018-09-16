@@ -55,7 +55,7 @@ class Users extends Seeder
             'degree'        => 2,
             'field'         => 2,
             'profile'       => 'NuLL',
-            'gender'        => 19,
+            'gender'        => 1,
         ]);
 
         DB::table('users')->insert([
@@ -71,7 +71,7 @@ class Users extends Seeder
             'degree'        => 2,
             'field'         => 2,
             'profile'       => 'NuLL',
-            'gender'        => 19,
+            'gender'        => 1,
         ]);
 
         /**
@@ -90,7 +90,7 @@ class Users extends Seeder
             'degree'        => 2,
             'field'         => 2,
             'profile'       => 'NuLL',
-            'gender'        => 19,
+            'gender'        => 1,
         ]);
 
         DB::table('users')->insert([
@@ -106,7 +106,7 @@ class Users extends Seeder
             'degree'        => 2,
             'field'         => 2,
             'profile'       => 'NuLL',
-            'gender'        => 20,
+            'gender'        => 2,
         ]);
 
         /**
@@ -121,7 +121,7 @@ class Users extends Seeder
             'last_name'     => 'آقاجان پور',
         ]);
         DB::table('patients')->insert([
-            'gender'        => 20,
+            'gender'        => 2,
             'id_number'     => '324234252343',
             'user_id'       => 8,
             'profile'       => 'NuLL',
@@ -137,7 +137,7 @@ class Users extends Seeder
             'last_name'     => 'مصطفایی',
         ]);
         DB::table('patients')->insert([
-            'gender'        => 19,
+            'gender'        => 1,
             'id_number'     => '43623523235',
             'user_id'       => 9,
             'profile'       => 'NuLL',
@@ -153,7 +153,7 @@ class Users extends Seeder
             'last_name'     => 'هزاره‌زاده',
         ]);
         DB::table('patients')->insert([
-            'gender'        => 19,
+            'gender'        => 1,
             'id_number'     => '23452352342',
             'user_id'       => 10,
             'profile'       => 'NuLL',
@@ -169,7 +169,7 @@ class Users extends Seeder
             'last_name'     => 'خالق پرست',
         ]);
         DB::table('patients')->insert([
-            'gender'        => 19,
+            'gender'        => 1,
             'id_number'     => '23452352342',
             'user_id'       => 11,
             'profile'       => 'NuLL',
@@ -185,7 +185,7 @@ class Users extends Seeder
             'last_name'     => 'هادی‌پور',
         ]);
         DB::table('patients')->insert([
-            'gender'        => 20,
+            'gender'        => 2,
             'id_number'     => '23452352342',
             'user_id'       => 12,
             'profile'       => 'NuLL',
@@ -201,7 +201,7 @@ class Users extends Seeder
             'last_name'     => 'خطیبی',
         ]);
         DB::table('patients')->insert([
-            'gender'        => 19,
+            'gender'        => 1,
             'id_number'     => '23452352342',
             'user_id'       => 13,
             'profile'       => 'NuLL',

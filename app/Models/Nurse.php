@@ -28,9 +28,12 @@ class Nurse extends Model
     public function getFieldStrAttribute(){
         return ConstValue::find($this->field)->value;
     }
+    
+    const MALE      = 1;
+    const FEMALE    = 2;
     public function getProfileUrlAttribute(){
         if($this->profile == 'NuLL')
-            if($this->gender == 19)
+            if($this->gender == Patient::MALE)
                 return url('defaults\male.png');
             else
                 return url('defaults\female.png');
