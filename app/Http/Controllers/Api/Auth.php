@@ -19,6 +19,9 @@ use App\Models\Patient;
 use App\Http\Resources\User as UserCollection;
 
 class Auth extends Controller{
+    /**
+     * login a user
+     */
     public function login(Request $request){
         $validation = new LoginRequest($request);
         if($validation->fails())
@@ -45,6 +48,9 @@ class Auth extends Controller{
             )->toDateTimeString()
         ]);
     }
+    /**
+     * register a patient
+     */
     public function registerPatient(Request $request){
         $validation = new PatientRequest($request);
         if($validation->fails())
@@ -58,6 +64,24 @@ class Auth extends Controller{
         $user = User::create($inputs);
         $inputs['user_id'] = $user->id;
         $patient = Patient::create($inputs);
+        return Response::json(new UserCollection($user), 200);
+    }
+    /**
+     * register a doctor
+     */
+    public function registerDoctor(Request $request){
+        $validation = new DoctorRequest($request);
+        if($validation->fails())
+            return Response::json($validation->errors(), 400);
+        $inputs = $request->all();
+        if($request->hasFile('profile')){
+            $inputs['profile'] = Storage::disk('public')->put('/users', $request->file('profile'));
+        }
+        $inputs['password'] = bcrypt($inputs['password']);
+        $inputs['group_code'] = User::G_DOCTOR;
+        $user = User::create($inputs);
+        $inputs['user_id'] = $user->id;
+        $doctor = Doctor::create($inputs);
         return Response::json(new UserCollection($user), 200);
     }
 }

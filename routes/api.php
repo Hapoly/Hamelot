@@ -16,7 +16,10 @@ use Illuminate\Http\Request;
 Route::namespace('Api')->prefix('auth')->group(function (){
     Route::post('/login', 'Auth@login')->name('login');
     Route::prefix('register')->name('register.')->group(function (){
-        Route::post('patient', 'Auth@registerPatient')->name('register');
+        Route::post('patient', 'Auth@registerPatient')->name('patient');
+        Route::post('doctor', 'Auth@registerDoctor')->name('doctor');
+        Route::post('nurse', 'Auth@registerNurse')->name('nurse');
+        Route::post('manager', 'Auth@registerManager')->name('manager');
     });
 });
 Route::middleware('auth:api')->namespace('Api')->group(function(){
