@@ -26,12 +26,8 @@ class User extends Authenticatable
     const T_PUBLIC = 1;
     const T_PRIVATE = 2;
     
-    protected $public_lang = [
-        1   => 'عمومی',
-        2   => 'خصوصی',
-    ];
     public function getPublicStrAttribute(){
-        return $this->public_lang[$this->public];
+        return __('users.public_str.'.$this->public);
     }
 
     public function isAdmin(){
@@ -56,10 +52,6 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'username', 'first_name', 'last_name', 'group_code', 'status', 'password', 'public',
-    ];
-    protected $appends = [
-        'permission_to_read_info',  'permission_to_read_history',   'permission_to_read_units',
-        'permission_to_write_info', 'permission_to_write_history',  'permission_to_write_units',
     ];
 
     /**
@@ -121,6 +113,8 @@ class User extends Authenticatable
         return true;
     }
     public function getPermissionToReadHistoryAttribute(){
+        if(!Auth::check())
+            return false;
         switch(Auth::user()->group_code){
             case User::G_ADMIN:
                 return true;
@@ -142,9 +136,13 @@ class User extends Authenticatable
         return true;
     }
     public function getPermissionToWriteInfoAttribute(){
+        if(!Auth::check())
+            return false;
         return Auth::user()->isAdmin();
     }
     public function getPermissionToWriteHistoryAttribute(){
+        if(!Auth::check())
+            return false;
         switch(Auth::user()->group_code){
             case User::G_ADMIN:
                 return true;
@@ -163,6 +161,8 @@ class User extends Authenticatable
         return false;
     }
     public function getPermissionToWriteUnitsAttribute(){
+        if(!Auth::check())
+            return false;
         return Auth::user()->isAdmin() || Auth::user()->isManager();
     }
 
@@ -245,12 +245,6 @@ class User extends Authenticatable
     /**
      * patients attributes
      */
-    public function getIdNumberAttribute(){
-        if($this->isPatient())
-            return $this->patient->id_number;
-        else
-            return ' - ';
-    }
     public function getAgeAttribute(){
         if($this->isPatient())
             return $this->patient->age;
@@ -260,6 +254,42 @@ class User extends Authenticatable
     public function getAgeStrAttribute(){
         if($this->isPatient())
             return $this->patient->age_str;
+        else
+            return ' - ';
+    }
+    public function getGenderAttribute(){
+        if($this->isAdmin() || $this->isManager())
+            return 0;
+        else{
+            if($this->isPatient())
+                return $this->patient->gender;
+            if($this->isDoctor())
+                return $this->doctor->gender;
+            if($this->isNurse())
+                return $this->nurse->gender;
+        }
+    }
+    public function getGenderStrAttribute(){
+        if($this->isAdmin() || $this->isManager())
+            return ' - ';
+        else{
+            if($this->isPatient())
+                return $this->patient->gender_str;
+            if($this->isDoctor())
+                return $this->doctor->gender_str;
+            if($this->isNurse())
+                return $this->nurse->gender_str;
+        }
+    }
+    public function getIdNumberAttribute(){
+        if($this->isPatient())
+            return $this->patient->id_number;
+        else
+            return null;
+    }
+    public function getIdNumberStrAttribute(){
+        if($this->isPatient())
+            return $this->patient->id_number_str;
         else
             return ' - ';
     }

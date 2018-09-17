@@ -13,8 +13,12 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+Route::namespace('Api')->prefix('auth')->group(function (){
+    Route::prefix('register')->group(function (){
+        Route::post('patient', 'Auth@registerPatient');
+    });
+});
+Route::middleware('auth:api')->namespace('Api')->group(function(){
 });
 // system apis
 Route::name('api.panel.')->group(function(){

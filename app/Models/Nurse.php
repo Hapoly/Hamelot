@@ -11,7 +11,6 @@ class Nurse extends Model
     protected $primary = 'id';
     protected $table = 'nurses';
     protected $fillable = ['degree', 'field', 'user_id', 'profile', 'gender', 'msc'];
-    protected $visible = ['degree_str', 'field_str', 'profile_url'];
 
     public function getMscStrAttribute(){
         if($this->msc == 'NuLL')
