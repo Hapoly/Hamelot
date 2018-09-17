@@ -27,13 +27,15 @@ class Auth extends Controller{
         $credentials = request(['username', 'password']);
         if(!AuthUnit::attempt($credentials))
             return response()->json([
-                'message' => 'Unauthorized'
+                "message" => "username and password were wrong, please type again!"
             ], 401);
         $user = $request->user();
         $tokenResult = $user->createToken('Personal Access Token');
         $token = $tokenResult->token;
-        if ($request->remember_me)
-            $token->expires_at = Carbon::now()->addWeeks(1);
+        if($request->remember_me)
+            $token->expires_at = Carbon::now()->addWeeks(2);
+        else
+            $token->expires_at = Carbon::now()->addHours(48);
         $token->save();
         return response()->json([
             'access_token' => $tokenResult->accessToken,

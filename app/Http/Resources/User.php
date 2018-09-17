@@ -14,9 +14,11 @@ class User extends Resource{
      */
     public function toArray($request){
         $data = [
+            'id'            => $this->id,
             'username'      => $this->username,
             'first_name'    => $this->first_name,
             'last_name'     => $this->last_name,
+            'full_name'     => $this->full_name,
             'group_code'    => $this->group_code,
             'group_str'     => $this->group_str,
             'permissions'   => [
@@ -33,6 +35,8 @@ class User extends Resource{
             $data['gender_str']     = $this->patient->gender_str;
             $data['id_number']      = $this->patient->id_number;
             $data['id_number_str']  = $this->patient->id_number_str;
+            $data['birth_date']     = $this->patient->birth_date;
+            $data['birth_date_str'] = $this->patient->birth_date_str;
             $data['profile']        = $this->patient->profile;
             $data['profile_url']    = $this->patient->profile_url;
             $data['permissions']['reading']['history'] = $this->permission_to_read_history;
