@@ -3,10 +3,11 @@
 namespace App\Http\Requests\Api\Register;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\Api\ApiRequest;
 use Validator;
 
-class PatientRequest{
-    const rules = [
+class PatientRequest extends ApiRequest{
+    public $rules = [
         'first_name'    => 'required|string',
         'last_name'     => 'required|string',
         'username'      => 'required|string|unique:users',
@@ -16,27 +17,4 @@ class PatientRequest{
         'birth_date'    => 'required|numeric',
         'id_number'     => 'required|string',
     ];
-
-    private $validator;
-    public function __construct(Request $request){
-        $this->validator = Validator::make($request->all(), PatientRequest::rules);
-    }
-    public function fails(){
-        return $this->validator->fails();
-    }
-    public function errors(){
-        $error_codes = (array) $this->validator->failed();
-        $error_messages = $this->validator->errors();
-        $resutls = [];
-        foreach($error_codes as $field => $errors){
-            foreach((array) $errors as $error => $disp){
-                array_push($resutls, [
-                    'field' => $field,
-                    'code'  => $field . '_' . $error,
-                    'message'   => $error_messages->first($field),
-                ]);
-            }
-        }
-        return $resutls;
-    }
 }

@@ -14,8 +14,9 @@ use Illuminate\Http\Request;
 */
 
 Route::namespace('Api')->prefix('auth')->group(function (){
-    Route::prefix('register')->group(function (){
-        Route::post('patient', 'Auth@registerPatient');
+    Route::post('/login', 'Auth@login')->name('login');
+    Route::prefix('register')->name('register.')->group(function (){
+        Route::post('patient', 'Auth@registerPatient')->name('register');
     });
 });
 Route::middleware('auth:api')->namespace('Api')->group(function(){
