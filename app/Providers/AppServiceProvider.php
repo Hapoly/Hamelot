@@ -40,6 +40,7 @@ class AppServiceProvider extends ServiceProvider
         Blade::component('components.forms.structures.edit', 'form_edit');
         Blade::component('components.others.pane_tagline', 'tagline');
         Blade::include('components.forms.structures.operations.th', 'operation_th');
+        Blade::include('components.forms.structures.operations.th_rg', 'operation_th_rg');
 
         Blade::component('components.forms.structures.table', 'table');
     }
