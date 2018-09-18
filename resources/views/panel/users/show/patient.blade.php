@@ -67,7 +67,7 @@
   <div class="panel panel-default">
     <h2>{{__('permissions.index_title')}}</h2>
     @tagline{{__('permissions.tag_line_patients')}}@endtagline
-    @if(sizeof($user->visitors()))
+    @if(sizeof($user->visitors))
       <table class="table">
         <thead>
           <tr>
@@ -79,7 +79,7 @@
           </tr>
         </thead>
         <tbody>
-          @foreach($user->visitors()->get() as $visitor)
+          @foreach($user->visitors as $visitor)
             <tr>
               <td>{{$visitor->id}}</td>
               <td><a href="{{route('panel.users.show', ['user' => $visitor])}}">{{$visitor->full_name}}</a></td>
@@ -107,7 +107,7 @@
   <div class="panel panel-default">
     <h2>{{__('experiments.index_title')}}</h2>
     @tagline{{__('experiments.tag_line_patients')}}@endtagline
-    @if(sizeof($user->experiments()))
+    @if(sizeof($user->experiments))
       <table class="table">
         <thead>
           <tr>
@@ -119,7 +119,7 @@
           </tr>
         </thead>
         <tbody>
-          @foreach($user->experiments()->get() as $experiment)
+          @foreach($user->experiments as $experiment)
             <tr>
               <td>{{$experiment->id}}</td>
               <td><a href="{{route('panel.report_templates.show', ['report_template' => $experiment->report_template])}}">{{$experiment->report_template->title}}</a></td>
@@ -139,7 +139,7 @@
     @else
       <div class="row">
         <div class="col-md-12" style="text-align: center">
-          {{__('permissions.not_found')}}
+          {{__('experiments.not_found')}}
         </div>
       </div>
     @endif
