@@ -303,6 +303,9 @@ class User extends Authenticatable
         }
         Entry::where('target_id', $this->id)->delete();
         UnitUser::where('user_id', $this->id)->delete();
+        Permission::where('patient_id', $this->id)->delete();
+        Permission::where('requester_id', $this->id)->delete();
+        Experiment::where('user_id', $this->id)->delete();
         parent::delete();
     }
 
