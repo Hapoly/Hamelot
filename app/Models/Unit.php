@@ -8,6 +8,7 @@ use App\Models\Unit;
 use App\Models\Entry;
 use App\User;
 use Auth;
+use Illuminate\Support\Facades\Storage;
 
 class Unit extends Model{
     protected $primary = 'id';

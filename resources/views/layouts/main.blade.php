@@ -38,7 +38,7 @@
 		<!-- Sidebar Holder -->
 		<nav id="sidebar">
 			<div class="sidebar-header">
-				<h3>Hamelot</h3>
+				<h3>{{config('app.name', 'Laravel')}}</h3>
 				<strong style="font-size:20px;">
 				`
 				</strong>
