@@ -4,15 +4,17 @@ namespace App\Http\Requests\Api\Register;
 
 use App\Http\Requests\Api\ApiRequest;
 
-class PatientRequest extends ApiRequest{
+class NurseRequest extends ApiRequest{
     public $rules = [
         'first_name'    => 'required|string',
         'last_name'     => 'required|string',
         'username'      => 'required|string|unique:users',
         'password'      => 'required|string',
+        'public'        => 'required|numeric|in:1,2',
         'gender'        => 'required|numeric|in:1,2',
+        'degree'        => 'required|numeric',
+        'field'         => 'required|numeric',
+        'msc'           => 'required|string',
         'profile'       => 'image|max:250',
-        'birth_date'    => 'required|numeric',
-        'id_number'     => 'required|string',
     ];
 }

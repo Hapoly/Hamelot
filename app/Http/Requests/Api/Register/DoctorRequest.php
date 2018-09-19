@@ -2,9 +2,7 @@
 
 namespace App\Http\Requests\Api\Register;
 
-use Illuminate\Http\Request;
 use App\Http\Requests\Api\ApiRequest;
-use Validator;
 
 class DoctorRequest extends ApiRequest{
     public $rules = [
