@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <div class="panel panel-default create-card">
-         <h2>{{ __('users.create.patient') }}</h2>
+         <h2>{{ __('users.edit.patient') }}</h2>
          <div class="row">
             <div class="col-md-12">
                 <form method="POST" action="{{ route('panel.users.update.patient', ['user'  => $user]) }}" enctype="multipart/form-data">
