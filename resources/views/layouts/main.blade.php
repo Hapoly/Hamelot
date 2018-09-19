@@ -60,7 +60,7 @@
 										<a class="exit" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">{{ __('general.logout') }}</a>
 									</li>
 									<li id="login-name">
-										<a href="#">{{Auth::user()->prefix}} {{ Auth::user()->first_name }} {{Auth::user()->last_name}}</a>
+										<a href="{{route('panel.users.edit', ['user' => Auth::user()])}}">{{Auth::user()->prefix}} {{ Auth::user()->first_name }} {{Auth::user()->last_name}}</a>
 									</li>
 								</ul>
 							</div>
