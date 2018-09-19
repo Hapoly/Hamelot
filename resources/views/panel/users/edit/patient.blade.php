@@ -124,8 +124,8 @@
                     <div class="form-group row create-form">
                         <div class="col-md-10">
                             <select class="form-control" name="gender" id="gender" style="width:90%">
-                                <option value="1" {{old('gender', $user->doctor->gender) == 1? 'selected': ''}} > {{__('users.gender_str.1')}}</option>
-                                <option value="2" {{old('gender', $user->doctor->gender) == 2? 'selected': ''}} > {{__('users.gender_str.2')}}</option>
+                                <option value="1" {{old('gender', $user->patient->gender) == 1? 'selected': ''}} > {{__('users.gender_str.1')}}</option>
+                                <option value="2" {{old('gender', $user->patient->gender) == 2? 'selected': ''}} > {{__('users.gender_str.2')}}</option>
                             </select>
                             @if ($errors->has('gender'))
                                 <span class="invalid-feedback">
