@@ -109,28 +109,30 @@
 			</ul>
 		</li>
 	@endif
-	<li>
-		<a href="#patient-requests" data-toggle="collapse" aria-expanded="false">
-			<i class="fa fa-stethoscope" aria-hidden="false"></i>
-			<span>
-			درخواست‌های دسترسی
-			</span>
-		</a>
-		<ul class="collapse list-unstyled" id="patient-requests">
-			@if(!Auth::user()->isPatient() && !Auth::user()->isManager() && !Auth::user()->isAdmin())
-				<li>
-					<a href="{{route('panel.permissions.create')}}"> درخواست جدید</a>
-				</li>
-			@endif
-			@if(!Auth::user()->isAdmin())
-				<li>
-					<a href="{{route('panel.permissions.index')}}">  درخواست‌های من</a>
-				</li>
-			@else
-				<li>
-					<a href="{{route('panel.permissions.index')}}">  درخواست‌ها</a>
-				</li>
-			@endif
-		</ul>
-	</li>
+	@if(!Auth::user()->isManager())
+		<li>
+			<a href="#patient-requests" data-toggle="collapse" aria-expanded="false">
+				<i class="fa fa-stethoscope" aria-hidden="false"></i>
+				<span>
+				درخواست‌های دسترسی
+				</span>
+			</a>
+			<ul class="collapse list-unstyled" id="patient-requests">
+				@if(!Auth::user()->isPatient() && !Auth::user()->isAdmin())
+					<li>
+						<a href="{{route('panel.permissions.create')}}"> درخواست جدید</a>
+					</li>
+				@endif
+				@if(!Auth::user()->isAdmin())
+					<li>
+						<a href="{{route('panel.permissions.index')}}">  درخواست‌های من</a>
+					</li>
+				@else
+					<li>
+						<a href="{{route('panel.permissions.index')}}">  درخواست‌ها</a>
+					</li>
+				@endif
+			</ul>
+		</li>
+	@endif
 </ul>
