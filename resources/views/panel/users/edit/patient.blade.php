@@ -22,7 +22,7 @@
 
                     <div class="form-group row create-form">
                         <div class="col-md-10">
-                           <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required >
+                           <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" >
                                 @if ($errors->has('password'))
                                     <span class="invalid-feedback">
                                         <strong>{{ $errors->first('password') }}</strong>
@@ -34,7 +34,7 @@
 
                     <div class="form-group row create-form">
                         <div class="col-md-10">
-                           <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required >
+                           <input id="password-confirm" type="password" class="form-control" name="password_confirmation" >
                         </div>
                          <label for="password-confirm" class="col-md-2 col-form-label text-center">{{ __('users.confirm_password') }}</label>
                     </div>
