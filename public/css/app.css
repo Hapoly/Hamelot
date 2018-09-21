@@ -8,6 +8,13 @@
 .py-4{
 	background-color:#f5f8fa;
 }
+#app .navbar .container {
+	margin-right: 0;
+}
+.navbar-collapse ul {
+	float: right;
+	padding:0;
+}
 @media (max-width: 768px) {
 	label{
 		text-align: right;
