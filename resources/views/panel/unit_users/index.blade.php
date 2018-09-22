@@ -64,14 +64,16 @@
       'id'            => __('unit_users.row'),
       'user_id'       => __('unit_users.user_id'),
       'unit_id'       => __('unit_users.unit_id'),
+      'NuLL1'         => __('units.group_code'),
       'status'        => __('unit_users.status'),
-      'NuLL'          => __('unit_users.operation'),
+      'NuLL2'         => __('unit_users.operation'),
     ]])
     @foreach($unit_users as $unit_user)
       <tr>
         <td>{{$unit_user->id}}</td>
         <td><a href="{{route('panel.users.show', ['user' => $unit_user->user])}}">{{$unit_user->user->full_name}}</a></td>
         <td><a href="{{route('panel.units.show', ['hospital' => $unit_user->unit])}}">{{$unit_user->unit->title}}</a></td>
+        <td>{{$unit_user->unit->group_str}}</td>
         <td>{{$unit_user->status_str}}</td>
         <td>
           @if($unit_user->has_manager_permission)

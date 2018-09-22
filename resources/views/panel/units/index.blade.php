@@ -68,9 +68,8 @@
     'cols' => [
       'id'          => __('units.row'),
       'title'       => __('units.title'),
+      'group_code'  => __('units.group_code'),
       'address'     => __('units.city_id'),
-      'phone'       => __('units.phone'),
-      'mobile'      => __('units.mobile'),
       'status'      => __('units.status'),
       'NuLL'        => __('units.operation'),
     ]])
@@ -78,9 +77,8 @@
       <tr class="unit-td {{$unit->joined? 'tr-highlight': ''}}">
         <td>{{$unit->id}}</td>
         <td><a href="{{route('panel.units.show', ['hospit$unit' => $unit])}}">{{$unit->title}}</a></td>
+        <td>{{$unit->group_str}}</td>
         <td>{{$unit->city->title}}</td>
-        <td>{{$unit->phone}}</td>
-        <td>{{$unit->mobile}}</td>
         <td>{{$unit->status_str}}</td>
         @if(Auth::user()->isAdmin())
           <td>

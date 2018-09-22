@@ -63,4 +63,7 @@ return [
     'joined_status'     => 'وضعیت دسترسی',
   
     'not_found'         => 'موردی یافت نشد',
+
+    'managers'          => 'کادر مدیریت',
+    'members'           => 'کادر پرسنل',
 ];

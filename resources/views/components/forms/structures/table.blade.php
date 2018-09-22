@@ -3,7 +3,7 @@
         <thead>
             <tr>
                 @foreach($cols as $k=>$col)
-                    @if($k=='NuLL')
+                    @if(strpos($k, 'NuLL')>=0)
                         <th>{{$col}}</th>
                     @else
                         <th><a href="{{route($route,[$search,'sort' => $k,'page' => $items->currentPage()])}}">{{$col}}</a></th>

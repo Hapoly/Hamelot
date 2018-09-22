@@ -1,5 +1,5 @@
 @extends('layouts.print')
-@section('title', 'بخش‌های ' . $unit->title)
+@section('title', $unit->group_str . ' ' . $unit->title)
 @section('content')
     <table>
         <thead>
@@ -7,42 +7,42 @@
         </thead>
         <tbody>
             <tr>
-                <td><b>واحد مادر</b></td>
+                <td><b>{{__('units.parent_id')}}</b></td>
                 <td>{{$unit->parent? $unit->parent->title: 'ریشه'}}</td>
-                <td><b>نوع واحد</b></td>
+                <td><b>{{__('units.group_code')}}</b></td>
                 <td>{{$unit->group_str}}</td>
             </tr>
             <tr>
-                <td><b>شماره تلفن</b></td>
+                <td><b>{{__('units.phone')}}</b></td>
                 <td>{{$unit->phone_str}}</td>
-                <td><b>شماره همراه</b></td>
+                <td><b>{{__('units.mobile')}}</b></td>
                 <td>{{$unit->mobile_str}}</td>
             </tr>
             <tr>
-                <td><b>وضعیت نمایش</b></td>
+                <td><b>{{__('units.type')}}</b></td>
                 <td>{{$unit->type_str}}</td>
-                <td><b>وضعیت کلی</b></td>
+                <td><b>{{__('units.status')}}</b></td>
                 <td>{{$unit->status_str}}</td>
             </tr>
             <tr>
-                <td><b>شهر</b></td>
+                <td><b>{{__('units.city_id')}}</b></td>
                 <td>{{$unit->city->title}}</td>
-                <td><b>استان</b></td>
+                <td><b>{{__('units.province_id')}}</b></td>
                 <td>{{$unit->city->province->title}}</td>
             </tr>
             <tr>
-                <td colspan="1"><b>آدرس</b></td>
+                <td colspan="1"><b>{{__('units.address')}}</b></td>
                 <td colspan="3">{{$unit->address}}</td>
             </tr>
         </tbody>
     </table>
-    <h3>کادر مدیریت</h3>
+    <h3>{{__('units.managers')}}</h3>
     <table>
         <thead>
-            <th>ردیف</th>
-            <th>نام</th>
-            <th>نام خانوادگی</th>
-            <th>وضعیت</th>
+            <th>{{__('users.row')}}</th>
+            <th>{{__('users.first_name')}}</th>
+            <th>{{__('users.last_name')}}</th>
+            <th>{{__('users.status')}}</th>
         </thead>
         <tbody>
             @foreach($unit->managers as $index => $user)
@@ -55,16 +55,16 @@
             @endforeach
         </tbody>
     </table>
-    <h3>کادر سلامت</h3>
+    <h3>{{__('units.members')}}</h3>
     <table>
         <thead>
-            <th>ردیف</th>
-            <th>نام</th>
-            <th>نام خانوادگی</th>
-            <th>گروه کاربری</th>
-            <th>سطح علمی</th>
-            <th>تخصص</th>
-            <th>وضعیت</th>
+            <th>{{__('users.row')}}</th>
+            <th>{{__('users.first_name')}}</th>
+            <th>{{__('users.last_name')}}</th>
+            <th>{{__('users.group_code')}}</th>
+            <th>{{__('users.degree')}}</th>
+            <th>{{__('users.field')}}</th>
+                <td>{{$user->status_str}}</td>
         </thead>
         <tbody>
             @foreach($unit->members as $index => $user)
@@ -80,17 +80,17 @@
             @endforeach
         </tbody>
     </table>
-    <h3>بخش‌ها</h3>
+    <h3>{{__('units.index_title')}}</h3>
     <table>
         <thead>
-            <th>ردیف</th>
-            <th>عنوان</th>
-            <th>آدرس</th>
-            <th>نوع</th>
-            <th>وضعیت نمایش</th>
-            <th>شماره تلفن</th>
-            <th>شماره همراه</th>
-            <th>وضعیت</th>
+            <th>{{__('units.row')}}</th>
+            <th>{{__('units.title')}}</th>
+            <th>{{__('units.address')}}</th>
+            <th>{{__('units.group_code')}}</th>
+            <th>{{__('units.type')}}</th>
+            <th>{{__('units.phone')}}</th>
+            <th>{{__('units.mobile')}}</th>
+            <th>{{__('units.status')}}</th>
         </thead>
         <tbody>
             @foreach($unit->sub_units as $index => $sub_unit)
