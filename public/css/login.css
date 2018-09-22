@@ -1,0 +1,31 @@
+@import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);
+.login{
+	margin-top: 100px;
+}
+.card-body{
+    background-color: white;
+}
+.py-4{
+	background-color:#f5f8fa;
+}
+#app .navbar .container {
+	margin-right: 0;
+}
+.navbar-collapse ul {
+	float: right;
+	padding:0;
+}
+@media (max-width: 768px) {
+	label{
+		text-align: right;
+	}
+	
+}
+@media (min-width: 1200px) {
+	.login{
+		width: 500px;
+	}
+	.register{
+		width: 500px;
+	}
+}
