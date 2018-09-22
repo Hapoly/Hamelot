@@ -40,9 +40,6 @@
 		<nav id="sidebar">
 			<div class="sidebar-header">
 				<h3>Hamelot</h3>
-				<strong style="font-size:20px;">
-				`
-				</strong>
 			</div>
 			@component('layouts.side_menu')
 			@endcomponent
