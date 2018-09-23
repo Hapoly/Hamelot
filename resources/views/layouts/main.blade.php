@@ -48,7 +48,7 @@
 		<!-- Page Content Holder -->
 		<div id="content" style="width:100%">
 			<nav class="navbar navbar-default">
-				<div class="container-fluid">	
+				<div class="container-fluid">
 					<div class="row" style="margin:0;">
 						<div class="col-md-6 exit-col">
 							<div class="collapse navbar-collapse">
