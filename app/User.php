@@ -300,12 +300,16 @@ class User extends Authenticatable
                 $this->doctor->delete();
             case User::G_NURSE:
                 $this->nurse->delete();
+            case User::G_PATIENT:
+                $this->patient->delete();
         }
         Entry::where('target_id', $this->id)->delete();
         UnitUser::where('user_id', $this->id)->delete();
         Permission::where('patient_id', $this->id)->delete();
         Permission::where('requester_id', $this->id)->delete();
         Experiment::where('user_id', $this->id)->delete();
+        Address::where('user_id', $this->id)->delete();
+        Demand::where('patient_id', $this->id)->delete();
         parent::delete();
     }
 
@@ -315,5 +319,9 @@ class User extends Authenticatable
 
     public function getHasPermissionToRequestUnitAttribute(){
         return Auth::user()->isAdmin() || Auth::user()->isManager();
+    }
+
+    public function addresses(){
+        return $this->hasMany('App\Models\Address', 'user_id');
     }
 }

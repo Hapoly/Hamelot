@@ -20,6 +20,7 @@ Route::middleware(['auth', 'Permission'])->namespace('Panel')->prefix('panel')->
         'report_templates'  => 'ReportTemplates',
         'experiments'       => 'Experiments',
         'demands'           => 'Demands',
+        'addresses'         => 'Addresses',
     ]);
 
     Route::prefix('prints')->name('prints.')->namespace('Prints')->group(function(){

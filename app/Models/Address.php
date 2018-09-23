@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Auth;
 
 class Address extends Model
 {
@@ -16,5 +17,12 @@ class Address extends Model
 
     public function user(){
         return $this->belongsTo('App\User');
+    }
+
+    public static function fetch(){
+        if(Auth::user()->isAdmin())
+            return new Address;
+        else
+            return Auth::user()->addresses();
     }
 }

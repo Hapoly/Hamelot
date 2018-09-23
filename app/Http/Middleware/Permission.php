@@ -67,6 +67,14 @@ class Permission
         'panel.experiments.show'                            => [ 1, 2, 3, 4, 5 ],
         'panel.experiments.destroy'                         => [ 1, 2, 3, 4 ],
 
+        'panel.addresses.index'                             => [ 1, 5 ],
+        'panel.addresses.create'                            => [ 1, 5 ],
+        'panel.addresses.store'                             => [ 1, 5 ],
+        'panel.addresses.edit'                              => [ 1, 5 ],
+        'panel.addresses.update'                            => [ 1, 5 ],
+        'panel.addresses.show'                              => [ 1, 5 ],
+        'panel.addresses.destroy'                           => [ 1, 5 ],
+
         'panel.search.patients'                             => [ 1, 2, 3, 4 ],
         'panel.search.units'                                => [ 1, 2, 3, 4 ],
         'panel.search.doctors'                              => [ 1, 2, 3, 4 ],
