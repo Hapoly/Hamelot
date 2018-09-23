@@ -16,7 +16,6 @@
   	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 	<!-- Our Custom CSS -->
 	<link rel="stylesheet" href="{{asset('css/style.css')}}?v={{hash_file('md5', 'css/style.css')}}">
-	<link href='http://www.fontonline.ir/css/BRoya.css' rel='stylesheet' type='text/css'>
 	<style>
 		.row {
 			margin-top: 3rem;
@@ -39,7 +38,9 @@
 		<!-- Sidebar Holder -->
 		<nav id="sidebar">
 			<div class="sidebar-header">
-				<h3>Hamelot</h3>
+				<h3>{{config('app.name', 'Laravel')}}</h3>
+				<strong style="font-size:20px;">
+				</strong>
 			</div>
 			@component('layouts.side_menu')
 			@endcomponent
@@ -59,7 +60,7 @@
 										<a class="exit" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">{{ __('general.logout') }}</a>
 									</li>
 									<li id="login-name">
-										<a href="#">{{Auth::user()->prefix}} {{ Auth::user()->first_name }} {{Auth::user()->last_name}}</a>
+										<a href="{{route('panel.users.edit', ['user' => Auth::user()])}}">{{Auth::user()->prefix}} {{ Auth::user()->first_name }} {{Auth::user()->last_name}}</a>
 									</li>
 								</ul>
 							</div>

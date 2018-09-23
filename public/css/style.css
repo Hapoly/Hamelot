@@ -4,15 +4,12 @@
     background: #EEE;
 }
 @font-face {
-    font-family: "IRANSans";
-  
-     src: url(../fonts/IRANSans-light-web.ttf); 
-      /*src: url(../fonts/IRANSans-Medium-web.eot?#iefix) format("embedded-opentype"), url(../fonts/IRANSans-Medium-web.woff)
-      format("woff"), url(../fonts/IRANSans-Medium-web.ttf) format("truetype"), url(../fonts/IRANSans-Medium-web.svg#woff2) format("woff2"); */
-  }
-  *{
-    font-family: "IRANSans";
-  }
+    font-family: "BYekan";
+    src: url(../fonts/b-yekan.ttf); 
+}
+*{
+    font-family: "BYekan";
+}
 body {
     background: #fafafa;
 }

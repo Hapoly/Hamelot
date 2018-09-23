@@ -87,7 +87,7 @@
               <td>{{$user->status_str}}</td>
                 @if(Auth::user()->isAdmin())
                   <td>
-                    @operation_th(['base' => 'panel.users', 'label' => 'user', 'item' => $user, 'remove_label' => __('users.remove'), 'edit_label' => __('users.edit_str'), 'show_label' => __('users.show')])
+                    @operation_th_rg(['base' => 'panel.users', 'label' => 'user', 'item' => $user, 'remove_label' => __('users.remove'), 'edit_label' => __('users.edit_str'), 'show_label' => __('users.show')])
                   </td>
                 @else
                   <td>

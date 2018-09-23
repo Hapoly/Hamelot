@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <div class="panel panel-default create-card">
-         <h2>{{ __('users.create.patient') }}</h2>
+         <h2>{{ __('users.edit.patient') }}</h2>
          <div class="row">
             <div class="col-md-12">
                 <form method="POST" action="{{ route('panel.users.update.patient', ['user'  => $user]) }}" enctype="multipart/form-data">
@@ -22,7 +22,7 @@
 
                     <div class="form-group row create-form">
                         <div class="col-md-10">
-                           <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required >
+                           <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" >
                                 @if ($errors->has('password'))
                                     <span class="invalid-feedback">
                                         <strong>{{ $errors->first('password') }}</strong>
@@ -34,7 +34,7 @@
 
                     <div class="form-group row create-form">
                         <div class="col-md-10">
-                           <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required >
+                           <input id="password-confirm" type="password" class="form-control" name="password_confirmation" >
                         </div>
                          <label for="password-confirm" class="col-md-2 col-form-label text-center">{{ __('users.confirm_password') }}</label>
                     </div>
@@ -124,8 +124,8 @@
                     <div class="form-group row create-form">
                         <div class="col-md-10">
                             <select class="form-control" name="gender" id="gender" style="width:90%">
-                                <option value="1" {{old('gender', $user->doctor->gender) == 1? 'selected': ''}} > {{__('users.gender_str.1')}}</option>
-                                <option value="2" {{old('gender', $user->doctor->gender) == 2? 'selected': ''}} > {{__('users.gender_str.2')}}</option>
+                                <option value="1" {{old('gender', $user->patient->gender) == 1? 'selected': ''}} > {{__('users.gender_str.1')}}</option>
+                                <option value="2" {{old('gender', $user->patient->gender) == 2? 'selected': ''}} > {{__('users.gender_str.2')}}</option>
                             </select>
                             @if ($errors->has('gender'))
                                 <span class="invalid-feedback">

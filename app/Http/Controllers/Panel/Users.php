@@ -302,6 +302,26 @@ class Users extends Controller{
 
     return redirect()->route('panel.users.show', ['user' => $user]);
   }
+  public function updatePatient(PatientRequest $request, User $user){
+    $inputs = $request->all();
+    if($request->hasFile('profile')){
+      $inputs['profile'] = Storage::disk('public')->put('/users', $request->file('profile'));
+    }
+    if($inputs['password'])
+      $inputs['password'] = bcrypt($inputs['password']);
+    else
+      unset($inputs['password']);
+    $inputs['group_code'] = User::G_PATIENT;
+
+    $user->fill($inputs);
+    $user->save();
+
+    $patient = $user->patient;
+    $patient->fill($inputs);
+    $patient->save();
+
+    return redirect()->route('panel.users.show', ['user' => $user]);
+  }
   public function destroy(User $user){
     if(!(Auth::user()->isAdmin() || $user->id == Auth::user()->id))
       abort(403);

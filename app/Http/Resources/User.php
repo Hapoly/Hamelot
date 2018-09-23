@@ -22,7 +22,7 @@ class User extends Resource{
             'group_code'    => $this->group_code,
             'group_str'     => $this->group_str,
             'permissions'   => [
-                'readings'  => [
+                'reading'  => [
                     'info'  => $this->permission_to_read_info
                 ],
                 'writing'   => [

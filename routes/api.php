@@ -21,6 +21,10 @@ Route::namespace('Api')->prefix('auth')->group(function (){
         Route::post('nurse', 'Auth@registerNurse')->name('nurse');
         Route::post('manager', 'Auth@registerManager')->name('manager');
     });
+    Route::middleware('auth:api')->group(function(){
+        Route::post('/logout', 'Auth@logout')->name('logout');
+        Route::post('/me', 'Auth@me')->name('me');
+    });
 });
 Route::middleware('auth:api')->namespace('Api')->group(function(){
 });

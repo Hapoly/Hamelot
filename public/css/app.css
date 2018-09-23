@@ -1,27 +1,4 @@
-@import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);
-.login{
-	margin-top: 100px;
-}
-.card-body{
-    background-color: white;
-}
-.py-4{
-	background-color:#f5f8fa;
-}
-@media (max-width: 768px) {
-	label{
-		text-align: right;
-	}
-	
-}
-@media (min-width: 1200px) {
-	.login{
-		width: 500px;
-	}
-	.register{
-		width: 500px;
-	}
-}
+
 /*!
  * Bootstrap v4.0.0 (https://getbootstrap.com)
  * Copyright 2011-2018 The Bootstrap Authors

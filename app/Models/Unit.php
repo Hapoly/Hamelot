@@ -4,10 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-use App\Models\Unit;
-use App\Models\Entry;
 use App\User;
 use Auth;
+use Illuminate\Support\Facades\Storage;
+
+use App\Models\Experiment;
+use App\Models\UnitUser;
+use App\Models\Entry;
 
 class Unit extends Model{
     protected $primary = 'id';
@@ -122,6 +125,11 @@ class Unit extends Model{
     public function delete(){
         Storage::disk('public')->delete($this->image);
         Entry::where('target_id', $this->id)->where('group_code', $this->group_code_to_gc[$this->group_code])->delete();
+        UnitUser::where('unit_id', $this->id)->delete();
+        Experiment::where('unit_id', $this->id)->delete();
+        foreach($this->sub_units as $sub_unit){
+            $sub_unit->delete();
+        }
         parent::delete();
     }
 
