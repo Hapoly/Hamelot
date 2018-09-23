@@ -33,3 +33,14 @@
 	text-align: center;
 	padding-top: 160px;
 }
+.search-things img {
+	width: 170px;
+}
+.search-btns {
+	background-color: #448AFF;
+	width: 180px;
+	color: white;
+}
+.search-input {
+	margin: auto;
+}
