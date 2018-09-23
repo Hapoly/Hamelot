@@ -14,6 +14,10 @@ class Demand extends Model
         return $this->belongsTo('App\User', 'patient_id');
     }
 
+    public function address(){
+        return $this->belongsTo('App\Address');
+    }
+
     const PENDING   = 1;
     const DOING     = 2;
     const DONE      = 3;
