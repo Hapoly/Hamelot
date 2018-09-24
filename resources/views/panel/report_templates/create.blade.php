@@ -204,7 +204,7 @@ function setOnChange(){
 
 }
 setOnChange();
-var last_field_index = {{sizeof(old('titles')) + 1}};
+var last_field_index = {{sizeof(old('titles', [])) + 1}};
 function remove_field(o){
     $("#field-" + o).remove();
 }
