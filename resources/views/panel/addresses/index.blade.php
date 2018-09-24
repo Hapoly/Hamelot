@@ -12,7 +12,7 @@
               <div class="col-md-6">
                 <div class="input-group">
                   <span class="input-group-addon">آدرس</span>
-                  <input type="text" class="form-control" value="{{isset($filters)? $filters['address']: ''}}" name="address" placeholder="خیابان شهربازی">
+                  <input type="text" class="form-control" value="{{isset($filters)? $filters['plain']: ''}}" name="plain" placeholder="خیابان شهربازی">
                 </div>
               </div>
               <div class="col-md-6">
@@ -46,19 +46,17 @@
     'cols' => [
       'id'          => __('addresses.row'),
       'title'       => __('addresses.title'),
-      'group_code'  => __('addresses.group_code'),
-      'address'     => __('addresses.city_id'),
-      'status'      => __('addresses.status'),
+      'user_id'     => __('addresses.user_id'),
+      'city_id'     => __('addresses.city_id'),
       'NuLL'        => __('addresses.operation'),
     ]])
     @foreach($addresses as $address)
       <tr class="address-td {{$address->joined? 'tr-highlight': ''}}">
         <td>{{$address->id}}</td>
         <td><a href="{{route('panel.addresses.show', ['address' => $address])}}">{{$address->title}}</a></td>
-        <td>{{$address->group_str}}</td>
-        <td>{{$address->city->title}}</td>
-        <td>{{$address->status_str}}</td>
-        @if(Auth::user()->isAdmin())
+        <td>{{$address->user->full_name}}</td>
+        <td>{{$address->city->title}} ({{$address->city->province->title}})</td>
+        @if($address->has_permission_to_write)
           <td>
             @operation_th(['base' => 'panel.addresses', 'label' => 'address', 'item' => $address, 'remove_label' => __('addresses.remove'), 'edit_label' => __('addresses.edit'), 'show_label' => __('addresses.show')])
           </td>

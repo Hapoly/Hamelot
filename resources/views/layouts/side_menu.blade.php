@@ -135,4 +135,22 @@
 			</ul>
 		</li>
 	@endif
+	@if(Auth::user()->isAdmin() || Auth::user()->isPatient())
+		<li>
+			<a href="#addresses" data-toggle="collapse" aria-expanded="false">
+				<i class="fa fa-map-marker" aria-hidden="false"></i>
+				<span>
+				آدرس‌ها
+				</span>
+			</a>
+			<ul class="collapse list-unstyled" id="addresses">
+				<li>
+					<a href="{{route('panel.addresses.create')}}"> آدرس جدید</a>
+				</li>
+				<li>
+					<a href="{{route('panel.addresses.index')}}">  آدرس‌ها</a>
+				</li>
+			</ul>
+		</li>
+	@endif
 </ul>

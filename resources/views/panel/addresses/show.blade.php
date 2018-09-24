@@ -24,7 +24,11 @@
             <td>{{__('addresses.city_id')}}</td>
             <td>{{$address->city->title}} ({{$address->city->province->title}})</td>
           </tr>
-          @if(!(Auth::user()->isAdmin())))
+          <tr>
+            <td>{{__('addresses.cordinate_link')}}</td>
+            <td><a target="_blank" href="https://www.google.com/maps/{{'@' .$address->lon}},{{$address->lat}},18z">{{__('addresses.show_on_gmaps')}}</a></td>
+          </tr>
+          @if(!(Auth::user()->isAdmin()))
             <tr>
               <td>{{__('addresses.user_id')}}</td>
               <td>{{$address->user->full_name}}</td>

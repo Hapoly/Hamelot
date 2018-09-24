@@ -6,7 +6,7 @@
     @input_text(['name' => 'title', 'value' => old('title', ''), 'label' => __('addresses.title'), 'required' => true])
     @input_text(['name' => 'plain', 'value' => old('plain', ''), 'label' => __('addresses.plain'), 'required' => false])
     @if(Auth::user()->isAdmin())
-      @autocomplete(['name' => 'full_name', 'label' => __('unit_users.full_name'), 'value' => old('full_name'), 'required' => true, 'route' => 'patients'])
+      @autocomplete(['name' => 'full_name', 'label' => __('addresses.full_name'), 'value' => old('full_name'), 'required' => true, 'route' => 'patients'])
     @endif
     @input_city(['city_id' => old('city_id'), 'province_id' => old('province_id'), 'lon' => old('lon'), 'lat' => old('lat')])
     @submit_row(['value' => 'new', 'label' => __('addresses.save')])

@@ -25,4 +25,8 @@ class Address extends Model
         else
             return Auth::user()->addresses();
     }
+
+    public function getHasPermissionToWriteAttribute(){
+        return Auth::user()->isAdmin() || Auth::user()->id == $this->user_id;
+    }
 }

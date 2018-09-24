@@ -12,8 +12,11 @@ use Illuminate\Support\Facades\Storage;
 use URL;
 use App\Models\Address;
 use App\User;
+use App\Models\City;
+use App\Models\Province;
 
 use App\Http\Requests\Address\Create as AddressCreateRequest;
+use App\Http\Requests\Address\Edit as AddressEditRequest;
 
 class Addresses extends Controller{
   public function index(Request $request){
@@ -24,7 +27,11 @@ class Addresses extends Controller{
     if($request->has('title'))
       $addresses = $addresses->whereRaw("title LIKE '%". $request->title ."%'");
     if($request->has('plain'))
-      $addresses = $addresses->whereRaw("address LIKE '%". $request->address ."%'");
+      $addresses = $addresses->whereRaw("plain LIKE '%". $request->plain ."%'");
+    if($request->has('full_name')){
+      $user = User::getByName($request->full_name);
+      $addresses = $addresses->where('user_id', $user->id);
+    }
     if($request->has('province_id') && $request->province_id != 0){
       if($request->has('city_id') && $request->city_id != 0){
         $addresses = $addresses->where('city_id', $request->city_id);
@@ -45,17 +52,16 @@ class Addresses extends Controller{
     $addresses = $addresses->paginate(10);
     
     return view('panel.addresses.index', [
-      'addresses'       => $addresses,
+      'addresses'   => $addresses,
       'links'       => $links,
       'sort'        => $sort,
       'search'      => isset(parse_url(url()->full())['query'])? parse_url(url()->full())['query']: '',
       'filters'     => [
         'title'       => $request->input('title', ''),
-        'address'     => $request->input('address', ''),
+        'plain'       => $request->input('plain', ''),
         'province_id' => $request->input('province_id', ''),
         'city_id'     => $request->input('city_id', ''),
-        'status'      => $request->input('status'),
-        'root'        => $request->has('root'),
+        'full_name'   => $request->input('full_name', ''),
       ],
       'provinces'   => Province::all(),
       'cities'      => City::all()
@@ -84,20 +90,22 @@ class Addresses extends Controller{
     return redirect()->route('panel.addresses.show', ['address' => $address]);
   }
   public function edit(Address $address){
-    $parents = Address::whereHas('managers', function($query){
-      return $query->where('users.id', Auth::user()->id);
-    });
     return view('panel.addresses.edit', [
-      'address'      => $address,
+      'address'   => $address,
       'provinces' => Province::all(),
       'cities'    => City::all(),
-      'parents'   => $parents,
     ]);
   }
-  public function update(AddressRequest $request, Address $address){
+  public function update(AddressEditRequest $request, Address $address){
     $inputs = $request->all();
-    if($request->hasFile('image'))
-      $inputs['image'] = Storage::disk('public')->put('/addresses', $request->file('image'));
+    if(!Auth::user()->isAdmin())
+      $inputs['user_id'] = Auth::user()->id;
+    else{
+      $user = User::whereRaw("concat(first_name, ' ', last_name) = '". $request->full_name ."'")->first();
+      if(!$user)
+        return redirect()->route('panel.addresses.index');
+        $inputs['user_id'] = $user->id;
+    }
     $address->fill($inputs)->save();
     return redirect()->route('panel.addresses.show', ['address' => $address]);
   }
