@@ -1,12 +1,18 @@
 @import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);
+body{
+	background-color: #fdfeff;
+}
+.navbar-laravel{
+	box-shadow:0 2px 2px rgba(0,0,0,.02)
+}
 .login{
 	margin-top: 100px;
 }
-.card-body{
+/* .card-body{
     background-color: white;
-}
+} */
 .py-4{
-	background-color:#f5f8fa;
+	background-color: #fdfeff;
 }
 #app .navbar .container {
 	margin-right: 0;
@@ -43,4 +49,20 @@
 }
 .search-input {
 	margin: auto;
+}            
+.login-img{
+    width: 75%;
+    margin: auto;
+    margin-top: 180px;
+}
+.login-pic{
+    display: none;
+}
+.login-form{
+    padding-top: 50px;
+}
+@media (min-width: 992px){
+    .login-pic{
+        display: block;
+    }
 }

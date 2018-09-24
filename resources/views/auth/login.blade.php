@@ -2,10 +2,19 @@
 
 @section('content')
 <div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
+    <div class="row">
+        <div class="col-md-6 login-pic">
+            <img src="/imgs/logo.png" class="login-img">
+        </div>
+        <div class="col-md-6">
+            <div class="login-card">
+                <form class="login-form">
+
+                </form>
+            </div>
+        </div>
+        <div >
             <div class="card login" style="margin-right: auto;margin-left: auto;">
-                <div class="card-header" style="background-color: #2a5477;color: white;text-align: right;">{{ __('general.login') }}</div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('login') }}">
