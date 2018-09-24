@@ -153,4 +153,20 @@
 			</ul>
 		</li>
 	@endif
+	<li>
+		<a href="#demands" data-toggle="collapse" aria-expanded="false">
+			<i class="fa fa-heartbeat" aria-hidden="false"></i>
+			<span>خدمات پرستاری</span>
+		</a>
+		<ul class="collapse list-unstyled" id="demands">
+			@if(Auth::user()->isAdmin() || Auth::user()->isPatient())
+				<li>
+					<a href="{{route('panel.demands.create')}}"> تقاضای جدید</a>
+				</li>
+			@endif
+			<li>
+				<a href="{{route('panel.demands.index')}}">  مشاهده تقاضاها</a>
+			</li>
+		</ul>
+	</li>
 </ul>
