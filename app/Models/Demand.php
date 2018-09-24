@@ -8,7 +8,7 @@ class Demand extends Model
 {
     protected $primary = 'id';
     protected $table = 'demands';
-    protected $fillable = ['description', 'patient_id', 'status'];
+    protected $fillable = ['description', 'patient_id', 'status', 'unit_id', 'user_id', 'bid_id'];
 
     public function patient(){
         return $this->belongsTo('App\User', 'patient_id');

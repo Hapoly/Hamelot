@@ -166,16 +166,28 @@ class User extends Authenticatable
         return Auth::user()->isAdmin() || Auth::user()->isManager();
     }
 
-    public static function fetch(){
+    public static function fetch($joined=false){
         if(Auth::user()->isAdmin())
             return new User;
         else
-            return User::where([
-                ['group_code', '<>', User::G_ADMIN],
-                ['group_code', '<>', User::G_MANAGER],
-                ['group_code', '<>', User::G_PATIENT],
-                ['public', '=', User::T_PUBLIC],
-            ]);
+            if($joined && Auth::user()->isManager()){
+                return User::where([
+                    ['group_code', '<>', User::G_ADMIN],
+                    ['group_code', '<>', User::G_MANAGER],
+                    ['group_code', '<>', User::G_PATIENT],
+                    ['public', '=', User::T_PUBLIC],
+                ])->whereHas('units', function($query){
+                    return $query->whereHas('managers', function($query){
+                        return $query->where('users.id', Auth::user()->id);
+                    });
+                });
+            }else
+                return User::where([
+                    ['group_code', '<>', User::G_ADMIN],
+                    ['group_code', '<>', User::G_MANAGER],
+                    ['group_code', '<>', User::G_PATIENT],
+                    ['public', '=', User::T_PUBLIC],
+                ]);
     }
 
     public static function fetchPatients(){

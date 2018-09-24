@@ -37,11 +37,11 @@ class Users extends Controller{
     $users = null;
     if($request->has('group_code'))
       if($request->group_code == 5)
-        $users = User::fetchPatients();
+        $users = User::fetchPatients($request->has('joined'));
       else
-        $users = User::fetch();
+        $users = User::fetch($request->has('joined'));
     else
-        $users = User::fetch();
+        $users = User::fetch($request->has('joined'));
     /* end of permissions section */
 
     $sort = $request->input('sort', '###');

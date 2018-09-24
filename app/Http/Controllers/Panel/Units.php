@@ -61,6 +61,7 @@ class Units extends Controller{
         'city_id'     => $request->input('city_id', ''),
         'status'      => $request->input('status'),
         'root'        => $request->has('root'),
+        'joined'      => $request->has('joined'),
       ],
       'provinces'   => Province::all(),
       'cities'      => City::all()
