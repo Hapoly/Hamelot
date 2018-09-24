@@ -60,13 +60,13 @@ class Demands extends Controller
         ]);
     }
     public function create(Request $request){
-
+        return view('panel.demands.create');
     }
     public function store(DemandCreateRequest $request){
 
     }
     public function edit(Request $request, Demand $demand){
-
+        return view('panel.demands.edit', ['demand' => $demand]);
     }
     public function update(DemandEditRequest $request, Demand $demand){
 

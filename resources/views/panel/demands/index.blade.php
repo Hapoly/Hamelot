@@ -37,16 +37,10 @@
                 </div>
               </div>
             </div>
-            <div class="row" style="margin-top: 0px; margin-bottom: 0xp;">
+            <div class="row">
               <div class="checkbox">
-                <input class="checkbox-input" name="root" type="checkbox" value="true" {{isset($filters)? ($filters['root']? 'checked': ''): ''}}>
+                <input class="checkbox-input" name="root" type="checkbox" value="" {{isset($filters)? ($filters['root']? 'checked': ''): ''}}>
                 <label class="checkbox-label" >فقط نمایش واحده‌های ریشه</label>
-              </div>
-            </div>
-            <div class="row" style="margin-top: 0px">
-              <div class="checkbox">
-                <input class="checkbox-input" name="joined" type="checkbox" value="true" {{isset($filters)? ($filters['joined']? 'checked': ''): ''}}>
-                <label class="checkbox-label" >واحد‌های من</label>
               </div>
             </div>
             <div class="row" style="margin-bottom:2px;margin-top:2px;">

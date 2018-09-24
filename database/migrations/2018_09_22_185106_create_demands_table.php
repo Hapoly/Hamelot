@@ -18,6 +18,9 @@ class CreateDemandsTable extends Migration
             $table->string('description', 400);
             $table->integer('patient_id')->index();
             $table->integer('address_id')->index();
+            $table->integer('unit_id')->index()->default(0);
+            $table->integer('user_id')->index()->default(0);
+            $table->integer('bid_id')->index()->default(0);
             $table->smallInteger('status')->default(1);
             $table->timestamps();
         });

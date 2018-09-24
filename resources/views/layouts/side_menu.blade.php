@@ -33,7 +33,7 @@
 			@endif
 			@if(Auth::user()->isManager())
 				<li>
-					<a href="{{route('panel.users.index')}}">  کاربران</a>
+					<a href="{{route('panel.users.index', ['joined' => true])}}">  کاربران</a>
 				</li>
 			@endif
 			@if(Auth::user()->isDoctor() || Auth::user()->isNurse())
@@ -67,9 +67,6 @@
 			<li><a href="{{route('panel.units.index')}}">لیست واحدها</a></li>
 			@if(Auth::user()->isAdmin() || Auth::user()->isManager())
 				<li><a href="{{route('panel.units.create')}}">واحد جدید</a></li>
-			@endif
-			@if(!(Auth::user()->isAdmin() || Auth::user()->isPatient()))
-				<li><a href="{{route('panel.units.index', ['joined' => true])}}">واحد‌های من</a></li>
 			@endif
 		</ul>
 	</li>

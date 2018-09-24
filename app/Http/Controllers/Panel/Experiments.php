@@ -80,11 +80,18 @@ class Experiments extends Controller{
     $report_template = ReportTemplate::find($request->input('report_template', 0));
     if(!$report_template)
       abort(404);
-    return view('panel.experiments.create', [
-      'report_template' => $report_template,
-      'patients'        => Auth::user()->patients()->get(),
-      'units'           => Auth::user()->units()->get(),
-    ]);
+    if(Auth::user()->isAdmin())
+      return view('panel.experiments.create', [
+        'report_template' => $report_template,
+        'patients'        => User::where('group_code', User::G_PATIENT)->get(),
+        'units'           => Unit::all(),
+      ]);
+    else
+      return view('panel.experiments.create', [
+        'report_template' => $report_template,
+        'patients'        => Auth::user()->patients()->get(),
+        'units'           => Auth::user()->units()->get(),
+      ]);
   }
   public function store(ExperimentRequest $request){
     $inputs = $request->all();
