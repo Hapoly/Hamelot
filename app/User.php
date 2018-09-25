@@ -7,6 +7,7 @@ use App\Models\Entry;
 use App\Models\Permission;
 use App\Models\Unit;
 use App\Models\UnitUser;
+use App\Models\Experiment;
 use Auth;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Laravel\Passport\HasApiTokens;

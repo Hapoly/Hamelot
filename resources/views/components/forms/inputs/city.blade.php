@@ -17,7 +17,7 @@
 <div class="form-group row create-form">
     <div class="col-md-10">
         <select class="form-control" name="city_id" id="city_id" style="width:93%">
-            <option disabled selected value="0">{{__('units.please_choose')}}</option>
+            <option disabled selected value="0">{{__('units.please_choose_city')}}</option>
         </select>
         @if ($errors->has('city_id'))
             <span class="invalid-feedback">
@@ -53,8 +53,9 @@
     $(document).ready(function(){
         const cities = {!! $cities !!};
         function updateCities(){
-            console.log('test');
             let pid = $('#province_id').val();
+            if(!pid)
+                return;
             let cid_arr = '<option disabled selected>{{__('units.please_choose')}}</option>';
             for(let i=0; i<cities.length; i++)
                 if(cities[i].province_id == pid)

@@ -1,6 +1,9 @@
 @extends('layouts.main')
 @section('title', __('users.create.patient'))
 @section('content')
+<?php
+    use App\Models\Unit;
+?>
 <div class="container">
     <div class="panel panel-default create-card">
          <h2>{{ __('users.create.patient') }}</h2>
@@ -152,23 +155,6 @@
                             @endif
                         </div>
                     </div>
-
-                    <div class="form-group row create-form">
-                        <label for="unit_id" class="col-md-2 label-col col-form-label text-center">{{ __('users.patient_unit_id') }}</label>
-                        <div class="col-md-10">
-                            <select class="form-control" name="unit_id" id="unit_id" style="width:90%">
-                                @foreach(Auth::user()->units as $unit)
-                                    <option value="{{$unit->id}}" {{old('unit_id') == $unit->id? 'selected': ''}} >{{$unit->title}} - {{$unit->hospital->title}}</option>
-                                @endforeach
-                            </select>
-                            @if ($errors->has('unit_id'))
-                                <span class="invalid-feedback">
-                                    <strong>{{ $errors->first('unit_id') }}</strong>
-                                </span>
-                            @endif
-                        </div>
-                    </div>
-                    
                     <div class="form-group row create-form">
                             <label for="profile" class="col-md-2 label-col col-form-label text-center">{{ __('users.profile') }}</label>
                         <div class="col-md-10">
