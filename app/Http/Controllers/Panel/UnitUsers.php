@@ -80,7 +80,7 @@ class UnitUsers extends Controller{
   public function store(UnitUserRequest $request){
     $user = User::whereRaw("concat(first_name, ' ', last_name) = '". $request->full_name ."'")->first();
     if(!$user)
-      return redirect()->route('panel.unit_users.index');
+      return redirect()->back()->with('failed', __('unit_users.failed_to_find_user'));
     UnitUser::create([
       'unit_id'     => $request->unit_id,
       'user_id'     => $user->id,
@@ -123,7 +123,7 @@ class UnitUsers extends Controller{
         'permission'  => UnitUser::MANAGER,
         'status'  => UnitUser::PENDING,
       ]);
-      return redirect()->back();
+      return redirect()->back()->with('success', __('unit_users.success_sent_message'));
     }else if($user->isDoctor() || $user->isNurse()){
       UnitUser::create([
         'unit_id' => $unit->id,

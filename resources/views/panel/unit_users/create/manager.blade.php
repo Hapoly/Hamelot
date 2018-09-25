@@ -5,6 +5,11 @@
   use App\Models\UnitUser;
 ?>
 <div class="container">
+  @if(session()->has('failed'))
+    <div class="alert alert-danger" role="alert">
+      {{session()->get('failed')}}
+    </div>
+  @endif
   @form_create(['action' => route('panel.unit_users.store'), 'title' => __('unit_users.create.manager')])
     @autocomplete(['name' => 'full_name', 'label' => __('unit_users.full_name'), 'value' => old('full_name', $full_name), 'required' => true, 'route' => 'managers'])
     <?php
