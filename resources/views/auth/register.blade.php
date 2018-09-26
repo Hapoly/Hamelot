@@ -2,10 +2,9 @@
 
 @section('content')
 <div class="container">
-    <div class="login-card">
     <div class="row">
         <div class="col-md-7">
-           
+            <div class="login-card">
                 <form class="login-form" method="POST" action="{{ route('register') }}">
                         @csrf
                     <div class="form-group row">
@@ -21,10 +20,6 @@
                             @endif
                         </div>
                     </div>
-                    <div class="input-field col s12">
-                        <input id="first_name" type="text" class="validate">
-                        <label for="first_name">First Name</label>
-                    </div>
                     <div class="form-group row">
                         <label for="password" class="col-md-3 col-form-label text-md-right">{{ __('general.password') }}</label>
 
@@ -39,13 +34,6 @@
                         </div>
                     </div>
 
-                    <div class="form-group row">
-                        <label for="password-confirm" class="col-md-3 col-form-label text-md-right">{{ __('general.confirm_password') }}</label>
-
-                        <div class="col-md-8">
-                            <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
-                        </div>
-                    </div>
                     <div class="form-group row">
                         <label for="password-confirm" class="col-md-3 col-form-label text-md-right">{{ __('general.confirm_password') }}</label>
 
@@ -85,7 +73,7 @@
                             @endif
                         </div>
                     </div>
-                    <div class="form-group row">
+                    <!-- <div class="form-group row">
                         <label for="prefix" class="col-md-3 col-form-label text-md-right">{{ __('general.prefix') }}</label>
 
                         <div class="col-md-8">
@@ -97,8 +85,8 @@
                                 </span>
                             @endif
                         </div>
-                    </div>
-                    <div class="form-group row">
+                    </div> -->
+                    <!-- <div class="form-group row">
                         <label for="group_code" class="col-md-3 col-form-label text-md-right">{{ __('general.group_code') }}</label>
 
                         <div class="col-md-8">
@@ -115,8 +103,8 @@
                                 </span>
                             @endif
                         </div>
-                    </div>
-                    <!-- inja -->
+                    </div> -->
+                   
                     <div class="form-group row mb-0">
                         <div class="col-md-8 offset-md-4" style="text-align: right; margin-top: 20px;">
                             <button type="submit" class="btn btn-primary" >
@@ -125,12 +113,11 @@
                         </div>
                     </div>
                 </form>
-           
+            </div>
         </div>
         <div class="col-md-5 login-pic">
             <img src="/imgs/logo.png" class="login-img">
         </div>
-    </div>
     </div>
 </div>
 
