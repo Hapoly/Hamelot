@@ -21,13 +21,20 @@ use App\Models\Permission;
 use App\Models\UnitUser;
 use App\Models\Unit;
 
-use App\Http\Requests\UserRequest;
-use App\Http\Requests\AdminRequest;
-use App\Http\Requests\ManagerRequest;
-use App\Http\Requests\DoctorRequest;
-use App\Http\Requests\NurseRequest;
-use App\Http\Requests\PatientRequest;
+use App\Http\Requests\Users\Create\Admin as AdminCreateRequest;
+use App\Http\Requests\Users\Edit\Admin as AdminEditRequest;
 
+use App\Http\Requests\Users\Create\Manager as ManagerCreateRequest;
+use App\Http\Requests\Users\Edit\Manager as ManagerEditRequest;
+
+use App\Http\Requests\Users\Create\Doctor as DoctorCreateRequest;
+use App\Http\Requests\Users\Edit\Doctor as DoctorEditRequest;
+
+use App\Http\Requests\Users\Create\Nurse as NurseCreateRequest;
+use App\Http\Requests\Users\Edit\Nurse as NurseEditRequest;
+
+use App\Http\Requests\Users\Create\Patient as PatientCreateRequest;
+use App\Http\Requests\Users\Edit\Patient as PatientEditRequest;
 class Users extends Controller{
   /**
    * listing the users
@@ -163,21 +170,21 @@ class Users extends Controller{
   /**
    * store users in user groups
    */
-  public function storeAdmin(AdminRequest $request){
+  public function storeAdmin(AdminCreateRequest $request){
     $inputs = $request->all();
     $inputs['password'] = bcrypt($inputs['password']);
     $inputs['group_code'] = User::G_ADMIN;
     $user = User::create($inputs);
     return redirect()->route('panel.users.show', ['user' => $user]);
   }
-  public function storeManager(ManagerRequest $request){
+  public function storeManager(ManagerCreateRequest $request){
     $inputs = $request->all();
     $inputs['password'] = bcrypt($inputs['password']);
     $inputs['group_code'] = User::G_MANAGER;
     $user = User::create($inputs);
     return redirect()->route('panel.users.show', ['user' => $user]);
   }
-  public function storeDoctor(DoctorRequest $request){
+  public function storeDoctor(DoctorCreateRequest $request){
     $inputs = $request->all();
     if($request->hasFile('profile')){
       $inputs['profile'] = Storage::disk('public')->put('/users', $request->file('profile'));
@@ -189,7 +196,7 @@ class Users extends Controller{
     $doctor = Doctor::create($inputs);
     return redirect()->route('panel.users.show', ['user' => $user]);
   }
-  public function storeNurse(NurseRequest $request){
+  public function storeNurse(NurseCreateRequest $request){
     $inputs = $request->all();
     if($request->hasFile('profile')){
       $inputs['profile'] = Storage::disk('public')->put('/users', $request->file('profile'));
@@ -201,7 +208,7 @@ class Users extends Controller{
     $nurse = Nurse::create($inputs);
     return redirect()->route('panel.users.show', ['user' => $user]);
   }
-  public function storePatient(PatientRequest $request){
+  public function storePatient(PatientCreateRequest $request){
     $inputs = $request->all();
     if($request->hasFile('profile')){
       $inputs['profile'] = Storage::disk('public')->put('/users', $request->file('profile'));
@@ -242,7 +249,7 @@ class Users extends Controller{
   /**
    * update methods
    */
-  public function updateAdmin(AdminRequest $request, User $user){
+  public function updateAdmin(AdminEditRequest $request, User $user){
     $inputs = $request->all();
     if($inputs['password'])
       $inputs['password'] = bcrypt($inputs['password']);
@@ -252,7 +259,7 @@ class Users extends Controller{
     $user->fill($inputs)->save();
     return redirect()->route('panel.users.show', ['user' => $user]);
   }
-  public function updateManager(ManagerRequest $request, User $user){
+  public function updateManager(ManagerEditRequest $request, User $user){
     $inputs = $request->all();
     if($inputs['password'])
       $inputs['password'] = bcrypt($inputs['password']);
@@ -262,7 +269,7 @@ class Users extends Controller{
     $user->fill($inputs)->save();
     return redirect()->route('panel.users.show', ['user' => $user]);
   }
-  public function updateDoctor(DoctorRequest $request, User $user){
+  public function updateDoctor(DoctorEditRequest $request, User $user){
     $inputs = $request->all();
     if($request->hasFile('profile')){
       $inputs['profile'] = Storage::disk('public')->put('/users', $request->file('profile'));
@@ -282,7 +289,7 @@ class Users extends Controller{
 
     return redirect()->route('panel.users.show', ['user' => $user]);
   }
-  public function updateNurse(NurseRequest $request, User $user){
+  public function updateNurse(NurseEditRequest $request, User $user){
     $inputs = $request->all();
     if($request->hasFile('profile')){
       $inputs['profile'] = Storage::disk('public')->put('/users', $request->file('profile'));
@@ -302,7 +309,7 @@ class Users extends Controller{
 
     return redirect()->route('panel.users.show', ['user' => $user]);
   }
-  public function updatePatient(PatientRequest $request, User $user){
+  public function updatePatient(PatientEditRequest $request, User $user){
     $inputs = $request->all();
     if($request->hasFile('profile')){
       $inputs['profile'] = Storage::disk('public')->put('/users', $request->file('profile'));

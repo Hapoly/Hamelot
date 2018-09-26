@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Users\Create;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class PatientRequest extends FormRequest
+class Nurse extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,14 +26,15 @@ class PatientRequest extends FormRequest
         return [
             'first_name'    => 'required|string',
             'last_name'     => 'required|string',
-            'username'      => 'required|string',
+            'username'      => 'required|string|unique:users',
             'password'      => 'required_if:action,new|confirmed',
-            'status'        => 'required|numeric',
+            'degree'        => 'required|numeric',
+            'field'         => 'required|numeric',
+            'gender'        => 'required|numeric',
             'profile'       => 'image',
-            'id_number'     => 'required|numeric',
-            'birth_year'    => 'required|numeric|min:1300|max:1400',
-            'birth_month'   => 'required|numeric|min:1|max:12',
-            'birth_day'     => 'required|numeric|min:1|max:31',
+            'status'        => 'required|numeric',
+            'public'        => 'required|numeric',
+            'msc'           => 'required|string|max:16',
         ];
     }
 }
