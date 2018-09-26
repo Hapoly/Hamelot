@@ -21,6 +21,10 @@
                             @endif
                         </div>
                     </div>
+                    <div class="input-field col s12">
+                        <input id="first_name" type="text" class="validate">
+                        <label for="first_name">First Name</label>
+                    </div>
                     <div class="form-group row">
                         <label for="password" class="col-md-3 col-form-label text-md-right">{{ __('general.password') }}</label>
 
