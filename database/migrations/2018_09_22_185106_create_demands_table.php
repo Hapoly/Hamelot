@@ -20,7 +20,9 @@ class CreateDemandsTable extends Migration
             $table->integer('address_id')->index();
             $table->integer('unit_id')->index()->default(0);
             $table->integer('user_id')->index()->default(0);
-            $table->integer('bid_id')->index()->default(0);
+            $table->boolean('asap')->default(false);
+            $table->integer('start_time')->default(0);
+            $table->integer('end_time')->default(0);
             $table->smallInteger('status')->default(1);
             $table->timestamps();
         });

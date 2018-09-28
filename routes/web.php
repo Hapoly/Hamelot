@@ -19,7 +19,6 @@ Route::middleware(['auth', 'Permission'])->namespace('Panel')->prefix('panel')->
         'units'             => 'Units',
         'report_templates'  => 'ReportTemplates',
         'experiments'       => 'Experiments',
-        'demands'           => 'Demands',
         'addresses'         => 'Addresses',
     ]);
 
@@ -110,6 +109,21 @@ Route::middleware(['auth', 'Permission'])->namespace('Panel')->prefix('panel')->
         Route::get('/members', 'Search@members')->name('members');
         Route::get('/managers', 'Search@managers')->name('managers');
         Route::get('/joiners', 'Search@joiners')->name('joiners');
+        Route::get('/unit-users', 'Search@unitUsers')->name('unit_users');
+    });
+    Route::prefix('demands')->name('demands.')->group(function(){
+        Route::prefix('create')->name('create.')->group(function(){
+            Route::get('/free', 'Demands@createFree')->name('free');
+            Route::get('/unit', 'Demands@createUnit')->name('unit');
+            Route::get('/user', 'Demands@createUser')->name('user');
+        });
+        Route::prefix('store')->name('store.')->group(function(){
+            Route::post('/free', 'Demands@storeFree')->name('free');
+            Route::post('/unit', 'Demands@storeUnit')->name('unit');
+            Route::post('/user', 'Demands@storeUser')->name('user');
+        });
+        Route::get('/{demand}', 'Demands@show')->name('show');
+        Route::get('/', 'Demands@index')->name('index');
     });
 });
 

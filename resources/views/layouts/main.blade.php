@@ -32,6 +32,11 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<!-- jQuery UI CDN -->
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+	<!-- persian date picker -->
+	<link rel="stylesheet" href="{{asset('css/persian-datepicker.min.css')}}"/>
+	<script src="{{asset('js/persian-date.min.js')}}"></script>
+	<script src="{{asset('js/persian-datepicker.min.js')}}"></script>
 	
 </head>
 <body>
@@ -95,12 +100,10 @@
 				$('#sidebar').toggleClass('active');
 			});
 		});
-	</script>
-	<script>
-	function appendcard() {
-    var txt1 = "<p>Text.</p>";            
-    $(".test").prepend('#testcard');   
-	}
+		function appendcard() {
+			var txt1 = "<p>Text.</p>";            
+			$(".test").prepend('#testcard');   
+		}
 	</script>
 </body>
 

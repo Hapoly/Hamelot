@@ -4,47 +4,56 @@ namespace App\Http\Controllers\Panel;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+
 use App\Models\Demand;
+use App\Models\DemandAttachment;
+use App\Models\Unit;
+use App\Models\City;
+use App\Models\Province;
+
+use Auth;
+
+use App\Http\Requests\Demand\CreateFree as DemandCreateFreeRequest;
 
 class Demands extends Controller
 {
     public function index(Request $request){
-        $experiments = Demand::fetch();
+        $demands = Demand::fetch();
         $links = '';
         $sort = $request->input('sort', '###');
 
         if($request->has('unit_id') && $request->unit_id != 0)
-        $experiments = $experiments->where('unit_id', $request->unit_id);
+        $demands = $demands->where('unit_id', $request->unit_id);
         if($request->has('status') && $request->status != 0)
-        $experiments = $experiments->where('status', $request->status);
+        $demands = $demands->where('status', $request->status);
         if($request->has('province_id') && $request->province_id != 0){
-        if($request->has('city_id') && $request->city_id != 0){
-            $city_id = $request->city_id;
-            $experiments = $experiments->whereHas('unit', function($query) use($city_id){
-            return $query->where('city_id', $city_id);
-            });
+            if($request->has('city_id') && $request->city_id != 0){
+                $city_id = $request->city_id;
+                $demands = $demands->whereHas('unit', function($query) use($city_id){
+                    return $query->where('city_id', $city_id);
+                });
+            }else{
+                $province_id = $request->province_id;
+                $demands = $demands->whereHas('unit', function($query) use($province_id){
+                    return $query->whereHas('city', function($query) use ($province_id){
+                        return $query->where('province_id', $province_id);
+                    });
+                });
+            }
         }else{
-            $province_id = $request->province_id;
-            $experiments = $experiments->whereHas('unit', function($query) use($province_id){
-            return $query->whereHas('city', function($query) use ($province_id){
-                return $query->where('province_id', $province_id);
-            });
-            });
-        }
-        }else{
-        if($request->has('city_id') && $request->city_id != 0){
-            $city_id = $request->city_id;
-            $experiments = $experiments->whereHas('unit', function($query) use($city_id){
-            return $query->where('city_id', $city_id);
-            });
-        }
+            if($request->has('city_id') && $request->city_id != 0){
+                $city_id = $request->city_id;
+                $demands = $demands->whereHas('unit', function($query) use($city_id){
+                    return $query->where('city_id', $city_id);
+                });
+            }
         }
         if($request->has('sort'))
-        $experiments = $experiments->orderBy($request->input('sort'), 'desc');
-        $experiments = $experiments->paginate(10);
+            $demands = $demands->orderBy($request->input('sort'), 'desc');
+        $demands = $demands->paginate(10);
         
-        return view('panel.experiments.index', [
-        'experiments' => $experiments,
+        return view('panel.demands.index', [
+        'demands' => $demands,
         'units'       => Auth::user()->units,
         'cities'      => City::all(),
         'provinces'   => Province::all(),
@@ -59,11 +68,21 @@ class Demands extends Controller
         ],
         ]);
     }
-    public function create(Request $request){
-        return view('panel.demands.create');
+    public function createFree(Request $request){
+        return view('panel.demands.create.free');
     }
-    public function store(DemandCreateRequest $request){
-
+    public function storeFree(DemandCreateFreeRequest $request){
+        $inputs = $request->all();
+        $inputs['patient_id'] = Auth::user()->id;
+        $demand = Demand::create($inputs);
+        if($request->hasFile('image')){
+            $image = Storage::disk('public')->put('/demands', $request->file('image'));
+            DemandAttachment::create([
+                'demand_id' => $demand->id,
+                'image'     => $image,
+            ]);
+        }
+        return redirect()->route('panel.demands.show', ['demand' => $demand]);
     }
     public function edit(Request $request, Demand $demand){
         return view('panel.demands.edit', ['demand' => $demand]);
@@ -72,7 +91,7 @@ class Demands extends Controller
 
     }
     public function show(Demand $demand){
-
+        return view('panel.demands.show', ['demand' => $demand]);
     }
     public function destroy(Demand $demand){
 

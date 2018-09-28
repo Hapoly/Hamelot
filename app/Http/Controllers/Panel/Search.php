@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Storage;
 
 use URL;
 use App\User;
+use App\Models\Unit;
 
 class Search extends Controller{
   public function patients(Request $request){
@@ -107,6 +108,27 @@ class Search extends Controller{
         'label' => $user->first_name . ' ' . $user->last_name . ' (' . $user->group_str . ')',
         'value' => $user->first_name . ' ' . $user->last_name,
       ]);
+    }
+    return $results;
+  }
+  public function unitUsers(Request $request){
+    $units = Unit::
+      whereRaw('title LIKE "%'. $request->input('term') .'%"')
+      ->get();
+    $results = [];
+    foreach($units as $unit){
+      array_push($results, [
+        'id'    => 'u' . $unit->id,
+        'label' => $unit->complete_title,
+        'value' => $unit->complete_title,
+      ]);
+      foreach($unit->members as $user){
+        array_push($results, [
+          'id'    => 's' . $user->id,
+          'label' => $unit->complete_title . ' : ' . $user->full_name,
+          'value' => $unit->complete_title . ' : ' . $user->full_name,
+        ]);
+      }
     }
     return $results;
   }

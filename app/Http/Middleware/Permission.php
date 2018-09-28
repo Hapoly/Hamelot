@@ -77,8 +77,12 @@ class Permission
 
 
         'panel.demands.index'                               => [ 1, 2, 3, 4, 5 ],
-        'panel.demands.create'                              => [ 1, 5 ],
-        'panel.demands.store'                               => [ 1, 5 ],
+        'panel.demands.create.free'                         => [ 5 ],
+        'panel.demands.create.unit'                         => [ 5 ],
+        'panel.demands.create.user'                         => [ 5 ],
+        'panel.demands.store.free'                          => [ 5 ],
+        'panel.demands.store.unit'                          => [ 5 ],
+        'panel.demands.store.user'                          => [ 5 ],
         'panel.demands.edit'                                => [ 1, 5 ],
         'panel.demands.update'                              => [ 1, 5 ],
         'panel.demands.show'                                => [ 1, 2, 3, 4, 5 ],
@@ -90,6 +94,7 @@ class Permission
         'panel.search.managers'                             => [ 1, 2, 3, 4 ],
         'panel.search.members'                              => [ 1, 2, 3, 4 ],
         'panel.search.joiners'                              => [ 1, 2, 3, 4 ],
+        'panel.search.unit_users'                           => [ 1, 5 ],
 
         'panel.permissions.create'                          => [ 2, 3, 4 ],
         'panel.permissions.check'                           => [ 2, 3, 4 ],

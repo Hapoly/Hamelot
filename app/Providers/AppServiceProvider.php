@@ -31,8 +31,10 @@ class AppServiceProvider extends ServiceProvider
         Blade::include('components.forms.inputs.filter_city', 'filter_city');
         Blade::include('components.forms.inputs.number', 'input_number');
         Blade::include('components.forms.inputs.date', 'input_date');
+        Blade::include('components.forms.inputs.date_complete', 'input_date_complete');
         Blade::include('components.forms.inputs.select', 'input_select');
         Blade::include('components.forms.inputs.image', 'input_image');
+        Blade::include('components.forms.inputs.image_multi', 'input_multi_image');
         Blade::include('components.forms.inputs.autocomplete', 'autocomplete');
         Blade::include('components.forms.inputs.filter_autocomplete', 'filter_autocomplete');
 
