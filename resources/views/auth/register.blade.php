@@ -39,13 +39,6 @@
 
                         <div class="col-md-8">
                             <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="password-confirm" class="col-md-3 col-form-label text-md-right">{{ __('general.confirm_password') }}</label>
-
-                        <div class="col-md-8">
-                            <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
 
                             @if ($errors->has('password'))
                                 <span class="invalid-feedback">
@@ -54,19 +47,71 @@
                             @endif
                         </div>
                     </div>
-                    <!-- inja -->
-                    <div class="form-group row mb-0">
-                            <div class="col-md-3" style="text-align: center;">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('general.login') }}
-                                </button>
-                            </div>
-                            <div class="col-md-8">
-                                <a class="btn btn-link" href="{{ route('password.request') }}">
-                                    {{ __('general.forgot_password') }}
-                                </a>
-                            </div>
+                    <div class="form-group row">
+                        <label for="first_name" class="col-md-3 col-form-label text-md-right">{{ __('general.first_name') }}</label>
+
+                        <div class="col-md-8">
+                            <input id="first_name" type="text" class="form-control{{ $errors->has('first_name') ? ' is-invalid' : '' }}" name="first_name" value="{{ old('first_name') }}" required>
+
+                            @if ($errors->has('first_name'))
+                                <span class="invalid-feedback">
+                                    <strong>{{ $errors->first('first_name') }}</strong>
+                                </span>
+                            @endif
                         </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="last_name" class="col-md-3 col-form-label text-md-right">{{ __('general.last_name') }}</label>
+
+                        <div class="col-md-8">
+                            <input id="last_name" type="text" class="form-control{{ $errors->has('last_name') ? ' is-invalid' : '' }}" name="last_name" value="{{ old('last_name') }}" required>
+
+                            @if ($errors->has('last_name'))
+                                <span class="invalid-feedback">
+                                    <strong>{{ $errors->first('last_name') }}</strong>
+                                </span>
+                            @endif
+                        </div>
+                    </div>
+                    <!-- <div class="form-group row">
+                        <label for="prefix" class="col-md-3 col-form-label text-md-right">{{ __('general.prefix') }}</label>
+
+                        <div class="col-md-8">
+                            <input id="prefix" type="text" class="form-control{{ $errors->has('prefix') ? ' is-invalid' : '' }}" name="prefix" value="{{ old('prefix') }}" required>
+
+                            @if ($errors->has('prefix'))
+                                <span class="invalid-feedback">
+                                    <strong>{{ $errors->first('prefix') }}</strong>
+                                </span>
+                            @endif
+                        </div>
+                    </div> -->
+                    <!-- <div class="form-group row">
+                        <label for="group_code" class="col-md-3 col-form-label text-md-right">{{ __('general.group_code') }}</label>
+
+                        <div class="col-md-8">
+                            <select class="form-control" name="group_code" id="group_code">
+                                <option value="1">{{__('general.group_codes.admin')}}   </option>
+                                <option value="2">{{__('general.group_codes.manager')}} </option>
+                                <option value="3">{{__('general.group_codes.doctor')}}  </option>
+                                <option value="4">{{__('general.group_codes.nurse')}}   </option>
+                                <option value="5">{{__('general.group_codes.patient')}} </option>
+                            </select>
+                            @if ($errors->has('group_code'))
+                                <span class="invalid-feedback">
+                                    <strong>{{ $errors->first('group_code') }}</strong>
+                                </span>
+                            @endif
+                        </div>
+                    </div> -->
+                   
+                    <div class="form-group row mb-0">
+                        <div class="col-md-8 offset-md-4" style="text-align: right; margin-top: 20px;">
+                            <button type="submit" class="btn btn-primary" >
+                                {{ __('general.register') }}
+                            </button>
+                        </div>
+                    </div>
                 </form>
             </div>
         </div>
@@ -77,77 +122,4 @@
 </div>
 
 
-           
-
-     
-
-                        <div class="form-group row">
-                            <label for="first_name" class="col-md-3 col-form-label text-md-right">{{ __('general.first_name') }}</label>
-
-                            <div class="col-md-8">
-                                <input id="first_name" type="text" class="form-control{{ $errors->has('first_name') ? ' is-invalid' : '' }}" name="first_name" value="{{ old('first_name') }}" required>
-
-                                @if ($errors->has('first_name'))
-                                    <span class="invalid-feedback">
-                                        <strong>{{ $errors->first('first_name') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="last_name" class="col-md-3 col-form-label text-md-right">{{ __('general.last_name') }}</label>
-
-                            <div class="col-md-8">
-                                <input id="last_name" type="text" class="form-control{{ $errors->has('last_name') ? ' is-invalid' : '' }}" name="last_name" value="{{ old('last_name') }}" required>
-
-                                @if ($errors->has('last_name'))
-                                    <span class="invalid-feedback">
-                                        <strong>{{ $errors->first('last_name') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="prefix" class="col-md-3 col-form-label text-md-right">{{ __('general.prefix') }}</label>
-
-                            <div class="col-md-8">
-                                <input id="prefix" type="text" class="form-control{{ $errors->has('prefix') ? ' is-invalid' : '' }}" name="prefix" value="{{ old('prefix') }}" required>
-
-                                @if ($errors->has('prefix'))
-                                    <span class="invalid-feedback">
-                                        <strong>{{ $errors->first('prefix') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="group_code" class="col-md-3 col-form-label text-md-right">{{ __('general.group_code') }}</label>
-                            <div class="col-md-8">
-                                <select class="form-control" name="group_code" id="group_code">
-                                    <option value="1">{{__('general.group_codes.admin')}}   </option>
-                                    <option value="2">{{__('general.group_codes.manager')}} </option>
-                                    <option value="3">{{__('general.group_codes.doctor')}}  </option>
-                                    <option value="4">{{__('general.group_codes.nurse')}}   </option>
-                                    <option value="5">{{__('general.group_codes.patient')}} </option>
-                                </select>
-                                @if ($errors->has('group_code'))
-                                    <span class="invalid-feedback">
-                                        <strong>{{ $errors->first('group_code') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-                        <div class="form-group row mb-0">
-                            <div class="col-md-8 offset-md-4" style="text-align: right; margin-top: 20px;">
-                                <button type="submit" class="btn btn-primary" >
-                                    {{ __('general.register') }}
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 @endsection
