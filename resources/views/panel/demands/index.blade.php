@@ -1,6 +1,9 @@
 @extends('layouts.main')
 @section('title', __('demands.index_title'))
 @section('content')
+<div class="row">
+  <h2>{{__('demands.index_title')}}</h2>
+</div>
 <div class="row" style="margin-bottom:50px;">
   @php
     $cols = [];

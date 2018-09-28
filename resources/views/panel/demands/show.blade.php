@@ -2,11 +2,9 @@
 @section('title', $demand->description)
 @section('content')
 <div class="container">
-  @if(session()->has('success'))
-    <div class="alert alert-success" role="alert">
-      {{session()->get('success')}}
-    </div>
-  @endif
+  <div class="row">
+    <h2>{{__('demands.index_title')}}</h2>
+  </div>
   <div class="panel panel-default">
     <div class="row">
       <table class="table table-striped">
