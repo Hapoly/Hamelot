@@ -82,6 +82,9 @@ class Permission
         'panel.bids.update'                                 => [ 1, 2 ],
         'panel.bids.show'                                   => [ 1, 2, 3, 4, 5 ],
         'panel.bids.destroy'                                => [ 1, 2 ],
+        'panel.bids.inline_update'                          => [ 1, 2, 3, 4, 5 ],
+        
+        'panel.payments.bids.verify'                        => [ 1, 2, 3, 4, 5 ],
 
         'panel.demands.index'                               => [ 1, 2, 3, 4, 5 ],
         'panel.demands.create.free'                         => [ 5 ],

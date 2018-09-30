@@ -45,6 +45,20 @@
               <td>{{$demand->start_date_time_str}} {{__('demands.date_to_date')}} {{$demand->end_date_time_str}}</td>
             @endif
           </tr>
+          @if($demand->choosenBid())
+            <tr>
+              <td>{{__('bids.unit_id')}}</td>
+              <td>{{$demand->unit->complete_title}}</td>
+            </tr>
+            <tr>
+              <td>{{__('bids.user_id')}}</td>
+              <td>{{$demand->user->full_name}}</td>
+            </tr>
+            <tr>
+              <td>{{__('bids.date')}}</td>
+              <td>{{$demand->choosenBid()->date_str}}</td>
+            </tr>
+          @endif
         </tbody>
       </table>
     </div>
@@ -73,17 +87,15 @@
             <th>{{__('bids.user_id')}}</th>
             <th>{{__('bids.price')}}</th>
             <th>{{__('bids.deposit')}}</th>
-            @if(Auth::user()->isAdmin())
-              <th>{{__('bids.operation')}}</th>
-            @endif
+            <th><th>
           </tr>
         </thead>
         <tbody>
           @foreach($demand->my_bids()->get() as $index => $bid)
             <tr>
-              <td>{{$index}}</td>
+              <td>{{$index+1}}</td>
               <td>{{$bid->date_str}}</td>
-              <td>{{$bid->unit->title}}</td>
+              <td>{{$bid->unit->complete_title}}</td>
               <td>{{$bid->user->full_name}}</td>
               <td>{{$bid->price_str}}</td>
               <td>{{$bid->deposit_str}}</td>
@@ -97,6 +109,8 @@
                     <a class="btn btn-success" href="{{route('panel.bids.inline_update', ['bid' => $bid, 'action' => 'accept'])}}">{{__('bids.accept')}}</a>
                   @endif
                 </td>
+              @else
+                <td>{{$bid->status_str}}</td>
               @endif
             </tr>
           @endforeach

@@ -5,6 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
 use App\models\Bid;
+use App\models\Transaction;
+
 use App\Drivers\Time;
 
 use Auth;
@@ -43,7 +45,7 @@ class Demand extends Model
     }
 
     public function user(){
-        return $this->belongsTo('App\Models\User', 'user_id');
+        return $this->belongsTo('App\User', 'user_id');
     }
 
     public function choosenBid(){
@@ -57,7 +59,7 @@ class Demand extends Model
     public function my_bids(){
         if(Auth::user()->isAdmin() || Auth::user()->isPatient())
             return $this->bids();
-        else if(Auth::user()->managers())
+        else if(Auth::user()->isManager())
             return $this->hasMany('App\Models\Bid', 'demand_id')->whereHas('unit', function($query){
                 return $query->whereHas('managers', function($query){
                     return $query->where('users.id', Auth::user()->id);
@@ -137,6 +139,8 @@ class Demand extends Model
 
     // can_modify
     public function getCanModifyAttribute(){
+        if(!$this->pending())
+            return false;
         if(Auth::user()->isAdmin()){
             return true;
         }else{
@@ -147,5 +151,20 @@ class Demand extends Model
 
     public function pending(){
         return $this->status == Demand::FREE_DEMAND || $this->status == Demand::UNIT_DEMAND || $this->status == Demand::UNIT_USER_DEMAND;
+    }
+
+    public function acceptBid(Bid $bid){
+        $bid->status = Bid::ACCEPTED;
+        $bid->save();
+        $this->status = Demand::IN_PROGRESS;
+        $this->unit_id = $bid->unit_id;
+        $this->user_id = $bid->user_id;
+        $this->save();
+        foreach($this->bids as $bid){
+            if($bid->status != Bid::ACCEPTED && $bid->status != Bid::DONE && $bid->status != Bid::CANCELED){
+                $bid->status = Bid::REFUSED;
+                $bid->save();
+            }
+        }
     }
 }

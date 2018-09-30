@@ -9,15 +9,15 @@ namespace App\Drivers;
  * @version 1.0.0
  */
 class ZarinPal {
-    public static function generate($amount, $description){
+    public static function generate($amount, $description, $callback){
         $data = array(
             'MerchantID' => env('ZARIN_PAL_MERCHANT_ID'),
             'Amount' => $amount,
-            'CallbackURL' => url('/factures/verify'),
+            'CallbackURL' => $callback,
             'Description' => $description,
         );
         $jsonData = json_encode($data);
-        $ch = curl_init('https://sandbox.zarinpal.com/pg/rest/WebGate/PaymentRequest.json');
+        $ch = curl_init('https://'. env('ZARIN_PAL_PROTOCOL') .'.zarinpal.com/pg/rest/WebGate/PaymentRequest.json');
         curl_setopt($ch, CURLOPT_USERAGENT, 'ZarinPal Rest Api v1');
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
         curl_setopt($ch, CURLOPT_POSTFIELDS, $jsonData);
@@ -43,13 +43,13 @@ class ZarinPal {
     }
 
     public static function generateLink($authority){
-        return "https://sandbox.zarinpal.com/pg/StartPay/$authority";
+        return "https://". env('ZARIN_PAL_PROTOCOL') .".zarinpal.com/pg/StartPay/$authority";
     }
 
     public static function verify($amount, $authority){
         $data = array('MerchantID' => env('ZARIN_PAL_MERCHANT_ID'), 'Authority' => $authority, 'Amount' => $amount);
         $jsonData = json_encode($data);
-        $ch = curl_init('https://sandbox.zarinpal.com/pg/rest/WebGate/PaymentVerification.json');
+        $ch = curl_init('https://'. env('ZARIN_PAL_PROTOCOL') .'.zarinpal.com/pg/rest/WebGate/PaymentVerification.json');
         curl_setopt($ch, CURLOPT_USERAGENT, 'ZarinPal Rest Api v1');
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
         curl_setopt($ch, CURLOPT_POSTFIELDS, $jsonData);
