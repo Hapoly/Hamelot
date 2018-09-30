@@ -129,3 +129,9 @@ Route::middleware(['auth', 'Permission'])->namespace('Panel')->prefix('panel')->
 
 Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/about',function(){
+    return view('about');
+});
+Route::get('/tour',function(){
+    return view('tour');
+});
