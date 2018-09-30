@@ -48,6 +48,13 @@
         </tbody>
       </table>
     </div>
+    @if($demand->can_modify)
+      <div class="row">
+        <div class="col-md-12" style="text-align: center">
+          <a class="btn btn-primary" href="{{route('panel.demands.edit', ['demand' => $demand])}}">{{__('demands.edit_title')}}</a>
+        </div>
+      </div>
+    @endif
   </div>
   <div class="panel panel-default">
     <div class="panel-heading sub-panel-title">
@@ -56,12 +63,12 @@
       @endif
       {{__('bids.index_title')}}
     </div>
-    @if(sizeof($demand->bids))
+    @if(sizeof($demand->my_bids()->get()))
       <table class="table">
         <thead>
           <tr>
             <th>{{__('bids.row')}}</th>
-            <th>{{__('bids.time')}}</th>
+            <th>{{__('bids.date')}}</th>
             <th>{{__('bids.unit_id')}}</th>
             <th>{{__('bids.user_id')}}</th>
             <th>{{__('bids.price')}}</th>
@@ -72,10 +79,10 @@
           </tr>
         </thead>
         <tbody>
-          @foreach($demand->bids as $index => $bid)
+          @foreach($demand->my_bids()->get() as $index => $bid)
             <tr>
               <td>{{$index}}</td>
-              <td>{{$bid->date_time_str}}</td>
+              <td>{{$bid->date_str}}</td>
               <td>{{$bid->unit->title}}</td>
               <td>{{$bid->user->full_name}}</td>
               <td>{{$bid->price_str}}</td>

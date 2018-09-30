@@ -1,5 +1,6 @@
 <?php
 return [
+    'row'           => 'ردیف',
     'index_title'   => 'پیشنهاد‌ها',
     'show_title'    => 'پیشنهاد خدمات',
     'create_title'  => 'پیشنهاد جدید',

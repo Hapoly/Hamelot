@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+use App\Drivers\Time;
+
 class Bid extends Model
 {
     protected $primary = 'id';
