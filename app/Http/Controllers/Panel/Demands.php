@@ -14,6 +14,7 @@ use App\Models\Province;
 use Auth;
 
 use App\Http\Requests\Demand\CreateFree as DemandCreateFreeRequest;
+use App\Http\Requests\Demand\Edit as DemandEditRequest;
 
 class Demands extends Controller
 {

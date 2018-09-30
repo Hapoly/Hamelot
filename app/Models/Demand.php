@@ -55,11 +55,20 @@ class Demand extends Model
     }
 
     public function my_bids(){
-        return $this->hasMany('App\Models\Bid', 'demand_id')->whereHas('unit', function($query){
-            return $query->whereHas('managers', function($query){
-                return $query->where('users.id', Auth::user()->id);
+        if(Auth::user()->isAdmin() || Auth::user()->isPatient())
+            return $this->bids();
+        else if(Auth::user()->managers())
+            return $this->hasMany('App\Models\Bid', 'demand_id')->whereHas('unit', function($query){
+                return $query->whereHas('managers', function($query){
+                    return $query->where('users.id', Auth::user()->id);
+                });
             });
-        });
+        else
+            return $this->hasMany('App\Models\Bid', 'demand_id')->whereHas('unit', function($query){
+                return $query->whereHas('members', function($query){
+                    return $query->where('users.id', Auth::user()->id);
+                });
+            });
     }
 
     const FREE_DEMAND           = 1;

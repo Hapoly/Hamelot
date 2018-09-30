@@ -6,6 +6,7 @@
 ?>
 <div class="container">
   @form_create(['action' => route('panel.demands.update', ['demand' => $demand]), 'title' => __('demands.edit_title')])
+    @csrf
     @input_text(['name' => 'description', 'value' => old('description', $demand->description), 'label' => __('demands.description'), 'required' => true])
     @php
       $address_rows = [

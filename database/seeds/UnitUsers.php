@@ -25,5 +25,23 @@ class UnitUsers extends Seeder
             'status'        => 2,
             'permission'    => UnitUser::MANAGER,
         ]);
+        UnitUser::create([
+            'unit_id'       => 2,
+            'user_id'       => 3,
+            'status'        => 2,
+            'permission'    => UnitUser::MEMBER,
+        ]);
+        UnitUser::create([
+            'unit_id'       => 1,
+            'user_id'       => 4,
+            'status'        => 2,
+            'permission'    => UnitUser::MEMBER,
+        ]);
+        UnitUser::create([
+            'unit_id'       => 5,
+            'user_id'       => 5,
+            'status'        => 2,
+            'permission'    => UnitUser::MEMBER,
+        ]);
     }
 }

@@ -4,6 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+use App\Drivers\Time;
+
+use Auth;
+
 class Bid extends Model
 {
     protected $primary = 'id';
@@ -64,5 +68,21 @@ class Bid extends Model
     // date_str
     public function getDateStrAttribute(){
         return Time::jdate('H:i d F Y', $this->date);
+    }
+
+    // permission_to_operate_bid
+    public function getPermissionToOperateBidAttribute(){
+        switch($this->status){
+            case Bid::PENDING:
+                return Auth::user()->isAdmin() || $this->demand->patient_id == Auth::user()->id;
+            case Bid::PATIENT_ACCEPTED:
+                return Auth::user()->isAdmin() || $this->unit->managers()->where('users.id', Auth::user()->id);
+            case Bid::UNIT_ACCEPTED:
+                return Auth::user()->isAdmin() || $this->unit->managers()->where('users.id', Auth::user()->id) || $this->user_id == Auth::user()->id;
+            case Bid::UNIT_USER_ACCEPTED:
+                return Auth::user()->id == $this->demand->patient_id;
+            default:
+                return false;
+        }
     }
 }
