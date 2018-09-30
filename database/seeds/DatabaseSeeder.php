@@ -18,5 +18,7 @@ class DatabaseSeeder extends Seeder
         $this->call(Units::class);
         $this->call(UnitUsers::class);
         $this->call(ReportTemplates::class);
+        $this->call(Addresses::class);
+        $this->call(Demands::class);
     }
 }

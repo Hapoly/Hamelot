@@ -20,6 +20,7 @@ Route::middleware(['auth', 'Permission'])->namespace('Panel')->prefix('panel')->
         'report_templates'  => 'ReportTemplates',
         'experiments'       => 'Experiments',
         'addresses'         => 'Addresses',
+        'bids'              => 'Bids',
     ]);
 
     Route::prefix('prints')->name('prints.')->namespace('Prints')->group(function(){
@@ -124,6 +125,8 @@ Route::middleware(['auth', 'Permission'])->namespace('Panel')->prefix('panel')->
         });
         Route::get('/{demand}', 'Demands@show')->name('show');
         Route::get('/', 'Demands@index')->name('index');
+        Route::get('/{demand}/edit', 'Demands@edit')->name('edit');
+        Route::post('/{demand}/update', 'Demands@update')->name('update');
     });
 });
 

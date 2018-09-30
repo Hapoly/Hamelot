@@ -5,24 +5,11 @@ return [
     'login'     => 'ورود',
     'logout'    => 'خروج',
 
-    'forgot_password'   => 'نام کاربری یا کلمه عبور خود را فراموش کرده ام',
-    'remember_me'       => 'مرا به یاد بیاور',
-
-
     'username'  => 'نام کاربری',
     'password'  => 'کلمه عبور',
-    'confirm_password'  => 'تکرار کلمه عبور',
-    'first_name'    => 'نام',
-    'last_name'     => 'نام خانوادگی',
-    'group_code'    => 'گروه کاربری',
-    'prefix'        => 'پیشوند نام',
-    'group_codes'   => [
-        'admin'     => 'مدیرکل',
-        'manager'   => 'مدیریت بیمارستان',
-        'doctor'    => 'پزشک',
-        'nurse'     => 'پرستار',
-        'patient'   => 'بیمار',
-    ],
+
+    'forgot_password'   => 'نام کاربری یا کلمه عبور خود را فراموش کرده ام',
+    'remember_me'       => 'مرا به یاد بیاور',
 
     'year'  => 'سال',
     'month' => 'ماه',
@@ -45,5 +32,10 @@ return [
     'select_str'    => [
         1   => 'بلی',
         2   => 'خیر',
-    ]
+    ],
+
+    // currencies
+    'toman'     => 'تومان',
+    'dollar'    => 'دلار',
+    'euro'      => 'یورو',
 ];

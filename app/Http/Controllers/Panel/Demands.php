@@ -73,6 +73,8 @@ class Demands extends Controller
     }
     public function storeFree(DemandCreateFreeRequest $request){
         $inputs = $request->all();
+        $inputs['start_time'] /= 10000;
+        $inputs['end_time'] /= 10000;
         $inputs['patient_id'] = Auth::user()->id;
         $demand = Demand::create($inputs);
         if($request->hasFile('image')){
@@ -88,7 +90,19 @@ class Demands extends Controller
         return view('panel.demands.edit', ['demand' => $demand]);
     }
     public function update(DemandEditRequest $request, Demand $demand){
-
+        $inputs = $request->all();
+        $inputs['start_time'] /= 10000;
+        $inputs['end_time'] /= 10000;
+        $demand = $demand->fill($inputs)->save();
+        if($request->hasFile('image')){
+            DemandAttachment::where('demand_id', $demand->id)->delete();
+            $image = Storage::disk('public')->put('/demands', $request->file('image'));
+            DemandAttachment::create([
+                'demand_id' => $demand->id,
+                'image'     => $image,
+            ]);
+        }
+        return redirect()->route('panel.demands.show', ['demand' => $demand]);
     }
     public function show(Demand $demand){
         return view('panel.demands.show', ['demand' => $demand]);
