@@ -129,7 +129,10 @@ Route::middleware(['auth', 'Permission'])->namespace('Panel')->prefix('panel')->
         Route::post('/{demand}/update', 'Demands@update')->name('update');
     });
     Route::prefix('bids')->name('bids.')->group(function(){
-        Route::get('/inline-update/{bid}', 'Bids@inline_update')->name('inline_update');
+        Route::get('/inline-update/{bid}', 'Bids@inlineUpdate')->name('inline_update');
+    });
+    Route::prefix('payments')->name('payments.')->group(function(){
+        Route::get('/bids', 'payments@bidVerify')->name('bids.verify');
     });
 });
 

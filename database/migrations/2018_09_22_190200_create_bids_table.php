@@ -24,7 +24,6 @@ class CreateBidsTable extends Migration
             $table->integer('deposit');
             $table->smallInteger('status')->default(1);
             $table->smallInteger('pay_type')->default(0);
-            $table->string('authority')->default('NuLL');
             $table->timestamps();
         });
     }
