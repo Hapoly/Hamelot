@@ -1,5 +1,16 @@
 /* @import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700"; */
 
+::-webkit-scrollbar {
+    display: none;
+}
+
+::-webkit-scrollbar-button {
+    display: none;
+}
+
+body {
+    -ms-overflow-style:none;
+}
 .left-addon {
     padding: 6px 12px;
     font-size: 14px;
