@@ -128,6 +128,9 @@ Route::middleware(['auth', 'Permission'])->namespace('Panel')->prefix('panel')->
         Route::get('/{demand}/edit', 'Demands@edit')->name('edit');
         Route::post('/{demand}/update', 'Demands@update')->name('update');
     });
+    Route::prefix('bids')->name('bids.')->group(function(){
+        Route::get('/inline-update/{bid}', 'Bids@inline_update')->name('inline_update');
+    });
 });
 
 Auth::routes();

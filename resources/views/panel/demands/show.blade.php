@@ -94,7 +94,7 @@
                   @endif
                   <a class="btn btn-warning" href="{{route('panel.bids.inline_update', ['bid' => $bid, 'action' => 'refuse'])}}">{{__('bids.refuse')}}</a>
                   @if(Auth::user()->isPatient())
-                    <a class="btn btn-succuess" href="{{route('panel.bids.inline_update', ['bid' => $bid, 'action' => 'accept'])}}">{{__('bids.accept')}}</a>
+                    <a class="btn btn-success" href="{{route('panel.bids.inline_update', ['bid' => $bid, 'action' => 'accept'])}}">{{__('bids.accept')}}</a>
                   @endif
                 </td>
               @endif
