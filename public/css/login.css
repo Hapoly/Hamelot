@@ -102,3 +102,12 @@ body{
 	margin: auto;
 	display: block;
 }
+.about-title {
+	text-align: center;
+	padding: 20px;
+}
+.about-content {
+	text-align: right;
+	padding: 20px;
+	line-height: 35px;
+}
