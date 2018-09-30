@@ -131,7 +131,7 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/about',function(){
     return view('about');
-});
+})->name('about');
 Route::get('/tour',function(){
     return view('tour');
-});
+})->name('tour');
