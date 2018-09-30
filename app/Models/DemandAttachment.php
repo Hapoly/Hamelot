@@ -16,4 +16,8 @@ class DemandAttachemtn extends Model
     public function getImageUrlAttribute(){
         return url($this->image);
     }
+    public function delete(array $options = []){
+        Storage::disk('public')->delete($this->image);
+        parent::delete($options);
+    }
 }

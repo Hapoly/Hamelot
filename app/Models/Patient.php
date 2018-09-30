@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
+
 use App\Drivers\Time;
 use App\Models\ConstValue;
 
@@ -56,5 +58,10 @@ class Patient extends Model
             return $this->id_number;
         else
             return ' - ';
+    }
+
+    public function delete(array $options =[]){
+        Storage::disk('public')->delete($this->profile);
+        parent::delete($options);
     }
 }

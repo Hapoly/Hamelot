@@ -323,6 +323,7 @@ class User extends Authenticatable
         Experiment::where('user_id', $this->id)->delete();
         Address::where('user_id', $this->id)->delete();
         Demand::where('patient_id', $this->id)->delete();
+        Bid::where('user_id', $this->id)->delete();
         parent::delete();
     }
 

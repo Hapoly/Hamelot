@@ -126,6 +126,7 @@ Route::middleware(['auth', 'Permission'])->namespace('Panel')->prefix('panel')->
         Route::get('/{demand}', 'Demands@show')->name('show');
         Route::get('/', 'Demands@index')->name('index');
         Route::get('/{demand}/edit', 'Demands@edit')->name('edit');
+        Route::post('/{demand}/update', 'Demands@update')->name('update');
     });
 });
 

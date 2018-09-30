@@ -135,4 +135,8 @@ class Demand extends Model
         }
         return false;
     }
+
+    public function pending(){
+        return $this->status == Demand::FREE_DEMAND || $this->status == Demand::UNIT_DEMAND || $this->status == Demand::UNIT_USER_DEMAND;
+    }
 }
