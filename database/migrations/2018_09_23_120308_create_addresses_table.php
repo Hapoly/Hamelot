@@ -21,6 +21,7 @@ class CreateAddressesTable extends Migration
             $table->integer('city_id')->index();
             $table->string('plain')->default('NuLL');
             $table->string('title');
+            $table->string('phone');
             $table->timestamps();
         });
     }

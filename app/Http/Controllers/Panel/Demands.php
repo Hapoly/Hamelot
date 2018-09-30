@@ -73,6 +73,8 @@ class Demands extends Controller
     }
     public function storeFree(DemandCreateFreeRequest $request){
         $inputs = $request->all();
+        $inputs['start_time'] /= 10000;
+        $inputs['end_time'] /= 10000;
         $inputs['patient_id'] = Auth::user()->id;
         $demand = Demand::create($inputs);
         if($request->hasFile('image')){

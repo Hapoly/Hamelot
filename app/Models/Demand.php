@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
 use App\models\Bid;
+use App\Drivers\Time;
 
 use Auth;
 
@@ -53,6 +54,14 @@ class Demand extends Model
         return $this->hasMany('App\Models\Bid', 'demand_id');
     }
 
+    public function my_bids(){
+        return $this->hasMany('App\Models\Bid', 'demand_id')->whereHas('unit', function($query){
+            return $query->whereHas('managers', function($query){
+                return $query->where('users.id', Auth::user()->id);
+            });
+        });
+    }
+
     const FREE_DEMAND           = 1;
     const UNIT_DEMAND           = 2;
     const UNIT_USER_DEMAND      = 3;
@@ -74,7 +83,16 @@ class Demand extends Model
     }
 
     public function getDescriptionSummaryAttribute(){
-        return substr($this->description, 0, 30) . '...';
+        return mb_substr($this->description, 0, 30) . '...' ;
+    }
+
+    public function has_bids(){
+        $user = Auth::user();
+        if($user->isAdmin() || $user->isPatient())
+            return false;
+        if($user->isManager() && $this->unit_id)
+            return $this->unit->managers()->where('users.id', $user->id)->first();
+        return $this->user_id == $user->id;
     }
 
     /**
@@ -88,5 +106,33 @@ class Demand extends Model
             return Demand::where('patient_id', Auth::user()->id);
         else
             return new Demand;
+    }
+
+    // has_permission_to_bid
+    public function getHasPermissionToBidAttribute(){
+        return Auth::user()->isManager();
+    }
+    // has_permission_to_read_bids
+    public function getHasPermissionToReadBidsAttribute(){
+        return Auth::user()->isAdmin() || Auth::user()->id == $this->patient_id || $this->has_bids();
+    }
+
+    // start_date_time_str
+    public function getStartDateTimeStrAttribute(){
+        return Time::jdate('H:i d F Y', $this->start_time);
+    }
+    // end_date_time_str
+    public function getEndDateTimeStrAttribute(){
+        return Time::jdate('H:i d F Y', $this->end_time);
+    }
+
+    // can_modify
+    public function getCanModifyAttribute(){
+        if(Auth::user()->isAdmin()){
+            return true;
+        }else{
+            return Auth::user()->id == $this->patient_id;
+        }
+        return false;
     }
 }

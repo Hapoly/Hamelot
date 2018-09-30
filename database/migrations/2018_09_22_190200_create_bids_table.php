@@ -16,10 +16,15 @@ class CreateBidsTable extends Migration
         Schema::create('bids', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('demand_id')->index();
+            $table->integer('date');
             $table->integer('unit_id')->index();
             $table->integer('user_id')->index();
             $table->string('description')->default('NuLL');
+            $table->integer('price');
+            $table->integer('deposit');
             $table->smallInteger('status')->default(1);
+            $table->smallInteger('pay_type')->default(0);
+            $table->string('authority')->default('NuLL');
             $table->timestamps();
         });
     }

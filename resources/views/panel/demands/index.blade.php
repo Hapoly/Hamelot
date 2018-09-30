@@ -37,7 +37,12 @@
           <td>{{$demand->patient->full_name}}</td>
         @endif
         <td>{{$demand->status_str}}</td>
-        <td><a class="btn btn-default" href="{{route('panel.demands.show', ['$demand' => $demand])}}">{{__('demands.show')}}</a></td>
+        <td>
+          @if($demand->can_modify)
+            <a href="{{route('panel.demands.edit', ['demand' => $demand])}}" class="btn btn-info" role="button">{{__('demands.edit_title')}}</a>
+          @endif
+          <a class="btn btn-default" href="{{route('panel.demands.show', ['$demand' => $demand])}}">{{__('demands.show')}}</a>
+        </td>
       </tr>
     @endforeach
   @endtable
