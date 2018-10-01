@@ -37,11 +37,14 @@ class ReportTemplates extends Controller{
     }else{
       $report_templates = $report_templates->paginate(10);
     }
+
     return view('panel.report_templates.index', [
       'report_templates'   => $report_templates,
-      'links'       => $links,
-      'sort'        => $sort,
-      'search'      => $search,
+      'links'               => $links,
+      'sort'                => $sort,
+      'search'              => $search,
+      'experiment_for_bid'  => $request->has('bid'),
+      'bid'                 => $request->input('bid', 0)
     ]);
   }
   public function show(ReportTemplate $report_template){

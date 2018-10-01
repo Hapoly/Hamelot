@@ -19,6 +19,7 @@ use App\Models\ReportTemplate;
 use App\Models\Unit;
 use App\Models\City;
 use App\Models\Province;
+use App\Models\Bid;
 use App\Http\Requests\ExperimentRequest;
 
 class Experiments extends Controller{
@@ -80,25 +81,33 @@ class Experiments extends Controller{
     $report_template = ReportTemplate::find($request->input('report_template', 0));
     if(!$report_template)
       abort(404);
+    $data = [];
     if(Auth::user()->isAdmin())
-      return view('panel.experiments.create', [
+      $data = [
         'report_template' => $report_template,
         'patients'        => User::where('group_code', User::G_PATIENT)->get(),
         'units'           => Unit::all(),
-      ]);
+      ];
     else
-      return view('panel.experiments.create', [
+      $data = [
         'report_template' => $report_template,
         'patients'        => Auth::user()->patients()->get(),
         'units'           => Auth::user()->units()->get(),
-      ]);
+      ];
+    if($request->has('bid')){
+      $data['bid'] = Bid::findOrFail($request->bid);
+    }
+    return view('panel.experiments.create', $data);
   }
   public function store(ExperimentRequest $request){
     $inputs = $request->all();
     $inputs['date'] = Time::jmktime(0, 0, 0, $inputs['day'], $inputs['month'], $inputs['year']);
     $experiment = Experiment::create($inputs);
     $experiment->saveFields($request);
-    return redirect()->route('panel.experiments.show', ['experiment' => $experiment]);
+    if($request->has('bid_id'))
+      return redirect()->route('panel.bids.show', ['bid' => $request->bid_id]);
+    else
+      return redirect()->route('panel.experiments.show', ['experiment' => $experiment]);
   }
   public function edit(Experiment $experiment){
     return view('panel.experiments.edit', [

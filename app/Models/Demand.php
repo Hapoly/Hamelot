@@ -4,9 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-use App\models\Bid;
-use App\models\Transaction;
-
+use App\Models\Bid;
+use App\Models\Transaction;
+use App\Models\Permission;
 use App\Drivers\Time;
 
 use Auth;
@@ -57,20 +57,26 @@ class Demand extends Model
     }
 
     public function my_bids(){
-        if(Auth::user()->isAdmin() || Auth::user()->isPatient())
+        $user = Auth::user();
+        if($user->isAdmin())
             return $this->bids();
-        else if(Auth::user()->isManager())
-            return $this->hasMany('App\Models\Bid', 'demand_id')->whereHas('unit', function($query){
-                return $query->whereHas('managers', function($query){
-                    return $query->where('users.id', Auth::user()->id);
+        else if($user->isPatient())
+            return $this->bids()->where('patient_accepted', 1)->orWhere([
+                ['unit_accepted', 1],
+                ['user_accepted', 1],
+            ]);
+        else if($user->isManager())
+            return $this->hasMany('App\Models\Bid', 'demand_id')->whereHas('unit', function($query) use ($user){
+                return $query->whereHas('managers', function($query) use ($user){
+                    return $query->where('users.id', $user->id);
                 });
             });
         else
-            return $this->hasMany('App\Models\Bid', 'demand_id')->whereHas('unit', function($query){
-                return $query->whereHas('members', function($query){
-                    return $query->where('users.id', Auth::user()->id);
+            return $this->hasMany('App\Models\Bid', 'demand_id')->whereHas('unit', function($query) use ($user){
+                return $query->whereHas('members', function($query) use ($user){
+                    return $query->where('users.id', $user->id);
                 });
-            });
+            })->where('user', $user->id);
     }
 
     const FREE_DEMAND           = 1;
@@ -166,5 +172,10 @@ class Demand extends Model
                 $bid->save();
             }
         }
+        Permission::create([
+            'requester_id'  => $this->user_id,
+            'patient_id'    => $this->patient_id,
+            'status'        => Permission::ACCEPTED,
+        ]);
     }
 }

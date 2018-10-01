@@ -166,4 +166,12 @@
 			</li>
 		</ul>
 	</li>
+	@if(Auth::user()->isDoctor() || Auth::user()->isNurse())
+		<li>
+			<a href="{{route('panel.bids.index')}}" aria-expanded="false">
+				<i class="fa fa-heartbeat" aria-hidden="false"></i>
+				<span>ماموریت‌ها</span>
+			</a>
+		</li>
+	@endif
 </ul>

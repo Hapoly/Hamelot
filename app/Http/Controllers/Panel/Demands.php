@@ -24,9 +24,9 @@ class Demands extends Controller
         $sort = $request->input('sort', '###');
 
         if($request->has('unit_id') && $request->unit_id != 0)
-        $demands = $demands->where('unit_id', $request->unit_id);
+            $demands = $demands->where('unit_id', $request->unit_id);
         if($request->has('status') && $request->status != 0)
-        $demands = $demands->where('status', $request->status);
+            $demands = $demands->where('status', $request->status);
         if($request->has('province_id') && $request->province_id != 0){
             if($request->has('city_id') && $request->city_id != 0){
                 $city_id = $request->city_id;

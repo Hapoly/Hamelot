@@ -12,7 +12,12 @@ class Bid extends Model
 {
     protected $primary = 'id';
     protected $table = 'bids';
-    protected $fillable = ['demand_id', 'unit_id', 'user_id', 'description', 'status', 'price', 'deposit', 'date'];
+    protected $fillable = [
+        'demand_id', 
+        'unit_id', 'user_id', 
+        'description', 
+        'status', 'unit_accepted', 'user_accepted', 'patient_accepted',
+        'price', 'deposit', 'date' ];
 
     public function getDescriptionStrAttribute(){
         if($this->description == 'NuLL')
@@ -72,17 +77,36 @@ class Bid extends Model
 
     // permission_to_operate_bid
     public function getPermissionToOperateBidAttribute(){
-        switch($this->status){
-            case Bid::PENDING:
-                return Auth::user()->isAdmin() || $this->demand->patient_id == Auth::user()->id;
-            case Bid::PATIENT_ACCEPTED:
-                return Auth::user()->isAdmin() || $this->unit->managers()->where('users.id', Auth::user()->id);
-            case Bid::UNIT_ACCEPTED:
-                return Auth::user()->isAdmin() || $this->unit->managers()->where('users.id', Auth::user()->id) || $this->user_id == Auth::user()->id;
-            case Bid::UNIT_USER_ACCEPTED:
-                return Auth::user()->id == $this->demand->patient_id;
-            default:
-                return false;
-        }
+        return $this->status == Bid::PENDING;
+    }
+
+    // fetch
+    public static function fetch(){
+        if(Auth::user()->isDoctor() || Auth::user()->isPatient())
+            return Bid::where('user_id', Auth::user()->id);
+        else
+            return null;
+    }
+
+    const P_PENDING     = 0;
+    const P_ACCEPTED    = 1;
+    const P_REFUSED     = 2;
+
+    // user_accepted_str
+    public function getUserAcceptedStrAttribute(){
+        return __('bids.acception_str.' . $this->user_accepted);
+    }
+
+    // can_modify
+    public function getCanModifyAttribute(){
+        if($this->status == Bid::PENDING){
+            return Auth::user()->isAdmin() || Auth::user()->isManager();
+        }else
+            return false;
+    }
+
+    // experiments
+    public function experiments(){
+        return $this->hasMany('App\Models\Experiment', 'bid_id');
     }
 }

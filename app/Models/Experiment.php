@@ -8,12 +8,13 @@ use App\Drivers\Time;
 use Storage;
 use Auth;
 use App\User;
+use App\Models\Bid;
 
 class Experiment extends Model
 {
     protected $primary = 'id';
     protected $table = 'experiments';
-    protected $fillable = ['user_id', 'report_template_id', 'date', 'status', 'unit_id'];
+    protected $fillable = ['user_id', 'report_template_id', 'date', 'status', 'unit_id', 'bid_id'];
 
     const STATUS_ACTIVE     = 1;
     const STATIC_INCACTIVE  = 2;
@@ -121,5 +122,20 @@ class Experiment extends Model
             return $this->unit->members()->where('users.id', $user->id)->first() != null;
         else
             return $this->user_id == $user->id;
+    }
+
+    public function bid(){
+        return $this->belongsTo('App\Models\Bid');
+    }
+    // can_modify
+    public function getCanModifyAttribute(){
+        if(Auth::user()->isAdmin())
+            return true;
+        else if(Auth::user()->isDoctor() || Auth::user()->isNurse()){
+            if($this->bid_id != 0){
+                return ($this->bid->user_id == Auth::user()->id && $this->bid->status == Bid::ACCEPTED);
+            }else
+                return false;
+        }
     }
 }

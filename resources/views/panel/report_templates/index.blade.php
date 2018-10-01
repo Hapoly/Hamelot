@@ -24,9 +24,7 @@
           <th ><a href="{{route('panel.report_templates.index',['search' => $search,'sort' => 'title'    ,'page' => $report_templates->currentPage()])}}">{{__('reports.title')}}</a></th>
           <th ><a href="{{route('panel.report_templates.index',['search' => $search,'sort' => 'field_count'    ,'page' => $report_templates->currentPage()])}}">{{__('reports.field_count')}}</a></th>
           <th ><a href="{{route('panel.report_templates.index',['search' => $search,'sort' => 'status'    ,'page' => $report_templates->currentPage()])}}">{{__('reports.status')}}</a></th>
-          @if(Auth::user()->isAdmin())
-            <th >{{__('reports.operation')}}</th>
-          @endif
+          <th >{{__('reports.operation')}}</th>
         </tr>
       </thead>
       <tbody>
@@ -45,6 +43,16 @@
               </form>
               <a href="{{route('panel.report_templates.edit', ['report_template' => $report_template])}}" class="btn btn-info" role="button">{{__('reports.edit')}}</a>
             </td>
+          @else
+            @if($experiment_for_bid)
+              <td>
+                <a class="btn btn-default" href="{{route('panel.experiments.create', ['report_template' => $report_template, 'bid' => $bid])}}">{{__('experiments.create')}}</a>
+              </td>
+            @else
+              <td>
+                <a class="btn btn-default" href="{{route('panel.report_templates.show', ['report_template' => $report_template])}}">{{__('experiemnts.show')}}</a>
+              </td>
+            @endif
           @endif
           </tr>
         @endforeach
