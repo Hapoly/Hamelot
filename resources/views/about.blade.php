@@ -19,7 +19,8 @@
             <img src="/imgs/reza.jpg" style="float:right" class="team-img">
         </div>
     </div>
-    
+    <hr>
+   
     <div class="row">
         <div class="col-md-5">
             <img src="/imgs/sadaf.jpg" class="team-img">
