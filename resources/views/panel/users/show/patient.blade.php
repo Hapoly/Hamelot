@@ -64,46 +64,48 @@
       </div>
     </div>
   </div>
-  <div class="panel panel-default">
-    <h2>{{__('permissions.index_title')}}</h2>
-    @tagline{{__('permissions.tag_line_patients')}}@endtagline
-    @if(sizeof($user->visitors))
-      <table class="table">
-        <thead>
-          <tr>
-            <th>{{__('permissions.row')}}</th>
-            <th>{{__('permissions.requester_id')}}</th>
-            <th>{{__('users.group_code')}}</th>
-            <th>{{__('permissions.status')}}</th>
-            <th>{{__('permissions.operation')}}</th>
-          </tr>
-        </thead>
-        <tbody>
-          @foreach($user->visitors as $visitor)
+  @if(Auth::user()->isAdmin() || Auth::user()->id == $user->id)
+    <div class="panel panel-default">
+      <h2>{{__('permissions.index_title')}}</h2>
+      @tagline{{__('permissions.tag_line_patients')}}@endtagline
+      @if(sizeof($user->visitors))
+        <table class="table">
+          <thead>
             <tr>
-              <td>{{$visitor->id}}</td>
-              <td><a href="{{route('panel.users.show', ['user' => $visitor])}}">{{$visitor->full_name}}</a></td>
-              <td>{{$visitor->group_str}}</td>
-              <td>{{$visitor->status_str}}</td>
-              @if(Auth::user()->isAdmin())
-                <td>
-                  @operation_th(['base' => 'panel.users', 'label' => 'user', 'item' => $visitor, 'remove_label' => __('users.remove'), 'edit_label' => __('users.edit_str'), 'show_label' => __('users.show')])
-                </td>
-              @else
-                <td>-</td>
-              @endif
+              <th>{{__('permissions.row')}}</th>
+              <th>{{__('permissions.requester_id')}}</th>
+              <th>{{__('users.group_code')}}</th>
+              <th>{{__('permissions.status')}}</th>
+              <th>{{__('permissions.operation')}}</th>
             </tr>
-          @endforeach
-        </tbody>
-      </table>
-    @else
-      <div class="row">
-        <div class="col-md-12" style="text-align: center">
-          {{__('permissions.not_found')}}
+          </thead>
+          <tbody>
+            @foreach($user->visitors as $visitor)
+              <tr>
+                <td>{{$visitor->id}}</td>
+                <td><a href="{{route('panel.users.show', ['user' => $visitor])}}">{{$visitor->full_name}}</a></td>
+                <td>{{$visitor->group_str}}</td>
+                <td>{{$visitor->status_str}}</td>
+                @if(Auth::user()->isAdmin())
+                  <td>
+                    @operation_th(['base' => 'panel.users', 'label' => 'user', 'item' => $visitor, 'remove_label' => __('users.remove'), 'edit_label' => __('users.edit_str'), 'show_label' => __('users.show')])
+                  </td>
+                @else
+                  <td>-</td>
+                @endif
+              </tr>
+            @endforeach
+          </tbody>
+        </table>
+      @else
+        <div class="row">
+          <div class="col-md-12" style="text-align: center">
+            {{__('permissions.not_found')}}
+          </div>
         </div>
-      </div>
-    @endif
-  </div>
+      @endif
+    </div>
+  @endif
   <div class="panel panel-default">
     <h2>{{__('experiments.index_title')}}</h2>
     @tagline{{__('experiments.tag_line_patients')}}@endtagline

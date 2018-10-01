@@ -22,6 +22,9 @@ class CreateBidsTable extends Migration
             $table->string('description')->default('NuLL');
             $table->integer('price');
             $table->integer('deposit');
+            $table->smallInteger('unit_accepted')->default(0);
+            $table->smallInteger('user_accepted')->default(0);
+            $table->smallInteger('patient_accepted')->default(0);
             $table->smallInteger('status')->default(1);
             $table->smallInteger('pay_type')->default(0);
             $table->timestamps();

@@ -38,16 +38,26 @@
       </table>
     </div>
     <div class="row">
-      <div class="col-md-6" style="text-align: center">
-        <a href="{{route('panel.bids.edit', ['bid' => $bid])}}" class="btn btn-primary" role="button">{{__('bids.edit')}}</a>
-      </div>
-      <div class="col-md-6" style="text-align: center">
+      @if($bid->can_modify)
+        <div class="col-md-6" style="text-align: center">
+          <a href="{{route('panel.bids.edit', ['bid' => $bid])}}" class="btn btn-primary" role="button">{{__('bids.edit')}}</a>
+        </div>
+        <div class="col-md-6" style="text-align: center">
         <form action="{{route('panel.bids.destroy', ['bid' => $bid])}}" method="post">
           {{ method_field('DELETE') }}
           {{ csrf_field() }}
           <button type="submit" class="btn btn-danger">حذف</button>
         </form>
       </div>
+      @else
+        <div class="col-md-6" style="text-align: center">
+          <a href="{{route('panel.users.show', ['user' => $bid->demand->patient])}}" class="btn btn-default" role="button">{{__('bids.show_patient')}}</a>
+        </div>
+        <div class="col-md-6" style="text-align: center">
+          <a href="{{route('panel.bids.inline_update', ['bid' => $bid, 'action' => 'cancel'])}}" class="btn btn-danger" role="button">{{__('bids.cancel')}}</a>
+          <a href="{{route('panel.bids.inline_update', ['bid' => $bid, 'action' => 'finish'])}}" class="btn btn-info" role="button">{{__('bids.finish')}}</a>
+        </div>
+      @endif
     </div>
   </div>
 </div>

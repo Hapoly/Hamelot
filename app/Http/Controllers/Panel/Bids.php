@@ -16,6 +16,23 @@ use App\Models\Transaction;
 use App\Drivers\ZarinPal;
 
 class Bids extends Controller{
+    public function index(Request $request){
+        $bids = Bid::fetch();
+        $links = '';
+        $sort = $request->input('sort', '###');
+
+        if($request->has('sort'))
+            $bids = $bids->orderBy($request->input('sort'), 'desc');
+        $bids = $bids->paginate(10);
+        
+        return view('panel.bids.index', [
+            'bids'   => $bids,
+            'links'       => $links,
+            'sort'        => $sort,
+            'search'      => isset(parse_url(url()->full())['query'])? parse_url(url()->full())['query']: '',
+            'filters'     => [],
+        ]);
+    }
     public function create(Request $request){
         $demand = Demand::findOrFail($request->demand);
         return view('panel.bids.create', [
@@ -28,6 +45,7 @@ class Bids extends Controller{
         $target = explode('.', $inputs['target']);
         $inputs['unit_id'] = $target[0];
         $inputs['user_id'] = $target[1];
+        $inputs['unit_accepted'] = 1;
         if($request->description == null)
             unset($inputs['description']);
         $bid = Bid::create($inputs);
@@ -58,13 +76,19 @@ class Bids extends Controller{
                     ]);
                     $pay_link = ZarinPal::generateLink($authority);
                     return redirect($pay_link);
+                }else if(Auth::user()->isDoctor() || Auth::user()->isNurse()){
+                    $bid->user_accepted = Bid::P_ACCEPTED;
+                    $bid->save();
+                    return redirect()->back();
                 }
             case 'refuse':
                 if(Auth::user()->isManager()){
+                    $bid->unit_accepted = Bid::P_REFUSED;
                     $bid->status = Bid::UNIT_REFUSED;
                 }else if(Auth::user()->isPatient()){
                     $bid->status = Bid::PATIENT_REFUSED;
                 }else if(!Auth::user()->isAdmin()){
+                    $bid->user_accepted = Bid::P_REFUSED;
                     $bid->status = Bid::UNIT_USER_REFUSED;
                 }
                 $bid->save();
