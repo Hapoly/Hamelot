@@ -82,7 +82,7 @@
               <td>{{$experiment->date_str}}</td>
               @if($experiment->can_modify)
                 <td>
-                  @operation_th(['base' => 'panel.users', 'label' => 'user', 'item' => $experiment, 'remove_label' => __('users.remove'), 'edit_label' => __('users.edit_str'), 'show_label' => __('users.show')])
+                  @operation_th(['base' => 'panel.experiments', 'label' => 'user', 'item' => $experiment, 'remove_label' => __('experiments.remove'), 'edit_label' => __('experiments.edit'), 'show_label' => __('experiments.show')])
                 </td>
               @else
                 <td>-</td>
