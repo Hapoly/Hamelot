@@ -14,6 +14,7 @@
     <script src="{{ asset('js/app.js') }}" defer></script>
  
     <!-- Styles -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/login.css') }}" rel="stylesheet">
 	<link href='http://www.fontonline.ir/css/BRoya.css' rel='stylesheet' type='text/css'>
@@ -89,5 +90,17 @@
             @yield('content')
         </main>
     </div>
+    <script>
+// When the user scrolls down 20px from the top of the document, show the button
+window.onscroll = function() {scrollFunction()};
+
+function scrollFunction() {
+    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+        document.getElementById("mybtn").style.display = "none";
+    } else {
+        document.getElementById("mybtn").style.display = "block";
+    }
+}
+    </script>
 </body>
 </html>
