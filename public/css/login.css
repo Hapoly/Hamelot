@@ -104,10 +104,83 @@ body{
 }
 .about-title {
 	text-align: center;
-	padding: 20px;
+	padding: 30px;
 }
 .about-content {
 	text-align: right;
 	padding: 20px;
-	line-height: 35px;
+	line-height: 40px;
+	font-size: 16px;
+	width: 90%;
+	margin: auto;
+}
+.team-title{
+	text-align: center;
+	padding: 30px;
+}
+.team-img {
+	width: 200px;
+	border-radius: 100%;
+}
+hr{
+	width: 75%;
+}
+.member-name{
+	text-align: center;
+	color: #858587;
+}
+.team-member{
+	padding: 30px;
+}
+.scroll-down {
+	opacity: 1;
+	-webkit-transition: all .5s ease-in 3s;
+	transition: all .5s ease-in 3s;
+  }
+  .scroll-down {
+	position: absolute;
+	bottom: 30px;
+	left: 50%;
+	margin-left: -16px;
+	display: block;
+	width: 32px;
+	height: 32px;
+	border: 2px solid pink;
+	background-size: 14px auto;
+	border-radius: 50%;
+	z-index: 2;
+	-webkit-animation: bounce 2s infinite 2s;
+	animation: bounce 2s infinite 2s;
+	-webkit-transition: all .2s ease-in;
+	transition: all .2s ease-in;
+	transform: scale(1)
+  }
+  .scroll-down:before {
+    position: absolute;
+    top: calc(50% - 8px);
+    left: calc(50% - 6px);
+    transform: rotate(-45deg);
+    display: block;
+    width: 12px;
+    height: 12px;
+    content: "";
+    border: 2px solid white;
+    border-width: 0px 0 2px 2px;
+}  
+#mybtn {
+	position: fixed;
+	bottom: 25px;
+	margin: auto;
+	left: 0;
+	right: 0;
+}
+.about-sec {
+	height: 100vh;
+}
+.arrow-down {
+	text-align: center;
+}
+.arrow-btn {
+	border-radius: 100%;
+	background-color: #ebf6ff;
 }
