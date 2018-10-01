@@ -76,7 +76,7 @@ class Demand extends Model
                 return $query->whereHas('members', function($query) use ($user){
                     return $query->where('users.id', $user->id);
                 });
-            })->where('user', $user->id);
+            })->where('user_id', $user->id);
     }
 
     const FREE_DEMAND           = 1;
@@ -176,6 +176,17 @@ class Demand extends Model
             'requester_id'  => $this->user_id,
             'patient_id'    => $this->patient_id,
             'status'        => Permission::ACCEPTED,
+        ]);
+        Transaction::create([
+            'src_id'    => $bid->demand->patient_id,
+            'dst_id'    => $bid->unit_id,
+            'amount'    => $bid->price - $bid->deposit,
+            'type'      => Transaction::BID_REMAIN_PAY,
+            'status'    => Transaction::PENDING,
+            'pay_type'  => Transaction::OFFLINE_PAY,
+            'authority' => 'NuLL',
+            'currency'  => 'tmn',
+            'target'    => $bid->id,
         ]);
     }
 }

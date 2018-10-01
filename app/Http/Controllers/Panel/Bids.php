@@ -93,6 +93,26 @@ class Bids extends Controller{
                 }
                 $bid->save();
                 return redirect()->back();
+            case 'cancel':
+                if(Auth::user()->isManager() || Auth::user()->isDoctor() || Auth::user()->isNurse()){
+                    Transaction::create([
+                        'type'      => Transaction::BID_DEPOSIT_BACK,
+                        'src_id'    => $bid->unit_id,
+                        'dst_id'    => $bid->demand->patient_id,
+                        'amount'    => $bid->deposit,
+                        'status'    => Transaction::PAID,
+                        'currency'  => 'tmn',
+                        'pay_type'  => Transaction::ONLINE_PAY,
+                        'target'    => $bid->id,
+                        'authority' => 'NuLL',
+                    ]);
+                }
+                $bid->status = Bid::CANCELED;
+                $bid->save();
+                return redirect()->back();
+            case 'finish-offline':
+                
+
         }
     }
 }

@@ -56,7 +56,7 @@ return [
 
 
     'cancel'            => 'لغو',
-    'finish'            => 'پایان خدمات',
+    'finish_offline'    => 'باقی هزینه در محل پرداخت شد',
     'show_patient'      => 'نمایش متقاضی',
     'add_experiment'    => 'افزودن گزارش',
 ];

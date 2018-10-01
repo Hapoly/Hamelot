@@ -105,6 +105,11 @@ class Bid extends Model
             return false;
     }
 
+    // finished
+    public function getFinishedAttribute(){
+        return $this->status == Bid::DONE || $this->status == Bid::CANCELED;
+    }
+
     // experiments
     public function experiments(){
         return $this->hasMany('App\Models\Experiment', 'bid_id');
