@@ -92,7 +92,8 @@ body{
 .tour-card-content{
 	background-color: #fdfeff;
     margin: auto;
-    margin-top: -50px;
+	margin-top: -50px;
+	text-align: right;
 	padding: 15px;
 	width: 60%;
 	box-shadow:0 2px 2px 2px rgba(0,0,0,.06);
