@@ -19,6 +19,8 @@ class Bids extends Seeder
             'description'   => 'تخفیف ویژه',
             'price'         => 20000,
             'deposit'       => 3000,
+            'unit_accepted' => 1,
+            'user_accepted' => 1,
         ]);
     }
 }
