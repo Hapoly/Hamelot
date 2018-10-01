@@ -11,10 +11,10 @@
             class="form-control {{ $errors->has($name) ? ' is-invalid' : '' }}" 
             name="{{$name}}" 
             value="{{$value}}"
-            {{$required? 'required': ''}}
-            {{$max? " max=$max": ''}}
-            {{$min? " min=$min": ''}}
-            {{$placeholder? " placeholder=$placeholder": ''}}
+            {{isset($required)? 'required': ''}}
+            {{isset($max)? " max=$max": ''}}
+            {{isset($min)? " min=$min": ''}}
+            {{isset($placeholder)? " placeholder=$placeholder": ''}}
     >
     @if ($errors->has($name))
         <span class="invalid-feedback">

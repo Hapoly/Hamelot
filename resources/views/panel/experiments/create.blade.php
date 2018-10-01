@@ -7,6 +7,9 @@
 <div class="test">
     @form_create(['action' => route('panel.experiments.store'), 'title' => __('experiments.create')])
         <div class="panel panel-default create-card"  id="field-1" style="margin-top:30px;" >
+            @if(isset($bid))
+                <input type="hidden" name="bid_id" value="{{$bid->id}}" />
+            @endif
             <div class="row">
                 <?php
                     $patient_rows = [[
@@ -19,7 +22,7 @@
                             'label' => $patient->full_name,
                         ]);
                 ?>
-                @input_select(['name' => 'user_id', 'value' => old('user_id', 'N'), 'label' => __('experiments.user_id'), 'required' => true, 'rows' => $patient_rows])
+                @input_select(['name' => 'user_id', 'value' => old('user_id', isset($bid)? $bid->demand->patient_id: 'N'), 'label' => __('experiments.user_id'), 'required' => true, 'rows' => $patient_rows])
                 <?php
                     $unit_rows = [[
                         'value' => "N",
@@ -31,7 +34,7 @@
                             'label' => $unit->complete_title,
                         ]);
                 ?>
-                @input_select(['name' => 'unit_id', 'value' => old('unit_id', 'N'), 'label' => __('experiments.unit_id'), 'required' => true, 'rows' => $unit_rows])
+                @input_select(['name' => 'unit_id', 'value' => old('unit_id', isset($bid)? $bid->demand->unit_id: 'N'), 'label' => __('experiments.unit_id'), 'required' => true, 'rows' => $unit_rows])
                 @input_date(['name' => '', 'year' => old('year', Time::year()), 'month' => old('month', Time::month()), 'day' => old('day', Time::day())])
                 <input hidden name="report_template_id" value="{{$report_template->id}}" />
             </div>

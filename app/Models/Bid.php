@@ -104,4 +104,9 @@ class Bid extends Model
         }else
             return false;
     }
+
+    // experiments
+    public function experiments(){
+        return $this->hasMany('App\Models\Experiment', 'bid_id');
+    }
 }
