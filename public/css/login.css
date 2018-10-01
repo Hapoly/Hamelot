@@ -104,10 +104,14 @@ body{
 }
 .about-title {
 	text-align: center;
-	padding: 20px;
+	padding: 30px;
 }
 .about-content {
 	text-align: right;
 	padding: 20px;
 	line-height: 35px;
+}
+.team-img {
+	width: 250px;
+	border-radius: 100%;
 }
