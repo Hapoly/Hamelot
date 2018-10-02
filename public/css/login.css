@@ -133,6 +133,11 @@ hr{
 	text-align: center;
 	color: #858587;
 }
+.member-job {
+	text-align: center;
+	color: #858587;
+	padding: 10px;
+}
 .team-member{
 	padding: 30px;
 }
@@ -177,9 +182,6 @@ hr{
 	margin: auto;
 	left: 0;
 	right: 0;
-}
-.about-sec {
-	height: 100vh;
 }
 .arrow-down {
 	text-align: center;

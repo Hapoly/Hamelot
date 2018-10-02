@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
 <div class="container">
-    <section class="about-sec">
+    <div class="about-sec">
         <h1 class="about-title">کالسیفر چیست و چه هدفی را دنبال میکند؟</h1>
         <div class="about-content">
            <p>
@@ -28,9 +28,9 @@
                 
             </a>
         </div>
-    </section>
+    </div>
     
-    <section id="ex">
+    <div id="ex">
             <h1 class="team-title">
                 اعضای تیم
             </h1>
@@ -40,6 +40,9 @@
                         <h3 class="member-name">
                             علیرضا دربندی
                         </h3>
+                        <p class="member-job">
+                            Back-End Developer
+                        </p>
                     </div>
                     <div class="col-md-5">
                         <img src="/imgs/reza.jpg" style="float:right" class="team-img">
@@ -58,9 +61,12 @@
                         <h3 class="member-name">
                             صدف نجفی خواه
                         </h3>
+                        <p class="member-job">
+                            Front-End Developer
+                        </p>
                     </div>
                 </div>
             </div>
-    </section>
+    </div>
 </div>
 @endsection
