@@ -3,6 +3,8 @@
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use App\Models\UnitUser;
+use App\User;
+use App\Models\Unit;
 
 class UnitUsers extends Seeder
 {
@@ -13,35 +15,24 @@ class UnitUsers extends Seeder
      */
     public function run()
     {
-        UnitUser::create([
-            'unit_id'       => 1,
-            'user_id'       => 2,
-            'status'        => 2,
-            'permission'    => UnitUser::MANAGER,
-        ]);
-        UnitUser::create([
-            'unit_id'       => 2,
-            'user_id'       => 3,
-            'status'        => 2,
-            'permission'    => UnitUser::MANAGER,
-        ]);
-        UnitUser::create([
-            'unit_id'       => 2,
-            'user_id'       => 3,
-            'status'        => 2,
-            'permission'    => UnitUser::MEMBER,
-        ]);
-        UnitUser::create([
-            'unit_id'       => 1,
-            'user_id'       => 4,
-            'status'        => 2,
-            'permission'    => UnitUser::MEMBER,
-        ]);
-        UnitUser::create([
-            'unit_id'       => 5,
-            'user_id'       => 5,
-            'status'        => 2,
-            'permission'    => UnitUser::MEMBER,
-        ]);
+        $members = User::where('group_code', User::G_DOCTOR)->orWhere('group_code', User::G_NURSE)->get();
+        $managers = User::where('group_code', User::G_MANAGER)->get();
+        $units = Unit::all();
+        for($i=0; $i<5; $i++){
+            UnitUser::create([
+                'unit_id'       => $units[intval(rand() % sizeof($units))]->id,
+                'user_id'       => $members[intval(rand() % sizeof($members))]->id,
+                'status'        => UnitUser::ACCEPTED,
+                'permission'    => UnitUser::MEMBER,
+            ]);
+        }
+        for($i=0; $i<3; $i++){
+            UnitUser::create([
+                'unit_id'       => $units[intval(rand() % sizeof($units))]->id,
+                'user_id'       => $managers[intval(rand() % sizeof($managers))]->id,
+                'status'        => UnitUser::ACCEPTED,
+                'permission'    => UnitUser::MANAGER,
+            ]);
+        }
     }
 }

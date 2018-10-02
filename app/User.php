@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Notifications\Notifiable;
+
 use App\Models\Entry;
 use App\Models\Permission;
 use App\Models\Unit;
@@ -11,9 +12,15 @@ use App\Models\Experiment;
 use Auth;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Laravel\Passport\HasApiTokens;
-
+use Webpatser\Uuid\Uuid;
 class User extends Authenticatable
 {
+    /**
+     * Indicates if the IDs are auto-incrementing.
+     *
+     * @var bool
+     */
+    public $incrementing = false;
     use Notifiable, HasApiTokens;
     const S_ACTIVE      = 1;
     const S_INACTIVE    = 2;
@@ -337,5 +344,10 @@ class User extends Authenticatable
 
     public function addresses(){
         return $this->hasMany('App\Models\Address', 'user_id');
+    }
+
+    public function save(array $options = []){
+        $this->id = Uuid::generate()->string;
+        parent::save($options);
     }
 }

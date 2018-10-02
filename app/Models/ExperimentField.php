@@ -2,10 +2,17 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use App\UModel;
 
-class ExperimentField extends Model
+
+class ExperimentField extends UModel
 {
+    /**
+     * Indicates if the IDs are auto-incrementing.
+     *
+     * @var bool
+     */
+    public $incrementing = false;
     protected $primary = 'id';
     protected $table = 'experiment_fields';
     protected $fillable = ['report_field_id', 'experiment_id', 'value_integer', 'value_image', 'value_string', 'value_decimal', 'value_boolean'];

@@ -2,10 +2,17 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use App\UModel;
 
-class Transaction extends Model
+
+class Transaction extends UModel
 {
+    /**
+     * Indicates if the IDs are auto-incrementing.
+     *
+     * @var bool
+     */
+    public $incrementing = false;
     protected $primary = 'id';
     protected $table = 'transactions';
     protected $fillable = ['type', 'amount', 'src_id', 'dst_id', 'target', 'pay_type', 'authority', 'currency', 'status'];
@@ -61,4 +68,6 @@ class Transaction extends Model
     public function getStatusStrAttribute(){
         return __('transactions.status_str.' . $this->staus);
     }
+
+    
 }

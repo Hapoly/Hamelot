@@ -21,6 +21,7 @@ Route::middleware(['auth', 'Permission'])->namespace('Panel')->prefix('panel')->
         'experiments'       => 'Experiments',
         'addresses'         => 'Addresses',
         'bids'              => 'Bids',
+        'transactions'      => 'Transactions',
     ]);
 
     Route::prefix('prints')->name('prints.')->namespace('Prints')->group(function(){

@@ -2,16 +2,23 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use App\UModel;
 
 use App\Drivers\Time;
 
 use App\Models\Demand;
 
+
 use Auth;
 
-class Bid extends Model
+class Bid extends UModel
 {
+    /**
+     * Indicates if the IDs are auto-incrementing.
+     *
+     * @var bool
+     */
+    public $incrementing = false;
     protected $primary = 'id';
     protected $table = 'bids';
     protected $fillable = [

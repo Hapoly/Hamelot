@@ -14,7 +14,8 @@ class CreateConstsTable extends Migration
     public function up()
     {
         Schema::create('consts', function (Blueprint $table) {
-            $table->increments('id');
+            $table->uuid('id');
+            $table->primary('id');
             $table->smallInteger('type')->default(0);
             $table->string('value', 64);
             $table->timestamps();

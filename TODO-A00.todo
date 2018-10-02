@@ -1,0 +1,16 @@
+
+Todo - A00:
+  ☐ solve the uuid problem @started(18-10-02 14:11)
+    all models have to be in uuid with no problem
+  ☐ implement the fetch function for transactions
+  ☐ complete the transaction cruds
+    ☐ create forms:
+      ☐ free transaction
+      ☐ deposit pay transactions
+      ☐ remain price pat transactions
+      ☐ withdraw pay transactions
+    ☐ edit
+    ☐ delete
+    ☐ show
+    ☐ list transactions
+    ☐ print transactions in list

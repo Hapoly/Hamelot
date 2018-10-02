@@ -2,11 +2,18 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use App\UModel;
+
 use Auth;
 
-class UnitUser extends Model
+class UnitUser extends UModel
 {
+    /**
+     * Indicates if the IDs are auto-incrementing.
+     *
+     * @var bool
+     */
+    public $incrementing = false;
     protected $primary = 'id';
     protected $table = 'unit_user';
     protected $fillable = ['user_id', 'unit_id', 'status', 'permission'];

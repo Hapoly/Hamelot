@@ -14,10 +14,11 @@ class CreateDemandAttachmentsTable extends Migration
     public function up()
     {
         Schema::create('demand_attachments', function (Blueprint $table) {
-            $table->increments('id');
+            $table->uuid('id');
+            $table->primary('id');
             $table->string('image');
             $table->string('caption')->default('NuLL');
-            $table->integer('demand_id')->index();
+            $table->uuid('demand_id')->index();
             $table->timestamps();
         });
     }

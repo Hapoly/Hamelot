@@ -2,7 +2,8 @@
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
-
+use App\Models\ReportTemplate;
+use App\Models\ReportField;
 class ReportTemplates extends Seeder
 {
     /**
@@ -12,60 +13,60 @@ class ReportTemplates extends Seeder
      */
     public function run()
     {
-        DB::table('report_templates')->insert([
+        $rp0 = ReportTemplate::create([
             'title'         => 'چکاپ RID',
             'description'   => 'چکاپ اولیه تمامی مولفه‌های RID',
             'status'        => 1,
         ]);
 
-        DB::table('report_fields')->insert([
+        ReportField::create([
             'title'                 => 'پلاکت',
             'description'           => 'میزان پلاکت خون',
             'label'                 => 'placet',
             'type'                  => 1,
-            'report_template_id'    => 1,
+            'report_template_id'    => $rp0->id,
             'quantity'              => 'gr',
         ]);
-        DB::table('report_fields')->insert([
+        ReportField::create([
             'title'                 => 'کلسترول',
             'description'           => 'میزان کلسترول خون',
             'label'                 => 'colestrol',
             'type'                  => 1,
-            'report_template_id'    => 1,
+            'report_template_id'    => $rp0->id,
             'quantity'              => 'ppm',
         ]);
 
         // ----------------------------
 
-        DB::table('report_templates')->insert([
+        $rp1 = ReportTemplate::create([
             'title'         => 'آزمایش کامل خون',
             'description'   => 'چکاپ کامل خون',
             'status'        => 1,
         ]);
 
-        DB::table('report_fields')->insert([
+        ReportField::create([
             'title'                 => 'پلاکت',
             'description'           => 'میزان پلاکت خون',
             'label'                 => 'placet',
             'type'                  => 1,
-            'report_template_id'    => 2,
+            'report_template_id'    => $rp1->id,
             'quantity'              => 'gr',
         ]);
-        DB::table('report_fields')->insert([
+        ReportField::create([
             'title'                 => 'کلسترول',
             'description'           => 'میزان کلسترول خون',
             'label'                 => 'colestrol',
             'type'                  => 1,
-            'report_template_id'    => 2,
+            'report_template_id'    => $rp1->id,
             'quantity'              => 'ppm',
         ]);
 
-        DB::table('report_fields')->insert([
+        ReportField::create([
             'title'                 => 'غلظت',
             'description'           => 'میزان غلظت خون',
             'label'                 => 'denst',
             'type'                  => 1,
-            'report_template_id'    => 2,
+            'report_template_id'    => $rp1->id,
             'quantity'              => '%',
         ]);
     }

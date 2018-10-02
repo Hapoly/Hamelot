@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use App\UModel;
 
 use App\User;
 use Auth;
@@ -12,7 +12,13 @@ use App\Models\Experiment;
 use App\Models\UnitUser;
 use App\Models\Entry;
 
-class Unit extends Model{
+class Unit extends UModel{
+    /**
+     * Indicates if the IDs are auto-incrementing.
+     *
+     * @var bool
+     */
+    public $incrementing = false;
     protected $primary = 'id';
     protected $table = 'units';
     protected $fillable = ['title', 'address', 'phone', 'mobile', 'image', 'lon', 'lat', 'city_id', 'group_code', 'type', 'public', 'status', 'parent_id'];

@@ -14,11 +14,12 @@ class CreateTransactionsTable extends Migration
     public function up()
     {
         Schema::create('transactions', function (Blueprint $table) {
-            $table->increments('id');
+            $table->uuid('id');
+            $table->primary('id');
             $table->smallInteger('type')->index();
-            $table->integer('src_id')->index();
-            $table->integer('dst_id')->index();
-            $table->integer('target')->index();
+            $table->uuid('src_id')->index();
+            $table->uuid('dst_id')->index();
+            $table->uuid('target')->index();
             $table->integer('amount');
             $table->string('authority');
             $table->string('currency', 3);

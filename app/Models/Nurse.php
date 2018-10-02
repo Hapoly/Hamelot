@@ -2,15 +2,22 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use App\UModel;
+
 use App\Models\ConstValue;
 use Illuminate\Support\Facades\Storage;
 
-class Nurse extends Model
+class Nurse extends UModel
 {
+    /**
+     * Indicates if the IDs are auto-incrementing.
+     *
+     * @var bool
+     */
+    public $incrementing = false;
     protected $primary = 'id';
     protected $table = 'nurses';
-    protected $fillable = ['degree', 'field', 'user_id', 'profile', 'gender', 'msc'];
+    protected $fillable = ['degree_id', 'field_id', 'user_id', 'profile', 'gender', 'msc'];
 
     public function getMscStrAttribute(){
         if($this->msc == 'NuLL')
@@ -22,10 +29,10 @@ class Nurse extends Model
         return $this->belongsTo('App\User');
     }
     public function getDegreeStrAttribute(){
-        return ConstValue::find($this->degree)->value;
+        return ConstValue::find($this->degree_id)->value;
     }
     public function getFieldStrAttribute(){
-        return ConstValue::find($this->field)->value;
+        return ConstValue::find($this->field_id)->value;
     }
     
     const MALE      = 1;
@@ -47,8 +54,8 @@ class Nurse extends Model
             'target_id'     => $this->id,
             'title'         => $this->user->full_name,
 
-            'degree'        => $this->degree,
-            'field'         => $this->field,
+            'degree_id'     => $this->degree_id,
+            'field_id'      => $this->field_id,
             
             'group_code'    => Entry::NURSE,
             'public'        => $this->user->public,

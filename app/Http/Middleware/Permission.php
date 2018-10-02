@@ -75,6 +75,14 @@ class Permission
         'panel.addresses.show'                              => [ 1, 5 ],
         'panel.addresses.destroy'                           => [ 1, 5 ],
 
+        'panel.transactions.index'                          => [ 1, 2, 3, 4, 5 ],
+        'panel.transactions.create'                         => [ 1 ],
+        'panel.transactions.store'                          => [ 1 ],
+        'panel.transactions.edit'                           => [ 1 ],
+        'panel.transactions.update'                         => [ 1 ],
+        'panel.transactions.show'                           => [ 1, 2, 3, 4, 5 ],
+        'panel.transactions.destroy'                        => [ 1 ],
+
         'panel.bids.index'                                  => [ 1, 2, 3, 4, 5 ],
         'panel.bids.create'                                 => [ 1, 2 ],
         'panel.bids.store'                                  => [ 1, 2 ],
