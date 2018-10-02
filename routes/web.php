@@ -146,3 +146,6 @@ Route::get('/about',function(){
 Route::get('/tour',function(){
     return view('tour');
 })->name('tour');
+Route::get('/searched',function(){
+    return view('searched');
+})->name('searched');
