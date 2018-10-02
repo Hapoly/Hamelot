@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\UModel;
+use App\Drivers\Time;
 use Auth;
 
 class Transaction extends UModel
@@ -66,7 +67,7 @@ class Transaction extends UModel
     const PAID      = 2;
     const FAILED    = 3;
     public function getStatusStrAttribute(){
-        return __('transactions.status_str.' . $this->staus);
+        return __('transactions.status_str.' . $this->status);
     }
 
     public static function fetch(){
@@ -81,6 +82,32 @@ class Transaction extends UModel
             });
         }else{
             return Transaction::where('src_id', $user->id)->orWhere('dst_id', $user->id);
+        }
+    }
+
+    public function getAmountStrAttribute(){
+        return $this->amount . ' ' . __('general.' . $this->currency);
+    }
+
+    public function getDateStrAttribute(){
+        return Time::jdate('i:H - d F Y', $this->date);
+    }
+
+    public function getDescriptionAttribute(){
+        $user = Auth::user();
+        if( $this->type == Transaction::BID_DEPOSIT_PAY     ||
+            $this->type == Transaction::BID_DEPOSIT_BACK    ||
+            $this->type == Transaction::BID_REMAIN_PAY      ||
+            $this->type == Transaction::BID_RMAIN_BACK){
+            if($user->isAdmin()){
+                return $this->bid->demand->description . ' ('. $this->bid->demand->patient->full_name .')' . ' - ' . $this->bid->demand->unit->complete_title;
+            }else if($user->isPatient()){
+                return $this->bid->demand->description;
+            }else{
+                return $this->bid->demand->description . ' ('. $this->bid->demand->patient->full_name .')';
+            }
+        }else if($this->type == Transaction::WITHDRAW){
+            return ' - ';
         }
     }
 

@@ -35,7 +35,7 @@ return [
     ],
 
     // currencies
-    'toman'     => 'تومان',
+    'tmn'     => 'تومان',
     'dollar'    => 'دلار',
     'euro'      => 'یورو',
     'confirm_password'=>'تکرار رمز عبور',

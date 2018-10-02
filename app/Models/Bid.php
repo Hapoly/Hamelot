@@ -73,10 +73,10 @@ class Bid extends UModel
     }
 
     public function getPriceStrAttribute(){
-        return $this->price . ' ' . __('general.toman');
+        return $this->price . ' ' . __('general.tmn');
     }
     public function getDepositStrAttribute(){
-        return $this->deposit . ' ' . __('general.toman');
+        return $this->deposit . ' ' . __('general.tmn');
     }
 
     // date_str

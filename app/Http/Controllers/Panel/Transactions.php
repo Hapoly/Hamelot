@@ -24,21 +24,40 @@ class Transactions extends Controller{
     $links = '';
     $sort = $request->input('sort', '###');
     
+    if($request->input('min_amount', 0) > 0)
+      $transactions = $transactions->where('amount', '>', $request->min_amount);
+    if($request->input('max_amount', 0) > 0)
+      $transactions = $transactions->where('amount', '<', $request->max_amount);
+
+    if($request->input('min_date', 0) > 0)
+      $transactions = $transactions->where('date', '>', $request->min_date/1000);
+    if($request->input('max_date', 0) > 0)
+      $transactions = $transactions->where('date', '<', $request->max_date/1000);
+
+    if($request->input('type', 0) > 0)
+      $transactions = $transactions->where('type', $request->type);
+    if($request->input('pay_type', 0) > 0)
+      $transactions = $transactions->where('pay_type', $request->pay_type);
+    if($request->input('status', 0) > 0)
+      $transactions = $transactions->where('status', $request->status);
+
     if($request->has('sort'))
       $transactions = $transactions->orderBy($request->input('sort'), 'desc');
     $transactions = $transactions->paginate(10);
     
     return view('panel.transactions.index', [
-      'transactions'   => $transactions,
-      'links'       => $links,
-      'sort'        => $sort,
-      'search'      => isset(parse_url(url()->full())['query'])? parse_url(url()->full())['query']: '',
-      'filters'     => [
-        'title'       => $request->input('title', ''),
-        'plain'       => $request->input('plain', ''),
-        'province_id' => $request->input('province_id', ''),
-        'city_id'     => $request->input('city_id', ''),
-        'full_name'   => $request->input('full_name', ''),
+      'transactions'  => $transactions,
+      'links'         => $links,
+      'sort'          => $sort,
+      'search'        => isset(parse_url(url()->full())['query'])? parse_url(url()->full())['query']: '',
+      'filters'       => [
+        'min_date'        => $request->input('min_date', 0)/1000,
+        'max_date'        => $request->input('max_date', 0)/1000,
+        'min_amount'      => $request->input('min_amount', ''),
+        'max_amount'      => $request->input('max_amount', ''),
+        'pay_type'        => $request->input('pay_type', ''),
+        'status'          => $request->input('status', ''),
+        'type'            => $request->input('type', ''),
       ],
       'provinces'   => Province::all(),
       'cities'      => City::all()

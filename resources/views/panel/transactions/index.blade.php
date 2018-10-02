@@ -9,21 +9,60 @@
         <div class="panel-body">
           <form>
             <div class="row">
-              <div class="col-md-6">
+              <div class="col-md-6">            
                 <div class="input-group">
-                  <span class="input-group-addon">آدرس</span>
-                  <input type="text" class="form-control" value="{{isset($filters)? $filters['plain']: ''}}" name="plain" placeholder="خیابان شهربازی">
+                  <span class="input-group-addon">حداکثر مقدار</span>
+                  <input type="number" min="0" class="form-control" value="{{isset($filters)? $filters['max_amount']: ''}}" name="max_amount">
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="input-group">
-                  <span class="input-group-addon">عنوان</span>
-                  <input type="text" class="form-control" value="{{isset($filters)? $filters['title']: ''}}" name="title" placeholder="خانه مادر">
+                  <span class="input-group-addon">حداقل مقدار</span>
+                  <input type="number" min="0" class="form-control" value="{{isset($filters)? $filters['min_amount']: ''}}" name="min_amount">
                 </div>
               </div>
             </div>
             <div class="row">
-              @filter_city(['province_id' => isset($filters)? $filters['province_id']: 0, 'city_id' => isset($filters)? $filters['city_id']: 0])
+              <div class="col-md-6">
+                @filter_date_complete(['name' => 'max_date', 'label' => 'تا تاریخ', 'value'  => (isset($filters)? $filters['max_date']: ''), 'required' => true])
+              </div>
+              <div class="col-md-6">
+                @filter_date_complete(['name' => 'min_date', 'label' => 'از تاریخ', 'value'  => (isset($filters)? $filters['min_date']: ''), 'required' => true])
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4">
+                <div class="form-group">
+                  <select class="form-control" name="status" id="status" style="width: 100%">
+                    <option value="0">تمام وضعیت‌ها</option>
+                    <option value="1" {{isset($filters)? ($filters['status'] == 1? 'selected': ''): ''}}>{{__('transactions.status_str.1')}}</option>
+                    <option value="2" {{isset($filters)? ($filters['status'] == 2? 'selected': ''): ''}}>{{__('transactions.status_str.2')}}</option>
+                    <option value="3" {{isset($filters)? ($filters['status'] == 3? 'selected': ''): ''}}>{{__('transactions.status_str.3')}}</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <select class="form-control" name="type" id="type" style="width: 100%">
+                    <option value="0">تمام تراکنش‌ها</option>
+                    <option value="1" {{isset($filters)? ($filters['type'] == 1? 'selected': ''): ''}}>{{__('transactions.type_str.1')}}</option>
+                    <option value="2" {{isset($filters)? ($filters['type'] == 2? 'selected': ''): ''}}>{{__('transactions.type_str.2')}}</option>
+                    <option value="3" {{isset($filters)? ($filters['type'] == 3? 'selected': ''): ''}}>{{__('transactions.type_str.3')}}</option>
+                    <option value="4" {{isset($filters)? ($filters['type'] == 4? 'selected': ''): ''}}>{{__('transactions.type_str.4')}}</option>
+                    <option value="5" {{isset($filters)? ($filters['type'] == 5? 'selected': ''): ''}}>{{__('transactions.type_str.5')}}</option>
+                    <option value="6" {{isset($filters)? ($filters['type'] == 6? 'selected': ''): ''}}>{{__('transactions.type_str.6')}}</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <select class="form-control" name="pay_type" id="pay_type" style="width: 100%">
+                    <option value="0">تمام تراکنش‌ها</option>
+                    <option value="1" {{isset($filters)? ($filters['pay_type'] == 1? 'selected': ''): ''}}>{{__('transactions.pay_type_str.1')}}</option>
+                    <option value="2" {{isset($filters)? ($filters['pay_type'] == 2? 'selected': ''): ''}}>{{__('transactions.pay_type_str.2')}}</option>
+                  </select>
+                </div>
+              </div>
             </div>
             <div class="row" style="margin-bottom:2px;margin-top:2px;">
               <div class="col-md-12">
@@ -45,24 +84,22 @@
     'search'  => $search,
     'cols' => [
       'id'          => __('transactions.row'),
-      'title'       => __('transactions.title'),
-      'user_id'     => __('transactions.user_id'),
-      'city_id'     => __('transactions.city_id'),
-      'NuLL'        => __('transactions.operation'),
+      'amount'      => __('transactions.amount'),
+      'date'        => __('transactions.date'),
+      'pay_type'    => __('transactions.pay_type'),
+      'type'        => __('transactions.type'),
+      'status'      => __('transactions.status'),
+      'NuLL1'       => __('transactions.description'),
     ]])
-    @foreach($transactions as $address)
-      <tr class="address-td {{$address->joined? 'tr-highlight': ''}}">
-        <td>{{$address->id}}</td>
-        <td><a href="{{route('panel.transactions.show', ['address' => $address])}}">{{$address->title}}</a></td>
-        <td>{{$address->user->full_name}}</td>
-        <td>{{$address->city->title}} ({{$address->city->province->title}})</td>
-        @if($address->has_permission_to_write)
-          <td>
-            @operation_th(['base' => 'panel.transactions', 'label' => 'address', 'item' => $address, 'remove_label' => __('transactions.remove'), 'edit_label' => __('transactions.edit'), 'show_label' => __('transactions.show')])
-          </td>
-        @else
-          <td><a class="btn btn-default" href="{{route('panel.transactions.show', ['$address' => $address])}}">{{__('transactions.show')}}</a></td>
-        @endif
+    @foreach($transactions as $index => $transaction)
+      <tr class="transactions-td">
+        <td>{{$index+1}}</td>
+        <td>{{$transaction->amount_str}}</td>
+        <td>{{$transaction->date_str}}</td>
+        <td>{{$transaction->pay_type_str}}</td>
+        <td>{{$transaction->type_str}}</td>
+        <td>{{$transaction->status_str}}</td>
+        <td>{{$transaction->description}}</td>
       </tr>
     @endforeach
   @endtable

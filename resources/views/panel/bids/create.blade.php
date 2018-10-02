@@ -9,8 +9,8 @@
     <input type="hidden" name="demand_id" value="{{$demand->id}}" />
     @input_text(['name' => 'description', 'value' => old('description', ''), 'label' => __('bids.description'), 'required' => false])
     @input_date_complete(['name' => 'date', 'label' => __('bids.date'), 'value'  => old('date', time()), 'required' => true])
-    @input_currency(['name' => 'price', 'value' => old('price', ''), 'label' => __('bids.price'), 'required' => true, 'min' => 1, 'max' => 9999999, 'step' => 1, 'placeholder' => __('general.toman')])
-    @input_currency(['name' => 'deposit', 'value' => old('deposit', ''), 'label' => __('bids.deposit'), 'required' => true, 'min' => 1, 'max' => 9999999, 'step' => 1, 'placeholder' => __('general.toman')])
+    @input_currency(['name' => 'price', 'value' => old('price', ''), 'label' => __('bids.price'), 'required' => true, 'min' => 1, 'max' => 9999999, 'step' => 1, 'placeholder' => __('general.tmn')])
+    @input_currency(['name' => 'deposit', 'value' => old('deposit', ''), 'label' => __('bids.deposit'), 'required' => true, 'min' => 1, 'max' => 9999999, 'step' => 1, 'placeholder' => __('general.tmn')])
     @tagline
       {{__('bids.price_description')}}
     @endtagline
