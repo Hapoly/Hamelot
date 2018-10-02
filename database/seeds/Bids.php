@@ -2,6 +2,9 @@
 
 use Illuminate\Database\Seeder;
 use App\Models\Bid;
+use App\Models\Unit;
+use App\User;
+use App\Models\Demand;
 class Bids extends Seeder
 {
     /**
@@ -11,11 +14,14 @@ class Bids extends Seeder
      */
     public function run()
     {
+        $unit = Unit::first();
+        $user = User::where('username', 'doctor1')->first();
+        $demand = Demand::first();
         Bid::create([
-            'demand_id'     => 1,
+            'demand_id'     => $demand->id,
             'date'          => 1538368702,
-            'unit_id'       => 1,
-            'user_id'       => 4,
+            'unit_id'       => $unit->id,
+            'user_id'       => $user->id,
             'description'   => 'تخفیف ویژه',
             'price'         => 20000,
             'deposit'       => 3000,

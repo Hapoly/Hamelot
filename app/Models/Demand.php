@@ -137,8 +137,10 @@ class Demand extends UModel
         $user = Auth::user();
         if($this->pending() && $user->isManager())
             return true;
-        if(($this->status = Demand::DONE || $this->in_progress()) && ($this->user_id == $user->id || $this->unit->managers()->where('users.id', $user->id)->first()))
-            return true;
+        if($this->status == Demand::DONE){
+            if($this->user_id == $user->id || $this->unit->managers()->where('users.id', $user->id)->first())
+                return true;
+        }
         return false;
     }
     // has_permission_to_read_bids
@@ -199,6 +201,7 @@ class Demand extends UModel
             'authority' => 'NuLL',
             'currency'  => 'tmn',
             'target'    => $bid->id,
+            'date'      => $bid->date,
         ]);
     }
 }

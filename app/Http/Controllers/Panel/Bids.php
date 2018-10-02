@@ -73,6 +73,7 @@ class Bids extends Controller{
                         'authority' => $authority,
                         'currency'  => 'tmn',
                         'pay_type'  => TRANSACTION::ONLINE_PAY,
+                        'date'      => time(),
                     ]);
                     $pay_link = ZarinPal::generateLink($authority);
                     return redirect($pay_link);
@@ -130,5 +131,6 @@ class Bids extends Controller{
                     return redirect($pay_link);
                 }
         }
+        return 'test';
     }
 }

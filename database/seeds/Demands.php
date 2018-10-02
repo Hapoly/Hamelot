@@ -3,6 +3,7 @@
 use Illuminate\Database\Seeder;
 
 use App\Models\Demand;
+use App\User;
 
 class Demands extends Seeder
 {
@@ -13,10 +14,11 @@ class Demands extends Seeder
      */
     public function run()
     {
+        $user = User::where('username', 'patient1')->first();
         Demand::create([
             'description'   => 'کشیدن بخیه چشم',
-            'patient_id'    => 8,
-            'address_id'    => 6,
+            'patient_id'    => $user->id,
+            'address_id'    => $user->addresses->first()->id,
             'unit_id'       => 0,
             'user_id'       => 0,
             'asap'          => 1,
@@ -26,7 +28,7 @@ class Demands extends Seeder
 
         Demand::create([
             'description'   => 'تعویض پانسمان چشم',
-            'patient_id'    => 8,
+            'patient_id'    => $user->id,
             'address_id'    => 0,
             'unit_id'       => 0,
             'user_id'       => 0,

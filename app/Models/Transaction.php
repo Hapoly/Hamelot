@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use App\UModel;
-
+use Auth;
 
 class Transaction extends UModel
 {
@@ -15,7 +15,7 @@ class Transaction extends UModel
     public $incrementing = false;
     protected $primary = 'id';
     protected $table = 'transactions';
-    protected $fillable = ['type', 'amount', 'src_id', 'dst_id', 'target', 'pay_type', 'authority', 'currency', 'status'];
+    protected $fillable = ['type', 'amount', 'src_id', 'dst_id', 'target', 'pay_type', 'authority', 'currency', 'status', 'date'];
 
     const BID_DEPOSIT_PAY   = 1;
     const BID_DEPOSIT_BACK  = 2;
@@ -67,6 +67,21 @@ class Transaction extends UModel
     const FAILED    = 3;
     public function getStatusStrAttribute(){
         return __('transactions.status_str.' . $this->staus);
+    }
+
+    public static function fetch(){
+        $user = Auth::user();
+        if($user->isAdmin())
+            return new Transaction;
+        else if($user->isManager()){
+            return Transaction::whereHas('src_unit', function($query) use ($user){
+                return $query->managers()->where('users.id', $user->id);
+            })->orWhereHas('dst_unit', function($query) use ($user){
+                return $query->managers()->where('users.id', $user->id);
+            });
+        }else{
+            return Transaction::where('src_id', $user->id)->orWhere('dst_id', $user->id);
+        }
     }
 
     
