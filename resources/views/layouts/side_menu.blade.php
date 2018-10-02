@@ -169,8 +169,31 @@
 	@if(Auth::user()->isDoctor() || Auth::user()->isNurse())
 		<li>
 			<a href="{{route('panel.bids.index')}}" aria-expanded="false">
-				<i class="fa fa-heartbeat" aria-hidden="false"></i>
+				<i class="fa fa-heartbeat-o" aria-hidden="false"></i>
 				<span>ماموریت‌ها</span>
+			</a>
+		</li>
+	@endif
+	@if(Auth::user()->isAdmin())
+		<li>
+			<a href="#transactions" data-toggle="collapse" aria-expanded="false">
+				<i class="fa fa-credit-card" aria-hidden="false"></i>
+				<span>تراکنش‌های مالی</span>
+			</a>
+			<ul class="collapse list-unstyled" id="transactions">
+				<li>
+					<a href="{{route('panel.transactions.create')}}"> تراکنش جدید</a>
+				</li>
+				<li>
+					<a href="{{route('panel.transactions.index')}}">تراکنش‌ها</a>
+				</li>
+			</ul>
+		</li>
+	@else
+		<li>
+			<a href="{{route('panel.transactions.index')}}" aria-expanded="false">
+				<i class="fa fa-credit-card" aria-hidden="false"></i>
+				<span>تراکنش‌های مالی</span>
 			</a>
 		</li>
 	@endif
