@@ -41,13 +41,15 @@ body{
 }
 .search-btns {
 	background-color: #448AFF;
-	width: 180px;
+	width: 110px;
 	color: white;
-	margin-top: 15px;
 }
 .search-input {
 	margin: auto;
-}            
+	width: 50%;
+	display: inline;
+}     
+      
 .login-img{
     width: 65%;
     margin: auto;
@@ -120,10 +122,11 @@ body{
 }
 .team-title{
 	text-align: center;
-	padding: 30px;
+	padding: 35px;
+	padding-bottom: 15px;
 }
 .team-img {
-	width: 200px;
+	width: 50%;
 	border-radius: 100%;
 }
 hr{
@@ -132,14 +135,14 @@ hr{
 .member-name{
 	text-align: center;
 	color: #858587;
+	padding: 20px;
 }
 .member-job {
 	text-align: center;
 	color: #858587;
-	padding: 10px;
 }
 .team-member{
-	padding: 30px;
+	padding: 20px;
 }
 .scroll-down {
 	opacity: 1;
@@ -189,4 +192,69 @@ hr{
 .arrow-btn {
 	border-radius: 100%;
 	background-color: #ebf6ff;
+}
+.searched-card {
+	height: auto;
+	margin-top: 40px;
+	border-radius: 2px;
+	padding: 15px;
+	width: 90%;
+	box-shadow:0 2px 2px 2px rgba(0,0,0,.06);
+}
+.center {
+	text-align: center;
+	margin: auto;
+	display: block;
+}
+.checked {
+    color: orange;
+}
+.star-rating {
+	text-align: center;
+	direction: ltr;
+}
+.search-img {
+	width: 70%;
+	border-radius: 100%;
+	margin: auto;
+	display: block;
+	padding: 10px;
+}
+.see-more-btn {
+	background-color: #2a5477;
+	margin-top: 20px;
+	width: 100%;
+	color: white;
+}
+.pagination {
+	direction: ltr;
+	display: inline-block;
+	padding: 30px;
+	padding-top: 50px;
+}
+
+.pagination a {
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+    border: 1px solid #ddd;
+}
+
+.pagination a.active {
+    background-color: #2a5477;
+    color: white;
+    border: 1px solid #2a5477;
+}
+
+.pagination a:hover:not(.active) {background-color: #ddd;}
+
+.pagination a:first-child {
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+.pagination a:last-child {
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
 }
