@@ -40,6 +40,9 @@
                         <h3 class="member-name">
                             علیرضا دربندی
                         </h3>
+                        <p>
+                            توسعه دهنده وب
+                        </p>
                         <p class="member-job">
                             Back-End Developer
                         </p>
@@ -61,6 +64,9 @@
                         <h3 class="member-name">
                             صدف نجفی خواه
                         </h3>
+                        <p>
+                            توسعه دهنده وب
+                        </p>
                         <p class="member-job">
                             Front-End Developer
                         </p>
