@@ -1,6 +1,12 @@
 @extends('layouts.app')
 @section('content')
 <div class="container">
+    <div class="form-group search center">
+        <input type="text" class="form-control search-input" placeholder="بیمارستان , درمانگاه , پزشک و...">
+        <button class="btn search-btns">
+            جستجو
+        </button>
+    </div>
     <div class="row">
         <div class="col-md-4">
             <div class="searched-card">

@@ -41,13 +41,15 @@ body{
 }
 .search-btns {
 	background-color: #448AFF;
-	width: 180px;
+	width: 110px;
 	color: white;
-	margin-top: 15px;
 }
 .search-input {
 	margin: auto;
-}            
+	width: 50%;
+	display: inline;
+}     
+      
 .login-img{
     width: 65%;
     margin: auto;
@@ -120,7 +122,8 @@ body{
 }
 .team-title{
 	text-align: center;
-	padding: 30px;
+	padding: 35px;
+	padding-bottom: 15px;
 }
 .team-img {
 	width: 50%;
@@ -139,7 +142,7 @@ hr{
 	color: #858587;
 }
 .team-member{
-	padding: 30px;
+	padding: 20px;
 }
 .scroll-down {
 	opacity: 1;
@@ -218,7 +221,7 @@ hr{
 	padding: 10px;
 }
 .see-more-btn {
-	background-color: #007bff;
+	background-color: #2a5477;
 	margin-top: 20px;
 	width: 100%;
 	color: white;
@@ -239,9 +242,9 @@ hr{
 }
 
 .pagination a.active {
-    background-color: #007bff;
+    background-color: #2a5477;
     color: white;
-    border: 1px solid #007bff;
+    border: 1px solid #2a5477;
 }
 
 .pagination a:hover:not(.active) {background-color: #ddd;}
