@@ -40,7 +40,7 @@
                         <h3 class="member-name">
                             علیرضا دربندی
                         </h3>
-                        <p>
+                        <p class="member-job">
                             توسعه دهنده وب
                         </p>
                         <p class="member-job">
@@ -64,7 +64,7 @@
                         <h3 class="member-name">
                             صدف نجفی خواه
                         </h3>
-                        <p>
+                        <p class="member-job">
                             توسعه دهنده وب
                         </p>
                         <p class="member-job">

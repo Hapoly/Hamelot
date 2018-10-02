@@ -123,7 +123,7 @@ body{
 	padding: 30px;
 }
 .team-img {
-	width: 200px;
+	width: 50%;
 	border-radius: 100%;
 }
 hr{
@@ -132,12 +132,11 @@ hr{
 .member-name{
 	text-align: center;
 	color: #858587;
-	padding-top: 20px;
+	padding: 20px;
 }
 .member-job {
 	text-align: center;
 	color: #858587;
-	padding: 10px;
 }
 .team-member{
 	padding: 30px;
@@ -190,4 +189,37 @@ hr{
 .arrow-btn {
 	border-radius: 100%;
 	background-color: #ebf6ff;
+}
+.searched-card {
+	height: auto;
+	margin-top: 40px;
+	border-radius: 2px;
+	padding: 15px;
+	width: 90%;
+	box-shadow:0 2px 2px 2px rgba(0,0,0,.06);
+}
+.center {
+	text-align: center;
+	margin: auto;
+	display: block;
+}
+.checked {
+    color: orange;
+}
+.star-rating {
+	text-align: center;
+	direction: ltr;
+}
+.search-img {
+	width: 70%;
+	border-radius: 100%;
+	margin: auto;
+	display: block;
+	padding: 10px;
+}
+.see-more-btn {
+	background-color: #007bff;
+	margin-top: 20px;
+	width: 100%;
+	color: white;
 }
