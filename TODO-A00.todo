@@ -1,7 +1,8 @@
 
 Todo - A00:
-  ☐ solve the uuid problem @started(18-10-02 14:11)
+  ✔ solve the uuid problem @started(18-10-02 14:11) @done(18-10-02 15:58) @lasted(1h47m54s)
     all models have to be in uuid with no problem
+  ☐ set numbers in all tables in views
   ☐ implement the fetch function for transactions
   ☐ complete the transaction cruds
     ☐ create forms:
