@@ -10,7 +10,10 @@
                        <input type="text" class="form-control search-input" style="width:80%;" placeholder="بیمارستان , درمانگاه , پزشک و...">
                    </div>
                </form>
-               <div class="row">
+                <button type="button" class="btn search-btns">
+                    جستجو
+                </button>
+               <!-- <div class="row">
                    <div class="col-md-6" style="text-align:left">
                         <button type="button" class="btn search-btns">
                             جستجو
@@ -21,7 +24,7 @@
                             اطراف من !
                         </button>
                    </div>
-               </div>
+               </div> -->
             </div>
         </div>
     </div>

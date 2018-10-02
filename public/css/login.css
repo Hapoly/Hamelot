@@ -34,7 +34,7 @@ body{
 }
 .search-things {
 	text-align: center;
-	padding-top: 160px;
+	padding-top: 140px;
 }
 .search-things img {
 	width: 170px;
@@ -43,6 +43,7 @@ body{
 	background-color: #448AFF;
 	width: 180px;
 	color: white;
+	margin-top: 15px;
 }
 .search-input {
 	margin: auto;
@@ -106,10 +107,12 @@ body{
 .about-title {
 	text-align: center;
 	padding: 30px;
+	margin-bottom: 0;
 }
 .about-content {
 	text-align: right;
 	padding: 20px;
+	padding-top: 0;
 	line-height: 40px;
 	font-size: 16px;
 	width: 90%;
@@ -170,7 +173,7 @@ hr{
 }  
 #mybtn {
 	position: fixed;
-	bottom: 25px;
+	bottom: 20px;
 	margin: auto;
 	left: 0;
 	right: 0;
