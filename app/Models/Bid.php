@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 use App\Drivers\Time;
 
+use App\Models\Demand;
+
 use Auth;
 
 class Bid extends Model
@@ -119,5 +121,9 @@ class Bid extends Model
     public function finish(){
         $this->status = Bid::DONE;
         $this->save();
+
+        $demand = $this->demand;
+        $demand->status = Demand::DONE;
+        $demand->save();
     }
 }

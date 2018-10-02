@@ -127,7 +127,12 @@ class Demand extends Model
 
     // has_permission_to_bid
     public function getHasPermissionToBidAttribute(){
-        return Auth::user()->isManager();
+        $user = Auth::user();
+        if($this->pending() && $user->isManager())
+            return true;
+        if(($this->status = Demand::DONE || $this->in_progress()) && ($this->user_id == $user->id || $this->unit->managers()->where('users.id', $user->id)->first()))
+            return true;
+        return false;
     }
     // has_permission_to_read_bids
     public function getHasPermissionToReadBidsAttribute(){
