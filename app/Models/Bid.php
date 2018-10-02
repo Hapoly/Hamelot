@@ -114,4 +114,10 @@ class Bid extends Model
     public function experiments(){
         return $this->hasMany('App\Models\Experiment', 'bid_id');
     }
+
+    // finish
+    public function finish(){
+        $this->status = Bid::DONE;
+        $this->save();
+    }
 }

@@ -62,7 +62,7 @@ class Bids extends Controller{
                     $authority = ZarinPal::generate(
                                                     $bid->deposit, 
                                                     $bid->unit->complete_title . ' - ' . $bid->user->full_name, 
-                                                    route('panel.payments.bids.verify')
+                                                    route('panel.payments.bids.deposit.verify')
                                                 );
                     Transaction::create([
                         'target'    => $bid->id,
@@ -110,9 +110,25 @@ class Bids extends Controller{
                 $bid->status = Bid::CANCELED;
                 $bid->save();
                 return redirect()->back();
-            case 'finish-offline':
-                
-
+            case 'finish':
+                if(Auth::user()->isManager() || Auth::user()->isDoctor() || Auth::user()->isNurse()){
+                    $transaction = Transaction::where('target', $bid->id)->where('type', Transaction::BID_REMAIN_PAY)->firstOrFail();
+                    $transaction->status = Transaction::PAID;
+                    $transaction->save();
+                    return redirect()->back();
+                }else if(Auth::user()->isPatient()){
+                    $transaction = Transaction::where('target', $bid->id)->where('type', Transaction::BID_REMAIN_PAY)->firstOrFail();
+                    $authority = ZarinPal::generate(
+                        $bid->price - $bid->deposit, 
+                        $bid->unit->complete_title . ' - ' . $bid->user->full_name, 
+                        route('panel.payments.bids.remain.verify')
+                    );
+                    $transaction->authority = $authority;
+                    $transaction->pay_type = Transaction::ONLINE_PAY;
+                    $transaction->save();
+                    $pay_link = ZarinPal::generateLink($authority);
+                    return redirect($pay_link);
+                }
         }
     }
 }

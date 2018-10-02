@@ -47,32 +47,36 @@
           <a href="{{route('panel.bids.edit', ['bid' => $bid])}}" class="btn btn-primary" role="button">{{__('bids.edit')}}</a>
         </div>
         <div class="col-md-6" style="text-align: center">
-        <form action="{{route('panel.bids.destroy', ['bid' => $bid])}}" method="post">
-          {{ method_field('DELETE') }}
-          {{ csrf_field() }}
-          <button type="submit" class="btn btn-danger">حذف</button>
-        </form>
-      </div>
+          <form action="{{route('panel.bids.destroy', ['bid' => $bid])}}" method="post">
+            {{ method_field('DELETE') }}
+            {{ csrf_field() }}
+            <button type="submit" class="btn btn-danger">حذف</button>
+          </form>
+        </div>
       @else
         @if(!$bid->finished)
           @if(Auth::user()->isPatient())
-            <div class="col-md-12" style="text-align: center">
+            <div class="col-md-6" style="text-align: center">
               <a href="{{route('panel.users.show', ['user' => $bid->demand->user])}}" class="btn btn-default" role="button">{{__('bids.show_user')}}</a>
               <a href="{{route('panel.units.show', ['unit' => $bid->demand->unit])}}" class="btn btn-default" role="button">{{__('bids.show_unit')}}</a>
             </div>
+            @if(!$bid->permission_to_operate_bid)
             <div class="col-md-6" style="text-align: center">
-              <a href="{{route('panel.bids.inline_update', ['bid' => $bid, 'action' => 'finish-offline'])}}" class="btn btn-info" role="button">{{__('bids.finish_offline')}}</a>
-              <a href="{{route('panel.bids.inline_update', ['bid' => $bid, 'action' => 'finish-online'])}}" class="btn btn-info" role="button">{{__('bids.finish_online')}}</a>
+              <a href="{{route('panel.bids.inline_update', ['bid' => $bid, 'action' => 'cancel'])}}" class="btn btn-danger" role="button">{{__('bids.cancel')}}</a>
+              <a href="{{route('panel.bids.inline_update', ['bid' => $bid, 'action' => 'finish'])}}" class="btn btn-info" role="button">{{__('bids.finish')}}</a>
             </div>
+            @endif
           @else
             <div class="col-md-6" style="text-align: center">
               <a href="{{route('panel.users.show', ['user' => $bid->demand->patient])}}" class="btn btn-default" role="button">{{__('bids.show_patient')}}</a>
               <a href="{{route('panel.report_templates.index', ['bid'  => $bid])}}" class="btn btn-info" role="button">{{__('bids.add_experiment')}}</a>
             </div>
+            @if(!$bid->permission_to_operate_bid)
             <div class="col-md-6" style="text-align: center">
               <a href="{{route('panel.bids.inline_update', ['bid' => $bid, 'action' => 'cancel'])}}" class="btn btn-danger" role="button">{{__('bids.cancel')}}</a>
               <a href="{{route('panel.bids.inline_update', ['bid' => $bid, 'action' => 'finish-offline'])}}" class="btn btn-info" role="button">{{__('bids.finish_offline')}}</a>
             </div>
+            @endif
           @endif
         @else
           <div class="col-md-12" style="text-align: center">
@@ -92,6 +96,7 @@
             <th>{{__('experiments.row')}}</th>
             <th>{{__('experiments.title')}}</th>
             <th>{{__('experiments.date')}}</th>
+            <th></th>
             <th>{{__('experiments.operation')}}</th>
           </tr>
         </thead>

@@ -15,8 +15,7 @@ use App\Models\Transaction;
 use App\Drivers\ZarinPal;
 
 class Payments extends Controller{
-    public function bidVerify(ZarinPalCallBackRequest $request){
-        
+    public function bidDepositVerify(ZarinPalCallBackRequest $request){
         $transaction = Transaction::where([
             'type'      => Transaction::BID_DEPOSIT_PAY,
             'authority' => $request->Authority,
@@ -27,6 +26,19 @@ class Payments extends Controller{
             $transaction->save();
             $bid->demand->acceptBid($bid);
         }
-        return redirect()->route('panel.demands.show', ['demand' => $bid->demand]);
+        return redirect()->route('panel.bids.show', ['bid' => $bid]);
+    }
+    public function bidRemainVerify(ZarinPalCallBackRequest $request){
+        $transaction = Transaction::where([
+            'type'      => Transaction::BID_REMAIN_PAY,
+            'authority' => $request->Authority,
+        ])->firstOrFail();
+        $bid = $transaction->bid;
+        if(ZarinPal::verify($transaction->amount, $request->Authority)){
+            $transaction->status = Transaction::PAID;
+            $transaction->save();
+            $bid->finish();
+        }
+        return redirect()->route('panel.bids.show', ['bid' => $bid]);
     }
 }
