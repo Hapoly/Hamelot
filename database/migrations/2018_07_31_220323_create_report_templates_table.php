@@ -14,7 +14,8 @@ class CreateReportTemplatesTable extends Migration
     public function up()
     {
         Schema::create('report_templates', function (Blueprint $table) {
-            $table->increments('id');
+            $table->uuid('id');
+            $table->primary('id');
             $table->string('title', 32);
             $table->string('description', 200);
             $table->smallInteger('status')->default(1);

@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use App\Models\Unit;
+use App\Models\City;
 
 class Units extends Seeder
 {
@@ -12,13 +13,14 @@ class Units extends Seeder
      */
     public function run()
     {
+        $cities = City::all();
         Unit::create([
             'title'         => 'راضی',
             'address'       => 'چهارراه عباسنیا - روبروی صادرات',
             'phone'         => '34234234',
             'mobile'        => '252342',
             'image'         => 'NuLL',
-            'city_id'       => 2,
+            'city_id'       => $cities[intval(rand() % sizeof($cities))]->id,
             'group_code'    => Unit::HOSPITAL,
             'public'        => Unit::T_PUBLIC,
             'type'          => Unit::ACTUAL,
@@ -31,7 +33,7 @@ class Units extends Seeder
             'phone'         => '234523525',
             'mobile'        => '2345625',
             'image'         => 'NuLL',
-            'city_id'       => 4,
+            'city_id'       => $cities[intval(rand() % sizeof($cities))]->id,
             'group_code'    => Unit::HOSPITAL,
             'public'        => Unit::T_PUBLIC,
             'type'          => Unit::ACTUAL,
@@ -44,7 +46,7 @@ class Units extends Seeder
             'phone'         => '345435243',
             'mobile'        => '34634525',
             'image'         => 'NuLL',
-            'city_id'       => 4,
+            'city_id'       => $cities[intval(rand() % sizeof($cities))]->id,
             'parent_id'     => 1,
             'group_code'    => Unit::DEPARTMENT,
             'public'        => Unit::T_PUBLIC,
@@ -59,7 +61,7 @@ class Units extends Seeder
             'phone'         => '435634523',
             'mobile'        => '3463452345',
             'image'         => 'NuLL',
-            'city_id'       => 4,
+            'city_id'       => $cities[intval(rand() % sizeof($cities))]->id,
             'parent_id'     => 1,
             'group_code'    => Unit::DEPARTMENT,
             'public'        => Unit::T_PUBLIC,
@@ -73,7 +75,7 @@ class Units extends Seeder
             'phone'         => '23523523',
             'mobile'        => '235463',
             'image'         => 'NuLL',
-            'city_id'       => 4,
+            'city_id'       => $cities[intval(rand() % sizeof($cities))]->id,
             'parent_id'     => 2,
             'group_code'    => Unit::DEPARTMENT,
             'public'        => Unit::T_PUBLIC,
@@ -88,7 +90,7 @@ class Units extends Seeder
             'phone'         => '2342454',
             'mobile'        => '02934823',
             'image'         => 'NuLL',
-            'city_id'       => 4,
+            'city_id'       => $cities[intval(rand() % sizeof($cities))]->id,
             'parent_id'     => 2,
             'group_code'    => Unit::DEPARTMENT,
             'public'        => Unit::T_PUBLIC,

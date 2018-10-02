@@ -14,9 +14,10 @@ class CreateExperimentFieldsTable extends Migration
     public function up()
     {
         Schema::create('experiment_fields', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('report_field_id')->index();
-            $table->integer('experiment_id')->index();
+            $table->uuid('id');
+            $table->primary('id');
+            $table->uuid('report_field_id')->index();
+            $table->uuid('experiment_id')->index();
             // values
             $table->integer('value_integer')->default(0);
             $table->string('value_string', 500)->default('NuLL');

@@ -14,9 +14,10 @@ class CreateUnitUserTable extends Migration
     public function up()
     {
         Schema::create('unit_user', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('user_id')->index();
-            $table->integer('unit_id')->index();
+            $table->uuid('id');
+            $table->primary('id');
+            $table->uuid('user_id')->index();
+            $table->uuid('unit_id')->index();
             $table->smallInteger('permission')->default(1);
             $table->smallInteger('status')->default(1);
             $table->boolean('system_reserved')->default(false)->index();

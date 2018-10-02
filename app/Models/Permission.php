@@ -2,12 +2,19 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use App\UModel;
+
 use Auth;
 use App\Drivers\Time;
 
-class Permission extends Model
+class Permission extends UModel
 {
+    /**
+     * Indicates if the IDs are auto-incrementing.
+     *
+     * @var bool
+     */
+    public $incrementing = false;
     protected $primary = 'id';
     protected $table = 'permissions';
     protected $fillable = ['requester_id', 'patient_id', 'status'];

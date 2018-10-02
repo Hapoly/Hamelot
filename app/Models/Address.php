@@ -2,11 +2,18 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use App\UModel;
 use Auth;
 
-class Address extends Model
+
+class Address extends UModel
 {
+    /**
+     * Indicates if the IDs are auto-incrementing.
+     *
+     * @var bool
+     */
+    public $incrementing = false;
     protected $primary = 'id';
     protected $table = 'addresses';
     protected $fillable = ['title', 'plain', 'lon', 'lat', 'city_id', 'user_id'];

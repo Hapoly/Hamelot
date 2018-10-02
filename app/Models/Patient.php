@@ -2,14 +2,21 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use App\UModel;
+
 use Illuminate\Support\Facades\Storage;
 
 use App\Drivers\Time;
 use App\Models\ConstValue;
 
-class Patient extends Model
+class Patient extends UModel
 {
+    /**
+     * Indicates if the IDs are auto-incrementing.
+     *
+     * @var bool
+     */
+    public $incrementing = false;
     protected $primary = 'id';
     protected $table = 'patients';
     protected $fillable = ['gender', 'id_number', 'profile', 'user_id', 'birth_date'];

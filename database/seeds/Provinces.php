@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use App\Models\Province;
 
 class Provinces extends Seeder
 {
@@ -12,33 +13,26 @@ class Provinces extends Seeder
      */
     public function run()
     {
-        DB::table('provinces')->insert([
+        Province::create([
             'title' => 'تهران',
-            'id'    => 1,
         ]);
-        DB::table('provinces')->insert([
+        Province::create([
             'title' => 'گیلان',
-            'id'    => 2,
         ]);
-        DB::table('provinces')->insert([
+        Province::create([
             'title' => 'مازندران',
-            'id'    => 3,
         ]);
-        DB::table('provinces')->insert([
+        Province::create([
             'title' => 'قزوین',
-            'id'    => 4,
         ]);
-        DB::table('provinces')->insert([
+        Province::create([
             'title' => 'اردبیل',
-            'id'    => 5,
         ]);
-        DB::table('provinces')->insert([
+        Province::create([
             'title' => 'گلستان',
-            'id'    => 6,
         ]);
-        DB::table('provinces')->insert([
+        Province::create([
             'title' => 'زنجان',
-            'id'    => 7,
         ]);
     }
 }

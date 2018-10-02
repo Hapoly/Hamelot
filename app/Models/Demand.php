@@ -2,7 +2,8 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use App\UModel;
+
 
 use App\Models\Bid;
 use App\Models\Transaction;
@@ -11,8 +12,14 @@ use App\Drivers\Time;
 
 use Auth;
 
-class Demand extends Model
+class Demand extends UModel
 {
+    /**
+     * Indicates if the IDs are auto-incrementing.
+     *
+     * @var bool
+     */
+    public $incrementing = false;
     protected $primary = 'id';
     protected $table = 'demands';
     protected $fillable = ['description', 'patient_id', 'address_id', 'status', 'unit_id', 'user_id', 'start_time', 'end_time', 'asap'];

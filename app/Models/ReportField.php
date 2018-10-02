@@ -2,10 +2,17 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use App\UModel;
 
-class ReportField extends Model
+
+class ReportField extends UModel
 {
+    /**
+     * Indicates if the IDs are auto-incrementing.
+     *
+     * @var bool
+     */
+    public $incrementing = false;
     protected $primary = 'id';
     protected $table = 'report_fields';
     protected $fillable = ['title', 'quantity', 'description', 'type', 'label', 'report_template_id', 'status'];

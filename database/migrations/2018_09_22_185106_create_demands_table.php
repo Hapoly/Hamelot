@@ -14,12 +14,13 @@ class CreateDemandsTable extends Migration
     public function up()
     {
         Schema::create('demands', function (Blueprint $table) {
-            $table->increments('id');
+            $table->uuid('id');
+            $table->primary('id');
             $table->string('description', 400);
-            $table->integer('patient_id')->index();
-            $table->integer('address_id')->index();
-            $table->integer('unit_id')->index()->default(0);
-            $table->integer('user_id')->index()->default(0);
+            $table->uuid('patient_id')->index();
+            $table->uuid('address_id')->index();
+            $table->uuid('unit_id')->index()->default(0);
+            $table->uuid('user_id')->index()->default(0);
             $table->boolean('asap')->default(false);
             $table->integer('start_time')->default(0);
             $table->integer('end_time')->default(0);

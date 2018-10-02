@@ -14,7 +14,8 @@ class CreateUnitsTable extends Migration
     public function up()
     {
         Schema::create('units', function (Blueprint $table) {
-            $table->increments('id');
+            $table->uuid('id');
+            $table->primary('id');
             $table->string('title');
             $table->string('address');
             $table->string('phone', 32)->default('NuLL');
@@ -22,14 +23,14 @@ class CreateUnitsTable extends Migration
             $table->string('image')->default('NuLL');
             $table->decimal('lon', 12, 10)->default(0);
             $table->decimal('lat', 12, 10)->default(0);
-            $table->integer('city_id')->default(0)->index();
+            $table->uuid('city_id')->default(0)->index();
             $table->smallInteger('group_code');
 
             $table->smallInteger('status')->default(env('UNIT_STATUS_DEFAULT'));
             $table->smallInteger('type')->default(env('UNIT_TYPE_DEFAULT'));
             $table->smallInteger('public')->default(env('UNIT_PUBLIC_DEFAULT'));
 
-            $table->integer('parent_id')->index()->default(0);
+            $table->uuid('parent_id')->index()->default(0);
             $table->timestamps();
         });
     }

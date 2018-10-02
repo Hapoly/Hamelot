@@ -2,10 +2,17 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
+use App\UModel;
 
-class DemandAttachemtn extends Model
+
+class DemandAttachemtn extends UModel
 {
+    /**
+     * Indicates if the IDs are auto-incrementing.
+     *
+     * @var bool
+     */
+    public $incrementing = false;
     protected $primary = 'id';
     protected $table = 'demand_events';
     protected $fillable = ['demand_id', 'image', 'caption'];

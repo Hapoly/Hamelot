@@ -2,6 +2,11 @@
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use App\User;
+
+use App\Models\Doctor;
+use App\Models\Nurse;
+use App\Models\Patient;
 
 class Users extends Seeder
 {
@@ -12,8 +17,7 @@ class Users extends Seeder
      */
     public function run()
     {
-        DB::table('users')->insert([
-            'id'            => 1,
+        User::create([
             'username'      => 'admin',
             'password'      => bcrypt('admin'),
             'group_code'    => 1,
@@ -23,16 +27,14 @@ class Users extends Seeder
         /**
          * creating two managers
          */
-        DB::table('users')->insert([
-            'id'            => 2,
+        User::create([
             'username'      => 'manager1',
             'password'      => bcrypt('manager1'),
             'group_code'    => 2,
             'first_name'    => 'گروس',
             'last_name'     => 'عبدلملکیان',
         ]);
-        DB::table('users')->insert([
-            'id'            => 3,
+        User::create([
             'username'      => 'manager2',
             'password'      => bcrypt('manager2'),
             'group_code'    => 2,
@@ -42,34 +44,32 @@ class Users extends Seeder
         /**
          * creating two doctors
          */
-        DB::table('users')->insert([
-            'id'            => 4,
+        $d1 = User::create([
             'username'      => 'doctor1',
             'password'      => bcrypt('doctor1'),
             'group_code'    => 3,
             'first_name'    => 'سامان',
             'last_name'     => 'ذبیحی',
         ]);
-        DB::table('doctors')->insert([
-            'user_id'       => 4,
-            'degree'        => 2,
-            'field'         => 2,
+        Doctor::create([
+            'user_id'       => $d1->id,
+            'degree_id'     => 2,
+            'field_id'      => 2,
             'profile'       => 'NuLL',
             'gender'        => 1,
         ]);
 
-        DB::table('users')->insert([
-            'id'            => 5,
+        $d2 = User::create([
             'username'      => 'doctor2',
             'password'      => bcrypt('doctor2'),
             'group_code'    => 3,
             'first_name'    => 'فلاح',
             'last_name'     => 'ابوزاده',
         ]);
-        DB::table('doctors')->insert([
-            'user_id'       => 5,
-            'degree'        => 2,
-            'field'         => 2,
+        Doctor::create([
+            'user_id'       => $d1->id,
+            'degree_id'     => 2,
+            'field_id'      => 2,
             'profile'       => 'NuLL',
             'gender'        => 1,
         ]);
@@ -77,34 +77,32 @@ class Users extends Seeder
         /**
          * creating two nurses
          */
-        DB::table('users')->insert([
-            'id'            => 6,
+        $n0 = User::create([
             'username'      => 'nurse1',
             'password'      => bcrypt('nurse1'),
             'group_code'    => 4,
             'first_name'    => 'عزیز',
             'last_name'     => 'صمیری',
         ]);
-        DB::table('nurses')->insert([
-            'user_id'       => 6,
-            'degree'        => 2,
-            'field'         => 2,
+        Nurse::create([
+            'user_id'       => $n0->id,
+            'degree_id'     => 2,
+            'field_id'      => 2,
             'profile'       => 'NuLL',
             'gender'        => 1,
         ]);
 
-        DB::table('users')->insert([
-            'id'            => 7,
+        $n1 = User::create([
             'username'      => 'nurse2',
             'password'      => bcrypt('nurse2'),
             'group_code'    => 4,
             'first_name'    => 'شادی',
             'last_name'     => 'علوی',
         ]);
-        DB::table('nurses')->insert([
-            'user_id'       => 7,
-            'degree'        => 2,
-            'field'         => 2,
+        Nurse::create([
+            'user_id'       => $n1->id,
+            'degree_id'     => 2,
+            'field_id'      => 2,
             'profile'       => 'NuLL',
             'gender'        => 2,
         ]);
@@ -112,98 +110,92 @@ class Users extends Seeder
         /**
          * creating patients
          */
-        DB::table('users')->insert([
-            'id'            => 8,
+        $p0 = User::create([
             'username'      => 'patient1',
             'password'      => bcrypt('patient1'),
             'group_code'    => 5,
             'first_name'    => 'فاطمه',
             'last_name'     => 'آقاجان پور',
         ]);
-        DB::table('patients')->insert([
+        Patient::create([
             'gender'        => 2,
             'id_number'     => '324234252343',
-            'user_id'       => 8,
+            'user_id'       => $p0->id,
             'profile'       => 'NuLL',
             'birth_date'    => 1111232334
         ]);
 
-        DB::table('users')->insert([
-            'id'            => 9,
+        $p1 = User::create([
             'username'      => 'patient2',
             'password'      => bcrypt('patient2'),
             'group_code'    => 5,
             'first_name'    => 'حمید',
             'last_name'     => 'مصطفایی',
         ]);
-        DB::table('patients')->insert([
+        Patient::create([
             'gender'        => 1,
             'id_number'     => '43623523235',
-            'user_id'       => 9,
+            'user_id'       => $p1->id,
             'profile'       => 'NuLL',
             'birth_date'    => 1190232334
         ]);
 
-        DB::table('users')->insert([
-            'id'            => 10,
+        $p2 = User::create([
             'username'      => 'patient3',
             'password'      => bcrypt('patient3'),
             'group_code'    => 5,
             'first_name'    => 'رضا',
             'last_name'     => 'هزاره‌زاده',
         ]);
-        DB::table('patients')->insert([
+        Patient::create([
             'gender'        => 1,
             'id_number'     => '23452352342',
-            'user_id'       => 10,
+            'user_id'       => $p2->id,
             'profile'       => 'NuLL',
             'birth_date'    => 1142232334
         ]);
 
-        DB::table('users')->insert([
-            'id'            => 11,
+        $p3 = User::create([
             'username'      => 'patient6',
             'password'      => bcrypt('patient6'),
             'group_code'    => 5,
             'first_name'    => 'شایان',
             'last_name'     => 'خالق پرست',
         ]);
-        DB::table('patients')->insert([
+        Patient::create([
             'gender'        => 1,
             'id_number'     => '23452352342',
-            'user_id'       => 11,
+            'user_id'       => $p3->id,
             'profile'       => 'NuLL',
             'birth_date'    => 1142232334
         ]);
 
-        DB::table('users')->insert([
-            'id'            => 12,
+        $p4 = User::create([
             'username'      => 'patient5',
             'password'      => bcrypt('patient5'),
             'group_code'    => 5,
             'first_name'    => 'ساناز',
             'last_name'     => 'هادی‌پور',
         ]);
-        DB::table('patients')->insert([
+        Patient::create([
             'gender'        => 2,
             'id_number'     => '23452352342',
-            'user_id'       => 12,
+            'user_id'       => $p4->id,
             'profile'       => 'NuLL',
             'birth_date'    => 1142232334
         ]);
 
-        DB::table('users')->insert([
-            'id'            => 13,
+        $p5 = User::create([
             'username'      => 'patient4',
             'password'      => bcrypt('patient4'),
             'group_code'    => 5,
             'first_name'    => 'اشکان',
             'last_name'     => 'خطیبی',
         ]);
-        DB::table('patients')->insert([
+        Patient::create([
             'gender'        => 1,
             'id_number'     => '23452352342',
-            'user_id'       => 13,
+            'user_id'       => $p5->id,
             'profile'       => 'NuLL',
             'birth_date'    => 1142232334
         ]);

@@ -2,10 +2,17 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
+use App\UModel;
 
-class Notification extends Model
+
+class Notification extends UModel
 {
+    /**
+     * Indicates if the IDs are auto-incrementing.
+     *
+     * @var bool
+     */
+    public $incrementing = false;
     protected $primary = 'id';
     protected $table = 'notifications';
     protected $fillable = ['user_id', 'type', 'title', 'body', 'data', 'status'];

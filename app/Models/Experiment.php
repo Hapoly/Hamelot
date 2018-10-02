@@ -2,7 +2,8 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use App\UModel;
+
 use App\Models\ExperimentField;
 use App\Drivers\Time;
 use Storage;
@@ -10,8 +11,14 @@ use Auth;
 use App\User;
 use App\Models\Bid;
 
-class Experiment extends Model
+class Experiment extends UModel
 {
+    /**
+     * Indicates if the IDs are auto-incrementing.
+     *
+     * @var bool
+     */
+    public $incrementing = false;
     protected $primary = 'id';
     protected $table = 'experiments';
     protected $fillable = ['user_id', 'report_template_id', 'date', 'status', 'unit_id', 'bid_id'];

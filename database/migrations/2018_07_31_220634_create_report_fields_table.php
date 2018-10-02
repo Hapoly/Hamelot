@@ -14,11 +14,12 @@ class CreateReportFieldsTable extends Migration
     public function up()
     {
         Schema::create('report_fields', function (Blueprint $table) {
-            $table->increments('id');
+            $table->uuid('id');
+            $table->primary('id');
             $table->string('title', 32);
             $table->string('description', 200);
             $table->string('label', 16);
-            $table->integer('report_template_id')->index();
+            $table->uuid('report_template_id')->index();
             $table->smallInteger('type');
             $table->string('quantity', 32)->default('NuLL');
             $table->smallInteger('status')->default(1);
