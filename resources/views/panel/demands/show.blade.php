@@ -112,6 +112,7 @@
               @else
                 <td>{{$bid->status_str}}</td>
               @endif
+              <td><a href="{{route('panel.bids.show', ['bid' => $bid])}}" class="btn btn-default">{{__('bids.show')}}</a></td>
             </tr>
           @endforeach
         </tbody>

@@ -14,6 +14,7 @@ class Transaction extends Model
     const BID_DEPOSIT_BACK  = 2;
     const BID_REMAIN_PAY    = 3;
     const BID_RMAIN_BACK    = 4;
+    const WITHDRAW          = 5;
     public function getTypeStrAttribute(){
         return __('transactions.type_str.' . $this->type);
     }

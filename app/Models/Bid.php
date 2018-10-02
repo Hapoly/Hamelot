@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 use App\Drivers\Time;
 
+use App\Models\Demand;
+
 use Auth;
 
 class Bid extends Model
@@ -105,8 +107,23 @@ class Bid extends Model
             return false;
     }
 
+    // finished
+    public function getFinishedAttribute(){
+        return $this->status == Bid::DONE || $this->status == Bid::CANCELED;
+    }
+
     // experiments
     public function experiments(){
         return $this->hasMany('App\Models\Experiment', 'bid_id');
+    }
+
+    // finish
+    public function finish(){
+        $this->status = Bid::DONE;
+        $this->save();
+
+        $demand = $this->demand;
+        $demand->status = Demand::DONE;
+        $demand->save();
     }
 }
