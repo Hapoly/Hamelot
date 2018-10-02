@@ -6,7 +6,7 @@ return [
     'logout'    => 'خروج',
 
     'username'  => 'نام کاربری',
-    'password'  => 'کلمه عبور',
+    'password'  => 'رمز عبور',
 
     'forgot_password'   => 'نام کاربری یا کلمه عبور خود را فراموش کرده ام',
     'remember_me'       => 'مرا به یاد بیاور',
@@ -38,4 +38,7 @@ return [
     'toman'     => 'تومان',
     'dollar'    => 'دلار',
     'euro'      => 'یورو',
+    'confirm_password'=>'تکرار رمز عبور',
+    'first_name'=> 'نام',
+    'last_name' =>'ننام خانوادگی',
 ];
