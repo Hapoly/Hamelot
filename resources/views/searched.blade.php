@@ -36,7 +36,7 @@
             <div class="searched-card">
                 <img src="/imgs/img.png" class="search-img">
                 <h5 class="center">
-                        نام و نام خانوادگی پزشک
+                        نام و نام خانوادگی پرستار
                 </h5>
                 <div class="star-rating">
                     <span class="fa fa-star checked"></span>
@@ -46,10 +46,10 @@
                     <span class="fa fa-star"></span>
                 </div>
                 <span class="center">
-                        فیلد کاری و تخصص پزشک
+                        فیلد کاری و تخصص پرستار
                 </span>
                 <span class="center">
-                        کد نظام پزشکی
+                        کد نظام پرستاری
                 </span>
                 <button class="btn see-more-btn center">
                     مشاهده صفحه
@@ -58,9 +58,9 @@
         </div>
         <div class="col-md-4">
             <div class="searched-card">
-                <img src="/imgs/img.png" class="search-img">
+                <img src="/imgs/loc.jpg" class="search-img">
                 <h5 class="center">
-                        نام و نام خانوادگی پزشک
+                عنوان واحد درمانی
                 </h5>
                 <div class="star-rating">
                     <span class="fa fa-star checked"></span>
@@ -70,10 +70,10 @@
                     <span class="fa fa-star"></span>
                 </div>
                 <span class="center">
-                        فیلد کاری و تخصص پزشک
+                نوع واحد درمانی
                 </span>
                 <span class="center">
-                        کد نظام پزشکی
+                آدرس و یا توضیحات
                 </span>
                 <button class="btn see-more-btn center">
                     مشاهده صفحه

@@ -214,7 +214,8 @@ hr{
 	direction: ltr;
 }
 .search-img {
-	width: 70%;
+	width: 160px;
+	height: 160px;
 	border-radius: 100%;
 	margin: auto;
 	display: block;
