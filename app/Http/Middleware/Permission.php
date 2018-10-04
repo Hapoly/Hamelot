@@ -75,6 +75,14 @@ class Permission
         'panel.addresses.show'                              => [ 1, 5 ],
         'panel.addresses.destroy'                           => [ 1, 5 ],
 
+        'panel.bank-accounts.index'                         => [ 1, 2 ],
+        'panel.bank-accounts.create'                        => [ 1, 2 ],
+        'panel.bank-accounts.store'                         => [ 1, 2 ],
+        'panel.bank-accounts.edit'                          => [ 1, 2 ],
+        'panel.bank-accounts.update'                        => [ 1, 2 ],
+        'panel.bank-accounts.show'                          => [ 1, 2 ],
+        'panel.bank-accounts.destroy'                       => [ 1, 2 ],
+
         'panel.transactions.index'                          => [ 1, 2, 3, 4, 5 ],
         'panel.transactions.create.free'                    => [ 1 ],
         'panel.transactions.create.withdraw'                => [ 1, 2 ],

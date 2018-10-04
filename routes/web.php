@@ -21,6 +21,7 @@ Route::middleware(['auth', 'Permission'])->namespace('Panel')->prefix('panel')->
         'experiments'       => 'Experiments',
         'addresses'         => 'Addresses',
         'bids'              => 'Bids',
+        'bank-accounts'     => 'BankAccounts',
     ]);
 
     Route::prefix('prints')->name('prints.')->namespace('Prints')->group(function(){
@@ -142,19 +143,19 @@ Route::middleware(['auth', 'Permission'])->namespace('Panel')->prefix('panel')->
         Route::get('/destroy/{transaction}', 'Transactions@destroy')->name('destroy');
         Route::prefix('create')->name('create.')->group(function(){
             Route::get('/free', 'Transactions@createFree')->name('free');
-            Route::get('/withdraw', 'Transactions@createWhitdraw')->name('withdraw');
+            Route::get('/withdraw', 'Transactions@createWithdraw')->name('withdraw');
         });
         Route::prefix('store')->name('store.')->group(function(){
             Route::post('/free', 'Transactions@storeFree')->name('free');
-            Route::post('/withdraw', 'Transactions@storeWhitdraw')->name('withdraw');
+            Route::post('/withdraw', 'Transactions@storeWithdraw')->name('withdraw');
         });
         Route::prefix('edit')->name('edit.')->group(function(){
             Route::get('/free/{transaction}', 'Transactions@editFree')->name('free');
-            Route::get('/withdraw/{transaction}', 'Transactions@editWhitdraw')->name('withdraw');
+            Route::get('/withdraw/{transaction}', 'Transactions@editWithdraw')->name('withdraw');
         });
         Route::prefix('update')->name('update.')->group(function(){
             Route::put('/free/{transaction}', 'Transactions@updateFree')->name('free');
-            Route::put('/withdraw/{transaction}', 'Transactions@updateWhitdraw')->name('withdraw');
+            Route::put('/withdraw/{transaction}', 'Transactions@updateWithdraw')->name('withdraw');
         });
     });
 });
