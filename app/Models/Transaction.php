@@ -137,6 +137,8 @@ class Transaction extends UModel
         if(Auth::user()->isAdmin())
             return true;
         else{
+            if($this->status == Transaction::PAID || $this->status == Transaction::FAILED)
+                return false;
             switch($this->type){
                 case Transaction::FREE:
                 case Transaction::FREE:
