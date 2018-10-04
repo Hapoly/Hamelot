@@ -104,9 +104,9 @@
           </tr>
         </thead>
         <tbody>
-          @foreach($unit->managers as $user)
+          @foreach($unit->managers as $index => $user)
             <tr>
-              <td>{{$user->id}}</td>
+              <td>{{$index+1}}</td>
               <td>{{$user->first_name}}</td>
               <td>{{$user->last_name}}</td>
               <td>{{$user->status_str}}</td>
@@ -142,25 +142,26 @@
             <th>{{__('users.row')}}</th>
             <th>{{__('users.first_name')}}</th>
             <th>{{__('users.last_name')}}</th>
+            <th>{{__('users.group_code')}}</th>
             <th>{{__('users.status')}}</th>
-            @if(Auth::user()->isAdmin())
-              <th>{{__('users.operation')}}</th>
-            @endif
+            <th>{{__('users.operation')}}</th>
           </tr>
         </thead>
         <tbody>
-          @foreach($unit->members as $user)
+          @foreach($unit->members as $index => $user)
             <tr>
-              <td>{{$user->id}}</td>
+              <td>{{$index+1}}</td>
               <td>{{$user->first_name}}</td>
               <td>{{$user->last_name}}</td>
+              <td>{{$user->group_str}}</td>
               <td>{{$user->status_str}}</td>
-              @if(Auth::user()->isAdmin())
-                <td>
+              <td>
+                @if($unit->has_permission)
                   @operation_th(['base' => 'panel.users', 'label' => 'user', 'item' => $user, 'remove_label' => __('users.remove'), 'edit_label' => __('users.edit_str'), 'show_label' => __('users.show')])
                   <a class="btn btn-warning" href="{{route('panel.unit_users.inline_update', ['unit_user' => $user->pivot->id, 'action' => 'cancel'])}}">{{__('unit_users.cancel')}}</a>
-                </td>
-              @endif
+                @endif
+                <a class="btn btn-default" href="{{route('panel.demands.create.unit_user', ['unit' => $unit, 'user' => $user])}}">{{__('demands.create_unit_user')}}</a>
+              </td>
             </tr>
           @endforeach
         </tbody>
@@ -194,9 +195,9 @@
           </tr>
         </thead>
         <tbody>
-          @foreach($unit->sub_units as $sub_unit)
+          @foreach($unit->sub_units as $index => $sub_unit)
             <tr>
-              <td>{{$sub_unit->id}}</td>
+              <td>{{$index+1}}</td>
               <td><a href="{{route('panel.units.show', ['unit' => $sub_unit])}}">{{$sub_unit->title}}</a></td>
               <td>{{$sub_unit->status_str}}</td>
               @if($unit->has_permission)

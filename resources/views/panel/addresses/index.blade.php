@@ -50,9 +50,9 @@
       'city_id'     => __('addresses.city_id'),
       'NuLL'        => __('addresses.operation'),
     ]])
-    @foreach($addresses as $address)
-      <tr class="address-td {{$address->joined? 'tr-highlight': ''}}">
-        <td>{{$address->id}}</td>
+    @foreach($addresses as $index => $address)
+      <tr class="address-td">
+        <td>{{$index+1}}</td>
         <td><a href="{{route('panel.addresses.show', ['address' => $address])}}">{{$address->title}}</a></td>
         <td>{{$address->user->full_name}}</td>
         <td>{{$address->city->title}} ({{$address->city->province->title}})</td>

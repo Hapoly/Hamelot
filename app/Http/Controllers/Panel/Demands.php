@@ -10,10 +10,12 @@ use App\Models\DemandAttachment;
 use App\Models\Unit;
 use App\Models\City;
 use App\Models\Province;
+use App\User;
 
 use Auth;
 
 use App\Http\Requests\Demand\CreateFree as DemandCreateFreeRequest;
+use App\Http\Requests\Demand\CreateUnitUser as DemandCreateUnitUserRequest;
 use App\Http\Requests\Demand\Edit as DemandEditRequest;
 
 class Demands extends Controller
@@ -72,6 +74,12 @@ class Demands extends Controller
     public function createFree(Request $request){
         return view('panel.demands.create.free');
     }
+    public function createUnitUser(Request $request, Unit $unit, User $user){
+        return view('panel.demands.create.unit_user', [
+            'unit'  => $unit,
+            'user'  => $user,
+        ]);
+    }
     public function storeFree(DemandCreateFreeRequest $request){
         $inputs = $request->all();
         $inputs['start_time'] /= 10000;
@@ -87,6 +95,15 @@ class Demands extends Controller
         }
         return redirect()->route('panel.demands.show', ['demand' => $demand]);
     }
+    public function storeUnitUser(DemandCreateUnitUserRequest $request){
+        $inputs = $request->all();
+        $inputs['start_time'] /= 10000;
+        $inputs['end_time'] /= 10000;
+        $inputs['patient_id'] = Auth::user()->id;
+        $demand = Demand::create($inputs);
+        return redirect()->route('panel.demands.show', ['demand' => $demand]);
+    }
+
     public function edit(Request $request, Demand $demand){
         return view('panel.demands.edit', ['demand' => $demand]);
     }

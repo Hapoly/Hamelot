@@ -5,10 +5,13 @@ return [
     'show_title'    => 'تقاضای خدمات درمانی',
     'edit_title'    => 'ویرایش',
     
-    'create'    => 'تقاضای جدید',
-    'edit'      => 'ویرایش',
-    'show'      => 'نمایش',
-    'remove'    => 'حذف',
+    'unit_id'       => 'واحد درمانی',
+    'user_id'       => 'خدمات دهنده',
+    'create'            => 'تقاضای جدید',
+    'create_unit_user'  => 'دریافت نوبت ویزیت',
+    'edit'              => 'ویرایش',
+    'show'              => 'نمایش',
+    'remove'            => 'حذف',
 
     'description'   => 'توضیحات',
     'address_id'    => 'آدرس',

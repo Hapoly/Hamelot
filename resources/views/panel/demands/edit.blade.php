@@ -7,6 +7,40 @@
 <div class="container">
   @form_create(['action' => route('panel.demands.update', ['demand' => $demand]), 'title' => __('demands.edit_title')])
     @csrf
+    <div class="col-md-10">
+      @if($demand->user_id != '0' || $demand->unit_id != '0')
+        <style>
+          th, td{
+            text-align: center;
+          }
+          table {
+            margin: 15px 10px;
+            width: 90%;
+          }
+          th, tr, td {
+            border-style: solid;
+            border-width: 1px;
+          }
+        </style>
+        <table>
+          <tbody>
+            @if($demand->user_id != '0')
+              <tr>
+                <th>{{__('demands.user_id')}}</th>
+                <td>{{$demand->user->full_name}}</td>
+              </tr>
+            @endif
+            @if($demand->unit_id != '0')
+              <tr>
+                <th>{{__('demands.unit_id')}}</th>
+                <td>{{$demand->unit->complete_title}}</td>
+              </tr>
+            @endif
+          </tbody>
+        </table>
+      @endif
+    </div>
+    <div class="col-md-2"></div>
     @input_text(['name' => 'description', 'value' => old('description', $demand->description), 'label' => __('demands.description'), 'required' => true])
     @php
       $address_rows = [

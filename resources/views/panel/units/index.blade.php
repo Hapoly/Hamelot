@@ -79,9 +79,9 @@
       'status'      => __('units.status'),
       'NuLL'        => __('units.operation'),
     ]])
-    @foreach($units as $unit)
+    @foreach($units as $index => $unit)
       <tr class="unit-td {{$unit->joined? 'tr-highlight': ''}}">
-        <td>{{$unit->id}}</td>
+        <td>{{$index+1}}</td>
         <td><a href="{{route('panel.units.show', ['hospit$unit' => $unit])}}">{{$unit->title}}</a></td>
         <td>{{$unit->group_str}}</td>
         <td>{{$unit->city->title}}</td>

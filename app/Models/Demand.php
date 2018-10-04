@@ -68,10 +68,13 @@ class Demand extends UModel
         if($user->isAdmin())
             return $this->bids();
         else if($user->isPatient())
-            return $this->bids()->where('patient_accepted', 1)->orWhere([
-                ['unit_accepted', 1],
-                ['user_accepted', 1],
-            ]);
+            return $this->bids()->where(function($query){
+                return $query   ->where('patient_accepted', 1)
+                                ->orWhere([
+                                            ['unit_accepted', 1],
+                                            ['user_accepted', 1],
+                                ]);
+                });
         else if($user->isManager())
             return $this->hasMany('App\Models\Bid', 'demand_id')->whereHas('unit', function($query) use ($user){
                 return $query->whereHas('managers', function($query) use ($user){

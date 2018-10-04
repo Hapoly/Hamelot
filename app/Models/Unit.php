@@ -133,6 +133,7 @@ class Unit extends UModel{
         Entry::where('target_id', $this->id)->where('group_code', $this->group_code_to_gc[$this->group_code])->delete();
         UnitUser::where('unit_id', $this->id)->delete();
         Experiment::where('unit_id', $this->id)->delete();
+        BankAccount::where('unit_id', $this->id)->delete();
         foreach($this->sub_units as $sub_unit){
             $sub_unit->delete();
         }
