@@ -67,4 +67,6 @@ return [
 
     'managers'          => 'کادر مدیریت',
     'members'           => 'کادر پرسنل',
+
+    'no_access'         => ' - ',
 ];

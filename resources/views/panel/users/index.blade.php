@@ -79,9 +79,9 @@
           </tr>
         </thead>
         <tbody>
-          @foreach($users as $user)
+          @foreach($users as $index => $user)
             <tr class="user-td">
-              <td>{{$user->id}}</td>
+              <td>{{$index+1}}</td>
               @if(Auth::user()->isAdmin())
                 <td><a href="{{route('panel.users.show', ['user' => $user])}}">{{$user->username}}</a></td>
               @endif

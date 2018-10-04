@@ -76,9 +76,9 @@
             </tr>
           </thead>
           <tbody>
-            @foreach($user->units as $unit)
+            @foreach($user->units as $index => $unit)
               <tr>
-                <td>{{$unit->id}}</td>
+                <td>{{$index+1}}</td>
                 <td><a href="{{route('panel.units.show', ['unit' => $unit])}}">{{$unit->title}}</a></td>
                 <td>{{$unit->status_str}}</td>
                 @if($unit->has_permission)

@@ -73,7 +73,7 @@ class Users extends Seeder
             'last_name'     => 'ابوزاده',
         ]);
         Doctor::create([
-            'user_id'       => $d1->id,
+            'user_id'       => $d2->id,
             'degree_id'     => $doctor_degrees[intval(rand() % sizeof($doctor_degrees))]->id,
             'field_id'      => $doctor_fields[intval(rand() % sizeof($doctor_fields))]->id,
             'profile'       => 'NuLL',
