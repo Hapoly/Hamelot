@@ -16,6 +16,7 @@
                     return;
                 }
                 $.getJSON( "{{route('panel.search.' . $route)}}", request, function( data, status, xhr ) {
+                    console.log(data);
                     cache[ term ] = data;
                     response( data );
                 });
@@ -25,7 +26,8 @@
     $(document).ready(function(){
         function update_id(){
             var data = new FormData();
-            let term = $("#{{$name}}").val();
+            let term = $("#{{$name}}").val().split(' - ')[0];
+            
             if(term  == '')
                 return;
             var xhr = new XMLHttpRequest();
