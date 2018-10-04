@@ -200,4 +200,20 @@
 			</a>
 		</li>
 	@endif
+	@if(Auth::user()->isAdmin() || Auth::user()->isManager())
+		<li>
+			<a href="#bank-accounts" data-toggle="collapse" aria-expanded="false">
+				<i class="fa fa-bank" aria-hidden="false"></i>
+				<span>حساب‌های بانکی</span>
+			</a>
+			<ul class="collapse list-unstyled" id="bank-accounts">
+				<li>
+					<a href="{{route('panel.bank-accounts.create')}}">حساب بانکی جدید </a>
+				</li>
+				<li>
+					<a href="{{route('panel.bank-accounts.index')}}">حساب‌ها</a>
+				</li>
+			</ul>
+		</li>
+	@endif
 </ul>
