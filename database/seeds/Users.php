@@ -7,6 +7,7 @@ use App\User;
 use App\Models\Doctor;
 use App\Models\Nurse;
 use App\Models\Patient;
+use App\Models\ConstValue;
 
 class Users extends Seeder
 {
@@ -17,6 +18,11 @@ class Users extends Seeder
      */
     public function run()
     {
+        $doctor_degrees = ConstValue::where('type', 1)->get();
+        $doctor_fields = ConstValue::where('type', 2)->get();
+        $nurse_degrees = ConstValue::where('type', 4)->get();
+        $nurse_fields = ConstValue::where('type', 3)->get();
+
         User::create([
             'username'      => 'admin',
             'password'      => bcrypt('admin'),
@@ -53,8 +59,8 @@ class Users extends Seeder
         ]);
         Doctor::create([
             'user_id'       => $d1->id,
-            'degree_id'     => 2,
-            'field_id'      => 2,
+            'degree_id'     => $doctor_degrees[intval(rand() % sizeof($doctor_degrees))]->id,
+            'field_id'      => $doctor_fields[intval(rand() % sizeof($doctor_fields))]->id,
             'profile'       => 'NuLL',
             'gender'        => 1,
         ]);
@@ -68,8 +74,8 @@ class Users extends Seeder
         ]);
         Doctor::create([
             'user_id'       => $d1->id,
-            'degree_id'     => 2,
-            'field_id'      => 2,
+            'degree_id'     => $doctor_degrees[intval(rand() % sizeof($doctor_degrees))]->id,
+            'field_id'      => $doctor_fields[intval(rand() % sizeof($doctor_fields))]->id,
             'profile'       => 'NuLL',
             'gender'        => 1,
         ]);
@@ -86,8 +92,8 @@ class Users extends Seeder
         ]);
         Nurse::create([
             'user_id'       => $n0->id,
-            'degree_id'     => 2,
-            'field_id'      => 2,
+            'degree_id'     => $nurse_degrees[intval(rand() % sizeof($nurse_degrees))]->id,
+            'field_id'      => $nurse_fields[intval(rand() % sizeof($nurse_fields))]->id,
             'profile'       => 'NuLL',
             'gender'        => 1,
         ]);
@@ -101,8 +107,8 @@ class Users extends Seeder
         ]);
         Nurse::create([
             'user_id'       => $n1->id,
-            'degree_id'     => 2,
-            'field_id'      => 2,
+            'degree_id'     => $nurse_degrees[intval(rand() % sizeof($nurse_degrees))]->id,
+            'field_id'      => $nurse_fields[intval(rand() % sizeof($nurse_fields))]->id,
             'profile'       => 'NuLL',
             'gender'        => 2,
         ]);

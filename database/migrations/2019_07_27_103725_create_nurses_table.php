@@ -18,8 +18,8 @@ class CreateNursesTable extends Migration
             $table->primary('id');
 
             $table->uuid('user_id')         ->index()                       ;
-            $table->smallInteger('degree_id')           ->default(1)        ;
-            $table->smallInteger('field_id')->index()   ->default(0)        ;
+            $table->uuid('degree_id')           ->default(1)        ;
+            $table->uuid('field_id')->index()   ->default(0)        ;
             $table->string('profile', 64)               ->default('NuLL')   ;
             $table->smallInteger('gender')              ->default(0)        ;
             $table->string('msc', 16)                   ->default('NuLL')   ;

@@ -18,7 +18,7 @@ class Demands extends Seeder
         Demand::create([
             'description'   => 'کشیدن بخیه چشم',
             'patient_id'    => $user->id,
-            'address_id'    => $user->addresses->first()->id,
+            'address_id'    => $user->addresses()->first()->id,
             'unit_id'       => 0,
             'user_id'       => 0,
             'asap'          => 1,
