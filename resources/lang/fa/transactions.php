@@ -2,6 +2,9 @@
 
 return [
     'create_free'   => 'تراکنش آزاد',
+    'edit_free'     => 'ویرایش تراکنش آزاد',
+    'create_withdraw'   => 'درخواست تسویه حساب',
+    'edit_withdraw'     => 'ویرایش درخواست تسویه حساب',
     'edit'          => 'ویرایش',
     'destroy'       => 'حذف',
     'show'          => 'نمایش',
@@ -15,6 +18,7 @@ return [
     'status'        => 'وضعیت',
     'pay_type'      => 'آنلاین/نقد',
     'type'          => 'نوع تراکنش',
+    'bank_account_id'   => 'حساب بانکی',
 
     'pay_type_str'  => [
         1   => 'آنلاین',

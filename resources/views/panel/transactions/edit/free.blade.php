@@ -31,7 +31,7 @@
       @endif
     @endif
     @input_currency(['name' => 'amount', 'value' => old('amount', $transaction->amount), 'label' => __('transactions.amount'), 'required' => true, 'placeholder' => __('general.tmn')])
-    @input_date_complete(['name' => 'date', 'label' => __('transactions.date'), 'value'  => old('date', time())])
+    @input_date_complete(['name' => 'date', 'label' => __('transactions.date'), 'value'  => old('date', $transaction->date)])
     <script>
       $(document).ready(function(){
         $('#unit').attr('disabled', true);

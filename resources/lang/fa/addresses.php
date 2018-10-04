@@ -2,7 +2,7 @@
 
 return [
     'row'               => 'ردیف',
-    'index_title'       => 'واحدها',
+    'index_title'       => 'آدرس‌ها',
     'search'            => 'جستجو',
     'not_found'         => 'آدرسی پیدا نشد',
     'operation'         => 'عملیات',

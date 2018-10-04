@@ -75,6 +75,9 @@ class Transaction extends UModel
     public function dst_user(){
         return $this->belongsTo('App\User', 'dst_id');
     }
+    public function bank_account(){
+        return $this->belongsTo('App\Models\BankAccount', 'target');
+    }
 
 
     const PENDING   = 1;

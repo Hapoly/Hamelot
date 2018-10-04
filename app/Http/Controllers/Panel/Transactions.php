@@ -14,9 +14,13 @@ use App\Models\Transaction;
 use App\User;
 use App\Models\City;
 use App\Models\Province;
+use App\Models\BankAccount;
 
 use App\Http\Requests\Transaction\CreateFree as TransactionCreateFreeRequest;
-use App\Http\Requests\Transaction\EditFree as TransactionEditRequest;
+use App\Http\Requests\Transaction\EditFree as TransactionEditFreeRequest;
+
+use App\Http\Requests\Transaction\CreateWithdraw as TransactionCreateWithdrawRequest;
+use App\Http\Requests\Transaction\EditWithdraw as TransactionEditWithdrawRequest;
 
 class Transactions extends Controller{
   public function index(Request $request){
@@ -69,6 +73,11 @@ class Transactions extends Controller{
   public function createFree(Request $request){
     return view('panel.transactions.create.free');
   }
+  public function createWithdraw(Request $request){
+    return view('panel.transactions.create.withdraw', [
+      'bank_accounts' => BankAccount::fetch()->get(),
+    ]);
+  }
   public function storeFree(TransactionCreateFreeRequest $request){
     $inputs = $request->all();
     $data = [
@@ -90,10 +99,41 @@ class Transactions extends Controller{
     $transaction = Transaction::create($data);
     return redirect()->route('panel.transactions.show', ['transaction' => $transaction]);
   }
+  public function storeWithdraw(TransactionCreateWithdrawRequest $request){
+    $bank_account = BankAccount::find($request->bank_account_id);
+    $data = [
+      'src_id'    => '0',
+      'dst_id'    => $bank_account->unit->id,
+      'date'      => $request->date,
+      'amount'    => $request->amount,
+      'type'      => Transaction::WITHDRAW,
+      'pay_type'  => Transaction::ONLINE_PAY,
+      'authority' => 'NuLL',
+      'currency'  => 'tmn',
+      'status'    => Transaction::PENDING,
+      'target'    => $bank_account->id,
+    ];
+    if(Auth::user()->isAdmin())
+      $data['status'] = $request->input('status', 1);
+    $transaction = Transaction::create($data);
+    return redirect()->route('panel.transactions.show', ['transaction' => $transaction]);
+  }
   public function editFree(Transaction $transaction){
+    if(!$transaction->can_modify)
+      abort(403);
     return view('panel.transactions.edit.free', ['transaction' => $transaction]);
   }
-  public function updateFree(TransactionEditRequest $request, Transaction $transaction){
+  public function editWithdraw(Transaction $transaction){
+    if(!$transaction->can_modify)
+      abort(403);
+    return view('panel.transactions.edit.withdraw', [
+      'transaction' => $transaction,
+      'bank_accounts' => BankAccount::fetch()->get(),
+    ]);
+  }
+  public function updateFree(TransactionEditFreeRequest $request, Transaction $transaction){
+    if(!$transaction->can_modify)
+      abort(403);
     $transaction->amount = $request->amount;
     $transaction->date = $request->date;
     if($request->target_type == 1)
@@ -103,7 +143,22 @@ class Transactions extends Controller{
     $transaction->save();
     return redirect()->route('panel.transactions.show', ['transaction' => $transaction]);
   }
+  public function updateWithdraw(TransactionEditWithdrawRequest $request, Transaction $transaction){
+    if(!$transaction->can_modify)
+      abort(403);
+    $bank_account = BankAccount::find($request->bank_account_id);
+    $transaction->amount = $request->amount;
+    $transaction->date = $request->date;
+    $transaction->target = $bank_account->id;
+    $transaction->dst_id = $bank_account->unit_id;
+    if(Auth::user()->isAdmin())
+      $transaction->status = $request->input('status', 1);
+    $transaction->save();
+    return redirect()->route('panel.transactions.show', ['transaction' => $transaction]);
+  }
   public function destroy(Transaction $transaction){
+    if(!$transaction->can_delete)
+      abort(401);
     $transaction->delete();
     if(URL::route('panel.transactions.show', ['transaction' => $transaction]) == URL::previous())
       return redirect()->route('panel.transactions.index');
