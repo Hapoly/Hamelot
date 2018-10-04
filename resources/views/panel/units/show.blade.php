@@ -68,6 +68,13 @@
         </div>
       </div>
     @endif
+    @if(Auth::user()->isPatient())
+      <div class="row">
+        <div class="col-md-12" style="text-align: center">
+          <a class="btn btn-default" href="{{route('panel.demands.create.unit', ['unit' => $unit])}}">{{__('demands.create_unit')}}</a>
+        </div>
+      </div>
+    @endif
     @if($unit->can_join)
     <div class="row">
       <div class="col-md-12" style="text-align: center">
@@ -160,7 +167,9 @@
                   @operation_th(['base' => 'panel.users', 'label' => 'user', 'item' => $user, 'remove_label' => __('users.remove'), 'edit_label' => __('users.edit_str'), 'show_label' => __('users.show')])
                   <a class="btn btn-warning" href="{{route('panel.unit_users.inline_update', ['unit_user' => $user->pivot->id, 'action' => 'cancel'])}}">{{__('unit_users.cancel')}}</a>
                 @endif
+                @if(Auth::user()->isPatient())
                   <a class="btn btn-default" href="{{route('panel.demands.create.unit_user', ['unit' => $unit, 'user' => $user])}}">{{__('demands.create_unit_user')}}</a>
+                @endif
               </td>
             </tr>
           @endforeach

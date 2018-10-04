@@ -9,6 +9,7 @@ return [
     'user_id'       => 'خدمات دهنده',
     'create'            => 'تقاضای جدید',
     'create_unit_user'  => 'دریافت نوبت ویزیت',
+    'create_unit'       => 'درخواست خدمات',
     'edit'              => 'ویرایش',
     'show'              => 'نمایش',
     'remove'            => 'حذف',
