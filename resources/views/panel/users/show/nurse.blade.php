@@ -85,7 +85,9 @@
                   @operation_th(['base' => 'panel.units', 'label' => 'unit', 'item' => $unit, 'remove_label' => __('units.remove'), 'edit_label' => __('units.edit'), 'show_label' => __('units.show')])
                 </td>
               @else
-                <td>-</td>
+                <td>
+                  <a class="btn btn-default" href="{{route('panel.demands.create.unit_user', ['unit' => $unit, 'user' => $user])}}">{{__('demands.create_unit_user')}}</a>
+                </td>
               @endif
             </tr>
           @endforeach

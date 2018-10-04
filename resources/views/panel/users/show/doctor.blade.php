@@ -87,7 +87,7 @@
                   </td>
                 @else
                   <td>
-                    {{__('units.no_access')}}
+                    <a class="btn btn-default" href="{{route('panel.demands.create.unit_user', ['unit' => $unit, 'user' => $user])}}">{{__('demands.create_unit_user')}}</a>
                   </td>
                 @endif
               </tr>
