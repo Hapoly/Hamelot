@@ -15,8 +15,8 @@ use App\User;
 use App\Models\City;
 use App\Models\Province;
 
-use App\Http\Requests\Transaction\Create as TransactionCreateRequest;
-use App\Http\Requests\Transaction\Edit as TransactionEditRequest;
+use App\Http\Requests\Transaction\CreateFree as TransactionCreateFreeRequest;
+use App\Http\Requests\Transaction\EditFree as TransactionEditRequest;
 
 class Transactions extends Controller{
   public function index(Request $request){
@@ -66,43 +66,41 @@ class Transactions extends Controller{
   public function show(Request $request, Transaction $transaction){
     return view('panel.transactions.show', ['transaction' => $transaction]);
   }
-  public function create(Request $request){
-    return view('panel.transactions.create', [
-      'provinces' => Province::all(),
-      'cities'    => json_encode(City::all()),
-    ]);
+  public function createFree(Request $request){
+    return view('panel.transactions.create.free');
   }
-  public function store(TransactionCreateRequest $request){
+  public function storeFree(TransactionCreateFreeRequest $request){
     $inputs = $request->all();
-    if(!Auth::user()->isAdmin())
-      $inputs['user_id'] = Auth::user()->id;
-    else{
-      $user = User::whereRaw("concat(first_name, ' ', last_name) = '". $request->full_name ."'")->first();
-      if(!$user)
-        return redirect()->route('panel.transactions.index');
-        $inputs['user_id'] = $user->id;
+    $data = [
+      'src_id'    => '0',
+      'date'      => $request->date,
+      'amount'    => $request->amount,
+      'type'      => Transaction::FREE,
+      'pay_type'  => Transaction::ONLINE_PAY,
+      'authority' => 'NuLL',
+      'currency'  => 'tmn',
+      'status'    => Transaction::PAID,
+      'target'    => 'NuLL',
+    ];
+    if($request->target_type == 1){ // user
+      $data['dst_id'] = $request->user_id;
+    }else{ // unit id
+      $data['dst_id'] = $request->unit_id;
     }
-    $transaction = Transaction::create($inputs);
+    $transaction = Transaction::create($data);
     return redirect()->route('panel.transactions.show', ['transaction' => $transaction]);
   }
-  public function edit(Transaction $transaction){
-    return view('panel.transactions.edit', [
-      'transaction'   => $transaction,
-      'provinces' => Province::all(),
-      'cities'    => City::all(),
-    ]);
+  public function editFree(Transaction $transaction){
+    return view('panel.transactions.edit.free', ['transaction' => $transaction]);
   }
-  public function update(TransactionEditRequest $request, Transaction $transaction){
-    $inputs = $request->all();
-    if(!Auth::user()->isAdmin())
-      $inputs['user_id'] = Auth::user()->id;
-    else{
-      $user = User::whereRaw("concat(first_name, ' ', last_name) = '". $request->full_name ."'")->first();
-      if(!$user)
-        return redirect()->route('panel.transactions.index');
-        $inputs['user_id'] = $user->id;
-    }
-    $transaction->fill($inputs)->save();
+  public function updateFree(TransactionEditRequest $request, Transaction $transaction){
+    $transaction->amount = $request->amount;
+    $transaction->date = $request->date;
+    if($request->target_type == 1)
+      $transaction->dst_id = $request->user_id;
+    else if($request->target_type == 2)
+      $transaction->dst_id = $request->unit_id;
+    $transaction->save();
     return redirect()->route('panel.transactions.show', ['transaction' => $transaction]);
   }
   public function destroy(Transaction $transaction){

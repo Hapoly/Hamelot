@@ -1,6 +1,9 @@
 @extends('layouts.main')
 @section('title', __('transactions.index_title'))
 @section('content')
+@php
+  use App\Models\Transaction;
+@endphp
 <div class="filter-panel">
   <div class="row justify-content-center">
     <div class="col-8">
@@ -90,6 +93,7 @@
       'type'        => __('transactions.type'),
       'status'      => __('transactions.status'),
       'NuLL1'       => __('transactions.description'),
+      'NuLL2'       => __('transactions.operation'),
     ]])
     @foreach($transactions as $index => $transaction)
       <tr class="transactions-td">
@@ -100,6 +104,18 @@
         <td>{{$transaction->type_str}}</td>
         <td>{{$transaction->status_str}}</td>
         <td>{{$transaction->description}}</td>
+        <td>
+          @if($transaction->can_modify && $transaction->type == Transaction::FREE)
+            <a class="btn btn-primary" href="{{route('panel.transactions.edit.free', ['transaction' => $transaction])}}">{{__('transactions.edit')}}</a>
+          @endif
+          @if($transaction->can_modify && $transaction->type == Transaction::WITHDRAW)
+            <a class="btn btn-primary" href="{{route('panel.transactions.edit.withdraw', ['transaction' => $transaction])}}">{{__('transactions.edit')}}</a>
+          @endif
+          @if($transaction->can_delete)
+            <a class="btn btn-danger" href="{{route('panel.transactions.destroy', ['transaction' => $transaction])}}">{{__('transactions.destroy')}}</a>
+          @endif
+          <a class="btn btn-default" href="{{route('panel.transactions.show', ['transaction' => $transaction])}}">{{__('transactions.show')}}</a>
+        </td>
       </tr>
     @endforeach
   @endtable

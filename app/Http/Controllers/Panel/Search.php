@@ -35,8 +35,11 @@ class Search extends Controller{
     return $results;
   }
   public function units(Request $request){
-    $units = Auth::user()->units()->whereRaw("title LIKE '%". $request->input('term') ."%'")
-                          ->get();
+    $units = null;
+    if(Auth::user()->isAdmin())
+      $units = Unit::whereRaw("title LIKE '%". $request->input('term') ."%'")->get();
+    else
+      $units = Auth::user()->units()->whereRaw("title LIKE '%". $request->input('term') ."%'")->get();
     $results = [];
     foreach($units as $unit){
       array_push($results, [

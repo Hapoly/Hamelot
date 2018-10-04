@@ -76,10 +76,14 @@ class Permission
         'panel.addresses.destroy'                           => [ 1, 5 ],
 
         'panel.transactions.index'                          => [ 1, 2, 3, 4, 5 ],
-        'panel.transactions.create'                         => [ 1 ],
-        'panel.transactions.store'                          => [ 1 ],
-        'panel.transactions.edit'                           => [ 1 ],
-        'panel.transactions.update'                         => [ 1 ],
+        'panel.transactions.create.free'                    => [ 1 ],
+        'panel.transactions.create.withdraw'                => [ 1, 2 ],
+        'panel.transactions.store.free'                     => [ 1 ],
+        'panel.transactions.store.withdraw'                 => [ 1, 2 ],
+        'panel.transactions.edit.free'                      => [ 1 ],
+        'panel.transactions.edit.withdraw'                  => [ 1, 2 ],
+        'panel.transactions.update.free'                    => [ 1 ],
+        'panel.transactions.update.withdraw'                => [ 1, 2 ],
         'panel.transactions.show'                           => [ 1, 2, 3, 4, 5 ],
         'panel.transactions.destroy'                        => [ 1 ],
 

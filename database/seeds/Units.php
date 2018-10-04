@@ -14,7 +14,7 @@ class Units extends Seeder
     public function run()
     {
         $cities = City::all();
-        Unit::create([
+        $u1 = Unit::create([
             'title'         => 'راضی',
             'address'       => 'چهارراه عباسنیا - روبروی صادرات',
             'phone'         => '34234234',
@@ -27,7 +27,7 @@ class Units extends Seeder
             'lat'           => 32.43234,
             'lon'           => 45.435234
         ]);
-        Unit::create([
+        $u2 = Unit::create([
             'title'         => 'پورسینا',
             'address'       => 'خیابان پرستا - جنب سازمان تامین اجتماعی',
             'phone'         => '234523525',
@@ -47,7 +47,7 @@ class Units extends Seeder
             'mobile'        => '34634525',
             'image'         => 'NuLL',
             'city_id'       => $cities[intval(rand() % sizeof($cities))]->id,
-            'parent_id'     => 1,
+            'parent_id'     => $u1->id,
             'group_code'    => Unit::DEPARTMENT,
             'public'        => Unit::T_PUBLIC,
             'type'          => Unit::ACTUAL,
@@ -62,7 +62,7 @@ class Units extends Seeder
             'mobile'        => '3463452345',
             'image'         => 'NuLL',
             'city_id'       => $cities[intval(rand() % sizeof($cities))]->id,
-            'parent_id'     => 1,
+            'parent_id'     => $u1->id,
             'group_code'    => Unit::DEPARTMENT,
             'public'        => Unit::T_PUBLIC,
             'type'          => Unit::ACTUAL,
@@ -76,7 +76,7 @@ class Units extends Seeder
             'mobile'        => '235463',
             'image'         => 'NuLL',
             'city_id'       => $cities[intval(rand() % sizeof($cities))]->id,
-            'parent_id'     => 2,
+            'parent_id'     => $u2->id,
             'group_code'    => Unit::DEPARTMENT,
             'public'        => Unit::T_PUBLIC,
             'type'          => Unit::ACTUAL,
@@ -91,7 +91,7 @@ class Units extends Seeder
             'mobile'        => '02934823',
             'image'         => 'NuLL',
             'city_id'       => $cities[intval(rand() % sizeof($cities))]->id,
-            'parent_id'     => 2,
+            'parent_id'     => $u2->id,
             'group_code'    => Unit::DEPARTMENT,
             'public'        => Unit::T_PUBLIC,
             'type'          => Unit::ACTUAL,

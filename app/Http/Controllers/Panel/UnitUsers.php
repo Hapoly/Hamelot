@@ -55,7 +55,7 @@ class UnitUsers extends Controller{
   }
 
   public function createManager(Request $request){
-    $user = User::find($request->input('user_id', 0));
+    $user = User::find($request->input('user_id', ''));
     $full_name = '';
     if($user)
       $full_name = $user->full_name;
@@ -66,7 +66,7 @@ class UnitUsers extends Controller{
     ]);
   }
   public function createMember(Request $request){
-    $user = User::find($request->input('user_id', 0));
+    $user = User::find($request->input('user_id', ''));
     $full_name = '';
     if($user)
       $full_name = $user->full_name;

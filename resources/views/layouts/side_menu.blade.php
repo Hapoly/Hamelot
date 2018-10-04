@@ -182,7 +182,10 @@
 			</a>
 			<ul class="collapse list-unstyled" id="transactions">
 				<li>
-					<a href="{{route('panel.transactions.create')}}"> تراکنش جدید</a>
+					<a href="{{route('panel.transactions.create.free')}}"> تراکنش آزاد جدید</a>
+				</li>
+				<li>
+					<a href="{{route('panel.transactions.create.withdraw')}}"> تسویه حساب جدید</a>
 				</li>
 				<li>
 					<a href="{{route('panel.transactions.index')}}">تراکنش‌ها</a>

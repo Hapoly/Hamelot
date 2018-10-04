@@ -23,6 +23,7 @@ class Transaction extends UModel
     const BID_REMAIN_PAY    = 3;
     const BID_RMAIN_BACK    = 4;
     const WITHDRAW          = 5;
+    const FREE              = 6;
     public function getTypeStrAttribute(){
         return __('transactions.type_str.' . $this->type);
     }
@@ -62,6 +63,19 @@ class Transaction extends UModel
         return $this->belongsTo('App\Models\Bid', 'target');
     }
 
+    public function src_unit(){
+        return $this->belongsTo('App\Models\Unit', 'src_id');
+    }
+    public function dst_unit(){
+        return $this->belongsTo('App\Models\Unit', 'dst_id');
+    }
+    public function src_user(){
+        return $this->belongsTo('App\User', 'src_id');
+    }
+    public function dst_user(){
+        return $this->belongsTo('App\User', 'dst_id');
+    }
+
 
     const PENDING   = 1;
     const PAID      = 2;
@@ -76,9 +90,13 @@ class Transaction extends UModel
             return new Transaction;
         else if($user->isManager()){
             return Transaction::whereHas('src_unit', function($query) use ($user){
-                return $query->managers()->where('users.id', $user->id);
+                return $query->whereHas('managers', function($query) use ($user){
+                    return $query->where('users.id', $user->id);
+                });
             })->orWhereHas('dst_unit', function($query) use ($user){
-                return $query->managers()->where('users.id', $user->id);
+                return $query->whereHas('managers', function($query) use ($user){
+                    return $query->where('users.id', $user->id);
+                });
             });
         }else{
             return Transaction::where('src_id', $user->id)->orWhere('dst_id', $user->id);
@@ -106,10 +124,30 @@ class Transaction extends UModel
             }else{
                 return $this->bid->demand->description . ' ('. $this->bid->demand->patient->full_name .')';
             }
-        }else if($this->type == Transaction::WITHDRAW){
+        }else{
             return ' - ';
         }
     }
 
+    // can_modify
+    public function getCanModifyAttribute(){
+        if(Auth::user()->isAdmin())
+            return true;
+        else{
+            switch($this->type){
+                case Transaction::FREE:
+                case Transaction::FREE:
+                    if($transaction->dst_user == Auth::user()->id)
+                        return true;
+                    else{
+                        return $transaction->dst_unit->managers()->where('users.id', Auth::user()->id)->first();
+                    }
+            }
+        }
+    }
+    // can_delete
+    public function getCanDeleteAttribute(){
+        return Auth::user()->isAdmin();
+    }
     
 }
