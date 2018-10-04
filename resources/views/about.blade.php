@@ -47,8 +47,8 @@
                             Back-End Developer
                         </p>
                     </div>
-                    <div class="col-md-5">
-                        <img src="/imgs/reza.jpg" style="float:right" class="team-img">
+                    <div class="col-md-5 team-img-col">
+                        <img src="/imgs/reza.jpg" class="team-img reza-img">
                     </div>
                 </div>
             </div>
@@ -58,7 +58,7 @@
             <div class="team-member">
                 <div class="row">
                     <div class="col-md-5">
-                        <img src="/imgs/sadaf.jpg" class="team-img">
+                        <img src="/imgs/sadaf.jpg" class="team-img sadaf-img">
                     </div>
                     <div class="col-md-7">
                         <h3 class="member-name">
