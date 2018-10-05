@@ -26,9 +26,7 @@ class Admin extends FormRequest
         return [
             'first_name'    => 'required|string',
             'last_name'     => 'required|string',
-            'username'      => 'required|string',
-            'password'      => 'required_if:action,new|confirmed',
-            'status'        => 'required|numeric'
+            'password'      => 'confirmed',
         ];
     }
 }

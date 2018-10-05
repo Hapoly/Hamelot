@@ -64,9 +64,9 @@
                     </div>
 
                     <div class="form-group row create-form">
-                        <label for="degree" class="col-md-2 label-col col-form-label text-center">{{ __('users.degree') }}</label>
+                        <label for="degree_id" class="col-md-2 label-col col-form-label text-center">{{ __('users.degree') }}</label>
                         <div class="col-md-10">
-                            <select class="form-control" name="degree" id="degree" style="width:90%">
+                            <select class="form-control" name="degree_id" id="degree_id" style="width:90%">
                                 @foreach($degrees as $degree)
                                     <option value="{{$degree->id}}" {{old('degree') == $degree->id? 'selected': ''}} > {{$degree->value}}</option>
                                 @endforeach
@@ -80,9 +80,9 @@
                     </div>
 
                     <div class="form-group row create-form">
-                        <label for="field" class="col-md-2 label-col col-form-label text-center">{{ __('users.field') }}</label>
+                        <label for="field_id" class="col-md-2 label-col col-form-label text-center">{{ __('users.field') }}</label>
                         <div class="col-md-10">
-                            <select class="form-control" name="field" id="field" style="width:90%">
+                            <select class="form-control" name="field_id" id="field_id" style="width:90%">
                                 @foreach($fields as $field)
                                     <option value="{{$field->id}}" {{old('field') == $field->id? 'selected': ''}} > {{$field->value}}</option>
                                 @endforeach

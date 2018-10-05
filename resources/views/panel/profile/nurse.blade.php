@@ -6,7 +6,7 @@
          <h2>{{ __('users.edit.nurse') }}</h2>
          <div class="row">
             <div class="col-md-12">
-                <form method="POST" action="{{ route('panel.users.update.nurse', ['user' => $user]) }}" enctype="multipart/form-data">
+                <form method="POST" action="{{ route('panel.profile.nurse') }}" enctype="multipart/form-data">
                       @csrf
                     <div class="form-group row create-form">
                         <div class="col-md-10">
@@ -80,7 +80,7 @@
 
                     <div class="form-group row create-form">
                         <div class="col-md-10">
-                            <select class="form-control" name="degree" id="degree" style="width:90%">
+                            <select class="form-control" name="degree_id" id="degree_id" style="width:90%">
                                 @foreach($degrees as $degree)
                                     <option value="{{$degree->id}}" {{old('degree', $user->nurse->degree) == $degree->id? 'selected': ''}} > {{$degree->value}}</option>
                                 @endforeach
@@ -91,12 +91,12 @@
                                 </span>
                             @endif
                         </div>
-                        <label for="degree" class="col-md-2 col-form-label text-center">{{ __('users.degree') }}</label>
+                        <label for="degree_id" class="col-md-2 col-form-label text-center">{{ __('users.degree') }}</label>
                     </div>
 
                     <div class="form-group row create-form">
                         <div class="col-md-10">
-                            <select class="form-control" name="field" id="field" style="width:90%">
+                            <select class="form-control" name="field_id" id="field_id" style="width:90%">
                                 @foreach($fields as $field)
                                     <option value="{{$field->id}}" {{old('field', $user->nurse->field) == $field->id? 'selected': ''}} > {{$field->value}}</option>
                                 @endforeach
@@ -107,7 +107,7 @@
                                 </span>
                             @endif
                         </div>
-                        <label for="field" class="col-md-2 col-form-label text-center">{{ __('users.field') }}</label>
+                        <label for="field_id" class="col-md-2 col-form-label text-center">{{ __('users.field') }}</label>
                     </div>
 
                     <div class="form-group row create-form">
@@ -151,23 +151,6 @@
                         </div>
                         <label for="status" class="col-md-2 col-form-label text-center">{{ __('users.public') }}</label>
                     </div>
-
-
-                    <div class="form-group row create-form">
-                        <div class="col-md-10">
-                            <select class="form-control" name="status" id="status" style="width:90%">
-                                <option value="1">{{__('users.status_str.1')}}  </option>
-                                <option value="2">{{__('users.status_str.2')}}  </option>
-                            </select>
-                            @if ($errors->has('status'))
-                                <span class="invalid-feedback">
-                                    <strong>{{ $errors->first('status') }}</strong>
-                                </span>
-                            @endif
-                        </div>
-                        <label for="status" class="col-md-2 col-form-label text-center">{{ __('users.status') }}</label>
-                    </div>
-                    
                     <div class="form-group row create-form">
                         <div class="col-md-10">
                            <input id="profile" type="file" class="form-control{{ $errors->has('profile') ? ' is-invalid' : '' }}" name="profile">

@@ -26,9 +26,7 @@ class Patient extends FormRequest
         return [
             'first_name'    => 'required|string',
             'last_name'     => 'required|string',
-            'username'      => 'required|string',
-            'password'      => 'required_if:action,new|confirmed',
-            'status'        => 'required|numeric',
+            'password'      => 'confirmed',
             'profile'       => 'image',
             'id_number'     => 'required|numeric',
             'birth_year'    => 'required|numeric|min:1300|max:1400',

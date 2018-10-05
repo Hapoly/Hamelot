@@ -6,19 +6,8 @@
          <h2>{{ __('users.edit.doctor') }}</h2>
          <div class="row">
             <div class="col-md-12">
-                <form method="POST" action="{{ route('panel.users.update.doctor', ['user' => $user]) }}" enctype="multipart/form-data">
+                <form method="POST" action="{{ route('panel.profile.doctor') }}" enctype="multipart/form-data">
                       @csrf
-                    <div class="form-group row create-form">
-                        <div class="col-md-10">
-                           <input id="username" type="text" class="form-control{{ $errors->has('username') ? ' is-invalid' : '' }}" name="username" value="{{ old('username', $user->username) }}" required autofocus>
-                                @if ($errors->has('username'))
-                                <span class="invalid-feedback">
-                                    <strong>{{ $errors->first('username') }}</strong>
-                                </span>
-                            @endif
-                        </div>
-                         <label for="title" class="col-md-2 col-form-label text-center">{{ __('users.username') }}</label>
-                    </div>
 
                     <div class="form-group row create-form">
                         <div class="col-md-10">
@@ -80,9 +69,9 @@
 
                     <div class="form-group row create-form">
                         <div class="col-md-10">
-                            <select class="form-control" name="degree" id="degree" style="width:90%">
+                            <select class="form-control" name="degree_id" id="degree_id" style="width:90%">
                                 @foreach($degrees as $degree)
-                                    <option value="{{$degree->id}}" {{old('degree', $user->doctor->degree) == $degree->id? 'selected': ''}} > {{$degree->value}}</option>
+                                    <option value="{{$degree->id}}" {{old('degree', $user->doctor->degree->id) == $degree->id? 'selected': ''}} > {{$degree->value}}</option>
                                 @endforeach
                             </select>
                             @if ($errors->has('degree'))
@@ -91,14 +80,14 @@
                                 </span>
                             @endif
                         </div>
-                        <label for="degree" class="col-md-2 col-form-label text-center">{{ __('users.degree') }}</label>
+                        <label for="degree_id" class="col-md-2 col-form-label text-center">{{ __('users.degree') }}</label>
                     </div>
 
                     <div class="form-group row create-form">
                         <div class="col-md-10">
-                            <select class="form-control" name="field" id="field" style="width:90%">
+                            <select class="form-control" name="field_id" id="field_id" style="width:90%">
                                 @foreach($fields as $field)
-                                    <option value="{{$field->id}}" {{old('field', $user->doctor->field) == $field->id? 'selected': ''}} > {{$field->value}}</option>
+                                    <option value="{{$field->id}}" {{old('field', $user->doctor->field->id) == $field->id? 'selected': ''}} > {{$field->value}}</option>
                                 @endforeach
                             </select>
                             @if ($errors->has('field'))
@@ -107,7 +96,7 @@
                                 </span>
                             @endif
                         </div>
-                        <label for="field" class="col-md-2 col-form-label text-center">{{ __('users.field') }}</label>
+                        <label for="field_id" class="col-md-2 col-form-label text-center">{{ __('users.field') }}</label>
                     </div>
 
                     <div class="form-group row create-form">
@@ -150,21 +139,6 @@
                             @endif
                         </div>
                         <label for="status" class="col-md-2 col-form-label text-center">{{ __('users.public') }}</label>
-                    </div>
-
-                    <div class="form-group row create-form">
-                        <div class="col-md-10">
-                            <select class="form-control" name="status" id="status" style="width:90%">
-                                <option value="1" {{old('status', $user->doctor->status) == 1? 'selected': ''}} >{{__('users.status_str.1')}}  </option>
-                                <option value="2" {{old('status', $user->doctor->status) == 2? 'selected': ''}} >{{__('users.status_str.2')}}  </option>
-                            </select>
-                            @if ($errors->has('status'))
-                                <span class="invalid-feedback">
-                                    <strong>{{ $errors->first('status') }}</strong>
-                                </span>
-                            @endif
-                        </div>
-                        <label for="status" class="col-md-2 col-form-label text-center">{{ __('users.status') }}</label>
                     </div>
                     
                     <div class="form-group row create-form">

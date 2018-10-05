@@ -56,14 +56,22 @@ class Profile extends Controller{
    * update methods
    */
   public function updateAdmin(AdminEditRequest $request){
+    $user = Auth::user();
     $inputs = $request->all();
-    if($inputs['password'])
+    if($inputs['password']){
       $inputs['password'] = bcrypt($inputs['password']);
-    else
+    }else
       unset($inputs['password']);
     $inputs['group_code'] = User::G_ADMIN;
     $user->fill($inputs)->save();
-    return redirect()->route('panel.users.show', ['user' => $user]);
+
+    if(isset($inputs['password']))
+      Auth::attempt([
+        'username'  => $user->username,
+        'password'  => $inputs['password'],
+      ]);
+    
+    return redirect()->route('panel.profile');
   }
   public function updateManager(ManagerEditRequest $request){
     $user = Auth::user();
@@ -82,9 +90,11 @@ class Profile extends Controller{
     return redirect()->route('panel.profile');
   }
   public function updateDoctor(DoctorEditRequest $request){
+    $user = Auth::user();
     $inputs = $request->all();
     if($request->hasFile('profile')){
       $inputs['profile'] = Storage::disk('public')->put('/users', $request->file('profile'));
+      Storage::disk('public')->delete($user->profile);
     }
     if($inputs['password'])
       $inputs['password'] = bcrypt($inputs['password']);
@@ -99,12 +109,20 @@ class Profile extends Controller{
     $doctor->fill($inputs);
     $doctor->save();
 
-    return redirect()->route('panel.users.show', ['user' => $user]);
+    if(isset($inputs['password']))
+      Auth::attempt([
+        'username'  => $user->username,
+        'password'  => $inputs['password'],
+      ]);
+    
+    return redirect()->route('panel.profile');
   }
   public function updateNurse(NurseEditRequest $request){
+    $user = Auth::user();
     $inputs = $request->all();
     if($request->hasFile('profile')){
       $inputs['profile'] = Storage::disk('public')->put('/users', $request->file('profile'));
+      Storage::disk('public')->delete($user->profile);
     }
     if($inputs['password'])
       $inputs['password'] = bcrypt($inputs['password']);
@@ -119,12 +137,20 @@ class Profile extends Controller{
     $nurse->fill($inputs);
     $nurse->save();
 
-    return redirect()->route('panel.users.show', ['user' => $user]);
+    if(isset($inputs['password']))
+      Auth::attempt([
+        'username'  => $user->username,
+        'password'  => $inputs['password'],
+      ]);
+    
+    return redirect()->route('panel.profile');
   }
   public function updatePatient(PatientEditRequest $request){
+    $user = Auth::user();
     $inputs = $request->all();
     if($request->hasFile('profile')){
       $inputs['profile'] = Storage::disk('public')->put('/users', $request->file('profile'));
+      Storage::disk('public')->delete($user->profile);
     }
     if($inputs['password'])
       $inputs['password'] = bcrypt($inputs['password']);
@@ -139,6 +165,12 @@ class Profile extends Controller{
     $patient->fill($inputs);
     $patient->save();
 
-    return redirect()->route('panel.users.show', ['user' => $user]);
+    if(isset($inputs['password']))
+      Auth::attempt([
+        'username'  => $user->username,
+        'password'  => $inputs['password'],
+      ]);
+    
+    return redirect()->route('panel.profile');
   }
 }

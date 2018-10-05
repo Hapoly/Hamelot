@@ -27,7 +27,7 @@
                     <div class="form-group row">
                         <label for="degree_id" class="col-md-3 col-form-label text-md-right">{{ __('users.degree') }}</label>
                         <div class="col-md-8">
-                            <select class="form-control" name="degree_id" id="degree">
+                            <select class="form-control" name="degree_id" id="degree_id">
                                 @foreach($degrees as $degree)
                                     <option value="{{$degree->id}}" {{old('degree') == $degree->id? 'selected': ''}} > {{$degree->value}}</option>
                                 @endforeach

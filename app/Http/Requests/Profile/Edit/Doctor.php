@@ -26,13 +26,11 @@ class Doctor extends FormRequest
         return [
             'first_name'    => 'required|string',
             'last_name'     => 'required|string',
-            'username'      => 'required|string',
-            'password'      => 'required_if:action,new|confirmed',
-            'degree'        => 'required|numeric',
-            'field'         => 'required|numeric',
+            'password'      => 'confirmed',
+            'degree_id'        => 'required|string',
+            'field_id'         => 'required|string',
             'gender'        => 'required|numeric',
             'profile'       => 'image',
-            'status'        => 'required|numeric',
             'public'        => 'required|numeric',
             'msc'           => 'required|string|max:16',
         ];

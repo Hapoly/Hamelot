@@ -28,6 +28,12 @@ class Doctor extends UModel{
     public function user(){
         return $this->belongsTo('App\User');
     }
+    public function degree(){
+        return $this->belongsTo('App\Models\ConstValue', 'degree_id');
+    }
+    public function field(){
+        return $this->belongsTo('App\Models\ConstValue', 'field_id');
+    }
     public function getDegreeStrAttribute(){
         return ConstValue::find($this->degree_id)->value;
     }
