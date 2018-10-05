@@ -1,14 +1,104 @@
 @extends('layouts.app')
 @section('content')
+@php
+    use App\Models\Entry;
+@endphp
 <div class="container">
     <div class="form-group search center">
-        <input type="text" class="form-control search-input" placeholder="بیمارستان , درمانگاه , پزشک و...">
-        <button class="btn search-btns">
-            جستجو
-        </button>
+        <form action="{{route('search')}}" method="GET">
+            <input type="text" name="term" class="form-control search-input" placeholder="بیمارستان , درمانگاه , پزشک و..." value="{{old('term', $term)}}">
+            <button class="btn search-btns">
+                جستجو
+            </button>
+        </form>
     </div>
     <div class="row">
-        <div class="col-md-4">
+        @foreach($results as $result)
+            @switch($result->group_code)
+                @case(Entry::HOSPITAL)
+                @case(Entry::DEPARTMENT)
+                @case(Entry::CLINIC)
+                @case(Entry::POLICLINIC)
+                    <div class="col-md-4">
+                        <div class="searched-card">
+                            <img src="{{$result->unit->image_url}}" class="search-img">
+                            <h5 class="center">
+                                {{$result->unit->complete_title}}
+                            </h5>
+                            <!-- <div class="star-rating">
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star"></span>
+                                <span class="fa fa-star"></span>
+                            </div> -->
+                            <span class="center">
+                                {{$result->unit->group_str}} ({{$result->unit->type_str}})
+                            </span>
+                            <span class="center">
+                                {{$result->unit->address}}
+                            </span>
+                            <a href="{{route('panel.units.show', ['unit' => $result->unit])}}" class="btn see-more-btn center">
+                                مشاهده صفحه
+                            </a>
+                        </div>
+                    </div>
+                    @break
+                @case(Entry::DOCTOR)
+                    <div class="col-md-4">
+                        <div class="searched-card">
+                            <img src="{{$result->user->doctor->profile_url}}" class="search-img">
+                            <h5 class="center">
+                                {{$result->user->full_name}}
+                            </h5>
+                            <!-- <div class="star-rating">
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star"></span>
+                                <span class="fa fa-star"></span>
+                            </div> -->
+                            <span class="center">
+                                {{$result->user->field_str}} - {{$result->user->degree_str}}
+                            </span>
+                            <span class="center">
+                                کد نظام‌پزشکی: {{$result->user->msc_str}}
+                            </span>
+                            <a href="{{route('panel.users.show', ['user' => $result->user])}}" class="btn see-more-btn center">
+                                مشاهده صفحه
+                            </a>
+                        </div>
+                    </div>
+                @break
+                @case(Entry::NURSE)
+                    <div class="col-md-4">
+                        <div class="searched-card">
+                            <img src="{{$result->user->nurse->profile_url}}" class="search-img">
+                            <h5 class="center">
+                                {{$result->user->full_name}}
+                            </h5>
+                            <!-- <div class="star-rating">
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star"></span>
+                                <span class="fa fa-star"></span>
+                            </div> -->
+                            <span class="center">
+                                {{$result->user->field_str}} - {{$result->user->degree_str}}
+                            </span>
+                            <span class="center">
+                                کد نظام‌پزشکی: {{$result->user->msc_str}}
+                            </span>
+                            <a href="{{route('panel.users.show', ['user' => $result->user])}}" class="btn see-more-btn center">
+                                مشاهده صفحه
+                            </a>
+                        </div>
+                    </div>
+                @break
+            @endswitch
+        @endforeach
+        <!-- <div class="col-md-4">
             <div class="searched-card">
                 <img src="/imgs/img.png" class="search-img">
                 <h5 class="center">
@@ -223,16 +313,10 @@
                     مشاهده صفحه
                 </button>
             </div>
-        </div>
+        </div> -->
     </div>
     <div class="center">
-        <div class="pagination">
-            <a href="#">&laquo;</a>
-            <a href="#">1</a>
-            <a class="active" href="#">2</a>
-            <a href="#">3</a>
-            <a href="#">&raquo;</a>
-        </div>
+        {{$results->links()}}
     </div>
 </div>
 @endsection

@@ -46,6 +46,9 @@
 		.invalid-feedback{
 			text-align: right;
         }
+        .see-more-btn {
+            color: white !important;
+        }
         @font-face {
             font-family: "IRANSans";
         

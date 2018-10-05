@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Storage;
 use App\Models\Experiment;
 use App\Models\UnitUser;
 use App\Models\Entry;
+use Webpatser\Uuid\Uuid;
 
 class Unit extends UModel{
     /**
@@ -103,6 +104,8 @@ class Unit extends UModel{
         Unit::LABRATORY     => Entry::LABRATORY,
     ];
     public function save(array $options = []){
+        if(!$this->id)
+            $this->id = Uuid::generate()->string;
         parent::save($options);
         $entry = Entry::where('target_id', $this->id)->where('group_code', $this->group_code_to_gc[$this->group_code])->first();
         $data = [

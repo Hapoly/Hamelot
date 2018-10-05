@@ -47,21 +47,11 @@ class Entry extends UModel
         return __('entries.status_str.' . $this->status);
     }
 
-    public function target(){
-        switch($this->type){
-            case Entry::HOSPITAL:
-                return $this->hasOne('App\Models\Hospital', 'target_id');
-            case Entry::POLICLINIC:
-                return $this->hasOne('App\Models\Policlinic', 'target_id');
-            case Entry::CLINIC:
-                return $this->hasOne('App\Models\Clinic', 'target_id');
-            case Entry::DOCTOR:
-                return $this->hasOne('App\User', 'target_id');
-            case Entry::NURSE:
-                return $this->hasOne('App\User', 'target_id');
-            default:
-                return null;
-        }
+    public function unit(){
+        return $this->belongsTo('App\Models\Unit', 'target_id');
+    }
+    public function user(){
+        return $this->belongsTo('App\User', 'target_id');
     }
 
     public function degree(){

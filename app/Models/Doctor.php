@@ -6,6 +6,7 @@ use App\UModel;
 
 use App\Models\ConstValue;
 use Illuminate\Support\Facades\Storage;
+use Webpatser\Uuid\Uuid;
 
 class Doctor extends UModel{
     /**
@@ -54,10 +55,12 @@ class Doctor extends UModel{
     }
 
     public function save(array $options = []){
+        if(!$this->id)
+            $this->id = Uuid::generate()->string;
         parent::save($options);
         $entry = Entry::where('target_id', $this->id)->where('group_code', Entry::DOCTOR)->first();
         $data = [
-            'target_id'     => $this->id,
+            'target_id'     => $this->user->id,
             'title'         => $this->user->full_name,
 
             'degree_id'     => $this->degree_id,

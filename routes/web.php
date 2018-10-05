@@ -11,9 +11,6 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('search');
 Route::middleware(['auth', 'Permission'])->namespace('Panel')->prefix('panel')->name('panel.')->group(function(){
     Route::resources([
         'units'             => 'Units',
@@ -180,12 +177,8 @@ Route::namespace('Auth')->group(function($query){
 Route::middleware('auth')->group(function(){
     Route::get('/home', 'HomeController@index')->name('home'); 
 });
-Route::get('/about',function(){
-    return view('about');
-})->name('about');
-Route::get('/tour',function(){
-    return view('tour');
-})->name('tour');
-Route::get('/searched',function(){
-    return view('searched');
-})->name('searched');
+
+Route::get('/', function () {return view('welcome');})->name('welcome');
+Route::get('/about',function(){return view('about');})->name('about');
+Route::get('/tour',function(){return view('tour');})->name('tour');
+Route::get('/search', 'HomeController@search')->name('search');
