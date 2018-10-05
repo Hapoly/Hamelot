@@ -48,7 +48,7 @@
             @endforeach
         @endtable
     @else
-        {{transactions.not_found}}
+        {{__('transactions.not_found')}}
     @endif
   </div>
 </div>
