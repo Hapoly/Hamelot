@@ -26,7 +26,13 @@ class RegisterController extends Controller{
     public function moreInfo(RegisterRequest $request){
         switch($request->group_code){
             case 2:
-                $user = User::create($request->all());
+                $data = $request->all();
+                $data['password'] = Hash::make($data['password']);
+                $user = User::create($data);
+                Auth::attempt([
+                    'username'  => $request->username,
+                    'password'  => $request->password,
+                ]);
                 return redirect()->route('search');
             case 3:
                 return view('auth.more_info.doctor', [
