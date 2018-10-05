@@ -351,4 +351,11 @@ class User extends Authenticatable
             $this->id = Uuid::generate()->string;
         parent::save($options);
     }
+
+    public function all_credit(){
+        return 120000;
+    }
+    public function avialable_credit(){
+        return 115000;
+    }
 }

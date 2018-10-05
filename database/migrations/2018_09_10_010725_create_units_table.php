@@ -30,6 +30,8 @@ class CreateUnitsTable extends Migration
             $table->smallInteger('type')->default(env('UNIT_TYPE_DEFAULT'));
             $table->smallInteger('public')->default(env('UNIT_PUBLIC_DEFAULT'));
 
+            $table->smallInteger('comission')->default(env('COMISSION_PERCENT'));
+
             $table->uuid('parent_id')->index()->default(0);
             $table->timestamps();
         });

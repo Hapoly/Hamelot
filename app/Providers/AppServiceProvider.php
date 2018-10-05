@@ -47,6 +47,15 @@ class AppServiceProvider extends ServiceProvider
         Blade::include('components.forms.structures.operations.th_rg', 'operation_th_rg');
 
         Blade::component('components.forms.structures.table', 'table');
+
+
+
+        // dashboard components
+        Blade::include('components.dashboard.users', 'dashboard_users');
+        Blade::include('components.dashboard.wallet', 'dashboard_wallet');
+        Blade::include('components.dashboard.units', 'dashboard_units');
+        Blade::include('components.dashboard.bids', 'dashboard_bids');
+        Blade::include('components.dashboard.demands', 'dashboard_demands');
     }
 
     /**

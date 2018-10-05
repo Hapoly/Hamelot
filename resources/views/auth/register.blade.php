@@ -121,7 +121,7 @@
             </div>
         </div>
         <div class="col-md-5 login-pic">
-            <img src="/imgs/logo.png" class="login-img">
+            <img src="{{asset('/imgs/logo.png')}}" class="login-img">
         </div>
     </div>
 </div>
