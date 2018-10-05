@@ -7,73 +7,47 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use App\Models\ConstValue;
+use Illuminate\Support\Facades\Storage;
 
-class RegisterController extends Controller
-{
-    /*
-    |--------------------------------------------------------------------------
-    | Register Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller handles the registration of new users as well as their
-    | validation and creation. By default this controller uses a trait to
-    | provide this functionality without requiring any additional code.
-    |
-    */
+use App\Models\Doctor;
+use App\Models\Nurse;
+use App\Models\Patient;
+use Auth;
+use App\Http\Requests\Auth\Register as RegisterRequest;
+use App\Http\Requests\Auth\CreateDoctor as CreateDoctorRequest;
 
-    use RegistersUsers;
-
-    /**
-     * Where to redirect users after registration.
-     *
-     * @var string
-     */
-    protected $redirectTo = '/home';
-
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('guest');
+class RegisterController extends Controller{
+    public function register(){
+        return view('auth.register');
     }
-
-    /**
-     * Get a validator for an incoming registration request.
-     *
-     * @param  array  $data
-     * @return \Illuminate\Contracts\Validation\Validator
-     */
-    protected function validator(array $data)
-    {
-        return Validator::make($data, [
-            'first_name'    => 'required|string',
-            'last_name'     => 'required|string',
-            'prefix'        => 'required|string',
-            'username'      => 'required|string|unique:users',
-            'password'      => 'required|string|confirmed',
-            'group_code'    => 'required|numeric',
-        ]);
+    public function moreInfo(RegisterRequest $request){
+        switch($request->group_code){
+            case 2:
+                return view('auth.more_info.manager');
+            case 3:
+                return view('auth.more_info.doctor', [
+                    'request'   => $request,
+                    'degrees'   => ConstValue::where('type', 1)->get(),
+                    'fields'    => ConstValue::where('type', 2)->get(),
+                ]);
+            case 4:
+                return view('auth.more_info.nurse');
+            case 5:
+                return view('auth.more_info.patient');
+        }
     }
-
-    /**
-     * Create a new user instance after a valid registration.
-     *
-     * @param  array  $data
-     * @return \App\User
-     */
-    protected function create(array $data)
-    {
-        return User::create([
-            'username'      => $data['username'],
-            'password'      => Hash::make($data['password']),
-            'first_name'    => $data['first_name'],
-            'last_name'     => $data['last_name'],
-            'prefix'        => $data['prefix'],
-            'group_code'    => $data['group_code'],
-            'status'        => User::S_ACTIVE
+    public function createDoctor(CreateDoctorRequest $request){
+        $data = $request->all();
+        $data['password'] = Hash::make($data['password']);
+        $data['profile'] = Storage::disk('public')->put('/users', $request->file('profile'));
+        $user = User::create($data);
+        $data['user_id'] = $user->id;
+        Doctor::create($data);
+        Auth::attempt([
+            'username'  => $request->username,
+            'password'  => $request->password,
         ]);
+        return redirect()->route('search');
     }
 }

@@ -1,12 +1,10 @@
 @extends('layouts.app')
-
 @section('content')
 <div class="container">
     <div class="row">
         <div class="col-md-7">
             <div class="login-card">
-                <form class="login-form" method="POST" action="{{ route('register') }}">
-                        @csrf
+                <form class="login-form" method="GET" action="{{ route('more_info') }}">
                     <div class="form-group row">
                         <label for="username" class="col-sm-3 col-form-label text-md-right">{{ __('general.username') }}</label>
     
@@ -105,12 +103,19 @@
                         </div>
                     </div> -->
                    
-                    <div class="form-group row mb-0">
-                        <div class="col-md-8 offset-md-4" style="text-align: right; margin-top: 20px;">
-                            <button type="submit" class="btn btn-primary" >
-                                {{ __('general.register') }}
-                            </button>
-                        </div>
+                    <div class="form-group row mb-0" style="display: flex; justify-content: center;">
+                        <button type="submit" name="group_code" value="2" class="btn btn-primary" style="margin: 10px">
+                            {{ __('general.register_as_manager') }}
+                        </button>
+                        <button type="submit" name="group_code" value="3" class="btn btn-primary" style="margin: 10px" >
+                            {{ __('general.register_as_doctor') }}
+                        </button>
+                        <button type="submit" name="group_code" value="4" class="btn btn-primary" style="margin: 10px" >
+                            {{ __('general.register_as_nurse') }}
+                        </button>
+                        <button type="submit" name="group_code" value="5" class="btn btn-primary" style="margin: 10px" >
+                            {{ __('general.register_as_patient') }}
+                        </button>
                     </div>
                 </form>
             </div>

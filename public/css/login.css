@@ -135,6 +135,7 @@ body{
 	background-color: #2a5477;
 	margin: auto;
 	display: block;
+	color: white !important;
 }
 .about-title {
 	text-align: center;

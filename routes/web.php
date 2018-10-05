@@ -13,7 +13,7 @@
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('search');
 Route::middleware(['auth', 'Permission'])->namespace('Panel')->prefix('panel')->name('panel.')->group(function(){
     Route::resources([
         'units'             => 'Units',
@@ -23,7 +23,6 @@ Route::middleware(['auth', 'Permission'])->namespace('Panel')->prefix('panel')->
         'bids'              => 'Bids',
         'bank-accounts'     => 'BankAccounts',
     ]);
-
     Route::prefix('prints')->name('prints.')->namespace('Prints')->group(function(){
         Route::prefix('units')->name('units.')->group(function(){
             Route::get('/', 'Units@units')->name('index');
@@ -160,8 +159,18 @@ Route::middleware(['auth', 'Permission'])->namespace('Panel')->prefix('panel')->
     });
 });
 
+// auth routes
 Auth::routes();
-Route::get('/home', 'HomeController@index')->name('home');
+Route::namespace('Auth')->group(function($query){
+    Route::get('/register', 'RegisterController@register')->name('register');
+    Route::get('/more-info', 'RegisterController@moreInfo')->name('more_info');
+    Route::post('/create-doctor', 'RegisterController@createDoctor')->name('create.doctor');
+});
+
+Route::middleware('auth')->group(function(){
+    Route::get('/home', 'HomeController@index')->name('home');
+    Route::get('/profile', 'HomeController@profile')->name('profile');    
+});
 Route::get('/about',function(){
     return view('about');
 })->name('about');

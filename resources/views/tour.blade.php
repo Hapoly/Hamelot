@@ -27,8 +27,7 @@
                     کالسیفر یک بانک بزرگ از واحدهای درمانی مختلف است که می‌توان در بین آنها جستجو کرد و حتی با آنها تعامل داشت. این سیستم می‌تواند نیازهای درمانی متعدد جامعه را با کیفیت بهتری تامین نماید. بیماران در این سیستم صاحب تاریخچه سلامت خود می شوند و می‌توانند آنرا در اختیار پزشکان و پرستاران مختلف قرار دهند. برای خود نوبت بگیرند یا درخواست حضور پرستار برای انجام امور درمانی خود کنند. این سرویس در جهت بهینه سازی تمام این مشکلات طراحی شده است.
                    </p>
                    <div>
-                    <button type="button" class="btn btn-primary reg-now">همین الان ثبت نام کن!</button>
-</div>
+                    <a href="{{route('register')}}" class="btn btn-primary reg-now">همین الان ثبت نام کن!</a>
                 </div>
             </div>
         </div>
@@ -48,7 +47,7 @@
                     مشاهده تقاضاهای خدمات درمانی و انجام آنها
                     پیگیری و گزارشگیری از روند انجام کلیه خدمات
                    </p>
-                    <button type="button" class="btn btn-primary reg-now">همین الان ثبت نام کن!</button>
+                    <a href="{{route('register')}}" class="btn btn-primary reg-now">همین الان ثبت نام کن!</a>
                 </div>
             </div>
             <div class="col-md-6">
@@ -74,7 +73,7 @@
                     گزارش گیری کامل از درآمد و تراکنش‌ها
                     
                    </p>
-                    <button type="button" class="btn btn-primary reg-now">همین الان ثبت نام کن!</button>
+                    <a href="{{route('register')}}" class="btn btn-primary reg-now">همین الان ثبت نام کن!</a>
                 </div>
             </div>
         </div>
@@ -93,7 +92,7 @@
                     امکان مشاهده پرونده شما توسط پزشکان و پرستاران مختلف در جهت بهبود کیفیت درمان
                     مشاهده و جستجو در واحد‌های درمانی مختلف و دریافت اطلاعات از آنها
                    </p>
-                    <button type="button" class="btn btn-primary reg-now">همین الان ثبت نام کن!</button>
+                    <a href="{{route('register')}}" class="btn btn-primary reg-now">همین الان ثبت نام کن!</a>
                 </div>
             </div>
             <div class="col-md-6">

@@ -35,10 +35,17 @@ return [
     ],
 
     // currencies
-    'tmn'     => 'تومان',
-    'dollar'    => 'دلار',
-    'euro'      => 'یورو',
-    'confirm_password'=>'تکرار رمز عبور',
-    'first_name'=> 'نام',
-    'last_name' =>'ننام خانوادگی',
+    'tmn'                   => 'تومان',
+    'dollar'                => 'دلار',
+    'euro'                  => 'یورو',
+
+
+    'confirm_password'      => 'تکرار رمز عبور',
+    'first_name'            => 'نام',
+    'last_name'             => 'نام خانوادگی',
+
+    'register_as_manager'   => 'من یک مدیر هستم',
+    'register_as_doctor'    => 'من یک پزشک هستم',
+    'register_as_nurse'     => 'من یک پرستار هستم',
+    'register_as_patient'   => 'من یک شخص عادی هستم',
 ];

@@ -19,8 +19,7 @@ use App\Http\Requests\Demand\CreateUnitUser as DemandCreateUnitUserRequest;
 use App\Http\Requests\Demand\CreateUnit as DemandCreateUnitRequest;
 use App\Http\Requests\Demand\Edit as DemandEditRequest;
 
-class Demands extends Controller
-{
+class Demands extends Controller{
     public function index(Request $request){
         $demands = Demand::fetch();
         $links = '';
