@@ -26,7 +26,7 @@ class CreateFree extends FormRequest
     {
         return [
             'target_type'   => 'required|numeric',
-            'user_id'       => 'required:target_type,1',
+            'user_id'       => 'required_if:target_type,1',
             'unit_id'       => 'required_if:target_type,2',
             'amount'        => 'required|numeric',
             'date'          => 'required|numeric',

@@ -15,4 +15,10 @@
         @dashboard_demands
     @endif
 </div>
+<div class="row">
+    @if(Auth::user()->isAdmin())
+        @dashboard_last_users
+    @endif
+    @dashboard_last_transactions
+</div>
 @endsection

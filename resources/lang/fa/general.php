@@ -48,4 +48,7 @@ return [
     'register_as_doctor'    => 'من یک پزشک هستم',
     'register_as_nurse'     => 'من یک پرستار هستم',
     'register_as_patient'   => 'من یک شخص عادی هستم',
+
+    'last_users'            => 'آخرین ثبت نام‌ها',
+    'last_transactions'     => 'آخرین تراکنش‌ها',
 ];
