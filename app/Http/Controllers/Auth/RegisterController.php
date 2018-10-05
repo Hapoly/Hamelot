@@ -16,6 +16,8 @@ use App\Models\Patient;
 use Auth;
 use App\Http\Requests\Auth\Register as RegisterRequest;
 use App\Http\Requests\Auth\CreateDoctor as CreateDoctorRequest;
+use App\Http\Requests\Auth\CreateNurse as CreateNurseRequest;
+use App\Http\Requests\Auth\CreatePatient as CreatePatientRequest;
 
 class RegisterController extends Controller{
     public function register(){
@@ -24,7 +26,8 @@ class RegisterController extends Controller{
     public function moreInfo(RegisterRequest $request){
         switch($request->group_code){
             case 2:
-                return view('auth.more_info.manager');
+                $user = User::create($request->all());
+                return redirect()->route('search');
             case 3:
                 return view('auth.more_info.doctor', [
                     'request'   => $request,
@@ -32,9 +35,15 @@ class RegisterController extends Controller{
                     'fields'    => ConstValue::where('type', 2)->get(),
                 ]);
             case 4:
-                return view('auth.more_info.nurse');
+                return view('auth.more_info.nurse', [
+                    'request'   => $request,
+                    'degrees'   => ConstValue::where('type', 3)->get(),
+                    'fields'    => ConstValue::where('type', 4)->get(),
+                ]);
             case 5:
-                return view('auth.more_info.patient');
+                return view('auth.more_info.patient', [
+                    'request'   => $request,
+                ]);
         }
     }
     public function createDoctor(CreateDoctorRequest $request){
@@ -44,6 +53,33 @@ class RegisterController extends Controller{
         $user = User::create($data);
         $data['user_id'] = $user->id;
         Doctor::create($data);
+        Auth::attempt([
+            'username'  => $request->username,
+            'password'  => $request->password,
+        ]);
+        return redirect()->route('search');
+    }
+    public function createNurse(CreateNurseRequest $request){
+        $data = $request->all();
+        $data['password'] = Hash::make($data['password']);
+        $data['profile'] = Storage::disk('public')->put('/users', $request->file('profile'));
+        $user = User::create($data);
+        $data['user_id'] = $user->id;
+        Nurse::create($data);
+        Auth::attempt([
+            'username'  => $request->username,
+            'password'  => $request->password,
+        ]);
+        return redirect()->route('search');
+    }
+    public function createPatient(CreatePatientRequest $request){
+        $data = $request->all();
+        $data['password'] = Hash::make($data['password']);
+        $data['birth_date'] /= 1000;
+        $data['profile'] = Storage::disk('public')->put('/users', $request->file('profile'));
+        $user = User::create($data);
+        $data['user_id'] = $user->id;
+        Patient::create($data);
         Auth::attempt([
             'username'  => $request->username,
             'password'  => $request->password,

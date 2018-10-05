@@ -11,14 +11,30 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    <!-- <script src="{{ asset('js/app.js') }}" defer></script> -->
  
     <!-- Styles -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/login.css') }}" rel="stylesheet">
 	<link href='http://www.fontonline.ir/css/BRoya.css' rel='stylesheet' type='text/css'>
+    
+	<!-- jQuery UI CDN -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <!-- Bootstrap Js CDN -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+	<!-- persian date picker -->
+	<link rel="stylesheet" href="{{asset('css/persian-datepicker.min.css')}}"/>
+	<script src="{{asset('js/persian-date.min.js')}}"></script>
+	<script src="{{asset('js/persian-datepicker.min.js')}}"></script>
+    
     <style>
+        .drop {
+            display: inherit;
+            right: -10px;
+        }
         body {
             direction: rtl;
         }
@@ -63,11 +79,13 @@
                             <li><a class="nav-link" href="{{ route('tour') }}"> الان شروع کن!</a></li>
                         @else
                             <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="{{route('profile')}}" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{Auth::user()->prefix}} {{ Auth::user()->first_name }} {{Auth::user()->last_name}} <span class="caret"></span>
                                 </a>
 
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <div id="drop-down-menu" class="dropdown-menu">
+                                    <a class="dropdown-item" href="{{route('profile')}}">پروفایل من</a>
+                                    <a class="dropdown-item" href="{{route('home')}}">پیشخوان</a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                     onclick="event.preventDefault();
                                                     document.getElementById('logout-form').submit();">
@@ -79,7 +97,7 @@
                                     </form>
                                 </div>
                             </li>
-                            <li><a class="nav-link" href="{{route('home')}}">حساب کاربری</a></li>
+                            <li></li>
                         @endguest
                     </ul>
                 </div>
@@ -91,16 +109,18 @@
         </main>
     </div>
     <script>
-// When the user scrolls down 20px from the top of the document, show the button
-window.onscroll = function() {scrollFunction()};
-
-function scrollFunction() {
-    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-        document.getElementById("mybtn").style.display = "none";
-    } else {
-        document.getElementById("mybtn").style.display = "block";
-    }
-}
+        // When the user scrolls down 20px from the top of the document, show the button
+        window.onscroll = function() {scrollFunction()};
+        function scrollFunction() {
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                document.getElementById("mybtn").style.display = "none";
+            } else {
+                document.getElementById("mybtn").style.display = "block";
+            }
+        }
+        $('#navbarDropdown').click(function(){
+            $('#drop-down-menu').toggleClass('drop');
+        })
     </script>
 </body>
 </html>

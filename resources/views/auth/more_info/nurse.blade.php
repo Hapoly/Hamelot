@@ -4,7 +4,7 @@
     <div class="row">
         <div class="col-md-7">
             <div class="login-card">
-                <form class="login-form" method="POST" action="{{ route('create.doctor') }}" enctype="multipart/form-data">
+                <form class="login-form" method="POST" action="{{ route('create.nurse') }}" enctype="multipart/form-data">
                     @csrf
                     <input hidden name="username" value="{{$request->username}}" />
                     <input hidden name="password" value="{{$request->password}}" />
@@ -42,7 +42,7 @@
                     <div class="form-group row">
                         <label for="field_id" class="col-md-3 col-form-label text-md-right">{{ __('users.field') }}</label>
                         <div class="col-md-8">
-                            <select class="form-control" name="field_id" id="field_id">
+                            <select class="form-control" name="field_id" id="field">
                                 @foreach($fields as $field)
                                     <option value="{{$field->id}}" {{old('field_id') == $field->id? 'selected': ''}} > {{$field->value}}</option>
                                 @endforeach
@@ -105,7 +105,7 @@
             </div>
         </div>
         <div class="col-md-5 login-pic">
-            <img src="{{asset('/imgs/004-doctor.svg')}}" class="login-img">
+            <img src="{{asset('/imgs/025-nurse.svg')}}" class="login-img">
         </div>
     </div>
 </div>
