@@ -84,7 +84,7 @@
                                 </a>
 
                                 <div id="drop-down-menu" class="dropdown-menu">
-                                    <a class="dropdown-item" href="{{route('profile')}}">پروفایل من</a>
+                                    <a class="dropdown-item" href="{{route('panel.profile')}}">پروفایل من</a>
                                     <a class="dropdown-item" href="{{route('home')}}">پیشخوان</a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                     onclick="event.preventDefault();

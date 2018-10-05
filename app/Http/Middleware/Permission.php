@@ -16,6 +16,13 @@ class Permission
      * @return mixed
      */
     private $roles = [
+        'panel.profile'                                     => [ 1, 2, 3, 4, 5 ],
+        'panel.profile.admin'                               => [ 1 ],
+        'panel.profile.manager'                             => [ 2 ],
+        'panel.profile.doctor'                              => [ 3 ],
+        'panel.profile.nurse'                               => [ 4 ],
+        'panel.profile.patient'                             => [ 5 ],
+
         'panel.users.create.admin'                          => [ 1 ],
         'panel.users.create.manager'                        => [ 1 ],
         'panel.users.create.doctor'                         => [ 1 ],

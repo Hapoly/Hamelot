@@ -157,6 +157,14 @@ Route::middleware(['auth', 'Permission'])->namespace('Panel')->prefix('panel')->
             Route::put('/withdraw/{transaction}', 'Transactions@updateWithdraw')->name('withdraw');
         });
     });
+    Route::get('/profile', 'Profile@edit')->name('profile');
+    Route::prefix('profile')->name('profile.')->group(function(){
+        Route::post('/admin', 'Profile@updateAdmin')->name('admin');
+        Route::post('/manager', 'Profile@updateManager')->name('manager');
+        Route::post('/doctor', 'Profile@updateDoctor')->name('doctor');
+        Route::post('/nurse', 'Profile@updateNurse')->name('nurse');
+        Route::post('/patient', 'Profile@updatePatient')->name('patient');
+    });
 });
 
 // auth routes
@@ -170,8 +178,7 @@ Route::namespace('Auth')->group(function($query){
 });
 
 Route::middleware('auth')->group(function(){
-    Route::get('/home', 'HomeController@index')->name('home');
-    Route::get('/profile', 'HomeController@profile')->name('profile');    
+    Route::get('/home', 'HomeController@index')->name('home'); 
 });
 Route::get('/about',function(){
     return view('about');
