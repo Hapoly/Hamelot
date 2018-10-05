@@ -76,9 +76,9 @@
     'search'  => $search,
     'cols' => $cols
     ])
-    @foreach($permissions as $permission)
+    @foreach($permissions as $index => $permission)
       <tr>
-        <td>{{$permission->id}}</td>
+        <td>{{$index+1}}</td>
         @if(Auth::user()->isAdmin() || Auth::user()->isPatient())
           <td>{{$permission->requester->full_name}}</td>
         @endif

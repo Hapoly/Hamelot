@@ -24,9 +24,9 @@
     'search'  => $search,
     'cols' => $cols
     ])
-    @foreach($demands as $demand)
+    @foreach($demands as $index => $demand)
       <tr class="demand-td {{$demand->joined? 'tr-highlight': ''}}">
-        <td>{{$demand->id}}</td>
+        <td>{{$index+1}}</td>
         <td><a href="{{route('panel.demands.show', ['demand' => $demand])}}">{{$demand->description_summary}}</a></td>
         @if($demand->address_id == 0)
           <td>{{__('demands.no_place')}}</td>

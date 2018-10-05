@@ -61,9 +61,9 @@
         </tr>
       </thead>
       <tbody>
-        @foreach($experiments as $experiment)
+        @foreach($experiments as $index => $experiment)
           <tr>
-          <td>{{$experiment->id}}</td>
+          <td>{{$index+1}}</td>
           <td><a href="{{route('panel.experiments.show', ['experiment' => $experiment])}}">{{$experiment->report_template->title}}</a></td>
           <td><a href="{{route('panel.users.show', ['user' => $experiment->user])}}">{{$experiment->user->full_name}}</a></td>
           <td>{{$experiment->date_str}}</td>
