@@ -59,4 +59,8 @@ return [
     'finish_offline'    => 'باقی هزینه در محل پرداخت شد',
     'show_patient'      => 'نمایش متقاضی',
     'add_experiment'    => 'افزودن گزارش',
+
+    'finish'            => 'پایان',
+    'show_user'         => 'مشاهده پزشک/پرستار',
+    'show_unit'         => 'مشاهده واحد درمانی',
 ];
