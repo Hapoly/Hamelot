@@ -9,10 +9,12 @@ use App\Models\Permission;
 use App\Models\Unit;
 use App\Models\UnitUser;
 use App\Models\Experiment;
+use App\Models\Transaction;
 use Auth;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Laravel\Passport\HasApiTokens;
 use Webpatser\Uuid\Uuid;
+
 class User extends Authenticatable
 {
     /**
@@ -352,10 +354,19 @@ class User extends Authenticatable
         parent::save($options);
     }
 
+    public function outgoing_transactions(){
+        return $this->hasMany('App\Models\Transaction', 'src_id');
+    }
+    public function incoming_transactions(){
+        return $this->hasMany('App\Models\Transaction', 'dst_id');
+    }
+
     public function all_credit(){
-        return 120000;
+        $out = $this->outgoing_transactions()->where('status', Transaction::PAID)->sum('amount');
+        $in = $this->incoming_transactions()->where('status', Transaction::PAID)->sum('amount');
+        return $in - $out;
     }
     public function avialable_credit(){
-        return 115000;
+        return $this->all_credit() * 0.9;
     }
 }

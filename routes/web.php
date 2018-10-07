@@ -130,8 +130,8 @@ Route::middleware(['auth', 'Permission'])->namespace('Panel')->prefix('panel')->
         Route::get('/inline-update/{bid}', 'Bids@inlineUpdate')->name('inline_update');
     });
     Route::prefix('payments')->name('payments.')->group(function(){
-        Route::get('/bids-deposit', 'payments@bidDepositVerify')->name('bids.deposit.verify');
-        Route::get('/bids-rmain', 'payments@bidRemainVerify')->name('bids.remain.verify');
+        Route::get('/bids-deposit', 'Payments@bidDepositVerify')->name('bids.deposit.verify');
+        Route::get('/bids-rmain', 'Payments@bidRemainVerify')->name('bids.remain.verify');
     });
     Route::prefix('transactions')->name('transactions.')->group(function(){
         Route::get('/', 'Transactions@index')->name('index');
