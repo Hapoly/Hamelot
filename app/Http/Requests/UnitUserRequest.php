@@ -25,7 +25,7 @@ class UnitUserRequest extends FormRequest
     {
         return [
             'full_name'         => 'required|string',
-            'unit_id'           => 'required|numeric',
+            'unit_id'           => 'required|string',
             'permission'        => 'required|numeric',
         ];
     }

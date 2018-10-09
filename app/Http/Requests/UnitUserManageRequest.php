@@ -25,7 +25,7 @@ class UnitUserManageRequest extends FormRequest
     {
         return [
             'full_name'     => 'required|string',
-            'unit_id' => 'required|numeric',
+            'unit_id'       => 'required|string',
             'type'          => 'required|numeric|in:1,2,3,4',
         ];
     }

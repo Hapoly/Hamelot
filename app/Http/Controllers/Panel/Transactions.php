@@ -82,7 +82,7 @@ class Transactions extends Controller{
     $inputs = $request->all();
     $data = [
       'src_id'    => '0',
-      'date'      => $request->date,
+      'date'      => $request->date/1000,
       'amount'    => $request->amount,
       'type'      => Transaction::FREE,
       'pay_type'  => Transaction::ONLINE_PAY,

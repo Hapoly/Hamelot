@@ -25,6 +25,7 @@ class CreateTransactionsTable extends Migration
             $table->string('currency', 3);
             $table->smallInteger('pay_type');
             $table->smallInteger('status')->default(1);
+            $table->smallInteger('comission')->default(0);
             $table->integer('date');
             $table->timestamps();
         });

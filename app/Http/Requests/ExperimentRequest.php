@@ -24,9 +24,9 @@ class ExperimentRequest extends FormRequest
     public function rules()
     {
         return [
-            'user_id'               => 'required|numeric',
-            'unit_id'               => 'required|numeric',
-            'report_template_id'    => 'required|numeric',
+            'user_id'               => 'required|string',
+            'unit_id'               => 'required|string',
+            'report_template_id'    => 'required|string',
             'year'                  => 'required|numeric',
             'month'                 => 'required|numeric',
             'day'                   => 'required|numeric',

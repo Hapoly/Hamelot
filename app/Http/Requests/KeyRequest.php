@@ -28,7 +28,7 @@ class KeyRequest extends FormRequest
             'description'   => 'required|string',
             'status'        => 'required|numeric',
             'type'          => 'required|numeric',
-            'template_id'   => 'required|numeric',
+            'template_id'   => 'required|string',
         ];
     }
 }

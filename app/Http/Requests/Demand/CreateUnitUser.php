@@ -26,7 +26,7 @@ class CreateUnitUser extends FormRequest
     {
         return [
             'description'   => 'required|string',
-            'address_id'    => 'required|numeric',
+            'address_id'    => 'required|string',
             'asap'          => 'required|numeric|in:0,1',
             'start_time'    => 'required_if:asap,0|string',
             'end_time'      => 'required_if:asap,0|string',
