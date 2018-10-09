@@ -105,7 +105,7 @@ a, a:hover, a:focus {
     background: #fff;
     border: none;
     border-radius: 0;
-    margin-bottom: 40px;
+    margin-bottom: 30px;
     box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
 }
 
@@ -411,7 +411,8 @@ h2, h3, h4{
 .panel-default{
     border-color: white;
     border-radius: 10px;
-    padding-bottom: 25px;
+    padding-bottom: 15px;
+    margin-bottom: 10px;
 }
 .error-span {
     position: sticky;
@@ -699,4 +700,11 @@ h2, h3, h4{
     margin: auto;
     padding: 0;
     width: 90%;
+}
+.btn-checkout ,.btn-units{
+    margin-top: 10px;
+    display: block;
+}
+.wallet-panel , .units-panel {
+    height: 170px;
 }
