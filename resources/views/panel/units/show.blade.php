@@ -163,8 +163,12 @@
               <td>{{$user->group_str}}</td>
               <td>{{$user->status_str}}</td>
               <td>
-                @if($unit->has_permission)
+                @if($user->permission_to_write_info)
                   @operation_th(['base' => 'panel.users', 'label' => 'user', 'item' => $user, 'remove_label' => __('users.remove'), 'edit_label' => __('users.edit_str'), 'show_label' => __('users.show')])
+                @else
+                  <a class="btn btn-default" href="{{route('panel.users.show', ['user' => $user])}}">{{__('users.show')}}</a>
+                @endif
+                @if($unit->has_permission)
                   <a class="btn btn-warning" href="{{route('panel.unit_users.inline_update', ['unit_user' => $user->pivot->id, 'action' => 'cancel'])}}">{{__('unit_users.cancel')}}</a>
                 @endif
                 @if(Auth::user()->isPatient())

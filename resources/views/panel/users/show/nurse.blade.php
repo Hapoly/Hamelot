@@ -83,6 +83,7 @@
               @if(Auth::user()->isAdmin() || Auth::user()->isManager())
                 <td>
                   @operation_th(['base' => 'panel.units', 'label' => 'unit', 'item' => $unit, 'remove_label' => __('units.remove'), 'edit_label' => __('units.edit'), 'show_label' => __('units.show')])
+                  <a class="btn btn-warning" href="{{route('panel.unit_users.inline_update', ['unit_user' => $unit->pivot->id, 'action' => 'cancel'])}}">{{__('unit_users.cancel')}}</a>
                 </td>
               @endif
               @if(Auth::user()->isPatient())

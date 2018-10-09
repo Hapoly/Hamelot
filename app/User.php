@@ -3,7 +3,7 @@
 namespace App;
 
 use Illuminate\Notifications\Notifiable;
-
+use DB;
 use App\Models\Entry;
 use App\Models\Permission;
 use App\Models\Unit;
@@ -360,13 +360,44 @@ class User extends Authenticatable
     public function incoming_transactions(){
         return $this->hasMany('App\Models\Transaction', 'dst_id');
     }
-
     public function all_credit(){
-        $out = $this->outgoing_transactions()->where('status', Transaction::PAID)->sum('amount');
-        $in = $this->incoming_transactions()->where('status', Transaction::PAID)->sum('amount');
-        return $in - $out;
+        $in = 0;
+        $out = 0;
+        if($this->isManager()){
+            $out = Transaction::whereHas('src_unit', function($query){
+                return $query->whereHas('managers', function($query){
+                    return $query->where('users.id', $this->id);
+                });
+            })->where('status', Transaction::PAID)->sum('amount');
+            $in = Transaction::whereHas('dst_unit', function($query){
+                return $query->whereHas('managers', function($query){
+                    return $query->where('users.id', $this->id);
+                });
+            })->where('status', Transaction::PAID)->sum('amount');
+        }else if($this->isPatient()){
+            $out = $this->outgoing_transactions()->where('status', Transaction::PAID)->sum('amount');
+            $in = $this->incoming_transactions()->where('status', Transaction::PAID)->sum('amount');
+        }
+        return intval($in - $out);
     }
     public function avialable_credit(){
-        return $this->all_credit() * 0.9;
+        $in = 0;
+        $out = 0;
+        if($this->isManager()){
+            $out = Transaction::whereHas('src_unit', function($query){
+                return $query->whereHas('managers', function($query){
+                    return $query->where('users.id', $this->id);
+                });
+            })->where('status', Transaction::PAID)->sum(DB::raw('(amount * 100) / (100-comission)'));
+            $in = Transaction::whereHas('dst_unit', function($query){
+                return $query->whereHas('managers', function($query){
+                    return $query->where('users.id', $this->id);
+                });
+            })->where('status', Transaction::PAID)->sum(DB::raw('(amount * 100) / (100-comission)'));
+        }else if($this->isPatient()){
+            $out = $this->outgoing_transactions()->where('status', Transaction::PAID)->sum('amount');
+            $in = $this->incoming_transactions()->where('status', Transaction::PAID)->sum('amount');
+        }
+        return intval($in - $out);
     }
 }
