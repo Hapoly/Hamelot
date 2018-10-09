@@ -7,11 +7,15 @@
                         <div class="col-md-12">
                             <span>اعتبار: {{Auth::user()->all_credit()}} تومان</span>
                             <br>
-                            <span>قابل برداشت: {{Auth::user()->avialable_credit()}} تومان</span>
+                            @if(Auth::user()->isManager() || Auth::user()->isDoctor() || Auth::user()->isNurse())
+                                <span>قابل برداشت: {{Auth::user()->avialable_credit()}} تومان</span>
+                            @endif
                         </div>
-                        <div class="col-md-12">
-                            <a class="btn btn-default" href="{{route('panel.transactions.create.withdraw')}}">تسویه حساب</a>
-                        </div>
+                        @if(Auth::user()->isManager())
+                            <div class="col-md-12">
+                                <a class="btn btn-default" href="{{route('panel.transactions.create.withdraw')}}">تسویه حساب</a>
+                            </div>
+                        @endif
                     </div>
                 </div>
                 <div class="col-md-4 col-sm-4 col-xs-4">

@@ -21,7 +21,7 @@ class Transaction extends UModel
     const BID_DEPOSIT_PAY   = 1;
     const BID_DEPOSIT_BACK  = 2;
     const BID_REMAIN_PAY    = 3;
-    const BID_RMAIN_BACK    = 4;
+    const BID_REMAIN_BACK   = 4;
     const WITHDRAW          = 5;
     const FREE              = 6;
     public function getTypeStrAttribute(){
@@ -101,6 +101,10 @@ class Transaction extends UModel
                     return $query->where('users.id', $user->id);
                 });
             });
+        }else if($user->isDoctor() || $user->isNurse()){
+            return Transaction::whereHas('bid', function($query){
+                return $query->where('user_id', Auth::user()->id);
+            });
         }else{
             return Transaction::where('src_id', $user->id)->orWhere('dst_id', $user->id);
         }
@@ -119,7 +123,7 @@ class Transaction extends UModel
         if( $this->type == Transaction::BID_DEPOSIT_PAY     ||
             $this->type == Transaction::BID_DEPOSIT_BACK    ||
             $this->type == Transaction::BID_REMAIN_PAY      ||
-            $this->type == Transaction::BID_RMAIN_BACK){
+            $this->type == Transaction::BID_REMAIN_BACK){
             if($user->isAdmin()){
                 return $this->bid->demand->description . ' ('. $this->bid->demand->patient->full_name .')' . ' - ' . $this->bid->demand->unit->complete_title;
             }else if($user->isPatient()){

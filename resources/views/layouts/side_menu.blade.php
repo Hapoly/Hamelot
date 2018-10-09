@@ -169,7 +169,7 @@
 	@if(Auth::user()->isDoctor() || Auth::user()->isNurse())
 		<li>
 			<a href="{{route('panel.bids.index')}}" aria-expanded="false">
-				<i class="fa fa-heartbeat-o" aria-hidden="false"></i>
+				<i class="fa fa-heart-o" aria-hidden="false"></i>
 				<span>ماموریت‌ها</span>
 			</a>
 		</li>
