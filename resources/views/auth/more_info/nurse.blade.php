@@ -6,11 +6,6 @@
             <div class="login-card">
                 <form class="login-form" method="POST" action="{{ route('create.nurse') }}" enctype="multipart/form-data">
                     @csrf
-                    <input hidden name="username" value="{{$request->username}}" />
-                    <input hidden name="password" value="{{$request->password}}" />
-                    <input hidden name="first_name" value="{{$request->first_name}}" />
-                    <input hidden name="last_name" value="{{$request->last_name}}" />
-                    <input hidden name="group_code" value="{{$request->group_code}}" />
                     <div class="form-group row">
                         <label for="msc" class="col-md-3 col-form-label text-md-right">{{ __('users.msc') }}</label>
 
@@ -95,7 +90,22 @@
                             @endif
                         </div>
                     </div>
-                   
+                    <div class="form-group row">
+                        <label for="token" class="col-md-3 col-form-label text-md-right">{{ __('users.token') }}</label>
+                        <div class="col-md-8">
+                            <input id="token" type="text" class="form-control{{ ($errors->has('token') || session('register.token_mismatch', false)) ? ' is-invalid' : '' }}" name="token" value="{{ old('token') }}" required>
+                            @if ($errors->has('token'))
+                                <span class="invalid-feedback">
+                                    <strong>{{ $errors->first('token') }}</strong>
+                                </span>
+                            @endif
+                            @if (session('register.token_mismatch', false))
+                                <span class="invalid-feedback">
+                                    <strong>{{ __('validation.token_mismatch') }}</strong>
+                                </span>
+                            @endif
+                        </div>
+                    </div>
                     <div class="form-group row mb-0" style="display: flex; justify-content: center;">
                         <button type="submit"class="btn btn-primary" style="margin: 10px">
                             {{ __('general.register') }}

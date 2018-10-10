@@ -169,6 +169,7 @@ Auth::routes();
 Route::namespace('Auth')->group(function($query){
     Route::get('/register', 'RegisterController@register')->name('register');
     Route::get('/more-info', 'RegisterController@moreInfo')->name('more_info');
+    Route::post('/create-manager', 'RegisterController@createManager')->name('create.manager');
     Route::post('/create-doctor', 'RegisterController@createDoctor')->name('create.doctor');
     Route::post('/create-nurse', 'RegisterController@createNurse')->name('create.nurse');
     Route::post('/create-patient', 'RegisterController@createPatient')->name('create.patient');

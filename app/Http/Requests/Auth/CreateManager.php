@@ -5,7 +5,7 @@ namespace App\Http\Requests\Auth;
 use Illuminate\Foundation\Http\FormRequest;
 use Auth;
 
-class CreateDoctor extends FormRequest
+class CreateManager extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,12 +26,6 @@ class CreateDoctor extends FormRequest
     {
         return [
             'token'         => 'required|string|max:6',
-            'msc'           => 'required|string',
-            'degree_id'     => 'required|string',
-            'field_id'      => 'required|string',
-            'public'        => 'required|numeric',
-            'profile'       => 'required|image|max:256',
-            'gender'        => 'required|numeric',
         ];
     }
 }

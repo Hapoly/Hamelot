@@ -25,12 +25,7 @@ class CreateNurse extends FormRequest
     public function rules()
     {
         return [
-            'username'      => 'required|string|unique:users',
-            'password'      => 'required|string',
-            'first_name'    => 'required|string',
-            'last_name'     => 'required|string',
-            'group_code'    => 'required|numeric',
-            
+            'token'         => 'required|string|max:6',
             'msc'           => 'required|string',
             'degree_id'     => 'required|string',
             'field_id'      => 'required|string',

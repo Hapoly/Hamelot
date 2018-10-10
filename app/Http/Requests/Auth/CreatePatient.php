@@ -25,12 +25,7 @@ class CreatePatient extends FormRequest
     public function rules()
     {
         return [
-            'username'      => 'required|string|unique:users',
-            'password'      => 'required|string',
-            'first_name'    => 'required|string',
-            'last_name'     => 'required|string',
-            'group_code'    => 'required|numeric',
-            
+            'token'         => 'required|string|max:6',
             'id_number'     => 'required|string',
             'birth_date'    => 'required|numeric',
             'profile'       => 'required|image|max:256',

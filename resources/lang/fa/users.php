@@ -24,6 +24,7 @@ return [
     'patient_unit_id' => 'بخش',
     'public'            => 'وضعیت نمایش',
     'msc'               => 'کدنظام پزشکی',
+    'token'             => 'کد تایید',
 
     'show'              => 'نمایش',
     'edit_str'          => 'ویرایش',
@@ -99,4 +100,8 @@ return [
     'print_experiments'         => 'چاپ آزمایشات کاربر',
     'print_patients'            => 'چاپ بیماران کاربر',
     'print_visitors'            => 'چاپ لیست پزشکان و پرستاران',
+
+
+
+    
 ];

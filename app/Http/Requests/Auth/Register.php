@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Auth;
 
 use Illuminate\Foundation\Http\FormRequest;
+use App\Rules\Phone;
 use Auth;
 
 class Register extends FormRequest
@@ -30,6 +31,7 @@ class Register extends FormRequest
             'first_name'    => 'required|string',
             'last_name'     => 'required|string',
             'group_code'    => 'required|numeric',
+            'phone'         => ['required', new Phone, 'unique:users'],
         ];
     }
 }

@@ -20,6 +20,7 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->string('first_name');
             $table->string('last_name');
+            $table->string('phone')->unique();
             $table->smallInteger('status')->default(1);
             $table->smallInteger('group_code')->default(1);
             $table->smallInteger('public')->default(1);

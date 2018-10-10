@@ -46,8 +46,6 @@ class Permission
         'panel.users.destroy'                               => [ 1 ],
         'panel.users.index'                                 => [ 1, 2, 3, 4, 5 ],
 
-
-
         'panel.units.index'                                 => [ 1, 2, 3, 4, 5 ],
         'panel.units.create'                                => [ 1, 2 ],
         'panel.units.store'                                 => [ 1, 2 ],
@@ -56,7 +54,6 @@ class Permission
         'panel.units.show'                                  => [ 1, 2, 3, 4, 5 ],
         'panel.units.destroy'                               => [ 1, 2 ],
 
-
         'panel.report_templates.index'                      => [ 1, 2, 3, 4 ],
         'panel.report_templates.create'                     => [ 1 ],
         'panel.report_templates.store'                      => [ 1 ],
@@ -64,7 +61,6 @@ class Permission
         'panel.report_templates.update'                     => [ 1 ],
         'panel.report_templates.show'                       => [ 1, 2, 3, 4 ],
         'panel.report_templates.destroy'                    => [ 1 ],
-
 
         'panel.experiments.index'                           => [ 1, 2, 3, 4, 5 ],
         'panel.experiments.create'                          => [ 1, 2, 3, 4, 5 ],
