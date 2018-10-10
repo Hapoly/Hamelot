@@ -2,7 +2,7 @@
 @section('title', 'داشبورد')
 @section('content')
 <div class="row">
-    @if(!Auth::user()->isAdmin())
+    @if(!(Auth::user()->isAdmin() || Auth::user()->isPatient() || Auth::user()->isNurse()))
         @dashboard_wallet
     @else
         @dashboard_users
