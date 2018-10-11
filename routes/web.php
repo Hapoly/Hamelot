@@ -17,6 +17,8 @@ Route::middleware(['auth', 'Permission'])->namespace('Panel')->prefix('panel')->
         'report_templates'  => 'ReportTemplates',
         'experiments'       => 'Experiments',
         'addresses'         => 'Addresses',
+        'activity-times'    => 'ActivityTimes',
+        'off-times'         => 'OffTimes',
         'bids'              => 'Bids',
         'bank-accounts'     => 'BankAccounts',
     ]);

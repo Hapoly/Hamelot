@@ -78,6 +78,22 @@ class Permission
         'panel.addresses.show'                              => [ 1, 5 ],
         'panel.addresses.destroy'                           => [ 1, 5 ],
 
+        'panel.activity-times.index'                        => [ 1, 2, 3, 4 ],
+        'panel.activity-times.create'                       => [ 1, 2, 3, 4 ],
+        'panel.activity-times.store'                        => [ 1, 2, 3, 4 ],
+        'panel.activity-times.edit'                         => [ 1, 2, 3, 4 ],
+        'panel.activity-times.update'                       => [ 1, 2, 3, 4 ],
+        'panel.activity-times.show'                         => [ 1, 2, 3, 4 ],
+        'panel.activity-times.destroy'                      => [ 1, 2, 3, 4 ],
+
+        'panel.off-time.index'                              => [ 1, 2, 3, 4 ],
+        'panel.off-time.create'                             => [ 1, 2, 3, 4 ],
+        'panel.off-time.store'                              => [ 1, 2, 3, 4 ],
+        'panel.off-time.edit'                               => [ 1, 2, 3, 4 ],
+        'panel.off-time.update'                             => [ 1, 2, 3, 4 ],
+        'panel.off-time.show'                               => [ 1, 2, 3, 4 ],
+        'panel.off-time.destroy'                            => [ 1, 2, 3, 4 ],
+
         'panel.bank-accounts.index'                         => [ 1, 2 ],
         'panel.bank-accounts.create'                        => [ 1, 2 ],
         'panel.bank-accounts.store'                         => [ 1, 2 ],

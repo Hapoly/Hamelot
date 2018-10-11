@@ -47,7 +47,7 @@ class Unit extends UModel{
     }
 
     public function getCompleteTitleAttribute(){
-        if($this->parent_id == 0)
+        if($this->parent_id == '0')
             return $this->title;
         else
             return $this->title . ' - '. $this->parent->title;

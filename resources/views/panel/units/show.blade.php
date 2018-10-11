@@ -218,7 +218,8 @@
                   @operation_th(['base' => 'panel.units', 'label' => 'unit', 'item' => $sub_unit, 'remove_label' => __('units.remove'), 'edit_label' => __('units.edit'), 'show_label' => __('units.show')])
                 </td>
               @elseif(Auth::user()->isDoctor() || Auth::user()->isNurse())
-                @if($sub_unit->canJoin())
+                <td>{{$sub_unit->joined_status_str}}</td>
+                @if($sub_unit->can_join)
                   <td><a class="btn btn-primary" href="{{route('panel.unit_users.send', ['user' => Auth::user(), 'unit' => $sub_unit])}}">{{ __('unit_users.send') }}</a></td>
                 @else
                   <td>-</td>

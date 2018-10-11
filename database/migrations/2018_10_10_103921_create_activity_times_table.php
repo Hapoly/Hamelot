@@ -16,11 +16,11 @@ class CreateActivityTimesTable extends Migration
         Schema::create('activity_times', function (Blueprint $table) {
             $table->uuid('id');
             $table->primary('id');
-            $table->smallInt('day_of_week');
+            $table->smallInteger('day_of_week');
             $table->integer('start_time');
             $table->integer('finish_time');
             $table->uuid('unit_user_id')->index();
-            $table->smallInteger('status');
+            $table->smallInteger('status')->default(1);
             $table->timestamps();
         });
     }
