@@ -5,8 +5,9 @@ namespace App\Models;
 use App\UModel;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Drivers\Time;
 
-class OffTime extends Model
+class OffTime extends UModel
 {
     /**
      * Indicates if the IDs are auto-incrementing.
@@ -31,5 +32,9 @@ class OffTime extends Model
 
     public function getFinishDateStrAttribute(){
         return Time::jdate('d F Y H:i', $this->finish_date);
+    }
+
+    public function getTimeStrAttribute(){
+        return $this->start_date_str . ' - ' . $this->finish_date_str;
     }
 }

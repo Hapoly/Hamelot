@@ -216,4 +216,34 @@
 			</ul>
 		</li>
 	@endif
+	@if(!Auth::user()->isPatient())
+		<li>
+			<a href="#activity-times" data-toggle="collapse" aria-expanded="false">
+				<i class="fa fa-calendar-check-o" aria-hidden="false"></i>
+				<span>زمان‌های فعالیت</span>
+			</a>
+			<ul class="collapse list-unstyled" id="activity-times">
+				<li>
+					<a href="{{route('panel.activity-times.create')}}">زمان فعالیت جدید </a>
+				</li>
+				<li>
+					<a href="{{route('panel.activity-times.index')}}">زمان‌های فعالیت</a>
+				</li>
+			</ul>
+		</li>
+		<li>
+			<a href="#off-times" data-toggle="collapse" aria-expanded="false">
+				<i class="fa fa-calendar-times-o" aria-hidden="false"></i>
+				<span>مرخصی</span>
+			</a>
+			<ul class="collapse list-unstyled" id="off-times">
+				<li>
+					<a href="{{route('panel.off-times.create')}}">مرخصی جدید </a>
+				</li>
+				<li>
+					<a href="{{route('panel.off-times.index')}}">مرخصی</a>
+				</li>
+			</ul>
+		</li>
+	@endif
 </ul>
