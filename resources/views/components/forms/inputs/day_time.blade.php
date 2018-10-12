@@ -5,8 +5,8 @@
  */
 ?>
 @php
-    $hour = intval($value / 3600);
-    $minute = intval($value / 60) %60;
+    $hour = intval(($value % (24 * 3600)) / 3600);
+    $minute = intval(($value % (24 * 3600)) / 60) %60;
 @endphp
 <div class="row">
     <div class="col-md-12 text-center">

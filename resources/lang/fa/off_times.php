@@ -19,4 +19,5 @@ return [
     'operation'     => 'عملیات',
 
     'all_unit_users'    => 'تمام واحد‌ها',
+    'not_found'         => 'موردی یافت نشد',
 ];
