@@ -6,6 +6,7 @@ use App\UModel;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Drivers\Time;
+use Auth;
 
 class OffTime extends UModel
 {
@@ -36,5 +37,44 @@ class OffTime extends UModel
 
     public function getTimeStrAttribute(){
         return $this->start_date_str . ' - ' . $this->finish_date_str;
+    }
+
+    public static function fetch(){
+        if(Auth::user()->isAdmin())
+            return new OffTime;
+        else if(Auth::user()->isManager())
+            return OffTime::where(function($query){
+                return $query->whereHas('unit_user', function($query){
+                    return $query->whereHas('unit', function($query){
+                        return $query->whereHas('managers', function($query){
+                            return $query->where('users.id', Auth::user()->id);
+                        });
+                    });
+                })->orWhere(function($query){
+                    return $query->where('unit_user', '0')->whereHas('user', function($query){
+                        return $query->where('units', function($query){
+                            return $query->whereHas('managers', function($query){
+                                return $query->where('users.id', Auth::user()->id);
+                            });
+                        });
+                    });
+                });
+            });
+        else{
+            return OffTime::where('user_id', Auth::user()->id);
+        }
+    }
+
+    public function getPermissionToWriteAttribute(){
+        if(Auth::user()->isAdmin())
+            return true;
+        if(Auth::user()->isManager())
+            return $this->unit_user->whereHas('unit', function($query){
+                return $query->where('managers', function($query){
+                    return $query->where('users.id', Auth::user()->id);
+                });
+            })->first() != null;
+        else
+            return $this->user_id == Auth::user()->id;
     }
 }

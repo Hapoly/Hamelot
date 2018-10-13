@@ -42,7 +42,8 @@ class OffTimes extends Controller{
       'sort'        => $sort,
       'search'      => isset(parse_url(url()->full())['query'])? parse_url(url()->full())['query']: '',
       'filters'     => [
-        'unit_id'     => $request->input('unit_id', ''),
+        'unit_id'       => $request->input('unit_id', 0),
+        'day_of_week'   => $request->input('day_of_week', 0),
       ],
     ]);
   }
