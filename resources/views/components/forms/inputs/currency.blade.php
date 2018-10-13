@@ -7,7 +7,7 @@
 <div class="form-group row create-form">
     <div class="col-md-10">
         <div class="input-group" style="width: 93%">
-            <input type="number" min="0" class="input-group-with-left-addon" name="{{$name}}" value="{{$value}}">
+            <input type="number" min="0" class="input-group-with-left-addon" id="{{$name}}" name="{{$name}}" value="{{$value}}">
             <span class="left-addon">{{$placeholder}}</span>
         </div>
         @if ($errors->has($name))

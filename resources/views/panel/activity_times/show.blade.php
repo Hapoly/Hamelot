@@ -26,6 +26,28 @@
             <td>{{__('activity_times.time')}}</td>
             <td>{{$activity_time->time_str}}</td>
           </tr>
+          <tr>
+            <td>{{__('activity_times.auto_fill')}}</td>
+            <td>{{$activity_time->auto_fill_str}}</td>
+          </tr>
+          @if($activity_time->auto_fill == 1)
+            <tr>
+                <td>{{__('activity_times.default_price')}}</td>
+                <td>{{$activity_time->default_price_str}}</td>
+            </tr>
+            <tr>
+                <td>{{__('activity_times.default_deposit')}}</td>
+                <td>{{$activity_time->default_deposit_str}}</td>
+            </tr>
+            <tr>
+                <td>{{__('activity_times.demand_limit')}}</td>
+                <td>{{$activity_time->demand_limit_str}}</td>
+            </tr>
+            <tr>
+                <td>{{__('activity_times.default_demand_time')}}</td>
+                <td>{{$activity_time->default_demand_time_str}}</td>
+            </tr>
+          @endif
         </tbody>
       </table>
     </div>

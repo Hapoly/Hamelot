@@ -17,7 +17,11 @@ class ActivityTime extends UModel
     public $incrementing = false;
     protected $primary = 'id';
     protected $table = 'activity_times';
-    protected $fillable = ['day_of_week', 'unit_user_id', 'start_time', 'finish_time', 'status'];
+    protected $fillable = [
+        'day_of_week', 'unit_user_id', 
+        'start_time', 'finish_time', 
+        'demand_limit', 'default_price', 'default_deposit', 'default_demand_time', 'auto_fill', 
+        'status'];
 
     const ACTIVE = 1;
     const DEACTIVE = 2;
@@ -76,5 +80,37 @@ class ActivityTime extends UModel
             })->first() != null;
         else
             return $this->unit_user->user_id == Auth::user()->id;
+    }
+
+    const AUTO_FILL_TRUE = 1;
+    const AUTO_FILL_FALSE = 0;
+    public function getAutoFillStrAttribute(){
+        return __('activity_times.auto_fill_str.' . $this->auto_fill);
+    }
+
+    public function getDefaultPriceStrAttribute(){
+        if($this->default_price == 0)
+            return __('general.free');
+        else
+            return $this->default_price . ' ' . __('general.tmn');
+    }
+    public function getDefaultDepositStrAttribute(){
+        if($this->default_deposit == 0)
+            return __('general.free');
+        else
+            return $this->default_deposit . ' ' . __('general.tmn');
+    }
+
+    public function getDemandLimitStrAttribute(){
+        if($this->demand_limit == 0)
+            return __('general.unlimit');
+        else
+            return $this->demand_limit . ' ' . __('general.person');
+    }
+    public function getDefaultDemandTimeStrAttribute(){
+        if($this->default_demand_time == 0)
+            return __('general.unlimit');
+        else
+            return $this->default_demand_time . ' ' . __('general.minute');
     }
 }

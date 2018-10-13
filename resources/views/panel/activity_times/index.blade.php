@@ -45,6 +45,7 @@
       'id'            => __('activity_times.row'),
       'unit_user_id'  => __('activity_times.unit_user_id'),
       'time'          => __('activity_times.time'),
+      'auto_fill'     => __('activity_times.auto_fill'),
       'NuLL'          => __('activity_times.operation'),
     ]])
     @foreach($activity_times as $index => $activity_time)
@@ -56,6 +57,7 @@
           <td>{{$activity_time->unit_user->unit->complete_title}} , {{$activity_time->unit_user->user->full_name}}</td>
         @endif
         <td>{{$activity_time->time_str}}</td>
+        <td>{{$activity_time->auto_fill_str}}</td>
         @if($activity_time->permission_to_write)
           <td>
             @operation_th(['base' => 'panel.activity-times', 'label' => 'activity_time', 'item' => $activity_time, 'remove_label' => __('activity_times.remove'), 'edit_label' => __('activity_times.edit'), 'show_label' => __('activity_times.show')])

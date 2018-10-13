@@ -25,12 +25,17 @@ class Create extends FormRequest
     public function rules()
     {
         return [
-            'unit_user_id'      => 'required|string',
-            'day_of_week'       => 'required|numeric|in:1,2,3,4,5,6,7',
-            'start_timehour'    => 'required|numeric|min:0|max:23',
-            'start_timeminute'  => 'required|numeric|min:0|max:59',
-            'finish_timehour'   => 'required|numeric|min:0|max:23',
-            'finish_timeminute' => 'required|numeric|min:0|max:59',
+            'unit_user_id'          => 'required|string',
+            'day_of_week'           => 'required|numeric|in:1,2,3,4,5,6,7',
+            'start_timehour'        => 'required|numeric|min:0|max:23',
+            'start_timeminute'      => 'required|numeric|min:0|max:59',
+            'finish_timehour'       => 'required|numeric|min:0|max:23',
+            'finish_timeminute'     => 'required|numeric|min:0|max:59',
+            'auto_fill'             => 'required|numeric|in:0,1',
+            'default_price'         => 'required_if:auto_fill,1|numeric|min:1000',
+            'default_deposit'       => 'required_if:auto_fill,1|numeric',
+            'demand_limit'          => 'required_if:auto_fill,1|numeric',
+            'default_demand_time'   => 'required_if:auto_fill,1|numeric',
         ];
     }
 }

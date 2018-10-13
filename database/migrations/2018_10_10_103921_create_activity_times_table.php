@@ -21,6 +21,11 @@ class CreateActivityTimesTable extends Migration
             $table->integer('finish_time');
             $table->uuid('unit_user_id')->index();
             $table->smallInteger('status')->default(1);
+            $table->boolean('auto_fill')->default(false);
+            $table->smallInteger('demand_limit')->default(0);
+            $table->integer('default_price')->default(0);
+            $table->integer('default_deposit')->default(0);
+            $table->integer('default_demand_time')->default(0);
             $table->timestamps();
         });
     }
