@@ -45,6 +45,10 @@ class Nurse extends UModel
     
     const MALE      = 1;
     const FEMALE    = 2;
+    public function getGenderStrAttribute(){
+        return __('users.gender_str.' . $this->gender);
+    }
+    
     public function getProfileUrlAttribute(){
         if($this->profile == 'NuLL')
             if($this->gender == Patient::MALE)

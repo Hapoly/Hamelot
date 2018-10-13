@@ -185,3 +185,4 @@ Route::get('/', function () {return view('welcome');})->name('welcome');
 Route::get('/about',function(){return view('about');})->name('about');
 Route::get('/tour',function(){return view('tour');})->name('tour');
 Route::get('/search', 'HomeController@search')->name('search');
+Route::get('/user/{username}', 'GeneralController@showUser')->name('show.user');

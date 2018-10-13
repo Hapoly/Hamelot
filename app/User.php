@@ -10,10 +10,12 @@ use App\Models\Unit;
 use App\Models\UnitUser;
 use App\Models\Experiment;
 use App\Models\Transaction;
+use App\Models\ActivityTime;
 use Auth;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Laravel\Passport\HasApiTokens;
 use Webpatser\Uuid\Uuid;
+use App\Drivers\Time;
 
 class User extends Authenticatable
 {
@@ -421,5 +423,20 @@ class User extends Authenticatable
             $in = $this->incoming_transactions()->where('status', Transaction::PAID)->sum(DB::raw('(amount * (100-comission)) / 100'));
         }
         return intval($in - $out);
+    }
+    public function activity_times($time = 0){
+        $result = [];
+        if($time == 0)
+            $time = time();
+        $day_of_week = Time::jdate('w', $time, '', 'Asia/Tehran', 'en');
+        for($i=1; $i<=7; $i++){
+            $result[$i] = [
+                'date'  => Time::jdate('y/m/d', $time - (3600*24*($day_of_week-$i+1))),
+            ];
+            $result[$i]['times'] = ActivityTime::whereHas('unit_user', function($query){
+                return $query->where('user_id', $this->id);
+            })->where('day_of_week', $i)->get();
+        }
+        return $result;
     }
 }

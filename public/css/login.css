@@ -22,6 +22,27 @@ body{
 	padding:0;
 }
 
+.default-btn {
+	border-width: 1px;
+    border-style: solid;
+    padding: 8px;
+    border-radius: 16px;
+    background: white;
+    cursor: pointer;
+    color: black;
+    text-decoration: none;
+}
+.primary-btn {
+	border-width: 1px;
+    border-style: solid;
+    padding: 8px;
+    border-radius: 16px;
+    background: #5BC0DE;
+    cursor: pointer;
+    color: white;
+    text-decoration: none;
+}
+
 @media (max-width: 768px) {
 	label{
 		text-align: right;
@@ -112,6 +133,15 @@ body{
     .login-pic{
         display: block;
     }
+}
+.show-card{
+    background-color: #fdfeff;
+    margin: auto;
+    margin-top: 25px;
+	border-radius: 10px;
+	padding: 15px;
+	width: 100%;
+	box-shadow:0 2px 2px 2px rgba(0,0,0,.06);
 }
 .login-card{
     background-color: #fdfeff;

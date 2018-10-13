@@ -36,6 +36,13 @@ class ActivityTime extends UModel
         $finish_minute = intval($this->finish_time / 60) % 60;
         return "$day_of_week $start_hour:$start_minute - $finish_hour:$finish_minute";
     }
+    public function getDayLessTimeStrAttribute(){
+        $start_hour = intval($this->start_time / 3600);
+        $start_minute = intval($this->start_time / 60) % 60;
+        $finish_hour = intval($this->finish_time / 3600);
+        $finish_minute = intval($this->finish_time / 60) % 60;
+        return "$start_hour:$start_minute تا $finish_hour:$finish_minute";
+    }
 
     public function getDayOfWeekStrAttribute(){
         return __('general.day_of_week.' . $this->day_of_week);
