@@ -322,10 +322,13 @@ class User extends Authenticatable
         switch($this->group_code){
             case User::G_DOCTOR:
                 $this->doctor->delete();
+                break;
             case User::G_NURSE:
                 $this->nurse->delete();
+                break;
             case User::G_PATIENT:
                 $this->patient->delete();
+                break;
         }
         Entry::where('target_id', $this->id)->delete();
         UnitUser::where('user_id', $this->id)->delete();
