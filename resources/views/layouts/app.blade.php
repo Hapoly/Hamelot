@@ -25,7 +25,7 @@
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <!-- Bootstrap Js CDN -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ asset('js/app.js') }}?v={{hash_file('md5', Storage::disk('public')->path('js/app.js'))}}" defer></script>
 	<!-- persian date picker -->
 	<link rel="stylesheet" href="{{asset('css/persian-datepicker.min.css')}}"/>
 	<script src="{{asset('js/persian-date.min.js')}}"></script>

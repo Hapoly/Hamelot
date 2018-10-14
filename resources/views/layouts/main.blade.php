@@ -15,7 +15,7 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 	<!-- Our Custom CSS -->
-	<link rel="stylesheet" href="{{asset('css/style.css')}}?v={{hash_file('md5', strpos(url()->current(), 'public')?'public/css/style.css': 'css/style.css')}}">
+	<link rel="stylesheet" href="{{asset('css/style.css')}}?v={{hash_file('md5', Storage::disk('public')->path('css/style.css'))}}">
 	<style>
 		.row {
 			margin-top: 3rem;
