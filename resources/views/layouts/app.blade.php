@@ -15,8 +15,8 @@
  
     <!-- Styles -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link href="{{ asset('css/app.css') }}?v={{hash_file('md5', strpos(url()->current(), 'public')?'public/css/app.css': 'css/app.css')}}" rel="stylesheet">
-    <link href="{{ asset('css/login.css') }}?v={{hash_file('md5', strpos(url()->current(), 'public')?'public/css/login.css': 'css/login.css')}}" rel="stylesheet">
+    <link href="{{ asset('css/app.css') }}?v={{hash_file('md5', app()->runningInConsole()?'public/css/app.css': 'css/app.css')}}" rel="stylesheet">
+    <link href="{{ asset('css/login.css') }}?v={{hash_file('md5', app()->runningInConsole()?'public/css/login.css': 'css/login.css')}}" rel="stylesheet">
     
 	<!-- jQuery UI CDN -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
