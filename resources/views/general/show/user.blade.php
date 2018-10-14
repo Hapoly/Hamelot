@@ -52,8 +52,11 @@
                                     <tr>
                                         <td>{{__('general.day_of_week.' . $i)}} - {{$user->activity_times[$i]['date']}}</td>
                                         <td>
+                                            @php
+                                                $day = $user->activity_times[$i]['day'];
+                                            @endphp
                                             @foreach($user->activity_times[$i]['times'] as $time)
-                                                <a class="primary-btn" href="">{{$time->day_less_time_str}}</a>
+                                                <a class="primary-btn" href="{{route('panel.demands.create.visit', ['activity_time' => $time, 'day' => $day])}}">{{$time->day_less_time_str}}</a>
                                             @endforeach
                                         </td>
                                     </tr>

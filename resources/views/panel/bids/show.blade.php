@@ -1,6 +1,9 @@
 @extends('layouts.main')
 @section('title', __('bids.show_title'))
 @section('content')
+@php
+  use App\Models\Bid;
+@endphp
 <div class="container">
   <div class="panel panel-default">
     <div class="row">
@@ -64,6 +67,9 @@
             <div class="col-md-6" style="text-align: center">
               <a href="{{route('panel.bids.inline_update', ['bid' => $bid, 'action' => 'cancel'])}}" class="btn btn-danger" role="button">{{__('bids.cancel')}}</a>
               <a href="{{route('panel.bids.inline_update', ['bid' => $bid, 'action' => 'finish'])}}" class="btn btn-info" role="button">{{__('bids.finish')}}</a>
+              @if($bid->status != Bid::ACCEPTED_PAID_ALL)
+                <a href="{{route('panel.bids.inline_update', ['bid' => $bid, 'action' => 'pay_remain'])}}" class="btn btn-info" role="button">{{__('bids.pay_remain')}}</a>
+              @endif
             </div>
             @endif
           @else

@@ -117,13 +117,13 @@ Route::middleware(['auth', 'Permission'])->namespace('Panel')->prefix('panel')->
             Route::get('/free', 'Demands@createFree')->name('free');
             Route::get('/unit-user/{unit}/{user}', 'Demands@createUnitUser')->name('unit_user');
             Route::get('/unit/{unit}', 'Demands@createUnit')->name('unit');
-            Route::get('/visit/{activity_time}', 'Demands@createVisit')->name('visit');
+            Route::get('/visit/{activity_time}/{day}', 'Demands@createVisit')->name('visit');
         });
         Route::prefix('store')->name('store.')->group(function(){
             Route::post('/free', 'Demands@storeFree')->name('free');
             Route::post('/unit-user', 'Demands@storeUnitUser')->name('unit_user');
             Route::post('/unit', 'Demands@storeUnit')->name('unit');
-            Route::post('/visit/{activity_time}', 'Demands@storeVisit')->name('visit');
+            Route::post('/visit/{activity_time}/{day}', 'Demands@storeVisit')->name('visit');
         });
         Route::get('/{demand}', 'Demands@show')->name('show');
         Route::get('/', 'Demands@index')->name('index');
@@ -135,7 +135,7 @@ Route::middleware(['auth', 'Permission'])->namespace('Panel')->prefix('panel')->
     });
     Route::prefix('payments')->name('payments.')->group(function(){
         Route::get('/bids-deposit', 'Payments@bidDepositVerify')->name('bids.deposit.verify');
-        Route::get('/bids-rmain', 'Payments@bidRemainVerify')->name('bids.remain.verify');
+        Route::get('/bids-rmain/{finish}', 'Payments@bidRemainVerify')->name('bids.remain.verify');
     });
     Route::prefix('transactions')->name('transactions.')->group(function(){
         Route::get('/', 'Transactions@index')->name('index');

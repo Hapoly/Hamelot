@@ -119,10 +119,29 @@ class Bids extends Controller{
                     return redirect()->back();
                 }else if(Auth::user()->isPatient()){
                     $transaction = Transaction::where('target', $bid->id)->where('type', Transaction::BID_REMAIN_PAY)->firstOrFail();
+                    if($transaction->status == Transaction::PAID){
+                        $bid->finish();
+                        return redirect()->back();
+                    }else{
+                        $authority = ZarinPal::generate(
+                            $bid->price - $bid->deposit, 
+                            $bid->unit->complete_title . ' - ' . $bid->user->full_name, 
+                            route('panel.payments.bids.remain.verify', ['finish' => 'true'])
+                        );
+                        $transaction->authority = $authority;
+                        $transaction->pay_type = Transaction::ONLINE_PAY;
+                        $transaction->save();
+                        $pay_link = ZarinPal::generateLink($authority);
+                        return redirect($pay_link);
+                    }
+                }
+            case 'pay_remain':
+                if(Auth::user()->isPatient()){
+                    $transaction = Transaction::where('target', $bid->id)->where('type', Transaction::BID_REMAIN_PAY)->firstOrFail();
                     $authority = ZarinPal::generate(
                         $bid->price - $bid->deposit, 
                         $bid->unit->complete_title . ' - ' . $bid->user->full_name, 
-                        route('panel.payments.bids.remain.verify')
+                        route('panel.payments.bids.remain.verify', ['finish' => 'false'])
                     );
                     $transaction->authority = $authority;
                     $transaction->pay_type = Transaction::ONLINE_PAY;

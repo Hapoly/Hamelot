@@ -7,17 +7,24 @@ use App\Http\Controllers\Controller;
 
 use App\Models\Demand;
 use App\Models\DemandAttachment;
+use App\Models\Bid;
 use App\Models\Unit;
 use App\Models\City;
 use App\Models\Province;
+use App\Models\ActivityTime;
 use App\User;
-
+use App\Models\Permission;
+use App\Models\Transaction;
+use App\Drivers\Time;
 use Auth;
 
 use App\Http\Requests\Demand\CreateFree as DemandCreateFreeRequest;
 use App\Http\Requests\Demand\CreateUnitUser as DemandCreateUnitUserRequest;
 use App\Http\Requests\Demand\CreateUnit as DemandCreateUnitRequest;
+use App\Http\Requests\Demand\CreateVisit as DemandCreateVisitRequest;
 use App\Http\Requests\Demand\Edit as DemandEditRequest;
+
+use App\Drivers\ZarinPal;
 
 class Demands extends Controller{
     public function index(Request $request){
@@ -85,6 +92,18 @@ class Demands extends Controller{
             'unit'  => $unit,
         ]);
     }
+    public function createVisit(Request $request, ActivityTime $activity_time, $day){
+        if(intval(Time::jdate('w', $day, '', 'Asia/Tehran', 'en'))+1 != $activity_time->day_of_week)
+            abort(404);
+        $hour = intval(Time::jdate('H', $day, '', 'Asia/Tehran', 'en'));
+        $minute = intval(Time::jdate('i', $day, '', 'Asia/Tehran', 'en'));
+        $day -= $hour * 3600 + $minute * 60;
+        return view('panel.demands.create.visit', [
+            'activity_time' => $activity_time,
+            'date'  => Time::jdate('y/m/d', $day),
+            'day'   => $day,
+        ]);
+    }
     public function storeFree(DemandCreateFreeRequest $request){
         $inputs = $request->all();
         $inputs['start_time'] /= 10000;
@@ -116,6 +135,94 @@ class Demands extends Controller{
         $inputs['patient_id'] = Auth::user()->id;
         $demand = Demand::create($inputs);
         return redirect()->route('panel.demands.show', ['demand' => $demand]);
+    }
+
+    public function storeVisit(DemandCreateVisitRequest $request, ActivityTime $activity_time, $day){
+        if(intval(Time::jdate('w', $day, '', 'Asia/Tehran', 'en'))+1 != $activity_time->day_of_week)
+            abort(404);
+        $demand = new Demand;
+        $demand->description = $request->description;
+        $demand->start_time = $day + $activity_time->start_time;
+        $demand->end_time = $day + $activity_time->finish_time;
+        $demand->patient_id = Auth::user()->id;
+        if($activity_time->just_in_unit_visit == ActivityTime::IN_UNIT)
+            $demand->address_id = 0;
+        else 
+            $demand->address_id = $request->input('address_id', '0');
+        $demand->unit_id = $activity_time->unit_user->unit_id;
+        $demand->user_id = $activity_time->unit_user->user_id;
+        $demand->asap = 0;
+        if($activity_time->default_deposit == 0){
+            $demand->status = Demand::IN_PROGRESS;
+            $demand->save();
+            $bid = new Bid;
+            $bid->demand_id = $demand->id;
+            $bid->unit_id = $demand->unit_id;
+            $bid->user_id = $demand->user_id;
+            $bid->status = Bid::ACCEPTED;
+            $bid->description = env('BID_DEFAULT_DESCRIPTION');
+            $bid->unit_accepted = 1;
+            $bid->user_accepted = 1;
+            $bid->patient_accepted = 0;
+            $bid->price = $activity_time->default_price;
+            $bid->deposit = $activity_time->default_deposit;
+            $bid->date = $demand->start_time;
+            $bid->save();
+            Permission::create([
+                'requester_id'  => $demand->user_id,
+                'patient_id'    => $demand->patient_id,
+                'status'        => Permission::ACCEPTED,
+            ]);
+            $transaction = Transaction::create([
+                'src_id'    => $demand->patient_id,
+                'dst_id'    => $demand->unit_id,
+                'amount'    => $bid->price - $bid->deposit,
+                'type'      => Transaction::BID_REMAIN_PAY,
+                'status'    => Transaction::PENDING,
+                'pay_type'  => Transaction::OFFLINE_PAY,
+                'authority' => 'NuLL',
+                'currency'  => 'tmn',
+                'target'    => $bid->id,
+                'date'      => $bid->date,
+            ]);
+            return redirect()->route('panel.bids.show', ['bid' => $bid]);
+        }else{
+            $demand->status = Demand::DEPOSIT_PAY;
+            $demand->save();
+            $bid = new Bid;
+            $bid->demand_id = $demand->id;
+            $bid->unit_id = $demand->unit_id;
+            $bid->user_id = $demand->user_id;
+            $bid->status = Bid::PENDING;
+            $bid->description = env('BID_DEFAULT_DESCRIPTION');
+            $bid->unit_accepted = 1;
+            $bid->user_accepted = 1;
+            $bid->patient_accepted = 0;
+            $bid->price = $activity_time->default_price;
+            $bid->deposit = $activity_time->default_deposit;
+            $bid->date = $demand->start_time;
+            $bid->save();
+            $authority = ZarinPal::generate(
+                $bid->deposit, 
+                $bid->unit->complete_title . ' - ' . $bid->user->full_name, 
+                route('panel.payments.bids.deposit.verify')
+            );
+            Transaction::create([
+                'target'    => $bid->id,
+                'src_id'    => Auth::user()->id,
+                'dst_id'    => $bid->unit_id,
+                'amount'    => $bid->deposit,
+                'type'      => Transaction::BID_DEPOSIT_PAY,
+                'authority' => $authority,
+                'currency'  => 'tmn',
+                'pay_type'  => TRANSACTION::ONLINE_PAY,
+                'date'      => time(),
+            ]);
+            $pay_link = ZarinPal::generateLink($authority);
+            return redirect($pay_link);
+        }
+        return $demand;
+        return $request->all();
     }
 
     public function edit(Request $request, Demand $demand){

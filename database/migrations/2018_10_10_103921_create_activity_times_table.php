@@ -22,6 +22,7 @@ class CreateActivityTimesTable extends Migration
             $table->uuid('unit_user_id')->index();
             $table->smallInteger('status')->default(1);
             $table->boolean('auto_fill')->default(false);
+            $table->smallInteger('just_in_unit_visit')->default(1);
             $table->smallInteger('demand_limit')->default(0);
             $table->integer('default_price')->default(0);
             $table->integer('default_deposit')->default(0);

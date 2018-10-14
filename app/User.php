@@ -11,6 +11,10 @@ use App\Models\UnitUser;
 use App\Models\Experiment;
 use App\Models\Transaction;
 use App\Models\ActivityTime;
+use App\Models\Address;
+use App\Models\OffTime;
+use App\Models\Demand;
+use App\Models\Bid;
 use Auth;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Laravel\Passport\HasApiTokens;
@@ -338,6 +342,7 @@ class User extends Authenticatable
         Address::where('user_id', $this->id)->delete();
         Demand::where('patient_id', $this->id)->delete();
         Bid::where('user_id', $this->id)->delete();
+        OffTime::where('user_id', $this->id)->delete();
         parent::delete();
     }
 
@@ -431,10 +436,12 @@ class User extends Authenticatable
         $result = [];
         if($time == 0)
             $time = time();
-        $day_of_week = Time::jdate('w', $time, '', 'Asia/Tehran', 'en');
+        $day_of_week = intval(Time::jdate('w', $time, '', 'Asia/Tehran', 'en'))+1;
         for($i=1; $i<=7; $i++){
+            $stamp = $time - (3600*24*($day_of_week-($i)));
             $result[$i] = [
-                'date'  => Time::jdate('y/m/d', $time - (3600*24*($day_of_week-$i+1))),
+                'date'  => Time::jdate('y/m/d', $stamp),
+                'day'   => $stamp,
             ];
             $result[$i]['times'] = ActivityTime::whereHas('unit_user', function($query){
                 return $query->where('user_id', $this->id);

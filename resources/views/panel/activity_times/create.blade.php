@@ -8,13 +8,13 @@
   @form_create(['action' => route('panel.activity-times.store'), 'title' => __('activity_times.create')])
     @php
       $unit_user_rows = [];
-      foreach(UnitUser::fetch()->get() as $unit_user){
+      foreach(UnitUser::fetch()->where('permission', UnitUser::MEMBER)->get() as $unit_user){
         if(Auth::user()->isDoctor() || Auth::user()->isNurse()){
           array_push($unit_user_rows, [
             'value' => $unit_user->id,
             'label' => $unit_user->unit->complete_title,
           ]);
-        }else if(Auth::user()->isManager()){
+        }else if(Auth::user()->isManager() || Auth::user()->isAdmin()){
           array_push($unit_user_rows, [
             'value' => $unit_user->id,
             'label' => $unit_user->unit->complete_title . ' - ' . $unit_user->user->full_name,
@@ -44,6 +44,14 @@
       {{__('activity_times.auto_fill_description')}}
     @endtagline
     @input_select(['name' => 'auto_fill', 'value' => old('auto_fill', '1'), 'label' => __('activity_times.auto_fill'), 'required' => true, 'rows' => $auto_fill_rows])
+    @php
+      $just_in_unit_visit_rows = [
+        ['label'  => __('activity_times.just_in_unit_visit_str.' . 1), 'value' => 1],
+        ['label'  => __('activity_times.just_in_unit_visit_str.' . 2), 'value' => 2],
+        ['label'  => __('activity_times.just_in_unit_visit_str.' . 3), 'value' => 3],
+      ];
+    @endphp
+    @input_select(['name' => 'just_in_unit_visit', 'value' => old('just_in_unit_visit', '1'), 'label' => __('activity_times.just_in_unit_visit'), 'required' => true, 'rows' => $just_in_unit_visit_rows])
     <script>
       $(document).ready(function(){
         function update_auto_fill(){

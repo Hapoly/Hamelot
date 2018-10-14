@@ -57,6 +57,8 @@ class Bid extends UModel
 
     const DONE                  = 10;
     const CANCELED              = 11;
+
+    const ACCEPTED_PAID_ALL     = 12;
     
     public function getStatusStrAttribute(){
         return __('bids.status_str.' . $this->status);
@@ -132,5 +134,11 @@ class Bid extends UModel
         $demand = $this->demand;
         $demand->status = Demand::DONE;
         $demand->save();
+    }
+
+    // remain paid
+    public function remain_paid(){
+        $this->status = Bid::ACCEPTED_PAID_ALL;
+        $this->save();
     }
 }

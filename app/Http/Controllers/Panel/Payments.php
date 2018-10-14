@@ -28,7 +28,7 @@ class Payments extends Controller{
         }
         return redirect()->route('panel.bids.show', ['bid' => $bid]);
     }
-    public function bidRemainVerify(ZarinPalCallBackRequest $request){
+    public function bidRemainVerify(ZarinPalCallBackRequest $request, $finish){
         $transaction = Transaction::where([
             'type'      => Transaction::BID_REMAIN_PAY,
             'authority' => $request->Authority,
@@ -37,7 +37,10 @@ class Payments extends Controller{
         if(ZarinPal::verify($transaction->amount, $request->Authority)){
             $transaction->status = Transaction::PAID;
             $transaction->save();
-            $bid->finish();
+            if($finish == 'true')
+                $bid->finish();
+            else
+                $bid->remain_paid();
         }
         return redirect()->route('panel.bids.show', ['bid' => $bid]);
     }
