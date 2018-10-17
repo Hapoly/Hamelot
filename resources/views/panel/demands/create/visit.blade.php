@@ -69,9 +69,9 @@
     <div class="row">
         <div class="col-md-12" style="text-align: center">
           @if($activity_time->default_deposit == 0)
-            <button type="submit" class="btn btn-primary" name="action" value="pay">{{__('activity_times.save')}}</button>  
+            <button type="submit" class="btn btn-primary" name="action" value="pay">{{__('demands.save')}}</button>  
           @else
-            <button type="submit" class="btn btn-primary" name="action" value="pay">{{__('activity_times.pay_deposit')}}</button>
+            <button type="submit" class="btn btn-primary" name="action" value="pay">{{__('demands.visit_pay_deposit')}}</button>
           @endif
         </div>
     </div>
