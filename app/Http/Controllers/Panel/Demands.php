@@ -17,6 +17,7 @@ use App\Models\Permission;
 use App\Models\Transaction;
 use App\Drivers\Time;
 use Auth;
+use App\Drivers\SMS;
 
 use App\Http\Requests\Demand\CreateFree as DemandCreateFreeRequest;
 use App\Http\Requests\Demand\CreateUnitUser as DemandCreateUnitUserRequest;
@@ -185,6 +186,7 @@ class Demands extends Controller{
                 'target'    => $bid->id,
                 'date'      => $bid->date,
             ]);
+            SMS::sendNewVisitMessage($bid);
             return redirect()->route('panel.bids.show', ['bid' => $bid]);
         }else{
             $demand->status = Demand::DEPOSIT_PAY;

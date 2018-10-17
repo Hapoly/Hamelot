@@ -12,6 +12,7 @@ use App\Models\Bid;
 use App\Models\Demand;
 use App\Models\Transaction;
 
+use App\Drivers\SMS;
 use App\Drivers\ZarinPal;
 
 class Payments extends Controller{
@@ -25,6 +26,7 @@ class Payments extends Controller{
             $transaction->status = Transaction::PAID;
             $transaction->save();
             $bid->demand->acceptBid($bid);
+            SMS::sendNewVisitMessage($bid);
         }
         return redirect()->route('panel.bids.show', ['bid' => $bid]);
     }
@@ -41,6 +43,7 @@ class Payments extends Controller{
                 $bid->finish();
             else
                 $bid->remain_paid();
+            SMS::sendRemainPaidMessage($bid);
         }
         return redirect()->route('panel.bids.show', ['bid' => $bid]);
     }

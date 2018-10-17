@@ -55,7 +55,7 @@ class Users extends Seeder
          */
         $d1 = User::create([
             'username'      => 'doctor1',
-            'phone'         => '+989XXXXXXXX4',
+            'phone'         => '09369198092',
             'password'      => bcrypt('doctor1'),
             'group_code'    => 3,
             'first_name'    => 'سامان',
@@ -125,7 +125,7 @@ class Users extends Seeder
          */
         $p0 = User::create([
             'username'      => 'patient1',
-            'phone'         => '+989XXXXXXXX8',
+            'phone'         => '09216720496',
             'password'      => bcrypt('patient1'),
             'group_code'    => 5,
             'first_name'    => 'فاطمه',

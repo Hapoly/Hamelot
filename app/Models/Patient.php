@@ -50,6 +50,9 @@ class Patient extends UModel
     public function getGenderStrAttribute(){
         return __('users.gender_str.' . $this->gender);
     }
+    public function getSirMadamStrAttribute(){
+        return __('users.sir_madam_str.' . $this->gender);
+    }
     public function getProfileUrlAttribute(){
         if($this->profile == 'NuLL')
             if($this->gender == Patient::MALE)

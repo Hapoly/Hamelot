@@ -309,6 +309,18 @@ class User extends Authenticatable
                 return $this->nurse->gender_str;
         }
     }
+    public function getSirMadamAttribute(){
+        if($this->isAdmin() || $this->isManager())
+            return ' - ';
+        else{
+            if($this->isPatient())
+                return $this->patient->sir_madam_str;
+            if($this->isDoctor())
+                return $this->doctor->sir_madam_str;
+            if($this->isNurse())
+                return $this->nurse->sir_madam_str;
+        }
+    }
     public function getIdNumberAttribute(){
         if($this->isPatient())
             return $this->patient->id_number;
