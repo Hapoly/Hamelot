@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\UModel;
+use Illuminate\Support\Facades\DB;
 
 use Auth;
 
@@ -17,7 +18,7 @@ class UnitUser extends UModel
     protected $primary = 'id';
     protected $table = 'unit_user';
     protected $fillable = ['user_id', 'unit_id', 'status', 'permission'];
-    protected $appends = ['status_str', 'type_str'];
+    protected $appends = ['status_str'];
 
     const PENDING   = 1;
     const ACCEPTED  = 2;
@@ -135,5 +136,22 @@ class UnitUser extends UModel
             UnitUser::where('user_id', $this->user_id)->where('unit_id', $this->unit_id)->delete();
         }
         parent::delete();
+    }
+
+    public function getDeptAttribute(){
+        $bid_incomes = Transaction::whereHas('bid', function($query){
+            return $query->where('user_id', $this->user_id)->where('unit_id', $this->unit_id);
+        })  ->where('status', Transaction::PAID)
+            ->where('pay_type', Transaction::ONLINE_PAY)
+            ->sum(DB::raw('CEIL((amount * (100 - comission))/100)'));
+        $withdraws = Transaction::
+                          where('src_id', $this->unit_id)
+                        ->where('dst_id', $this->user_id)
+                        ->where('status', Transaction::PAID)
+                        ->sum('amount');
+        return $bid_incomes - $withdraws;
+    }
+    public function getDeptStrAttribute(){
+        return $this->dept . ' ' . __('general.tmn');
     }
 }

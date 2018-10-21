@@ -177,6 +177,7 @@ class Demands extends Controller{
             $transaction = Transaction::create([
                 'src_id'    => $demand->patient_id,
                 'dst_id'    => $demand->unit_id,
+                'comission' => $demand->unit->comission,
                 'amount'    => $bid->price - $bid->deposit,
                 'type'      => Transaction::BID_REMAIN_PAY,
                 'status'    => Transaction::PENDING,
@@ -213,6 +214,7 @@ class Demands extends Controller{
                 'target'    => $bid->id,
                 'src_id'    => Auth::user()->id,
                 'dst_id'    => $bid->unit_id,
+                'comission' => $bid->unit->comission,
                 'amount'    => $bid->deposit,
                 'type'      => Transaction::BID_DEPOSIT_PAY,
                 'authority' => $authority,

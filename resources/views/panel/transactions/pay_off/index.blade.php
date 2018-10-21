@@ -1,5 +1,5 @@
 @extends('layouts.main')
-@section('title', __('unit_users.index_title'))
+@section('title', __('transactions.pay_off_index'))
 @section('content')
 <?php
   use App\Models\UnitUser;
@@ -24,23 +24,9 @@
                 </div>
               </div>
             </div>
-            <div class="row">
-              <div class="col-md-6"></div>
-              <div class="col-md-6">
-                <div class="form-group">
-                  <select class="form-control" name="status" id="status" style="width: 100%">
-                    <option value="0">تمام وضعیت‌ها</option>
-                    <option value="1" {{isset($filters)? ($filters['status'] == 1? 'selected': '') : ''}}>{{__('unit_users.status_str.1')}}</option>
-                    <option value="2" {{isset($filters)? ($filters['status'] == 2? 'selected': '') : ''}}>{{__('unit_users.status_str.2')}}</option>
-                    <option value="3" {{isset($filters)? ($filters['status'] == 3? 'selected': '') : ''}}>{{__('unit_users.status_str.3')}}</option>
-                    <option value="4" {{isset($filters)? ($filters['status'] == 4? 'selected': '') : ''}}>{{__('unit_users.status_str.4')}}</option>
-                  </select>
-                </div>
-              </div>
-            </div>
             <div class="row" style="margin-bottom:2px;margin-top:2px;">
               <div class="col-md-6" style="text-align: left;">
-                <button class="btn btn-info" type="submit">{{__('unit_users.search')}}</button>
+                <button class="btn btn-info" type="submit">{{__('transactions.search')}}</button>
               </div>
               <div class="col-md-6" style="text-align: right;">
                 <a class="btn btn-default" href="{{route('panel.prints.unit_users.index', [$search, 'page' => 0])}}">{{__('unit_users.print_all')}}</a>
@@ -65,30 +51,18 @@
       'user_id'       => __('unit_users.user_id'),
       'unit_id'       => __('unit_users.unit_id'),
       'NuLL1'         => __('units.group_code'),
-      'status'        => __('unit_users.status'),
+      'NuLL3'         => __('transactions.dept_amount'),
       'NuLL2'         => __('unit_users.operation'),
     ]])
     @foreach($unit_users as $index => $unit_user)
       <tr>
         <td>{{$index+1}}</td>
         <td><a href="{{route('panel.users.show', ['user' => $unit_user->user])}}">{{$unit_user->user->full_name}}</a></td>
-        <td><a href="{{route('panel.units.show', ['hospital' => $unit_user->unit])}}">{{$unit_user->unit->title}}</a></td>
+        <td><a href="{{route('panel.units.show', ['hospital' => $unit_user->unit])}}">{{$unit_user->unit->complete_title}}</a></td>
         <td>{{$unit_user->unit->group_str}}</td>
-        <td>{{$unit_user->status_str}}</td>
+        <td>{{$unit_user->dept_str}}</td>
         <td>
-          @if($unit_user->has_manager_permission)
-              @if($unit_user->accepted())
-                <a class="btn btn-default" href="{{route('panel.unit_users.inline_update', ['unit_user' => $unit_user, 'action' => 'cancel'])}}">{{__('unit_users.cancel')}}</a></td>
-              @elseif($unit_user->pending())
-                <a class="btn btn-primary" href="{{route('panel.unit_users.inline_update', ['unit_user' => $unit_user, 'action' => 'accept'])}}">{{__('unit_users.accept')}}</a>
-                <a class="btn btn-danger" href="{{route('panel.unit_users.inline_update', ['unit_user' => $unit_user, 'action' => 'refuse'])}}">{{__('unit_users.refuse')}}</a>
-              @else
-                -
-              @endif
-            </form>
-          @else
-            <a class="btn btn-default" href="{{route('panel.unit_users.show', ['unit_user' => $unit_user])}}">{{__('unit_users.show')}}</a><
-          @endif
+          <a href="{{route('panel.transactions.pay_off.paid', ['unit_user' => $unit_user])}}" class="btn btn-default">{{__('transactions.dept_paid')}}</a>
         </td>
       </tr>
     @endforeach

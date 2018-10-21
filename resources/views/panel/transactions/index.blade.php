@@ -48,12 +48,9 @@
                 <div class="form-group">
                   <select class="form-control" name="type" id="type" style="width: 100%">
                     <option value="0">تمام تراکنش‌ها</option>
-                    <option value="1" {{isset($filters)? ($filters['type'] == 1? 'selected': ''): ''}}>{{__('transactions.type_str.1')}}</option>
-                    <option value="2" {{isset($filters)? ($filters['type'] == 2? 'selected': ''): ''}}>{{__('transactions.type_str.2')}}</option>
-                    <option value="3" {{isset($filters)? ($filters['type'] == 3? 'selected': ''): ''}}>{{__('transactions.type_str.3')}}</option>
-                    <option value="4" {{isset($filters)? ($filters['type'] == 4? 'selected': ''): ''}}>{{__('transactions.type_str.4')}}</option>
-                    <option value="5" {{isset($filters)? ($filters['type'] == 5? 'selected': ''): ''}}>{{__('transactions.type_str.5')}}</option>
-                    <option value="6" {{isset($filters)? ($filters['type'] == 6? 'selected': ''): ''}}>{{__('transactions.type_str.6')}}</option>
+                    @for($i=1; $i<8; $i++)
+                      <option value="{{$i}}" {{isset($filters)? ($filters['type'] == $i? 'selected': ''): ''}}>{{__('transactions.type_str.' . $i)}}</option>
+                    @endfor
                   </select>
                 </div>
               </div>

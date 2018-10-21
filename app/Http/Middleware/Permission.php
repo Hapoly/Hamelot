@@ -113,6 +113,8 @@ class Permission
         'panel.transactions.update.withdraw'                => [ 1, 2 ],
         'panel.transactions.show'                           => [ 1, 2, 3, 4, 5 ],
         'panel.transactions.destroy'                        => [ 1 ],
+        'panel.transactions.pay_off.index'                  => [ 1, 2 ],
+        'panel.transactions.pay_off.paid'                   => [ 1, 2 ],
 
         'panel.bids.index'                                  => [ 1, 2, 3, 4, 5 ],
         'panel.bids.create'                                 => [ 1, 2 ],

@@ -68,6 +68,7 @@ class Bids extends Controller{
                         'target'    => $bid->id,
                         'src_id'    => Auth::user()->id,
                         'dst_id'    => $bid->unit_id,
+                        'comission' => $bid->unit->comission,
                         'amount'    => $bid->deposit,
                         'type'      => Transaction::BID_DEPOSIT_PAY,
                         'authority' => $authority,
@@ -99,6 +100,7 @@ class Bids extends Controller{
                     Transaction::create([
                         'type'      => Transaction::BID_DEPOSIT_BACK,
                         'src_id'    => $bid->unit_id,
+                        'comission' => $bid->unit->comission,
                         'dst_id'    => $bid->demand->patient_id,
                         'amount'    => $bid->deposit,
                         'status'    => Transaction::PAID,

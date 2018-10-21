@@ -16,7 +16,7 @@ class Transaction extends UModel
     public $incrementing = false;
     protected $primary = 'id';
     protected $table = 'transactions';
-    protected $fillable = ['type', 'amount', 'src_id', 'dst_id', 'target', 'pay_type', 'authority', 'currency', 'status', 'date'];
+    protected $fillable = ['type', 'amount', 'src_id', 'dst_id', 'target', 'pay_type', 'authority', 'currency', 'status', 'date', 'comission'];
 
     const BID_DEPOSIT_PAY   = 1;
     const BID_DEPOSIT_BACK  = 2;
@@ -24,6 +24,7 @@ class Transaction extends UModel
     const BID_REMAIN_BACK   = 4;
     const WITHDRAW          = 5;
     const FREE              = 6;
+    const USER_WITHDRAW     = 7;
     public function getTypeStrAttribute(){
         return __('transactions.type_str.' . $this->type);
     }
@@ -131,6 +132,8 @@ class Transaction extends UModel
             }else{
                 return $this->bid->demand->description . ' ('. $this->bid->demand->patient->full_name .')';
             }
+        } else if($this->type == Transaction::USER_WITHDRAW){
+            return $this->src_unit->complete_title . ', ' . $this->dst_user->full_name;
         }else{
             return ' - ';
         }

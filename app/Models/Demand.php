@@ -197,6 +197,7 @@ class Demand extends UModel
         Transaction::create([
             'src_id'    => $bid->demand->patient_id,
             'dst_id'    => $bid->unit_id,
+            'comission' => $bid->unit->comission,
             'amount'    => $bid->price - $bid->deposit,
             'type'      => Transaction::BID_REMAIN_PAY,
             'status'    => Transaction::PENDING,

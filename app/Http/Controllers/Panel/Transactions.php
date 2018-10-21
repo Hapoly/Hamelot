@@ -15,6 +15,9 @@ use App\User;
 use App\Models\City;
 use App\Models\Province;
 use App\Models\BankAccount;
+use App\Models\UnitUser;
+use App\Models\Unit;
+
 
 use App\Http\Requests\Transaction\CreateFree as TransactionCreateFreeRequest;
 use App\Http\Requests\Transaction\EditFree as TransactionEditFreeRequest;
@@ -95,6 +98,7 @@ class Transactions extends Controller{
       $data['dst_id'] = $request->user_id;
     }else{ // unit id
       $data['dst_id'] = $request->unit_id;
+      $data['comission'] = 0;
     }
     $transaction = Transaction::create($data);
     return redirect()->route('panel.transactions.show', ['transaction' => $transaction]);
@@ -104,6 +108,7 @@ class Transactions extends Controller{
     $data = [
       'src_id'    => '0',
       'dst_id'    => $bank_account->unit->id,
+      'comission' => $bank_account->unit->comission,
       'date'      => $request->date,
       'amount'    => $request->amount,
       'type'      => Transaction::WITHDRAW,
@@ -115,6 +120,7 @@ class Transactions extends Controller{
     ];
     if(Auth::user()->isAdmin())
       $data['status'] = $request->input('status', 1);
+    $data['comission'] = $bid->unit->comission;
     $transaction = Transaction::create($data);
     return redirect()->route('panel.transactions.show', ['transaction' => $transaction]);
   }
@@ -164,5 +170,58 @@ class Transactions extends Controller{
       return redirect()->route('panel.transactions.index');
     else
       return redirect()->back();
+  }
+
+  /**
+   * pay off actions for unit managers to say we paid for users
+   */
+  public function payList(Request $request){
+    $unit_users = UnitUser::whereHas('unit', function($query){
+      return $query->whereHas('managers', function($query){
+        return $query->where('users.id', Auth::user()->id);
+      });
+    })->where('status', UnitUser::ACCEPTED)->where('permission', UnitUser::MEMBER);
+    $links = '';
+    $sort = $request->input('sort', '###');
+    if($request->has('unit_id') && $request->unit_id != "0"){
+      $unit_users = $unit_users->where('unit_id', $request->unit_id);
+    }
+    if($request->has('user_id')){
+      $user = User::getByName($request->user_id);
+      if($user){
+        $unit_users = $unit_users->where('user_id', $user->id);
+      }
+    }
+    if($request->has('sort'))
+      $unit_users = $unit_users->orderBy($request->input('sort'), 'desc');
+    $unit_users = $unit_users->paginate(10);
+    return view('panel.transactions.pay_off.index', [
+      'unit_users'  => $unit_users,
+      'units'       => Unit::fetch(true)->get(),
+      'links'       => $links,
+      'sort'        => $sort,
+      'search'          => isset(parse_url(url()->full())['query'])? parse_url(url()->full())['query']: '',
+      'filters'         => [
+        'unit_id'           => $request->input('unit_id', "0"),
+        'user_id'           => $request->input('user_id', ""),
+        'status'            => $request->input('status',  "0"),
+      ],
+    ]);
+  }
+  public function paid(Request $request, UnitUser $unit_user){
+    Transaction::create([
+      'src_id'    => $unit_user->unit_id,
+      'dst_id'    => $unit_user->user_id,
+      'amount'    => $unit_user->dept,
+      'pay_type'  => Transaction::ONLINE_PAY,
+      'target'    => '0',
+      'authority' => 'NuLL',
+      'status'    => Transaction::PAID,
+      'comission' => 0,
+      'currency'  => 'tmn',
+      'type'      => Transaction::USER_WITHDRAW,
+      'date'      => time(),
+    ]);
+    return redirect()->back();
   }
 }

@@ -17,10 +17,11 @@ class UnitUsers extends Controller{
     $unit_users = UnitUser::fetch($request->type, $request->permission);
     $links = '';
     $sort = $request->input('sort', '###');
-    if($request->has('status') && $request->status != 0)
+    if($request->has('status') && $request->status != "0")
       $unit_users = $unit_users->where('status', $request->status);
-    if($request->has('unit_id') && $request->unit_id != 0)
+    if($request->has('unit_id') && $request->unit_id != "0"){
       $unit_users = $unit_users->where('unit_id', $request->unit_id);
+    }
     if($request->has('user_id')){
       $user = User::getByName($request->user_id);
       if($user){
@@ -37,9 +38,9 @@ class UnitUsers extends Controller{
       'sort'        => $sort,
       'search'          => isset(parse_url(url()->full())['query'])? parse_url(url()->full())['query']: '',
       'filters'         => [
-        'status'              => $request->input('status', 0),
-        'user_id'             => $request->input('user_id', ''),
-        'patient_name'        => $request->input('patient_id', ''),
+        'unit_id'           => $request->input('unit_id', "0"),
+        'user_id'           => $request->input('user_id', "0"),
+        'status'            => $request->input('status',  "0"),
       ],
     ]);
   }

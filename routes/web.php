@@ -157,6 +157,10 @@ Route::middleware(['auth', 'Permission'])->namespace('Panel')->prefix('panel')->
             Route::put('/free/{transaction}', 'Transactions@updateFree')->name('free');
             Route::put('/withdraw/{transaction}', 'Transactions@updateWithdraw')->name('withdraw');
         });
+        Route::prefix('pay-off')->name('pay_off.')->group(function(){
+            Route::get('/list', 'Transactions@payList')->name('index');
+            Route::get('/paid/{unit_user}', 'Transactions@paid')->name('paid');
+        });
     });
     Route::get('/profile', 'Profile@edit')->name('profile');
     Route::prefix('profile')->name('profile.')->group(function(){
