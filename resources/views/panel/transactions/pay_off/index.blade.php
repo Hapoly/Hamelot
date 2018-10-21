@@ -62,7 +62,11 @@
         <td>{{$unit_user->unit->group_str}}</td>
         <td>{{$unit_user->dept_str}}</td>
         <td>
-          <a href="{{route('panel.transactions.pay_off.paid', ['unit_user' => $unit_user])}}" class="btn btn-default">{{__('transactions.dept_paid')}}</a>
+          @if($unit_user->dept > 0)
+            <a href="{{route('panel.transactions.pay_off.paid', ['unit_user' => $unit_user])}}" class="btn btn-default">{{__('transactions.dept_paid')}}</a>
+          @else
+            -
+          @endif
         </td>
       </tr>
     @endforeach

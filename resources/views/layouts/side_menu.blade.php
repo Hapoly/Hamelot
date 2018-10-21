@@ -205,6 +205,9 @@
 				<li>
 					<a href="{{route('panel.transactions.index')}}">تراکنش‌ها</a>
 				</li>
+				<li>
+					<a href="{{route('panel.transactions.pay_off.index')}}">تسویه حساب با پرسنل</a>
+				</li>
 			</ul>
 		</li>
 	@else
