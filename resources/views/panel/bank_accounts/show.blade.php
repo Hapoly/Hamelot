@@ -17,6 +17,10 @@
             <td>{{$bank_account->title}}</td>
           </tr>
           <tr>
+            <td>{{__('bank_accounts.owner_name')}}</td>
+            <td>{{$bank_account->owner_name}}</td>
+          </tr>
+          <tr>
             <td>{{__('bank_accounts.account_number')}}</td>
             <td>{{$bank_account->account_number}}</td>
           </tr>

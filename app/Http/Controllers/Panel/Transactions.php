@@ -120,7 +120,7 @@ class Transactions extends Controller{
     ];
     if(Auth::user()->isAdmin())
       $data['status'] = $request->input('status', 1);
-    $data['comission'] = $bid->unit->comission;
+    $data['comission'] = $bank_account->unit->comission;
     $transaction = Transaction::create($data);
     return redirect()->route('panel.transactions.show', ['transaction' => $transaction]);
   }

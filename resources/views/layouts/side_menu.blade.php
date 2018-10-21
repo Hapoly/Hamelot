@@ -192,6 +192,21 @@
 				</li>
 			</ul>
 		</li>
+	@elseif(Auth::user()->isManager())
+		<li>
+			<a href="#transactions" data-toggle="collapse" aria-expanded="false">
+				<i class="fa fa-credit-card" aria-hidden="false"></i>
+				<span>تراکنش‌های مالی</span>
+			</a>
+			<ul class="collapse list-unstyled" id="transactions">
+				<li>
+					<a href="{{route('panel.transactions.create.withdraw')}}"> تسویه حساب جدید</a>
+				</li>
+				<li>
+					<a href="{{route('panel.transactions.index')}}">تراکنش‌ها</a>
+				</li>
+			</ul>
+		</li>
 	@else
 		<li>
 			<a href="{{route('panel.transactions.index')}}" aria-expanded="false">
