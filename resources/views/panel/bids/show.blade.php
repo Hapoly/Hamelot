@@ -80,7 +80,7 @@
             @if(!$bid->permission_to_operate_bid)
             <div class="col-md-6" style="text-align: center">
               <a href="{{route('panel.bids.inline_update', ['bid' => $bid, 'action' => 'cancel'])}}" class="btn btn-danger" role="button">{{__('bids.cancel')}}</a>
-              <a href="{{route('panel.bids.inline_update', ['bid' => $bid, 'action' => 'finish-offline'])}}" class="btn btn-info" role="button">{{__('bids.finish_offline')}}</a>
+              <a href="{{route('panel.bids.inline_update', ['bid' => $bid, 'action' => 'finish'])}}" class="btn btn-info" role="button">{{__('bids.finish_offline')}}</a>
             </div>
             @endif
           @endif

@@ -390,24 +390,29 @@ class User extends Authenticatable
                 return $query->whereHas('managers', function($query){
                     return $query->where('users.id', $this->id);
                 });
-            })->where('status', Transaction::PAID)->sum('amount');
+            })  ->where('pay_type', Transaction::ONLINE_PAY)
+                ->where('status', Transaction::PAID)->sum('amount');
             $in = Transaction::whereHas('dst_unit', function($query){
                 return $query->whereHas('managers', function($query){
                     return $query->where('users.id', $this->id);
                 });
-            })->where('status', Transaction::PAID)->sum('amount');
+            })  ->where('pay_type', Transaction::ONLINE_PAY)
+                ->where('status', Transaction::PAID)->sum('amount');
         }else if($this->isDoctor() || $this->isNurse()){
             $out = Transaction::whereHas('bid', function($query){
                 return $query->where('user_id', Auth::user()->id);
-            })->where('status', Transaction::PAID)
-            ->whereIn('type', [Transaction::BID_DEPOSIT_BACK, Transaction::BID_REMAIN_BACK])->sum('amount');
+            })  ->where('pay_type', Transaction::ONLINE_PAY)
+                ->where('status', Transaction::PAID)
+                ->whereIn('type', [Transaction::BID_DEPOSIT_BACK, Transaction::BID_REMAIN_BACK])->sum('amount');
             $in = Transaction::whereHas('bid', function($query){
                 return $query->where('user_id', Auth::user()->id);
-            })->where('status', Transaction::PAID)
-            ->whereIn('type', [Transaction::BID_DEPOSIT_PAY, Transaction::BID_REMAIN_PAY])->sum('amount');
+            })  ->where('pay_type', Transaction::ONLINE_PAY)
+                ->where('status', Transaction::PAID)
+                ->whereIn('type', [Transaction::BID_DEPOSIT_PAY, Transaction::BID_REMAIN_PAY])->sum('amount');
         }else if($this->isPatient()){
             $out = 0;
-            $in = $this->incoming_transactions()->where('status', Transaction::PAID)->sum('amount');
+            $in = $this->incoming_transactions()  ->where('pay_type', Transaction::ONLINE_PAY)
+                                                  ->where('status', Transaction::PAID)->sum('amount');
         }
         return intval($in - $out);
     }
@@ -418,21 +423,21 @@ class User extends Authenticatable
             $out = Transaction::whereHas('src_unit', function($query){
                 return $query->whereHas('managers', function($query){
                     return $query->where('users.id', $this->id);
-                });
+                })->where('pay_type', Transaction::ONLINE_PAY);
             })->where('status', Transaction::PAID)->sum(DB::raw('(amount * (100-comission)) / 100'));
             $in = Transaction::whereHas('dst_unit', function($query){
                 return $query->whereHas('managers', function($query){
                     return $query->where('users.id', $this->id);
                 });
-            })->where('status', Transaction::PAID)->sum(DB::raw('(amount * (100-comission)) / 100'));
+            })->where('pay_type', Transaction::ONLINE_PAY)->where('status', Transaction::PAID)->sum(DB::raw('(amount * (100-comission)) / 100'));
         }else if($this->isDoctor() || $this->isNurse()){
             $out = Transaction::whereHas('bid', function($query){
                 return $query->where('user_id', Auth::user()->id);
-            })->where('status', Transaction::PAID)
+            })->where('pay_type', Transaction::ONLINE_PAY)->where('status', Transaction::PAID)
             ->whereIn('type', [Transaction::BID_DEPOSIT_BACK, Transaction::BID_REMAIN_BACK])->sum(DB::raw('(amount * (100-comission)) / 100'));
             $in = Transaction::whereHas('bid', function($query){
                 return $query->where('user_id', Auth::user()->id);
-            })->where('status', Transaction::PAID)
+            })->where('pay_type', Transaction::ONLINE_PAY)->where('status', Transaction::PAID)
             ->whereIn('type', [Transaction::BID_DEPOSIT_PAY, Transaction::BID_REMAIN_PAY])->sum(DB::raw('(amount * (100-comission)) / 100'));
         }else if($this->isPatient()){
             $out = 0;

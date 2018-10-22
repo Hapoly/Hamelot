@@ -118,6 +118,8 @@ class Bids extends Controller{
                     $transaction = Transaction::where('target', $bid->id)->where('type', Transaction::BID_REMAIN_PAY)->firstOrFail();
                     $transaction->status = Transaction::PAID;
                     $transaction->save();
+                    $bid->status = Bid::DONE;
+                    $bid->save();
                     return redirect()->back();
                 }else if(Auth::user()->isPatient()){
                     $transaction = Transaction::where('target', $bid->id)->where('type', Transaction::BID_REMAIN_PAY)->firstOrFail();
