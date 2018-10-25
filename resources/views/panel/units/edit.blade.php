@@ -19,6 +19,7 @@
         }
     ?>
     @input_select(['name' => 'parent_id', 'value' => old('parent_id', $unit->parent_id), 'label' => __('units.parent_id'), 'required' => true, 'rows' => $parent_id_rows])
+    @input_text(['name' => 'slug', 'value' => old('slug', $unit->slug), 'label' => __('units.slug'), 'required' => true])
     @input_text(['name' => 'address', 'value' => old('address', $unit->address), 'label' => __('units.address'), 'required' => true])
     @input_text(['name' => 'phone', 'value' => old('phone', $unit->phone), 'label' => __('units.phone'), 'required' => false])
     @input_text(['name' => 'mobile', 'value' => old('mobile', $unit->mobile), 'label' => __('units.mobile'), 'required' => false])

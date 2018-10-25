@@ -22,7 +22,7 @@ class Unit extends UModel{
     public $incrementing = false;
     protected $primary = 'id';
     protected $table = 'units';
-    protected $fillable = ['title', 'address', 'phone', 'mobile', 'image', 'lon', 'lat', 'city_id', 'group_code', 'type', 'public', 'status', 'parent_id'];
+    protected $fillable = ['title', 'address', 'phone', 'mobile', 'image', 'lon', 'lat', 'city_id', 'group_code', 'type', 'public', 'status', 'parent_id', 'slug'];
     protected $appends = ['complete_title'];
 
     public static function getByTitle($title){

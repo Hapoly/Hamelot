@@ -74,9 +74,9 @@
                 }
             }
         });
-        $('#province_id').val({{$province_id}});
+        $('#province_id').val("{{$province_id}}");
         updateCities();
-        $('#city_id').val({{$city_id}});
+        $('#city_id').val("{{$city_id}}");
         $('#lon').val({{$lon}});
         $('#lat').val({{$lat}});
     });

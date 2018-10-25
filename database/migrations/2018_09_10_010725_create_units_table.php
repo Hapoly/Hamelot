@@ -17,6 +17,7 @@ class CreateUnitsTable extends Migration
             $table->uuid('id');
             $table->primary('id');
             $table->string('title');
+            $table->string('slug')->unique();
             $table->string('address');
             $table->string('phone', 32)->default('NuLL');
             $table->string('mobile', 32)->default('NuLL');

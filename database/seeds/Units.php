@@ -16,6 +16,7 @@ class Units extends Seeder
         $cities = City::all();
         $u1 = Unit::create([
             'title'         => 'راضی',
+            'slug'          => 'razi',
             'address'       => 'چهارراه عباسنیا - روبروی صادرات',
             'phone'         => '34234234',
             'mobile'        => '252342',
@@ -29,6 +30,7 @@ class Units extends Seeder
         ]);
         $u2 = Unit::create([
             'title'         => 'پورسینا',
+            'slug'          => 'pursina',
             'address'       => 'خیابان پرستا - جنب سازمان تامین اجتماعی',
             'phone'         => '234523525',
             'mobile'        => '2345625',
@@ -42,6 +44,7 @@ class Units extends Seeder
         ]);
         Unit::create([
             'title'         => 'خون',
+            'slug'          => 'khoon',
             'address'       => 'طبقه اول',
             'phone'         => '345435243',
             'mobile'        => '34634525',
@@ -57,6 +60,7 @@ class Units extends Seeder
 
         Unit::create([
             'title'         => 'اورژانس',
+            'slug'          => 'urjans',
             'address'       => 'طبقه دوم',
             'phone'         => '435634523',
             'mobile'        => '3463452345',
@@ -71,6 +75,7 @@ class Units extends Seeder
         ]);
         Unit::create([
             'title'         => 'عمل جراحی',
+            'slug'          => 'amal-jarahi',
             'address'       => 'ساختمان صدر',
             'phone'         => '23523523',
             'mobile'        => '235463',
@@ -86,6 +91,7 @@ class Units extends Seeder
 
         Unit::create([
             'title'         => 'زنان زایمان',
+            'slug'          => 'zanan',
             'address'       => 'راهروی شمالی',
             'phone'         => '2342454',
             'mobile'        => '02934823',

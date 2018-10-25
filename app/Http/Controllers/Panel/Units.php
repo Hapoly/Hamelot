@@ -15,7 +15,8 @@ use App\Models\UnitUser;
 use App\Models\Province;
 use App\Models\City;
 use App\User;
-use App\Http\Requests\UnitRequest;
+use App\Http\Requests\Unit\Create as UnitCreateRequest;
+use App\Http\Requests\Unit\Edit as UnitEditRequest;
 
 class Units extends Controller{
   public function index(Request $request){
@@ -85,7 +86,7 @@ class Units extends Controller{
       'parent_id' => $request->input('unit_id', 0),
     ]);
   }
-  public function store(UnitRequest $request){
+  public function store(UnitCreateRequest $request){
     $inputs = $request->all();
     if($request->hasFile('image'))
       $inputs['image'] = Storage::disk('public')->put('/units', $request->file('image'));
@@ -109,7 +110,7 @@ class Units extends Controller{
       'parents'   => $parents,
     ]);
   }
-  public function update(UnitRequest $request, Unit $unit){
+  public function update(UnitEditRequest $request, Unit $unit){
     $inputs = $request->all();
     if($request->hasFile('image'))
       $inputs['image'] = Storage::disk('public')->put('/units', $request->file('image'));

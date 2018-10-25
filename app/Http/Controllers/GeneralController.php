@@ -17,4 +17,13 @@ class GeneralController extends Controller
             'offset'    => $request->input('time', time()),
         ]);
     }
+    public function showUnit(Request $request, $key){
+        $unit = Unit::where('slug', $slug)->firstOrFail();
+        $activity_times = $unit->activity_times($request->input('time', 0));
+        $unit->activity_times = $unit->activity_times;
+        return view('general.show.unit', [
+            'unit'      => $unit,
+            'offset'    => $request->input('time', time())
+        ]);
+    }
 }
