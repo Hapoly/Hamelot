@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', $user->full_name)
+@section('title', $unit->complete_title)
 @section('content')
 <div class="container">
     <div class="row">
@@ -10,38 +10,30 @@
                         <table class="table table-striped">
                             <tbody>
                                 <tr>
-                                    <td>{{__('users.first_name')}}</td>
-                                    <td>{{$user->first_name}}</td>
+                                    <td>{{__('units.title')}}</td>
+                                    <td>{{$unit->complete_title}}</td>
                                 </tr>
                                 <tr>
-                                    <td>{{__('users.last_name')}}</td>
-                                    <td>{{$user->last_name}}</td>
+                                    <td>{{__('units.address')}}</td>
+                                    <td>{{$unit->address}}</td>
                                 </tr>
                                 <tr>
-                                    <td>{{__('users.degree')}}</td>
-                                    <td>{{$user->degree_str}}</td>
+                                    <td>{{__('units.province_id')}}</td>
+                                    <td>{{$unit->city->province->title}}</td>
                                 </tr>
                                 <tr>
-                                    <td>{{__('users.field')}}</td>
-                                    <td>{{$user->field_str}}</td>
+                                    <td>{{__('units.city_id')}}</td>
+                                    <td>{{$unit->city->title}}</td>
                                 </tr>
                                 <tr>
-                                    <td>{{__('users.msc')}}</td>
-                                    <td>{{$user->msc_str}}</td>
-                                </tr>
-                                <tr>
-                                    <td>{{__('users.gender')}}</td>
-                                    <td>{{$user->gender_str}}</td>
+                                    <td>{{__('units.group_code')}}</td>
+                                    <td>{{$unit->group_str}}</td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
                     <div class="col-md-5" style="text-align: center; padding: 5px">
-                        @if($user->isDoctor())
-                            <img src="{{$user->doctor->profile_url}}" />
-                        @elseif($user->isNurse())
-                            <img src="{{$user->nurse->profile_url}}" />
-                        @endif
+                        <img src="{{$unit->image_url}}" />
                     </div>
                 </div>
                 <div class="row">
@@ -54,12 +46,12 @@
                             <tbody>
                                 @for($i=1; $i<=7; $i++)
                                     <tr>
-                                        <td>{{__('general.day_of_week.' . $i)}} - {{$user->activity_times[$i]['date']}}</td>
+                                        <td>{{__('general.day_of_week.' . $i)}} - {{$unit->activity_times[$i]['date']}}</td>
                                         <td>
                                             @php
-                                                $day = $user->activity_times[$i]['day'];
+                                                $day = $unit->activity_times[$i]['day'];
                                             @endphp
-                                            @foreach($user->activity_times[$i]['times'] as $time)
+                                            @foreach($unit->activity_times[$i]['times'] as $time)
                                                 <a class="primary-btn" href="{{route('panel.demands.create.visit', ['activity_time' => $time, 'day' => $day])}}">{{$time->day_less_time_str}}</a>
                                             @endforeach
                                         </td>
@@ -74,11 +66,11 @@
                         @if($offset <= time())
                             <a class="default-btn">هفته قبل</a>
                         @else
-                            <a href="{{route("show.user", ['username' => $user->username, 'time' => ($offset - (7*24*3600))])}}" class="default-btn">هفته قبل</a>
+                            <a href="{{route("show.unit", ['slug' => $unit->slug, 'time' => ($offset - (7*24*3600))])}}" class="default-btn">هفته قبل</a>
                         @endif
                     </div>
                     <div class="col-md-6">
-                        <a href="{{route("show.user", ['username' => $user->username, 'time' => ($offset + (7*24*3600))])}}" class="default-btn">هفته بعد</a>
+                        <a href="{{route("show.unit", ['slug' => $unit->slug, 'time' => ($offset + (7*24*3600))])}}" class="default-btn">هفته بعد</a>
                     </div>
                 </div>
             </div>

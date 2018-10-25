@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Drivers\Time;
 use App\User;
+use App\Models\Unit;
 
 class GeneralController extends Controller
 {
@@ -17,10 +18,10 @@ class GeneralController extends Controller
             'offset'    => $request->input('time', time()),
         ]);
     }
-    public function showUnit(Request $request, $key){
+    public function showUnit(Request $request, $slug){
         $unit = Unit::where('slug', $slug)->firstOrFail();
         $activity_times = $unit->activity_times($request->input('time', 0));
-        $unit->activity_times = $unit->activity_times;
+        $unit->activity_times = $activity_times;
         return view('general.show.unit', [
             'unit'      => $unit,
             'offset'    => $request->input('time', time())

@@ -13,6 +13,8 @@ use App\Models\UnitUser;
 use App\Models\Entry;
 use Webpatser\Uuid\Uuid;
 
+use App\Drivers\Time;
+
 class Unit extends UModel{
     /**
      * Indicates if the IDs are auto-incrementing.
@@ -217,5 +219,22 @@ class Unit extends UModel{
             return $request->status_str;
         else
             return __('unit_users.status_str.5');
+    }
+    public function activity_times($time = 0){
+        $result = [];
+        if($time == 0)
+            $time = time();
+        $day_of_week = intval(Time::jdate('w', $time, '', 'Asia/Tehran', 'en'))+1;
+        for($i=1; $i<=7; $i++){
+            $stamp = $time - (3600*24*($day_of_week-($i)));
+            $result[$i] = [
+                'date'  => Time::jdate('y/m/d', $stamp),
+                'day'   => $stamp,
+            ];
+            $result[$i]['times'] = ActivityTime::whereHas('unit_user', function($query){
+                return $query->where('unit_id', $this->id);
+            })->where('day_of_week', $i)->get();
+        }
+        return $result;
     }
 }
