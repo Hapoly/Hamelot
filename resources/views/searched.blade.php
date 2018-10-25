@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@section('title', 'جستجو')
 @section('content')
 @php
     use App\Models\Entry;
