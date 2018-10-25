@@ -60,7 +60,7 @@
                                                 $day = $user->activity_times[$i]['day'];
                                             @endphp
                                             @foreach($user->activity_times[$i]['times'] as $time)
-                                                <a class="primary-btn" href="{{route('panel.demands.create.visit', ['activity_time' => $time, 'day' => $day])}}">{{$time->day_less_time_str}}</a>
+                                                <a class="primary-btn" href="{{route('panel.demands.create.visit', ['activity_time' => $time, 'day' => $day])}}">{{$time->day_less_time_str}} ({{$time->unit_user->unit->complete_title}})</a>
                                             @endforeach
                                         </td>
                                     </tr>
