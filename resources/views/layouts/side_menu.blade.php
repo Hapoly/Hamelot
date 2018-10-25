@@ -3,6 +3,14 @@
 	use App\Models\UnitUser;
 ?>
 <ul class="list-unstyled components">
+	@if(Auth::user()->isDoctor() || Auth::user()->isNurse())
+		<li>
+			<a href="{{route('show.user', ['username' => Auth::user()->username])}}" aria-expanded="false">
+				<i class="fa fa-user" aria-hidden="false"></i>
+				<span>صفحه عمومی من</span>
+			</a>
+		</li>
+	@endif
 	<li>
 		<a href="#userSubmenu" data-toggle="collapse" aria-expanded="false">
 			<i class="fa fa-users" aria-hidden="false"></i>
