@@ -53,17 +53,25 @@
                             </thead>
                             <tbody>
                                 @for($i=1; $i<=7; $i++)
-                                    <tr>
-                                        <td>{{__('general.day_of_week.' . $i)}} - {{$user->activity_times[$i]['date']}}</td>
-                                        <td>
-                                            @php
-                                                $day = $user->activity_times[$i]['day'];
-                                            @endphp
-                                            @foreach($user->activity_times[$i]['times'] as $time)
-                                                <a class="primary-btn" href="{{route('panel.demands.create.visit', ['activity_time' => $time, 'day' => $day])}}">{{$time->day_less_time_str}} ({{$time->unit_user->unit->complete_title}})</a>
-                                            @endforeach
-                                        </td>
-                                    </tr>
+                                    @php
+                                        $day = $user->activity_times[$i]['day'];
+                                    @endphp
+                                    @if($day > (time() - (time()%(24*3600))))
+                                        <tr>
+                                            <td>{{__('general.day_of_week.' . $i)}} - {{$user->activity_times[$i]['date']}}</td>
+                                            @if(isset($user->activity_times[$i]['times']))
+                                                <td>
+                                                    @foreach($user->activity_times[$i]['times'] as $time)
+                                                        <a class="primary-btn" href="{{route('panel.demands.create.visit', ['activity_time' => $time, 'day' => $day])}}">{{$time->day_less_time_str}} ({{$time->unit_user->unit->complete_title}})</a>
+                                                    @endforeach
+                                                </td>
+                                            @else
+                                                <td style="background: #CCC">
+                                                    <i>{{__('off_times.free_day')}}</i>
+                                                </td>
+                                            @endif
+                                        </tr>
+                                    @endif
                                 @endfor
                             </tbody>
                         </table>

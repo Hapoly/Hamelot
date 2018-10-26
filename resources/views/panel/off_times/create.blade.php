@@ -19,7 +19,7 @@
             'value' => $unit_user->id,
             'label' => $unit_user->unit->complete_title,
           ]);
-        }else if(Auth::user()->isManager()){
+        }else if(Auth::user()->isManager() || Auth::user()->isAdmin()){
           array_push($unit_user_rows, [
             'value' => $unit_user->id,
             'label' => $unit_user->unit->complete_title . ' - ' . $unit_user->user->full_name,

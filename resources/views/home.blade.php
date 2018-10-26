@@ -4,7 +4,8 @@
 <div class="row">
     @if(!(Auth::user()->isAdmin() || Auth::user()->isPatient() || Auth::user()->isNurse()))
         @dashboard_wallet
-    @else
+    @endif
+    @if(Auth::user()->isAdmin())
         @dashboard_users
     @endif
     @if(!Auth::user()->isPatient())

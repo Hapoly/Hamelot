@@ -20,4 +20,6 @@ return [
 
     'all_unit_users'    => 'تمام واحد‌ها',
     'not_found'         => 'موردی یافت نشد',
+
+    'free_day' => 'مرخصی'
 ];

@@ -456,9 +456,15 @@ class User extends Authenticatable
                 'date'  => Time::jdate('y/m/d', $stamp),
                 'day'   => $stamp,
             ];
-            $result[$i]['times'] = ActivityTime::whereHas('unit_user', function($query){
-                return $query->where('user_id', $this->id);
-            })->where('day_of_week', $i)->get();
+            if(OffTime::where('user_id', $this->id)
+                      ->where('start_date', '<', $stamp)
+                      ->where('finish_date', '>', $stamp)
+                      ->first())
+                $result[$i]['off'] = true;
+            else
+                $result[$i]['times'] = ActivityTime::whereHas('unit_user', function($query){
+                    return $query->where('user_id', $this->id);
+                })->where('day_of_week', $i)->get();
         }
         return $result;
     }
