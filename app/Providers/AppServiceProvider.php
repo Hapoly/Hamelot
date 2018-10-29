@@ -57,6 +57,8 @@ class AppServiceProvider extends ServiceProvider
         Blade::include('components.dashboard.units', 'dashboard_units');
         Blade::include('components.dashboard.bids', 'dashboard_bids');
         Blade::include('components.dashboard.demands', 'dashboard_demands');
+        Blade::include('components.dashboard.open_bids_patient', 'dashboard_open_bids_patient');
+        Blade::include('components.dashboard.open_bids_user', 'dashboard_open_bids_user');
 
         Blade::include('components.dashboard.last_users', 'dashboard_last_users');
         Blade::include('components.dashboard.last_transactions', 'dashboard_last_transactions');

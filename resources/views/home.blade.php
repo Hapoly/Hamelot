@@ -17,7 +17,10 @@
     @endif
 </div>
 <div class="row">
-    @if(Auth::user()->isAdmin())
+    @if(Auth::user()->isPatient())
+        @dashboard_open_bids_patient
+    @elseif(Auth::user()->isAdmin())
+        @dashboard_open_bids_user
         @dashboard_last_users
     @endif
     @dashboard_last_transactions
