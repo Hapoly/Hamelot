@@ -16,7 +16,7 @@
                     <img src="{{asset('/imgs/004-hospital.svg')}}">
                 </div>
                 <div class="col-md-12">
-                    <a class="btn btn-default btn-units" href="{{route('panel.units.create')}}">مشاهده واحد‌ها</a>
+                    <a class="btn btn-default btn-units" href="{{route('panel.units.index')}}">مشاهده واحد‌ها</a>
                 </div>
             </div>
         </div>
