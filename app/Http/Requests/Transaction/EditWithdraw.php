@@ -2,10 +2,10 @@
 
 namespace App\Http\Requests\Transaction;
 
-use Illuminate\Foundation\Http\FormRequest;
+use App\Http\Requests\PersianFormRequest;
 use Auth;
 
-class EditWithdraw extends FormRequest
+class EditWithdraw extends PersianFormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

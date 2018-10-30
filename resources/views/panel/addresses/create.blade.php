@@ -5,6 +5,7 @@
   @form_create(['action' => route('panel.addresses.store'), 'title' => __('addresses.create')])
     @input_text(['name' => 'title', 'value' => old('title', ''), 'label' => __('addresses.title'), 'required' => true])
     @input_text(['name' => 'plain', 'value' => old('plain', ''), 'label' => __('addresses.plain'), 'required' => false])
+    @input_text(['name' => 'phone', 'value' => old('phone', ''), 'label' => __('addresses.phone'), 'required' => false])
     @if(Auth::user()->isAdmin())
       @autocomplete(['name' => 'full_name', 'label' => __('addresses.full_name'), 'value' => old('full_name'), 'required' => true, 'route' => 'patients'])
     @endif

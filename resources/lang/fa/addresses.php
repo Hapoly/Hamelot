@@ -25,4 +25,6 @@ return [
 
     'cordinate_link'    => 'مختصات آدرس',
     'show_on_gmaps'     => 'نمایش روی نقشه‌های گوگل',
+
+    'phone'             => 'موبایل',
 ];

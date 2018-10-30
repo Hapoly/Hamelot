@@ -28,6 +28,10 @@
             <td>{{__('addresses.cordinate_link')}}</td>
             <td><a target="_blank" href="https://www.google.com/maps/{{'@' .$address->lon}},{{$address->lat}},18z">{{__('addresses.show_on_gmaps')}}</a></td>
           </tr>
+          <tr>
+            <td>{{__('addresses.phone')}}</td>
+            <td>{{$address->phone}}</td>
+          </tr>
           @if(!(Auth::user()->isAdmin()))
             <tr>
               <td>{{__('addresses.user_id')}}</td>

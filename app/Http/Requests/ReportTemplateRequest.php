@@ -2,9 +2,9 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Foundation\Http\FormRequest;
+use App\Http\Requests\PersianFormRequest;
 
-class ReportTemplateRequest extends FormRequest
+class ReportTemplateRequest extends PersianFormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

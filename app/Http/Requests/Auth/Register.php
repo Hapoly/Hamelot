@@ -2,11 +2,11 @@
 
 namespace App\Http\Requests\Auth;
 
-use Illuminate\Foundation\Http\FormRequest;
+use App\Http\Requests\PersianFormRequest;
 use App\Rules\Phone;
 use Auth;
 
-class Register extends FormRequest
+class Register extends PersianFormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

@@ -2,10 +2,10 @@
 
 namespace App\Http\Requests\Address;
 
-use Illuminate\Foundation\Http\FormRequest;
+use App\Http\Requests\PersianFormRequest;
 use Auth;
 
-class Create extends FormRequest
+class Create extends PersianFormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -30,6 +30,7 @@ class Create extends FormRequest
             'city_id'       => 'required|string',
             'lon'           => 'string',
             'lat'           => 'string',
+            'phone'         => 'required|string',
         ];
     }
 }

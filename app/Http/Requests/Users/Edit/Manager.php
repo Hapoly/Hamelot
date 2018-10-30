@@ -2,9 +2,9 @@
 
 namespace App\Http\Requests\Users\Edit;
 
-use Illuminate\Foundation\Http\FormRequest;
+use App\Http\Requests\PersianFormRequest;
 
-class Manager extends FormRequest
+class Manager extends PersianFormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

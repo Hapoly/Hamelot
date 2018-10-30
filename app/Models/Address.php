@@ -16,7 +16,7 @@ class Address extends UModel
     public $incrementing = false;
     protected $primary = 'id';
     protected $table = 'addresses';
-    protected $fillable = ['title', 'plain', 'lon', 'lat', 'city_id', 'user_id'];
+    protected $fillable = ['title', 'plain', 'lon', 'lat', 'city_id', 'user_id', 'phone'];
 
     public function city(){
         return $this->belongsTo('App\Models\City');

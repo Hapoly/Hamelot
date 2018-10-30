@@ -2,9 +2,9 @@
 
 namespace App\Http\Requests\Profile\Edit;
 
-use Illuminate\Foundation\Http\FormRequest;
+use App\Http\Requests\PersianFormRequest;
 
-class Nurse extends FormRequest
+class Nurse extends PersianFormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

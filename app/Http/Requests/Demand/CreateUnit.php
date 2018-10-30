@@ -2,10 +2,10 @@
 
 namespace App\Http\Requests\Demand;
 
-use Illuminate\Foundation\Http\FormRequest;
+use App\Http\Requests\PersianFormRequest;
 use Auth;
 
-class CreateUnit extends FormRequest
+class CreateUnit extends PersianFormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

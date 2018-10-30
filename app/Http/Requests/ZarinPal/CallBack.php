@@ -2,10 +2,10 @@
 
 namespace App\Http\Requests\ZarinPal;
 
-use Illuminate\Foundation\Http\FormRequest;
+use App\Http\Requests\PersianFormRequest;
 use Auth;
 
-class CallBack extends FormRequest
+class CallBack extends PersianFormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
