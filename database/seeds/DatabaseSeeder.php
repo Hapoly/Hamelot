@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
         $this->call(Units::class);
         $this->call(UnitUsers::class);
         $this->call(ReportTemplates::class);
-        $this->call(Demands::class);
-        $this->call(Bids::class);
+        // $this->call(Demands::class);
+        // $this->call(Bids::class);
     }
 }
