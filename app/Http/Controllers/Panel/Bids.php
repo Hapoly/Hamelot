@@ -42,6 +42,8 @@ class Bids extends Controller{
     }
     public function store(BidCreateRequest $request){
         $inputs = $request->all();
+        if($inputs['date'] > 9999999999)
+            $inputs['date'] /= 1000;
         $target = explode('.', $inputs['target']);
         $inputs['unit_id'] = $target[0];
         $inputs['user_id'] = $target[1];
