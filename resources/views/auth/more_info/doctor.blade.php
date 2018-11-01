@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@section('title', 'ثبت نام پزشک')
 @section('content')
 <div class="container">
     <div class="row">

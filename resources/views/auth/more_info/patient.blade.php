@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@section('title', 'ثبت نام بیمار')
 @section('content')
 {{var_dump($errors->all())}}
 <div class="container">
