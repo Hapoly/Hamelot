@@ -77,11 +77,10 @@
 									<i class="glyphicon glyphicon-align-right"></i>
 									<!-- <span>Toggle</span>  -->
 								</button>
+								<a class="btn btn-primary" href="{{route('search')}}">{{__('general.search')}}</a>
 							</div>
 						</div>
 					</div>
-					
-					
 				</div>
 			</nav>
 			<div class="container">

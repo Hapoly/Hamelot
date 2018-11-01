@@ -49,6 +49,7 @@
         </div>
       </div>
     @endif
+    @if(Auth::user()->isAdmin() || Auth::user()->isManager())
     <div class="row">
       <div class="col-md-12" style="text-align: center">
         <a style="margin: 0px 5px" class="btn btn-default" href="{{route('panel.prints.users.info', ['user' => $user])}}">{{__('users.print_info')}}</a>
@@ -56,6 +57,14 @@
         <a style="margin: 0px 5px" class="btn btn-default" href="{{route('panel.prints.users.patients', ['user' => $user])}}">{{__('users.print_patients')}}</a>
       </div>
     </div>
+    @endif
+    @if(Auth::user()->isPatient())
+    <div class="row">
+      <div class="col-md-12" style="text-align: center">
+        <a class="btn btn-primary" href="{{route('show.user', ['username' => $user->username])}}">{{__('demands.create_unit_user')}}</a>
+      </div>
+    </div>
+    @endif
   </div>
   @if($user->permission_to_read_units)
     <div class="panel panel-default">

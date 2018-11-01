@@ -12,6 +12,12 @@
 		</li>
 	@endif
 	<li>
+		<a href="{{route('home')}}">
+			<i class="fa fa-dashboard" aria-hidden="false"></i>
+			<span>پیشخوان</span>
+		</a>
+	</li>
+	<li>
 		<a href="#userSubmenu" data-toggle="collapse" aria-expanded="false">
 			<i class="fa fa-users" aria-hidden="false"></i>
 			<span>
@@ -79,13 +85,13 @@
 		</ul>
 	</li>
 	<li>
-		<a href="#testtSubmenu" data-toggle="collapse" aria-expanded="false">
+		<a href="#experiments" data-toggle="collapse" aria-expanded="false">
 			<i class="fa fa-medkit" aria-hidden="true"></i>
 			<span>
 			آزمایشات
 			</span>
 		</a>
-		<ul class="collapse list-unstyled" id="testtSubmenu">
+		<ul class="collapse list-unstyled" id="experiments">
 			<li>
 				<a href="{{route('panel.experiments.index')}}"> لیست آزمایشات</a>
 			</li>
