@@ -27,7 +27,9 @@ class CreatePatient extends PersianFormRequest
         return [
             'token'         => 'required|string|max:6',
             'id_number'     => 'required|string',
-            'birth_date'    => 'required|numeric',
+            'birth_year'    => 'required|numeric',
+            'birth_month'   => 'required|numeric',
+            'birth_day'     => 'required|numeric',
             'profile'       => 'required|image|max:256',
             'gender'        => 'required|numeric',
         ];

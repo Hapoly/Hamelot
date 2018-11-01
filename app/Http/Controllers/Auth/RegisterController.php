@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Storage;
 use Kavenegar\KavenegarApi;
 use Kavenegar\Exceptions\ApiException;
 use Kavenegar\Exceptions\HttpException;
+use App\Drivers\Time;
 
 use App\Models\Doctor;
 use App\Models\Nurse;
@@ -136,7 +137,7 @@ class RegisterController extends Controller{
         $data['phone'] = $request->session()->get('register.phone');
         $data['group_code'] = $request->session()->get('register.group_code');
         $data['password'] = Hash::make($request->session()->get('register.password'));
-        $data['birth_date'] /= 1000;
+        $data['birth_date'] = Time::jmktime(0, 0, 0, $data['birth_day'], $data['birth_month'], $data['birth_year']);
         $data['profile'] = Storage::disk('public')->put('/users', $request->file('profile'));
         $user = User::create($data);
         $data['user_id'] = $user->id;

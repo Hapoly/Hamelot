@@ -67,8 +67,8 @@
                         <label for="public" class="col-md-3 col-form-label text-md-right">{{ __('users.public') }}</label>
                         <div class="col-md-8">
                             <select class="form-control" name="public" id="public">
-                                <option value="1" {{old('public') == 1? 'selected': ''}} > {{__('users.public_str.1')}}</option>
-                                <option value="2" {{old('public') == 2? 'selected': ''}} > {{__('users.public_str.2')}}</option>
+                                <option value="1" {{old('public') == 1? 'selected': ''}} > {{__('users.public_str.1')}}({{__('users.public_description_str.1')}})</option>
+                                <option value="2" {{old('public') == 2? 'selected': ''}} > {{__('users.public_str.2')}}({{__('users.public_description_str.2')}})</option>
                             </select>
                             @if ($errors->has('public'))
                                 <span class="invalid-feedback">

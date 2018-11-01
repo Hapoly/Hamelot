@@ -83,38 +83,6 @@
                             @endif
                         </div>
                     </div>
-                    <!-- <div class="form-group row">
-                        <label for="prefix" class="col-md-3 col-form-label text-md-right">{{ __('general.prefix') }}</label>
-
-                        <div class="col-md-8">
-                            <input id="prefix" type="text" class="form-control{{ $errors->has('prefix') ? ' is-invalid' : '' }}" name="prefix" value="{{ old('prefix') }}" required>
-
-                            @if ($errors->has('prefix'))
-                                <span class="invalid-feedback">
-                                    <strong>{{ $errors->first('prefix') }}</strong>
-                                </span>
-                            @endif
-                        </div>
-                    </div> -->
-                    <!-- <div class="form-group row">
-                        <label for="group_code" class="col-md-3 col-form-label text-md-right">{{ __('general.group_code') }}</label>
-
-                        <div class="col-md-8">
-                            <select class="form-control" name="group_code" id="group_code">
-                                <option value="1">{{__('general.group_codes.admin')}}   </option>
-                                <option value="2">{{__('general.group_codes.manager')}} </option>
-                                <option value="3">{{__('general.group_codes.doctor')}}  </option>
-                                <option value="4">{{__('general.group_codes.nurse')}}   </option>
-                                <option value="5">{{__('general.group_codes.patient')}} </option>
-                            </select>
-                            @if ($errors->has('group_code'))
-                                <span class="invalid-feedback">
-                                    <strong>{{ $errors->first('group_code') }}</strong>
-                                </span>
-                            @endif
-                        </div>
-                    </div> -->
-                   
                     <div class="form-group row mb-0" style="display: flex; justify-content: center;">
                         <button type="submit" name="group_code" value="2" class="btn btn-primary" style="margin: 10px">
                             {{ __('general.register_as_manager') }}

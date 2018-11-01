@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @section('content')
+{{var_dump($errors->all())}}
 <div class="container">
     <div class="row">
         <div class="col-md-7">
@@ -19,30 +20,56 @@
                         </div>
                     </div>
                     <div class="form-group row create-form">
-                        <label for="birth_date" class="col-md-3 col-form-label text-md-right">{{__('users.birth_date')}}</label>
+                        <label for="birth_year" class="col-md-3 label-col col-form-label text-md-right">{{ __('users.birth.year') }}</label>
                         <div class="col-md-8">
-                            <input type="text" id="birth_date-v" value="{{old('birth_date')!=''?\App\Drivers\Time::jdate('Y/m/d H:i', old('birth_date')):''}}" class="form-control {{ $errors->has('birth-date') ? ' is-invalid' : '' }}"/>
-                            <input hidden type="number" name="birth_date" id="birth_date" value="{{old('birth_date')}}"/>
-                            @if ($errors->has('birth_date'))
+                            <select class="form-control" name="birth_year" id="birth_year" style="width:100%">
+                                @for($i=1341; $i<1400; $i++)
+                                    <option value="{{$i}}" {{old('birth_year') == $i? 'selected': ''}} > {{$i}}</option>
+                                @endfor
+                            </select>
+                            @if ($errors->has('birth_year'))
                                 <span class="invalid-feedback">
-                                <strong>{{ $errors->first('birth_date') }}</strong>
+                                    <strong>{{ $errors->first('birth_year') }}</strong>
                                 </span>
                             @endif
-
                         </div>
-                        <script>
-                            $("#birth_date-v").pDatepicker({
-                                'altField'          : '#birth_date',
-                                'format'            : 'YY/MM/DD',
-                                'onlySelectOnDate'  : true,
-                                'initialValue'      : false,
-                            });
-                        </script>
+                       
+                    </div>
+                    <div class="form-group row create-form">
+                        <label for="birth_month" class="col-md-3 label-col col-form-label text-md-right">{{ __('users.birth.month') }}</label>
+                        <div class="col-md-8">
+                            <select class="form-control" name="birth_month" id="birth_month" style="width:100%">
+                                @for($i=1; $i<12; $i++)
+                                    <option value="{{$i}}" {{old('birth_month') == $i? 'selected': ''}} > {{ __('users.birth.month_str.' . $i) }}</option>
+                                @endfor
+                            </select>
+                            @if ($errors->has('birth_month'))
+                                <span class="invalid-feedback">
+                                    <strong>{{ $errors->first('birth_month') }}</strong>
+                                </span>
+                            @endif
+                        </div>
+                       
+                    </div>
+                    <div class="form-group row create-form">
+                        <label for="birth_day" class="col-md-3 label-col col-form-label text-md-right">{{ __('users.birth.day') }}</label>
+                        <div class="col-md-8">
+                            <select class="form-control" name="birth_day" id="birth_day" style="width:100%">
+                                @for($i=1; $i<31; $i++)
+                                    <option value="{{$i}}" {{old('birth_day') == $i? 'selected': ''}} > {{$i}}</option>
+                                @endfor
+                            </select>
+                            @if ($errors->has('birth_day'))
+                                <span class="invalid-feedback">
+                                    <strong>{{ $errors->first('birth_day') }}</strong>
+                                </span>
+                            @endif
+                        </div>
                     </div>
                     <div class="form-group row">
                         <label for="gender" class="col-md-3 col-form-label text-md-right">{{ __('users.gender') }}</label>
                         <div class="col-md-8">
-                            <select class="form-control" name="gender" id="gender">
+                            <select class="form-control" name="gender" id="gender" style="width: 100%">
                                 <option value="1" {{old('gender') == 1? 'selected': ''}} > {{__('users.gender_str.1')}}</option>
                                 <option value="2" {{old('gender') == 2? 'selected': ''}} > {{__('users.gender_str.2')}}</option>
                             </select>
