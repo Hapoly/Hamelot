@@ -61,9 +61,17 @@
                                             <td>{{__('general.day_of_week.' . $i)}} - {{$user->activity_times[$i]['date']}}</td>
                                             @if(isset($user->activity_times[$i]['times']))
                                                 <td>
+                                                    <div class="row">
                                                     @foreach($user->activity_times[$i]['times'] as $time)
-                                                        <a class="primary-btn" href="{{route('panel.demands.create.visit', ['activity_time' => $time, 'day' => $day])}}">{{$time->day_less_time_str}} ({{$time->unit_user->unit->complete_title}})</a>
+                                                    <div class="col-md-3 visit-time">
+                                                        <a class="primary-btn" href="{{route('panel.demands.create.visit', ['activity_time' => $time, 'day' => $day])}}">
+                                                            <span>
+                                                            {{$time->day_less_time_str}} ({{$time->unit_user->unit->complete_title}})
+                                                            </span>
+                                                        </a>
+                                                    </div>
                                                     @endforeach
+                                                    </div>
                                                 </td>
                                             @else
                                                 <td style="background: #CCC">
