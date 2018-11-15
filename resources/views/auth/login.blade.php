@@ -49,7 +49,7 @@
                     </div>
                     <div class="form-group row mb-0">
                             <div class="col-md-3" style="text-align: center;">
-                                <button type="submit" class="btn btn-primary">
+                                <button type="submit" class="btn btn-primary" id="login">
                                     {{ __('general.login') }}
                                 </button>
                             </div>
