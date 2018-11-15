@@ -33,7 +33,7 @@
                         </table>
                     </div>
                     <div class="col-md-5" style="text-align: center; padding: 5px">
-                        <img src="{{$unit->image_url}}" />
+                        <img style="width: 100%" src="{{$unit->image_url}}" />
                     </div>
                 </div>
                 <div class="row">

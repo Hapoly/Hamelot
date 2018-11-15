@@ -38,9 +38,9 @@
                     </div>
                     <div class="col-md-5" style="text-align: center; padding: 5px">
                         @if($user->isDoctor())
-                            <img src="{{$user->doctor->profile_url}}" />
+                            <img style="width:100%" src="{{$user->doctor->profile_url}}" />
                         @elseif($user->isNurse())
-                            <img src="{{$user->nurse->profile_url}}" />
+                            <img style="width:100%" src="{{$user->nurse->profile_url}}" />
                         @endif
                     </div>
                 </div>
