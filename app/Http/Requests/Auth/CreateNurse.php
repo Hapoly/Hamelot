@@ -30,7 +30,7 @@ class CreateNurse extends PersianFormRequest
             'degree_id'     => 'required|string',
             'field_id'      => 'required|string',
             'public'        => 'required|numeric',
-            'profile'       => 'required|image|max:256',
+            'profile'       => 'required|image',
             'gender'        => 'required|numeric',
         ];
     }

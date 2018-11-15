@@ -31,7 +31,7 @@ class CreateFree extends PersianFormRequest
             'asap'          => 'required|numeric|in:0,1',
             'start_time'    => 'required_if:asap,0|string',
             'end_time'      => 'required_if:asap,0|string',
-            'image'         => 'image|max:256',
+            'image'         => 'image',
         ];
     }
 }

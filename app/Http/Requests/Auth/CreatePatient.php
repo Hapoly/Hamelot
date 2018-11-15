@@ -30,7 +30,7 @@ class CreatePatient extends PersianFormRequest
             'birth_year'    => 'required|numeric',
             'birth_month'   => 'required|numeric',
             'birth_day'     => 'required|numeric',
-            'profile'       => 'required|image|max:256',
+            'profile'       => 'required|image',
             'gender'        => 'required|numeric',
         ];
     }
