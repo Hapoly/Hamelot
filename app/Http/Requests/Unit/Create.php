@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Unit;
 
 use App\Http\Requests\PersianFormRequest;
+use App\Rules\UUID;
 
 class Create extends PersianFormRequest
 {
@@ -32,8 +33,8 @@ class Create extends PersianFormRequest
             'image'         => 'required|image|max:256',
             'lon'           => 'required|string',
             'lat'           => 'required|string',
-            'city_id'       => 'required|string',
-            'parent_id'     => 'required|string',
+            'city_id'       => ['required', new UUID],
+            'parent_id'     => ['required', new UUID],
 
             'status'        => 'required|numeric',
             'public'        => 'required|numeric',

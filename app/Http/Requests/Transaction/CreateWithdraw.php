@@ -4,6 +4,7 @@ namespace App\Http\Requests\Transaction;
 
 use App\Http\Requests\PersianFormRequest;
 use Auth;
+use App\Rules\UUID;
 
 class CreateWithdraw extends PersianFormRequest
 {
@@ -25,7 +26,7 @@ class CreateWithdraw extends PersianFormRequest
     public function rules()
     {
         return [
-            'bank_account_id'   => 'required|string',
+            'bank_account_id'   => ['required', new UUID],
             'amount'            => 'required|numeric|min:' . env('MIN_WITHDRAW_AMOUNT'),
             'date'              => 'required|numeric',
         ];

@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use App\Http\Requests\PersianFormRequest;
+use App\Rules\UUID;
 
 class KeyRequest extends PersianFormRequest
 {
@@ -28,7 +29,7 @@ class KeyRequest extends PersianFormRequest
             'description'   => 'required|string',
             'status'        => 'required|numeric',
             'type'          => 'required|numeric',
-            'template_id'   => 'required|string',
+            'template_id'   => ['required', new UUID],
         ];
     }
 }

@@ -25,7 +25,7 @@ class EditWithdraw extends PersianFormRequest
     public function rules()
     {
         return [
-            'bank_account_id'   => 'required|string',
+            'bank_account_id'   => ['required', new UUID],
             'amount'            => 'required|numeric|min:' . env('MIN_WITHDRAW_AMOUNT'),
             'date'              => 'required|numeric',
         ];

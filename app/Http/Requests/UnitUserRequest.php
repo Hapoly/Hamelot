@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use App\Http\Requests\PersianFormRequest;
+use App\Rules\UUID;
 
 class UnitUserRequest extends PersianFormRequest
 {
@@ -25,7 +26,7 @@ class UnitUserRequest extends PersianFormRequest
     {
         return [
             'full_name'         => 'required|string',
-            'unit_id'           => 'required|string',
+            'unit_id'           => ['required', new UUID],
             'permission'        => 'required|numeric',
         ];
     }

@@ -4,6 +4,7 @@ namespace App\Http\Requests\OffTime;
 
 use App\Http\Requests\PersianFormRequest;
 use Auth;
+use App\Rules\UUID;
 
 class Create extends PersianFormRequest
 {
@@ -25,7 +26,7 @@ class Create extends PersianFormRequest
     public function rules()
     {
         return [
-            'unit_user_id'      => 'required|string',
+            'unit_user_id'      => ['required', new UUID],
             'start_date'        => 'required|numeric',
             'finish_date'       => 'required|numeric',
         ];

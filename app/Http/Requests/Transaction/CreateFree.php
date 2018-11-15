@@ -4,6 +4,7 @@ namespace App\Http\Requests\Transaction;
 
 use App\Http\Requests\PersianFormRequest;
 use Auth;
+use App\Rules\UUID;
 
 class CreateFree extends PersianFormRequest
 {
@@ -26,8 +27,8 @@ class CreateFree extends PersianFormRequest
     {
         return [
             'target_type'   => 'required|numeric',
-            'user_id'       => 'required_if:target_type,1',
-            'unit_id'       => 'required_if:target_type,2',
+            'user_id'       => ['required_if:target_type,1', new UUID],
+            'unit_id'       => ['required_if:target_type,2', new UUID],
             'amount'        => 'required|numeric',
             'date'          => 'required|numeric',
         ];

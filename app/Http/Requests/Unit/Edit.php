@@ -5,6 +5,7 @@ namespace App\Http\Requests\Unit;
 use App\Http\Requests\PersianFormRequest;
 use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
+use App\Rules\UUID;
 
 class Edit extends PersianFormRequest
 {
@@ -42,8 +43,8 @@ class Edit extends PersianFormRequest
             'mobile'        => 'required|string',
             'lon'           => 'required|string',
             'lat'           => 'required|string',
-            'city_id'       => 'required|string',
-            'parent_id'     => 'required|string',
+            'city_id'       => ['required', new UUID],
+            'parent_id'     => ['required', new UUID],
 
             'status'        => 'required|numeric',
             'public'        => 'required|numeric',

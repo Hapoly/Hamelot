@@ -4,6 +4,7 @@ namespace App\Http\Requests\OffTime;
 
 use App\Http\Requests\PersianFormRequest;
 use Auth;
+use App\Rules\UUID;
 
 class Edit extends PersianFormRequest
 {
@@ -25,12 +26,9 @@ class Edit extends PersianFormRequest
     public function rules()
     {
         return [
-            'unit_user_id'      => 'required|string',
-            'day_of_week'       => 'required|numeric|in:1,2,3,4,5,6,7',
-            'start_timehour'    => 'required|numeric|min:0|max:23',
-            'start_timeminute'  => 'required|numeric|min:0|max:59',
-            'finish_timehour'   => 'required|numeric|min:0|max:23',
-            'finish_timeminute' => 'required|numeric|min:0|max:59',
+            'unit_user_id'      => ['required', new UUID],
+            'start_date'        => 'required|numeric',
+            'finish_date'       => 'required|numeric',
         ];
     }
 }

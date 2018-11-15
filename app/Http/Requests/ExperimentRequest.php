@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use App\Http\Requests\PersianFormRequest;
+use App\Rules\UUID;
 
 class ExperimentRequest extends PersianFormRequest
 {
@@ -24,9 +25,9 @@ class ExperimentRequest extends PersianFormRequest
     public function rules()
     {
         return [
-            'user_id'               => 'required|string',
-            'unit_id'               => 'required|string',
-            'report_template_id'    => 'required|string',
+            'user_id'               => ['required', new UUID],
+            'unit_id'               => ['required', new UUID],
+            'report_template_id'    => ['required', new UUID],
             'year'                  => 'required|numeric',
             'month'                 => 'required|numeric',
             'day'                   => 'required|numeric',

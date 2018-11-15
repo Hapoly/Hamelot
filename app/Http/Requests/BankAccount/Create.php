@@ -4,6 +4,7 @@ namespace App\Http\Requests\BankAccount;
 
 use App\Http\Requests\PersianFormRequest;
 use Auth;
+use App\Rules\UUID;
 
 class Create extends PersianFormRequest
 {
@@ -26,7 +27,7 @@ class Create extends PersianFormRequest
     {
         return [
             'title'             => 'required|string',
-            'unit_id'           => 'required|string',
+            'unit_id'           => ['required', new UUID],
             'bank'              => 'required|numeric',
             'account_number'    => 'required|string',
             'sheba_number'      => 'required|string',

@@ -4,6 +4,7 @@ namespace App\Http\Requests\Demand;
 
 use App\Http\Requests\PersianFormRequest;
 use Auth;
+use App\Rules\UUID;
 
 class CreateUnitUser extends PersianFormRequest
 {
@@ -26,12 +27,12 @@ class CreateUnitUser extends PersianFormRequest
     {
         return [
             'description'   => 'required|string',
-            'address_id'    => 'required|string',
+            'address_id'    => ['required', new UUID],
             'asap'          => 'required|numeric|in:0,1',
             'start_time'    => 'required_if:asap,0|string',
             'end_time'      => 'required_if:asap,0|string',
-            'unit_id'       => 'required|string',
-            'user_id'       => 'required|string',
+            'unit_id'       => ['required', new UUID],
+            'user_id'       => ['required', new UUID],
         ];
     }
 }
