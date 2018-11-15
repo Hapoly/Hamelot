@@ -181,6 +181,9 @@ Route::namespace('Auth')->group(function($query){
     Route::post('/create-doctor', 'RegisterController@createDoctor')->name('create.doctor');
     Route::post('/create-nurse', 'RegisterController@createNurse')->name('create.nurse');
     Route::post('/create-patient', 'RegisterController@createPatient')->name('create.patient');
+    Route::get('/forgot-password', 'LoginController@forgotPassword')->name('forgot.password');
+    Route::post('/forgot-password', 'LoginController@sendSms')->name('forgot.password.send');
+    Route::post('/reset-password', 'LoginController@resetPassword')->name('forgot.password.reset');
 });
 
 Route::middleware('auth')->group(function(){

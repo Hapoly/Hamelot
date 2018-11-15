@@ -5,8 +5,13 @@
     <div class="row">
         <div class="col-md-7">
             <div class="login-card">
+                @if(session('password_changed', false))
+                    <div class="alert alert-success" style="text-align: right" role="alert">
+                        {{__('auth.password_changed')}}
+                    </div>
+                @endif
                 <form class="login-form"method="POST" action="{{ route('login') }}">
-                        @csrf
+                    @csrf
                     <div class="form-group row">
                         <label for="username" class="col-sm-3 col-form-label text-md-right">{{ __('general.username') }}</label>
 
@@ -49,8 +54,8 @@
                                 </button>
                             </div>
                             <div class="col-md-8">
-                                <a class="btn btn-link" href="{{ route('password.request') }}">
-                                    {{ __('general.forgot_password') }}
+                                <a class="btn btn-link" href="{{ route('forgot.password') }}">
+                                    {{ __('auth.forgot_password') }}
                                 </a>
                             </div>
                         </div>
@@ -58,7 +63,7 @@
             </div>
         </div>
         <div class="col-md-5 login-pic">
-            <img src="/imgs/logo.png" class="login-img">
+            <img src="{{url('/imgs/logo.png')}}" class="login-img">
         </div>
     </div>
 </div>
