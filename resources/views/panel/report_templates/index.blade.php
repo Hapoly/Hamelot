@@ -28,9 +28,9 @@
         </tr>
       </thead>
       <tbody>
-        @foreach($report_templates as $report_template)
+        @foreach($report_templates as $index => $report_template)
           <tr class="rep-td">
-          <td>{{$report_template->id}}</td>
+          <td>{{$index+1}}</td>
           <td><a href="{{route('panel.report_templates.show', ['report_template' => $report_template])}}">{{$report_template->title}}</a></td>
           <td>{{$report_template->field_count}}</td>
           <td>{{$report_template->status_str}}</td>
@@ -50,7 +50,7 @@
               </td>
             @else
               <td>
-                <a class="btn btn-default" href="{{route('panel.report_templates.show', ['report_template' => $report_template])}}">{{__('experiemnts.show')}}</a>
+                <a class="btn btn-default" href="{{route('panel.report_templates.show', ['report_template' => $report_template])}}">{{__('experiments.show')}}</a>
               </td>
             @endif
           @endif
