@@ -327,3 +327,9 @@ hr{
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
 }
+.visit-time {
+	padding: 10px 0px;;
+}
+a:hover {
+    text-decoration: none;
+}
