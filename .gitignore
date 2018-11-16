@@ -16,3 +16,4 @@ yarn-error.log
 /public/experiments
 /public/units
 .rnd
+tests/Browser/screenshots/
