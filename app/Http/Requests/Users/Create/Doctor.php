@@ -36,7 +36,7 @@ class Doctor extends PersianFormRequest
             'profile'       => 'image',
             'status'        => 'required|numeric',
             'public'        => 'required|numeric',
-            'phone'         => ['required', new Phone],
+            'phone'         => ['required', new Phone, 'unique:users'],
             'msc'           => 'required|string|max:16',
         ];
     }

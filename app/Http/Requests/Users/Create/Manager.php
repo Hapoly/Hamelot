@@ -27,7 +27,7 @@ class Manager extends PersianFormRequest
         return [
             'first_name'    => 'required|string',
             'last_name'     => 'required|string',
-            'phone'         => ['required', new Phone],
+            'phone'         => ['required', new Phone, 'unique:users'],
             'username'      => 'required|string|unique:users',
             'password'      => 'required_if:action,new|confirmed',
             'status'        => 'required|numeric'

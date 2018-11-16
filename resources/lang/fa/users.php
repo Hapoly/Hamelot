@@ -109,8 +109,7 @@ return [
     'print_experiments'         => 'چاپ آزمایشات کاربر',
     'print_patients'            => 'چاپ بیماران کاربر',
     'print_visitors'            => 'چاپ لیست پزشکان و پرستاران',
-
-
+    'phone'                     => 'شماره موبایل',
 
     
 ];

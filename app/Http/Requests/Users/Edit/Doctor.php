@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Users\Edit;
 
 use App\Http\Requests\PersianFormRequest;
+use Illuminate\Validation\Rule;
 use App\Rules\UUID;
 use App\Rules\Phone;
 
@@ -25,10 +26,11 @@ class Doctor extends PersianFormRequest
      */
     public function rules()
     {
+        $user_id = $this->route('user')->id;
         return [
             'first_name'    => 'required|string',
             'last_name'     => 'required|string',
-            'username'      => 'required|string',
+            'username'      => ['required', Rule::unique('users')->ignore($user_id)],
             'password'      => 'required_if:action,new|confirmed',
             'degree_id'     => ['required', new UUID],
             'field_id'      => ['required', new UUID],
@@ -36,7 +38,7 @@ class Doctor extends PersianFormRequest
             'profile'       => 'image',
             'status'        => 'required|numeric',
             'public'        => 'required|numeric',
-            'phone'         => ['required', new Phone],
+            'phone'         => ['required', new Phone, Rule::unique('users')->ignore($user_id)],
             'msc'           => 'required|string|max:16',
         ];
     }

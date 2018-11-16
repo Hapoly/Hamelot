@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Users\Edit;
 
 use App\Http\Requests\PersianFormRequest;
+use Illuminate\Validation\Rule;
 use App\Rules\Phone;
 
 class Manager extends PersianFormRequest
@@ -24,13 +25,14 @@ class Manager extends PersianFormRequest
      */
     public function rules()
     {
+        $user_id = $this->route('user')->id;
         return [
             'first_name'    => 'required|string',
             'last_name'     => 'required|string',
-            'username'      => 'required|string',
+            'username'      => ['required', Rule::unique('users')->ignore($user_id)],
             'password'      => 'required_if:action,new|confirmed',
             'status'        => 'required|numeric',
-            'phone'         => ['required', new Phone],
+            'phone'         => ['required', new Phone, Rule::unique('users')->ignore($user_id)],
         ];
     }
 }

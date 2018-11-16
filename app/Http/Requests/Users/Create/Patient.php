@@ -35,7 +35,7 @@ class Patient extends PersianFormRequest
             'birth_year'    => 'required|numeric|min:1300|max:1400',
             'birth_month'   => 'required|numeric|min:1|max:12',
             'birth_day'     => 'required|numeric|min:1|max:31',
-            'phone'         => ['required', new Phone],
+            'phone'         => ['required', new Phone, 'unique:users'],
         ];
     }
 }

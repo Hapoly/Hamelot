@@ -46,13 +46,13 @@
     @if(Auth::user()->isAdmin())
       <div class="row">
         <div class="col-md-6" style="text-align: center">
-          <a href="{{route('panel.users.edit', ['user' => $user])}}" class="btn btn-primary" role="button">{{__('users.edit.general')}}</a>
+          <a href="{{route('panel.users.edit', ['user' => $user])}}" class="btn btn-primary" id="edit" role="button">{{__('users.edit.general')}}</a>
           @if(Auth::user()->isDoctor())
-            <a href="{{route('panel.permissions.create', ['user' => $user])}}" class="btn btn-primary" role="button">{{__('permissions.create')}}</a>
+            <a href="{{route('panel.permissions.create', ['user' => $user])}}" class="btn btn-primary" id="permission_create" role="button">{{__('permissions.create')}}</a>
           @endif
         </div>
         <div class="col-md-6" style="text-align: center">
-          <a href="{{route('panel.users.destroy', ['user' => $user])}}" class="btn btn-danger" role="button">{{__('users.remove')}}</a>
+          <a href="{{route('panel.users.destroy', ['user' => $user])}}" id="remove" class="btn btn-danger" role="button">{{__('users.remove')}}</a>
         </div>
       </div>
     @endif

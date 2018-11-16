@@ -23,33 +23,42 @@
                         </div> 
                     </div>
                     <div class="form-group row create-form">
+                        <label for="username" class="col-md-2 label-col col-form-label text-center">{{ __('users.username') }}</label>
+                        <div class="col-md-10">
+                           <input id="username" type="text" class="form-control{{ $errors->has('username') ? ' is-invalid' : '' }}" name="username" value="{{ old('username') }}" required>
+                            @if ($errors->has('username'))
+                                <span class="invalid-feedback">
+                                    <strong>{{ $errors->first('username') }}</strong>
+                                </span>
+                            @endif
+                        </div> 
+                    </div>
+                    <div class="form-group row create-form">
                         <label for="password" class="col-md-2 label-col col-form-label text-center">{{ __('users.password') }}</label>
                         <div class="col-md-10">
                            <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required >
-                                @if ($errors->has('password'))
-                                    <span class="invalid-feedback">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
-                                @endif
+                            @if ($errors->has('password'))
+                                <span class="invalid-feedback">
+                                    <strong>{{ $errors->first('password') }}</strong>
+                                </span>
+                            @endif
                         </div>
                     </div>
-
                     <div class="form-group row create-form">
                         <label for="password_confirmation" class="col-md-2 label-col col-form-label text-center">{{ __('users.confirm_password') }}</label>
                         <div class="col-md-10">
                            <input id="password_confirmation" type="password" class="form-control" name="password_confirmation" required >
                         </div>
                     </div>
-
-                     <div class="form-group row create-form">
+                    <div class="form-group row create-form">
                         <label for="first_name" class="col-md-2 label-col col-form-label text-center">{{ __('users.first_name') }}</label>
                         <div class="col-md-10">
                            <input id="first_name" type="text" class="form-control{{ $errors->has('first_name') ? ' is-invalid' : '' }}" name="first_name" value="{{ old('first_name') }}" required>
-                                 @if ($errors->has('first_name'))
-                                    <span class="invalid-feedback">
-                                        <strong>{{ $errors->first('first_name') }}</strong>
-                                    </span>
-                                @endif
+                            @if ($errors->has('first_name'))
+                                <span class="invalid-feedback">
+                                    <strong>{{ $errors->first('first_name') }}</strong>
+                                </span>
+                            @endif
                         </div>
                     </div>
 
@@ -57,11 +66,11 @@
                         <label for="last_name" class="col-md-2 label-col col-form-label text-center">{{ __('users.last_name') }}</label>
                         <div class="col-md-10">
                            <input id="last_name" type="text" class="form-control{{ $errors->has('last_name') ? ' is-invalid' : '' }}" name="last_name" value="{{ old('last_name') }}" required>
-                                 @if ($errors->has('last_name'))
-                                    <span class="invalid-feedback">
-                                        <strong>{{ $errors->first('last_name') }}</strong>
-                                    </span>
-                                @endif
+                            @if ($errors->has('last_name'))
+                                <span class="invalid-feedback">
+                                    <strong>{{ $errors->first('last_name') }}</strong>
+                                </span>
+                            @endif
                         </div> 
                     </div>
 
@@ -69,7 +78,7 @@
                         <label for="title" class="col-md-2 label-col col-form-label text-center">{{ __('users.id_number') }}</label>
                         <div class="col-md-10">
                            <input id="id_number" type="text" class="form-control{{ $errors->has('id_number') ? ' is-invalid' : '' }}" name="id_number" value="{{ old('id_number') }}" required autofocus>
-                                @if ($errors->has('id_number'))
+                            @if ($errors->has('id_number'))
                                 <span class="invalid-feedback">
                                     <strong>{{ $errors->first('id_number') }}</strong>
                                 </span>

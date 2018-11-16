@@ -25,7 +25,7 @@ class Users extends Seeder
 
         User::create([
             'username'      => 'admin',
-            'phone'         => '+989XXXXXXXX1',
+            'phone'         => '09114866684',
             'password'      => bcrypt('admin'),
             'group_code'    => 1,
             'first_name'    => 'علیرضا',
@@ -36,7 +36,7 @@ class Users extends Seeder
          */
         User::create([
             'username'      => 'manager1',
-            'phone'         => '+989XXXXXXXX2',
+            'phone'         => '09214857487',
             'password'      => bcrypt('manager1'),
             'group_code'    => 2,
             'first_name'    => 'گروس',
@@ -71,7 +71,7 @@ class Users extends Seeder
 
         $d2 = User::create([
             'username'      => 'doctor2',
-            'phone'         => '+989XXXXXXXX5',
+            'phone'         => '09355849587',
             'password'      => bcrypt('doctor2'),
             'group_code'    => 3,
             'first_name'    => 'فلاح',
@@ -90,7 +90,7 @@ class Users extends Seeder
          */
         $n0 = User::create([
             'username'      => 'nurse1',
-            'phone'         => '+989XXXXXXXX6',
+            'phone'         => '09385748574',
             'password'      => bcrypt('nurse1'),
             'group_code'    => 4,
             'first_name'    => 'عزیز',
@@ -106,7 +106,7 @@ class Users extends Seeder
 
         $n1 = User::create([
             'username'      => 'nurse2',
-            'phone'         => '+989XXXXXXXX7',
+            'phone'         => '09113847584',
             'password'      => bcrypt('nurse2'),
             'group_code'    => 4,
             'first_name'    => 'شادی',
@@ -141,7 +141,7 @@ class Users extends Seeder
 
         $p1 = User::create([
             'username'      => 'patient2',
-            'phone'         => '+989XXXXXXXX9',
+            'phone'         => '09113857487',
             'password'      => bcrypt('patient2'),
             'group_code'    => 5,
             'first_name'    => 'حمید',
@@ -157,7 +157,7 @@ class Users extends Seeder
 
         $p2 = User::create([
             'username'      => 'patient3',
-            'phone'         => '+989XXXXXXX10',
+            'phone'         => '09123847384',
             'password'      => bcrypt('patient3'),
             'group_code'    => 5,
             'first_name'    => 'رضا',
@@ -173,7 +173,7 @@ class Users extends Seeder
 
         $p3 = User::create([
             'username'      => 'patient6',
-            'phone'         => '+989XXXXXXX11',
+            'phone'         => '09218473847',
             'password'      => bcrypt('patient6'),
             'group_code'    => 5,
             'first_name'    => 'شایان',
@@ -189,7 +189,7 @@ class Users extends Seeder
 
         $p4 = User::create([
             'username'      => 'patient5',
-            'phone'         => '+989XXXXXXX12',
+            'phone'         => '09148574857',
             'password'      => bcrypt('patient5'),
             'group_code'    => 5,
             'first_name'    => 'ساناز',
@@ -205,7 +205,7 @@ class Users extends Seeder
 
         $p5 = User::create([
             'username'      => 'patient4',
-            'phone'         => '+989XXXXXXX13',
+            'phone'         => '09114857487',
             'password'      => bcrypt('patient4'),
             'group_code'    => 5,
             'first_name'    => 'اشکان',
