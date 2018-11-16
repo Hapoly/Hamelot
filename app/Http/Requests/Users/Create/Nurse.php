@@ -3,6 +3,8 @@
 namespace App\Http\Requests\Users\Create;
 
 use App\Http\Requests\PersianFormRequest;
+use App\Rules\UUID;
+use App\Rules\Phone;
 
 class Nurse extends PersianFormRequest
 {
@@ -28,12 +30,13 @@ class Nurse extends PersianFormRequest
             'last_name'     => 'required|string',
             'username'      => 'required|string|unique:users',
             'password'      => 'required_if:action,new|confirmed',
-            'degree_id'        => 'required|string',
-            'field_id'         => 'required|string',
+            'degree_id'     => ['required', new UUID],
+            'field_id'      => ['required', new UUID],
             'gender'        => 'required|numeric',
             'profile'       => 'image',
             'status'        => 'required|numeric',
             'public'        => 'required|numeric',
+            'phone'         => ['required', new Phone],
             'msc'           => 'required|string|max:16',
         ];
     }

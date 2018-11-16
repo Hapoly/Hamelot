@@ -9,17 +9,16 @@
                 <form method="POST" action="{{ route('panel.users.store.nurse') }}" enctype="multipart/form-data">
                       @csrf
                     <div class="form-group row create-form">
-                        <label for="title" class="col-md-2 label-col col-form-label text-center">{{ __('users.username') }}</label>
+                        <label for="phone" class="col-md-2 label-col col-form-label text-center">{{ __('users.phone') }}</label>
                         <div class="col-md-10">
-                           <input id="username" type="text" class="form-control{{ $errors->has('username') ? ' is-invalid' : '' }}" name="username" value="{{ old('username') }}" required autofocus>
-                                @if ($errors->has('username'))
+                           <input id="phone" type="text" class="form-control{{ $errors->has('phone') ? ' is-invalid' : '' }}" name="phone" value="{{ old('phone') }}" required>
+                            @if ($errors->has('phone'))
                                 <span class="invalid-feedback">
-                                    <strong>{{ $errors->first('username') }}</strong>
+                                    <strong>{{ $errors->first('phone') }}</strong>
                                 </span>
                             @endif
-                        </div>
+                        </div> 
                     </div>
-
                     <div class="form-group row create-form">
                         <label for="password" class="col-md-2 label-col col-form-label text-center">{{ __('users.password') }}</label>
                         <div class="col-md-10">
@@ -33,9 +32,9 @@
                     </div>
 
                     <div class="form-group row create-form">
-                        <label for="password-confirm" class="col-md-2 label-col col-form-label text-center">{{ __('users.confirm_password') }}</label>
+                        <label for="password_confirmation" class="col-md-2 label-col col-form-label text-center">{{ __('users.confirm_password') }}</label>
                         <div class="col-md-10">
-                           <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required >
+                           <input id="password_confirmation" type="password" class="form-control" name="password_confirmation" required >
                         </div>
                     </div>
 

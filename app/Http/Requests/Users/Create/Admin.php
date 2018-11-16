@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Users\Create;
 
 use App\Http\Requests\PersianFormRequest;
+use App\Rules\Phone;
 
 class Admin extends PersianFormRequest
 {
@@ -26,6 +27,7 @@ class Admin extends PersianFormRequest
         return [
             'first_name'    => 'required|string',
             'last_name'     => 'required|string',
+            'phone'         => ['required', new Phone],
             'username'      => 'required|string|unique:users',
             'password'      => 'required_if:action,new|confirmed',
             'status'        => 'required|numeric'

@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Users\Create;
 
 use App\Http\Requests\PersianFormRequest;
+use App\Rules\Phone;
 
 class Patient extends PersianFormRequest
 {
@@ -34,6 +35,7 @@ class Patient extends PersianFormRequest
             'birth_year'    => 'required|numeric|min:1300|max:1400',
             'birth_month'   => 'required|numeric|min:1|max:12',
             'birth_day'     => 'required|numeric|min:1|max:31',
+            'phone'         => ['required', new Phone],
         ];
     }
 }
