@@ -44,7 +44,7 @@ class Edit extends PersianFormRequest
             'lon'           => 'required|string',
             'lat'           => 'required|string',
             'city_id'       => ['required', new UUID],
-            'parent_id'     => ['required', new UUID],
+            'parent_id'     => ['required', 'string'],
 
             'status'        => 'required|numeric',
             'public'        => 'required|numeric',
