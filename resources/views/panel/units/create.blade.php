@@ -4,6 +4,7 @@
 <div class="container">
   @form_create(['action' => route('panel.units.store'), 'title' => __('units.create')])
     @input_text(['name' => 'title', 'value' => old('title', ''), 'label' => __('units.title'), 'required' => true])
+    @input_text(['name' => 'slug', 'value' => old('slug', ''), 'label' => __('units.slug'), 'required' => true])
     <?php
         $parent_id_rows = [
           [
