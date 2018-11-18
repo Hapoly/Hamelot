@@ -30,7 +30,7 @@ class Create extends PersianFormRequest
             'address'       => 'required|string',
             'phone'         => 'required|string',
             'mobile'        => 'required|string',
-            'image'         => 'required|image',
+            // 'image'         => 'required|image',
             'lon'           => 'required|string',
             'lat'           => 'required|string',
             'city_id'       => ['required', new UUID],
