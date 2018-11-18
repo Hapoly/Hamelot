@@ -33,6 +33,8 @@
           ];
       ?>
       @input_select(['name' => 'status', 'value' => old('status', ''), 'label' => __('units.status'), 'required' => true, 'rows' => $status_rows])
+    @else
+      <input name="status" value="1" hidden />
     @endif
     <?php
         $group_code_rows = [
