@@ -32,6 +32,8 @@
           ];
       ?>
       @input_select(['name' => 'status', 'value' => old('status', $unit->status), 'label' => __('units.status'), 'required' => true, 'rows' => $status_rows])
+    @else
+      <input hidden name="status" value="1" />
     @endif
     @input_image(['name' => 'image', 'label' => __('units.image'), 'required' => true])
     @input_city(['city_id' => old('city_id', $unit->city_id), 'lon' => old('lon', $unit->lon), 'lat' => old('lat', $unit->lat), 'province_id' => old('province_id', $unit->city->province_id)])
