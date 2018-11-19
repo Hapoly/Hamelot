@@ -468,4 +468,12 @@ class User extends Authenticatable
         }
         return $result;
     }
+
+
+    /**
+     * unit users status
+     */
+    public function getUnitUserAttribute(){
+        return UnitUser::find($this->pivot->id);
+    }
 }

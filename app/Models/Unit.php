@@ -73,28 +73,22 @@ class Unit extends UModel{
         return $this->hasMany('App\Models\UnitUser');
     }
 
-    public function members_pivot(){
-        return $this->hasMany('App\Models\UnitUser', 'unit_id')
-                    ->where('permission', UnitUser::MEMBER)
-                    ->where('status', UnitUser::ACCEPTED);
-    }
-
-    public function managers_pivot(){
-        return $this->hasMany('App\Models\UnitUser', 'unit_id')
-                    ->where('permission', UnitUser::MANAGER)
-                    ->where('status', UnitUser::ACCEPTED);
-    }
-
     public function members(){
         return $this->belongsToMany('App\User', 'unit_user', 'unit_id')
                     ->wherePivot('permission', UnitUser::MEMBER)
-                    ->wherePivot('status', UnitUser::ACCEPTED);
+                    ->wherePivot('status', UnitUser::ACCEPTED)
+                    ->using((new class extends \Illuminate\Database\Eloquent\Relations\Pivot {
+                        protected $casts = ['id' => 'string'];
+                    }))->withPivot('id');
     }
 
     public function managers(){
         return $this->belongsToMany('App\User', 'unit_user', 'unit_id')
                     ->wherePivot('permission', UnitUser::MANAGER)
-                    ->wherePivot('status', UnitUser::ACCEPTED);
+                    ->wherePivot('status', UnitUser::ACCEPTED)
+                    ->using((new class extends \Illuminate\Database\Eloquent\Relations\Pivot {
+                        protected $casts = ['id' => 'string'];
+                    }))->withPivot('id');
     }
 
     public function getImageUrlAttribute(){
