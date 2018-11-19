@@ -43,13 +43,13 @@
     </div>
     <div class="row">
       <div class="col-md-6" style="text-align: center">
-        <a href="{{route('panel.addresses.edit', ['address' => $address])}}" class="btn btn-primary" role="button">{{__('addresses.edit')}}</a>
+        <a href="{{route('panel.addresses.edit', ['address' => $address])}}" id="edit" class="btn btn-primary" role="button">{{__('addresses.edit')}}</a>
       </div>
       <div class="col-md-6" style="text-align: center">
         <form action="{{route('panel.addresses.destroy', ['address' => $address])}}" method="post">
           {{ method_field('DELETE') }}
           {{ csrf_field() }}
-          <button type="submit" class="btn btn-danger">حذف</button>
+          <button type="submit" id="remove" class="btn btn-danger">حذف</button>
         </form>
       </div>
     </div>
