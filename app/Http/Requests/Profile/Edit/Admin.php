@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests\Profile\Edit;
 
-use Illuminate\Foundation\Http\FormRequest;
+use App\Http\Requests\PersianFormRequest;
 
 class Admin extends PersianFormRequest
 {

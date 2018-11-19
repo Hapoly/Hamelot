@@ -96,6 +96,7 @@ class Units extends Controller{
         'unit_id' => $unit->id,
         'user_id' => Auth::user()->id,
         'status'  => UnitUser::ACCEPTED,
+        'permission' => UnitUser::MANAGER,
       ]);
     return redirect()->route('panel.units.show', ['unit' => $unit]);
   }
