@@ -111,16 +111,19 @@
           </tr>
         </thead>
         <tbody>
-          @foreach($unit->managers as $index => $user)
+          @foreach($unit->managers_pivot as $index => $pivot)
+            @php
+              $user = $pivot->user;
+            @endphp
             <tr>
               <td>{{$index+1}}</td>
               <td>{{$user->first_name}}</td>
               <td>{{$user->last_name}}</td>
-              <td>{{$user->status_str}}</td>
+              <td>{{$pivot->status_str}}</td>
               @if(Auth::user()->isAdmin())
                 <td>
                   @operation_th(['base' => 'panel.users', 'label' => 'user', 'item' => $user, 'remove_label' => __('users.remove'), 'edit_label' => __('users.edit_str'), 'show_label' => __('users.show')])
-                  <a class="btn btn-warning" href="{{route('panel.unit_users.inline_update', ['unit_user' => $user->pivot->id, 'action' => 'cancel'])}}">{{__('unit_users.cancel')}}</a>
+                  <a class="btn btn-warning" href="{{route('panel.unit_users.inline_update', ['unit_user' => $pivot, 'action' => 'cancel'])}}">{{__('unit_users.cancel')}}</a>
                 </td>
               @endif
             </tr>
@@ -155,7 +158,10 @@
           </tr>
         </thead>
         <tbody>
-          @foreach($unit->members as $index => $user)
+          @foreach($unit->members_pivot as $index => $pivot)
+            @php
+              $user = $pivot->user;
+            @endphp
             <tr>
               <td>{{$index+1}}</td>
               <td>{{$user->first_name}}</td>
@@ -169,7 +175,7 @@
                   <a class="btn btn-default" href="{{route('panel.users.show', ['user' => $user])}}">{{__('users.show')}}</a>
                 @endif
                 @if($unit->has_permission)
-                  <a class="btn btn-warning" href="{{route('panel.unit_users.inline_update', ['unit_user' => $user->pivot->id, 'action' => 'cancel'])}}">{{__('unit_users.cancel')}}</a>
+                  <a class="btn btn-warning" href="{{route('panel.unit_users.inline_update', ['unit_user' => $pivot, 'user' => $user, 'action' => 'cancel'])}}">{{__('unit_users.cancel')}}</a>
                 @endif
                 @if(Auth::user()->isPatient())
                   <a class="btn btn-default" href="{{route('panel.demands.create.unit_user', ['unit' => $unit, 'user' => $user])}}">{{__('demands.create_unit_user')}}</a>
