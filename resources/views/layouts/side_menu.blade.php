@@ -180,11 +180,19 @@
 			</li>
 		</ul>
 	</li>
-	@if(Auth::user()->isDoctor() || Auth::user()->isNurse())
+	@if(Auth::user()->isDoctor())
 		<li>
 			<a href="{{route('panel.bids.index')}}" aria-expanded="false">
 				<i class="fa fa-heart-o" aria-hidden="false"></i>
 				<span>ماموریت‌ها</span>
+			</a>
+		</li>
+	@endif
+	@if(Auth::user()->isDoctor())
+		<li>
+			<a href="{{route('panel.bids.index')}}" aria-expanded="false">
+				<i class="fa fa-heart-o" aria-hidden="false"></i>
+				<span>ویزیت‌های ثبت شده</span>
 			</a>
 		</li>
 	@endif
@@ -249,20 +257,22 @@
 		</li>
 	@endif
 	@if(!Auth::user()->isPatient())
+		@if(!Auth::user()->isDoctor())
 		<li>
 			<a href="#activity-times" data-toggle="collapse" aria-expanded="false">
 				<i class="fa fa-calendar-check-o" aria-hidden="false"></i>
-				<span>زمان‌های فعالیت</span>
+				<span>زمانهای نوبت‌دهی</span>
 			</a>
 			<ul class="collapse list-unstyled" id="activity-times">
 				<li>
-					<a href="{{route('panel.activity-times.create')}}">زمان فعالیت جدید </a>
+					<a href="{{route('panel.activity-times.create')}}">زمان نوب‌ت‌دهی جدید </a>
 				</li>
 				<li>
-					<a href="{{route('panel.activity-times.index')}}">زمان‌های فعالیت</a>
+					<a href="{{route('panel.activity-times.index')}}">زمان‌های نوبت‌دهی</a>
 				</li>
 			</ul>
 		</li>
+		@endif
 		<li>
 			<a href="#off-times" data-toggle="collapse" aria-expanded="false">
 				<i class="fa fa-calendar-times-o" aria-hidden="false"></i>

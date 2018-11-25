@@ -93,7 +93,7 @@ class Bid extends UModel
 
     // fetch
     public static function fetch(){
-        if(Auth::user()->isDoctor() || Auth::user()->isPatient())
+        if(Auth::user()->isDoctor() || Auth::user()->isNurse() || Auth::user()->isPatient())
             return Bid::where('user_id', Auth::user()->id);
         else
             return null;
