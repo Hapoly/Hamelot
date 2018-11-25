@@ -37,7 +37,7 @@ class ActivityTime extends UModel
         return "$day_of_week " . $this->day_less_time_str;
     }
     public function getDayLessTimeStrAttribute(){
-        return Time::jdate('H:i', $this->start_time) . " تا " . Time::jdate('H:i', $this->finish_time);
+        return Time::jdate('H:i', $this->start_time - 3600*3.5) . " تا " . Time::jdate('H:i', $this->finish_time - 3600*3.5);
     }
 
     public function getDayOfWeekStrAttribute(){
