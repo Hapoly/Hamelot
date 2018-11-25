@@ -30,7 +30,7 @@ class CreateDoctor extends PersianFormRequest
             'degree_id'     => 'required|string',
             'field_id'      => 'required|string',
             'public'        => 'required|numeric',
-            'profile'       => 'required|image',
+            'profile'       => 'image',
             'gender'        => 'required|numeric',
         ];
     }

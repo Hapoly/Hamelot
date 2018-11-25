@@ -17,25 +17,27 @@ class PersianFormRequest extends FormRequest{
             '۵' => '5',
             '۶' => '6',
             '۷' => '7',
+            '۸' => '8',
+            '۹' => '9',
         ];
         foreach($digit_translates as $persian=>$latina){
             $str = str_replace($persian, $latina, $str);
         }
         return $str;
     }
-    // public function getValidatorInstance(){
-    //     foreach(request()->all() as $key=>$value){
-    //         if($key == '_token')
-    //             continue;
+    public function getValidatorInstance(){
+        foreach(request()->all() as $key=>$value){
+            if($key == '_token')
+                continue;
             
-    //         // fixings
-    //         $value = $this->replace_digits($value);
-
-    //         // replace the fixes
-    //         request()->merge([
-    //             $key => $value,
-    //         ]);
-    //     }
-    //     parent::getValidatorInstance();
-    // }
+            // fixings
+            $value = $this->replace_digits($value);
+            // replace the fixes
+            request()->merge([
+                $key => $value,
+            ]);
+        }
+        // die(json_encode(request()->all()));
+        return parent::getValidatorInstance();
+    }
 }

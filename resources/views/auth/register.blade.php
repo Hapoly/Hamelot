@@ -73,6 +73,17 @@
                         </div>
                     </div>
                     <div class="form-group row">
+                        <label for="email" class="col-md-3 col-form-label text-md-right">{{ __('general.email') }}</label>
+                        <div class="col-md-8">
+                            <input id="email" type="text" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" placeholder="{{__('general.optional')}}">
+                            @if ($errors->has('email'))
+                                <span class="invalid-feedback">
+                                    <strong>{{ $errors->first('email') }}</strong>
+                                </span>
+                            @endif
+                        </div>
+                    </div>
+                    <div class="form-group row">
                         <label for="phone" class="col-md-3 col-form-label text-md-right">{{ __('general.phone') }}</label>
                         <div class="col-md-8">
                             <input id="phone" type="text" class="form-control{{ $errors->has('phone') ? ' is-invalid' : '' }}" name="phone" value="{{ old('phone') }}" required>

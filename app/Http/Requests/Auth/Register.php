@@ -25,12 +25,14 @@ class Register extends PersianFormRequest
      */
     public function rules()
     {
+        // die(json_encode(request()->all()));
         return [
             'username'      => 'required|string|unique:users',
             'password'      => 'required|string|confirmed',
             'first_name'    => 'required|string',
             'last_name'     => 'required|string',
             'group_code'    => 'required|numeric',
+            'email'         => 'email',
             'phone'         => ['required', new Phone, 'unique:users'],
         ];
     }

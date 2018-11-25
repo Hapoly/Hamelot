@@ -26,18 +26,38 @@ use App\Http\Requests\Auth\CreateNurse as CreateNurseRequest;
 use App\Http\Requests\Auth\CreatePatient as CreatePatientRequest;
 
 class RegisterController extends Controller{
+    private function replace_digits($str){
+        $digit_translates = [
+            '۰' => '0',
+            '۱' => '1',
+            '۲' => '2',
+            '۳' => '3',
+            '۴' => '4',
+            '۵' => '5',
+            '۶' => '6',
+            '۷' => '7',
+            '۸' => '8',
+            '۹' => '9',
+        ];
+        foreach($digit_translates as $persian=>$latina){
+            $str = str_replace($persian, $latina, $str);
+        }
+        return $str;
+    }
     public function register(Request $request){
         $request->session()->flush();
         return view('auth.register');
     }
     public function moreInfo(RegisterRequest $request){
+        $inputs = $request->all();
+        $inputs['phone'] = $this->replace_digits($request->phone);
         if(!$request->session()->has('token') && !$request->session()->get('register.token_mismatch', false)){
-            $request->session()->put('register.username'   , $request->username);
-            $request->session()->put('register.password'   , $request->password);
-            $request->session()->put('register.first_name' , $request->first_name);
-            $request->session()->put('register.last_name'  , $request->last_name);
-            $request->session()->put('register.group_code' , $request->group_code);
-            $request->session()->put('register.phone'      , $request->phone);
+            $request->session()->put('register.username'   , $inputs['username']);
+            $request->session()->put('register.password'   , $inputs['password']);
+            $request->session()->put('register.first_name' , $inputs['first_name']);
+            $request->session()->put('register.last_name'  , $inputs['last_name']);
+            $request->session()->put('register.group_code' , $inputs['group_code']);
+            $request->session()->put('register.phone'      , $inputs['phone']);
             $request->session()->put('register.token'      , rand() % 1000000);
             // sending message to phone number
             try{
@@ -81,7 +101,8 @@ class RegisterController extends Controller{
     }
     public function createDoctor(CreateDoctorRequest $request){
         $data = $request->all();
-        if($request->token != $request->session()->get('register.token')){
+        $data['token'] = $this->replace_digits($data['token']);
+        if($data['token'] != $request->session()->get('register.token')){
             $request->session()->put('register.token_mismatch', true);
             return redirect()->back();
         }
@@ -91,7 +112,8 @@ class RegisterController extends Controller{
         $data['phone'] = $request->session()->get('register.phone');
         $data['group_code'] = $request->session()->get('register.group_code');
         $data['password'] = Hash::make($request->session()->get('register.password'));
-        $data['profile'] = Storage::disk('public')->put('/users', $request->file('profile'));
+        if($request->hasFile('profile'))
+            $data['profile'] = Storage::disk('public')->put('/users', $request->file('profile'));
         $user = User::create($data);
         $data['user_id'] = $user->id;
         Doctor::create($data);
@@ -104,7 +126,8 @@ class RegisterController extends Controller{
     }
     public function createNurse(CreateNurseRequest $request){
         $data = $request->all();
-        if($request->token != $request->session()->get('register.token')){
+        $data['token'] = $this->replace_digits($data['token']);
+        if($data['token'] != $request->session()->get('register.token')){
             $request->session()->put('register.token_mismatch', true);
             return redirect()->back();
         }
@@ -114,7 +137,8 @@ class RegisterController extends Controller{
         $data['phone'] = $request->session()->get('register.phone');
         $data['group_code'] = $request->session()->get('register.group_code');
         $data['password'] = Hash::make($request->session()->get('register.password'));
-        $data['profile'] = Storage::disk('public')->put('/users', $request->file('profile'));
+        if($request->hasFile('profile'))
+            $data['profile'] = Storage::disk('public')->put('/users', $request->file('profile'));
         $user = User::create($data);
         $data['user_id'] = $user->id;
         Nurse::create($data);
@@ -127,7 +151,8 @@ class RegisterController extends Controller{
     }
     public function createPatient(CreatePatientRequest $request){
         $data = $request->all();
-        if($request->token != $request->session()->get('register.token')){
+        $data['token'] = $this->replace_digits($data['token']);
+        if($data['token'] != $request->session()->get('register.token')){
             $request->session()->put('register.token_mismatch', true);
             return redirect()->back();
         }
@@ -138,7 +163,8 @@ class RegisterController extends Controller{
         $data['group_code'] = $request->session()->get('register.group_code');
         $data['password'] = Hash::make($request->session()->get('register.password'));
         $data['birth_date'] = Time::jmktime(0, 0, 0, $data['birth_day'], $data['birth_month'], $data['birth_year']);
-        $data['profile'] = Storage::disk('public')->put('/users', $request->file('profile'));
+        if($request->hasFile('profile'))
+            $data['profile'] = Storage::disk('public')->put('/users', $request->file('profile'));
         $user = User::create($data);
         $data['user_id'] = $user->id;
         Patient::create($data);
@@ -151,7 +177,8 @@ class RegisterController extends Controller{
     }
     public function createManager(CreateManagerRequest $request){
         $data = $request->all();
-        if($request->token != $request->session()->get('register.token')){
+        $data['token'] = $this->replace_digits($data['token']);
+        if($data['token'] != $request->session()->get('register.token')){
             $request->session()->put('register.token_mismatch', true);
             return redirect()->back();
         }

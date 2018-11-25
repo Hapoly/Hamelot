@@ -170,6 +170,7 @@ return [
         'user_id'           => 'کاربر',
         'unit_id'           => 'واحد درمانی',
         'experiment_id'     => 'آزمایش',
+        'email'             => 'ایمیل',
     ],
 
 ];
