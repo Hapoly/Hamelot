@@ -95,6 +95,16 @@
 			<li>
 				<a href="{{route('panel.experiments.index')}}"> لیست آزمایشات</a>
 			</li>
+		</ul>
+	</li>
+	<li>
+		<a href="#templates" data-toggle="collapse" arisa-expanded="false">
+			<i class="fa fa-note" aria-hidden="true"></i>
+			<span>
+				قالب ها
+			</span>
+		</a>
+		<ul class="collapse list-unstyled" id="templates">
 			<li>
 				<a href="{{route('panel.report_templates.index')}}"> لیست قالب‌ها</a>
 			</li>
@@ -257,21 +267,36 @@
 		</li>
 	@endif
 	@if(!Auth::user()->isPatient())
-		@if(!Auth::user()->isDoctor())
-		<li>
-			<a href="#activity-times" data-toggle="collapse" aria-expanded="false">
-				<i class="fa fa-calendar-check-o" aria-hidden="false"></i>
-				<span>زمانهای نوبت‌دهی</span>
-			</a>
-			<ul class="collapse list-unstyled" id="activity-times">
-				<li>
-					<a href="{{route('panel.activity-times.create')}}">زمان نوب‌ت‌دهی جدید </a>
-				</li>
-				<li>
-					<a href="{{route('panel.activity-times.index')}}">زمان‌های نوبت‌دهی</a>
-				</li>
-			</ul>
-		</li>
+		@if(Auth::user()->isDoctor())
+			<li>
+				<a href="#activity-times" data-toggle="collapse" aria-expanded="false">
+					<i class="fa fa-calendar-check-o" aria-hidden="false"></i>
+					<span>زمانهای نوبت‌دهی</span>
+				</a>
+				<ul class="collapse list-unstyled" id="activity-times">
+					<li>
+						<a href="{{route('panel.activity-times.create')}}">زمان نوب‌ت‌دهی جدید </a>
+					</li>
+					<li>
+						<a href="{{route('panel.activity-times.index')}}">زمان‌های نوبت‌دهی</a>
+					</li>
+				</ul>
+			</li>
+		@else
+			<li>
+				<a href="#activity-times" data-toggle="collapse" aria-expanded="false">
+					<i class="fa fa-calendar-check-o" aria-hidden="false"></i>
+					<span>زمان‌های فعالیت </span>
+				</a>
+				<ul class="collapse list-unstyled" id="activity-times">
+					<li>
+						<a href="{{route('panel.activity-times.create')}}">زمان فعالیت جدید </a>
+					</li>
+					<li>
+						<a href="{{route('panel.activity-times.index')}}">زمان‌های فعالیت </a>
+					</li>
+				</ul>
+			</li>
 		@endif
 		<li>
 			<a href="#off-times" data-toggle="collapse" aria-expanded="false">

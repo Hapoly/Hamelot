@@ -47,7 +47,7 @@ class ActivityTime extends UModel
     public static function fetch(){
         if(Auth::user()->isAdmin())
             return new ActivityTime;
-        else if(Auth::user()->isManager())
+        else if(Auth::user()->isManager()){
             return ActivityTime::whereHas('unit_user', function($query){
                 return $query->whereHas('unit', function($query){
                     return $query->whereHas('managers', function($query){
@@ -55,7 +55,7 @@ class ActivityTime extends UModel
                     });
                 });
             });
-        else
+        }else
             return ActivityTime::whereHas('unit_user', function($query){
                 return $query->where('user_id', Auth::user()->id);
             });
@@ -64,13 +64,13 @@ class ActivityTime extends UModel
     public function getPermissionToWriteAttribute(){
         if(Auth::user()->isAdmin())
             return true;
-        if(Auth::user()->isManager())
+        if(Auth::user()->isManager()){
             return $this->unit_user->whereHas('unit', function($query){
-                return $query->where('managers', function($query){
+                return $query->whereHas('managers', function($query){
                     return $query->where('users.id', Auth::user()->id);
                 });
             })->first() != null;
-        else
+        }else
             return $this->unit_user->user_id == Auth::user()->id;
     }
 

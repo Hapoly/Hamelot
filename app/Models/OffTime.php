@@ -70,7 +70,7 @@ class OffTime extends UModel
             return true;
         if(Auth::user()->isManager())
             return $this->unit_user->whereHas('unit', function($query){
-                return $query->where('managers', function($query){
+                return $query->whereHas('managers', function($query){
                     return $query->where('users.id', Auth::user()->id);
                 });
             })->first() != null;

@@ -35,7 +35,6 @@ class ActivityTimes extends Controller{
     if($request->has('sort'))
       $activity_times = $activity_times->orderBy($request->input('sort'), 'desc');
     $activity_times = $activity_times->paginate(10);
-    
     return view('panel.activity_times.index', [
       'activity_times'   => $activity_times,
       'links'       => $links,
