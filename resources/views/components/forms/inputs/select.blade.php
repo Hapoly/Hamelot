@@ -1,4 +1,4 @@
-<div class="form-group row create-form">
+<div class="form-group create-form">
     <div class="col-md-{{isset($col)? $col : 12}}">
         <label for="{{$name}}" class="col-md-2 col-form-label text-center" style="float:right">{{$label}}</label>
         <div class="col-md-10">
@@ -7,6 +7,7 @@
                     <option value="{{$row['value']}}" {{$value == $row['value'] ? 'selected': ''}}>{{$row['label']}}</option>
                 @endforeach
             </select>
+            <!-- <i class="fa fa-question-circle" aria-hidden="true"></i> -->
             @if ($errors->has($name))
                 <span class="invalid-feedback">
                 <strong>{{ $errors->first($name) }}</strong>
