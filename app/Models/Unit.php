@@ -144,6 +144,7 @@ class Unit extends UModel{
         UnitUser::where('unit_id', $this->id)->delete();
         Experiment::where('unit_id', $this->id)->delete();
         BankAccount::where('unit_id', $this->id)->delete();
+        Transaction::where('src_id', $this->id)->orWhere('dst_id', $this->id)->delete();
         foreach($this->sub_units as $sub_unit){
             $sub_unit->delete();
         }
