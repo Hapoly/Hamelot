@@ -28,7 +28,7 @@ class HomeController extends Controller
     }
     public function search(Request $request){
         $term = $request->input('term', '');
-        $results = Entry::where('title', 'LIKE', "%$term%");
+        $results = Entry::where('title', 'LIKE', "%$term%")->where('public', Entry::T_PUBLIC);
         $results = $results->paginate(10);
         return view('searched', [
             'results'   => $results,

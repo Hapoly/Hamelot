@@ -47,6 +47,9 @@ class Entry extends UModel
         return __('entries.status_str.' . $this->status);
     }
 
+    const T_PUBLIC  = 1;
+    const T_PRIVATE = 2;
+
     public function unit(){
         return $this->belongsTo('App\Models\Unit', 'target_id');
     }
