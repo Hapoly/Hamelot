@@ -15,8 +15,10 @@
 </div>
 <div class="form-group row create-form">
     <div class="col-md-{{isset($col)? $col : 12}}">
+        
         <div class="col-md-6">
-            <div class="col-md-10">
+        <label for="{{$name}}" class="col-md-4 col-form-label text-center" style="float:right">دقیقه</label>
+            <div class="col-md-8">
                 <input  id="{{$name}}" 
                         type="number" 
                         class="form-control {{ $errors->has($name) ? ' is-invalid' : '' }}" 
@@ -33,10 +35,11 @@
                     </span>
                 @endif
             </div>
-            <label for="{{$name}}" class="col-md-2 col-form-label text-center">دقیقه</label>
+          
         </div>
         <div class="col-md-6">
-            <div class="col-md-10">
+            <label for="{{$name}}" class="col-md-4 col-form-label text-center" style="float:right">ساعت</label>
+            <div class="col-md-8">
                 <input  id="{{$name}}" 
                         type="number" 
                         class="form-control {{ $errors->has($name) ? ' is-invalid' : '' }}" 
@@ -53,7 +56,7 @@
                     </span>
                 @endif
             </div>
-            <label for="{{$name}}" class="col-md-2 col-form-label text-center">ساعت</label>
+            
         </div>
     </div>
 </div>
