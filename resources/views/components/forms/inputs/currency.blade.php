@@ -6,6 +6,7 @@
 ?>
 <div class="form-group row create-form">
     <div class="col-md-{{isset($col)? $col : 12}}">
+        <label for="{{$name}}" class="col-md-2 col-form-label text-center" style="float:right;">{{$label}}</label>
         <div class="col-md-10">
             <div class="input-group" style="width: 93%">
                 <input type="number" min="0" class="input-group-with-left-addon" id="{{$name}}" name="{{$name}}" value="{{$value}}">
@@ -17,6 +18,6 @@
                 </span>
             @endif
         </div>
-        <label for="{{$name}}" class="col-md-2 col-form-label text-center">{{$label}}</label>
+     
     </div>
 </div>
