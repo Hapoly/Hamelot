@@ -22,7 +22,28 @@
         }
       }
     @endphp
-    <div class="">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group create-form">
+          <label  class="col-md-2 col-form-label text-center" style="float:right">نمونه</label>
+          <div class="col-md-1" style="padding:0;">
+              <div class="popup" onclick="myFunction()"><i class="fa fa-question-circle" aria-hidden="true"></i>
+                <span class="popuptext" id="myPopup">
+                در صورتی که زماندهی را روی حالت خودکار بگذارید. سیستم به صورت خودکار ویزیت‌ها را زماندهی می‌کند و هزینه‌های لازم را از کاربر می گیرد. در غیراین صورت تمام درخواست‌ها در این بازه زمانی برعهده مدیریت درمانی و شما است.
+                </span>
+              </div>
+          </div>
+          <div class="col-md-9" style="padding-left:0">
+              <select class="form-control"  style="width:93%" required>
+                <option value="" disabled selected></option>
+                <option value="1">ریاضیات-کلاس سوم</option>
+                <option value="2"> ریاضیات-کلاس چهارم</option>
+              </select>
+          </div>
+         
+        </div>
+      </div>
+    </div>
       @input_select(['name' => 'unit_user_id', 'value' => old('unit_user_id', ''), 'label' => __('activity_times.unit_user_id'), 'required' => true, 'col'=>6, 'rows' => $unit_user_rows])
   
       @php
@@ -58,7 +79,7 @@
       @endphp
       @input_select(['name' => 'just_in_unit_visit', 'value' => old('just_in_unit_visit', '1'), 'label' => __('activity_times.just_in_unit_visit'), 'required' => true, 'col'=>6, 'rows' => $just_in_unit_visit_rows])
     
-    </div>
+    
     <script>
       $(document).ready(function(){
         function update_auto_fill(){
@@ -80,6 +101,13 @@
         });
         update_auto_fill();
       });
+    </script>
+    <script>
+      // When the user clicks on div, open the popup
+      function myFunction() {
+          var popup = document.getElementById("myPopup");
+          popup.classList.toggle("show");
+      }
     </script>
 
         @tagline
