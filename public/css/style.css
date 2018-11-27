@@ -717,13 +717,15 @@ h2, h3, h4{
 }
 /* popup things */
 .popup {
-    position: relative;
+    position: absolute;
+    z-index: 1;
     display: inline-block;
     cursor: pointer;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+    
 }
 
 /* The actual popup */

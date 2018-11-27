@@ -11,7 +11,7 @@
             <label style="width: auto; float: right; margin-right: 15px;">{{$label}}</label>
             @if ($errors->has($name))
                 <span class="invalid-feedback">
-                <strong>{{ $errors->first($name) }}</strong>
+                    <strong>{{ $errors->first($name) }}</strong>
                 </span>
             @endif
         </div>
