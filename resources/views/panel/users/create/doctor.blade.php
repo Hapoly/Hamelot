@@ -8,6 +8,28 @@
             <div class="col-md-12">
                 <form method="POST" action="{{ route('panel.users.store.doctor') }}" enctype="multipart/form-data">
                     @csrf
+                     
+                    <div class="form-group row create-form">
+                        <label for="profile" class="col-md-2 label-col col-form-label text-center">{{ __('users.profile') }}</label>
+                        <div class="col-md-10">
+                            <div class="fileinput fileinput-new" data-provides="fileinput">
+                                <div class="fileinput-new thumbnail" style="width: 200px; height: 150px;">
+                                    <!-- <img data-src="holder.js/100%x100%" alt="..."> -->
+                                </div>
+                                <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 200px; max-height: 150px;"></div>
+                                <div>
+                                    <span class="btn btn-default btn-file" style="display:block;margin:auto;"><span class="fileinput-new">انتخاب کنید</span><span class="fileinput-exists">تغییر</span><input id="profile" type="file" class="form-control{{ $errors->has('profile') ? ' is-invalid' : '' }}" name="profile"></span>
+                                    <!-- <a href="#" class="btn btn-default fileinput-exists" data-dismiss="fileinput">حذف</a> -->
+                                </div>
+                            </div>
+                           <!-- <input id="profile" type="file" class="form-control{{ $errors->has('profile') ? ' is-invalid' : '' }}" name="profile"> -->
+                                 @if ($errors->has('profile'))
+                                    <span class="invalid-feedback">
+                                        <strong>{{ $errors->first('profile') }}</strong>
+                                    </span>
+                                @endif
+                        </div>
+                    </div>
                     <div class="form-group row create-form">
                         <label for="phone" class="col-md-2 label-col col-form-label text-center">{{ __('users.phone') }}</label>
                         <div class="col-md-10">
@@ -160,18 +182,7 @@
                             @endif
                         </div>
                     </div>
-                    
-                    <div class="form-group row create-form">
-                        <label for="profile" class="col-md-2 label-col col-form-label text-center">{{ __('users.profile') }}</label>
-                        <div class="col-md-10">
-                           <input id="profile" type="file" class="form-control{{ $errors->has('profile') ? ' is-invalid' : '' }}" name="profile">
-                                 @if ($errors->has('profile'))
-                                    <span class="invalid-feedback">
-                                        <strong>{{ $errors->first('profile') }}</strong>
-                                    </span>
-                                @endif
-                        </div>
-                    </div>
+                   
                     <?php
                         $public_rows = [
                         [ 'value' => 1, 'label' => __('users.public_str.1') ],

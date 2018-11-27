@@ -23,19 +23,19 @@
       }
     @endphp
     <div class="">
-        @input_select(['name' => 'unit_user_id', 'value' => old('unit_user_id', ''), 'label' => __('activity_times.unit_user_id'), 'required' => true, 'col'=>6, 'rows' => $unit_user_rows])
-    
-        @php
-          $day_of_week_rows = [];
-          for($i=1; $i<=7; $i++)
-            array_push($day_of_week_rows, [
-              'label' => __('general.day_of_week.' . $i),
-              'value' => $i
-            ]);
-        @endphp
-        @input_select(['name' => 'day_of_week', 'value' => old('day_of_week', ''), 'label' => __('activity_times.day_of_week'), 'required' => true, 'col'=>6, 'rows' => $day_of_week_rows])
-        @input_day_time(['name' => 'start_time', 'value' => old('start_time', time()), 'col'=>6, 'label' => __('activity_times.start_time')])
-        @input_day_time(['name' => 'finish_time', 'value' => old('finish_time', time()), 'col'=>6, 'label' => __('activity_times.finish_time')])
+      @input_select(['name' => 'unit_user_id', 'value' => old('unit_user_id', ''), 'label' => __('activity_times.unit_user_id'), 'required' => true, 'col'=>6, 'rows' => $unit_user_rows])
+  
+      @php
+        $day_of_week_rows = [];
+        for($i=1; $i<=7; $i++)
+          array_push($day_of_week_rows, [
+            'label' => __('general.day_of_week.' . $i),
+            'value' => $i
+          ]);
+      @endphp
+      @input_select(['name' => 'day_of_week', 'value' => old('day_of_week', ''), 'label' => __('activity_times.day_of_week'), 'required' => true, 'col'=>6, 'rows' => $day_of_week_rows])
+      @input_day_time(['name' => 'start_time', 'value' => old('start_time', time()), 'col'=>6, 'label' => __('activity_times.start_time')])
+      @input_day_time(['name' => 'finish_time', 'value' => old('finish_time', time()), 'col'=>6, 'label' => __('activity_times.finish_time')])
     
       @php
         $auto_fill_rows = [
@@ -47,16 +47,16 @@
         {{__('activity_times.auto_fill_description')}}
       @endtagline
      
-        @input_select(['name' => 'auto_fill', 'value' => old('auto_fill', '1'), 'col'=>6, 'label' => __('activity_times.auto_fill'), 'required' => true, 'rows' => $auto_fill_rows])
-     
-        @php
-          $just_in_unit_visit_rows = [
-            ['label'  => __('activity_times.just_in_unit_visit_str.' . 1), 'value' => 1],
-            ['label'  => __('activity_times.just_in_unit_visit_str.' . 2), 'value' => 2],
-            ['label'  => __('activity_times.just_in_unit_visit_str.' . 3), 'value' => 3],
-          ];
-        @endphp
-        @input_select(['name' => 'just_in_unit_visit', 'value' => old('just_in_unit_visit', '1'), 'label' => __('activity_times.just_in_unit_visit'), 'required' => true, 'col'=>6, 'rows' => $just_in_unit_visit_rows])
+      @input_select(['name' => 'auto_fill', 'value' => old('auto_fill', '1'), 'col'=>6, 'label' => __('activity_times.auto_fill'), 'required' => true, 'rows' => $auto_fill_rows])
+
+      @php
+        $just_in_unit_visit_rows = [
+          ['label'  => __('activity_times.just_in_unit_visit_str.' . 1), 'value' => 1],
+          ['label'  => __('activity_times.just_in_unit_visit_str.' . 2), 'value' => 2],
+          ['label'  => __('activity_times.just_in_unit_visit_str.' . 3), 'value' => 3],
+        ];
+      @endphp
+      @input_select(['name' => 'just_in_unit_visit', 'value' => old('just_in_unit_visit', '1'), 'label' => __('activity_times.just_in_unit_visit'), 'required' => true, 'col'=>6, 'rows' => $just_in_unit_visit_rows])
     
     </div>
     <script>

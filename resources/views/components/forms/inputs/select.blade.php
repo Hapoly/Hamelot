@@ -7,7 +7,7 @@
                     <option value="{{$row['value']}}" {{$value == $row['value'] ? 'selected': ''}}>{{$row['label']}}</option>
                 @endforeach
             </select>
-            <!-- <i class="fa fa-question-circle" aria-hidden="true"></i> -->
+           
             @if ($errors->has($name))
                 <span class="invalid-feedback">
                 <strong>{{ $errors->first($name) }}</strong>
