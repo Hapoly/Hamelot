@@ -95,8 +95,8 @@
 		</div>
 	</div>
 	<footer class="container-fluid bg-4 text-center">
-		<p style="margin-top:15px;color:white;">design by
-			<a href="https://github.com/Hapoly">hapoly</a>
+		<p style="margin-top:15px;color:white;">designed by
+			<a href="https://doctorsoal.com">doctorsoal.com</a>
 		</p>
 	</footer>
 	<script type="text/javascript">

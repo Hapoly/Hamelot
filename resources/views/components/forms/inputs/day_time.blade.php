@@ -11,7 +11,7 @@
 
 <div class="col-md-{{isset($col)? $col : 12}}">
     <div class="row" style="margin: 0px 0px !important;">
-        <div class="col-md-12 text-center">
+        <div class="col-md-12 text-center" style="padding-top:5px;padding-bottom:20px;">
             {{$label}}
             @if(isset($help))
                 <div class="col-md-1" style="padding:0;">
