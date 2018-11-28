@@ -53,13 +53,11 @@
                                             @endphp
                                             <div class="row">
                                                 @foreach($unit->activity_times[$i]['times'] as $time)
-                                                <div class="col-md-3 visit-time">
                                                     <a class="primary-btn" href="{{route('panel.demands.create.visit', ['activity_time' => $time, 'day' => $day])}}">
                                                         <span>
                                                         {{$time->day_less_time_str}} ({{$time->unit_user->user->full_name}})
                                                         </span>
                                                     </a>
-                                                </div>
                                                 @endforeach
                                             </div>
                                         </td>

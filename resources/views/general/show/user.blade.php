@@ -62,15 +62,13 @@
                                             @if(isset($user->activity_times[$i]['times']))
                                                 <td>
                                                     <div class="row">
-                                                    @foreach($user->activity_times[$i]['times'] as $time)
-                                                    <div class="col-md-3 visit-time">
-                                                        <a class="primary-btn" href="{{route('panel.demands.create.visit', ['activity_time' => $time, 'day' => $day])}}">
-                                                            <span>
-                                                            {{$time->day_less_time_str}} ({{$time->unit_user->unit->complete_title}})
-                                                            </span>
-                                                        </a>
-                                                    </div>
-                                                    @endforeach
+                                                        @foreach($user->activity_times[$i]['times'] as $time)
+                                                            <a class="primary-btn" href="{{route('panel.demands.create.visit', ['activity_time' => $time, 'day' => $day])}}">
+                                                                <span>
+                                                                {{$time->day_less_time_str}} ({{$time->unit_user->unit->complete_title}})
+                                                                </span>
+                                                            </a>
+                                                        @endforeach
                                                     </div>
                                                 </td>
                                             @else
