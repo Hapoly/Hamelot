@@ -49,7 +49,7 @@
                             ['label' => __('users.gender_str.' . 2), 'value' => 2],
                         ];
                     @endphp
-                    @input_select(['name' => 'gender_id', 'value' => old('gender_id', 0), 'label' => __('users.gender'), 'required' => true, 'rows' => $gender_rows, 'row' => true])
+                    @input_select(['name' => 'gender', 'value' => old('gender', 0), 'label' => __('users.gender'), 'required' => true, 'rows' => $gender_rows, 'row' => true])
                     
                     @input_text(['name' => 'msc', 'label' => __('users.msc'), 'value' => old('msc'), 'row' => true])
                     <div class="form-group row create-form">
@@ -59,7 +59,7 @@
                                 ['label' => __('users.public_str.' . 2), 'value' => 2],
                             ];
                         @endphp
-                        @input_select(['name' => 'public_id', 'value' => old('public_id', 0), 'label' => __('users.public'), 'required' => true, 'rows' => $public_rows, 'col' => 6])
+                        @input_select(['name' => 'public', 'value' => old('public', 0), 'label' => __('users.public'), 'required' => true, 'rows' => $public_rows, 'col' => 6])
                         
                         @php
                             $status_rows = [
@@ -67,7 +67,7 @@
                                 ['label' => __('users.status_str.' . 2), 'value' => 2],
                             ];
                         @endphp
-                        @input_select(['name' => 'status_id', 'value' => old('status_id', 0), 'label' => __('users.status'), 'required' => true, 'rows' => $status_rows, 'col' => 6])
+                        @input_select(['name' => 'status', 'value' => old('status', 0), 'label' => __('users.status'), 'required' => true, 'rows' => $status_rows, 'col' => 6])
                     </div>
                     @submit_row(['value' => 'save', 'label' => __('users.save')])
                 </form>
