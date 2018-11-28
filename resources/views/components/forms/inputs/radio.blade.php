@@ -1,9 +1,3 @@
-<?php
-/**
- * inptus:
- *  $name, $value, $required, $label
- */
-?>
 <div class="form-group row create-form">
     <div class="col-md-{{isset($col)? $col : 12}}">
         <div class="col-md-10">

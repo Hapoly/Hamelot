@@ -7,7 +7,7 @@ return [
 
     'username'          => 'نام کاربری',
     'password'          => 'کلمه عبور',
-    'confirm_password'  => 'تایید کلمه عبور',
+    'password_confirmation' => 'تایید کلمه عبور',
     'group_code'        => 'گروه کاربری',
     'first_name'        => 'نام',
     'prefix'            => 'پیشوند',
@@ -26,6 +26,7 @@ return [
     'msc'               => 'کدنظام پزشکی/پرستاری',
     'token'             => 'کد تایید',
     'full_name'         => 'نام و ‌نام‌خانوادگی',
+    'email'             => 'آدرس ایمیل',
 
     'show'              => 'نمایش',
     'edit_str'          => 'ویرایش',

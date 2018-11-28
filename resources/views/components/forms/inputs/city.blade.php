@@ -1,4 +1,8 @@
+@if(isset($row) && $row)
 <div class="form-group row create-form">
+@else
+<div class="col-md-{{isset($col)? $col : 12}}">
+@endif
     <div class="col-md-{{isset($col)? $col : 12}}">
         <div class="col-md-10">
             <select class="form-control" name="province_id" id="province_id" style="width:93%">
@@ -16,7 +20,11 @@
         <label for="province_id" class="col-md-2 col-form-label text-center">{{(__('units.province_id'))}}</label>
     </div>
 </div>
+@if(isset($row) && $row)
 <div class="form-group row create-form">
+@else
+<div class="col-md-{{isset($col)? $col : 12}}">
+@endif
     <div class="col-md-{{isset($col)? $col : 12}}">
         <div class="col-md-10">
             <select class="form-control" name="city_id" id="city_id" style="width:93%">
@@ -31,7 +39,11 @@
         <label for="city_id" class="col-md-2 col-form-label text-center">{{(__('units.city_id'))}}</label>
     </div>
 </div>
+@if(isset($row) && $row)
 <div class="form-group row create-form">
+@else
+<div class="col-md-{{isset($col)? $col : 12}}">
+@endif
     <div class="col-md-{{isset($col)? $col : 12}}">
         <div class="col-md-10">
         <input id="lon" type="text" class="form-control {{ $errors->has('lon') ? ' is-invalid' : '' }}" name="lon" required autofocus>
@@ -44,7 +56,11 @@
         <label for="lon" class="col-md-2 col-form-label text-center">{{__('units.lon')}}</label>
     </div>
 </div>
+@if(isset($row) && $row)
 <div class="form-group row create-form">
+@else
+<div class="col-md-{{isset($col)? $col : 12}}">
+@endif
     <div class="col-md-{{isset($col)? $col : 12}}">
         <div class="col-md-10">
             <input id="lat" type="text" class="form-control {{ $errors->has('lat') ? ' is-invalid' : '' }}" name="lat" required autofocus>

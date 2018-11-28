@@ -1,10 +1,8 @@
-<?php
-/**
- * inptus:
- *  $name, $value, $required, $label
- */
-?>
+@if(isset($row) && $row)
 <div class="form-group row create-form">
+@else
+<div class="col-md-{{isset($col)? $col : 12}}">
+@endif
     <div class="col-md-{{isset($col)? $col : 12}}">
         <div class="col-md-10">
             <input type="text" id="{{$name}}-v" value="{{$value!=''?\App\Drivers\Time::jdate('Y/m/d H:i', $value):''}}" class="form-control {{ $errors->has($name) ? ' is-invalid' : '' }}"/>

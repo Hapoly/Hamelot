@@ -1,28 +1,24 @@
-<?php
-/**
- * inptus:
- *  $name, $value, $required, $label
- */
-?>
+@if(isset($row) && $row)
 <div class="form-group row create-form">
-    <div class="col-md-{{isset($col)? $col : 12}}">
-        @if(isset($help))
-            <div class="popup" id="popup{{$name}}"><i class="fa fa-question-circle" aria-hidden="true"></i>
-                <span class="popuptext" id="help{{$name}}">
-                    {{$help}}
-                </span>
-            </div>
-        @endif
-        <div class="col-md-10">
-            <input id="{{$name}}" type="text" class="form-control {{ $errors->has($name) ? ' is-invalid' : '' }}" name="{{$name}}" value="{{$value}}" {{$required? 'required': ''}} autofocus>
-            @if ($errors->has($name))
-                <span class="invalid-feedback">
-                <strong>{{ $errors->first($name) }}</strong>
-                </span>
-            @endif
+@else
+<div class="col-md-{{isset($col)? $col : 12}}">
+@endif
+    @if(isset($help))
+        <div class="popup" id="popup{{$name}}"><i class="fa fa-question-circle" aria-hidden="true"></i>
+            <span class="popuptext" id="help{{$name}}">
+                {{$help}}
+            </span>
         </div>
-        <label for="{{$name}}" class="col-md-2 col-form-label text-center">{{$label}}</label>
+    @endif
+    <div class="col-md-{{isset($col)?9:10}}">
+        <input id="{{$name}}" style="{{isset($col)?'width: 87%': ''}}" type="{{isset($type)? $type: 'text'}}" class="form-control {{ $errors->has($name) ? ' is-invalid' : '' }}" name="{{$name}}" value="{{$value}}" {{isset($required)?($required? 'required': ''): ''}} autofocus>
+        @if ($errors->has($name))
+            <span class="invalid-feedback">
+            <strong>{{ $errors->first($name) }}</strong>
+            </span>
+        @endif
     </div>
+    <label for="{{$name}}" class="col-md-{{isset($col)?3:2}} col-form-label text-center">{{$label}}</label>
 </div>
 @if(isset($help))
     <script>

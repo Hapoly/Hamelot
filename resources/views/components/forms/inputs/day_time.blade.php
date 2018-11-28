@@ -1,15 +1,12 @@
-<?php
-/**
- * inptus:
- *  $name, $value, $label
- */
-?>
 @php
     $hour = intval(($value % (24 * 3600)) / 3600);
     $minute = intval(($value % (24 * 3600)) / 60) %60;
 @endphp
-
+@if(isset($row) && $row)
+<div class="form-group row create-form">
+@else
 <div class="col-md-{{isset($col)? $col : 12}}">
+@endif
     <div class="row" style="margin: 0px 0px !important;">
         <div class="col-md-12 text-center">
             {{$label}}
