@@ -5,181 +5,45 @@
     use App\Models\Unit;
 ?>
 <div class="container">
-    <div class="panel panel-default create-card">
-         <h2>{{ __('users.create.patient') }}</h2>
-         <div class="row">
-            <div class="col-md-12">
-                <form method="POST" action="{{ route('panel.users.store.patient') }}" enctype="multipart/form-data">
-                    @csrf
-                    <div class="form-group row create-form">
-                        <label for="phone" class="col-md-2 label-col col-form-label text-center">{{ __('users.phone') }}</label>
-                        <div class="col-md-10">
-                           <input id="phone" type="text" class="form-control{{ $errors->has('phone') ? ' is-invalid' : '' }}" name="phone" value="{{ old('phone') }}" required>
-                            @if ($errors->has('phone'))
-                                <span class="invalid-feedback">
-                                    <strong>{{ $errors->first('phone') }}</strong>
-                                </span>
-                            @endif
-                        </div> 
-                    </div>
-                    <div class="form-group row create-form">
-                        <label for="username" class="col-md-2 label-col col-form-label text-center">{{ __('users.username') }}</label>
-                        <div class="col-md-10">
-                           <input id="username" type="text" class="form-control{{ $errors->has('username') ? ' is-invalid' : '' }}" name="username" value="{{ old('username') }}" required>
-                            @if ($errors->has('username'))
-                                <span class="invalid-feedback">
-                                    <strong>{{ $errors->first('username') }}</strong>
-                                </span>
-                            @endif
-                        </div> 
-                    </div>
-                    <div class="form-group row create-form">
-                        <label for="password" class="col-md-2 label-col col-form-label text-center">{{ __('users.password') }}</label>
-                        <div class="col-md-10">
-                           <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required >
-                            @if ($errors->has('password'))
-                                <span class="invalid-feedback">
-                                    <strong>{{ $errors->first('password') }}</strong>
-                                </span>
-                            @endif
-                        </div>
-                    </div>
-                    <div class="form-group row create-form">
-                        <label for="password_confirmation" class="col-md-2 label-col col-form-label text-center">{{ __('users.confirm_password') }}</label>
-                        <div class="col-md-10">
-                           <input id="password_confirmation" type="password" class="form-control" name="password_confirmation" required >
-                        </div>
-                    </div>
-                    <div class="form-group row create-form">
-                        <label for="first_name" class="col-md-2 label-col col-form-label text-center">{{ __('users.first_name') }}</label>
-                        <div class="col-md-10">
-                           <input id="first_name" type="text" class="form-control{{ $errors->has('first_name') ? ' is-invalid' : '' }}" name="first_name" value="{{ old('first_name') }}" required>
-                            @if ($errors->has('first_name'))
-                                <span class="invalid-feedback">
-                                    <strong>{{ $errors->first('first_name') }}</strong>
-                                </span>
-                            @endif
-                        </div>
-                    </div>
-
-                    <div class="form-group row create-form">
-                        <label for="last_name" class="col-md-2 label-col col-form-label text-center">{{ __('users.last_name') }}</label>
-                        <div class="col-md-10">
-                           <input id="last_name" type="text" class="form-control{{ $errors->has('last_name') ? ' is-invalid' : '' }}" name="last_name" value="{{ old('last_name') }}" required>
-                            @if ($errors->has('last_name'))
-                                <span class="invalid-feedback">
-                                    <strong>{{ $errors->first('last_name') }}</strong>
-                                </span>
-                            @endif
-                        </div> 
-                    </div>
-
-                    <div class="form-group row create-form">
-                        <label for="title" class="col-md-2 label-col col-form-label text-center">{{ __('users.id_number') }}</label>
-                        <div class="col-md-10">
-                           <input id="id_number" type="text" class="form-control{{ $errors->has('id_number') ? ' is-invalid' : '' }}" name="id_number" value="{{ old('id_number') }}" required autofocus>
-                            @if ($errors->has('id_number'))
-                                <span class="invalid-feedback">
-                                    <strong>{{ $errors->first('id_number') }}</strong>
-                                </span>
-                            @endif
-                        </div>
-                    </div>
-
-                    <div class="form-group row create-form">
-                        <label for="birth_year" class="col-md-2 label-col col-form-label text-center">{{ __('users.birth.year') }}</label>
-                        <div class="col-md-10">
-                            <select class="form-control" name="birth_year" id="birth_year" style="width:90%">
-                                @for($i=1341; $i<1400; $i++)
-                                    <option value="{{$i}}" {{old('birth_year') == $i? 'selected': ''}} > {{$i}}</option>
-                                @endfor
-                            </select>
-                            @if ($errors->has('birth_year'))
-                                <span class="invalid-feedback">
-                                    <strong>{{ $errors->first('birth_year') }}</strong>
-                                </span>
-                            @endif
-                        </div>
-                       
-                    </div>
-                    <div class="form-group row create-form">
-                        <label for="birth_month" class="col-md-2 label-col col-form-label text-center">{{ __('users.birth.month') }}</label>
-                        <div class="col-md-10">
-                            <select class="form-control" name="birth_month" id="birth_month" style="width:90%">
-                                @for($i=1; $i<12; $i++)
-                                    <option value="{{$i}}" {{old('birth_month') == $i? 'selected': ''}} > {{ __('users.birth.month_str.' . $i) }}</option>
-                                @endfor
-                            </select>
-                            @if ($errors->has('birth_month'))
-                                <span class="invalid-feedback">
-                                    <strong>{{ $errors->first('birth_month') }}</strong>
-                                </span>
-                            @endif
-                        </div>
-                       
-                    </div>
-                    <div class="form-group row create-form">
-                        <label for="birth_day" class="col-md-2 label-col col-form-label text-center">{{ __('users.birth.day') }}</label>
-                        <div class="col-md-10">
-                            <select class="form-control" name="birth_day" id="birth_day" style="width:90%">
-                                @for($i=1; $i<31; $i++)
-                                    <option value="{{$i}}" {{old('birth_day') == $i? 'selected': ''}} > {{$i}}</option>
-                                @endfor
-                            </select>
-                            @if ($errors->has('birth_day'))
-                                <span class="invalid-feedback">
-                                    <strong>{{ $errors->first('birth_day') }}</strong>
-                                </span>
-                            @endif
-                        </div>
-                    </div>
-
-                    <div class="form-group row create-form">
-                        <label for="gender" class="col-md-2 label-col col-form-label text-center">{{ __('users.gender') }}</label>
-                        <div class="col-md-10">
-                            <select class="form-control" name="gender" id="gender" style="width:90%">
-                                <option value="1" {{old('gender') == 1? 'selected': ''}} > {{__('users.gender_str.1')}}</option>
-                                <option value="2" {{old('gender') == 2? 'selected': ''}} > {{__('users.gender_str.2')}}</option>
-                            </select>
-                            @if ($errors->has('gender'))
-                                <span class="invalid-feedback">
-                                    <strong>{{ $errors->first('gender') }}</strong>
-                                </span>
-                            @endif
-                        </div> 
-                    </div>
-                    
-                    <div class="form-group row create-form">
-                        <label for="status" class="col-md-2 label-col col-form-label text-center">{{ __('users.status') }}</label>
-                        <div class="col-md-10">
-                            <select class="form-control" name="status" id="status" style="width:90%">
-                                <option value="1">{{__('users.status_str.1')}}  </option>
-                                <option value="2">{{__('users.status_str.2')}}  </option>
-                            </select>
-                            @if ($errors->has('status'))
-                                <span class="invalid-feedback">
-                                    <strong>{{ $errors->first('status') }}</strong>
-                                </span>
-                            @endif
-                        </div>
-                    </div>
-                    <div class="form-group row create-form">
-                            <label for="profile" class="col-md-2 label-col col-form-label text-center">{{ __('users.profile') }}</label>
-                        <div class="col-md-10">
-                           <input id="profile" type="file" class="form-control{{ $errors->has('profile') ? ' is-invalid' : '' }}" name="profile">
-                                 @if ($errors->has('profile'))
-                                    <span class="invalid-feedback">
-                                        <strong>{{ $errors->first('profile') }}</strong>
-                                    </span>
-                                @endif
-                        </div> 
-                    </div>
-                        @submit_row(['value' => 'save', 'label' => __('users.save')])
-                    </form>
-                </div>
-            </div>
+    @form_create(['action' => route('panel.users.store.patient'), 'title' => __('users.create.patient')])
+        @input_image(['name' => 'profile', 'label' => __('users.profile'), 'col' => 12])
+        @input_text(['name' => 'phone', 'label' => __('users.phone'), 'value' => old('phone'), 'row' => true])
+        @input_text(['name' => 'username', 'label' => __('users.username'), 'value' => old('username'), 'row' => true])
+        @input_text(['name' => 'email', 'label' => __('users.email'), 'value' => old('email'), 'row' => true])
+        <div class="form-group row create-form">
+            @input_text(['name' => 'password', 'label' => __('users.password'), 'value' => old('password'), 'col' => 6, 'type' => 'password'])
+            @input_text(['name' => 'password_confirmation', 'label' => __('users.password_confirmation'), 'value' => old('password_confirmation'), 'col' => 6, 'type' => 'password'])
         </div>
-    </div>
- </div>
+        <div class="form-group row create-form">
+            @input_text(['name' => 'first_name', 'label' => __('users.first_name'), 'value' => old('first_name'), 'col' => 6])
+            @input_text(['name' => 'last_name', 'label' => __('users.last_name'), 'value' => old('last_name'), 'col' => 6])
+        </div>
+        @input_text(['name' => 'id_number', 'label' => __('users.id_number'), 'value' => old('id_number'), 'row' => true])
+        @php
+            $status_rows = [
+                ['label' => __('users.status_str.' . 1), 'value' => 1],
+                ['label' => __('users.status_str.' . 2), 'value' => 2],
+            ];
+        @endphp
+        @input_select(['name' => 'status', 'value' => old('status', 0), 'label' => __('users.status'), 'required' => true, 'rows' => $status_rows, 'row' => true])
+        @input_date(['name' => 'birth_', 'year' => old('birth_year'), 'month' => old('birth_month'), 'day' => old('birth_day'), 'label' => __('users.birth_date'), 'row' => true])
+        <div class="form-group row create-form">
+            @php
+                $gender_rows = [
+                    ['label' => __('users.gender_str.' . 1), 'value' => 1],
+                    ['label' => __('users.gender_str.' . 2), 'value' => 2],
+                ];
+            @endphp
+            @input_select(['name' => 'gender', 'value' => old('gender', 0), 'label' => __('users.gender'), 'required' => true, 'rows' => $gender_rows, 'col' => 6])
+            @php
+                $status_rows = [
+                    ['label' => __('users.status_str.' . 1), 'value' => 1],
+                    ['label' => __('users.status_str.' . 2), 'value' => 2],
+                ];
+            @endphp
+            @input_select(['name' => 'status', 'value' => old('status', 0), 'label' => __('users.status'), 'required' => true, 'rows' => $status_rows, 'col' => 6])
+        </div>
+        @submit_row(['value' => 'save', 'label' => __('users.save')])
+    @endform_create
 </div>
 @endsection

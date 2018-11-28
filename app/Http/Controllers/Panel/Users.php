@@ -174,6 +174,8 @@ class Users extends Controller{
     $inputs = $request->all();
     $inputs['password'] = bcrypt($inputs['password']);
     $inputs['group_code'] = User::G_ADMIN;
+    if(!$request->input('email'))
+      unset($inputs['email']);
     $user = User::create($inputs);
     return redirect()->route('panel.users.show', ['user' => $user]);
   }
@@ -181,6 +183,8 @@ class Users extends Controller{
     $inputs = $request->all();
     $inputs['password'] = bcrypt($inputs['password']);
     $inputs['group_code'] = User::G_MANAGER;
+    if(!$request->input('email'))
+      unset($inputs['email']);
     $user = User::create($inputs);
     return redirect()->route('panel.users.show', ['user' => $user]);
   }
@@ -189,6 +193,8 @@ class Users extends Controller{
     if($request->hasFile('profile')){
       $inputs['profile'] = Storage::disk('public')->put('/users', $request->file('profile'));
     }
+    if(!$request->input('email'))
+      unset($inputs['email']);
     $inputs['password'] = bcrypt($inputs['password']);
     $inputs['group_code'] = User::G_DOCTOR;
     $user = User::create($inputs);
@@ -201,6 +207,8 @@ class Users extends Controller{
     if($request->hasFile('profile')){
       $inputs['profile'] = Storage::disk('public')->put('/users', $request->file('profile'));
     }
+    if(!$request->input('email'))
+      unset($inputs['email']);
     $inputs['password'] = bcrypt($inputs['password']);
     $inputs['group_code'] = User::G_NURSE;
     $user = User::create($inputs);
@@ -213,6 +221,8 @@ class Users extends Controller{
     if($request->hasFile('profile')){
       $inputs['profile'] = Storage::disk('public')->put('/users', $request->file('profile'));
     }
+    if(!$request->input('email'))
+      unset($inputs['email']);
     $inputs['password'] = bcrypt($inputs['password']);
     $inputs['group_code'] = User::G_PATIENT;
     $inputs['birth_date'] = Time::jmktime(0, 0, 0, $inputs['birth_day'], $inputs['birth_month'], $inputs['birth_year']);
@@ -255,6 +265,9 @@ class Users extends Controller{
       $inputs['password'] = bcrypt($inputs['password']);
     else
       unset($inputs['password']);
+    
+    if(!$request->input('email'))
+      unset($inputs['email']);
     $inputs['group_code'] = User::G_ADMIN;
     $user->fill($inputs)->save();
     return redirect()->route('panel.users.show', ['user' => $user]);
@@ -265,6 +278,8 @@ class Users extends Controller{
       $inputs['password'] = bcrypt($inputs['password']);
     else
       unset($inputs['password']);
+    if(!$request->input('email'))
+      unset($inputs['email']);
     $inputs['group_code'] = User::G_MANAGER;
     $user->fill($inputs)->save();
     return redirect()->route('panel.users.show', ['user' => $user]);
@@ -278,6 +293,8 @@ class Users extends Controller{
       $inputs['password'] = bcrypt($inputs['password']);
     else
       unset($inputs['password']);
+    if(!$request->input('email'))
+      unset($inputs['email']);
     $inputs['group_code'] = User::G_DOCTOR;
 
     $user->fill($inputs);
@@ -298,6 +315,8 @@ class Users extends Controller{
       $inputs['password'] = bcrypt($inputs['password']);
     else
       unset($inputs['password']);
+    if(!$request->input('email'))
+      unset($inputs['email']);
     $inputs['group_code'] = User::G_NURSE;
 
     $user->fill($inputs);
@@ -318,6 +337,8 @@ class Users extends Controller{
       $inputs['password'] = bcrypt($inputs['password']);
     else
       unset($inputs['password']);
+    if(!$request->input('email'))
+      unset($inputs['email']);
     $inputs['group_code'] = User::G_PATIENT;
 
     $user->fill($inputs);

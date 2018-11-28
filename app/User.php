@@ -476,4 +476,11 @@ class User extends Authenticatable
     public function getUnitUserAttribute(){
         return UnitUser::find($this->pivot->id);
     }
+
+    public function getEmailStrAttribute(){
+        if($this->email == 'NuLL')
+            return '';
+        else
+            return $this->email;
+    }
 }

@@ -4,7 +4,9 @@
         <div class="col-md-12">
         <form method="POST" action="{{ $action }}" enctype="multipart/form-data">
             @csrf
-            {{ method_field('PUT') }}
+            @if(!(isset($post) && $post))
+                {{ method_field('PUT') }}
+            @endif
             {{$slot}}
         </form>
         </div>

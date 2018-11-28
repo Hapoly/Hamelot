@@ -24,7 +24,7 @@
                         <div class="col-md-10">
                         <input id="password_confirmation" type="password" class="form-control" name="password_confirmation" >
                         </div>
-                        <label for="password_confirmation" class="col-md-2 col-form-label text-center">{{ __('users.confirm_password') }}</label>
+                        <label for="password_confirmation" class="col-md-2 col-form-label text-center">{{ __('users.password_confirmation') }}</label>
                     </div>
 
                     <div class="form-group row create-form">

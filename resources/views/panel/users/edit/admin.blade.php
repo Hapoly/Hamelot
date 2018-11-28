@@ -2,98 +2,26 @@
 @section('title', __('users.edit.admin'))
 @section('content')
 <div class="container">
-    <div class="panel panel-default create-card">
-         <h2>{{ __('users.edit.admin') }}</h2>
-         <div class="row">
-            <div class="col-md-12">
-                <form method="POST" action="{{ route('panel.users.update.admin', ['user' => $user]) }}" enctype="multipart/form-data">
-                    @csrf
-                    <div class="form-group row create-form">
-                        <label for="phone" class="col-md-2 label-col col-form-label text-center">{{ __('users.phone') }}</label>
-                        <div class="col-md-10">
-                           <input id="phone" type="text" class="form-control{{ $errors->has('phone') ? ' is-invalid' : '' }}" name="phone" value="{{ old('phone', $user->phone) }}" required>
-                            @if ($errors->has('phone'))
-                                <span class="invalid-feedback">
-                                    <strong>{{ $errors->first('phone') }}</strong>
-                                </span>
-                            @endif
-                        </div> 
-                    </div>
-                    <div class="form-group row create-form">
-                        <div class="col-md-10">
-                           <input id="username" type="text" class="form-control{{ $errors->has('username') ? ' is-invalid' : '' }}" name="username" value="{{ old('username', $user->username) }}" required autofocus>
-                                @if ($errors->has('username'))
-                                <span class="invalid-feedback">
-                                    <strong>{{ $errors->first('username') }}</strong>
-                                </span>
-                            @endif
-                        </div>
-                         <label for="title" class="col-md-2 col-form-label text-center">{{ __('users.username') }}</label>
-                    </div>
-
-                    <div class="form-group row create-form">
-                        <div class="col-md-10">
-                           <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" >
-                                @if ($errors->has('password'))
-                                    <span class="invalid-feedback">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
-                                @endif
-                        </div>
-                         <label for="password" class="col-md-2 col-form-label text-center">{{ __('users.password') }}</label>
-                    </div>
-
-                    <div class="form-group row create-form">
-                        <div class="col-md-10">
-                           <input id="password_confirmation" type="password" class="form-control" name="password_confirmation" >
-                        </div>
-                         <label for="password_confirmation" class="col-md-2 col-form-label text-center">{{ __('users.confirm_password') }}</label>
-                    </div>
-
-                     <div class="form-group row create-form">
-                        <div class="col-md-10">
-                           <input id="first_name" type="text" class="form-control{{ $errors->has('first_name') ? ' is-invalid' : '' }}" name="first_name" value="{{ old('first_name', $user->first_name) }}" required>
-                                 @if ($errors->has('first_name'))
-                                    <span class="invalid-feedback">
-                                        <strong>{{ $errors->first('first_name') }}</strong>
-                                    </span>
-                                @endif
-                        </div>
-                         <label for="first_name" class="col-md-2 col-form-label text-center">{{ __('users.first_name') }}</label>
-                    </div>
-
-                    <div class="form-group row create-form">
-                        <div class="col-md-10">
-                           <input id="last_name" type="text" class="form-control{{ $errors->has('last_name') ? ' is-invalid' : '' }}" name="last_name" value="{{ old('last_name', $user->last_name) }}" required>
-                                 @if ($errors->has('last_name'))
-                                    <span class="invalid-feedback">
-                                        <strong>{{ $errors->first('last_name') }}</strong>
-                                    </span>
-                                @endif
-                        </div>
-                         <label for="last_name" class="col-md-2 col-form-label text-center">{{ __('users.last_name') }}</label>
-                    </div>
-
-                    <div class="form-group row create-form">
-                        <div class="col-md-10">
-                            <select class="form-control" name="status" id="status" style="width:90%">
-                                <option value="1" {{old('status') == 1? 'selected': ''}} >{{__('users.status_str.1')}}  </option>
-                                <option value="2" {{old('status') == 2? 'selected': ''}} >{{__('users.status_str.2')}}  </option>
-                            </select>
-                            @if ($errors->has('status'))
-                                <span class="invalid-feedback">
-                                    <strong>{{ $errors->first('status') }}</strong>
-                                </span>
-                            @endif
-                        </div>
-                        <label for="status" class="col-md-2 col-form-label text-center">{{ __('users.status') }}</label>
-                    </div>
-                        @submit_row(['value' => 'save', 'label' => __('users.save')])
-                    </form>
-                </div>
-            </div>
+@form_edit(['post' => true, 'action' => route('panel.users.update.admin', ['user' => $user]), 'title' => __('users.edit.admin')])
+        @input_text(['name' => 'phone', 'label' => __('users.phone'), 'value' => old('phone', $user->phone), 'row' => true])
+        @input_text(['name' => 'username', 'label' => __('users.username'), 'value' => old('username', $user->username), 'row' => true])
+        @input_text(['name' => 'email', 'label' => __('users.email'), 'value' => old('email', $user->email_str), 'row' => true])
+        <div class="form-group row create-form">
+            @input_text(['name' => 'password', 'label' => __('users.password'), 'value' => old('password'), 'col' => 6, 'type' => 'password'])
+            @input_text(['name' => 'password_confirmation', 'label' => __('users.password_confirmation'), 'value' => old('password_confirmation'), 'col' => 6, 'type' => 'password'])
         </div>
-    </div>
- </div>
+        <div class="form-group row create-form">
+            @input_text(['name' => 'first_name', 'label' => __('users.first_name'), 'value' => old('first_name', $user->first_name), 'col' => 6])
+            @input_text(['name' => 'last_name', 'label' => __('users.last_name'), 'value' => old('last_name', $user->last_name), 'col' => 6])
+        </div>
+        @php
+            $status_rows = [
+                ['label' => __('users.status_str.' . 1), 'value' => 1],
+                ['label' => __('users.status_str.' . 2), 'value' => 2],
+            ];
+        @endphp
+        @input_select(['name' => 'status', 'value' => old('status', $user->status), 'label' => __('users.status'), 'required' => true, 'rows' => $status_rows, 'row' => true])
+        @submit_row(['value' => 'save', 'label' => __('users.save')])
+    @endform_edit
 </div>
 @endsection
