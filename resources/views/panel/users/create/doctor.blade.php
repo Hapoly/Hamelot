@@ -25,7 +25,7 @@
                             $degree_rows = [];
                             foreach($degrees as $degree){
                                 array_push($degree_rows, [
-                                    'label' => $degree->title,
+                                    'label' => $degree->value,
                                     'value' => $degree->id,
                                 ]);
                             }
@@ -36,7 +36,7 @@
                             $field_rows = [];
                             foreach($fields as $field){
                                 array_push($field_rows, [
-                                    'label' => $field->title,
+                                    'label' => $field->value,
                                     'value' => $field->id,
                                 ]);
                             }
