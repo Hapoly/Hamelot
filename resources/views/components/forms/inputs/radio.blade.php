@@ -1,5 +1,5 @@
 <div class="form-group row create-form">
-    <div class="col-md-{{isset($col)? $col : 12}}">
+    <div class="col-md-{{isset($col)? $col : 12}}" style="float: right">
         <div class="col-md-10">
             <input style="width: auto; float: right" id="{{$id}}" type="radio" name="{{$name}}" value="{{$value}}" {{$checked? 'checked': ''}}> 
             <label style="width: auto; float: right; margin-right: 15px;">{{$label}}</label>

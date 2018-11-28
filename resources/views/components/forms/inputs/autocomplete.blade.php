@@ -58,7 +58,7 @@
     });
 </script>
 <div class="form-group row create-form" id="{{$name}}-autocomplete">
-    <div class="col-md-{{isset($col)? $col : 12}}">
+    <div class="col-md-{{isset($col)? $col : 12}}" style="float: right">
         <div class="col-md-10">
             <input id="{{$name}}" type="text" class="form-control {{ $errors->has($name) ? ' is-invalid' : '' }}" name="{{$name}}" value="{{$value}}" {{$required? 'required': ''}} placeholder="{{isset($placeholder)? $placeholder: ''}}">
             <input hidden id="{{$name}}_id" name="{{$name}}_id" value="" />

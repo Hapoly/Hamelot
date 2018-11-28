@@ -1,9 +1,9 @@
 @if(isset($row) && $row)
 <div class="form-group row create-form">
 @else
-<div class="col-md-{{isset($col)? $col : 12}}">
+<div class="col-md-{{isset($col)? $col : 12}}" style="float: right">
 @endif
-    <div class="col-md-{{isset($col)? $col : 12}}">
+    <div class="col-md-{{isset($col)? $col : 12}}" style="float: right">
         <div class="col-md-10">
             <select class="form-control" name="province_id" id="province_id" style="width:93%">
                 <option disabled selected value="0">{{__('units.please_choose')}}</option>
@@ -23,9 +23,9 @@
 @if(isset($row) && $row)
 <div class="form-group row create-form">
 @else
-<div class="col-md-{{isset($col)? $col : 12}}">
+<div class="col-md-{{isset($col)? $col : 12}}" style="float: right">
 @endif
-    <div class="col-md-{{isset($col)? $col : 12}}">
+    <div class="col-md-{{isset($col)? $col : 12}}" style="float: right">
         <div class="col-md-10">
             <select class="form-control" name="city_id" id="city_id" style="width:93%">
                 <option disabled selected value="0">{{__('units.please_choose_city')}}</option>
@@ -42,9 +42,9 @@
 @if(isset($row) && $row)
 <div class="form-group row create-form">
 @else
-<div class="col-md-{{isset($col)? $col : 12}}">
+<div class="col-md-{{isset($col)? $col : 12}}" style="float: right">
 @endif
-    <div class="col-md-{{isset($col)? $col : 12}}">
+    <div class="col-md-{{isset($col)? $col : 12}}" style="float: right">
         <div class="col-md-10">
         <input id="lon" type="text" class="form-control {{ $errors->has('lon') ? ' is-invalid' : '' }}" name="lon" required autofocus>
         @if ($errors->has('lon'))
@@ -59,9 +59,9 @@
 @if(isset($row) && $row)
 <div class="form-group row create-form">
 @else
-<div class="col-md-{{isset($col)? $col : 12}}">
+<div class="col-md-{{isset($col)? $col : 12}}" style="float: right">
 @endif
-    <div class="col-md-{{isset($col)? $col : 12}}">
+    <div class="col-md-{{isset($col)? $col : 12}}" style="float: right">
         <div class="col-md-10">
             <input id="lat" type="text" class="form-control {{ $errors->has('lat') ? ' is-invalid' : '' }}" name="lat" required autofocus>
             @if ($errors->has('lat'))

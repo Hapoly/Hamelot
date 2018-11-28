@@ -1,7 +1,7 @@
 @if(isset($row) && $row)
 <div class="form-group row create-form">
 @else
-<div class="col-md-{{isset($col)? $col : 12}}">
+<div class="col-md-{{isset($col)? $col : 12}}" style="float: right">
 @endif
         <div class="col-md-4">
             <div class="col-md-10">
