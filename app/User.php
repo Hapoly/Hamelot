@@ -154,7 +154,12 @@ class User extends Authenticatable
     public function getPermissionToWriteInfoAttribute(){
         if(!Auth::check())
             return false;
-        return Auth::user()->isAdmin();
+        if(Auth::user()->isAdmin() || $this->id == Auth::user()->id)
+            return true;
+        if(Auth::user()->isManager())
+            return ($this->units()->whereHas('managers', function($query){
+                return $query->where('users.id', Auth::user()->id);
+            })->first()) != null;
     }
     public function getPermissionToWriteHistoryAttribute(){
         if(!Auth::check())

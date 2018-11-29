@@ -235,7 +235,7 @@ class Users extends Controller{
    * edit users
    */
   public function edit(User $user){
-    if(!(Auth::user()->isAdmin() || $user->id == Auth::user()->id))
+    if(!($user->permission_to_write_info))
       abort(403);
     switch($user->group_code){
       case User::G_ADMIN:

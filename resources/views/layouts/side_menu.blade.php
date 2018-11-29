@@ -47,7 +47,13 @@
 			@endif
 			@if(Auth::user()->isManager())
 				<li>
-					<a href="{{route('panel.users.index', ['joined' => true])}}">  کاربران</a>
+					<a href="{{route('panel.users.index', ['joined' => true])}}">  همکاران من</a>
+				</li>
+				<li>
+					<a href="{{route('panel.users.create.doctor')}}"> دکتر جدید</a>
+				</li>
+				<li>
+					<a href="{{route('panel.users.create.nurse')}}"> پرستار جدید</a>
 				</li>
 			@endif
 			@if(Auth::user()->isDoctor() || Auth::user()->isNurse())
