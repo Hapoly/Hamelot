@@ -73,7 +73,7 @@
                         @guest
                             <li><a class="nav-link" href="{{ route('login') }}">{{ __('general.login') }}</a></li>
                             <li><a class="nav-link" href="{{ route('register') }}">{{ __('general.register') }}</a></li>
-                            <li><a class="nav-link" href="{{ route('about') }}">درباره ما</a></li>
+                            <!-- <li><a class="nav-link" href="{{ route('about') }}">درباره ما</a></li> -->
                             <li><a class="nav-link" href="{{ route('tour') }}"> الان شروع کن!</a></li>
                         @else
                             <li class="nav-item dropdown">
