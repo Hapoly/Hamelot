@@ -96,7 +96,7 @@ class Demands extends Controller{
     public function createVisit(Request $request, ActivityTime $activity_time, $day){
         if(intval(Time::jdate('w', $day, '', 'Asia/Tehran', 'en'))+1 != $activity_time->day_of_week)
             abort(404);
-        return $day;
+        // return $day;
         $hour = intval(Time::jdate('H', $day, '', 'Asia/Tehran', 'en'));
         $minute = intval(Time::jdate('i', $day, '', 'Asia/Tehran', 'en'));
         $day -= $hour * 3600 + $minute * 60;

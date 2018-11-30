@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'index_title'   => 'تراکنش‌ها',
     'create_free'   => 'تراکنش آزاد',
     'edit_free'     => 'ویرایش تراکنش آزاد',
     'create_withdraw'   => 'درخواست تسویه حساب',

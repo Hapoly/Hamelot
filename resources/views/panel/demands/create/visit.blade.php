@@ -37,7 +37,7 @@
         </tbody>
       </table>
     </div>
-    @input_text(['name' => 'description', 'value' => old('description', ''), 'label' => __('demands.description'), 'required' => false])
+    @input_text(['name' => 'description', 'value' => old('description', ''), 'label' => __('demands.description'), 'required' => false, 'row' => true])
     @if($activity_time->just_in_unit_visit == ActivityTime::UNIT_ADDRESS || $activity_time->just_in_unit_visit == ActivityTime::IN_ADDRESS)
       @php
         $address_rows = [];
@@ -64,14 +64,14 @@
           }
         }
       @endphp
-      @input_select(['name' => 'address_id', 'value' => old('address_id', ''), 'label' => __('demands.address_id'), 'required' => true, 'rows' => $address_rows])
+      @input_select(['name' => 'address_id', 'value' => old('address_id', ''), 'label' => __('demands.address_id'), 'required' => true, 'rows' => $address_rows, 'row' => true])
     @endif
     <div class="row">
         <div class="col-md-12" style="text-align: center">
           @if($activity_time->default_deposit == 0)
-            <button type="submit" class="btn btn-primary" name="action" value="pay">{{__('demands.save')}}</button>  
+            <button type="submit" id="submit" class="btn btn-primary" name="action" value="pay">{{__('demands.save')}}</button>  
           @else
-            <button type="submit" class="btn btn-primary" name="action" value="pay">{{__('demands.visit_pay_deposit')}}</button>
+            <button type="submit" id="submit" class="btn btn-primary" name="action" value="pay">{{__('demands.visit_pay_deposit')}}</button>
           @endif
         </div>
     </div>
