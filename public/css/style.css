@@ -521,6 +521,10 @@ h2, h3, h4{
     #sidebar {
         margin-left: 0;
     }
+    .btn-checkout ,.btn-units{
+        margin-top: 90px;
+        display: block;
+    }
     .table{
         width: 100%;
     }
@@ -595,7 +599,7 @@ h2, h3, h4{
     .user-td td:nth-of-type(6):before { content: " وضعیت";}
     .user-td td:nth-of-type(7):before { content: " عملیات";}
 }
-/* @media(min-width:) */
+
 @media (min-width: 768px){
     .create-card{
         width:100%;
@@ -606,6 +610,10 @@ h2, h3, h4{
     }
     .navbar-form .input-group{
         width: 80%;
+    }
+    .btn-checkout ,.btn-units{
+        margin-top: 10px;
+        display: block;
     }
 }
 .accent-color { 
@@ -708,10 +716,7 @@ h2, h3, h4{
     padding: 0;
     width: 90%;
 }
-.btn-checkout ,.btn-units{
-    margin-top: 10px;
-    display: block;
-}
+
 .wallet-panel , .units-panel {
     height: 170px;
 }
