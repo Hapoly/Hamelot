@@ -105,7 +105,7 @@
 	</li>
 	<li>
 		<a href="#templates" data-toggle="collapse" arisa-expanded="false">
-			<i class="fa fa-note" aria-hidden="true"></i>
+			<i class="fa fa-folder-open-o" aria-hidden="true"></i>
 			<span>
 				قالب ها
 			</span>
@@ -195,6 +195,12 @@
 				<a href="{{route('panel.demands.index')}}">تفاضاها</a>
 			</li>
 		</ul>
+	</li>
+	<li>
+		<a href="{{route('panel.bids.index')}}" aria-expanded="false">
+			<i class="fa fa-stethoscope" aria-hidden="false"></i>
+			<span>نوبت ویزیت‌های من</span>
+		</a>
 	</li>
 	@if(Auth::user()->isDoctor())
 		<li>

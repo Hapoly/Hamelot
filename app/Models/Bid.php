@@ -93,10 +93,20 @@ class Bid extends UModel
 
     // fetch
     public static function fetch(){
-        if(Auth::user()->isDoctor() || Auth::user()->isNurse() || Auth::user()->isPatient())
+        if(Auth::user()->isDoctor() || Auth::user()->isNurse())
             return Bid::where('user_id', Auth::user()->id);
+        else if(Auth::user()->isPatient())
+            return Bid::whereHas('demand', function($query){
+                return $query->where('patient_id', Auth::user()->id);
+            });
+        else if(Auth::user()->isManager())
+            return Bid::whereHas('unit', function($query){
+                return $query->whereHas('managers', function($query){
+                    return $query->where('users.id', Auth::user()->id);
+                });
+            });
         else
-            return null;
+            return new Bid;
     }
 
     const P_PENDING     = 0;
