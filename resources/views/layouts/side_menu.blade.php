@@ -196,25 +196,18 @@
 			</li>
 		</ul>
 	</li>
-	<li>
-		<a href="{{route('panel.bids.index')}}" aria-expanded="false">
-			<i class="fa fa-stethoscope" aria-hidden="false"></i>
-			<span>نوبت ویزیت‌های من</span>
-		</a>
-	</li>
-	@if(Auth::user()->isDoctor())
+	@if(Auth::user()->isPatient())
+		<li>
+			<a href="{{route('panel.bids.index')}}" aria-expanded="false">
+				<i class="fa fa-stethoscope" aria-hidden="false"></i>
+				<span>نوبت ویزیت‌های من</span>
+			</a>
+		</li>
+	@else
 		<li>
 			<a href="{{route('panel.bids.index')}}" aria-expanded="false">
 				<i class="fa fa-heart-o" aria-hidden="false"></i>
 				<span>ماموریت‌ها</span>
-			</a>
-		</li>
-	@endif
-	@if(Auth::user()->isDoctor())
-		<li>
-			<a href="{{route('panel.bids.index')}}" aria-expanded="false">
-				<i class="fa fa-heart-o" aria-hidden="false"></i>
-				<span>ویزیت‌های ثبت شده</span>
 			</a>
 		</li>
 	@endif
