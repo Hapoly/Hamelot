@@ -29,13 +29,13 @@ class Patient extends UModel
     }
 
     public function getBirthYearAttribute(){
-        return Time::jdate('Y', $this->birth_date);
+        return Time::jdate('Y', $this->birth_date, 'none', '', 'en');
     }
     public function getBirthMonthAttribute(){
-        return intval(Time::jdate('m', $this->birth_date));
+        return intval(Time::jdate('m', $this->birth_date, 'none', '', 'en'));
     }
     public function getBirthDayAttribute(){
-        return intval(Time::jdate('d', $this->birth_date));
+        return intval(Time::jdate('d', $this->birth_date, 'none', '', 'en'));
     }
 
     public function getAgeAttribute(){

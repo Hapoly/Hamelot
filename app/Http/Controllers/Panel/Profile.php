@@ -157,7 +157,7 @@ class Profile extends Controller{
     else
       unset($inputs['password']);
     $inputs['group_code'] = User::G_PATIENT;
-
+    $inputs['birth_date'] = Time::jmktime(0, 0, 0, intval($inputs['birth_day']), intval($inputs['birth_month']), intval($inputs['birth_year']));
     $user->fill($inputs);
     $user->save();
 
