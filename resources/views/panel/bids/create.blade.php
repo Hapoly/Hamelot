@@ -4,7 +4,7 @@
 <div class="container">
   @form_create(['action' => route('panel.bids.store'), 'title' => __('bids.create_title')])
     <div class="row">
-      <div class="col-md-12" style="text-align: center">{{__('bids.for_demand')}} <a href="{{route('panel.demands.show' ,['demand' => $demand])}}">{{$demand->description}}</a></div>
+      <div class="col-md-12" style="text-align: center">{{__('bids.for_demand')}} <a href="{{route('panel.demands.show' ,['demand' => $demand])}}">{{$demand->description_str}}</a></div>
     </div>
     <input type="hidden" name="demand_id" value="{{$demand->id}}" />
     @input_text(['name' => 'description', 'value' => old('description', ''), 'label' => __('bids.description'), 'required' => false])

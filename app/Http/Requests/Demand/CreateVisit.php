@@ -25,7 +25,7 @@ class CreateVisit extends PersianFormRequest
     public function rules()
     {
         return [
-            'description'   => 'required|string',
+            'description'   => 'nullable|string',
         ];
     }
 }

@@ -41,7 +41,7 @@
       @endif
     </div>
     <div class="col-md-2"></div>
-    @input_text(['name' => 'description', 'value' => old('description', $demand->description), 'label' => __('demands.description'), 'required' => true])
+    @input_text(['name' => 'description', 'value' => old('description', $demand->description_str), 'label' => __('demands.description'), 'required' => true])
     @php
       $address_rows = [
         [

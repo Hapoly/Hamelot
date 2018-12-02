@@ -16,7 +16,7 @@ class CreateDemandsTable extends Migration
         Schema::create('demands', function (Blueprint $table) {
             $table->uuid('id');
             $table->primary('id');
-            $table->string('description', 400);
+            $table->string('description', 400)->default('NuLL');
             $table->uuid('patient_id')->index();
             $table->uuid('address_id')->index();
             $table->uuid('unit_id')->index()->default(0);

@@ -1,5 +1,5 @@
 @extends('layouts.main')
-@section('title', $demand->description)
+@section('title', $demand->description_str)
 @section('content')
 <div class="container">
   <div class="panel panel-default">
@@ -8,7 +8,7 @@
         <tbody>
           <tr>
             <td>{{__('demands.description')}}</td>
-            <td>{{$demand->description}}</td>
+            <td>{{$demand->description_str}}</td>
           </tr>
           <tr>
             <td>{{__('demands.patient_id')}}</td>

@@ -143,7 +143,8 @@ class Demands extends Controller{
         if(intval(Time::jdate('w', $day, '', 'Asia/Tehran', 'en'))+1 != $activity_time->day_of_week)
             abort(404);
         $demand = new Demand;
-        $demand->description = $request->description;
+        if($request->description)
+            $demand->description = $request->description;
         $demand->start_time = $day + $activity_time->start_time;
         $demand->end_time = $day + $activity_time->finish_time;
         $demand->patient_id = Auth::user()->id;
@@ -237,6 +238,8 @@ class Demands extends Controller{
         $inputs = $request->all();
         $inputs['start_time'] /= 10000;
         $inputs['end_time'] /= 10000;
+        if($inputs['description'] = '')
+            unset($inputs['description']);
         $demand = $demand->fill($inputs)->save();
         if($request->hasFile('image')){
             DemandAttachment::where('demand_id', $demand->id)->delete();

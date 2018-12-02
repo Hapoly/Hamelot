@@ -48,17 +48,24 @@
                         </div>
                     </div>
                     <div class="form-group row mb-0">
-                            <div class="col-md-3" style="text-align: center;">
-                                <button type="submit" class="btn btn-primary" id="login">
-                                    {{ __('general.login') }}
-                                </button>
-                            </div>
-                            <div class="col-md-8">
-                                <a class="btn btn-link" href="{{ route('forgot.password') }}">
-                                    {{ __('auth.forgot_password') }}
-                                </a>
-                            </div>
+                        <div class="col-md-3" style="text-align: center;">
+                            <button type="submit" class="btn btn-primary" id="login">
+                                {{ __('general.login') }}
+                            </button>
                         </div>
+                        <div class="col-md-8">
+                            <a class="btn btn-link" href="{{ route('forgot.password') }}">
+                                {{ __('auth.forgot_password') }}
+                            </a>
+                        </div>
+                    </div>
+                    <div class="form-group row mb-0">
+                        <div class="col-md-10">
+                            <a class="btn btn-link" href="{{ route('register') }}">
+                                {{ __('general.register') }}
+                            </a>
+                        </div>
+                    </div>
                 </form>
             </div>
         </div>

@@ -36,6 +36,7 @@ class Patient extends PersianFormRequest
             'birth_month'   => 'required|numeric|min:1|max:12',
             'birth_day'     => 'required|numeric|min:1|max:31',
             'phone'         => ['required', new Phone, 'unique:users'],
+            'email'         => 'nullable|email',
         ];
     }
 }

@@ -39,7 +39,7 @@
                         <label for="birth_month" class="col-md-3 label-col col-form-label text-md-right">{{ __('users.birth.month') }}</label>
                         <div class="col-md-8">
                             <select class="form-control" name="birth_month" id="birth_month" style="width:100%">
-                                @for($i=1; $i<12; $i++)
+                                @for($i=1; $i<=12; $i++)
                                     <option value="{{$i}}" {{old('birth_month') == $i? 'selected': ''}} > {{ __('users.birth.month_str.' . $i) }}</option>
                                 @endfor
                             </select>

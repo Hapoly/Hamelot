@@ -110,7 +110,17 @@ class Demand extends UModel
     }
 
     public function getDescriptionSummaryAttribute(){
-        return mb_substr($this->description, 0, 30) . '...' ;
+        if($this->description == 'NuLL')
+            return 'بدون توضیحات';
+        else
+            return mb_substr($this->description, 0, 30) . '...' ;
+    }
+
+    public function getDescriptionStrAttribute(){
+        if($this->description == 'NuLL')
+            return 'بدون توضیحات';
+        else
+            return $this->description;
     }
 
     public function has_bids(){

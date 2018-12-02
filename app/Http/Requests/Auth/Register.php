@@ -32,7 +32,7 @@ class Register extends PersianFormRequest
             'first_name'    => 'required|string',
             'last_name'     => 'required|string',
             'group_code'    => 'required|numeric',
-            'email'         => 'email',
+            'email'         => 'nullable|email',
             'phone'         => ['required', new Phone, 'unique:users'],
         ];
     }

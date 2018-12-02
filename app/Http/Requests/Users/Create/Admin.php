@@ -30,7 +30,8 @@ class Admin extends PersianFormRequest
             'phone'         => ['required', new Phone, 'unique:users'],
             'username'      => 'required|string|unique:users',
             'password'      => 'required_if:action,new|confirmed',
-            'status'        => 'required|numeric'
+            'status'        => 'required|numeric',
+            'email'         => 'nullable|email',
         ];
     }
 }

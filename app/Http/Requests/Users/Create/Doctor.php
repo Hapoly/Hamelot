@@ -38,6 +38,7 @@ class Doctor extends PersianFormRequest
             'public'        => 'required|numeric',
             'phone'         => ['required', new Phone, 'unique:users'],
             'msc'           => 'required|string|max:16',
+            'email'         => 'nullable|email',
         ];
     }
 }
