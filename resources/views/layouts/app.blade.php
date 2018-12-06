@@ -30,6 +30,7 @@
 	<link rel="stylesheet" href="{{asset('css/persian-datepicker.min.css')}}"/>
 	<script src="{{asset('js/persian-date.min.js')}}"></script>
 	<script src="{{asset('js/persian-datepicker.min.js')}}"></script>
+    <script type="text/javascript">!function(){function t(){var t=document.createElement("script");t.type="text/javascript",t.async=!0,localStorage.getItem("rayToken")?t.src="https://app.raychat.io/scripts/js/"+o+"?rid="+localStorage.getItem("rayToken")+"&href="+window.location.href:t.src="https://app.raychat.io/scripts/js/"+o;var e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(t,e)}var e=document,a=window,o="03c5eff6-2946-41d1-b71c-d950fa1eaf56";"complete"==e.readyState?t():a.attachEvent?a.attachEvent("onload",t):a.addEventListener("load",t,!1)}();</script>
     <style>
         .drop {
             display: inherit;
@@ -120,6 +121,5 @@
             $('#drop-down-menu').toggleClass('drop');
         })
     </script>
-	<script type="text/javascript">!function(){function t(){var t=document.createElement("script");t.type="text/javascript",t.async=!0,localStorage.getItem("rayToken")?t.src="https://app.raychat.io/scripts/js/"+o+"?rid="+localStorage.getItem("rayToken")+"&href="+window.location.href:t.src="https://app.raychat.io/scripts/js/"+o;var e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(t,e)}var e=document,a=window,o="03c5eff6-2946-41d1-b71c-d950fa1eaf56";"complete"==e.readyState?t():a.attachEvent?a.attachEvent("onload",t):a.addEventListener("load",t,!1)}();</script>
 </body>
 </html>
