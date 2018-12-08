@@ -107,8 +107,7 @@ body{
 	width: 170px;
 }
 .search-btns {
-	background-color: #448AFF;
-	width: 110px;
+	background-color: #01838b;
 	color: white;
 }
 .search-input {
@@ -122,6 +121,25 @@ body{
     margin: auto;
 	margin-top: 100px;
 	float: right;
+}
+.has-search .form-control {
+    padding-left: 2.375rem;
+}
+
+.has-search .form-control-feedback {
+    position: absolute;
+    z-index: 2;
+    display: block;
+    width: 2.375rem;
+    height: 2.375rem;
+    line-height: 2.375rem;
+    text-align: center;
+    pointer-events: none;
+    color: #aaa;
+}
+.input-group>.input-group-append>.btn{
+	border-top-right-radius:0;
+	border-bottom-right-radius:0;
 }
 .tour-img{
 	width: 50%;
