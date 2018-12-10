@@ -351,3 +351,10 @@ hr{
 a:hover {
     text-decoration: none;
 }
+.search-select {
+	-webkit-appearance:none;
+	border-radius: 0;
+}
+.hidden-select {
+	display: none
+}
