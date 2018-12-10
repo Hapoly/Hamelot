@@ -11,11 +11,11 @@
                             <tbody>
                                 <tr>
                                     <td>{{__('users.first_name')}}</td>
-                                    <td>{{$user->first_name}}</td>
+                                    <td>{{$user->first_name_str}}</td>
                                 </tr>
                                 <tr>
                                     <td>{{__('users.last_name')}}</td>
-                                    <td>{{$user->last_name}}</td>
+                                    <td>{{$user->last_name_str}}</td>
                                 </tr>
                                 <tr>
                                     <td>{{__('users.degree')}}</td>

@@ -16,7 +16,7 @@ class CreatePatientsTable extends Migration
         Schema::create('patients', function (Blueprint $table) {
             $table->uuid('id');
             $table->primary('id');
-            $table->string('id_number', 16);
+            $table->string('id_number', 16)->default('NuLL');
             $table->integer('gender')->index()->default(0);
             $table->uuid('user_id')->index()->default(0);
             $table->string('profile', 64)->default('NuLL');

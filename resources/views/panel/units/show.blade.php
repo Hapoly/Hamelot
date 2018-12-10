@@ -114,8 +114,8 @@
           @foreach($unit->managers as $index => $user)
             <tr>
               <td>{{$index+1}}</td>
-              <td>{{$user->first_name}}</td>
-              <td>{{$user->last_name}}</td>
+              <td>{{$user->first_name_str}}</td>
+              <td>{{$user->last_name_str}}</td>
               <td>{{$user->unit_user->status_str}}</td>
               @if(Auth::user()->isAdmin())
                 <td>
@@ -158,8 +158,8 @@
           @foreach($unit->members as $index => $user)
             <tr>
               <td>{{$index+1}}</td>
-              <td>{{$user->first_name}}</td>
-              <td>{{$user->last_name}}</td>
+              <td>{{$user->first_name_str}}</td>
+              <td>{{$user->last_name_str}}</td>
               <td>{{$user->group_str}}</td>
               <td>{{$user->status_str}}</td>
               <td>

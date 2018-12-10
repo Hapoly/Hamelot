@@ -2,7 +2,13 @@
 
 return [
     'register'  => 'ثبت نام',
-    'login'     => 'ورود',
+    'login'     => [
+        'patient'   => 'ورود کاربر',
+        'doctor'    => 'ورود پزشک',
+        'nurse'     => 'ورود پرستار',
+        'manager'   => 'ورود مدیر',
+        'secretary' => 'ورود منشی',
+    ],
     'logout'    => 'خروج',
 
     'username'  => 'نام کاربری',

@@ -85,8 +85,8 @@
               @if(Auth::user()->isAdmin())
                 <td><a href="{{route('panel.users.show', ['user' => $user])}}">{{$user->username}}</a></td>
               @endif
-              <td>{{$user->first_name}}</td>
-              <td>{{$user->last_name}}</td>
+              <td>{{$user->first_name_str}}</td>
+              <td>{{$user->last_name_str}}</td>
               <td>{{$user->group_str}}</td>
               <td>{{$user->status_str}}</td>
                 @if(Auth::user()->isAdmin())

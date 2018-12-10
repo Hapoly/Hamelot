@@ -27,8 +27,6 @@ class Register extends PersianFormRequest
     {
         // die(json_encode(request()->all()));
         return [
-            'username'      => 'required|string|unique:users',
-            'password'      => 'required|string|confirmed',
             'first_name'    => 'required|string',
             'last_name'     => 'required|string',
             'group_code'    => 'required|numeric',

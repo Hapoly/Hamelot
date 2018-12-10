@@ -6,7 +6,7 @@ use App\Http\Requests\PersianFormRequest;
 use App\Rules\Phone;
 use Auth;
 
-class ForgotPassword extends PersianFormRequest
+class Login extends PersianFormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,7 +26,7 @@ class ForgotPassword extends PersianFormRequest
     public function rules()
     {
         return [
-            'phone'         => ['required', new Phone, 'exists:users'],
+            'phone' => ['required', new Phone],
         ];
     }
 }

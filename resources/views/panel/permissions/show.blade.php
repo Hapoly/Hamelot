@@ -13,9 +13,9 @@
     @endif
     <div class="row">
       @if(Auth::user()->isDoctor() || Auth::user()->isNurse())
-        <h3>{{ $permission->patient->first_name }} {{ $permission->patient->last_name }}</h3>
+        <h3>{{ $permission->patient->first_name_str }} {{ $permission->patient->last_name_str }}</h3>
       @elseif(Auth::user()->isPatient())
-        <h3>{{ $permission->requester->first_name }} {{ $permission->requester->last_name }} ({{$permission->requester->group_str}})</h3>
+        <h3>{{ $permission->requester->first_name_str }} {{ $permission->requester->last_name_str }} ({{$permission->requester->group_str}})</h3>
       @endif
     </div>
     <div class="row">
@@ -24,11 +24,11 @@
           @if(Auth::user()->isDoctor() || Auth::user()->isNurse())
             <tr>
               <td>{{__('users.first_name')}}</td>
-              <td>{{$permission->patient->first_name}}</td>
+              <td>{{$permission->patient->first_name_str}}</td>
             </tr>
             <tr>
               <td>{{__('users.last_name')}}</td>
-              <td>{{$permission->patient->last_name}}</td>
+              <td>{{$permission->patient->last_name_str}}</td>
             </tr>
             <tr>
               <td>{{__('users.id_number')}}</td>
@@ -57,11 +57,11 @@
           @elseif(Auth::user()->isPatient())
             <tr>
               <td>{{__('users.first_name')}}</td>
-              <td>{{$permission->requester->first_name}}</td>
+              <td>{{$permission->requester->first_name_str}}</td>
             </tr>
             <tr>
               <td>{{__('users.last_name')}}</td>
-              <td>{{$permission->requester->last_name}}</td>
+              <td>{{$permission->requester->last_name_str}}</td>
             </tr>
             <tr>
               <td>{{__('users.status')}}</td>
@@ -87,13 +87,13 @@
             </tr>
             <tr>
               <td>{{__('users.first_name')}}</td>
-              <td>{{$permission->requester->first_name}}</td>
-              <td>{{$permission->patient->first_name}}</td>
+              <td>{{$permission->requester->first_name_str}}</td>
+              <td>{{$permission->patient->first_name_str}}</td>
             </tr>
             <tr>
               <td>{{__('users.last_name')}}</td>
-              <td>{{$permission->requester->last_name}}</td>
-              <td>{{$permission->patient->last_name}}</td>
+              <td>{{$permission->requester->last_name_str}}</td>
+              <td>{{$permission->patient->last_name_str}}</td>
             </tr>
             <tr>
               <td>{{__('users.status')}}</td>

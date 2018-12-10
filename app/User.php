@@ -38,12 +38,26 @@ class User extends Authenticatable
     const G_DOCTOR      = 3;
     const G_NURSE       = 4;
     const G_PATIENT     = 5;
+    const G_SECRETARY   = 6;
     
     const T_PUBLIC = 1;
     const T_PRIVATE = 2;
     
     public function getPublicStrAttribute(){
         return __('users.public_str.'.$this->public);
+    }
+
+    public function getFirstNameStrAttribute(){
+        if($this->first_name == 'NuLL')
+            return 'بدون';
+        else
+            return $this->first_name;
+    }
+    public function getLastNameStrAttribute(){
+        if($this->last_name == 'NuLL')
+            return 'نام';
+        else
+            return $this->last_name;
     }
 
     public function isAdmin(){
@@ -61,13 +75,16 @@ class User extends Authenticatable
     public function isPatient(){
         return $this->group_code == User::G_PATIENT;
     }
+    public function isSecretary(){
+        return $this->group_code == User::G_SECRETARY;
+    }
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'username', 'first_name', 'last_name', 'group_code', 'status', 'password', 'public', 'phone', 'email',
+        'first_name', 'last_name', 'group_code', 'status', 'public', 'phone', 'email',
     ];
 
     /**

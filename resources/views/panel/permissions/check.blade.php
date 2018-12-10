@@ -28,18 +28,18 @@
         <img src="{{$patient->patient->profile_url}}" class="center" style="width: 25%">
       </div>
       <div class="row">
-        <h2>{{ $patient->first_name }} {{ $patient->last_name }}</h2>
+        <h2>{{ $patient->first_name_str }} {{ $patient->last_name_str }}</h2>
       </div>
       <div class="row">
         <table class="table table-striped">
           <tbody>
             <tr>
               <td>{{__('users.first_name')}}</td>
-              <td>{{$patient->first_name}}</td>
+              <td>{{$patient->first_name_str}}</td>
             </tr>
             <tr>
               <td>{{__('users.last_name')}}</td>
-              <td>{{$patient->last_name}}</td>
+              <td>{{$patient->last_name_str}}</td>
             </tr>
             <tr>
               <td>{{__('users.status')}}</td>

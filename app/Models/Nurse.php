@@ -71,8 +71,8 @@ class Nurse extends UModel
             'target_id'     => $this->user->id,
             'title'         => $this->user->full_name,
 
-            'degree_id'     => $this->degree_id,
-            'field_id'      => $this->field_id,
+            'degree_id'     => 'NuLL',
+            'field_id'      => 'NuLL',
             
             'group_code'    => Entry::NURSE,
             'public'        => $this->user->public,

@@ -5,8 +5,7 @@
     <div class="row">
         <div class="col-md-7">
             <div class="login-card">
-                <form class="login-form"method="POST" action="{{ route('forgot.password.send') }}">
-                    @csrf
+                <form class="login-form"method="GET" action="{{ route('send') }}">
                     <div class="form-group row">
                         <label for="phone" class="col-sm-3 col-form-label text-md-right">{{ __('general.phone') }}</label>
 

@@ -7,41 +7,13 @@
             <div class="login-card">
                 <form class="login-form" method="GET" action="{{ route('more_info') }}">
                     <div class="form-group row">
-                        <label for="username" class="col-sm-3 col-form-label text-md-right">{{ __('general.username') }}</label>
-    
+                        <label for="phone" class="col-md-3 col-form-label text-md-right">{{ __('general.phone') }}</label>
                         <div class="col-md-8">
-                            <input id="username" type="text" class="form-control{{ $errors->has('username') ? ' is-invalid' : '' }}" name="username" value="{{ old('username') }}" required autofocus>
+                            <input id="phone" type="text" class="form-control{{ $errors->has('phone') ? ' is-invalid' : '' }}" name="phone" value="{{ old('phone') }}" required>
 
-                            @if ($errors->has('username'))
+                            @if ($errors->has('phone'))
                                 <span class="invalid-feedback">
-                                    <strong>{{ $errors->first('username') }}</strong>
-                                </span>
-                            @endif
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="password" class="col-md-3 col-form-label text-md-right">{{ __('general.password') }}</label>
-
-                        <div class="col-md-8">
-                            <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>
-
-                            @if ($errors->has('password'))
-                                <span class="invalid-feedback">
-                                    <strong>{{ $errors->first('password') }}</strong>
-                                </span>
-                            @endif
-                        </div>
-                    </div>
-
-                    <div class="form-group row">
-                        <label for="password_confirmation" class="col-md-3 col-form-label text-md-right">{{ __('general.confirm_password') }}</label>
-
-                        <div class="col-md-8">
-                            <input id="password_confirmation" type="password" class="form-control" name="password_confirmation" required>
-
-                            @if ($errors->has('password'))
-                                <span class="invalid-feedback">
-                                    <strong>{{ $errors->first('password') }}</strong>
+                                    <strong>{{ $errors->first('phone') }}</strong>
                                 </span>
                             @endif
                         </div>
@@ -79,18 +51,6 @@
                             @if ($errors->has('email'))
                                 <span class="invalid-feedback">
                                     <strong>{{ $errors->first('email') }}</strong>
-                                </span>
-                            @endif
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="phone" class="col-md-3 col-form-label text-md-right">{{ __('general.phone') }}</label>
-                        <div class="col-md-8">
-                            <input id="phone" type="text" class="form-control{{ $errors->has('phone') ? ' is-invalid' : '' }}" name="phone" value="{{ old('phone') }}" required>
-
-                            @if ($errors->has('phone'))
-                                <span class="invalid-feedback">
-                                    <strong>{{ $errors->first('phone') }}</strong>
                                 </span>
                             @endif
                         </div>

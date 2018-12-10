@@ -12,8 +12,8 @@
             @input_text(['name' => 'password_confirmation', 'label' => __('users.password_confirmation'), 'value' => old('password_confirmation', $user->password_confirmation), 'col' => 6, 'type' => 'password'])
         </div>
         <div class="form-group row create-form">
-            @input_text(['name' => 'first_name', 'label' => __('users.first_name'), 'value' => old('first_name', $user->first_name), 'col' => 6])
-            @input_text(['name' => 'last_name', 'label' => __('users.last_name'), 'value' => old('last_name', $user->last_name), 'col' => 6])
+            @input_text(['name' => 'first_name', 'label' => __('users.first_name'), 'value' => old('first_name', $user->first_name_str), 'col' => 6])
+            @input_text(['name' => 'last_name', 'label' => __('users.last_name'), 'value' => old('last_name', $user->last_name_str), 'col' => 6])
         </div>
         <div class="form-group row create-form">
             @php

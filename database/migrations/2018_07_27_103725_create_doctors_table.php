@@ -16,12 +16,10 @@ class CreateDoctorsTable extends Migration
         Schema::create('doctors', function (Blueprint $table) {
             $table->uuid('id');
             $table->primary('id');
-            $table->uuid('user_id')         ->index()                       ;
-            $table->uuid('degree_id')                   ->default(1)        ;
-            $table->uuid('field_id')        ->index()   ->default(0)        ;
-            $table->string('profile', 64)               ->default('NuLL')   ;
-            $table->smallInteger('gender')              ->default(0)        ;
-            $table->string('msc', 16)                   ->default('NuLL')   ;
+            $table->uuid('user_id')->index();
+            $table->string('profile', 64)->default('NuLL');
+            $table->smallInteger('gender')->default(0);
+            $table->string('msc', 16)->default('NuLL');
             $table->timestamps();
         });
     }

@@ -12,8 +12,8 @@
             @input_text(['name' => 'password_confirmation', 'label' => __('users.password_confirmation'), 'value' => old('password_confirmation', $user->password_confirmation), 'col' => 6, 'type' => 'password'])
         </div>
         <div class="form-group row create-form">
-            @input_text(['name' => 'first_name', 'label' => __('users.first_name'), 'value' => old('first_name', $user->first_name), 'col' => 6])
-            @input_text(['name' => 'last_name', 'label' => __('users.last_name'), 'value' => old('last_name', $user->last_name), 'col' => 6])
+            @input_text(['name' => 'first_name', 'label' => __('users.first_name'), 'value' => old('first_name', $user->first_name_str), 'col' => 6])
+            @input_text(['name' => 'last_name', 'label' => __('users.last_name'), 'value' => old('last_name', $user->last_name_str), 'col' => 6])
         </div>
         @input_text(['name' => 'id_number', 'label' => __('users.id_number'), 'value' => old('id_number', $user->patient->id_number), 'row' => true])
         @input_date(['name' => 'birth_', 'year' => old('birth_year', $user->birth_year), 'month' => old('birth_month', $user->birth_month), 'day' => old('birth_day', $user->birth_day), 'label' => __('users.birth_date'), 'row' => true])

@@ -4,9 +4,10 @@ namespace App\Http\Requests\Auth;
 
 use App\Http\Requests\PersianFormRequest;
 use App\Rules\Phone;
+use App\Rules\Token;
 use Auth;
 
-class ResetPassword extends PersianFormRequest
+class Check extends PersianFormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,8 +27,8 @@ class ResetPassword extends PersianFormRequest
     public function rules()
     {
         return [
-            'token'     => 'required|string|max:6',
-            'password'  => 'required|string|confirmed',
+            'token'     => ['required_if:action,check', new Token(request()->get('token'))],
+            'action'    => ['required', 'string'],
         ];
     }
 }

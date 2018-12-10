@@ -46,23 +46,23 @@ class LoginController extends Controller
 
     public function username()
     {
-        return 'username';
+        return 'phone';
     }
 
-    public function forgotPassword(){
-        return view('auth.passwords.phone');
+    public function loginGet(){
+        return view('auth.login.phone');
     }
-    public function sendSms(FrogotPasswordRequest $request){
+    public function loginPost(Login $request){
         $user = User::where('phone', $request->phone)->firstOrFail();
         // sending message to phone number
-        $request->session()->put('forgot.password.phone'      , $request->phone);
-        $request->session()->put('forgot.password.token'      , rand() % 1000000);
+        $request->session()->put('login.phone'      , $request->phone);
+        $request->session()->put('login.token'      , rand() % 1000000);
         try{
             $api = new KavenegarApi(env('KAVENEGAR_API_TOKEN'));
             $template = env('KAVENEGAR_PATTERN');
             $result = $api->VerifyLookup(
-                        $request->session()->get('forgot.password.phone'),
-                        $request->session()->get('forgot.password.token'), 
+                        $request->session()->get('login.phone'),
+                        $request->session()->get('login.token'), 
                         '', '',
                         $template,'sms'
                     );
@@ -73,17 +73,17 @@ class LoginController extends Controller
         catch(HttpException $e){
             echo $e->errorMessage();
         }
-        return view('auth.passwords.reset');
+        return view('login.check');
     }
     public function resetPassword(ResetPasswordRequest $request){
-        if(intval($request->token) != $request->session()->get('forgot.password.token')){
+        if(intval($request->token) != $request->session()->get('login.token')){
             // return $request->all();
             $request->session()->put('register.token_mismatch', true);
             return view('auth.passwords.reset');
         }else{
             $request->session()->put('register.token_mismatch', false);
         }
-        $user = User::where('phone', $request->session()->get('forgot.password.phone'))->first();
+        $user = User::where('phone', $request->session()->get('login.phone'))->first();
         return redirect('login')->with('password_changed', true);
     }
 }

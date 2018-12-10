@@ -1,5 +1,5 @@
 @extends('layouts.main')
-@section('title', $user->first_name . ' ' . $user->last_name)
+@section('title', $user->first_name_str . ' ' . $user->last_name_str)
 @section('content')
 <div class="container">
   <div class="panel panel-default">
@@ -7,18 +7,18 @@
       <img src="{{$user->nurse->profile_url}}" class="center" style="width: 25%">
     </div>
     <div class="row">
-      <h2>{{ $user->first_name }} {{ $user->last_name }}</h2>
+      <h2>{{ $user->first_name_str }} {{ $user->last_name_str }}</h2>
     </div>
     <div class="row">
       <table class="table table-striped">
         <tbody>
           <tr>
             <td>{{__('users.first_name')}}</td>
-            <td>{{$user->first_name}}</td>
+            <td>{{$user->first_name_str}}</td>
           </tr>
           <tr>
             <td>{{__('users.last_name')}}</td>
-            <td>{{$user->last_name}}</td>
+            <td>{{$user->last_name_str}}</td>
           </tr>
           <tr>
             <td>{{__('users.status')}}</td>

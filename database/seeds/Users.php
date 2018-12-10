@@ -24,9 +24,7 @@ class Users extends Seeder
         $nurse_fields = ConstValue::where('type', 3)->get();
 
         User::create([
-            'username'      => 'admin',
             'phone'         => '09114866684',
-            'password'      => bcrypt('admin'),
             'group_code'    => 1,
             'first_name'    => 'علیرضا',
             'last_name'     => 'دربندی',
@@ -35,17 +33,13 @@ class Users extends Seeder
          * creating two managers
          */
         User::create([
-            'username'      => 'manager1',
             'phone'         => '09214857487',
-            'password'      => bcrypt('manager1'),
             'group_code'    => 2,
             'first_name'    => 'گروس',
             'last_name'     => 'عبدلملکیان',
         ]);
         User::create([
-            'username'      => 'manager2',
             'phone'         => '+989XXXXXXXX3',
-            'password'      => bcrypt('manager2'),
             'group_code'    => 2,
             'first_name'    => 'فاطیما',
             'last_name'     => 'عزیزی',
@@ -54,33 +48,25 @@ class Users extends Seeder
          * creating two doctors
          */
         $d1 = User::create([
-            'username'      => 'doctor1',
             'phone'         => '09369198095',
-            'password'      => bcrypt('doctor1'),
             'group_code'    => 3,
             'first_name'    => 'سامان',
             'last_name'     => 'ذبیحی',
         ]);
         Doctor::create([
             'user_id'       => $d1->id,
-            'degree_id'     => $doctor_degrees[intval(rand() % sizeof($doctor_degrees))]->id,
-            'field_id'      => $doctor_fields[intval(rand() % sizeof($doctor_fields))]->id,
             'profile'       => 'NuLL',
             'gender'        => 1,
         ]);
 
         $d2 = User::create([
-            'username'      => 'doctor2',
             'phone'         => '09355849587',
-            'password'      => bcrypt('doctor2'),
             'group_code'    => 3,
             'first_name'    => 'فلاح',
             'last_name'     => 'ابوزاده',
         ]);
         Doctor::create([
             'user_id'       => $d2->id,
-            'degree_id'     => $doctor_degrees[intval(rand() % sizeof($doctor_degrees))]->id,
-            'field_id'      => $doctor_fields[intval(rand() % sizeof($doctor_fields))]->id,
             'profile'       => 'NuLL',
             'gender'        => 1,
         ]);
@@ -89,33 +75,25 @@ class Users extends Seeder
          * creating two nurses
          */
         $n0 = User::create([
-            'username'      => 'nurse1',
             'phone'         => '09385748574',
-            'password'      => bcrypt('nurse1'),
             'group_code'    => 4,
             'first_name'    => 'عزیز',
             'last_name'     => 'صمیری',
         ]);
         Nurse::create([
             'user_id'       => $n0->id,
-            'degree_id'     => $nurse_degrees[intval(rand() % sizeof($nurse_degrees))]->id,
-            'field_id'      => $nurse_fields[intval(rand() % sizeof($nurse_fields))]->id,
             'profile'       => 'NuLL',
             'gender'        => 1,
         ]);
 
         $n1 = User::create([
-            'username'      => 'nurse2',
             'phone'         => '09113847584',
-            'password'      => bcrypt('nurse2'),
             'group_code'    => 4,
             'first_name'    => 'شادی',
             'last_name'     => 'علوی',
         ]);
         Nurse::create([
             'user_id'       => $n1->id,
-            'degree_id'     => $nurse_degrees[intval(rand() % sizeof($nurse_degrees))]->id,
-            'field_id'      => $nurse_fields[intval(rand() % sizeof($nurse_fields))]->id,
             'profile'       => 'NuLL',
             'gender'        => 2,
         ]);
@@ -124,9 +102,7 @@ class Users extends Seeder
          * creating patients
          */
         $p0 = User::create([
-            'username'      => 'patient1',
             'phone'         => '09216720495',
-            'password'      => bcrypt('patient1'),
             'group_code'    => 5,
             'first_name'    => 'فاطمه',
             'last_name'     => 'آقاجان پور',
@@ -140,9 +116,7 @@ class Users extends Seeder
         ]);
 
         $p1 = User::create([
-            'username'      => 'patient2',
             'phone'         => '09113857487',
-            'password'      => bcrypt('patient2'),
             'group_code'    => 5,
             'first_name'    => 'حمید',
             'last_name'     => 'مصطفایی',
@@ -156,9 +130,7 @@ class Users extends Seeder
         ]);
 
         $p2 = User::create([
-            'username'      => 'patient3',
             'phone'         => '09123847384',
-            'password'      => bcrypt('patient3'),
             'group_code'    => 5,
             'first_name'    => 'رضا',
             'last_name'     => 'هزاره‌زاده',
@@ -172,9 +144,7 @@ class Users extends Seeder
         ]);
 
         $p3 = User::create([
-            'username'      => 'patient6',
             'phone'         => '09218473847',
-            'password'      => bcrypt('patient6'),
             'group_code'    => 5,
             'first_name'    => 'شایان',
             'last_name'     => 'خالق پرست',
@@ -188,9 +158,7 @@ class Users extends Seeder
         ]);
 
         $p4 = User::create([
-            'username'      => 'patient5',
             'phone'         => '09148574857',
-            'password'      => bcrypt('patient5'),
             'group_code'    => 5,
             'first_name'    => 'ساناز',
             'last_name'     => 'هادی‌پور',
@@ -204,9 +172,7 @@ class Users extends Seeder
         ]);
 
         $p5 = User::create([
-            'username'      => 'patient4',
             'phone'         => '09114857487',
-            'password'      => bcrypt('patient4'),
             'group_code'    => 5,
             'first_name'    => 'اشکان',
             'last_name'     => 'خطیبی',

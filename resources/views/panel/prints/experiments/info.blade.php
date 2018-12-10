@@ -8,9 +8,9 @@
         <tbody>
             <tr>
                 <td><b>{{__('users.first_name')}}</b></td>
-                <td>{{$user->first_name}}</td>
+                <td>{{$user->first_name_str}}</td>
                 <td><b>{{__('users.last_name')}}}</b></td>
-                <td>{{$user->last_name}}</td>
+                <td>{{$user->last_name_str}}</td>
             </tr>
             <tr>
                 <td><b>{{__('users.group_code')}}</b></td>
@@ -40,8 +40,8 @@
                 @foreach($user->visitors()->get() as $index => $user)
                 <tr>
                     <td>{{$index + 1}}</td>
-                    <td>{{$user->first_name}}</td>
-                    <td>{{$user->last_name}}</td>
+                    <td>{{$user->first_name_str}}</td>
+                    <td>{{$user->last_name_str}}</td>
                     <td>{{$user->status_str}}</td>
                 </tr>
                 @endforeach

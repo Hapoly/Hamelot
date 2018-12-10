@@ -24,8 +24,8 @@
                 @if(Auth::user()->isAdmin())
                     <td>{{$user->username}}</td>
                 @endif
-                <td>{{$user->first_name}}</td>
-                <td>{{$user->last_name}}</td>
+                <td>{{$user->first_name_str}}</td>
+                <td>{{$user->last_name_str}}</td>
                 <td>{{$user->group_str}}</td>
                 <td>{{$user->id_number}}</td>
                 <td>{{$user->age_str}}</td>

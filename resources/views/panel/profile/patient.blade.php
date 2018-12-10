@@ -41,7 +41,7 @@
 
                      <div class="form-group row create-form">
                         <div class="col-md-10">
-                           <input id="first_name" type="text" class="form-control{{ $errors->has('first_name') ? ' is-invalid' : '' }}" name="first_name" value="{{ old('first_name', $user->first_name) }}" required>
+                           <input id="first_name" type="text" class="form-control{{ $errors->has('first_name') ? ' is-invalid' : '' }}" name="first_name" value="{{ old('first_name', $user->first_name_str) }}" required>
                                  @if ($errors->has('first_name'))
                                     <span class="invalid-feedback">
                                         <strong>{{ $errors->first('first_name') }}</strong>
@@ -53,7 +53,7 @@
 
                     <div class="form-group row create-form">
                         <div class="col-md-10">
-                           <input id="last_name" type="text" class="form-control{{ $errors->has('last_name') ? ' is-invalid' : '' }}" name="last_name" value="{{ old('last_name', $user->last_name) }}" required>
+                           <input id="last_name" type="text" class="form-control{{ $errors->has('last_name') ? ' is-invalid' : '' }}" name="last_name" value="{{ old('last_name', $user->last_name_str) }}" required>
                                  @if ($errors->has('last_name'))
                                     <span class="invalid-feedback">
                                         <strong>{{ $errors->first('last_name') }}</strong>

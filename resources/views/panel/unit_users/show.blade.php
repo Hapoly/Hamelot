@@ -78,8 +78,8 @@
           @foreach($hospital->users as $user)
             <tr>
               <td>{{$user->id}}</td>
-              <td>{{$user->first_name}}</td>
-              <td>{{$user->last_name}}</td>
+              <td>{{$user->first_name_str}}</td>
+              <td>{{$user->last_name_str}}</td>
               <td>{{$user->status_str}}</td>
               @if(Auth::user()->isAdmin())
                 <td>

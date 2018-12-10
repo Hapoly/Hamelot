@@ -70,7 +70,7 @@ return [
     'present'              => ':attribute باید مقدار داشته باشد',
     'regex'                => 'الگوی :attribute نامعتبر است',
     'required'             => ':attribute مورد نیاز است',
-    'required_if'          => ':attribute وقتی که :other مقدار :value دارد ضروری است',
+    'required_if'          => ':attribute مورد نیاز است',
     'required_unless'      => ':attribute وقتی که :other :value نیست مورد نیاز است',
     'required_with'        => ':attribute وقتی که :other مقدار دارد مورد نیاز است',
     'required_with_all'    => ':attribute وقتی که :other مقدار دارد مورد نیاز است',
@@ -171,6 +171,7 @@ return [
         'unit_id'           => 'واحد درمانی',
         'experiment_id'     => 'آزمایش',
         'email'             => 'ایمیل',
+        'token'             => 'کد فعالسازی',
     ],
 
 ];

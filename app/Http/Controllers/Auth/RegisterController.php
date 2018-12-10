@@ -52,8 +52,6 @@ class RegisterController extends Controller{
         $inputs = $request->all();
         $inputs['phone'] = $this->replace_digits($request->phone);
         if(!$request->session()->has('token') && !$request->session()->get('register.token_mismatch', false)){
-            $request->session()->put('register.username'   , $inputs['username']);
-            $request->session()->put('register.password'   , $inputs['password']);
             $request->session()->put('register.first_name' , $inputs['first_name']);
             $request->session()->put('register.last_name'  , $inputs['last_name']);
             $request->session()->put('register.group_code' , $inputs['group_code']);
@@ -106,22 +104,17 @@ class RegisterController extends Controller{
             $request->session()->put('register.token_mismatch', true);
             return redirect()->back();
         }
-        $data['username'] = $request->session()->get('register.username');
         $data['first_name'] = $request->session()->get('register.first_name');
         $data['last_name'] = $request->session()->get('register.last_name');
         $data['phone'] = $request->session()->get('register.phone');
         $data['group_code'] = $request->session()->get('register.group_code');
-        $data['password'] = Hash::make($request->session()->get('register.password'));
         if($request->hasFile('profile'))
             $data['profile'] = Storage::disk('public')->put('/users', $request->file('profile'));
         $user = User::create($data);
         $data['user_id'] = $user->id;
         Doctor::create($data);
         $request->session()->flush();
-        Auth::attempt([
-            'username'  => $request->username,
-            'password'  => $request->password,
-        ]);
+        Auth::login($user);
         return redirect()->route('home');
     }
     public function createNurse(CreateNurseRequest $request){
@@ -131,22 +124,17 @@ class RegisterController extends Controller{
             $request->session()->put('register.token_mismatch', true);
             return redirect()->back();
         }
-        $data['username'] = $request->session()->get('register.username');
         $data['first_name'] = $request->session()->get('register.first_name');
         $data['last_name'] = $request->session()->get('register.last_name');
         $data['phone'] = $request->session()->get('register.phone');
         $data['group_code'] = $request->session()->get('register.group_code');
-        $data['password'] = Hash::make($request->session()->get('register.password'));
         if($request->hasFile('profile'))
             $data['profile'] = Storage::disk('public')->put('/users', $request->file('profile'));
         $user = User::create($data);
         $data['user_id'] = $user->id;
         Nurse::create($data);
         $request->session()->flush();
-        Auth::attempt([
-            'username'  => $request->username,
-            'password'  => $request->password,
-        ]);
+        Auth::login($user);
         return redirect()->route('home');
     }
     public function createPatient(CreatePatientRequest $request){
@@ -156,12 +144,10 @@ class RegisterController extends Controller{
             $request->session()->put('register.token_mismatch', true);
             return redirect()->back();
         }
-        $data['username'] = $request->session()->get('register.username');
         $data['first_name'] = $request->session()->get('register.first_name');
         $data['last_name'] = $request->session()->get('register.last_name');
         $data['phone'] = $request->session()->get('register.phone');
         $data['group_code'] = $request->session()->get('register.group_code');
-        $data['password'] = Hash::make($request->session()->get('register.password'));
         $data['birth_date'] = Time::jmktime(0, 0, 0, $data['birth_day'], $data['birth_month'], $data['birth_year']);
         if($request->hasFile('profile'))
             $data['profile'] = Storage::disk('public')->put('/users', $request->file('profile'));
@@ -169,10 +155,7 @@ class RegisterController extends Controller{
         $data['user_id'] = $user->id;
         Patient::create($data);
         $request->session()->flush();
-        Auth::attempt([
-            'username'  => $request->username,
-            'password'  => $request->password,
-        ]);
+        Auth::login($user);
         return redirect()->route('home');
     }
     public function createManager(CreateManagerRequest $request){
@@ -182,18 +165,13 @@ class RegisterController extends Controller{
             $request->session()->put('register.token_mismatch', true);
             return redirect()->back();
         }
-        $data['username'] = $request->session()->get('register.username');
         $data['first_name'] = $request->session()->get('register.first_name');
         $data['last_name'] = $request->session()->get('register.last_name');
         $data['phone'] = $request->session()->get('register.phone');
         $data['group_code'] = $request->session()->get('register.group_code');
-        $data['password'] = Hash::make($request->session()->get('register.password'));
         $user = User::create($data);
         $request->session()->flush();
-        Auth::attempt([
-            'username'  => $request->username,
-            'password'  => $request->password,
-        ]);
+        Auth::login($user);
         return redirect()->route('home');
     }
 }
