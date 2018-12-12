@@ -41,7 +41,9 @@
                 </div>
                 <div class="row">
                     <div class="col-md-3">
-                        <img src="{{asset('/imgs/icon/hospital.png')}}">
+                        <div class="circle-icon">
+                            <img src="{{asset('/imgs/icon/hospital.png')}}">
+                        </div>
                         <span>بیمارستان ها </span>
                     </div>
                     <div class="col-md-3">
