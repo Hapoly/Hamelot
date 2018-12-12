@@ -38,7 +38,21 @@
                             </div>
                         </form>
                     </div>
-                   
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <img src="{{asset('/imgs/icon/hospital.png')}}">
+                        <span>بیمارستان ها </span>
+                    </div>
+                    <div class="col-md-3">
+                    hello
+                    </div>
+                    <div class="col-md-3">
+                    hello
+                    </div>
+                    <div class="col-md-3">
+                    hello
+                    </div>
                 </div>
             </div>
         </div>
