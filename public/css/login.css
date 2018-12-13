@@ -1,11 +1,11 @@
 @import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);
 
 @font-face {
-    font-family: "BYekan";
-    src: url(../fonts/b-yekan.ttf); 
+    font-family: "Shabnam";
+    src: url(../fonts/Shabnam.ttf); 
 }
 *{
-    font-family: "BYekan";
+    font-family: "Shabnam" !important;
 }
 /* popup things */
 .popup {
