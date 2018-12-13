@@ -358,3 +358,12 @@ a:hover {
 .hidden-select {
 	display: none
 }
+.circle-icon img{
+	height: 140px;
+	width: 140px;
+}
+.circle-icon {
+	border: 1px solid darkturquoise;
+	border-radius: 100%;
+	margin-top: 20px;
+}
