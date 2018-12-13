@@ -93,7 +93,6 @@ class Doctor extends UModel{
     }
 
     public function getIsProfileCompletedAttribute(){
-        return true;
         if($this->user->first_name == 'NuLL' || $this->user->last_name == 'NuLL')
             return false;
         if(sizeof($this->user->fields) == 0)

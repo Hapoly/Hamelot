@@ -208,13 +208,14 @@ class Unit extends UModel{
             case User::G_MANAGER:
             case User::G_DOCTOR:
             case User::G_NURSE:
+            case User::G_SECRETARY:
                 if($joined)
                     return Unit::whereHas('requests', function($query){
                         return $query->where('user_id', Auth::user()->id);
                     });
                 else
                     return (new Unit);
-            case USER::G_PATIENT:
+            case User::G_PATIENT:
                 return Unit::where('public', Unit::T_PUBLIC);
         }
     }

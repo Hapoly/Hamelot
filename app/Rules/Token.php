@@ -13,8 +13,7 @@ class Token implements Rule{
      *
      * @return void
      */
-    public function __construct($token)
-    {
+    public function __construct($token){
         $this->token = $token;
     }
 
@@ -34,8 +33,7 @@ class Token implements Rule{
      *
      * @return string
      */
-    public function message()
-    {
+    public function message(){
         return __('validation.token_mismatch');
     }
 }

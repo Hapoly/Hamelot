@@ -84,7 +84,7 @@ class AuthController extends Controller{
             case User::G_SECRETARY:
             case User::G_PATIENT:
                 if($user){
-                    if($user->isManager()){
+                    if($user->group_code == $request->session()->get('auth.group')){
                         Auth::login($user);
                         return redirect()->route('home');
                     }else{
@@ -106,7 +106,7 @@ class AuthController extends Controller{
             case User::G_DOCTOR:
             case User::G_NURSE:
                 if($user){
-                    if($user->isNurse() || $user->isDoctor()){
+                    if($user->group_code == $request->session()->get('auth.group')){
                         Auth::login($user);
                         return redirect()->route('home');
                     }else{

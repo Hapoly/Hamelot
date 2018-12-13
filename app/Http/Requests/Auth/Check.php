@@ -24,8 +24,7 @@ class Check extends PersianFormRequest
      *
      * @return array
      */
-    public function rules()
-    {
+    public function rules(){
         return [
             'token'     => ['required_if:action,check', new Token(request()->get('token'))],
             'action'    => ['required', 'string'],
