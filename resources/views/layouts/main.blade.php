@@ -90,6 +90,16 @@
 				</div>
 			</nav>
 			<div class="container">
+				@if(Auth::user()->has_to_complete_profile)
+					<div class="alert alert-warning" role="alert">
+					{!! __('auth.has_to_complete_profile', ['link' => route('panel.profile')]) !!}
+					</div>
+				@endif
+				@if(Auth::user()->has_to_join_unit)
+					<div class="alert alert-warning" role="alert">
+					{!! __('auth.has_to_join_unit', ['link' => route('panel.units.create.clinic')]) !!}
+					</div>
+				@endif
 				@yield('content')
 			</div>
 		</div>

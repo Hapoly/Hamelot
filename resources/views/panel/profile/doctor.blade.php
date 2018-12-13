@@ -2,129 +2,22 @@
 @section('title', __('users.edit.doctor'))
 @section('content')
 <div class="container">
-    <div class="panel panel-default create-card">
-         <h2>{{ __('users.edit.doctor') }}</h2>
-         <div class="row">
-            <div class="col-md-12">
-                <form method="POST" action="{{ route('panel.profile.doctor') }}" enctype="multipart/form-data">
-                      @csrf
-
-                    <div class="form-group row create-form">
-                        <div class="col-md-10">
-                           <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" >
-                                @if ($errors->has('password'))
-                                    <span class="invalid-feedback">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
-                                @endif
-                        </div>
-                         <label for="password" class="col-md-2 col-form-label text-center">{{ __('users.password') }}</label>
-                    </div>
-
-                    <div class="form-group row create-form">
-                        <div class="col-md-10">
-                           <input id="password_confirmation" type="password" class="form-control" name="password_confirmation" >
-                        </div>
-                         <label for="password_confirmation" class="col-md-2 col-form-label text-center">{{ __('users.password_confirmation') }}</label>
-                    </div>
-
-                     <div class="form-group row create-form">
-                        <div class="col-md-10">
-                           <input id="first_name" type="text" class="form-control{{ $errors->has('first_name') ? ' is-invalid' : '' }}" name="first_name" value="{{ old('first_name', $user->first_name_str) }}" required>
-                                 @if ($errors->has('first_name'))
-                                    <span class="invalid-feedback">
-                                        <strong>{{ $errors->first('first_name') }}</strong>
-                                    </span>
-                                @endif
-                        </div>
-                         <label for="first_name" class="col-md-2 col-form-label text-center">{{ __('users.first_name') }}</label>
-                    </div>
-
-                    <div class="form-group row create-form">
-                        <div class="col-md-10">
-                           <input id="last_name" type="text" class="form-control{{ $errors->has('last_name') ? ' is-invalid' : '' }}" name="last_name" value="{{ old('last_name', $user->last_name_str) }}" required>
-                                 @if ($errors->has('last_name'))
-                                    <span class="invalid-feedback">
-                                        <strong>{{ $errors->first('last_name') }}</strong>
-                                    </span>
-                                @endif
-                        </div>
-                         <label for="last_name" class="col-md-2 col-form-label text-center">{{ __('users.last_name') }}</label>
-                    </div>
-
-                    <div class="form-group row create-form">
-                        <div class="col-md-10">
-                            <select class="form-control" name="status" id="status" style="width:90%">
-                                <option value="1" {{old('status') == 1? 'selected': ''}} >{{__('users.status_str.1')}}  </option>
-                                <option value="2" {{old('status') == 2? 'selected': ''}} >{{__('users.status_str.2')}}  </option>
-                            </select>
-                            @if ($errors->has('status'))
-                                <span class="invalid-feedback">
-                                    <strong>{{ $errors->first('status') }}</strong>
-                                </span>
-                            @endif
-                        </div>
-                        <label for="status" class="col-md-2 col-form-label text-center">{{ __('users.status') }}</label>
-                    </div>
-                    <div class="form-group row create-form">
-                        <div class="col-md-10">
-                            <select class="form-control" name="gender" id="gender" style="width:90%">
-                                <option value="1" {{old('gender', $user->doctor->gender) == 1? 'selected': ''}} > {{__('users.gender_str.1')}}</option>
-                                <option value="2" {{old('gender', $user->doctor->gender) == 2? 'selected': ''}} > {{__('users.gender_str.2')}}</option>
-                            </select>
-                            @if ($errors->has('gender'))
-                                <span class="invalid-feedback">
-                                    <strong>{{ $errors->first('gender') }}</strong>
-                                </span>
-                            @endif
-                        </div>
-                        <label for="gender" class="col-md-2 col-form-label text-center">{{ __('users.gender') }}</label>
-                    </div>
-                    
-                    <div class="form-group row create-form">
-                        <div class="col-md-10">
-                           <input id="msc" type="text" class="form-control{{ $errors->has('msc') ? ' is-invalid' : '' }}" name="msc" value="{{ old('msc', $user->doctor->msc_str) }}" required autofocus>
-                                @if ($errors->has('msc'))
-                                <span class="invalid-feedback">
-                                    <strong>{{ $errors->first('msc') }}</strong>
-                                </span>
-                            @endif
-                        </div>
-                         <label for="title" class="col-md-2 col-form-label text-center">{{ __('users.msc') }}</label>
-                    </div>
-
-                    <div class="form-group row create-form">
-                        <div class="col-md-10">
-                            <select class="form-control" name="public" id="public" style="width:90%">
-                                <option value="1" {{old('public', $user->doctor->public) == 1? 'selected': ''}} >{{__('users.public_str.1')}}  </option>
-                                <option value="2" {{old('public', $user->doctor->public) == 2? 'selected': ''}} >{{__('users.public_str.2')}}  </option>
-                            </select>
-                            @if ($errors->has('public'))
-                                <span class="invalid-feedback">
-                                    <strong>{{ $errors->first('public') }}</strong>
-                                </span>
-                            @endif
-                        </div>
-                        <label for="status" class="col-md-2 col-form-label text-center">{{ __('users.public') }}</label>
-                    </div>
-                    
-                    <div class="form-group row create-form">
-                        <div class="col-md-10">
-                           <input id="profile" type="file" class="form-control{{ $errors->has('profile') ? ' is-invalid' : '' }}" name="profile">
-                                 @if ($errors->has('profile'))
-                                    <span class="invalid-feedback">
-                                        <strong>{{ $errors->first('profile') }}</strong>
-                                    </span>
-                                @endif
-                        </div>
-                         <label for="profile" class="col-md-2 col-form-label text-center">{{ __('users.profile') }}</label>
-                    </div>
-                        @submit_row(['value' => 'save', 'label' => __('users.save')])
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
- </div>
+    @form_edit(['post' => true, 'action' => route('panel.profile.doctor'), 'title' => __('users.edit.doctor')])
+        @input_image(['name' => 'profile', 'label' => __('users.profile'), 'col' => 12])
+        @input_text(['name' => 'email', 'label' => __('users.email'), 'value' => old('email', Auth::user()->email_str), 'row' => true])
+        @input_text(['name' => 'first_name', 'label' => __('users.first_name'), 'value' => old('first_name', Auth::user()->first_name_str), 'row' => true])
+        @input_text(['name' => 'last_name', 'label' => __('users.last_name'), 'value' => old('last_name', Auth::user()->last_name_str), 'row' => true])
+        @php
+            $gender_rows = [
+                ['label' => __('users.gender_str.' . 1), 'value' => 1],
+                ['label' => __('users.gender_str.' . 2), 'value' => 2],
+            ];
+        @endphp
+        @input_select(['name' => 'gender', 'value' => old('gender', Auth::user()->doctor->gender), 'label' => __('users.gender'), 'required' => true, 'rows' => $gender_rows, 'row' => true])
+        @input_text(['name' => 'msc', 'label' => __('users.msc_doctor'), 'value' => old('msc', Auth::user()->doctor->msc_str), 'row' => true])
+        @input_number(['name' => 'start_year', 'label' => __('users.start_year_doctor'), 'value' => old('start_year', Auth::user()->doctor->start_year), 'min' => 1360, 'max' => 1400, 'row' => true])
+        @multiautocomplete(['name' => 'fields', 'label' => __('users.fields'), 'value' => old('fields', Auth::user()->fields_str), 'required' => true, 'route' => 'fields.doctor'])
+        @submit_row(['value' => 'save', 'label' => __('users.save')])
+    @endform_edit
 </div>
 @endsection

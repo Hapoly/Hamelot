@@ -5,38 +5,10 @@
     @form_create(['action' => route('panel.users.store.nurse'), 'title' => __('users.create.nurse')])
         @input_image(['name' => 'profile', 'label' => __('users.profile'), 'col' => 12])
         @input_text(['name' => 'phone', 'label' => __('users.phone'), 'value' => old('phone'), 'row' => true])
-        @input_text(['name' => 'username', 'label' => __('users.username'), 'value' => old('username'), 'row' => true])
         @input_text(['name' => 'email', 'label' => __('users.email'), 'value' => old('email'), 'row' => true])
-        <div class="form-group row create-form">
-            @input_text(['name' => 'password', 'label' => __('users.password'), 'value' => old('password'), 'col' => 6, 'type' => 'password'])
-            @input_text(['name' => 'password_confirmation', 'label' => __('users.password_confirmation'), 'value' => old('password_confirmation'), 'col' => 6, 'type' => 'password'])
-        </div>
         <div class="form-group row create-form">
             @input_text(['name' => 'first_name', 'label' => __('users.first_name'), 'value' => old('first_name'), 'col' => 6])
             @input_text(['name' => 'last_name', 'label' => __('users.last_name'), 'value' => old('last_name'), 'col' => 6])
-        </div>
-        <div class="form-group row create-form">
-            @php
-                $degree_rows = [];
-                foreach($degrees as $degree){
-                    array_push($degree_rows, [
-                        'label' => $degree->value,
-                        'value' => $degree->id,
-                    ]);
-                }
-            @endphp
-            @input_select(['name' => 'degree_id', 'value' => old('degree_id', 0), 'label' => __('users.degree'), 'required' => true, 'rows' => $degree_rows, 'col' => 6])
-            
-            @php
-                $field_rows = [];
-                foreach($fields as $field){
-                    array_push($field_rows, [
-                        'label' => $field->value,
-                        'value' => $field->id,
-                    ]);
-                }
-            @endphp
-            @input_select(['name' => 'field_id', 'value' => old('field_id', 0), 'label' => __('users.field'), 'required' => true, 'rows' => $field_rows, 'col' => 6])
         </div>
         @php
             $gender_rows = [

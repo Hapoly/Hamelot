@@ -4,6 +4,7 @@ namespace App\Http\Requests\Auth;
 
 use App\Http\Requests\PersianFormRequest;
 use Auth;
+use App\Rules\UUID;
 
 class CreateDoctor extends PersianFormRequest
 {
@@ -25,13 +26,16 @@ class CreateDoctor extends PersianFormRequest
     public function rules()
     {
         return [
-            'token'         => 'required|string|max:6',
             'msc'           => 'required|string',
-            'degree_id'     => 'required|string',
-            'field_id'      => 'required|string',
-            'public'        => 'required|numeric',
-            'profile'       => 'image',
+            'feilds'        => 'required|string',
+            'profile'       => 'image|mimes:jpeg',
             'gender'        => 'required|numeric',
+            'city_id'       => ['required', new UUID, 'exists:cities,id'],
+            'address'       => 'required|string|max:200',
+            'slug'          => 'required|string|max:32|min:4|unique:units',
+            'phone'         => 'required|string',
+            'mobile'        => 'required|string',
+            'start_year'    => 'required|numeric',
         ];
     }
 }

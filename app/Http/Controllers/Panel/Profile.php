@@ -20,6 +20,7 @@ use App\Models\ConstValue;
 use App\Models\Permission;
 use App\Models\UnitUser;
 use App\Models\Unit;
+use App\Models\UserConst;
 
 use App\Http\Requests\Profile\Edit\Admin as AdminEditRequest;
 use App\Http\Requests\Profile\Edit\Manager as ManagerEditRequest;
@@ -41,13 +42,13 @@ class Profile extends Controller{
         return view('panel.profile.manager', ['user' => $user]);
         break;
       case User::G_DOCTOR:
-        return view('panel.profile.doctor', ['user' => $user, 'degrees' => ConstValue::doctor_degrees()->get(), 'fields' => ConstValue::doctor_fields()->get(), 'genders' => ConstValue::genders()->get()]);
+        return view('panel.profile.doctor', ['user' => $user]);
         break;
       case User::G_NURSE:
-        return view('panel.profile.nurse', ['user' => $user, 'degrees' => ConstValue::nurse_degrees()->get(), 'fields' => ConstValue::nurse_fields()->get(), 'genders' => ConstValue::genders()->get()]);
+        return view('panel.profile.nurse', ['user' => $user]);
         break;
       case User::G_PATIENT:
-        return view('panel.profile.patient', ['user' => $user, 'genders' => ConstValue::genders()->get()]);
+        return view('panel.profile.patient', ['user' => $user]);
         break;
     }
     abort(404);
@@ -96,11 +97,11 @@ class Profile extends Controller{
       $inputs['profile'] = Storage::disk('public')->put('/users', $request->file('profile'));
       Storage::disk('public')->delete($user->profile);
     }
-    if($inputs['password'])
-      $inputs['password'] = bcrypt($inputs['password']);
-    else
-      unset($inputs['password']);
     $inputs['group_code'] = User::G_DOCTOR;
+    unset($inputs['status']);
+    unset($inputs['public']);
+    if($inputs['email'] == null)
+      unset($inputs['email']);
 
     $user->fill($inputs);
     $user->save();
@@ -108,13 +109,19 @@ class Profile extends Controller{
     $doctor = $user->doctor;
     $doctor->fill($inputs);
     $doctor->save();
-
-    if(isset($inputs['password']))
-      Auth::attempt([
-        'username'  => $user->username,
-        'password'  => $inputs['password'],
+    $field_names = explode(', ', $request->fields);
+    // return $field_names;
+    UserConst::where('user_id', $user->id)->delete();
+    foreach($field_names as $field_name){
+      $const = ConstValue::where('value', str_replace(',', '', $field_name))->first();
+      if(!$const)
+        continue;
+      
+      UserConst::create([
+        'user_id'   => $user->id,
+        'const_id'  => $const->id,
       ]);
-    
+    }
     return redirect()->route('panel.profile');
   }
   public function updateNurse(NurseEditRequest $request){

@@ -12,6 +12,7 @@ return [
 
     'members'           => 'پرسنل',
     'managers'          => 'مدیریت',
+    'secretaries'       => 'منشی ها',
 
     'status_str'        => [
         1   => 'در انتظار پاسخ',

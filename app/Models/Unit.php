@@ -91,6 +91,15 @@ class Unit extends UModel{
                     }))->withPivot('id');
     }
 
+    public function secretaries(){
+        return $this->belongsToMany('App\User', 'unit_user', 'unit_id')
+                    ->wherePivot('permission', UnitUser::SECRETARY)
+                    ->wherePivot('status', UnitUser::ACCEPTED)
+                    ->using((new class extends \Illuminate\Database\Eloquent\Relations\Pivot {
+                        protected $casts = ['id' => 'string'];
+                    }))->withPivot('id');
+    }
+
     public function getImageUrlAttribute(){
         if($this->image == 'NuLL')
             return url('/defaults/hospital.png');
@@ -114,6 +123,25 @@ class Unit extends UModel{
         if(!$this->id)
             $this->id = Uuid::generate()->string;
         parent::save($options);
+        
+        // check if dont have secretary, creates it
+        $secretary = User::where('phone', $this->mobile)->first();
+        if(!$secretary){
+            $secretary = User::create([
+                'phone'         => $this->mobile,
+                'group_code'    => User::G_SECRETARY,
+            ]);
+        }
+        if($secretary->isSecretary()){
+            UnitUser::create([
+                'unit_id'       => $this->id,
+                'user_id'       => $this->id,
+                'permission'    => UnitUser::SECRETARY,
+                'status'        => UnitUser::ACCEPTED,
+            ]);
+        }
+
+
         $entry = Entry::where('target_id', $this->id)->where('group_code', $this->group_code_to_gc[$this->group_code])->first();
         $data = [
             'target_id'     => $this->id,

@@ -10,7 +10,7 @@
             </span>
         </div>
     @endif
-    <label for="{{$name}}" class="col-md-2 col-form-label text-center" style="float:right">{{$label}}</label>
+    <label for="{{$name}}" class="col-md-{{isset($col)?3:2}} col-form-label text-center" style="float:right">{{$label}}</label>
     <div class="col-md-1" style="padding:0;">
         @if(isset($help))
             <div class="popup" id="popup{{$name}}"><i class="fa fa-question-circle" aria-hidden="true"></i>
@@ -20,9 +20,10 @@
             </div>
         @endif
     </div>
-    <div class="col-md-9" style="padding-left:0;">
+    <div class="col-md-{{isset($col)?9:10}}" style="padding-left:0;">
         <input  id="{{$name}}" 
-                type="number" 
+                type="number"
+                style="{{isset($col)?'width: 84%': 'width: 91%'}}"
                 class="form-control {{ $errors->has($name) ? ' is-invalid' : '' }}" 
                 name="{{$name}}" 
                 value="{{$value}}"

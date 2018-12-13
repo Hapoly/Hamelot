@@ -17,7 +17,7 @@ class Doctor extends UModel{
     public $incrementing = false;
     protected $primary = 'id';
     protected $table = 'doctors';
-    protected $fillable = ['degree_id', 'field_id', 'user_id', 'profile', 'gender', 'msc'];
+    protected $fillable = ['degree_id', 'field_id', 'user_id', 'profile', 'gender', 'msc', 'start_year'];
 
     public function getMscStrAttribute(){
         if($this->msc == 'NuLL')
@@ -70,10 +70,6 @@ class Doctor extends UModel{
         $data = [
             'target_id'     => $this->user->id,
             'title'         => $this->user->full_name,
-
-            'degree_id'     => 'NuLL',
-            'field_id'      => 'NuLL',
-            
             'group_code'    => Entry::DOCTOR,
             'public'        => $this->user->public,
             'type'          => Entry::ACTUAL,
@@ -94,5 +90,21 @@ class Doctor extends UModel{
         parent::delete();
         Storage::disk('public')->delete($this->image);
         Entry::where('target_id', $this->id)->where('group_code', Entry::DOCTOR)->delete();
+    }
+
+    public function getIsProfileCompletedAttribute(){
+        return true;
+        if($this->user->first_name == 'NuLL' || $this->user->last_name == 'NuLL')
+            return false;
+        if(sizeof($this->user->fields) == 0)
+            return false;
+        if($this->start_year == 0 || $this->gender == 0 || $this->msc == 'NuLL')
+            return false;
+        return true;
+    }
+    public function getHasUnitAttribute(){
+        if(sizeof($this->user->units) > 0)
+            return true;
+        return false;
     }
 }

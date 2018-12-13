@@ -48,7 +48,8 @@ class Permission
 
         'panel.units.index'                                 => [ 1, 2, 3, 4, 5 ],
         'panel.units.create'                                => [ 1, 2 ],
-        'panel.units.store'                                 => [ 1, 2 ],
+        'panel.units.create.clinic'                         => [ 1, 2, 3, 4],
+        'panel.units.store'                                 => [ 1, 2, 3, 4],
         'panel.units.edit'                                  => [ 1, 2 ],
         'panel.units.update'                                => [ 1, 2 ],
         'panel.units.show'                                  => [ 1, 2, 3, 4, 5 ],
@@ -145,6 +146,8 @@ class Permission
         'panel.search.patients'                             => [ 1, 2, 3, 4 ],
         'panel.search.units'                                => [ 1, 2, 3, 4 ],
         'panel.search.doctors'                              => [ 1, 2, 3, 4 ],
+        'panel.search.fields.doctor'                        => [ 1, 2, 3, 4 ],
+        'panel.search.fields.nurse'                         => [ 1, 2, 3, 4 ],
         'panel.search.managers'                             => [ 1, 2, 3, 4 ],
         'panel.search.members'                              => [ 1, 2, 3, 4 ],
         'panel.search.joiners'                              => [ 1, 2, 3, 4 ],

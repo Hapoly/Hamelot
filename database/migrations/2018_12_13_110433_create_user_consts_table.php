@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateExperimentsTable extends Migration
+class CreateUserConstsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,11 @@ class CreateExperimentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('experiments', function (Blueprint $table) {
+        Schema::create('user_consts', function (Blueprint $table) {
             $table->uuid('id');
             $table->primary('id');
-            $table->uuid('user_id')->index();
-            $table->uuid('report_template_id')->index();
-            $table->uuid('unit_id')->index();
-            $table->uuid('bid_id')->index()->default(0);
-            $table->integer('date')->default(0);
-            $table->smallInteger('status')->default(1);
+            $table->uuid('user_id')->default(0)->index();
+            $table->uuid('const_id')->default(0)->index();
             $table->timestamps();
         });
     }
@@ -33,6 +29,6 @@ class CreateExperimentsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('experiments');
+        Schema::dropIfExists('user_consts');
     }
 }

@@ -22,10 +22,9 @@
     
 	<!-- jQuery UI CDN -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <!-- Bootstrap Js CDN -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="{{ asset('js/app.js') }}?v={{hash_file('md5', Storage::disk('public')->path('js/app.js'))}}" defer></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	<!-- persian date picker -->
 	<link rel="stylesheet" href="{{asset('css/persian-datepicker.min.css')}}"/>
 	<script src="{{asset('js/persian-date.min.js')}}"></script>
@@ -103,7 +102,6 @@
                 </div>
             </div>
         </nav>
-
         <main class="py-4">
             @yield('content')
         </main>

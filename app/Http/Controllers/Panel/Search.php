@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Storage;
 use URL;
 use App\User;
 use App\Models\Unit;
+use App\Models\ConstValue;
 
 class Search extends Controller{
   public function patients(Request $request){
@@ -132,6 +133,32 @@ class Search extends Controller{
           'value' => $unit->complete_title . ' : ' . $user->full_name,
         ]);
       }
+    }
+    return $results;
+  }
+
+  public function doctorFields(Request $request){
+    $consts = ConstValue::where('value', 'LIKE', '%'. $request->input('term') .'%')->where('type', ConstValue::DOCTOR_FIELDS)->get();
+    $results = [];
+    foreach($consts as $const){
+      array_push($results, [
+        'id'    => $const->id,
+        'label' => $const->value,
+        'value' => $const->value,
+      ]);
+    }
+    return $results;
+  }
+
+  public function nurseFields(Request $request){
+    $consts = ConstValue::where('value', 'LIKE', '%'. $request->input('term') .'%')->where('type', ConstValue::NURSE_FIELDS)->get();
+    $results = [];
+    foreach($consts as $const){
+      array_push($results, [
+        'id'    => $const->id,
+        'label' => $const->value,
+        'value' => $const->value,
+      ]);
     }
     return $results;
   }

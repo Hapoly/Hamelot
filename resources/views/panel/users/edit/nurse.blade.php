@@ -5,38 +5,10 @@
 @form_edit(['post' => true, 'action' => route('panel.users.update.nurse', ['user' => $user]), 'title' => __('users.edit.nurse')])
         @input_image(['name' => 'profile', 'label' => __('users.profile'), 'col' => 12])
         @input_text(['name' => 'phone', 'label' => __('users.phone'), 'value' => old('phone', $user->phone), 'row' => true])
-        @input_text(['name' => 'username', 'label' => __('users.username'), 'value' => old('username', $user->username), 'row' => true])
         @input_text(['name' => 'email', 'label' => __('users.email'), 'value' => old('email', $user->email_str), 'row' => true])
-        <div class="form-group row create-form">
-            @input_text(['name' => 'password', 'label' => __('users.password'), 'value' => old('password'), 'col' => 6, 'type' => 'password'])
-            @input_text(['name' => 'password_confirmation', 'label' => __('users.password_confirmation'), 'value' => old('password_confirmation', $user->password_confirmation), 'col' => 6, 'type' => 'password'])
-        </div>
         <div class="form-group row create-form">
             @input_text(['name' => 'first_name', 'label' => __('users.first_name'), 'value' => old('first_name', $user->first_name_str), 'col' => 6])
             @input_text(['name' => 'last_name', 'label' => __('users.last_name'), 'value' => old('last_name', $user->last_name_str), 'col' => 6])
-        </div>
-        <div class="form-group row create-form">
-            @php
-                $degree_rows = [];
-                foreach($degrees as $degree){
-                    array_push($degree_rows, [
-                        'label' => $degree->value,
-                        'value' => $degree->id,
-                    ]);
-                }
-            @endphp
-            @input_select(['name' => 'degree_id', 'value' => old('degree_id', $user->nurse->degree_id), 'label' => __('users.degree'), 'required' => true, 'rows' => $degree_rows, 'col' => 6])
-            
-            @php
-                $field_rows = [];
-                foreach($fields as $field){
-                    array_push($field_rows, [
-                        'label' => $field->value,
-                        'value' => $field->id,
-                    ]);
-                }
-            @endphp
-            @input_select(['name' => 'field_id', 'value' => old('field_id', $user->nurse->field_id), 'label' => __('users.field'), 'required' => true, 'rows' => $field_rows, 'col' => 6])
         </div>
         @php
             $gender_rows = [

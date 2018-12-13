@@ -118,59 +118,6 @@
     function update_form(){
       switch($('#group-code').val()){
         case "{{User::G_DOCTOR}}":
-          $('#more-inputs').html(
-            '<div class="col-md-6">'+
-            '    <div class="form-group">'+
-            '      <select class="form-control" name="doctor_degree" style="width: 100%">'+
-            '        <option value="0">تمام سطوح</option>'+
-            '        @foreach($doctor_degrees as $degree)'+
-            '          <option value="{{$degree->id}}">{{$degree->value}}</option>'+
-            '        @endforeach'+
-            '      </select>'+
-            '    </div>'+
-            '  </div>'+
-            '  <div class="col-md-6">'+
-            '    <div class="form-group">'+
-            '      <select class="form-control" name="doctor_field" style="width: 100%">'+
-            '        <option value="0">تمام تخصص‌ها</option>'+
-            '        @foreach($doctor_fields as $field)'+
-            '          <option value="{{$field->id}}">{{$field->value}}</option>'+
-            '        @endforeach'+
-            '      </select>'+
-            '    </div>'+
-            '  </div>'
-          );
-          break;
-        case "{{User::G_NURSE}}":
-          $('#more-inputs').html(
-            '<div class="col-md-6">'+
-            '    <div class="form-group">'+
-            '      <select class="form-control" name="nurse_degree" style="width: 100%">'+
-            '        <option value="0">تمام سطوح</option>'+
-            '        @foreach($nurse_degrees as $degree)'+
-            '          <option value="{{$degree->id}}">{{$degree->value}}</option>'+
-            '        @endforeach'+
-            '      </select>'+
-            '    </div>'+
-            '  </div>'+
-            '  <div class="col-md-6">'+
-            '    <div class="form-group">'+
-            '      <select class="form-control" name="nurse_field" style="width: 100%">'+
-            '        <option value="0">تمام تخصص‌ها</option>'+
-            '        @foreach($nurse_fields as $field)'+
-            '          <option value="{{$field->id}}">{{$field->value}}</option>'+
-            '        @endforeach'+
-            '      </select>'+
-            '    </div>'+
-            '  </div>'
-          );
-          break;
-        default:
-          $('#more-inputs').html('');
-          break;
-      }
-      switch($('#group-code').val()){
-        case "{{User::G_DOCTOR}}":
         case "{{User::G_NURSE}}":
         case "{{User::G_PATIENT}}":
           $('#gender-input').html(
@@ -192,59 +139,6 @@
     $('#group-code').change(function(){
       update_form();
     })
-    switch($('#group-code').val()){
-      case "{{User::G_DOCTOR}}":
-        $('#more-inputs').html(
-          '<div class="col-md-6">'+
-          '    <div class="form-group">'+
-          '      <select class="form-control" name="doctor_degree" style="width: 100%">'+
-          '        <option value="0">تمام سطوح</option>'+
-          '        @foreach($doctor_degrees as $degree)'+
-          '          <option {{isset($filters)? ($filters["doctor_degree"] == $degree->id ? "selected": ""): ""}} value="{{$degree->id}}">{{$degree->value}}</option>'+
-          '        @endforeach'+
-          '      </select>'+
-          '    </div>'+
-          '  </div>'+
-          '  <div class="col-md-6">'+
-          '    <div class="form-group">'+
-          '      <select class="form-control" name="doctor_field" style="width: 100%">'+
-          '        <option value="0">تمام تخصص‌ها</option>'+
-          '        @foreach($doctor_fields as $field)'+
-          '          <option {{isset($filters)? ($filters["doctor_field"] == $field->id ? "selected": ""): ""}} value="{{$field->id}}">{{$field->value}}</option>'+
-          '        @endforeach'+
-          '      </select>'+
-          '    </div>'+
-          '  </div>'
-        );
-        break;
-      case "{{User::G_NURSE}}":
-        $('#more-inputs').html(
-          '<div class="col-md-6">'+
-          '    <div class="form-group">'+
-          '      <select class="form-control" name="nurse_degree" style="width: 100%">'+
-          '        <option value="0">تمام سطوح</option>'+
-          '        @foreach($nurse_degrees as $degree)'+
-          '          <option {{isset($filters)? ($filters["nurse_degree"] == $degree->id ? "selected": ""): ""}} value="{{$degree->id}}">{{$degree->value}}</option>'+
-          '        @endforeach'+
-          '      </select>'+
-          '    </div>'+
-          '  </div>'+
-          '  <div class="col-md-6">'+
-          '    <div class="form-group">'+
-          '      <select class="form-control" name="nurse_field" style="width: 100%">'+
-          '        <option value="0">تمام تخصص‌ها</option>'+
-          '        @foreach($nurse_fields as $field)'+
-          '          <option {{isset($filters)? ($filters["nurse_field"] == $field->id ? "selected": ""): ""}} value="{{$field->id}}">{{$field->value}}</option>'+
-          '        @endforeach'+
-          '      </select>'+
-          '    </div>'+
-          '  </div>'
-        );
-        break;
-      default:
-        $('#more-inputs').html('');
-        break;
-    }
     switch($('#group-code').val()){
       case "{{User::G_DOCTOR}}":
       case "{{User::G_NURSE}}":

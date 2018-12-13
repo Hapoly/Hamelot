@@ -25,13 +25,15 @@ class CreateNurse extends PersianFormRequest
     public function rules()
     {
         return [
-            'token'         => 'required|string|max:6',
             'msc'           => 'required|string',
-            'degree_id'     => 'required|string',
-            'field_id'      => 'required|string',
-            'public'        => 'required|numeric',
-            'profile'       => 'image',
+            'feilds'        => 'required|string',
+            'profile'       => 'image|mimes:jpeg',
             'gender'        => 'required|numeric',
+            'city_id'       => ['required', new UUID, 'exists:cities'],
+            'address'       => 'required|string|max:200',
+            'slug'          => 'required|string|max:32|min:4|unique:units',
+            'phone'         => 'required|string',
+            'mobile'        => 'required|string',
         ];
     }
 }
