@@ -40,29 +40,31 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-3">
+                    <div class="col-md-3 icons">
                         <button type="button" class="circle-icon">
                             <img src="{{asset('/imgs/icon/hospital.png')}}">
                         </button>
-                        <span>بیمارستان ها </span>
+                        <a href="#">
+                        بیمارستان ها 
+                        </a>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-3 icons">
                         <button class="circle-icon">
                             <img src="{{asset('/imgs/icon/pill.png')}}">
                         </button>
-                        <span>داروخانه ها </span>
+                        <a>داروخانه ها </a>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-3 icons">
                         <button class="circle-icon">
                             <img src="{{asset('/imgs/icon/chemistry.png')}}">
                         </button>
-                        <span>آزمایشگاه ها </span>
+                        <a>آزمایشگاه ها </a>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-3 icons">
                         <button class="circle-icon">
                             <img src="{{asset('/imgs/icon/phonendoscope.png')}}">
                         </button>
-                        <span>تخصص ها </span>
+                        <a>تخصص ها </a>
                     </div>
                 </div>
             </div>

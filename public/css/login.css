@@ -123,6 +123,9 @@ body{
 		width: 80%;
 		box-shadow:0 2px 2px 2px rgba(0,0,0,.06);
 	}
+	.col-md-3.icons {
+		width:50%;
+	}
 }
 @media (min-width: 768px) {
 	.reza-img {
@@ -152,7 +155,7 @@ body{
 	padding-top: 60px;
 }
 .search-things img {
-	width: 170px;
+	width: 130px;
 }
 .search-btns {
 	background-color: #01838b;
@@ -407,11 +410,16 @@ a:hover {
 	display: none
 }
 .circle-icon img{
-	height: 140px;
-	width: 140px;
+	height: 120px;
+	width: 120px;
 }
 .circle-icon {
-	border: 1px solid darkturquoise;
+	border: 1px solid #fdfeff;
 	border-radius: 100%;
 	margin-top: 20px;
+	background-color: white;
+}
+.input-group>.custom-select:not(:last-child), .input-group>.form-control:not(:last-child){
+	border-top-left-radius:0;
+	border-bottom-left-radius:0;
 }
