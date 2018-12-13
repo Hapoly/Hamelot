@@ -9,23 +9,53 @@
                 <h2 style="padding-top:20px;padding-bottom:20px;">
                 نوبت دهی دکتر سوال
                 </h2>
-                <form action="{{route('search')}}" method="GET">
-                    <!-- <div class="form-group" style="padding-top:25px">
-                        <input type="text" name="term" class="form-control search-input" style="width:80%;" 
-                        placeholder="جستجوی  پزشک ، بیمارستان ، درمانگاه  ">
+                <div class="row">
+                    <div class="col-md-3" style="padding-left:0;">
+                        <select class="form-control search-select" title="انتخاب شهر">
+                        <option class="hidden-select">انتخاب شهر</option>
+                        <option>رشت</option>
+                        <option>لاهیجان</option>
+                        <option>املش</option>
+                        <option>انزلی</option>
+                        </select>
                     </div>
-                    <button type="submit" class="btn search-btns">
-                        جستجو
-                    </button> -->
-                    <div class="input-group">
-                        <input type="text" class="form-control" placeholder="جستجوی  پزشک ، بیمارستان ، درمانگاه  ">
-                        <div class="input-group-append">
-                        <button class="btn search-btns" type="button">
-                            <i class="fa fa-search"></i>
-                        </button>
+                    <div class="col-md-9">
+                        <form action="{{route('search')}}" method="GET">
+                            <!-- <div class="form-group" style="padding-top:25px">
+                                <input type="text" name="term" class="form-control search-input" style="width:80%;" 
+                                placeholder="جستجوی  پزشک ، بیمارستان ، درمانگاه  ">
+                            </div>
+                            <button type="submit" class="btn search-btns">
+                                جستجو
+                            </button> -->
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="جستجوی  پزشک ، بیمارستان ، درمانگاه  ">
+                                <div class="input-group-append">
+                                <button class="btn search-btns" type="button">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="circle-icon">
+                            <img src="{{asset('/imgs/icon/hospital.png')}}">
                         </div>
+                        <span>بیمارستان ها </span>
                     </div>
-                </form>
+                    <div class="col-md-3">
+                    hello
+                    </div>
+                    <div class="col-md-3">
+                    hello
+                    </div>
+                    <div class="col-md-3">
+                    hello
+                    </div>
+                </div>
             </div>
         </div>
     </div>

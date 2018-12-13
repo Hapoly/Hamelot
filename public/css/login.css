@@ -149,7 +149,7 @@ body{
 }
 .search-things {
 	text-align: center;
-	padding-top: 100px;
+	padding-top: 60px;
 }
 .search-things img {
 	width: 170px;
@@ -398,4 +398,11 @@ hr{
 }
 a:hover {
     text-decoration: none;
+}
+.search-select {
+	-webkit-appearance:none;
+	border-radius: 0;
+}
+.hidden-select {
+	display: none
 }
