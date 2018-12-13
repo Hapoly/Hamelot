@@ -250,43 +250,12 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\UnitUser', 'user_id');
     }
 
-    /**
-     * doctors and nurses attributes
-     */
-    public function getFieldStrAttribute(){
-        if($this->isDoctor())
-            return $this->doctor->field_str;
-        else if($this->isNurse())
-            return $this->nurse->field_str;
-        return ' - ';
-    }
-    public function getDegreeStrAttribute(){
-        if($this->isDoctor())
-            return $this->doctor->degree_str;
-        else if($this->isNurse())
-            return $this->nurse->degree_str;
-        return ' - ';
-    }
     public function getMscStrAttribute(){
         if($this->isDoctor())
             return $this->doctor->msc_str;
         else if($this->isNurse())
             return $this->nurse->msc_str;
         return ' - ';
-    }
-    public function getFieldAttribute(){
-        if($this->isDoctor())
-            return $this->doctor->field;
-        else if($this->isNurse())
-            return $this->nurse->field;
-        return null;
-    }
-    public function getDegreeAttribute(){
-        if($this->isDoctor())
-            return $this->doctor->degree;
-        else if($this->isNurse())
-            return $this->nurse->degree;
-        return null;
     }
     public function getMscAttribute(){
         if($this->isDoctor())
@@ -507,5 +476,34 @@ class User extends Authenticatable
             return '';
         else
             return $this->email;
+    }
+
+    public function getHasToCompleteProfileAttribute(){
+        if($this->isDoctor()){
+            return !$this->doctor->is_profile_completed;
+        }else if($this->isNurse()){
+            return !$this->nurse->is_profile_completed;
+        }else
+            return false;
+    }
+
+    public function getHasToJoinUnitAttribute(){
+        if($this->isDoctor()){
+            return !$this->doctor->has_unit;
+        }else if($this->isNurse()){
+            return !$this->nurse->has_unit;
+        }else
+            return false;
+    }
+
+    public function fields(){
+        return $this->belongsToMany('App\Models\ConstValue', 'user_consts', 'user_id', 'const_id');
+    }
+
+    public function getFieldsStrAttribute(){
+        $fields = '';
+        foreach($this->fields as $field)
+            $fields .= $field->value . ', ';
+        return $fields;
     }
 }

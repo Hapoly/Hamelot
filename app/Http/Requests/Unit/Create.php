@@ -22,8 +22,7 @@ class Create extends PersianFormRequest
      *
      * @return array
      */
-    public function rules()
-    {
+    public function rules(){
         return [
             'title'         => 'required|string',
             'slug'          => 'required|string|max:32|min:4|unique:units',

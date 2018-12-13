@@ -22,6 +22,9 @@ Route::middleware(['auth', 'Permission'])->namespace('Panel')->prefix('panel')->
         'bids'              => 'Bids',
         'bank-accounts'     => 'BankAccounts',
     ]);
+    Route::prefix('units')->name('units.')->group(function(){
+        Route::get('/create/clinic', 'Units@createClinic')->name('create.clinic');
+    });
     Route::prefix('prints')->name('prints.')->namespace('Prints')->group(function(){
         Route::prefix('units')->name('units.')->group(function(){
             Route::get('/', 'Units@units')->name('index');
@@ -111,6 +114,10 @@ Route::middleware(['auth', 'Permission'])->namespace('Panel')->prefix('panel')->
         Route::get('/joiners', 'Search@joiners')->name('joiners');
         Route::get('/unit-users', 'Search@unitUsers')->name('unit_users');
         Route::get('/users', 'Search@users')->name('users');
+        Route::prefix('fields')->name('fields.')->group(function(){
+            Route::get('/doctor', 'Search@doctorFields')->name('doctor');
+            Route::get('/nurse', 'Search@nurseFields')->name('nurse');
+        });
     });
     Route::prefix('demands')->name('demands.')->group(function(){
         Route::prefix('create')->name('create.')->group(function(){
@@ -178,6 +185,14 @@ Route::get('/login', 'AuthController@login')->name('login');
 Route::get('/send-token', 'AuthController@sendToken')->name('send');
 Route::get('/token', 'AuthController@token')->name('token');
 Route::post('/check', 'AuthController@check')->name('check');
+Route::prefix('register')->name('register.')->group(function(){
+    Route::get('/doctor', 'AuthController@registerDoctor')->name('doctor');
+    Route::get('/nurse', 'AuthController@registerNuese')->name('nuese');
+});
+Route::prefix('store')->name('store.')->group(function(){
+    Route::post('/doctor', 'AuthController@storeDoctor')->name('doctor');
+    Route::post('/nurse', 'AuthController@storeNuese')->name('nuese');
+});
 
 Route::post('/logout', 'AuthController@logout')->name('logout');
 
@@ -194,3 +209,6 @@ Route::get('/search', 'HomeController@search')->name('search');
 
 Route::get('/user/{username}', 'GeneralController@showUser')->name('show.user');
 Route::get('/unit/{key}', 'GeneralController@showUnit')->name('show.unit');
+
+if(env('APP_DEBUG', false))
+    Route::get('/session/all', 'GeneralController@sessionAll')->name('session.all');

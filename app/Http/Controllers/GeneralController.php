@@ -27,4 +27,8 @@ class GeneralController extends Controller
             'offset'    => $request->input('time', time())
         ]);
     }
+
+    public function sessionAll(Request $request){
+        return $request->session()->all();
+    }
 }

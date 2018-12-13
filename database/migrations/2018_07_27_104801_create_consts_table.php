@@ -29,6 +29,6 @@ class CreateConstsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('doctor_degrees');
+        Schema::dropIfExists('consts');
     }
 }

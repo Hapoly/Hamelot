@@ -86,18 +86,62 @@ class Units extends Controller{
       'parent_id' => $request->input('unit_id', 0),
     ]);
   }
+  /**
+   * 
+   */
+  private function replace_digits($str){
+    $digit_translates = [
+        '۰' => '0',
+        '۱' => '1',
+        '۲' => '2',
+        '۳' => '3',
+        '۴' => '4',
+        '۵' => '5',
+        '۶' => '6',
+        '۷' => '7',
+        '۸' => '8',
+        '۹' => '9',
+    ];
+    foreach($digit_translates as $persian=>$latina){
+        $str = str_replace($persian, $latina, $str);
+    }
+    return $str;
+  }
   public function store(UnitCreateRequest $request){
     $inputs = $request->all();
     if($request->hasFile('image'))
       $inputs['image'] = Storage::disk('public')->put('/units', $request->file('image'));
+    $inputs['phone'] = $this->replace_digits($inputs['phone']);
+    $inputs['mobile'] = $this->replace_digits($inputs['mobile']);
     $unit = Unit::create($inputs);
-    if(!Auth::user()->isAdmin())
+
+    $secretary = User::where('phone', $inputs['mobile'])->first();
+    if(!$secretary)
+      $secretary = User::create([
+        'phone' => $inputs['mobile'],
+        'group_code'  => User::G_SECREATRY
+      ]);
+    UnitUser::create([
+      'user_id' => $secretary->id,
+      'unit_id' => $unit->id,
+      'permission'  => UnitUser::SECRETARY,
+      'status'  => UnitUser::ACCEPTED,
+    ]);
+    
+    if(!Auth::user()->isAdmin()){
       UnitUser::create([
         'unit_id' => $unit->id,
         'user_id' => Auth::user()->id,
         'status'  => UnitUser::ACCEPTED,
         'permission' => UnitUser::MANAGER,
       ]);
+      UnitUser::create([
+        'unit_id' => $unit->id,
+        'user_id' => Auth::user()->id,
+        'status'  => UnitUser::ACCEPTED,
+        'permission' => UnitUser::MEMBER,
+      ]);
+    }
     return redirect()->route('panel.units.show', ['unit' => $unit]);
   }
   public function edit(Unit $unit){
@@ -124,5 +168,12 @@ class Units extends Controller{
       return redirect()->route('panel.units.index');
     else
       return redirect()->back();
+  }
+
+  public function createClinic(Request $request){
+    return view('panel.units.create_clinic', [
+      'provinces' => Province::all(),
+      'cities'    => json_encode(City::all()),
+    ]);
   }
 }

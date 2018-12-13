@@ -16,13 +16,7 @@ class Users extends Seeder
      *
      * @return void
      */
-    public function run()
-    {
-        $doctor_degrees = ConstValue::where('type', 1)->get();
-        $doctor_fields = ConstValue::where('type', 2)->get();
-        $nurse_degrees = ConstValue::where('type', 4)->get();
-        $nurse_fields = ConstValue::where('type', 3)->get();
-
+    public function run(){
         User::create([
             'phone'         => '09114866684',
             'group_code'    => 1,
@@ -57,6 +51,7 @@ class Users extends Seeder
             'user_id'       => $d1->id,
             'profile'       => 'NuLL',
             'gender'        => 1,
+            'start_year'    => 1380,
         ]);
 
         $d2 = User::create([
@@ -69,6 +64,7 @@ class Users extends Seeder
             'user_id'       => $d2->id,
             'profile'       => 'NuLL',
             'gender'        => 1,
+            'start_year'    => 1380,
         ]);
 
         /**

@@ -49,8 +49,9 @@ class UnitUser extends UModel
             return UnitUser::where('user_id', Auth::user()->id);
     }
     
-    const MEMBER = 1;
-    const MANAGER = 2;
+    const MEMBER    = 1;
+    const MANAGER   = 2;
+    const SECRETARY = 3;
     public function getPermissionStrAttribute(){
         return __('unit_users.permission_str.' . $this->permission);
     }

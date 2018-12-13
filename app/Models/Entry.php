@@ -19,7 +19,6 @@ class Entry extends UModel
         'title',
         'lon', 'lat', 'city_id', 'province_id',
         'target_id', 
-        'field_id', 'degree_id',
         'type', 'status', 'public', 'group_code'];
 
     const HOSPITAL      = 1;
@@ -55,13 +54,6 @@ class Entry extends UModel
     }
     public function user(){
         return $this->belongsTo('App\User', 'target_id');
-    }
-
-    public function degree(){
-        return $this->hasOne('App\Models\ConstValue');
-    }
-    public function field(){
-        return $this->hasOne('App\Models\ConstValue');
     }
 
     public function city(){

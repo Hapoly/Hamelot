@@ -10,9 +10,14 @@ use Auth;
 use App\Models\Patient;
 use App\Models\Doctor;
 use App\Models\Nurse;
+use App\Models\Province;
+use App\Models\City;
 
 use App\Http\Requests\Auth\Login as LoginRequest;
 use App\Http\Requests\Auth\Check as CheckRequest;
+
+use App\Http\Requests\Auth\CreateDoctor as CreateDoctorRequest;
+use App\Http\Requests\Auth\CreateNurse as CreateNurseRequest;
 
 class AuthController extends Controller{
     public function login(Request $request){
@@ -101,7 +106,7 @@ class AuthController extends Controller{
             case User::G_DOCTOR:
             case User::G_NURSE:
                 if($user){
-                    if($user->isManager()){
+                    if($user->isNurse() || $user->isDoctor()){
                         Auth::login($user);
                         return redirect()->route('home');
                     }else{
@@ -117,7 +122,7 @@ class AuthController extends Controller{
                             'user_id'   => $user->id
                         ]);
                     }else if($request->session()->get('auth.group') == User::G_NURSE){
-                        NURSE::create([
+                        Nurse::create([
                             'user_id'   => $user->id
                         ]);
                     }
@@ -126,7 +131,6 @@ class AuthController extends Controller{
                 }
         }
     }
-
     public function logout(Request $request){
         Auth::logout();
         return redirect()->route('welcome');

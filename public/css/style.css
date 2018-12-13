@@ -11,6 +11,12 @@
 body {
     -ms-overflow-style:none;
 }
+
+.force-link {
+    text-decoration: underline;
+    color: #337ab7;
+}
+
 a:hover {
     text-decoration: none;
 }

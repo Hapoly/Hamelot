@@ -115,11 +115,6 @@ class Users extends Controller{
     return view('panel.users.index', [
       'users'           => $users,
       'links'           => $links,
-      'genders'         => ConstValue::genders()->get(),
-      'doctor_fields'   => ConstValue::doctor_fields()->get(),
-      'doctor_degrees'  => ConstValue::doctor_degrees()->get(),
-      'nurse_fields'    => ConstValue::nurse_fields()->get(),
-      'nurse_degrees'   => ConstValue::nurse_degrees()->get(),
       'units'           => Unit::fetch(true)->get(),
       'search'      => isset(parse_url(url()->full())['query'])? parse_url(url()->full())['query']: '',
       'filters'         => [
@@ -164,9 +159,9 @@ class Users extends Controller{
    */
   public function createAdmin()   { return view('panel.users.create.admin');    }
   public function createManager() { return view('panel.users.create.manager');  }
-  public function createDoctor()  { return view('panel.users.create.doctor', ['degrees' => ConstValue::doctor_degrees()->get(), 'fields' => ConstValue::doctor_fields()->get(), 'genders' => ConstValue::genders()->get()]);   }
-  public function createNurse()   { return view('panel.users.create.nurse', ['degrees' => ConstValue::nurse_degrees()->get(), 'fields' => ConstValue::nurse_fields()->get(), 'genders' => ConstValue::genders()->get()]);   }
-  public function createPatient() { return view('panel.users.create.patient', ['genders' => ConstValue::genders()->get()]);  }
+  public function createDoctor()  { return view('panel.users.create.doctor');   }
+  public function createNurse()   { return view('panel.users.create.nurse');    }
+  public function createPatient() { return view('panel.users.create.patient');  }
   /**
    * store users in user groups
    */
@@ -245,10 +240,10 @@ class Users extends Controller{
         return view('panel.users.edit.manager', ['user' => $user]);
         break;
       case User::G_DOCTOR:
-        return view('panel.users.edit.doctor', ['user' => $user, 'degrees' => ConstValue::doctor_degrees()->get(), 'fields' => ConstValue::doctor_fields()->get(), 'genders' => ConstValue::genders()->get()]);
+        return view('panel.users.edit.doctor', ['user' => $user]);
         break;
       case User::G_NURSE:
-        return view('panel.users.edit.nurse', ['user' => $user, 'degrees' => ConstValue::nurse_degrees()->get(), 'fields' => ConstValue::nurse_fields()->get(), 'genders' => ConstValue::genders()->get()]);
+        return view('panel.users.edit.nurse', ['user' => $user]);
         break;
       case User::G_PATIENT:
         return view('panel.users.edit.patient', ['user' => $user, 'genders' => ConstValue::genders()->get()]);
