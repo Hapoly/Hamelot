@@ -1,3 +1,6 @@
+@php
+	use App\User;
+@endphp
 <ul class="list-unstyled components">
 	<li>
 		<a href="{{route('show.user', ['username' => Auth::user()->username])}}" aria-expanded="false">

@@ -497,7 +497,7 @@ class User extends Authenticatable
     }
 
     public function getCanUseAttribute(){
-        return $this->has_to_complete_profile && $this->has_to_join_unit;
+        return !$this->has_to_complete_profile && !$this->has_to_join_unit;
     }
 
     public function fields(){

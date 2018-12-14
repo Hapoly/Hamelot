@@ -124,9 +124,8 @@
             '<div class="form-group">'+
             '  <select class="form-control" name="gender" style="width: 100%">'+
             '    <option value="0">تمام جنسیت‌ها</option>'+
-            '    @foreach($genders as $gender)'+
-            '      <option value="{{$gender->id}}">{{$gender->value}}</option>'+
-            '    @endforeach'+
+            '    <option {{isset($filters)? ($filters["gender"] == 1 ? "selected": ""): ""}} value="{{1}}">{{__('users.gender_str.1')}}</option>'+
+            '    <option {{isset($filters)? ($filters["gender"] == 2 ? "selected": ""): ""}} value="{{2}}">{{__('users.gender_str.2')}}</option>'+
             '  </select>'+
             '</div>'
           );
@@ -147,9 +146,8 @@
           '<div class="form-group">'+
           '  <select class="form-control" name="gender" style="width: 100%">'+
           '    <option value="0">تمام جنسیت‌ها</option>'+
-          '    @foreach($genders as $gender)'+
-          '      <option {{isset($filters)? ($filters["gender"] == $gender->id ? "selected": ""): ""}} value="{{$gender->id}}">{{$gender->value}}</option>'+
-          '    @endforeach'+
+          '    <option {{isset($filters)? ($filters["gender"] == 1 ? "selected": ""): ""}} value="{{1}}">{{__('users.gender_str.1')}}</option>'+
+          '    <option {{isset($filters)? ($filters["gender"] == 2 ? "selected": ""): ""}} value="{{2}}">{{__('users.gender_str.2')}}</option>'+
           '  </select>'+
           '</div>'
         );

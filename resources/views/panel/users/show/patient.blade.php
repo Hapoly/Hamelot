@@ -40,6 +40,12 @@
             <td>{{__('users.age')}}</td>
             <td>{{$user->patient->age_str}}</td>
           </tr>
+          @if(Auth::user()->isAdmin())
+            <tr>
+              <td>{{__('users.phone')}}</td>
+              <td>{{$user->phone}}</td>
+            </tr>
+          @endif
         </tbody>
       </table>
     </div>

@@ -145,6 +145,9 @@ class Users extends Controller{
       case User::G_DOCTOR:
         return view('panel.users.show.doctor', ['user' => $user]);
         break;
+      case User::G_SECRETARY:
+        return view('panel.users.show.secretary', ['user' => $user]);
+        break;
       case User::G_NURSE:
         return view('panel.users.show.nurse', ['user' => $user]);
         break;
@@ -242,11 +245,14 @@ class Users extends Controller{
       case User::G_DOCTOR:
         return view('panel.users.edit.doctor', ['user' => $user]);
         break;
+      case User::G_SECRETARY:
+        return view('panel.users.edit.secretary', ['user' => $user]);
+        break;
       case User::G_NURSE:
         return view('panel.users.edit.nurse', ['user' => $user]);
         break;
       case User::G_PATIENT:
-        return view('panel.users.edit.patient', ['user' => $user, 'genders' => ConstValue::genders()->get()]);
+        return view('panel.users.edit.patient', ['user' => $user]);
         break;
     }
     abort(404);

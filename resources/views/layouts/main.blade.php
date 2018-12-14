@@ -54,7 +54,7 @@
 				<strong style="font-size:20px;">
 				</strong>
 			</div>
-			@if((Auth::user()->isDoctor() || Auth::user()->isNurse()) && Auth::user()->can_use)
+			@if((Auth::user()->isDoctor() || Auth::user()->isNurse()) && !Auth::user()->can_use)
 				@component('layouts.side.incomplete_doctor_nurse')
 				@endcomponent
 			@elseif(Auth::user()->isDoctor())
