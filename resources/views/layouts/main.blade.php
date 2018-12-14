@@ -16,9 +16,9 @@
 
 <!-- Latest compiled and minified JavaScript -->
 
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	<link rel="stylesheet" href="{{asset('css/font-awesome.min.css')}}">
 	<!-- Our Custom CSS -->
 	<link rel="stylesheet" href="{{asset('css/style.css')}}?v={{hash_file('md5', Storage::disk('public')->path('css/style.css'))}}">
 	<style>
@@ -54,8 +54,13 @@
 				<strong style="font-size:20px;">
 				</strong>
 			</div>
-			@component('layouts.side_menu')
-			@endcomponent
+			@if((Auth::user()->isDoctor() || Auth::user()->isNurse()) && Auth::user()->can_use)
+				@component('layouts.side.incomplete_doctor_nurse')
+				@endcomponent
+			@else
+				@component('layouts.side_menu')
+				@endcomponent
+			@endif
 		</nav>
 		<!-- Page Content Holder -->
 		<div id="content" style="width:100%">
