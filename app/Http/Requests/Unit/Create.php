@@ -25,17 +25,9 @@ class Create extends PersianFormRequest
      * @return array
      */
     public function rules(){
-        $unit_id = $this->route('unit')->id;
         return [
             'title'         => 'required|string',
-            'slug'          => [
-                                'required', 
-                                'string', 
-                                'max:32', 
-                                'min:4', 
-                                'regex:/[A-Z,a-z,1-9]*/i',
-                                Rule::unique('units')->ignore($unit_id),
-                            ],
+            'slug'          => 'required|string|max:32|min:4|regex:/[A-Z,a-z,1-9]*/i|unique:units',
             'address'       => 'required|string',
             'mobile'        => ['required', new NotRegistered(User::G_SECRETARY)],
             'phone'         => 'required|string',
