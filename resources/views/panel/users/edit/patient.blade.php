@@ -11,7 +11,7 @@
             @input_text(['name' => 'last_name', 'label' => __('users.last_name'), 'value' => old('last_name', $user->last_name_str), 'col' => 6])
         </div>
         @input_text(['name' => 'id_number', 'label' => __('users.id_number'), 'value' => old('id_number', $user->patient->id_number_str), 'row' => true])
-        @input_date(['name' => 'birth_', 'year' => old('birth_year', $user->birth_year), 'month' => old('birth_month', $user->birth_month), 'day' => old('birth_day', $user->birth_day), 'label' => __('users.birth_date'), 'row' => true])
+        @input_date(['name' => 'birth_', 'year' => old('birth_year', $user->patient->birth_year), 'month' => old('birth_month', $user->patient->birth_month), 'day' => old('birth_day', $user->patient->birth_day), 'label' => __('users.birth_date'), 'row' => true])
         <div class="form-group row create-form">
             @php
                 $gender_rows = [
