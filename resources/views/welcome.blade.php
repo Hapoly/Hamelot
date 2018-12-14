@@ -41,29 +41,35 @@
                 </div>
                 <div class="row">
                     <div class="col-md-3 icons">
-                        <button type="button" class="circle-icon">
-                            <img src="{{asset('/imgs/icon/hospital.png')}}">
-                        </button>
+                        <div class="circle-icon">
+                            <a href="#">
+                                <svg width="96px" height="96px" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve"> 
+</svg>
+                            </a>
+                            <!-- <img src="{{asset('/imgs/icon/hospital.svg')}}"> -->
+                        </div>
                         <a href="#">
                         بیمارستان ها 
                         </a>
                     </div>
                     <div class="col-md-3 icons">
-                        <button class="circle-icon">
-                            <img src="{{asset('/imgs/icon/pill.png')}}">
-                        </button>
+                        <div class="circle-icon">
+                            <img src="{{asset('/imgs/icon/pill.svg')}}">
+                        </div>
                         <a href="#">داروخانه ها </a>
                     </div>
                     <div class="col-md-3 icons">
-                        <button class="circle-icon">
-                            <img src="{{asset('/imgs/icon/chemistry.png')}}">
-                        </button>
-                        <a href="#">آزمایشگاه ها </a>
+                        <div class="circle-icon">
+                            <img src="{{asset('/imgs/icon/chemistry.svg')}}">
+                        </div>
+                        <a href="#">
+                            آزمایشگاه ها 
+                        </a>
                     </div>
                     <div class="col-md-3 icons">
-                        <button class="circle-icon">
-                            <img src="{{asset('/imgs/icon/phonendoscope.png')}}">
-                        </button>
+                        <div class="circle-icon">
+                            <img src="{{asset('/imgs/icon/phonendoscope.svg')}}">
+                        </div>
                         <a href="#">تخصص ها </a>
                     </div>
                 </div>

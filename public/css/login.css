@@ -410,17 +410,17 @@ a:hover {
 	display: none
 }
 .circle-icon img{
-	height: 120px;
-	width: 120px;
+	width: 70px;
+	padding: 10px;
 }
 .circle-icon {
-	border: 1px solid #fdfeff;
-	border-radius: 100%;
+	/* border: 1px solid #fdfeff;
+	border-radius: 100%; */
 	margin-top: 20px;
 	background-color: white;
 }
 .circle-icon:hover {
-	background-color: #007FFF;
+	fill: #2a5477;
 }
 .input-group>.custom-select:not(:last-child), .input-group>.form-control:not(:last-child){
 	border-top-left-radius:0;

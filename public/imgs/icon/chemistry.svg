@@ -4,6 +4,9 @@
       .cls-1 {
         fill: #00ced1;
       }
+      .cls-1:hover {
+        fill: pink;
+      }
     </style>
   </defs>
   <g id="_006-chemistry" data-name="006-chemistry" transform="translate(-11.2 -10.9)">
