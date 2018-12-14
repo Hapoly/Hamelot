@@ -142,6 +142,26 @@ class Demands extends Controller{
     public function storeVisit(DemandCreateVisitRequest $request, ActivityTime $activity_time, $day){
         if(intval(Time::jdate('w', $day, '', 'Asia/Tehran', 'en'))+1 != $activity_time->day_of_week)
             abort(404);
+        $user = Auth::user();
+        $patient = $user->patient;
+        if(Auth::user()->first_name == 'NuLL'){
+            $user->first_name = $request->first_name;
+        }
+        if(Auth::user()->last_name == 'NuLL'){
+            $user->last_name = $request->last_name;
+        }
+        if(Auth::user()->id_number == 'NuLL'){
+            $patient->id_number = $request->id_number;
+        }
+        if(Auth::user()->gender == 0){
+            $patient->gender = $request->gender;
+        }
+        if(Auth::user()->birth_date == 0){
+            $patient->birth_date = Time::jmktime(0, 0, 0, intval($request->birth_day), intval($request->birth_month), intval($request->birth_year));
+        }
+        $user->save();
+        $patient->save();
+
         $demand = new Demand;
         if($request->description)
             $demand->description = $request->description;

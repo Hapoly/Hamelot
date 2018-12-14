@@ -101,7 +101,7 @@ class AuthController extends Controller{
                         ]);
                     }
                     Auth::login($user);
-                    return redirect()->route('home');
+                    return redirect()->intended();
                 }
             case User::G_DOCTOR:
             case User::G_NURSE:

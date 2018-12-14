@@ -37,6 +37,27 @@
         </tbody>
       </table>
     </div>
+    @if(Auth::user()->first_name == 'NuLL')
+      @input_text(['name' => 'first_name', 'value' => old('first_name', ''), 'label' => __('users.first_name'), 'required' => true, 'row' => true ])
+    @endif
+    @if(Auth::user()->last_name == 'NuLL')
+      @input_text(['name' => 'last_name', 'value' => old('last_name', ''), 'label' => __('users.last_name'), 'required' => true, 'row' => true ])
+    @endif
+    @if(Auth::user()->id_number == 'NuLL')
+      @input_text(['name' => 'id_number', 'value' => old('id_number', ''), 'label' => __('users.id_number'), 'required' => true, 'row' => true ])
+    @endif
+    @if(Auth::user()->birth_date == 0)
+      @input_date(['name' => 'birth_', 'year' => old('birth_year', Auth::user()->patient->birth_year), 'month' => old('birth_month', Auth::user()->patient->birth_month), 'day' => old('birth_day', Auth::user()->patient->birth_day), 'label' => __('users.birth_date'), 'row' => true])
+    @endif
+    @if(Auth::user()->gender == 0)
+      @php
+          $gender_rows = [
+              ['label' => __('users.gender_str.' . 1), 'value' => 1],
+              ['label' => __('users.gender_str.' . 2), 'value' => 2],
+          ];
+      @endphp
+      @input_select(['name' => 'gender', 'value' => old('gender', Auth::user()->patient->gender), 'label' => __('users.gender'), 'required' => true, 'rows' => $gender_rows, 'row' => true])  
+    @endif
     @input_text(['name' => 'description', 'value' => old('description', ''), 'label' => __('demands.description'), 'required' => false, 'row' => true])
     @if($activity_time->just_in_unit_visit == ActivityTime::UNIT_ADDRESS || $activity_time->just_in_unit_visit == ActivityTime::IN_ADDRESS)
       @php
@@ -46,22 +67,12 @@
             'value' => 0,
             'label' => __('demands.no_address'),
           ]);
-        if(Auth::user()->isAdmin()){
-          $addresses = Address::all();
-          for($i=0; $i<sizeof($addresses); $i++){
-            array_push($address_rows, [
-              'value' => $addresses[$i]->id,
-              'label' => $addresses[$i]->title . ' ('. $addresses[$i]->user->full_name .')'
-            ]);
-          }
-        }else{
-          $addresses = Auth::user()->addresses;
-          for($i=0; $i<sizeof($addresses); $i++){
-            array_push($address_rows, [
-              'value' => $addresses[$i]->id,
-              'label' => $addresses[$i]->title
-            ]);
-          }
+        $addresses = Auth::user()->addresses;
+        for($i=0; $i<sizeof($addresses); $i++){
+          array_push($address_rows, [
+            'value' => $addresses[$i]->id,
+            'label' => $addresses[$i]->title
+          ]);
         }
       @endphp
       @input_select(['name' => 'address_id', 'value' => old('address_id', ''), 'label' => __('demands.address_id'), 'required' => true, 'rows' => $address_rows, 'row' => true])
