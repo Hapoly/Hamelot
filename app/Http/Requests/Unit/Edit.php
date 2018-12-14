@@ -6,6 +6,8 @@ use App\Http\Requests\PersianFormRequest;
 use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
 use App\Rules\UUID;
+use App\Rules\NotRegistered;
+use App\User;
 
 class Edit extends PersianFormRequest
 {
@@ -24,8 +26,7 @@ class Edit extends PersianFormRequest
      *
      * @return array
      */
-    public function rules(Request $request)
-    {
+    public function rules(Request $request){
         $unit_id = $this->route('unit')->id;
         // die($unit_id);
         return [
@@ -40,7 +41,7 @@ class Edit extends PersianFormRequest
                                 ],
             'address'       => 'required|string',
             'phone'         => 'required|string',
-            'mobile'        => 'required|string',
+            'phone'         => ['required', new NotRegistered(User::G_SECRETARY)],
             'lon'           => 'required|string',
             'lat'           => 'required|string',
             'city_id'       => ['required', new UUID],

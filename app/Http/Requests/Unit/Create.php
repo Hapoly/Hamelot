@@ -4,6 +4,8 @@ namespace App\Http\Requests\Unit;
 
 use App\Http\Requests\PersianFormRequest;
 use App\Rules\UUID;
+use App\Rules\NotRegistered;
+use App\User;
 
 class Create extends PersianFormRequest
 {
@@ -25,10 +27,10 @@ class Create extends PersianFormRequest
     public function rules(){
         return [
             'title'         => 'required|string',
-            'slug'          => 'required|string|max:32|min:4|unique:units',
+            'slug'          => 'required|string|max:32|min:4|regex:/[A-Z,a-z,1-9]*/i|unique:units',
             'address'       => 'required|string',
+            'mobile'        => ['required', new NotRegistered(User::G_SECRETARY)],
             'phone'         => 'required|string',
-            'mobile'        => 'required|string',
             // 'image'         => 'required|image',
             'lon'           => 'required|string',
             'lat'           => 'required|string',

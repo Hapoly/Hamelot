@@ -36,6 +36,12 @@
             <td>{{__('users.msc')}}</td>
             <td>{{$user->msc_str}}</td>
           </tr>
+          @if(Auth::user()->isAdmin())
+            <tr>
+              <td>{{__('users.phone')}}</td>
+              <td>{{$user->phone}}</td>
+            </tr>
+          @endif
         </tbody>
       </table>
     </div>
@@ -77,7 +83,7 @@
         <tbody>
           @foreach($user->units as $index => $unit)
             <tr>
-              <td>{{$index}}</td>
+              <td>{{$index+1}}</td>
               <td><a href="{{route('panel.units.show', ['unit' => $unit])}}">{{$unit->title}}</a></td>
               <td>{{$unit->status_str}}</td>
               @if(Auth::user()->isAdmin() || Auth::user()->isManager())

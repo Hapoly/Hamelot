@@ -496,6 +496,10 @@ class User extends Authenticatable
             return false;
     }
 
+    public function getCanUseAttribute(){
+        return !$this->has_to_complete_profile && !$this->has_to_join_unit;
+    }
+
     public function fields(){
         return $this->belongsToMany('App\Models\ConstValue', 'user_consts', 'user_id', 'const_id');
     }

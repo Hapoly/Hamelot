@@ -18,7 +18,7 @@ class Users extends Seeder
      */
     public function run(){
         User::create([
-            'phone'         => '09114866684',
+            'phone'         => '09216720496',
             'group_code'    => 1,
             'first_name'    => 'علیرضا',
             'last_name'     => 'دربندی',

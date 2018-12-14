@@ -40,6 +40,12 @@
             <td>{{__('users.age')}}</td>
             <td>{{$user->patient->age_str}}</td>
           </tr>
+          @if(Auth::user()->isAdmin())
+            <tr>
+              <td>{{__('users.phone')}}</td>
+              <td>{{$user->phone}}</td>
+            </tr>
+          @endif
         </tbody>
       </table>
     </div>
@@ -82,7 +88,7 @@
           <tbody>
             @foreach($user->visitors as $index => $visitor)
               <tr>
-                <td>{{$index}}</td>
+                <td>{{$index+1}}</td>
                 <td><a href="{{route('panel.users.show', ['user' => $visitor])}}">{{$visitor->full_name}}</a></td>
                 <td>{{$visitor->group_str}}</td>
                 <td>{{$visitor->status_str}}</td>

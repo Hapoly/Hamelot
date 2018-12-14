@@ -181,10 +181,12 @@ Route::middleware(['auth', 'Permission'])->namespace('Panel')->prefix('panel')->
 
 // auth routes
 // Auth::routes();
-Route::get('/login', 'AuthController@login')->name('login');
-Route::get('/send-token', 'AuthController@sendToken')->name('send');
-Route::get('/token', 'AuthController@token')->name('token');
-Route::post('/check', 'AuthController@check')->name('check');
+Route::middleware('guest')->group(function(){
+    Route::get('/login', 'AuthController@login')->name('login');
+    Route::get('/send-token', 'AuthController@sendToken')->name('send');
+    Route::get('/token', 'AuthController@token')->name('token');
+    Route::post('/check', 'AuthController@check')->name('check');    
+});
 Route::prefix('register')->name('register.')->group(function(){
     Route::get('/doctor', 'AuthController@registerDoctor')->name('doctor');
     Route::get('/nurse', 'AuthController@registerNuese')->name('nuese');

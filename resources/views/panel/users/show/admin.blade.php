@@ -21,6 +21,12 @@
             <td>{{__('users.status')}}</td>
             <td>{{$user->status_str}}</td>
           </tr>
+          @if(Auth::user()->isAdmin())
+            <tr>
+              <td>{{__('users.phone')}}</td>
+              <td>{{$user->phone}}</td>
+            </tr>
+          @endif
         </tbody>
       </table>
     </div>
