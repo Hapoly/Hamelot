@@ -5,7 +5,7 @@
     src: url(../fonts/Shabnam.ttf); 
 }
 *{
-    font-family: "Shabnam" !important;
+    font-family: "Shabnam";
 }
 /* popup things */
 .popup {
