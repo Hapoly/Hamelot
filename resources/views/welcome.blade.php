@@ -6,11 +6,11 @@
         <div class="col-md-8">
             <div class="search-things">
                 <img src="{{asset('/imgs/512.png')}}">
-                <h2 style="padding-top:20px;padding-bottom:20px;">
+                <h2 style="padding-top:20px;padding-bottom:60px;">
                 نوبت دهی دکتر سوال
                 </h2>
                 <div class="row">
-                    <div class="col-md-3" style="padding-left:0;">
+                    <div class="col-md-3 select-col">
                         <select class="form-control search-select" title="انتخاب شهر">
                         <option class="hidden-select">انتخاب شهر</option>
                         <option>رشت</option>
@@ -31,7 +31,7 @@
                             <div class="input-group">
                                 <input type="text" class="form-control" placeholder="جستجوی  پزشک ، بیمارستان ، درمانگاه  ">
                                 <div class="input-group-append">
-                                <button class="btn search-btns" type="button">
+                                <button type="submit" class="btn search-btns" type="button">
                                     <i class="fa fa-search"></i>
                                 </button>
                                 </div>
@@ -39,8 +39,9 @@
                         </form>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-md-3 icons">
+                <div class="flex-container">
+                    
+                    <div class="icons">
                         <div class="circle-icon">
                             <img src="{{asset('/imgs/icon/hospital.svg')}}">
                         </div>
@@ -48,13 +49,13 @@
                         بیمارستان ها 
                         </a>
                     </div>
-                    <div class="col-md-3 icons">
+                    <div class="icons">
                         <div class="circle-icon">
                             <img src="{{asset('/imgs/icon/pill.svg')}}">
                         </div>
                         <a href="#">داروخانه ها </a>
                     </div>
-                    <div class="col-md-3 icons">
+                    <div class="icons">
                         <div class="circle-icon">
                             <img src="{{asset('/imgs/icon/chemistry.svg')}}">
                         </div>
@@ -62,12 +63,13 @@
                             آزمایشگاه ها 
                         </a>
                     </div>
-                    <div class="col-md-3 icons">
+                    <div class="icons">
                         <div class="circle-icon">
                             <img src="{{asset('/imgs/icon/phonendoscope.svg')}}">
                         </div>
                         <a href="#">تخصص ها </a>
                     </div>
+                   
                 </div>
             </div>
         </div>
