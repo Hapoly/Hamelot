@@ -52,19 +52,19 @@
                         <button class="circle-icon">
                             <img src="{{asset('/imgs/icon/pill.png')}}">
                         </button>
-                        <a>داروخانه ها </a>
+                        <a href="#">داروخانه ها </a>
                     </div>
                     <div class="col-md-3 icons">
                         <button class="circle-icon">
                             <img src="{{asset('/imgs/icon/chemistry.png')}}">
                         </button>
-                        <a>آزمایشگاه ها </a>
+                        <a href="#">آزمایشگاه ها </a>
                     </div>
                     <div class="col-md-3 icons">
                         <button class="circle-icon">
                             <img src="{{asset('/imgs/icon/phonendoscope.png')}}">
                         </button>
-                        <a>تخصص ها </a>
+                        <a href="#">تخصص ها </a>
                     </div>
                 </div>
             </div>
