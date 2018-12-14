@@ -33,7 +33,14 @@ class LoginController extends Controller
      * @var string
      */
     protected $redirectTo = '/home';
-
+    
+    public function showLoginForm(){
+        if(!session()->has('url.intended'))
+        {
+            session(['url.intended' => url()->previous()]);
+        }
+        return view('auth.login');    
+    }
     /**
      * Create a new controller instance.
      *
@@ -49,41 +56,4 @@ class LoginController extends Controller
         return 'phone';
     }
 
-    public function loginGet(){
-        return view('auth.login.phone');
-    }
-    public function loginPost(Login $request){
-        $user = User::where('phone', $request->phone)->firstOrFail();
-        // sending message to phone number
-        $request->session()->put('login.phone'      , $request->phone);
-        $request->session()->put('login.token'      , rand() % 1000000);
-        try{
-            $api = new KavenegarApi(env('KAVENEGAR_API_TOKEN'));
-            $template = env('KAVENEGAR_PATTERN');
-            $result = $api->VerifyLookup(
-                        $request->session()->get('login.phone'),
-                        $request->session()->get('login.token'), 
-                        '', '',
-                        $template,'sms'
-                    );
-        }
-        catch(ApiException $e){
-            echo $e->errorMessage();
-        }
-        catch(HttpException $e){
-            echo $e->errorMessage();
-        }
-        return view('login.check');
-    }
-    public function resetPassword(ResetPasswordRequest $request){
-        if(intval($request->token) != $request->session()->get('login.token')){
-            // return $request->all();
-            $request->session()->put('register.token_mismatch', true);
-            return view('auth.passwords.reset');
-        }else{
-            $request->session()->put('register.token_mismatch', false);
-        }
-        $user = User::where('phone', $request->session()->get('login.phone'))->first();
-        return redirect('login')->with('password_changed', true);
-    }
 }

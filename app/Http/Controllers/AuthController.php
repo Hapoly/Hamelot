@@ -86,7 +86,7 @@ class AuthController extends Controller{
                 if($user){
                     if($user->group_code == $request->session()->get('auth.group')){
                         Auth::login($user);
-                        return redirect()->route('home');
+                        return redirect()->intended();
                     }else{
                         return redirect()->back()->with(['failed' => true]);
                     }
