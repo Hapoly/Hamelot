@@ -64,10 +64,10 @@ class Patient extends UModel
     }
 
     public function getIdNumberStrAttribute(){
-        if($this->id_number)
+        if($this->id_number != 'NuLL')
             return $this->id_number;
         else
-            return ' - ';
+            return '';
     }
 
     public function delete(array $options =[]){

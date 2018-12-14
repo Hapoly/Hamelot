@@ -50,6 +50,9 @@ class Profile extends Controller{
       case User::G_PATIENT:
         return view('panel.profile.patient', ['user' => $user]);
         break;
+      case User::G_SECRETARY:
+        return view('panel.profile.secretary', ['user' => $user]);
+        break;
     }
     abort(404);
   }
@@ -59,35 +62,28 @@ class Profile extends Controller{
   public function updateAdmin(AdminEditRequest $request){
     $user = Auth::user();
     $inputs = $request->all();
-    if($inputs['password']){
-      $inputs['password'] = bcrypt($inputs['password']);
-    }else
-      unset($inputs['password']);
     $inputs['group_code'] = User::G_ADMIN;
+    if($inputs['email'] == null)
+      unset($inputs['email']);
     $user->fill($inputs)->save();
-
-    if(isset($inputs['password']))
-      Auth::attempt([
-        'username'  => $user->username,
-        'password'  => $inputs['password'],
-      ]);
-    
     return redirect()->route('panel.profile');
   }
   public function updateManager(ManagerEditRequest $request){
     $user = Auth::user();
     $inputs = $request->all();
-    if(isset($inputs['password'])){
-      $inputs['password'] = bcrypt($inputs['password']);
-    }else
-      unset($inputs['password']);
+    if($inputs['email'] == null)
+      unset($inputs['email']);
     $inputs['group_code'] = User::G_MANAGER;
     $user->fill($inputs)->save();
-    if(isset($inputs['password']))
-      Auth::attempt([
-        'username'  => $user->username,
-        'password'  => $inputs['password'],
-      ]);
+    return redirect()->route('panel.profile');
+  }
+  public function updateSecretary(SecretaryEditRequest $request){
+    $user = Auth::user();
+    $inputs = $request->all();
+    if($inputs['email'] == null)
+      unset($inputs['email']);
+    $inputs['group_code'] = User::G_SECREATRY;
+    $user->fill($inputs)->save();
     return redirect()->route('panel.profile');
   }
   public function updateDoctor(DoctorEditRequest $request){
@@ -131,25 +127,15 @@ class Profile extends Controller{
       $inputs['profile'] = Storage::disk('public')->put('/users', $request->file('profile'));
       Storage::disk('public')->delete($user->profile);
     }
-    if($inputs['password'])
-      $inputs['password'] = bcrypt($inputs['password']);
-    else
-      unset($inputs['password']);
     $inputs['group_code'] = User::G_NURSE;
-
+    if($inputs['email'] == null)
+      unset($inputs['email']);
     $user->fill($inputs);
     $user->save();
 
     $nurse = $user->nurse;
     $nurse->fill($inputs);
     $nurse->save();
-
-    if(isset($inputs['password']))
-      Auth::attempt([
-        'username'  => $user->username,
-        'password'  => $inputs['password'],
-      ]);
-    
     return redirect()->route('panel.profile');
   }
   public function updatePatient(PatientEditRequest $request){
@@ -159,25 +145,16 @@ class Profile extends Controller{
       $inputs['profile'] = Storage::disk('public')->put('/users', $request->file('profile'));
       Storage::disk('public')->delete($user->profile);
     }
-    if($inputs['password'])
-      $inputs['password'] = bcrypt($inputs['password']);
-    else
-      unset($inputs['password']);
     $inputs['group_code'] = User::G_PATIENT;
     $inputs['birth_date'] = Time::jmktime(0, 0, 0, intval($inputs['birth_day']), intval($inputs['birth_month']), intval($inputs['birth_year']));
+    if($inputs['email'] == null)
+      unset($inputs['email']);
     $user->fill($inputs);
     $user->save();
 
     $patient = $user->patient;
     $patient->fill($inputs);
     $patient->save();
-
-    if(isset($inputs['password']))
-      Auth::attempt([
-        'username'  => $user->username,
-        'password'  => $inputs['password'],
-      ]);
-    
     return redirect()->route('panel.profile');
   }
 }

@@ -28,7 +28,7 @@ class Patient extends PersianFormRequest
             'last_name'     => 'required|string',
             'password'      => 'confirmed',
             'profile'       => 'image',
-            'id_number'     => 'required|numeric',
+            'id_number'     => 'required|string|size:10',
             'birth_year'    => 'required|numeric|min:1300|max:1400',
             'birth_month'   => 'required|numeric|min:1|max:12',
             'birth_day'     => 'required|numeric|min:1|max:31',
