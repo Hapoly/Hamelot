@@ -88,7 +88,7 @@
           <tbody>
             @foreach($user->visitors as $index => $visitor)
               <tr>
-                <td>{{$index}}</td>
+                <td>{{$index+1}}</td>
                 <td><a href="{{route('panel.users.show', ['user' => $visitor])}}">{{$visitor->full_name}}</a></td>
                 <td>{{$visitor->group_str}}</td>
                 <td>{{$visitor->status_str}}</td>
