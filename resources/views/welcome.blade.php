@@ -42,11 +42,7 @@
                 <div class="row">
                     <div class="col-md-3 icons">
                         <div class="circle-icon">
-                            <a href="#">
-                                <svg width="96px" height="96px" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve"> 
-</svg>
-                            </a>
-                            <!-- <img src="{{asset('/imgs/icon/hospital.svg')}}"> -->
+                            <img src="{{asset('/imgs/icon/hospital.svg')}}">
                         </div>
                         <a href="#">
                         بیمارستان ها 

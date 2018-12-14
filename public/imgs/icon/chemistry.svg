@@ -2,10 +2,7 @@
   <defs>
     <style>
       .cls-1 {
-        fill: #00ced1;
-      }
-      .cls-1:hover {
-        fill: pink;
+        fill: #007FFF;
       }
     </style>
   </defs>
