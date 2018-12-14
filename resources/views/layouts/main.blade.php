@@ -57,6 +57,15 @@
 			@if((Auth::user()->isDoctor() || Auth::user()->isNurse()) && Auth::user()->can_use)
 				@component('layouts.side.incomplete_doctor_nurse')
 				@endcomponent
+			@elseif(Auth::user()->isDoctor())
+				@component('layouts.side.doctor')
+				@endcomponent
+			@elseif(Auth::user()->isSecretary())
+				@component('layouts.side.secretary')
+				@endcomponent
+			@elseif(Auth::user()->isPatient())
+				@component('layouts.side.patient')
+				@endcomponent
 			@else
 				@component('layouts.side_menu')
 				@endcomponent
