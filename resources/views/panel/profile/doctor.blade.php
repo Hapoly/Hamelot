@@ -1,8 +1,8 @@
 @extends('layouts.main')
-@section('title', __('users.edit.doctor'))
+@section('title', __('users.profile_edit'))
 @section('content')
 <div class="container">
-    @form_edit(['post' => true, 'action' => route('panel.profile.doctor'), 'title' => __('users.edit.doctor')])
+    @form_edit(['post' => true, 'action' => route('panel.profile.doctor'), 'title' => __('users.profile_edit')])
         @input_image(['name' => 'profile', 'label' => __('users.profile'), 'col' => 12])
         @input_text(['name' => 'email', 'label' => __('users.email'), 'value' => old('email', Auth::user()->email_str), 'row' => true])
         @input_text(['name' => 'first_name', 'label' => __('users.first_name'), 'value' => old('first_name', Auth::user()->first_name_str), 'row' => true])

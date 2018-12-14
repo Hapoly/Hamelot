@@ -176,6 +176,7 @@ Route::middleware(['auth', 'Permission'])->namespace('Panel')->prefix('panel')->
         Route::post('/doctor', 'Profile@updateDoctor')->name('doctor');
         Route::post('/nurse', 'Profile@updateNurse')->name('nurse');
         Route::post('/patient', 'Profile@updatePatient')->name('patient');
+        Route::post('/secretary', 'Profile@updateSecretary')->name('secretary');
     });
 });
 

@@ -22,6 +22,7 @@ class Permission
         'panel.profile.doctor'                              => [ 3 ],
         'panel.profile.nurse'                               => [ 4 ],
         'panel.profile.patient'                             => [ 5 ],
+        'panel.profile.secretary'                           => [ 6 ],
 
         'panel.users.create.admin'                          => [ 1 ],
         'panel.users.create.manager'                        => [ 1 ],
