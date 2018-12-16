@@ -83,7 +83,7 @@ class Profile extends Controller{
     $inputs = $request->all();
     if($inputs['email'] == null)
       unset($inputs['email']);
-    $inputs['group_code'] = User::G_SECREATRY;
+    $inputs['group_code'] = User::G_SECRETARY;
     $user->fill($inputs)->save();
     return redirect()->route('panel.profile');
   }

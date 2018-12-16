@@ -6,6 +6,8 @@ use App\Http\Requests\PersianFormRequest;
 use App\Rules\UUID;
 use App\Rules\Phone;
 
+use Auth;
+
 class Nurse extends PersianFormRequest
 {
     /**
@@ -13,9 +15,8 @@ class Nurse extends PersianFormRequest
      *
      * @return bool
      */
-    public function authorize()
-    {
-        return true;
+    public function authorize(){
+        return Auth::check();
     }
 
     /**

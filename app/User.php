@@ -180,9 +180,9 @@ class User extends Authenticatable
             return false;
         if(Auth::user()->isAdmin())
             return true;
-        if($this->id == Auth::user()->id)
+        else if($this->id == Auth::user()->id)
             return true;
-        if(Auth::user()->isManager())
+        else if(Auth::user()->isManager() || Auth::user()->isDoctor() || Auth::user()->isNurse())
             return ($this->units()->whereHas('managers', function($query){
                 return $query->where('users.id', Auth::user()->id);
             })->first()) != null;

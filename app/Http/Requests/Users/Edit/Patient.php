@@ -5,6 +5,7 @@ namespace App\Http\Requests\Users\Edit;
 use App\Http\Requests\PersianFormRequest;
 use Illuminate\Validation\Rule;
 use App\Rules\Phone;
+use Auth;
 
 class Patient extends PersianFormRequest
 {
@@ -13,9 +14,8 @@ class Patient extends PersianFormRequest
      *
      * @return bool
      */
-    public function authorize()
-    {
-        return true;
+    public function authorize(){
+        return Auth::check();
     }
 
     /**

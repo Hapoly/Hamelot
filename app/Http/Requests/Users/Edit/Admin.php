@@ -6,6 +6,8 @@ use App\Http\Requests\PersianFormRequest;
 use Illuminate\Validation\Rule;
 use App\Rules\Phone;
 
+use Auth;
+
 class Admin extends PersianFormRequest
 {
     /**
@@ -13,9 +15,8 @@ class Admin extends PersianFormRequest
      *
      * @return bool
      */
-    public function authorize()
-    {
-        return true;
+    public function authorize(){
+        return Auth::check();
     }
 
     /**

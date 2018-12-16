@@ -119,7 +119,7 @@ class Units extends Controller{
     if(!$secretary)
       $secretary = User::create([
         'phone' => $inputs['mobile'],
-        'group_code'  => User::G_SECREATRY
+        'group_code'  => User::G_SECRETARY
       ]);
     UnitUser::create([
       'user_id' => $secretary->id,
