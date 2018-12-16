@@ -6,10 +6,8 @@
         @input_image(['name' => 'profile', 'label' => __('users.profile'), 'col' => 12])
         @input_text(['name' => 'phone', 'label' => __('users.phone'), 'value' => old('phone', $user->phone), 'row' => true])
         @input_text(['name' => 'email', 'label' => __('users.email'), 'value' => old('email', $user->email_str), 'row' => true])
-        <div class="form-group row create-form">
-            @input_text(['name' => 'first_name', 'label' => __('users.first_name'), 'value' => old('first_name', $user->first_name_str), 'col' => 6])
-            @input_text(['name' => 'last_name', 'label' => __('users.last_name'), 'value' => old('last_name', $user->last_name_str), 'col' => 6])
-        </div>
+        @input_text(['name' => 'first_name', 'label' => __('users.first_name'), 'value' => old('first_name', $user->first_name_str), 'row' => true])
+        @input_text(['name' => 'last_name', 'label' => __('users.last_name'), 'value' => old('last_name', $user->last_name_str), 'row' => true])
         @php
             $gender_rows = [
                 ['label' => __('users.gender_str.' . 1), 'value' => 1],
@@ -17,8 +15,9 @@
             ];
         @endphp
         @input_select(['name' => 'gender', 'value' => old('gender', $user->doctor->gender), 'label' => __('users.gender'), 'required' => true, 'rows' => $gender_rows, 'row' => true])
-        
-        @input_text(['name' => 'msc', 'label' => __('users.msc'), 'value' => old('msc', $user->doctor->msc), 'row' => true])
+        @input_text(['name' => 'msc', 'label' => __('users.msc_doctor'), 'value' => old('msc', $user->doctor->msc_str), 'row' => true])
+        @input_number(['name' => 'start_year', 'label' => __('users.start_year_doctor'), 'value' => old('start_year', $user->doctor->start_year), 'min' => 1360, 'max' => 1400, 'row' => true])
+        @multiautocomplete(['name' => 'fields', 'label' => __('users.fields'), 'value' => old('fields', $user->fields_str), 'required' => true, 'route' => 'fields.doctor'])
         <div class="form-group row create-form">
             @php
                 $public_rows = [

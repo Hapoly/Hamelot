@@ -9,10 +9,8 @@
         @input_image(['name' => 'profile', 'label' => __('users.profile'), 'col' => 12])
         @input_text(['name' => 'phone', 'label' => __('users.phone'), 'value' => old('phone'), 'row' => true])
         @input_text(['name' => 'email', 'label' => __('users.email'), 'value' => old('email'), 'row' => true])
-        <div class="form-group row create-form">
-            @input_text(['name' => 'first_name', 'label' => __('users.first_name'), 'value' => old('first_name'), 'col' => 6])
-            @input_text(['name' => 'last_name', 'label' => __('users.last_name'), 'value' => old('last_name'), 'col' => 6])
-        </div>
+        @input_text(['name' => 'first_name', 'label' => __('users.first_name'), 'value' => old('first_name'), 'row' => true])
+        @input_text(['name' => 'last_name', 'label' => __('users.last_name'), 'value' => old('last_name'), 'row' => true])
         @input_text(['name' => 'id_number', 'label' => __('users.id_number'), 'value' => old('id_number'), 'row' => true])
         @php
             $status_rows = [
