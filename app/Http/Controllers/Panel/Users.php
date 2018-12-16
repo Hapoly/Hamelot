@@ -27,6 +27,9 @@ use App\Http\Requests\Users\Edit\Admin as AdminEditRequest;
 use App\Http\Requests\Users\Create\Manager as ManagerCreateRequest;
 use App\Http\Requests\Users\Edit\Manager as ManagerEditRequest;
 
+use App\Http\Requests\Users\Create\Secretary as SecretaryCreateRequest;
+use App\Http\Requests\Users\Edit\Secretary as SecretaryEditRequest;
+
 use App\Http\Requests\Users\Create\Doctor as DoctorCreateRequest;
 use App\Http\Requests\Users\Edit\Doctor as DoctorEditRequest;
 
@@ -135,6 +138,7 @@ class Users extends Controller{
   public function createDoctor()  { return view('panel.users.create.doctor');   }
   public function createNurse()   { return view('panel.users.create.nurse');    }
   public function createPatient() { return view('panel.users.create.patient');  }
+  public function createSecretary() { return view('panel.users.create.secretary');  }
   /**
    * store users in user groups
    */
@@ -154,6 +158,16 @@ class Users extends Controller{
     $user = User::create($inputs);
     return redirect()->route('panel.users.show', ['user' => $user]);
   }
+  
+  public function storeSecretary(SecretaryCreateRequest $request){
+    $inputs = $request->all();
+    $inputs['group_code'] = User::G_SECRETARY;
+    if(!$request->input('email'))
+      unset($inputs['email']);
+    $user = User::create($inputs);
+    return redirect()->route('panel.users.show', ['user' => $user]);
+  }
+
   public function storeDoctor(DoctorCreateRequest $request){
     $inputs = $request->all();
     if($request->hasFile('profile')){
@@ -238,6 +252,14 @@ class Users extends Controller{
     if(!$request->input('email'))
       unset($inputs['email']);
     $inputs['group_code'] = User::G_MANAGER;
+    $user->fill($inputs)->save();
+    return redirect()->route('panel.users.show', ['user' => $user]);
+  }
+  public function updateSecretary(SecretaryEditRequest $request, User $user){
+    $inputs = $request->all();
+    if(!$request->input('email'))
+      unset($inputs['email']);
+    $inputs['group_code'] = User::G_SECRETARY;
     $user->fill($inputs)->save();
     return redirect()->route('panel.users.show', ['user' => $user]);
   }

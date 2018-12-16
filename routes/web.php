@@ -74,6 +74,7 @@ Route::middleware(['auth', 'Permission'])->namespace('Panel')->prefix('panel')->
         Route::prefix('create')->name('create.')->group(function(){
             Route::get('/admin', 'Users@createAdmin')->name('admin');
             Route::get('/manager', 'Users@createManager')->name('manager');
+            Route::get('/secretary', 'Users@createSecretary')->name('secretary');
             Route::get('/doctor', 'Users@createDoctor')->name('doctor');
             Route::get('/nurse', 'Users@createNurse')->name('nurse');
             Route::get('/patient', 'Users@createPatient')->name('patient');
@@ -81,6 +82,7 @@ Route::middleware(['auth', 'Permission'])->namespace('Panel')->prefix('panel')->
         Route::prefix('store')->name('store.')->group(function(){
             Route::post('/admin', 'Users@storeAdmin')->name('admin');
             Route::post('/manager', 'Users@storeManager')->name('manager');
+            Route::post('/secretary', 'Users@storeSecretary')->name('secretary');
             Route::post('/doctor', 'Users@storeDoctor')->name('doctor');
             Route::post('/nurse', 'Users@storeNurse')->name('nurse');
             Route::post('/patient', 'Users@storePatient')->name('patient');
@@ -88,6 +90,7 @@ Route::middleware(['auth', 'Permission'])->namespace('Panel')->prefix('panel')->
         Route::prefix('update/{user}')->name('update.')->group(function(){
             Route::post('/admin', 'Users@updateAdmin')->name('admin');
             Route::post('/manager', 'Users@updateManager')->name('manager');
+            Route::post('/secretary', 'Users@updateSecretary')->name('secretary');
             Route::post('/doctor', 'Users@updateDoctor')->name('doctor');
             Route::post('/nurse', 'Users@updateNurse')->name('nurse');
             Route::post('/patient', 'Users@updatePatient')->name('patient');
