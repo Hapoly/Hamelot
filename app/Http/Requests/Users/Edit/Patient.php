@@ -29,13 +29,16 @@ class Patient extends PersianFormRequest
         return [
             'first_name'    => 'required|string',
             'last_name'     => 'required|string',
-            'status'        => 'required|numeric',
             'profile'       => 'image',
             'id_number'     => 'required|numeric',
             'birth_year'    => 'required|numeric|min:1300|max:1400',
             'birth_month'   => 'required|numeric|min:1|max:12',
             'birth_day'     => 'required|numeric|min:1|max:31',
-            'phone'         => ['required', new Phone, Rule::unique('users')->ignore($user_id)],
         ];
+        if(Auth::user()->isAdmin()){
+            $data['status'] = 'required|numeric';
+            $data['phone'] = ['required', new Phone, Rule::unique('users')->ignore($user_id)];
+        }
+        return $data;
     }
 }

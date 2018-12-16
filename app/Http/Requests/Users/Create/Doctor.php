@@ -26,16 +26,18 @@ class Doctor extends PersianFormRequest
      */
     public function rules()
     {
-        return [
+        $data = [
             'first_name'    => 'required|string',
             'last_name'     => 'required|string',
             'gender'        => 'required|numeric',
             'profile'       => 'image',
-            'status'        => 'required|numeric',
             'public'        => 'required|numeric',
             'phone'         => ['required', new Phone, 'unique:users'],
             'msc'           => 'required|string|max:16',
             'email'         => 'nullable|email',
         ];
+        if(Auth::user()->isAdmin())
+            $data['status'] = 'required|numeric';
+        return $data;
     }
 }

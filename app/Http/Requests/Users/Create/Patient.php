@@ -25,10 +25,9 @@ class Patient extends PersianFormRequest
      */
     public function rules()
     {
-        return [
+        $data = [
             'first_name'    => 'required|string',
             'last_name'     => 'required|string',
-            'status'        => 'required|numeric',
             'profile'       => 'image',
             'id_number'     => 'required|numeric',
             'birth_year'    => 'required|numeric|min:1300|max:1400',
@@ -37,5 +36,8 @@ class Patient extends PersianFormRequest
             'phone'         => ['required', new Phone, 'unique:users'],
             'email'         => 'nullable|email',
         ];
+        if(Auth::user()->isAdmin())
+            $data['status'] = 'required|numeric';
+        return $data;
     }
 }

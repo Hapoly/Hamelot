@@ -26,17 +26,20 @@ class Doctor extends PersianFormRequest
     public function rules()
     {
         $user_id = $this->route('user')->id;
-        return [
+        $data = [
             'first_name'    => 'required|string',
             'last_name'     => 'required|string',
             'gender'        => 'required|numeric',
             'profile'       => 'image',
-            'status'        => 'required|numeric',
             'public'        => 'required|numeric',
-            'phone'         => ['required', new Phone, Rule::unique('users')->ignore($user_id)],
             'fields'        => 'required|string|min:5',
             'start_year'    => 'required|numeric',
             'msc'           => 'required|string|max:16',
         ];
+        if(Auth::user()->isAdmin()){
+            $data['status'] = 'required|numeric';
+            $data['phone'] = ['required', new Phone, Rule::unique('users')->ignore($user_id)];
+        }
+        return $data;
     }
 }

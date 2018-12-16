@@ -27,11 +27,14 @@ class Manager extends PersianFormRequest
     public function rules()
     {
         $user_id = $this->route('user')->id;
-        return [
+        $data = [
             'first_name'    => 'required|string',
             'last_name'     => 'required|string',
-            'status'        => 'required|numeric',
-            'phone'         => ['required', new Phone, Rule::unique('users')->ignore($user_id)],
         ];
+        if(Auth::user()->isAdmin()){
+            $data['status'] = 'required|numeric';
+            $data['phone'] = ['required', new Phone, Rule::unique('users')->ignore($user_id)];
+        }
+        return $data;
     }
 }

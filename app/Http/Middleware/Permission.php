@@ -35,12 +35,14 @@ class Permission
         'panel.users.store.doctor'                          => [ 1, 2 ],
         'panel.users.store.nurse'                           => [ 1, 2 ],
         'panel.users.store.patient'                         => [ 1 ],
+        'panel.users.store.secretary'                      => [ 1, 2, 3, 4 ],
 
         'panel.users.update.admin'                          => [ 1 ],
         'panel.users.update.manager'                        => [ 1 ],
         'panel.users.update.doctor'                         => [ 1, 2 ],
         'panel.users.update.nurse'                          => [ 1, 2 ],
         'panel.users.update.patient'                        => [ 1 ],
+        'panel.users.update.secretary'                      => [ 1, 2, 3, 4 ],
 
         'panel.users.edit'                                  => [ 1, 2, 3, 4, 5, 6 ],
         'panel.users.show'                                  => [ 1, 2, 3, 4, 5, 6 ],

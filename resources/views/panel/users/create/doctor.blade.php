@@ -17,23 +17,22 @@
         @input_text(['name' => 'msc', 'label' => __('users.msc_doctor'), 'value' => old('msc'), 'row' => true])
         @input_number(['name' => 'start_year', 'label' => __('users.start_year_doctor'), 'value' => old('start_year'), 'min' => 1360, 'max' => 1400, 'row' => true])
         @multiautocomplete(['name' => 'fields', 'label' => __('users.fields'), 'value' => old('fields'), 'required' => true, 'route' => 'fields.doctor'])
-        <div class="form-group row create-form">
-            @php
-                $public_rows = [
-                    ['label' => __('users.public_str.' . 1), 'value' => 1],
-                    ['label' => __('users.public_str.' . 2), 'value' => 2],
-                ];
-            @endphp
-            @input_select(['name' => 'public', 'value' => old('public', 0), 'label' => __('users.public'), 'required' => true, 'rows' => $public_rows, 'col' => 6])
-            
+        @php
+            $public_rows = [
+                ['label' => __('users.public_str.' . 1), 'value' => 1],
+                ['label' => __('users.public_str.' . 2), 'value' => 2],
+            ];
+        @endphp
+        @input_select(['name' => 'public', 'value' => old('public', 0), 'label' => __('users.public'), 'required' => true, 'rows' => $public_rows, 'row' => true])
+        @if(Auth::user()->isAdmin())
             @php
                 $status_rows = [
                     ['label' => __('users.status_str.' . 1), 'value' => 1],
                     ['label' => __('users.status_str.' . 2), 'value' => 2],
                 ];
             @endphp
-            @input_select(['name' => 'status', 'value' => old('status', 0), 'label' => __('users.status'), 'required' => true, 'rows' => $status_rows, 'col' => 6])
-        </div>
+            @input_select(['name' => 'status', 'value' => old('status', 0), 'label' => __('users.status'), 'required' => true, 'rows' => $status_rows, 'row' => true])
+        @endif
         @submit_row(['value' => 'save', 'label' => __('users.save')])
     @endform_create
 </div>

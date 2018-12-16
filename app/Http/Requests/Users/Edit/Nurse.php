@@ -33,10 +33,13 @@ class Nurse extends PersianFormRequest
             'last_name'     => 'required|string',
             'gender'        => 'required|numeric',
             'profile'       => 'image',
-            'status'        => 'required|numeric',
             'public'        => 'required|numeric',
             'msc'           => 'required|string|max:16',
-            'phone'         => ['required', new Phone, Rule::unique('users')->ignore($user_id)],
         ];
+        if(Auth::user()->isAdmin()){
+            $data['status'] = 'required|numeric';
+            $data['phone'] = ['required', new Phone, Rule::unique('users')->ignore($user_id)];
+        }
+        return $data;
     }
 }

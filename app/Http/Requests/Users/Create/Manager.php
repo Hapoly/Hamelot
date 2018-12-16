@@ -25,12 +25,14 @@ class Manager extends PersianFormRequest
      */
     public function rules()
     {
-        return [
+        $data = [
             'first_name'    => 'required|string',
             'last_name'     => 'required|string',
             'phone'         => ['required', new Phone, 'unique:users'],
-            'status'        => 'required|numeric',
             'email'         => 'nullable|email',
         ];
+        if(Auth::user()->isAdmin())
+            $data['status'] = 'required|numeric';
+        return $data;
     }
 }
