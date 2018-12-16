@@ -40,18 +40,12 @@ class Users extends Controller{
    * listing the users
    */
   public function index(Request $request){
-    /* permissions to show and list users in diffrent group codes */
-    $users = null;
-    if($request->has('group_code'))
-      if($request->group_code == 5)
-        $users = User::fetchPatients($request->has('joined'));
-      else
-        $users = User::fetch($request->has('joined'));
-    else
-        $users = User::fetch($request->has('joined'));
-    /* end of permissions section */
-
+    $users = User::fetch();
+    
     $sort = $request->input('sort', '###');
+
+    if($request->has('group_code') && $request->group_code != 0)
+      $users = $user->where('group_code', $request->group_code);
 
     if($request->has('first_name') && $request->first_name != '')
       $users = $users->where('first_name', 'LIKE' , '%'.$request->first_name.'%');
@@ -70,30 +64,6 @@ class Users extends Controller{
         $users = $users->whereHas('units', function($query) use ($unit_id){
           return $query->where('units.unit_id', $unit_id);
         });
-      }
-    }
-    if($request->group_code != 0){
-      $users = $users->where('group_code', $request->group_code);
-      switch($request->group_code){
-        case User::G_DOCTOR:
-          if($request->doctor_degree != 0)
-            $users = $users->whereHas('doctor', function($query) use ($request){
-              return $query->where('degree', $request->doctor_degree);
-            });
-          if($request->doctor_field != 0)
-            $users = $users->whereHas('doctor', function($query) use ($request){
-              return $query->where('field', $request->doctor_field);
-            });
-          break;
-        case User::G_NURSE:
-          if($request->nurse_degree != 0)
-            $users = $users->whereHas('nurse', function($query) use ($request){
-              return $query->where('degree', $request->nurse_degree);
-            });
-          if($request->nurse_field != 0)
-            $users = $users->whereHas('nurse', function($query) use ($request){
-              return $query->where('field', $request->nurse_field);
-            });
       }
     }
     if($request->gender != 0){
@@ -140,19 +110,19 @@ class Users extends Controller{
           return view('panel.users.show.admin', ['user' => $user]);
         break;
       case User::G_MANAGER:
-        return view('panel.users.show.manager', ['user' => $user]);
+          return view('panel.users.show.manager', ['user' => $user]);
         break;
       case User::G_DOCTOR:
-        return view('panel.users.show.doctor', ['user' => $user]);
+          return view('panel.users.show.doctor', ['user' => $user]);
         break;
       case User::G_SECRETARY:
-        return view('panel.users.show.secretary', ['user' => $user]);
+          return view('panel.users.show.secretary', ['user' => $user]);
         break;
       case User::G_NURSE:
-        return view('panel.users.show.nurse', ['user' => $user]);
+          return view('panel.users.show.nurse', ['user' => $user]);
         break;
       case User::G_PATIENT:
-        return view('panel.users.show.patient', ['user' => $user]);
+          return view('panel.users.show.patient', ['user' => $user]);
         break;
     }
     abort(404);
@@ -170,7 +140,6 @@ class Users extends Controller{
    */
   public function storeAdmin(AdminCreateRequest $request){
     $inputs = $request->all();
-    $inputs['password'] = bcrypt($inputs['password']);
     $inputs['group_code'] = User::G_ADMIN;
     if(!$request->input('email'))
       unset($inputs['email']);
@@ -179,7 +148,6 @@ class Users extends Controller{
   }
   public function storeManager(ManagerCreateRequest $request){
     $inputs = $request->all();
-    $inputs['password'] = bcrypt($inputs['password']);
     $inputs['group_code'] = User::G_MANAGER;
     if(!$request->input('email'))
       unset($inputs['email']);
@@ -193,7 +161,6 @@ class Users extends Controller{
     }
     if(!$request->input('email'))
       unset($inputs['email']);
-    $inputs['password'] = bcrypt($inputs['password']);
     $inputs['group_code'] = User::G_DOCTOR;
     $user = User::create($inputs);
     $inputs['user_id'] = $user->id;
@@ -207,7 +174,6 @@ class Users extends Controller{
     }
     if(!$request->input('email'))
       unset($inputs['email']);
-    $inputs['password'] = bcrypt($inputs['password']);
     $inputs['group_code'] = User::G_NURSE;
     $user = User::create($inputs);
     $inputs['user_id'] = $user->id;
@@ -221,7 +187,6 @@ class Users extends Controller{
     }
     if(!$request->input('email'))
       unset($inputs['email']);
-    $inputs['password'] = bcrypt($inputs['password']);
     $inputs['group_code'] = User::G_PATIENT;
     $inputs['birth_date'] = Time::jmktime(0, 0, 0, $inputs['birth_day'], $inputs['birth_month'], $inputs['birth_year']);
     $user = User::create($inputs);
@@ -262,11 +227,6 @@ class Users extends Controller{
    */
   public function updateAdmin(AdminEditRequest $request, User $user){
     $inputs = $request->all();
-    if($inputs['password'])
-      $inputs['password'] = bcrypt($inputs['password']);
-    else
-      unset($inputs['password']);
-    
     if(!$request->input('email'))
       unset($inputs['email']);
     $inputs['group_code'] = User::G_ADMIN;
@@ -275,10 +235,6 @@ class Users extends Controller{
   }
   public function updateManager(ManagerEditRequest $request, User $user){
     $inputs = $request->all();
-    if($inputs['password'])
-      $inputs['password'] = bcrypt($inputs['password']);
-    else
-      unset($inputs['password']);
     if(!$request->input('email'))
       unset($inputs['email']);
     $inputs['group_code'] = User::G_MANAGER;
@@ -290,10 +246,6 @@ class Users extends Controller{
     if($request->hasFile('profile')){
       $inputs['profile'] = Storage::disk('public')->put('/users', $request->file('profile'));
     }
-    if($inputs['password'])
-      $inputs['password'] = bcrypt($inputs['password']);
-    else
-      unset($inputs['password']);
     if(!$request->input('email'))
       unset($inputs['email']);
     $inputs['group_code'] = User::G_DOCTOR;
@@ -312,10 +264,6 @@ class Users extends Controller{
     if($request->hasFile('profile')){
       $inputs['profile'] = Storage::disk('public')->put('/users', $request->file('profile'));
     }
-    if($inputs['password'])
-      $inputs['password'] = bcrypt($inputs['password']);
-    else
-      unset($inputs['password']);
     if(!$request->input('email'))
       unset($inputs['email']);
     $inputs['group_code'] = User::G_NURSE;
@@ -334,10 +282,6 @@ class Users extends Controller{
     if($request->hasFile('profile')){
       $inputs['profile'] = Storage::disk('public')->put('/users', $request->file('profile'));
     }
-    if($inputs['password'])
-      $inputs['password'] = bcrypt($inputs['password']);
-    else
-      unset($inputs['password']);
     if(!$request->input('email'))
       unset($inputs['email']);
     $inputs['group_code'] = User::G_PATIENT;

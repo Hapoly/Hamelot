@@ -27,6 +27,7 @@ use App\Http\Requests\Profile\Edit\Manager as ManagerEditRequest;
 use App\Http\Requests\Profile\Edit\Doctor as DoctorEditRequest;
 use App\Http\Requests\Profile\Edit\Nurse as NurseEditRequest;
 use App\Http\Requests\Profile\Edit\Patient as PatientEditRequest;
+use App\Http\Requests\Profile\Edit\Secretary as SecretaryEditRequest;
 
 class Profile extends Controller{
   /**

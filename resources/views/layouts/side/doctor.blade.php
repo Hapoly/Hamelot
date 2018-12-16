@@ -15,12 +15,6 @@
 		</a>
 	</li>
 	<li>
-		<a href="{{route('panel.users.index', ['group_code' => User::G_PATIENT])}}" aria-expanded="false">
-			<i class="fa fa-user" aria-hidden="false"></i>
-			<span>  بیماران من</span>
-		</a>
-	</li>
-	<li>
 		<a href="#healthunitmenu" data-toggle="collapse" aria-expanded="false">
 			<i class="fa fa-hospital-o" aria-hidden="false"></i>
 			<span>

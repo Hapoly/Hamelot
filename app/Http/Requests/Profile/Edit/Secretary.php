@@ -1,12 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Users\Create;
+namespace App\Http\Requests\Profile\Edit;
 
 use App\Http\Requests\PersianFormRequest;
-use App\Rules\UUID;
-use App\Rules\Phone;
 
-class Nurse extends PersianFormRequest
+class Secretary extends PersianFormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,15 +24,9 @@ class Nurse extends PersianFormRequest
     public function rules()
     {
         return [
+            'email'         => 'nullable|email',
             'first_name'    => 'required|string',
             'last_name'     => 'required|string',
-            'gender'        => 'required|numeric',
-            'profile'       => 'image',
-            'status'        => 'required|numeric',
-            'public'        => 'required|numeric',
-            'phone'         => ['required', new Phone, 'unique:users'],
-            'msc'           => 'required|string|max:16',
-            'email'         => 'nullable|email',
         ];
     }
 }

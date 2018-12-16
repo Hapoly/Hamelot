@@ -30,10 +30,6 @@ class Nurse extends PersianFormRequest
         return [
             'first_name'    => 'required|string',
             'last_name'     => 'required|string',
-            'username'      => ['required', Rule::unique('users')->ignore($user_id)],
-            'password'      => 'required_if:action,new|confirmed',
-            'degree_id'     => ['required', new UUID],
-            'field_id'      => ['required', new UUID],
             'gender'        => 'required|numeric',
             'profile'       => 'image',
             'status'        => 'required|numeric',

@@ -109,6 +109,13 @@ class User extends Authenticatable
         return $this->belongsToMany('App\User', 'permissions', 'requester_id', 'patient_id')
                     ->wherePivot('status', Permission::ACCEPTED);
     }
+    public function secretaries(){
+        return User::whereHas('units', function($query){
+            return $query->whereHas('managers', function($query){
+                return $query->where('users.id', Auth::user()->id);
+            });
+        })->where('group_code', User::G_SECRETARY);
+    }
 
     public static function getByName($name){
         return User::
@@ -210,34 +217,7 @@ class User extends Authenticatable
     public static function fetch($joined=false){
         if(Auth::user()->isAdmin())
             return new User;
-        else
-            if($joined && Auth::user()->isManager()){
-                return User::where([
-                    ['group_code', '<>', User::G_ADMIN],
-                    ['group_code', '<>', User::G_MANAGER],
-                    ['group_code', '<>', User::G_PATIENT],
-                    ['public', '=', User::T_PUBLIC],
-                ])->whereHas('units', function($query){
-                    return $query->whereHas('managers', function($query){
-                        return $query->where('users.id', Auth::user()->id);
-                    });
-                });
-            }else
-                return User::where([
-                    ['group_code', '<>', User::G_ADMIN],
-                    ['group_code', '<>', User::G_MANAGER],
-                    ['group_code', '<>', User::G_PATIENT],
-                    ['public', '=', User::T_PUBLIC],
-                ]);
     }
-
-    public static function fetchPatients(){
-        if(Auth::user()->isAdmin())
-            return new User;
-        else
-            return Auth::user()->patients();
-    }
-
 
     public function permissions(){
         return $this->hasMany('App\Models\Permission', 'requester_id');

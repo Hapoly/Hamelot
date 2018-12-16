@@ -24,9 +24,9 @@ class Manager extends PersianFormRequest
     public function rules()
     {
         return [
+            'email'         => 'nullable|email',
             'first_name'    => 'required|string',
             'last_name'     => 'required|string',
-            'password'      => 'confirmed'
         ];
     }
 }

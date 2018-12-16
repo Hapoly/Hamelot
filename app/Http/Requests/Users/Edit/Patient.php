@@ -29,8 +29,6 @@ class Patient extends PersianFormRequest
         return [
             'first_name'    => 'required|string',
             'last_name'     => 'required|string',
-            'username'      => ['required', Rule::unique('users')->ignore($user_id)],
-            'password'      => 'required_if:action,new|confirmed',
             'status'        => 'required|numeric',
             'profile'       => 'image',
             'id_number'     => 'required|numeric',
