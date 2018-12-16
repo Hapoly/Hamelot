@@ -224,8 +224,9 @@ class Unit extends UModel{
     public function getHasPermissionAttribute(){
         if(Auth::user()->isAdmin())
             return true;
-        else if(Auth::user()->isManager())
-            return $this->managers()->where('users.id', Auth::user()->id)->first() != null;
+        else if(Auth::user()->isManager() || Auth::user()->isDoctor() || Auth::user()->isNurse())
+            return true;
+            // return $this->managers()->where('users.id', Auth::user()->id)->first() != null;
         else
             return false;
     }

@@ -20,6 +20,7 @@ use App\Models\ConstValue;
 use App\Models\Permission;
 use App\Models\UnitUser;
 use App\Models\Unit;
+use App\Models\UserConsts;
 
 use App\Http\Requests\Users\Create\Admin as AdminCreateRequest;
 use App\Http\Requests\Users\Edit\Admin as AdminEditRequest;
@@ -147,6 +148,10 @@ class Users extends Controller{
     $inputs['group_code'] = User::G_ADMIN;
     if(!$request->input('email'))
       unset($inputs['email']);
+    if(!Auth::user()->isAdmin()){
+      unset($inputs['status']);
+      unset($inputs['public']);
+    }
     $user = User::create($inputs);
     return redirect()->route('panel.users.show', ['user' => $user]);
   }
@@ -155,6 +160,10 @@ class Users extends Controller{
     $inputs['group_code'] = User::G_MANAGER;
     if(!$request->input('email'))
       unset($inputs['email']);
+    if(!Auth::user()->isAdmin()){
+      unset($inputs['status']);
+      unset($inputs['public']);
+    }
     $user = User::create($inputs);
     return redirect()->route('panel.users.show', ['user' => $user]);
   }
@@ -164,21 +173,48 @@ class Users extends Controller{
     $inputs['group_code'] = User::G_SECRETARY;
     if(!$request->input('email'))
       unset($inputs['email']);
+    if(!Auth::user()->isAdmin()){
+      unset($inputs['status']);
+      unset($inputs['public']);
+    }
     $user = User::create($inputs);
     return redirect()->route('panel.users.show', ['user' => $user]);
   }
 
   public function storeDoctor(DoctorCreateRequest $request){
+    $user = new User;
     $inputs = $request->all();
     if($request->hasFile('profile')){
       $inputs['profile'] = Storage::disk('public')->put('/users', $request->file('profile'));
+      // Storage::disk('public')->delete($user->profile);
     }
-    if(!$request->input('email'))
-      unset($inputs['email']);
     $inputs['group_code'] = User::G_DOCTOR;
-    $user = User::create($inputs);
-    $inputs['user_id'] = $user->id;
-    $doctor = Doctor::create($inputs);
+    if(!Auth::user()->isAdmin()){
+      unset($inputs['status']);
+      unset($inputs['public']);
+    }
+    if($inputs['email'] == null)
+      unset($inputs['email']);
+
+    $user->fill($inputs);
+    $user->save();
+
+    $doctor = new Doctor;
+    $doctor->fill($inputs);
+    $doctor->save();
+    $field_names = explode(', ', $request->fields);
+    // return $field_names;
+    UserConst::where('user_id', $user->id)->delete();
+    foreach($field_names as $field_name){
+      $const = ConstValue::where('value', str_replace(',', '', $field_name))->first();
+      if(!$const)
+        continue;
+      
+      UserConst::create([
+        'user_id'   => $user->id,
+        'const_id'  => $const->id,
+      ]);
+    }
     return redirect()->route('panel.users.show', ['user' => $user]);
   }
   public function storeNurse(NurseCreateRequest $request){
@@ -188,6 +224,10 @@ class Users extends Controller{
     }
     if(!$request->input('email'))
       unset($inputs['email']);
+    if(!Auth::user()->isAdmin()){
+      unset($inputs['status']);
+      unset($inputs['public']);
+    }
     $inputs['group_code'] = User::G_NURSE;
     $user = User::create($inputs);
     $inputs['user_id'] = $user->id;
@@ -201,6 +241,10 @@ class Users extends Controller{
     }
     if(!$request->input('email'))
       unset($inputs['email']);
+    if(!Auth::user()->isAdmin()){
+      unset($inputs['status']);
+      unset($inputs['public']);
+    }
     $inputs['group_code'] = User::G_PATIENT;
     $inputs['birth_date'] = Time::jmktime(0, 0, 0, $inputs['birth_day'], $inputs['birth_month'], $inputs['birth_year']);
     $user = User::create($inputs);
@@ -243,6 +287,10 @@ class Users extends Controller{
     $inputs = $request->all();
     if(!$request->input('email'))
       unset($inputs['email']);
+    if(!Auth::user()->isAdmin()){
+      unset($inputs['status']);
+      unset($inputs['public']);
+    }
     $inputs['group_code'] = User::G_ADMIN;
     $user->fill($inputs)->save();
     return redirect()->route('panel.users.show', ['user' => $user]);
@@ -251,6 +299,10 @@ class Users extends Controller{
     $inputs = $request->all();
     if(!$request->input('email'))
       unset($inputs['email']);
+    if(!Auth::user()->isAdmin()){
+      unset($inputs['status']);
+      unset($inputs['public']);
+    }
     $inputs['group_code'] = User::G_MANAGER;
     $user->fill($inputs)->save();
     return redirect()->route('panel.users.show', ['user' => $user]);
@@ -259,6 +311,10 @@ class Users extends Controller{
     $inputs = $request->all();
     if(!$request->input('email'))
       unset($inputs['email']);
+    if(!Auth::user()->isAdmin()){
+      unset($inputs['status']);
+      unset($inputs['public']);
+    }
     $inputs['group_code'] = User::G_SECRETARY;
     $user->fill($inputs)->save();
     return redirect()->route('panel.users.show', ['user' => $user]);
@@ -267,10 +323,15 @@ class Users extends Controller{
     $inputs = $request->all();
     if($request->hasFile('profile')){
       $inputs['profile'] = Storage::disk('public')->put('/users', $request->file('profile'));
+      Storage::disk('public')->delete($user->profile);
     }
-    if(!$request->input('email'))
-      unset($inputs['email']);
     $inputs['group_code'] = User::G_DOCTOR;
+    if($inputs['email'] == null)
+      unset($inputs['email']);
+    if(!Auth::user()->isAdmin()){
+      unset($inputs['status']);
+      unset($inputs['public']);
+    }
 
     $user->fill($inputs);
     $user->save();
@@ -278,7 +339,19 @@ class Users extends Controller{
     $doctor = $user->doctor;
     $doctor->fill($inputs);
     $doctor->save();
-
+    $field_names = explode(', ', $request->fields);
+    // return $field_names;
+    UserConst::where('user_id', $user->id)->delete();
+    foreach($field_names as $field_name){
+      $const = ConstValue::where('value', str_replace(',', '', $field_name))->first();
+      if(!$const)
+        continue;
+      
+      UserConst::create([
+        'user_id'   => $user->id,
+        'const_id'  => $const->id,
+      ]);
+    }
     return redirect()->route('panel.users.show', ['user' => $user]);
   }
   public function updateNurse(NurseEditRequest $request, User $user){
@@ -288,6 +361,10 @@ class Users extends Controller{
     }
     if(!$request->input('email'))
       unset($inputs['email']);
+    if(!Auth::user()->isAdmin()){
+      unset($inputs['status']);
+      unset($inputs['public']);
+    }
     $inputs['group_code'] = User::G_NURSE;
 
     $user->fill($inputs);
@@ -306,6 +383,10 @@ class Users extends Controller{
     }
     if(!$request->input('email'))
       unset($inputs['email']);
+    if(!Auth::user()->isAdmin()){
+      unset($inputs['status']);
+      unset($inputs['public']);
+    }
     $inputs['group_code'] = User::G_PATIENT;
 
     $user->fill($inputs);

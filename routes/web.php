@@ -99,6 +99,7 @@ Route::middleware(['auth', 'Permission'])->namespace('Panel')->prefix('panel')->
     Route::prefix('unit-users')->name('unit_users.')->group(function(){
         Route::get('/create-manager', 'UnitUsers@createManager')->name('create.manager');
         Route::get('/create-member', 'UnitUsers@createMember')->name('create.member');
+        Route::get('/create-secretary', 'UnitUsers@createSecretary')->name('create.secretary');
         Route::post('/store', 'UnitUsers@store')->name('store');
 
         Route::get('/send/{unit}', 'UnitUsers@send')->name('send');
