@@ -29,13 +29,14 @@ class Permission
         'panel.users.create.doctor'                         => [ 1, 2 ],
         'panel.users.create.nurse'                          => [ 1, 2 ],
         'panel.users.create.patient'                        => [ 1 ],
+        'panel.users.create.secretary'                      => [ 1, 2, 3, 4 ],
 
         'panel.users.store.admin'                           => [ 1 ],
         'panel.users.store.manager'                         => [ 1 ],
         'panel.users.store.doctor'                          => [ 1, 2 ],
         'panel.users.store.nurse'                           => [ 1, 2 ],
         'panel.users.store.patient'                         => [ 1 ],
-        'panel.users.store.secretary'                      => [ 1, 2, 3, 4 ],
+        'panel.users.store.secretary'                       => [ 1, 2, 3, 4 ],
 
         'panel.users.update.admin'                          => [ 1 ],
         'panel.users.update.manager'                        => [ 1 ],
@@ -153,6 +154,7 @@ class Permission
         'panel.search.fields.nurse'                         => [ 1, 2, 3, 4 ],
         'panel.search.managers'                             => [ 1, 2, 3, 4 ],
         'panel.search.members'                              => [ 1, 2, 3, 4 ],
+        'panel.search.secretaries'                          => [ 1, 2, 3, 4 ],
         'panel.search.joiners'                              => [ 1, 2, 3, 4 ],
         'panel.search.unit_users'                           => [ 1, 5 ],
 
@@ -169,10 +171,11 @@ class Permission
 
         'panel.unit_users.send'                             => [ 2, 3, 4 ],
         'panel.unit_users.index'                            => [ 1, 2 ],
-        'panel.unit_users.create.member'                    => [ 1, 2 ],
-        'panel.unit_users.create.manager'                   => [ 1, 2 ],
-        'panel.unit_users.store'                            => [ 1, 2 ],
-        'panel.unit_users.inline_update'                    => [ 1, 2 ],
+        'panel.unit_users.create.member'                    => [ 1, 2, 3, 4 ],
+        'panel.unit_users.create.manager'                   => [ 1, 2, 3, 4 ],
+        'panel.unit_users.create.secretary'                 => [ 1, 2, 3, 4 ],
+        'panel.unit_users.store'                            => [ 1, 2, 3, 4 ],
+        'panel.unit_users.inline_update'                    => [ 1, 2, 3, 4 ],
 
         'panel.prints.units.index'                          => [ 1, 2, 3, 4, 5, 6 ],
         'panel.prints.units.members'                        => [ 1, 2, 3, 4, 5, 6 ],

@@ -169,7 +169,7 @@
                   <a class="btn btn-default" href="{{route('panel.users.show', ['user' => $user])}}">{{__('users.show')}}</a>
                 @endif
                 @if($unit->has_permission)
-                  <a class="btn btn-warning" href="{{route('panel.unit_users.inline_update', ['unit_user' => $user->pivot->id, 'user' => $user, 'action' => 'cancel'])}}">{{__('unit_users.cancel')}}</a>
+                  <a class="btn btn-warning" href="{{route('panel.unit_users.inline_update', ['unit_user' => $user->pivot->id, 'action' => 'cancel'])}}">{{__('unit_users.cancel')}}</a>
                 @endif
                 @if(Auth::user()->isPatient())
                   <a class="btn btn-default" href="{{route('panel.demands.create.unit_user', ['unit' => $unit, 'user' => $user])}}">{{__('demands.create_unit_user')}}</a>
@@ -189,6 +189,9 @@
   </div>
   <div class="panel panel-default">
     <div class="panel-heading sub-panel-title">
+      @if($unit->has_permission)
+        <a href="{{route('panel.unit_users.create.secretary', ['unit_id' => $unit->id])}}" class="btn btn-primary sub-panel-add"><i class="fa fa-plus"></i></a>
+      @endif
       {{__('unit_users.secretaries')}}
     </div>
     @if(sizeof($unit->secretaries))
@@ -218,7 +221,7 @@
                   <a class="btn btn-default" href="{{route('panel.users.show', ['user' => $user])}}">{{__('users.show')}}</a>
                 @endif
                 @if($unit->has_permission)
-                  <a class="btn btn-warning" href="{{route('panel.unit_users.inline_update', ['unit_user' => $user->pivot->id, 'user' => $user, 'action' => 'cancel'])}}">{{__('unit_users.cancel')}}</a>
+                  <a class="btn btn-warning" href="{{route('panel.unit_users.inline_update', ['unit_user' => $user->pivot->id, 'action' => 'cancel'])}}">{{__('unit_users.cancel')}}</a>
                 @endif
               </td>
             </tr>

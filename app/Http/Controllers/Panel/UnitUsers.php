@@ -77,6 +77,17 @@ class UnitUsers extends Controller{
       'full_name' => $full_name,
     ]);
   }
+  public function createSecretary(Request $request){
+    $user = User::find($request->input('user_id', ''));
+    $full_name = '';
+    if($user)
+      $full_name = $user->full_name;
+    return view('panel.unit_users.create.secretary', [
+      'units'     => Unit::fetch(true)->get(),
+      'unit_id'   => $request->input('unit_id', 0),
+      'full_name' => $full_name,
+    ]);
+  }
 
   public function store(UnitUserRequest $request){
     $user = User::whereRaw("concat(first_name, ' ', last_name) = '". $request->full_name ."'")->first();
@@ -93,23 +104,23 @@ class UnitUsers extends Controller{
   public function inlineUpdate(Request $request, UnitUser $unit_user, $action){
     switch($action){
         case 'accept':
-            if($unit_user->canAccept()){
-                $unit_user->status = UnitUser::ACCEPTED;
-                $unit_user->save();
-            }
-            break;
+          if($unit_user->canAccept()){
+              $unit_user->status = UnitUser::ACCEPTED;
+              $unit_user->save();
+          }
+          break;
         case 'refuse':
-            if($unit_user->canRefuse()){
-                $unit_user->status = UnitUser::REFUSED;
-                $unit_user->save();
-            }
-            break;
+          if($unit_user->canRefuse()){
+              $unit_user->status = UnitUser::REFUSED;
+              $unit_user->save();
+          }
+          break;
         case 'cancel':
-            if($unit_user->canCancel()){
-                $unit_user->status = UnitUser::CANCELED;
-                $unit_user->save();
-            }
-            break;
+          if($unit_user->canCancel()){
+              $unit_user->status = UnitUser::CANCELED;
+              $unit_user->save();
+          }
+          break;
     }
     return redirect()->back();
   }

@@ -25,7 +25,9 @@ return [
     'create'        => [
         'manager'   => 'مدیر جدید',
         'member'    => 'پرسنل جدید',
+        'secretary' => 'منشی جدید',
     ],
+    'user_not_registered'   => 'کاربر مورد نظر من هنوز ثبت نام نکرده است',
     'save'          => 'ذخیره',
     'edit'          => 'ویرایش',
     'remove'        => 'حذف',

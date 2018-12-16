@@ -85,7 +85,7 @@ class UnitUser extends UModel
         $user = Auth::user();
         if($user->isAdmin())
             return true;
-        else if($user->isManager())
+        else if($user->isManager() || $user->isDoctor() || $user->isNurse())
             return $this->unit->managers()->where('users.id', $user->id)->first() != null;
         else
             return false;
@@ -96,7 +96,7 @@ class UnitUser extends UModel
         $user = Auth::user();
         if($user->isAdmin())
             return true;
-        else if($user->isManager())
+        else if($user->isManager() || $user->isDoctor() || $user->isNurse())
             return $this->unit->managers()->where('users.id', $user->id)->first() != null;
         else
             return false;
@@ -107,7 +107,7 @@ class UnitUser extends UModel
         $user = Auth::user();
         if($user->isAdmin())
             return true;
-        else if($user->isManager())
+        else if($user->isManager() || $user->isDoctor() || $user->isNurse())
             return $this->unit->managers()->where('users.id', $user->id)->first() != null;
         else
             return false;

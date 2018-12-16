@@ -114,6 +114,7 @@ Route::middleware(['auth', 'Permission'])->namespace('Panel')->prefix('panel')->
         Route::get('/patients', 'Search@patients')->name('patients');
         Route::get('/units', 'Search@units')->name('units');
         Route::get('/members', 'Search@members')->name('members');
+        Route::get('/secretaries', 'Search@secretaries')->name('secretaries');
         Route::get('/managers', 'Search@managers')->name('managers');
         Route::get('/joiners', 'Search@joiners')->name('joiners');
         Route::get('/unit-users', 'Search@unitUsers')->name('unit_users');
