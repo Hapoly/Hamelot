@@ -35,7 +35,7 @@
           </tr>
           <tr>
             <td>{{__('bids.demand_id')}}</td>
-            <td><a href="{{route('panel.demands.show', ['demand' => $bid->demand])}}">{{$bid->demand->description}}</a></td>
+            <td><a href="{{route('panel.demands.show', ['demand' => $bid->demand])}}">{{$bid->demand->description_str}}</a></td>
           </tr>
           <tr>
             <td>{{__('bids.status')}}</td>
