@@ -3,25 +3,9 @@
 @else
 <div class="col-md-{{isset($col)? $col : 12}}" style="float: right">
 @endif
-    @if(isset($help))
-        <div class="popup" id="popup{{$name}}"><i class="fa fa-question-circle" aria-hidden="true"></i>
-            <span class="popuptext" id="help{{$name}}">
-                {{$help}}
-            </span>
-        </div>
-    @endif
     <label for="{{$name}}" class="col-md-2 col-form-label text-center" style="float:right;">{{$label}}</label>
-    <div class="col-md-1" style="padding:0;">
-        @if(isset($help))
-            <div class="popup" id="popup{{$name}}"><i class="fa fa-question-circle" aria-hidden="true"></i>
-                <span class="popuptext" id="help{{$name}}">
-                    {{$help}}
-                </span>
-            </div>
-        @endif
-    </div>
-    <div class="col-md-9" style="padding-left:0;">
-        <div class="input-group" style="width: 93%">
+    <div class="col-md-{{isset($col)?9:10}}" style="padding-left:0;">
+        <div class="input-group" style="{{isset($col)?'width: 84%': 'width: 91%'}}">
             <input type="number" min="0" class="input-group-with-left-addon" id="{{$name}}" name="{{$name}}" value="{{$value}}">
             <span class="left-addon">{{$placeholder}}</span>
         </div>
@@ -30,7 +14,14 @@
             <strong>{{ $errors->first($name) }}</strong>
             </span>
         @endif
-    </div>    
+        @if(isset($help))
+            <div class="popup" id="popup{{$name}}"><i class="fa fa-question-circle" aria-hidden="true"></i>
+                <span class="popuptext" id="help{{$name}}">
+                    {{$help}}
+                </span>
+            </div>
+        @endif
+    </div>
 </div>
 @if(isset($help))
     <script>

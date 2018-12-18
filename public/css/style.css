@@ -728,6 +728,8 @@ h2, h3, h4{
 }
 /* popup things */
 .popup {
+    left: 0px;
+    top: 0px;
     position: absolute;
     z-index: 1;
     display: inline-block;

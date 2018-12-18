@@ -45,7 +45,7 @@ class UnitUser extends UModel
                     return $query->where('users.id', Auth::user()->id);
                 });
             });
-        }else if(Auth::user()->isDoctor() || Auth::user()->isNurse())
+        }else
             return UnitUser::where('user_id', Auth::user()->id);
     }
     

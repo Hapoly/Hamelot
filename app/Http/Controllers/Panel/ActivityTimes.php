@@ -50,7 +50,48 @@ class ActivityTimes extends Controller{
     return view('panel.activity_times.show', ['activity_time' => $activity_time]);
   }
   public function create(Request $request){
-    return view('panel.activity_times.create');
+    $unit_users = UnitUser::where('permission', UnitUser::MEMBER)->where('status', UnitUser::ACCEPTED);
+    if(Auth::user()->isAdmin())
+      $unit_users = $unit_users->get();
+    else if(Auth::user()->isManager())
+      $unit_users = $unit_users->whereHas('unit', function($query){
+        return $query->whereHas('managers', function($query){
+          return $query->where('users.id', Auth::user()->id);
+        });
+      })->get();
+    else if(Auth::user()->isSecretary())
+      $unit_users = $unit_users->whereHas('unit', function($query){
+        return $query->whereHas('secretaries', function($query){
+          return $query->where('users.id', Auth::user()->id);
+        });
+      })->get();
+    else
+      $unit_users = $unit_users->where('user_id', Auth::user()->id)->get();
+    return view('panel.activity_times.create.default', [
+      'unit_users'  => $unit_users,
+    ]);
+  }
+  public function createVisit(Request $request){
+    $unit_users = UnitUser::where('permission', UnitUser::MEMBER)->where('status', UnitUser::ACCEPTED);
+    if(Auth::user()->isAdmin())
+      $unit_users = $unit_users->get();
+    else if(Auth::user()->isManager())
+      $unit_users = $unit_users->whereHas('unit', function($query){
+        return $query->whereHas('managers', function($query){
+          return $query->where('users.id', Auth::user()->id);
+        });
+      })->get();
+    else if(Auth::user()->isSecretary())
+      $unit_users = $unit_users->whereHas('unit', function($query){
+        return $query->whereHas('secretaries', function($query){
+          return $query->where('users.id', Auth::user()->id);
+        });
+      })->get();
+    else
+      $unit_users = $unit_users->where('user_id', Auth::user()->id)->get();
+    return view('panel.activity_times.create.visit', [
+      'unit_users'  => $unit_users,
+    ]);
   }
   public function store(ActivityTimeCreateRequest $request){
     $inputs = $request->all();

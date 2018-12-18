@@ -1,21 +1,18 @@
 @extends('layouts.main')
 @section('title', __('activity_times.create'))
 @section('content')
-@php
-  use App\Models\UnitUser;
-@endphp
 <div class="container">
   @form_create(['action' => route('panel.activity-times.store'), 'title' => __('activity_times.create')])
     <div class="row">
       @php
         $unit_user_rows = [];
-        foreach(UnitUser::fetch()->where('permission', UnitUser::MEMBER)->get() as $unit_user){
+        foreach($unit_users as $unit_user){
           if(Auth::user()->isDoctor() || Auth::user()->isNurse()){
             array_push($unit_user_rows, [
               'value' => $unit_user->id,
               'label' => $unit_user->unit->complete_title,
             ]);
-          }else if(Auth::user()->isManager() || Auth::user()->isAdmin()){
+          }else if(Auth::user()->isManager() || Auth::user()->isAdmin() || Auth::user()->isSecretary()){
             array_push($unit_user_rows, [
               'value' => $unit_user->id,
               'label' => $unit_user->unit->complete_title . ' - ' . $unit_user->user->full_name,

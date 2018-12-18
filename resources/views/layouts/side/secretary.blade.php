@@ -88,7 +88,7 @@
 		</a>
 		<ul class="collapse list-unstyled" id="activity-times">
 			<li>
-				<a href="{{route('panel.activity-times.create')}}">زمان نوب‌ت‌دهی جدید </a>
+				<a href="{{route('panel.activity-times.create_visit')}}">زمان نوب‌ت‌دهی جدید </a>
 			</li>
 			<li>
 				<a href="{{route('panel.activity-times.index')}}">زمان‌های نوبت‌دهی</a>

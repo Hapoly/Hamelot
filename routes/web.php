@@ -22,6 +22,7 @@ Route::middleware(['auth', 'Permission'])->namespace('Panel')->prefix('panel')->
         'bids'              => 'Bids',
         'bank-accounts'     => 'BankAccounts',
     ]);
+    Route::get('/activity-times/create/visit', 'ActivityTimes@createVisit')->name('activity-times.create_visit');
     Route::prefix('units')->name('units.')->group(function(){
         Route::get('/create/clinic', 'Units@createClinic')->name('create.clinic');
     });
