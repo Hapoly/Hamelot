@@ -25,7 +25,7 @@
     <input name="permission" value="{{UnitUser::SECRETARY}}" hidden />
     <div class="row">
       <div class="col-md-12" style="text-align: center;">
-        <a style="text-decoration: underline;" href="{{route('panel.users.create.secretary')}}">{{__('unit_users.user_not_registered')}}</a>
+        <a style="text-decoration: underline;" href="{{route('panel.users.create.secretary', ['unit_id' => $unit_id])}}">{{__('unit_users.user_not_registered')}}</a>
         <button class="btn btn-primary" type="submit" value="new">{{__('unit_users.save')}}</button>
       </div>
     </div>

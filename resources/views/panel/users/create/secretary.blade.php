@@ -13,6 +13,7 @@
                 ['label' => __('users.status_str.' . 2), 'value' => 2],
             ];
         @endphp
+        <input name="unit_id" value="{{$unit_id}}" hidden />
         @input_select(['name' => 'status', 'value' => old('status'), 'label' => __('users.status'), 'required' => true, 'rows' => $status_rows, 'row' => true])
         @submit_row(['value' => 'save', 'label' => __('users.save')])
     @endform_create

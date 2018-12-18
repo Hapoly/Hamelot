@@ -139,7 +139,11 @@ class Users extends Controller{
   public function createDoctor()  { return view('panel.users.create.doctor');   }
   public function createNurse()   { return view('panel.users.create.nurse');    }
   public function createPatient() { return view('panel.users.create.patient');  }
-  public function createSecretary() { return view('panel.users.create.secretary');  }
+  public function createSecretary(Request $request) {
+    return view('panel.users.create.secretary', [
+      'unit_id' => $request->input('unit_id', 0),
+    ]);
+  }
   /**
    * store users in user groups
    */
@@ -178,6 +182,17 @@ class Users extends Controller{
       unset($inputs['public']);
     }
     $user = User::create($inputs);
+    if($request->has('unit_id')){
+      if($request->unit_id != 0){
+        UnitUser::create([
+          'unit_id'     => $request->unit_id,
+          'user_id'     => $user->id,
+          'permission'  => UnitUser::SECRETARY,
+          'status'      => UnitUser::ACCEPTED,
+        ]);
+        return redirect()->route('panel.units.show', ['unit_id' => $request->unit_id]);
+      }
+    }
     return redirect()->route('panel.users.show', ['user' => $user]);
   }
 
