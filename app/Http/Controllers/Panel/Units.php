@@ -69,7 +69,7 @@ class Units extends Controller{
     ]);
   }
   public function show(Request $request, Unit $unit){
-    return view('panel.units.show', ['unit' => $unit]);
+    return view('panel.units.show.' . $unit->group_code, ['unit' => $unit]);
   }
   public function create(Request $request){
     $parents = new Unit;

@@ -71,4 +71,9 @@ return [
 
     'no_access'         => ' - ',
     'slug'              => 'نام اختصاری',
+
+    'doctor'            => [
+        'full_name'     => 'پزشک',
+        'fields'        => 'تخصص ها',
+    ],
 ];
