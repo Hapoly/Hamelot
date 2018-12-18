@@ -14,12 +14,12 @@ class DatabaseSeeder extends Seeder
         $this->call(Consts::class);
         $this->call(Provinces::class);
         $this->call(Cities::class);
-        $this->call(Users::class);
-        $this->call(Addresses::class);
-        $this->call(Units::class);
-        $this->call(UnitUsers::class);
+        // $this->call(Users::class);
+        // $this->call(Addresses::class);
+        // $this->call(Units::class);
+        // $this->call(UnitUsers::class);
         $this->call(ReportTemplates::class);
-        $this->call(ActivityTimes::class);
+        // $this->call(ActivityTimes::class);
         // $this->call(Demands::class);
         // $this->call(Bids::class);
     }

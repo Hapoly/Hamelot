@@ -65,7 +65,7 @@
     @if(Auth::user()->isPatient())
       <div class="row">
         <div class="col-md-12" style="text-align: center">
-          <a class="btn btn-default" href="{{route('panel.demands.create.unit', ['unit' => $unit])}}">{{__('demands.create_visit')}}</a>
+          <a class="btn btn-default" href="{{route('unit', ['key' => $unit->slug])}}">{{__('demands.create_visit')}}</a>
         </div>
       </div>
     @endif

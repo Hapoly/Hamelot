@@ -115,31 +115,32 @@ class Units extends Controller{
     $inputs['mobile'] = $this->replace_digits($inputs['mobile']);
     $unit = Unit::create($inputs);
 
-    $secretary = User::where('phone', $inputs['mobile'])->first();
-    if(!$secretary)
-      $secretary = User::create([
-        'phone' => $inputs['mobile'],
-        'group_code'  => User::G_SECRETARY
-      ]);
-    UnitUser::create([
-      'user_id' => $secretary->id,
-      'unit_id' => $unit->id,
-      'permission'  => UnitUser::SECRETARY,
-      'status'  => UnitUser::ACCEPTED,
-    ]);
-    
-    if(!Auth::user()->isAdmin()){
+    if($inputs['group_code'] == Unit::CLINIC){
+      $secretary = User::where('phone', $inputs['mobile'])->first();
+      if(!$secretary)
+        $secretary = User::create([
+          'phone' => $inputs['mobile'],
+          'group_code'  => User::G_SECRETARY
+        ]);
       UnitUser::create([
+        'user_id' => $secretary->id,
         'unit_id' => $unit->id,
-        'user_id' => Auth::user()->id,
+        'permission'  => UnitUser::SECRETARY,
         'status'  => UnitUser::ACCEPTED,
-        'permission' => UnitUser::MANAGER,
       ]);
       UnitUser::create([
         'unit_id' => $unit->id,
         'user_id' => Auth::user()->id,
         'status'  => UnitUser::ACCEPTED,
         'permission' => UnitUser::MEMBER,
+      ]);
+    }
+    if(!Auth::user()->isAdmin()){
+      UnitUser::create([
+        'unit_id' => $unit->id,
+        'user_id' => Auth::user()->id,
+        'status'  => UnitUser::ACCEPTED,
+        'permission' => UnitUser::MANAGER,
       ]);
     }
     return redirect()->route('panel.units.show', ['unit' => $unit]);

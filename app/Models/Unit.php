@@ -123,23 +123,6 @@ class Unit extends UModel{
         if(!$this->id)
             $this->id = Uuid::generate()->string;
         parent::save($options);
-        
-        // check if dont have secretary, creates it
-        $secretary = User::where('phone', $this->mobile)->first();
-        if(!$secretary){
-            $secretary = User::create([
-                'phone'         => $this->mobile,
-                'group_code'    => User::G_SECRETARY,
-            ]);
-        }
-        if($secretary->isSecretary()){
-            UnitUser::create([
-                'unit_id'       => $this->id,
-                'user_id'       => $this->id,
-                'permission'    => UnitUser::SECRETARY,
-                'status'        => UnitUser::ACCEPTED,
-            ]);
-        }
 
 
         $entry = Entry::where('target_id', $this->id)->where('group_code', $this->group_code_to_gc[$this->group_code])->first();
@@ -150,6 +133,8 @@ class Unit extends UModel{
             'lat'           => $this->lat,
             'city_id'       => $this->city_id,
             'province_id'   => $this->city->province_id,
+            'phone'         => $this->phone,
+            'mobile'        => $this->mobile,
             
             'group_code'    => $this->group_code,
             'public'        => $this->public,
@@ -162,6 +147,7 @@ class Unit extends UModel{
             $entry->fill($data);
             $entry->save();  
         }else{
+            $data['group_code'] = $this->group_code_to_gc[$this->group_code];
             Entry::create($data);
         }   
     }

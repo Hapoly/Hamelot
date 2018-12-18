@@ -13,8 +13,7 @@ class HomeController extends Controller
      *
      * @return void
      */
-    public function __construct()
-    {
+    public function __construct(){
     }
 
     /**
@@ -22,8 +21,7 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
+    public function index(){
         return view('home');
     }
     public function search(Request $request){
