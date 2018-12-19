@@ -13,6 +13,8 @@ return [
     'start_time'    => 'زمان شروع',
     'finish_time'   => 'زمان پایان',
 
+    'index_title'   => 'زمان‌های نوبت‌دهی',
+
     'time'          => 'بازه زمانی',
 
     'search'        => 'جستجو',

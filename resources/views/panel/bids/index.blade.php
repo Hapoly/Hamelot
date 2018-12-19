@@ -4,6 +4,58 @@
 @php
   use App\Models\Bid;
 @endphp
+<div class="filter-panel">
+  <div class="row justify-content-center">
+    <div class="col-8">
+      <div class="panel panel-default">
+        <div class="panel-heading">جستجو</div>
+        <div class="panel-body">
+          <form>
+            <div class="row">
+              <div class="col-md-4">
+                <div class="form-group">
+                  <select class="form-control" name="day" style="width: 100%">
+                    <option value="0"> همه روز‌ها</option>
+                    @for($i=1; $i<=31; $i++)
+                      <option value="{{$i}}" {{isset($filters['day'])? ($filters['day'] == $i ? 'selected': ''): ''}}>{{$i}}</option>
+                    @endfor
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <select class="form-control" name="month" style="width: 100%">
+                    <option value="0"> تمام ماه‌ها</option>
+                    @for($i=1; $i<=12; $i++)
+                      <option value="{{$i}}" {{isset($filters['month'])? ($filters['month'] == $i? 'selected': '') : ''}}>{{__('general.month_str.' . $i)}}</option>
+                    @endfor
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <input class="form-control" name="year" value="{{isset($filters['year'])?$filters['year']:''}}" placeholder="سال" type="number" min="1390" max="1400" style="width: 100%" />
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4">
+                <div class="form-group">
+                  <input class="form-control" name="phone" value="{{isset($filters['phone'])? $filters['phone']:''}}" placeholder="شماره تلفن" type="text" style="width: 100%" />
+                </div>
+              </div>
+            </div>
+            <div class="row" style="margin-bottom:2px;margin-top:2px;">
+              <div class="col-md-12">
+                <button class="btn btn-info" type="submit">{{__('activity_times.search')}}</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 <div class="row" style="margin-bottom:50px;">
   @table([
     'route' => 'panel.bids.index', 

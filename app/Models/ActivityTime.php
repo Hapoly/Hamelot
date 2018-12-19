@@ -55,6 +55,14 @@ class ActivityTime extends UModel
                     });
                 });
             });
+        }else if(Auth::user()->isSecretary()){
+            return ActivityTime::whereHas('unit_user', function($query){
+                return $query->whereHas('unit', function($query){
+                    return $query->whereHas('secretaries', function($query){
+                        return $query->where('users.id', Auth::user()->id);
+                    });
+                });
+            });
         }else
             return ActivityTime::whereHas('unit_user', function($query){
                 return $query->where('user_id', Auth::user()->id);

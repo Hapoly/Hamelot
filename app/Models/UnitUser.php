@@ -45,6 +45,12 @@ class UnitUser extends UModel
                     return $query->where('users.id', Auth::user()->id);
                 });
             });
+        }else if(Auth::user()->isSecretary()){
+            return UnitUser::whereHas('unit', function($query){
+                return $query->whereHas('secretaries', function($query){
+                    return $query->where('users.id', Auth::user()->id);
+                });
+            });
         }else
             return UnitUser::where('user_id', Auth::user()->id);
     }

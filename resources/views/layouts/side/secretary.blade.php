@@ -50,7 +50,7 @@
 	<li>
 		<a href="{{route('panel.bids.index')}}" aria-expanded="false">
 			<i class="fa fa-stethoscope" aria-hidden="false"></i>
-			<span>نوبت ویزیت‌های</span>
+			<span>نوبت‌های ویزیت</span>
 		</a>
 	</li>
 	<li>

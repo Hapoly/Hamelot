@@ -47,7 +47,7 @@
 	<li>
 		<a href="{{route('panel.bids.index')}}" aria-expanded="false">
 			<i class="fa fa-stethoscope" aria-hidden="false"></i>
-			<span>نوبت ویزیت‌های من</span>
+			<span>نوبت‌های ویزیت من</span>
 		</a>
 	</li>
 	<li>

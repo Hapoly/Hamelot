@@ -9,6 +9,8 @@ use Auth;
 use App\Http\Requests\Bid\Create as BidCreateRequest;
 use App\Http\Requests\ZarinPal\CallBack as ZarinPalCallBackRequest;
 
+use App\Drivers\Time;
+
 use App\Models\Bid;
 use App\Models\Demand;
 use App\Models\Transaction;
@@ -23,14 +25,29 @@ class Bids extends Controller{
 
         if($request->has('sort'))
             $bids = $bids->orderBy($request->input('sort'), 'desc');
+        if($request->has('day')){
+            $time = Time::jmktime(0, 0, 0, $request->day, $request->month, $request->year);
+            $bids = $bids->where('date', '>', $time)->where('date', '<', $time + 24*3600);
+        }
+        if($request->has('phone')){
+            $bids = $bids->whereHas('user', function($query) use ($request){
+                return $query->where('phone', 'LIKE', '%'.$request->input('phone').'%');
+            });
+        }
         $bids = $bids->paginate(10);
+
         
         return view('panel.bids.index', [
-            'bids'   => $bids,
-            'links'       => $links,
-            'sort'        => $sort,
-            'search'      => isset(parse_url(url()->full())['query'])? parse_url(url()->full())['query']: '',
-            'filters'     => [],
+            'bids'      => $bids,
+            'links'     => $links,
+            'sort'      => $sort,
+            'search'    => isset(parse_url(url()->full())['query'])? parse_url(url()->full())['query']: '',
+            'filters'   => [
+                'day'   => $request->input('day', Time::jdate('d', time(), 'none', 'Asia/Tehran', 'en')),
+                'month' => $request->input('month', Time::jdate('m', time(), 'none', 'Asia/Tehran', 'en')),
+                'year'  => $request->input('year', Time::jdate('Y', time(), 'none', 'Asia/Tehran', 'en')),
+                'phone' => $request->input('phone', ''),
+            ],
         ]);
     }
     public function create(Request $request){
