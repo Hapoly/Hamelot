@@ -66,7 +66,7 @@ class Doctor extends UModel{
         if(!$this->id)
             $this->id = Uuid::generate()->string;
         parent::save($options);
-        $entry = Entry::where('target_id', $this->id)->where('group_code', Entry::DOCTOR)->first();
+        $entry = Entry::where('target_id', $this->user->id)->where('group_code', Entry::DOCTOR)->first();
         $data = [
             'target_id'     => $this->user->id,
             'title'         => $this->user->full_name,
@@ -79,7 +79,6 @@ class Doctor extends UModel{
         
         if($this->status)
             $data['status'] = $this->status;
-
         if($entry){
             $entry->fill($data);
             $entry->save();  

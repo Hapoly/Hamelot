@@ -39,7 +39,7 @@
                             <span class="center">
                                 {{$result->unit->address}}
                             </span>
-                            <a href="{{route('show.unit', ['slug' => $result->unit->slug])}}" class="btn see-more-btn center">
+                            <a href="{{route('show.unit', ['slug' => $result->slug])}}" class="btn see-more-btn center">
                                 مشاهده صفحه
                             </a>
                         </div>
@@ -65,7 +65,7 @@
                             <span class="center">
                                 کد نظام‌پزشکی: {{$result->user->msc_str}}
                             </span>
-                            <a href="{{route('show.user', ['username' => $result->user->username])}}" class="btn see-more-btn center">
+                            <a href="{{route('show.user', ['slug' => $result->slug])}}" class="btn see-more-btn center">
                                 مشاهده صفحه
                             </a>
                         </div>
@@ -91,7 +91,7 @@
                             <span class="center">
                                 کد نظام‌پزشکی: {{$result->user->msc_str}}
                             </span>
-                            <a href="{{route('show.user', ['username' => $result->user->username])}}" class="btn see-more-btn center">
+                            <a href="{{route('show.user', ['slug' => $result->slug])}}" class="btn see-more-btn center">
                                 مشاهده صفحه
                             </a>
                         </div>

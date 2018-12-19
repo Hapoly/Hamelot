@@ -7,10 +7,9 @@ use App\Drivers\Time;
 use App\User;
 use App\Models\Unit;
 
-class GeneralController extends Controller
-{
-    public function showUser(Request $request, $username){
-        $user = User::where('username', $username)->firstOrFail();
+class GeneralController extends Controller{
+    public function showUser(Request $request, $slug){
+        $user = User::where('slug', $slug)->firstOrFail();
         $activity_times = $user->activity_times($request->input('time', 0));
         $user->activity_times = $activity_times;
         return view('general.show.user', [

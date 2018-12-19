@@ -70,7 +70,7 @@ class Nurse extends UModel
         if(!$this->id)
             $this->id = Uuid::generate()->string;
         parent::save($options);
-        $entry = Entry::where('target_id', $this->id)->where('group_code', Entry::NURSE)->first();
+        $entry = Entry::where('target_id', $this->user->id)->where('group_code', Entry::NURSE)->first();
         $data = [
             'target_id'     => $this->user->id,
             'title'         => $this->user->full_name,
