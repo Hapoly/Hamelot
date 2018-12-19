@@ -17,6 +17,7 @@ class CreateEntriesTable extends Migration
             $table->uuid('id');
             $table->primary('id');
             $table->string('title', 64)->index()->default('NuLL');
+            $table->string('slug', 64)->index()->unique();
             $table->decimal('lon', 12, 10)->index()->default(0);
             $table->decimal('lat', 12, 10)->index()->default(0);
             $table->uuid('city_id')->index()->default(0);

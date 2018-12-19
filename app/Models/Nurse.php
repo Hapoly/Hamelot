@@ -70,24 +70,25 @@ class Nurse extends UModel
         if(!$this->id)
             $this->id = Uuid::generate()->string;
         parent::save($options);
-        // $entry = Entry::where('target_id', $this->id)->where('group_code', Entry::NURSE)->first();
-        // $data = [
-        //     'target_id'     => $this->user->id,
-        //     'title'         => $this->user->full_name,
+        $entry = Entry::where('target_id', $this->id)->where('group_code', Entry::NURSE)->first();
+        $data = [
+            'target_id'     => $this->user->id,
+            'title'         => $this->user->full_name,
+            'slug'          => $this->user->slug,
             
-        //     'group_code'    => Entry::NURSE,
-        //     'public'        => $this->user->public,
-        //     'type'          => Entry::ACTUAL,
-        // ];
-        // if($this->status)
-        //     $data['status'] = $this->status;
+            'group_code'    => Entry::NURSE,
+            'public'        => $this->user->public,
+            'type'          => Entry::ACTUAL,
+        ];
+        if($this->status)
+            $data['status'] = $this->status;
 
-        // if($entry){
-        //     $entry->fill($data);
-        //     $entry->save();  
-        // }else{
-        //     Entry::create($data);
-        // }   
+        if($entry){
+            $entry->fill($data);
+            $entry->save();  
+        }else{
+            Entry::create($data);
+        }   
     }
 
     public function delete(){

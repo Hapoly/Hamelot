@@ -3,6 +3,9 @@
 namespace App\Http\Requests\Profile\Edit;
 
 use App\Http\Requests\PersianFormRequest;
+use Illuminate\Validation\Rule;
+
+use Auth;
 
 class Doctor extends PersianFormRequest
 {
@@ -21,11 +24,12 @@ class Doctor extends PersianFormRequest
      *
      * @return array
      */
-    public function rules()
-    {
+    public function rules(){
+        $user_id = Auth::user()->id;
         return [
             'first_name'    => 'required|string',
             'last_name'     => 'required|string',
+            'slug'          => ['required', 'string', 'max:64', 'min:6', Rule::unique('users')->ignore($user_id)],
             'gender'        => 'required|numeric',
             'profile'       => 'image',
             'msc'           => 'required|string|max:16',

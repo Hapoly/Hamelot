@@ -31,6 +31,7 @@ class Nurse extends PersianFormRequest
         return [
             'first_name'    => 'required|string',
             'last_name'     => 'required|string',
+            'slug'          => 'required|string|max:64|min:6',
             'gender'        => 'required|numeric',
             'profile'       => 'image',
             'public'        => 'required|numeric',

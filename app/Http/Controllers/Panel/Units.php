@@ -120,7 +120,8 @@ class Units extends Controller{
       if(!$secretary)
         $secretary = User::create([
           'phone' => $inputs['mobile'],
-          'group_code'  => User::G_SECRETARY
+          'group_code'  => User::G_SECRETARY,
+          'slug'        => rand(0, 99999999),
         ]);
       UnitUser::create([
         'user_id' => $secretary->id,

@@ -29,6 +29,7 @@ class Nurse extends PersianFormRequest
         $data = [
             'first_name'    => 'required|string',
             'last_name'     => 'required|string',
+            'slug'          => ['required', 'string', 'max:64', 'min:6', 'unique:users'],
             'gender'        => 'required|numeric',
             'profile'       => 'image',
             'public'        => 'required|numeric',

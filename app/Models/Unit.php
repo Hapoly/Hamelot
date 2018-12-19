@@ -129,6 +129,7 @@ class Unit extends UModel{
         $data = [
             'target_id'     => $this->id,
             'title'         => $this->title,
+            'slug'          => $this->slug,
             'lon'           => $this->lon,
             'lat'           => $this->lat,
             'city_id'       => $this->city_id,

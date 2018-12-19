@@ -29,6 +29,7 @@ class Doctor extends PersianFormRequest
         $data = [
             'first_name'    => 'required|string',
             'last_name'     => 'required|string',
+            'slug'          => ['required', 'string', 'max:64', 'min:6', Rule::unique('users')->ignore($user_id)],
             'gender'        => 'required|numeric',
             'profile'       => 'image',
             'public'        => 'required|numeric',

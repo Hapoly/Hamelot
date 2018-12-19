@@ -16,7 +16,7 @@ class Entry extends UModel
     protected $primary = 'id';
     protected $table = 'entries';
     protected $fillable = [
-        'title',
+        'title', 'slug',
         'lon', 'lat', 'city_id', 'province_id',
         'target_id', 
         'type', 'status', 'public', 'group_code'];

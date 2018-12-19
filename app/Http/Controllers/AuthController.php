@@ -94,6 +94,7 @@ class AuthController extends Controller{
                     $user = User::create([
                         'phone'         => $request->session()->get('auth.phone'),
                         'group_code'    => $request->session()->get('auth.group'),
+                        'slug'          => rand(0, 99999999),
                     ]);
                     if($request->session()->get('auth.group') == User::G_PATIENT){
                         Patient::create([
@@ -116,6 +117,7 @@ class AuthController extends Controller{
                     $user = User::create([
                         'phone'         => $request->session()->get('auth.phone'),
                         'group_code'    => $request->session()->get('auth.group'),
+                        'slug'          => rand(0, 99999999),
                     ]);
                     if($request->session()->get('auth.group') == User::G_DOCTOR){
                         Doctor::create([

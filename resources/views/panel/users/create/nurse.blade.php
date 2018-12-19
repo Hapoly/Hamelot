@@ -8,6 +8,7 @@
         @input_text(['name' => 'email', 'label' => __('users.email'), 'value' => old('email'), 'row' => true])
         @input_text(['name' => 'first_name', 'label' => __('users.first_name'), 'value' => old('first_name'), 'row' => true])
         @input_text(['name' => 'last_name', 'label' => __('users.last_name'), 'value' => old('last_name'), 'row' => true])
+        @input_text(['name' => 'slug', 'label' => __('users.slug'), 'value' => old('slug'), 'row' => true])
         @php
             $gender_rows = [
                 ['label' => __('users.gender_str.' . 1), 'value' => 1],

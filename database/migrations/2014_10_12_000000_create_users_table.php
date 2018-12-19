@@ -18,6 +18,7 @@ class CreateUsersTable extends Migration
             $table->primary('id');
             $table->string('first_name')->default('NuLL');
             $table->string('last_name')->default('NuLL');
+            $table->string('slug', 64)->index()->unique();
             $table->string('phone')->unique();
             $table->smallInteger('status')->default(1);
             $table->smallInteger('group_code')->default(1);
