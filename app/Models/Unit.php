@@ -137,7 +137,7 @@ class Unit extends UModel{
             'phone'         => $this->phone,
             'mobile'        => $this->mobile,
             
-            'group_code'    => $this->group_code,
+            'group_code'    => $this->group_code_to_gc[$this->group_code],
             'public'        => $this->public,
             'type'          => $this->type,
         ];
@@ -148,7 +148,6 @@ class Unit extends UModel{
             $entry->fill($data);
             $entry->save();  
         }else{
-            $data['group_code'] = $this->group_code_to_gc[$this->group_code];
             Entry::create($data);
         }   
     }

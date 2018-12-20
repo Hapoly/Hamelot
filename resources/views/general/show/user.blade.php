@@ -88,11 +88,11 @@
                         @if($offset <= time())
                             <a class="default-btn">هفته قبل</a>
                         @else
-                            <a href="{{route("show.user", ['username' => $user->username, 'time' => ($offset - (7*24*3600))])}}" class="default-btn">هفته قبل</a>
+                            <a href="{{route("show.user", ['slug' => $user->slug, 'time' => ($offset - (7*24*3600))])}}" class="default-btn">هفته قبل</a>
                         @endif
                     </div>
                     <div class="col-md-6">
-                        <a href="{{route("show.user", ['username' => $user->username, 'time' => ($offset + (7*24*3600))])}}" class="default-btn">هفته بعد</a>
+                        <a href="{{route("show.user", ['slug' => $user->slug, 'time' => ($offset + (7*24*3600))])}}" class="default-btn">هفته بعد</a>
                     </div>
                 </div>
             </div>
