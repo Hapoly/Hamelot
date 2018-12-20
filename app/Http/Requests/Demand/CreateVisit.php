@@ -33,7 +33,7 @@ class CreateVisit extends PersianFormRequest
             $rules['id_number'] = 'required|string|max:32';
         if(Auth::user()->gender == 0)
             $rules['gender'] = 'required|numeric|in:1,2';
-        if(Auth::user()->birth_date == 0){
+        if(Auth::user()->patient->birth_date == 0){
             $rules['birth_year']    = 'required|numeric';
             $rules['birth_month']   = 'required|numeric';
             $rules['birth_day']     = 'required|numeric';

@@ -156,7 +156,7 @@ class Demands extends Controller{
         if(Auth::user()->gender == 0){
             $patient->gender = $request->gender;
         }
-        if(Auth::user()->birth_date == 0){
+        if(Auth::user()->patient->birth_date == 0){
             $patient->birth_date = Time::jmktime(0, 0, 0, intval($request->birth_day), intval($request->birth_month), intval($request->birth_year));
         }
         $user->save();

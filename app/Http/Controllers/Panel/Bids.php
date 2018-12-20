@@ -133,9 +133,10 @@ class Bids extends Controller{
                 $bid->save();
                 return redirect()->back();
             case 'finish':
-                if(Auth::user()->isManager() || Auth::user()->isDoctor() || Auth::user()->isNurse()){
+                if(Auth::user()->isManager() || Auth::user()->isDoctor() || Auth::user()->isNurse() || Auth::user()->isSecretary()){
                     $transaction = Transaction::where('target', $bid->id)->where('type', Transaction::BID_REMAIN_PAY)->firstOrFail();
                     $transaction->status = Transaction::PAID;
+                    $transaction->pay_type = Transaction::OFFLINE_PAY;
                     $transaction->save();
                     $bid->status = Bid::DONE;
                     $bid->save();

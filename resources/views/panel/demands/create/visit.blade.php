@@ -46,7 +46,7 @@
     @if(Auth::user()->id_number == 'NuLL')
       @input_text(['name' => 'id_number', 'value' => old('id_number', ''), 'label' => __('users.id_number'), 'required' => true, 'row' => true ])
     @endif
-    @if(Auth::user()->birth_date == 0)
+    @if(Auth::user()->patient->birth_date == 0)
       @input_date(['name' => 'birth_', 'year' => old('birth_year', Auth::user()->patient->birth_year), 'month' => old('birth_month', Auth::user()->patient->birth_month), 'day' => old('birth_day', Auth::user()->patient->birth_day), 'label' => __('users.birth_date'), 'row' => true])
     @endif
     @if(Auth::user()->gender == 0)
