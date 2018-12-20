@@ -22,7 +22,7 @@
         }
       }
     @endphp
-    @input_select(['name' => 'unit_user_id', 'value' => old('unit_user_id', $activity_time->unit_user_id), 'label' => __('activity_times.unit_user_id'), 'required' => true, 'rows' => $unit_user_rows])
+    @input_select(['name' => 'unit_user_id', 'value' => old('unit_user_id', $activity_time->unit_user_id), 'label' => __('activity_times.unit_user_id'), 'required' => true, 'rows' => $unit_user_rows, 'row' => true])
     @php
       $day_of_week_rows = [];
       for($i=1; $i<=7; $i++)
@@ -31,19 +31,16 @@
           'value' => $i
         ]);
     @endphp
-    @input_select(['name' => 'day_of_week', 'value' => old('day_of_week', $activity_time->day_of_week), 'label' => __('activity_times.day_of_week'), 'required' => true, 'rows' => $day_of_week_rows])
-    @input_day_time(['name' => 'start_time', 'value' => old('start_time', $activity_time->start_time), 'label' => __('activity_times.start_time')])
-    @input_day_time(['name' => 'finish_time', 'value' => old('finish_time', $activity_time->finish_time), 'label' => __('activity_times.finish_time')])
+    @input_select(['name' => 'day_of_week', 'value' => old('day_of_week', $activity_time->day_of_week), 'label' => __('activity_times.day_of_week'), 'required' => true, 'rows' => $day_of_week_rows, 'row' => true])
+    @input_day_time(['name' => 'start_time', 'value' => old('start_time', $activity_time->start_time), 'label' => __('activity_times.start_time'), 'row' => true])
+    @input_day_time(['name' => 'finish_time', 'value' => old('finish_time', $activity_time->finish_time), 'label' => __('activity_times.finish_time'), 'row' => true])
     @php
       $auto_fill_rows = [
         ['label'  => __('activity_times.auto_fill_str.' . 0), 'value' => 0],
         ['label'  => __('activity_times.auto_fill_str.' . 1), 'value' => 1],
       ];
     @endphp
-    @tagline
-      {{__('activity_times.auto_fill_description')}}
-    @endtagline
-    @input_select(['name' => 'auto_fill', 'value' => old('auto_fill', $activity_time->auto_fill), 'label' => __('activity_times.auto_fill'), 'required' => true, 'rows' => $auto_fill_rows])
+    @input_select(['help' => __('activity_times.auto_fill_description'), 'name' => 'auto_fill', 'value' => old('auto_fill', $activity_time->auto_fill), 'label' => __('activity_times.auto_fill'), 'required' => true, 'rows' => $auto_fill_rows, 'row' => true])
     @php
       $just_in_unit_visit_rows = [
         ['label'  => __('activity_times.just_in_unit_visit_str.' . 0), 'value' => 0],
@@ -51,7 +48,7 @@
         ['label'  => __('activity_times.just_in_unit_visit_str.' . 1), 'value' => 1],
       ];
     @endphp
-    @input_select(['name' => 'just_in_unit_visit', 'value' => old('just_in_unit_visit', '1'), 'label' => __('activity_times.just_in_unit_visit'), 'required' => true, 'rows' => $just_in_unit_visit_rows])
+    @input_select(['name' => 'just_in_unit_visit', 'value' => old('just_in_unit_visit', '1'), 'label' => __('activity_times.just_in_unit_visit'), 'required' => true, 'rows' => $just_in_unit_visit_rows, 'row' => true])
     <script>
       $(document).ready(function(){
         function update_auto_fill(){
@@ -74,22 +71,10 @@
         update_auto_fill();
       });
     </script>
-    @tagline
-      {{__('activity_times.deafult_price_description')}}
-    @endtagline
-    @input_currency(['name' => 'default_price', 'value' => old('default_price', $activity_time->default_price), 'label' => __('activity_times.default_price'), 'required' => true, 'min' => 0, 'max' => 9999999, 'step' => 1, 'placeholder' => __('general.tmn')])
-    @tagline
-      {{__('activity_times.default_deposit_description')}}
-    @endtagline
-    @input_currency(['name' => 'default_deposit', 'value' => old('default_deposit', $activity_time->default_deposit), 'label' => __('activity_times.default_deposit'), 'required' => true, 'min' => 1000, 'max' => 9999999, 'step' => 1, 'placeholder' => __('general.tmn')])
-    @tagline
-      {{__('activity_times.deamnd_limit_description')}}
-    @endtagline
-    @input_number(['name' => 'demand_limit', 'value' => old('demand_limit', $activity_time->demand_limit), 'label' => __('activity_times.demand_limit'), 'required' => true, 'min' => 0, 'max' => 1000, 'placeholder' => 'نفر'])
-    @tagline
-      {{__('activity_times.default_demand_time_description')}}
-    @endtagline
-    @input_number(['name' => 'default_demand_time', 'value' => old('default_demand_time', $activity_time->default_demand_time), 'label' => __('activity_times.default_demand_time'), 'required' => true, 'min' => 0, 'max' => 1000, 'placeholder' => 'نفر'])
+    @input_currency(['help' => __('activity_times.deafult_price_description'), 'name' => 'default_price', 'value' => old('default_price', $activity_time->default_price), 'label' => __('activity_times.default_price'), 'required' => true, 'min' => 0, 'max' => 9999999, 'step' => 1, 'placeholder' => __('general.tmn'), 'row' => true])
+    @input_currency(['help' => __('activity_times.default_deposit_description'), 'name' => 'default_deposit', 'value' => old('default_deposit', $activity_time->default_deposit), 'label' => __('activity_times.default_deposit'), 'required' => true, 'min' => 1000, 'max' => 9999999, 'step' => 1, 'placeholder' => __('general.tmn'), 'row' => true])
+    @input_number(['help' => __('activity_times.deamnd_limit_description'), 'name' => 'demand_limit', 'value' => old('demand_limit', $activity_time->demand_limit), 'label' => __('activity_times.demand_limit'), 'required' => true, 'min' => 0, 'max' => 1000, 'placeholder' => 'نفر', 'row' => true])
+    @input_number(['help' => __('activity_times.default_demand_time_description'), 'name' => 'default_demand_time', 'value' => old('default_demand_time', $activity_time->default_demand_time), 'label' => __('activity_times.default_demand_time'), 'required' => true, 'min' => 0, 'max' => 1000, 'placeholder' => 'نفر', 'row' => true])
     @submit_row(['value' => 'new', 'label' => __('activity_times.save')])
   @endform_create
 </div>
