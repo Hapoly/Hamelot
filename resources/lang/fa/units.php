@@ -8,7 +8,7 @@ return [
     'title'             => 'عنوان',
     'address'           => 'آدرس',
     'phone'             => 'شماره تماس',
-    'mobile'            => 'موبایل',
+    'mobile'            => 'مویابل منشی',
     'image'             => 'تصویر',
     'operation'         => 'عملیات',
     'city_id'           => 'شهر',

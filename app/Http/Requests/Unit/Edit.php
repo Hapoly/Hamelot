@@ -7,6 +7,7 @@ use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
 use App\Rules\UUID;
 use App\Rules\NotRegistered;
+use App\Rules\Phone;
 use App\User;
 
 class Edit extends PersianFormRequest
@@ -41,7 +42,7 @@ class Edit extends PersianFormRequest
                                 ],
             'address'       => 'required|string',
             'phone'         => 'required|string',
-            'phone'         => ['required', new NotRegistered(User::G_SECRETARY)],
+            'mobile'        => ['required', new NotRegistered(User::G_SECRETARY), new Phone],
             'lon'           => 'required|string',
             'lat'           => 'required|string',
             'city_id'       => ['required', new UUID],

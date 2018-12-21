@@ -59,6 +59,18 @@ class User extends Authenticatable
         else
             return $this->last_name;
     }
+    public function getFirstNameItemAttribute(){
+        if($this->first_name == 'NuLL')
+            return '';
+        else
+            return $this->first_name;
+    }
+    public function getLastNameItemAttribute(){
+        if($this->last_name == 'NuLL')
+            return '';
+        else
+            return $this->last_name;
+    }
 
     public function isAdmin(){
         return $this->group_code == User::G_ADMIN;
