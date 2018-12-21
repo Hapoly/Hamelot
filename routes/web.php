@@ -214,7 +214,7 @@ Route::post('/logout', 'AuthController@logout')->name('logout');
 Route::get('/doctor', 'AuthController@registerDoctor')->name('register.doctor');
 
 Route::middleware('auth')->group(function(){
-    Route::get('/home', 'HomeController@index')->name('home'); 
+    Route::get('/home', 'HomeController@home')->name('home'); 
 });
 
 Route::get('/', 'HomeController@index')->name('welcome');
