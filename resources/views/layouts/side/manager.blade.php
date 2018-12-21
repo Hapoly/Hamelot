@@ -63,9 +63,9 @@
 			<span>تراکنش‌های مالی</span>
 		</a>
 		<ul class="collapse list-unstyled" id="transactions">
-			<li>
+			<!-- <li>
 				<a href="{{route('panel.transactions.create.withdraw')}}"> تسویه حساب جدید</a>
-			</li>
+			</li> -->
 			<li>
 				<a href="{{route('panel.transactions.index')}}">تراکنش‌ها</a>
 			</li>
