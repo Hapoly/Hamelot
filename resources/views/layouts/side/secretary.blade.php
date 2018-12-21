@@ -63,6 +63,9 @@
 				<a href="{{route('panel.transactions.create.withdraw')}}"> تسویه حساب جدید</a>
 			</li> -->
 			<li>
+				<a href="{{route('panel.transactions.factures.index')}}">صورتحساب</a>
+			</li>
+			<li>
 				<a href="{{route('panel.transactions.index')}}">تراکنش‌ها</a>
 			</li>
 		</ul>

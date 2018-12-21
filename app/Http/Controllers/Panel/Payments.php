@@ -47,4 +47,21 @@ class Payments extends Controller{
         }
         return redirect()->route('panel.bids.show', ['bid' => $bid]);
     }
+
+    public function factures(ZarinPalCallBackRequest $request){
+        $transaction = Transaction::where([
+            'type'      => Transaction::FACTURE,
+            'authority' => $request->Authority,
+        ])->firstOrFail();
+        if(ZarinPal::verify($transaction->amount, $request->Authority)){
+            $transaction->status = Transaction::PAID;
+            $transaction->save();
+            Transaction::
+                where('dst_id', $transaction->src_id)
+                ->where('pay_type', Transaction::OFFLINE_PAY)
+                ->where('status', Transaction::PAID)
+                ->update(['pay_type' => Transaction::OFFLINE_PAY_SCOUNTED]);
+        }
+        return redirect()->route('home');
+    }
 }

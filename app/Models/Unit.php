@@ -6,6 +6,7 @@ use App\UModel;
 
 use App\User;
 use Auth;
+use DB;
 use Illuminate\Support\Facades\Storage;
 
 use App\Models\Experiment;
@@ -258,5 +259,16 @@ class Unit extends UModel{
             })->where('day_of_week', $i)->get();
         }
         return $result;
+    }
+    public function getFactureAmountAttribute(){
+        return intval(Transaction::whereHas('dst_unit', function($query){
+            return $query->where('units.id', $this->id);
+        })
+            ->where('pay_type', Transaction::OFFLINE_PAY)
+            ->where('status', Transaction::PAID)
+            ->sum(DB::raw('(amount * (comission)) / 100')));
+    }
+    public function getFactureAmountStrAttribute(){
+        return $this->facture_amount . ' ' . __('general.tmn');
     }
 }

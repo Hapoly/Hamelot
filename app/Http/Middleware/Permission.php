@@ -121,6 +121,9 @@ class Permission
         'panel.transactions.destroy'                        => [ 1 ],
         'panel.transactions.pay_off.index'                  => [ 1, 2 ],
         'panel.transactions.pay_off.paid'                   => [ 1, 2 ],
+        'panel.transactions.factures.live'                  => [ 2, 3, 4, 6 ],
+        'panel.transactions.factures.index'                 => [ 2, 3, 4, 6 ],
+        'panel.transactions.factures.pay'                   => [ 2, 3, 4, 6 ],
 
         'panel.bids.index'                                  => [ 1, 2, 3, 4, 5, 6 ],
         'panel.bids.create'                                 => [ 1, 2 ],
@@ -133,6 +136,7 @@ class Permission
         
         'panel.payments.bids.deposit.verify'                => [ 1, 2, 3, 4, 5, 6 ],
         'panel.payments.bids.remain.verify'                 => [ 1, 2, 3, 4, 5, 6 ],
+        "panel.payments.factures.verify"                    => [ 2, 3, 4, 6 ],
 
         'panel.demands.index'                               => [ 1, 2, 3, 4, 5, 6 ],
         'panel.demands.create.free'                         => [ 5 ],

@@ -148,7 +148,8 @@ Route::middleware(['auth', 'Permission'])->namespace('Panel')->prefix('panel')->
     });
     Route::prefix('payments')->name('payments.')->group(function(){
         Route::get('/bids-deposit', 'Payments@bidDepositVerify')->name('bids.deposit.verify');
-        Route::get('/bids-rmain/{finish}', 'Payments@bidRemainVerify')->name('bids.remain.verify');
+        Route::get('/bids-remain/{finish}', 'Payments@bidRemainVerify')->name('bids.remain.verify');
+        Route::get('/factures', 'Payments@factures')->name('factures.verify');
     });
     Route::prefix('transactions')->name('transactions.')->group(function(){
         Route::get('/', 'Transactions@index')->name('index');
@@ -157,6 +158,11 @@ Route::middleware(['auth', 'Permission'])->namespace('Panel')->prefix('panel')->
         Route::prefix('create')->name('create.')->group(function(){
             Route::get('/free', 'Transactions@createFree')->name('free');
             Route::get('/withdraw', 'Transactions@createWithdraw')->name('withdraw');
+        });
+        Route::prefix('factures')->name('factures.')->group(function(){
+            Route::get('/index', 'Transactions@facturesIndex')->name('index');
+            Route::get('/live/{unit}', 'Transactions@facturesLive')->name('live');
+            Route::get('/pay/{unit}', 'Transactions@facturesPay')->name('pay');
         });
         Route::prefix('store')->name('store.')->group(function(){
             Route::post('/free', 'Transactions@storeFree')->name('free');

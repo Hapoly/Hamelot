@@ -25,12 +25,14 @@ class Transaction extends UModel
     const WITHDRAW          = 5;
     const FREE              = 6;
     const USER_WITHDRAW     = 7;
+    const FACTURE           = 8;
     public function getTypeStrAttribute(){
         return __('transactions.type_str.' . $this->type);
     }
 
-    const ONLINE_PAY    = 1;
-    const OFFLINE_PAY   = 2;
+    const ONLINE_PAY            = 1;
+    const OFFLINE_PAY           = 2;
+    const OFFLINE_PAY_SCOUNTED  = 3;
     public function getPayTypeStrAttribute(){
         return __('transactions.pay_type_str.' . $this->pay_type);
     }
@@ -122,11 +124,14 @@ class Transaction extends UModel
     }
 
     public function getAmountStrAttribute(){
-        return $this->amount . ' ' . __('general.' . $this->currency);
+        return (($this->amount * (100-$this->comission))/100) . ' ' . __('general.' . $this->currency);
+    }
+    public function getComissionStrAttribute(){
+        return (($this->amount * $this->comission)/100) . ' ' . __('general.' . $this->currency);
     }
 
     public function getDateStrAttribute(){
-        return Time::jdate('i:H - d F Y', $this->date);
+        return Time::jdate('H:i - d F Y', $this->date);
     }
 
     public function getDescriptionAttribute(){

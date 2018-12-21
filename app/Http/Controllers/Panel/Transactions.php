@@ -12,12 +12,13 @@ use Illuminate\Support\Facades\Storage;
 use URL;
 use App\Models\Transaction;
 use App\User;
+use App\Models\Unit;
 use App\Models\City;
 use App\Models\Province;
 use App\Models\BankAccount;
 use App\Models\UnitUser;
-use App\Models\Unit;
 
+use App\Drivers\ZarinPal;
 
 use App\Http\Requests\Transaction\CreateFree as TransactionCreateFreeRequest;
 use App\Http\Requests\Transaction\EditFree as TransactionEditFreeRequest;
@@ -223,5 +224,44 @@ class Transactions extends Controller{
       'date'      => time(),
     ]);
     return redirect()->back();
+  }
+
+  public function facturesLive(Request $request, Unit $unit){
+    $transactions = Transaction::whereHas('dst_unit', function($query) use($unit){
+      return $query->where('units.id', $unit->id);
+    })->where('pay_type', Transaction::OFFLINE_PAY)->where('status', Transaction::PAID)->get();
+    return view('panel.transactions.factures.live', [
+      'transactions'  => $transactions,
+      'unit'          => $unit,
+    ]);
+  }
+
+  public function facturesIndex(Request $request){
+    $units = Auth::user()->units;
+    return view('panel.transactions.factures.index', [
+      'units' => $units,
+    ]);
+  }
+
+  public function facturesPay(Request $request, Unit $unit){
+    $authority = ZarinPal::generate(
+        $unit->facture_amount, 
+        'صورتحساب ' . $unit->title,
+        route('panel.payments.factures.verify')
+    );
+    Transaction::create([
+      'type'      => Transaction::FACTURE,
+      'amount'    => $unit->facture_amount,
+      'src_id'    => $unit->id,
+      'dst_id'    => '0',
+      'target'    => '0',
+      'authority' => $authority,
+      'currency'  => 'tmn',
+      'comission' => 0,
+      'pay_type'  => Transaction::ONLINE_PAY,
+      'date'      => time(),
+    ]);
+    $pay_link = ZarinPal::generateLink($authority);
+    return redirect($pay_link);
   }
 }

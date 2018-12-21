@@ -376,6 +376,7 @@ class User extends Authenticatable
                     return $query->where('users.id', $this->id);
                 });
             })  ->where('pay_type', Transaction::ONLINE_PAY)
+                ->where('type', '<>', Transaction::FACTURE)
                 ->where('status', Transaction::PAID)->sum('amount');
             $out += Transaction::whereHas('dst_unit', function($query){
                 return $query->whereHas('secretaries', function($query){
@@ -395,6 +396,7 @@ class User extends Authenticatable
                     return $query->where('users.id', $this->id);
                 });
             })  ->where('pay_type', Transaction::ONLINE_PAY)
+                ->where('type', '<>', Transaction::FACTURE)
                 ->where('status', Transaction::PAID)->sum('amount');
             $out += Transaction::whereHas('dst_unit', function($query){
                 return $query->whereHas('secretaries', function($query){
@@ -434,8 +436,11 @@ class User extends Authenticatable
             $out = Transaction::whereHas('src_unit', function($query){
                 return $query->whereHas('managers', function($query){
                     return $query->where('users.id', $this->id);
-                })->where('pay_type', Transaction::ONLINE_PAY);
-            })->where('status', Transaction::PAID)->sum(DB::raw('(amount * (100-comission)) / 100'));
+                });
+              })->where('pay_type', Transaction::ONLINE_PAY)
+                ->where('type', '<>', Transaction::FACTURE)
+                ->where('status', Transaction::PAID)
+                ->sum(DB::raw('(amount * (100-comission)) / 100'));
             $in = Transaction::whereHas('dst_unit', function($query){
                 return $query->whereHas('managers', function($query){
                     return $query->where('users.id', $this->id);
@@ -445,8 +450,10 @@ class User extends Authenticatable
             $out = Transaction::whereHas('src_unit', function($query){
                 return $query->whereHas('secretaries', function($query){
                     return $query->where('users.id', $this->id);
-                })->where('pay_type', Transaction::ONLINE_PAY);
-            })->where('status', Transaction::PAID)->sum(DB::raw('(amount * (100-comission)) / 100'));
+                });
+                })->where('pay_type', Transaction::ONLINE_PAY)
+                ->where('type', '<>', Transaction::FACTURE)
+                ->where('status', Transaction::PAID)->sum(DB::raw('(amount * (100-comission)) / 100'));
             $in = Transaction::whereHas('dst_unit', function($query){
                 return $query->whereHas('secretaries', function($query){
                     return $query->where('users.id', $this->id);
