@@ -102,6 +102,16 @@ class Transaction extends UModel
                     return $query->where('users.id', $user->id);
                 });
             });
+        }else if($user->isSecretary()){
+            return Transaction::whereHas('src_unit', function($query) use ($user){
+                return $query->whereHas('secretaries', function($query) use ($user){
+                    return $query->where('users.id', $user->id);
+                });
+            })->orWhereHas('dst_unit', function($query) use ($user){
+                return $query->whereHas('secretaries', function($query) use ($user){
+                    return $query->where('users.id', $user->id);
+                });
+            });
         }else if($user->isDoctor() || $user->isNurse()){
             return Transaction::whereHas('bid', function($query){
                 return $query->where('user_id', Auth::user()->id);
@@ -126,11 +136,11 @@ class Transaction extends UModel
             $this->type == Transaction::BID_REMAIN_PAY      ||
             $this->type == Transaction::BID_REMAIN_BACK){
             if($user->isAdmin()){
-                return $this->bid->demand->description . ' ('. $this->bid->demand->patient->full_name .')' . ' - ' . $this->bid->demand->unit->complete_title;
+                return $this->bid->demand->description_str . ' ('. $this->bid->demand->patient->full_name .')' . ' - ' . $this->bid->demand->unit->complete_title;
             }else if($user->isPatient()){
-                return $this->bid->demand->description;
+                return $this->bid->demand->description_str;
             }else{
-                return $this->bid->demand->description . ' ('. $this->bid->demand->patient->full_name .')';
+                return $this->bid->demand->description_str . ' ('. $this->bid->demand->patient->full_name .')';
             }
         } else if($this->type == Transaction::USER_WITHDRAW){
             return $this->src_unit->complete_title . ', ' . $this->dst_user->full_name;
@@ -147,7 +157,6 @@ class Transaction extends UModel
             if($this->status == Transaction::PAID || $this->status == Transaction::FAILED)
                 return false;
             switch($this->type){
-                case Transaction::FREE:
                 case Transaction::FREE:
                     if($transaction->dst_user == Auth::user()->id)
                         return true;

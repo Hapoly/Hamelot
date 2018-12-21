@@ -7,7 +7,7 @@
                         <div class="col-md-12">
                             <span>اعتبار: {{Auth::user()->all_credit()}} تومان</span>
                             <br>
-                            @if(Auth::user()->isManager() || Auth::user()->isDoctor() || Auth::user()->isNurse())
+                            @if(Auth::user()->isManager() || Auth::user()->isDoctor() || Auth::user()->isNurse() || Auth::user()->isSecretary())
                                 <span>قابل برداشت: {{Auth::user()->avialable_credit()}} تومان</span>
                             @endif
                         </div>
@@ -17,7 +17,7 @@
                 <div class="col-md-4 col-sm-4 col-xs-4">
                     <img src="{{asset('/imgs/001-wallet.svg')}}">
                 </div>
-                @if(Auth::user()->isManager())
+                @if(Auth::user()->isManager() || Auth::user()->isSecretary())
                     <div class="col-md-12">
                         <a class="btn btn-default btn-checkout" href="{{route('panel.transactions.create.withdraw')}}">تسویه حساب</a>
                     </div>

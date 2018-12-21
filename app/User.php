@@ -46,7 +46,6 @@ class User extends Authenticatable
     public function getPublicStrAttribute(){
         return __('users.public_str.'.$this->public);
     }
-
     public function getFirstNameStrAttribute(){
         if($this->first_name == 'NuLL')
             return 'بدون';
@@ -378,11 +377,37 @@ class User extends Authenticatable
                 });
             })  ->where('pay_type', Transaction::ONLINE_PAY)
                 ->where('status', Transaction::PAID)->sum('amount');
+            $out += Transaction::whereHas('dst_unit', function($query){
+                return $query->whereHas('secretaries', function($query){
+                    return $query->where('users.id', $this->id);
+                });
+            })  ->where('pay_type', Transaction::OFFLINE_PAY)
+                ->where('status', Transaction::PAID)->sum(DB::raw('(amount * (comission)) / 100'));
             $in = Transaction::whereHas('dst_unit', function($query){
                 return $query->whereHas('managers', function($query){
                     return $query->where('users.id', $this->id);
                 });
             })  ->where('pay_type', Transaction::ONLINE_PAY)
+                ->where('status', Transaction::PAID)->sum('amount');
+        }else if($this->isSecretary()){
+            $out = Transaction::whereHas('src_unit', function($query){
+                return $query->whereHas('secretaries', function($query){
+                    return $query->where('users.id', $this->id);
+                });
+            })  ->where('pay_type', Transaction::ONLINE_PAY)
+                ->where('status', Transaction::PAID)->sum('amount');
+            $out += Transaction::whereHas('dst_unit', function($query){
+                return $query->whereHas('secretaries', function($query){
+                    return $query->where('users.id', $this->id);
+                });
+            })  ->where('pay_type', Transaction::OFFLINE_PAY)
+                ->where('status', Transaction::PAID)->sum(DB::raw('(amount * (comission)) / 100'));
+            
+            $in = Transaction::whereHas('dst_unit', function($query){
+                return $query->whereHas('secretaries', function($query){
+                    return $query->where('users.id', $this->id);
+                });
+            })->where('pay_type', Transaction::ONLINE_PAY)
                 ->where('status', Transaction::PAID)->sum('amount');
         }else if($this->isDoctor() || $this->isNurse()){
             $out = Transaction::whereHas('bid', function($query){
@@ -413,6 +438,17 @@ class User extends Authenticatable
             })->where('status', Transaction::PAID)->sum(DB::raw('(amount * (100-comission)) / 100'));
             $in = Transaction::whereHas('dst_unit', function($query){
                 return $query->whereHas('managers', function($query){
+                    return $query->where('users.id', $this->id);
+                });
+            })->where('pay_type', Transaction::ONLINE_PAY)->where('status', Transaction::PAID)->sum(DB::raw('(amount * (100-comission)) / 100'));
+        }else if($this->isSecretary()){
+            $out = Transaction::whereHas('src_unit', function($query){
+                return $query->whereHas('secretaries', function($query){
+                    return $query->where('users.id', $this->id);
+                })->where('pay_type', Transaction::ONLINE_PAY);
+            })->where('status', Transaction::PAID)->sum(DB::raw('(amount * (100-comission)) / 100'));
+            $in = Transaction::whereHas('dst_unit', function($query){
+                return $query->whereHas('secretaries', function($query){
                     return $query->where('users.id', $this->id);
                 });
             })->where('pay_type', Transaction::ONLINE_PAY)->where('status', Transaction::PAID)->sum(DB::raw('(amount * (100-comission)) / 100'));

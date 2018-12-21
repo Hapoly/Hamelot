@@ -110,7 +110,7 @@ class Permission
 
         'panel.transactions.index'                          => [ 1, 2, 3, 4, 5, 6 ],
         'panel.transactions.create.free'                    => [ 1 ],
-        'panel.transactions.create.withdraw'                => [ 1, 2 ],
+        'panel.transactions.create.withdraw'                => [ 1, 2, 3, 4, 6 ],
         'panel.transactions.store.free'                     => [ 1 ],
         'panel.transactions.store.withdraw'                 => [ 1, 2 ],
         'panel.transactions.edit.free'                      => [ 1 ],

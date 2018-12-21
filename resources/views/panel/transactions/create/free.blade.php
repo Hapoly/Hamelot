@@ -15,11 +15,11 @@
         ]
       ];
     @endphp
-    @input_select(['name' => 'target_type', 'value' => old('target_type', ''), 'label' => __('transactions.target_type'), 'required' => true, 'rows' => $target_type_rows])
-    @autocomplete(['name' => 'user', 'label' => __('transactions.user_id'), 'value' => old('user', ''), 'required' => false, 'route' => 'patients'])
-    @autocomplete(['name' => 'unit', 'label' => __('transactions.unit_id'), 'value' => old('unit', ''), 'required' => false, 'route' => 'units'])
-    @input_currency(['name' => 'amount', 'value' => old('amount', ''), 'label' => __('transactions.amount'), 'required' => true, 'placeholder' => __('general.tmn')])
-    @input_date_complete(['name' => 'date', 'label' => __('transactions.date'), 'value'  => old('date', time())])
+    @input_select(['name' => 'target_type', 'value' => old('target_type', ''), 'label' => __('transactions.target_type'), 'required' => true, 'rows' => $target_type_rows, 'row' => true])
+    @autocomplete(['name' => 'user', 'label' => __('transactions.user_id'), 'value' => old('user', ''), 'required' => false, 'route' => 'patients', 'row' => true])
+    @autocomplete(['name' => 'unit', 'label' => __('transactions.unit_id'), 'value' => old('unit', ''), 'required' => false, 'route' => 'units', 'row' => true])
+    @input_currency(['name' => 'amount', 'value' => old('amount', ''), 'label' => __('transactions.amount'), 'required' => true, 'placeholder' => __('general.tmn'), 'row' => true])
+    @input_date_complete(['name' => 'date', 'label' => __('transactions.date'), 'value'  => old('date', time()), 'row' => true])
     <script>
       $(document).ready(function(){
         $('#unit').attr('disabled', true);

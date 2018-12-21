@@ -62,11 +62,11 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
             <div class="container">
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <button class="navbar-toggler" id="navbartop" type="button" data-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <div class="navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
                         @guest
@@ -77,26 +77,18 @@
                             <!-- <li><a class="nav-link" href="{{ route('about') }}">درباره ما</a></li> -->
                             <!-- <li><a class="nav-link" href="{{ route('tour') }}"> الان شروع کن!</a></li> -->
                         @else
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{Auth::user()->prefix}} {{ Auth::user()->first_name_str }} {{Auth::user()->last_name_str}} <span class="caret"></span>
+                            <li><a class="dropdown-item" href="{{route('panel.profile')}}">پروفایل من</a></li>
+                            <li><a class="dropdown-item" href="{{route('home')}}">پیشخوان</a></li>
+                            <li><a class="dropdown-item" href="{{ route('logout') }}"
+                                onclick="event.preventDefault();
+                                                document.getElementById('logout-form').submit();">
+                                    {{ __('general.logout') }}
                                 </a>
 
-                                <div id="drop-down-menu" class="dropdown-menu">
-                                    <a class="dropdown-item" href="{{route('panel.profile')}}">پروفایل من</a>
-                                    <a class="dropdown-item" href="{{route('home')}}">پیشخوان</a>
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                    onclick="event.preventDefault();
-                                                    document.getElementById('logout-form').submit();">
-                                        {{ __('general.logout') }}
-                                    </a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                        @csrf
-                                    </form>
-                                </div>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                    @csrf
+                                </form>
                             </li>
-                            <li></li>
                         @endguest
                     </ul>
                 </div>
@@ -117,8 +109,8 @@
                 document.getElementById("mybtn").style.display = "block";
             }
         }
-        $('#navbarDropdown').click(function(){
-            $('#drop-down-menu').toggleClass('drop');
+        $('#navbartop').click(function(){
+            $('#navbarSupportedContent').toggleClass('collapse');
         })
     </script>
 </body>
