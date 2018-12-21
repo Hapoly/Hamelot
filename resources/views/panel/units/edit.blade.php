@@ -38,24 +38,24 @@
     @input_image(['name' => 'image', 'label' => __('units.image'), 'required' => true, 'row' => true])
     @input_city(['city_id' => old('city_id', $unit->city_id), 'lon' => old('lon', $unit->lon), 'lat' => old('lat', $unit->lat), 'province_id' => old('province_id', $unit->city->province_id), 'row' => true])
     <?php
-        $status_rows = [
-          [ 'value' => 1, 'label' => __('units.status_str.1') ],
-          [ 'value' => 2, 'label' => __('units.status_str.2') ],
-        ];
+      $status_rows = [
+        [ 'value' => 1, 'label' => __('units.status_str.1') ],
+        [ 'value' => 2, 'label' => __('units.status_str.2') ],
+      ];
     ?>
     @input_select(['name' => 'status', 'value' => old('status', $unit->status), 'label' => __('units.status'), 'required' => true, 'rows' => $status_rows, 'row' => true])
     <?php
-        $group_code_rows = [
-          [ 'value' => 1, 'label' => __('units.group_code_str.1') ],
-          [ 'value' => 2, 'label' => __('units.group_code_str.2') ],
-          [ 'value' => 3, 'label' => __('units.group_code_str.3') ],
-          [ 'value' => 4, 'label' => __('units.group_code_str.4') ],
-          [ 'value' => 5, 'label' => __('units.group_code_str.5') ],
-          [ 'value' => 6, 'label' => __('units.group_code_str.6') ],
-          [ 'value' => 7, 'label' => __('units.group_code_str.7') ],
-          [ 'value' => 8, 'label' => __('units.group_code_str.8') ],
-          [ 'value' => 9, 'label' => __('units.group_code_str.9') ],
-        ];
+      $group_code_rows = [
+        [ 'value' => 1, 'label' => __('units.group_code_str.1') ],
+        [ 'value' => 2, 'label' => __('units.group_code_str.2') ],
+        [ 'value' => 3, 'label' => __('units.group_code_str.3') ],
+        [ 'value' => 4, 'label' => __('units.group_code_str.4') ],
+        [ 'value' => 5, 'label' => __('units.group_code_str.5') ],
+        [ 'value' => 6, 'label' => __('units.group_code_str.6') ],
+        [ 'value' => 7, 'label' => __('units.group_code_str.7') ],
+        [ 'value' => 8, 'label' => __('units.group_code_str.8') ],
+        [ 'value' => 9, 'label' => __('units.group_code_str.9') ],
+      ];
     ?>
     @input_select(['name' => 'group_code', 'value' => old('group_code', $unit->group_code), 'label' => __('units.group_code'), 'required' => true, 'rows' => $group_code_rows, 'row' => true])
     <?php
