@@ -79,9 +79,9 @@
                             <!-- <li><a class="nav-link" href="{{ route('tour') }}"> الان شروع کن!</a></li> -->
                         @else
                             <li><a class="nav-link" href="https://blog.doctorsoal.com">بلاگ</a></li>
-                            <li><a class="dropdown-item" href="{{route('panel.profile')}}">پروفایل من</a></li>
-                            <li><a class="dropdown-item" href="{{route('home')}}">پیشخوان</a></li>
-                            <li><a class="dropdown-item" href="{{ route('logout') }}"
+                            <li><a class="nav-link" href="{{route('panel.profile')}}">پروفایل من</a></li>
+                            <li><a class="nav-link" href="{{route('home')}}">پیشخوان</a></li>
+                            <li><a class="nav-link" href="{{ route('logout') }}"
                                 onclick="event.preventDefault();
                                                 document.getElementById('logout-form').submit();">
                                     {{ __('general.logout') }}
