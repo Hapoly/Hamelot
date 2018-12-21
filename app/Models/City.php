@@ -20,4 +20,8 @@ class City extends UModel
     public function province(){
         return $this->belongsTo('App\Models\Province');
     }
+
+    public function units(){
+        return $this->hasMany('App\Models\Unit', 'city_id');
+    }
 }

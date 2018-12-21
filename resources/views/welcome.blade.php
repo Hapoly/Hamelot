@@ -9,18 +9,17 @@
                 <h2 style="padding-top:20px;padding-bottom:60px;">
                 نوبت دهی دکتر سوال
                 </h2>
-                <div class="row">
-                    <div class="col-md-3 select-col">
-                        <select class="form-control search-select" title="انتخاب شهر">
-                        <option class="hidden-select">انتخاب شهر</option>
-                        <option>رشت</option>
-                        <option>لاهیجان</option>
-                        <option>املش</option>
-                        <option>انزلی</option>
-                        </select>
-                    </div>
-                    <div class="col-md-9">
-                        <form action="{{route('search')}}" method="GET">
+                <form action="{{route('search')}}" method="GET">
+                    <div class="row">
+                        <div class="col-md-3 select-col">
+                            <select name="city_id" class="form-control search-select" title="انتخاب شهر">
+                                <option value="0">همه شهرها</option>
+                                @foreach($cities as $city)
+                                    <option value="{{$city->id}}">{{$city->title}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="col-md-9">
                             <!-- <div class="form-group" style="padding-top:25px">
                                 <input type="text" name="term" class="form-control search-input" style="width:80%;" 
                                 placeholder="جستجوی  پزشک ، بیمارستان ، درمانگاه  ">
@@ -31,14 +30,14 @@
                             <div class="input-group">
                                 <input type="text" class="form-control" placeholder="جستجوی  پزشک ، بیمارستان ، درمانگاه  ">
                                 <div class="input-group-append">
-                                <button type="submit" class="btn search-btns" type="button">
-                                    <i class="fa fa-search"></i>
-                                </button>
+                                    <button type="submit" class="btn search-btns" type="button">
+                                        <i class="fa fa-search"></i>
+                                    </button>
                                 </div>
                             </div>
-                        </form>
+                        </div>
                     </div>
-                </div>
+                </form>
                 <div class="flex-container">
                     
                     <div class="icons">
