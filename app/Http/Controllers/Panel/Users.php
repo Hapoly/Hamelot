@@ -20,7 +20,7 @@ use App\Models\ConstValue;
 use App\Models\Permission;
 use App\Models\UnitUser;
 use App\Models\Unit;
-use App\Models\UserConsts;
+use App\Models\UserConst;
 
 use App\Http\Requests\Users\Create\Admin as AdminCreateRequest;
 use App\Http\Requests\Users\Edit\Admin as AdminEditRequest;
@@ -136,8 +136,16 @@ class Users extends Controller{
    */
   public function createAdmin()   { return view('panel.users.create.admin');    }
   public function createManager() { return view('panel.users.create.manager');  }
-  public function createDoctor()  { return view('panel.users.create.doctor');   }
-  public function createNurse()   { return view('panel.users.create.nurse');    }
+  public function createDoctor(Request $request) {
+    return view('panel.users.create.doctor', [
+      'unit_id' => $request->input('unit_id', 0),
+    ]);
+  }
+  public function createNurse(Request $request) {
+    return view('panel.users.create.nurse', [
+      'unit_id' => $request->input('unit_id', 0),
+    ]);
+  }
   public function createPatient() { return view('panel.users.create.patient');  }
   public function createSecretary(Request $request) {
     return view('panel.users.create.secretary', [
@@ -208,11 +216,12 @@ class Users extends Controller{
       unset($inputs['status']);
       unset($inputs['public']);
     }
-    if($inputs['email'] == null)
+    if(!$request->input('email'))
       unset($inputs['email']);
 
     $user->fill($inputs);
     $user->save();
+    $inputs['user_id'] = $user->id;
 
     $doctor = new Doctor;
     $doctor->fill($inputs);
@@ -229,6 +238,17 @@ class Users extends Controller{
         'user_id'   => $user->id,
         'const_id'  => $const->id,
       ]);
+    }
+    if($request->has('unit_id')){
+      if($request->unit_id != 0){
+        UnitUser::create([
+          'unit_id'     => $request->unit_id,
+          'user_id'     => $user->id,
+          'permission'  => UnitUser::MEMBER,
+          'status'      => UnitUser::ACCEPTED,
+        ]);
+        return redirect()->route('panel.units.show', ['unit_id' => $request->unit_id]);
+      }
     }
     return redirect()->route('panel.users.show', ['user' => $user]);
   }
@@ -247,6 +267,17 @@ class Users extends Controller{
     $user = User::create($inputs);
     $inputs['user_id'] = $user->id;
     $nurse = Nurse::create($inputs);
+    if($request->has('unit_id')){
+      if($request->unit_id != 0){
+        UnitUser::create([
+          'unit_id'     => $request->unit_id,
+          'user_id'     => $user->id,
+          'permission'  => UnitUser::MEMBER,
+          'status'      => UnitUser::ACCEPTED,
+        ]);
+        return redirect()->route('panel.units.show', ['unit_id' => $request->unit_id]);
+      }
+    }
     return redirect()->route('panel.users.show', ['user' => $user]);
   }
   public function storePatient(PatientCreateRequest $request){

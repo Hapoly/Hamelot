@@ -34,6 +34,7 @@
             @endphp
             @input_select(['name' => 'status', 'value' => old('status', 0), 'label' => __('users.status'), 'required' => true, 'rows' => $status_rows, 'row' => true])
         @endif
+        <input name="unit_id" value="{{$unit_id}}" hidden />
         @submit_row(['value' => 'save', 'label' => __('users.save')])
     @endform_create
 </div>
