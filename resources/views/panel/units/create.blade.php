@@ -43,6 +43,10 @@
           [ 'value' => 3, 'label' => __('units.group_code_str.3') ],
           [ 'value' => 4, 'label' => __('units.group_code_str.4') ],
           [ 'value' => 5, 'label' => __('units.group_code_str.5') ],
+          [ 'value' => 6, 'label' => __('units.group_code_str.6') ],
+          [ 'value' => 7, 'label' => __('units.group_code_str.7') ],
+          [ 'value' => 8, 'label' => __('units.group_code_str.8') ],
+          [ 'value' => 9, 'label' => __('units.group_code_str.9') ],
         ];
     ?>
     @input_select(['name' => 'group_code', 'value' => old('group_code', ''), 'label' => __('units.group_code'), 'required' => true, 'rows' => $group_code_rows])

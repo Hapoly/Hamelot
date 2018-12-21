@@ -119,6 +119,10 @@ class Unit extends UModel{
         Unit::POLICLINIC    => Entry::POLICLINIC,
         Unit::CLINIC        => Entry::CLINIC,
         Unit::LABRATORY     => Entry::LABRATORY,
+        Unit::ORTOPED       => Entry::ORTOPED,
+        Unit::FIZIOTORAPHY  => Entry::FIZIOTORAPHY,
+        Unit::MASSAGE       => Entry::MASSAGE,
+        Unit::WORKOLOGHY    => Entry::WORKOLOGHY,
     ];
     public function save(array $options = []){
         if(!$this->id)
@@ -184,6 +188,11 @@ class Unit extends UModel{
     const POLICLINIC    = 3;
     const CLINIC        = 4;
     const LABRATORY     = 5;
+    const ORTOPED       = 6;
+    const FIZIOTORAPHY  = 7;
+    const MASSAGE       = 8;
+    const WORKOLOGHY    = 9;
+
     public function getGroupStrAttribute(){
         return __('units.group_code_str.' . $this->group_code);
     }

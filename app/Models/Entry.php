@@ -28,6 +28,10 @@ class Entry extends UModel
     const CLINIC        = 5;
     const DOCTOR        = 6;
     const NURSE         = 7;
+    const ORTOPED       = 8;
+    const FIZIOTORAPHY  = 9;
+    const MASSAGE       = 10;
+    const WORKOLOGHY    = 11;
     
     public function getGroupCodeStrAttribute(){
         return __('entries.group_code_str.' . $this->group_code);

@@ -44,29 +44,25 @@
                         <div class="circle-icon">
                             <img src="{{asset('/imgs/icon/hospital.svg')}}">
                         </div>
-                        <a href="#">
-                        بیمارستان ها 
+                        <a href="{{route('search', ['group_code' => 5])}}">
+                            مطب ها
                         </a>
-                    </div>
-                    <div class="icons">
-                        <div class="circle-icon">
-                            <img src="{{asset('/imgs/icon/pill.svg')}}">
-                        </div>
-                        <a href="#">داروخانه ها </a>
                     </div>
                     <div class="icons">
                         <div class="circle-icon">
                             <img src="{{asset('/imgs/icon/chemistry.svg')}}">
                         </div>
-                        <a href="#">
-                            آزمایشگاه ها 
+                        <a href="{{route('search', ['group_code' => 9])}}">
+                            مراکز فیزیوتراپی 
                         </a>
                     </div>
                     <div class="icons">
                         <div class="circle-icon">
                             <img src="{{asset('/imgs/icon/phonendoscope.svg')}}">
                         </div>
-                        <a href="#">تخصص ها </a>
+                        <a href="{{route('search', ['group_code' => 8])}}">
+                            مرکز ارتوپدی
+                        </a>
                     </div>
                    
                 </div>
