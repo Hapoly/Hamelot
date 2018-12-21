@@ -18,12 +18,8 @@
                                     <td>{{$user->last_name_str}}</td>
                                 </tr>
                                 <tr>
-                                    <td>{{__('users.degree')}}</td>
-                                    <td>{{$user->degree_str}}</td>
-                                </tr>
-                                <tr>
-                                    <td>{{__('users.field')}}</td>
-                                    <td>{{$user->field_str}}</td>
+                                    <td>{{__('users.fields')}}</td>
+                                    <td>{{$user->fields_str}}</td>
                                 </tr>
                                 <tr>
                                     <td>{{__('users.msc')}}</td>
@@ -38,9 +34,9 @@
                     </div>
                     <div class="col-md-5" style="text-align: center; padding: 5px">
                         @if($user->isDoctor())
-                            <img style="width:100%" src="{{$user->doctor->profile_url}}" />
+                            <img style="width:50%" src="{{$user->doctor->profile_url}}" />
                         @elseif($user->isNurse())
-                            <img style="width:100%" src="{{$user->nurse->profile_url}}" />
+                            <img style="width:50%" src="{{$user->nurse->profile_url}}" />
                         @endif
                     </div>
                 </div>

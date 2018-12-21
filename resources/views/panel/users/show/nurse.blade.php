@@ -25,12 +25,8 @@
             <td>{{$user->status_str}}</td>
           </tr>
           <tr>
-            <td>{{__('users.field')}}</td>
-            <td>{{$user->field_str}}</td>
-          </tr>
-          <tr>
-            <td>{{__('users.degree')}}</td>
-            <td>{{$user->degree_str}}</td>
+            <td>{{__('users.fields')}}</td>
+            <td>{{$user->fields_str}}</td>
           </tr>
           <tr>
             <td>{{__('users.msc')}}</td>

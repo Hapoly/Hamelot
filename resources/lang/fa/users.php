@@ -14,8 +14,6 @@ return [
     'last_name'         => 'نام خانوادگی',
     'status'            => 'وضعیت',
     'operation'         => 'عملیات',
-    'degree'            => 'سطح',
-    'field'             => 'فیلد کاری',
     'gender'            => 'جنسیت',
     'profile'           => 'تصویر',
     'id_number'         => 'کدملی',
