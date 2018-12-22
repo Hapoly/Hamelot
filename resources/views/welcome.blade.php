@@ -41,26 +41,26 @@
                 <div class="flex-container">
                     
                     <div class="icons">
-                        <div class="circle-icon">
-                            <img src="{{asset('/imgs/icon/hospital.svg')}}">
-                        </div>
                         <a href="{{route('search', ['group_code' => 5])}}">
+                            <div class="circle-icon">
+                                <img src="{{asset('/imgs/icon/hospital.svg')}}">
+                            </div>
                             مطب ها
                         </a>
                     </div>
                     <div class="icons">
-                        <div class="circle-icon">
-                            <img src="{{asset('/imgs/icon/chemistry.svg')}}">
-                        </div>
                         <a href="{{route('search', ['group_code' => 9])}}">
+                            <div class="circle-icon">
+                                <img src="{{asset('/imgs/icon/chemistry.svg')}}">
+                            </div>
                             مراکز فیزیوتراپی 
                         </a>
                     </div>
                     <div class="icons">
-                        <div class="circle-icon">
-                            <img src="{{asset('/imgs/icon/phonendoscope.svg')}}">
-                        </div>
                         <a href="{{route('search', ['group_code' => 8])}}">
+                            <div class="circle-icon">
+                                <img src="{{asset('/imgs/icon/phonendoscope.svg')}}">
+                            </div>
                             مرکز ارتوپدی
                         </a>
                     </div>
