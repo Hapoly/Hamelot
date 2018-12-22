@@ -344,7 +344,8 @@ hr{
 }
 .searched-card {
 	height: auto;
-	margin-top: 40px;
+	margin: auto;
+	margin-top: 25px;
 	border-radius: 2px;
 	padding: 15px;
 	width: 90%;
