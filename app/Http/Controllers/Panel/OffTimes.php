@@ -23,15 +23,12 @@ class OffTimes extends Controller{
     $links = '';
     $sort = $request->input('sort', '###');
 
-    if($request->has('unit_id')){
+    if($request->has('unit_id') && $request->unit_id != '0'){
       $unit_id = $request->unit_id;
       $off_times = $off_times->whereHas('unit_user', function($query) use($unit_id){
         return $query->where('unit_id', $unit_id);
       });
     }
-    if($request->has('day_of_week'))
-      $off_times = $off_times->where('day_of_week', $request->day_of_week);
-    
     if($request->has('sort'))
       $off_times = $off_times->orderBy($request->input('sort'), 'desc');
     $off_times = $off_times->paginate(10);
@@ -40,10 +37,10 @@ class OffTimes extends Controller{
       'off_times'   => $off_times,
       'links'       => $links,
       'sort'        => $sort,
+      'units'       => Auth::user()->units,
       'search'      => isset(parse_url(url()->full())['query'])? parse_url(url()->full())['query']: '',
       'filters'     => [
         'unit_id'       => $request->input('unit_id', 0),
-        'day_of_week'   => $request->input('day_of_week', 0),
       ],
     ]);
   }

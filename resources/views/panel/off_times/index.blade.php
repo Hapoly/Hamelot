@@ -1,5 +1,5 @@
 @extends('layouts.main')
-@section('title', __('off_times.index_title'))
+@section('title', __('off_times.index'))
 @section('content')
 <div class="filter-panel">
   <div class="row justify-content-center">
@@ -12,11 +12,11 @@
               <div class="col-md-6"></div>
               <div class="col-md-6">
                 <div class="form-group">
-                  <select class="form-control" name="day_of_week" id="day_of_week" style="width: 100%">
-                    <option value="0"> تمام روز‌های هفته</option>
-                    @for($i=1; $i<=7; $i++)
-                      <option value="$i" {{isset($filters)? ($filters['day_of_week'] == $i? 'selected': ''): ''}}>{{__('general.day_of_week.1')}}</option>
-                    @endfor
+                  <select class="form-control" name="unit_id" id="unit_id" style="width: 100%">
+                    <option value="0"> تمام واحدها</option>
+                    @foreach($units as $unit)
+                      <option value="{{$unit->id}}" {{isset($filters)? ($filters['unit_id'] == $unit->id? 'selected': ''): ''}}>{{$unit->complete_title}}</option>
+                    @endforeach
                   </select>
                 </div>
               </div>

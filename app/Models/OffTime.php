@@ -50,12 +50,14 @@ class OffTime extends UModel
                             return $query->where('users.id', Auth::user()->id);
                         });
                     });
-                })->orWhere(function($query){
-                    return $query->where('unit_user', '0')->whereHas('user', function($query){
-                        return $query->where('units', function($query){
-                            return $query->whereHas('managers', function($query){
-                                return $query->where('users.id', Auth::user()->id);
-                            });
+                });
+            });
+        else if(Auth::user()->isSecretary())
+            return OffTime::where(function($query){
+                return $query->whereHas('unit_user', function($query){
+                    return $query->whereHas('unit', function($query){
+                        return $query->whereHas('secretaries', function($query){
+                            return $query->where('users.id', Auth::user()->id);
                         });
                     });
                 });
