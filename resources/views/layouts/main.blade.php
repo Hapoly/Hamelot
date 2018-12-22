@@ -103,7 +103,9 @@
 									<i class="glyphicon glyphicon-align-right"></i>
 									<!-- <span>Toggle</span>  -->
 								</button>
-								<a class="btn btn-primary" href="{{route('search')}}">{{__('general.search')}}</a>
+								<a class="btn btn-primary" href="{{route('search')}}">
+									<i class="fa fa-search" aria-hidden="false"></i>
+								</a>
 							</div>
 						</div>
 					</div>
