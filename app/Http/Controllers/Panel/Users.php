@@ -158,6 +158,7 @@ class Users extends Controller{
   public function storeAdmin(AdminCreateRequest $request){
     $inputs = $request->all();
     $inputs['group_code'] = User::G_ADMIN;
+    $inputs['slug'] = rand(0, 99999999);
     if(!$request->input('email'))
       unset($inputs['email']);
     if(!Auth::user()->isAdmin()){
@@ -170,6 +171,7 @@ class Users extends Controller{
   public function storeManager(ManagerCreateRequest $request){
     $inputs = $request->all();
     $inputs['group_code'] = User::G_MANAGER;
+    $inputs['slug'] = rand(0, 99999999);
     if(!$request->input('email'))
       unset($inputs['email']);
     if(!Auth::user()->isAdmin()){
@@ -183,6 +185,7 @@ class Users extends Controller{
   public function storeSecretary(SecretaryCreateRequest $request){
     $inputs = $request->all();
     $inputs['group_code'] = User::G_SECRETARY;
+    $inputs['slug'] = rand(0, 99999999);
     if(!$request->input('email'))
       unset($inputs['email']);
     if(!Auth::user()->isAdmin()){
@@ -282,6 +285,7 @@ class Users extends Controller{
   }
   public function storePatient(PatientCreateRequest $request){
     $inputs = $request->all();
+    $inputs['slug'] = rand(0, 99999999);
     if($request->hasFile('profile')){
       $inputs['profile'] = Storage::disk('public')->put('/users', $request->file('profile'));
     }
