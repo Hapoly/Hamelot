@@ -22,9 +22,9 @@
         }
       }
     @endphp
-    @input_select(['name' => 'unit_user_id', 'value' => old('unit_user_id', $off_time->unit_user_id), 'label' => __('off_times.unit_user_id'), 'required' => true, 'rows' => $unit_user_rows])
-    @input_day_time(['name' => 'start_time', 'value' => old('start_time', $off_time->start_time), 'label' => __('off_times.start_time')])
-    @input_day_time(['name' => 'finish_time', 'value' => old('finish_time', $off_time->finish_time), 'label' => __('off_times.finish_time')])
+    @input_select(['name' => 'unit_user_id', 'value' => old('unit_user_id', $off_time->unit_user_id), 'label' => __('off_times.unit_user_id'), 'required' => true, 'rows' => $unit_user_rows, 'row' => true])
+    @input_day_time(['name' => 'start_time', 'value' => old('start_time', $off_time->start_time), 'label' => __('off_times.start_time'), 'row' => true])
+    @input_day_time(['name' => 'finish_time', 'value' => old('finish_time', $off_time->finish_time), 'label' => __('off_times.finish_time'), 'row' => true])
     @submit_row(['value' => 'new', 'label' => __('off_times.save')])
   @endform_create
 </div>

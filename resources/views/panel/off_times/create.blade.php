@@ -27,9 +27,9 @@
         }
       }
     @endphp
-    @input_select(['name' => 'unit_user_id', 'value' => old('unit_user_id', ''), 'label' => __('off_times.unit_user_id'), 'required' => true, 'rows' => $unit_user_rows])
-    @input_date_complete(['name' => 'start_date', 'label' => __('off_times.start_date'), 'value'  => old('start_date', time()), 'required' => true])
-    @input_date_complete(['name' => 'finish_date', 'label' => __('off_times.finish_date'), 'value'  => old('finish_date', time()), 'required' => true])
+    @input_select(['name' => 'unit_user_id', 'value' => old('unit_user_id', ''), 'label' => __('off_times.unit_user_id'), 'required' => true, 'rows' => $unit_user_rows, 'row' => true])
+    @input_date_complete(['name' => 'start_date', 'label' => __('off_times.start_date'), 'value'  => old('start_date', time()), 'required' => true, 'row' => true])
+    @input_date_complete(['name' => 'finish_date', 'label' => __('off_times.finish_date'), 'value'  => old('finish_date', time()), 'required' => true, 'row' => true])
     @submit_row(['value' => 'new', 'label' => __('off_times.save')])
   @endform_create
 </div>
