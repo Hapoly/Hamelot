@@ -218,12 +218,13 @@ Route::middleware('auth')->group(function(){
 });
 
 Route::get('/', 'HomeController@index')->name('welcome');
+Route::get('/terms', 'HomeController@terms')->name('terms');
+
 Route::get('/about',function(){return view('about');})->name('about');
 Route::get('/tour',function(){return view('tour');})->name('tour');
 Route::get('/search', 'HomeController@search')->name('search');
 
 Route::get('/user/{username}', 'GeneralController@showUser')->name('show.user');
 Route::get('/unit/{key}', 'GeneralController@showUnit')->name('show.unit');
-
 if(env('APP_DEBUG', false))
     Route::get('/session/all', 'GeneralController@sessionAll')->name('session.all');

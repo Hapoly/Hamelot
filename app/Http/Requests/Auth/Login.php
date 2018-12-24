@@ -27,6 +27,7 @@ class Login extends PersianFormRequest
     {
         return [
             'phone' => ['required', new Phone],
+            'terms' => 'required|accepted',
         ];
     }
 }

@@ -44,4 +44,8 @@ class HomeController extends Controller
             'term'      => $term,
         ]);
     }
+
+    public function terms(Request $request){
+        return view('terms');
+    }
 }
