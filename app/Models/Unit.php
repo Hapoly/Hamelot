@@ -143,9 +143,13 @@ class Unit extends UModel{
             'mobile'        => $this->mobile,
             
             'group_code'    => $this->group_code_to_gc[$this->group_code],
-            'public'        => $this->public,
             'type'          => $this->type,
         ];
+        if(sizeof($this->members) > 0)
+            $data['public'] = Entry::T_PUBLIC;
+        else
+            $data['public'] = Entry::T_PRIVATE;
+
         if($this->status)
             $data['status'] = $this->status;
 

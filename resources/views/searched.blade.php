@@ -18,8 +18,12 @@
             @switch($result->group_code)
                 @case(Entry::HOSPITAL)
                 @case(Entry::DEPARTMENT)
-                @case(Entry::CLINIC)
+                {{ /* @case(Entry::CLINIC) */ }}
                 @case(Entry::POLICLINIC)
+                @case(Entry::ORTOPED)
+                @case(Entry::FIZIOTORAPHY)
+                @case(Entry::MASSAGE)
+                @case(Entry::WORKOLOGHY)
                     <div class="col-md-4">
                         <div class="searched-card">
                             <img src="{{$result->unit->image_url}}" class="search-img">

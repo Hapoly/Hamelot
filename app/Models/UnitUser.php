@@ -137,6 +137,13 @@ class UnitUser extends UModel
                     'status'            => $this->status
                 ]);
         }
+        if($this->permission == UnitUser::MEMBER){
+            if(sizeof($this->unit->members) >0){
+                Entry::where('target_id', $this->unit_id)->update(['public' => Entry::T_PUBLIC]);
+            }else{
+                Entry::where('target_id', $this->unit_id)->update(['public' => Entry::T_PRIVATE]);
+            }
+        }
     }
     public function delete(){
         foreach($this->unit->sub_units as $unit){
