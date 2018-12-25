@@ -17,7 +17,7 @@ class Doctor extends UModel{
     public $incrementing = false;
     protected $primary = 'id';
     protected $table = 'doctors';
-    protected $fillable = ['degree_id', 'field_id', 'user_id', 'profile', 'gender', 'msc', 'start_year'];
+    protected $fillable = ['user_id', 'profile', 'gender', 'msc', 'start_year'];
 
     public function getMscStrAttribute(){
         if($this->msc == 'NuLL')
@@ -28,18 +28,6 @@ class Doctor extends UModel{
 
     public function user(){
         return $this->belongsTo('App\User');
-    }
-    public function degree(){
-        return $this->belongsTo('App\Models\ConstValue', 'degree_id');
-    }
-    public function field(){
-        return $this->belongsTo('App\Models\ConstValue', 'field_id');
-    }
-    public function getDegreeStrAttribute(){
-        return ConstValue::find($this->degree_id)->value;
-    }
-    public function getFieldStrAttribute(){
-        return ConstValue::find($this->field_id)->value;
     }
     
     const MALE      = 1;
