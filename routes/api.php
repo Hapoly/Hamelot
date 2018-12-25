@@ -12,23 +12,21 @@ use Illuminate\Http\Request;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-
-Route::namespace('Api')->prefix('auth')->group(function (){
-    Route::post('/login', 'Auth@login')->name('login');
-    Route::prefix('register')->name('register.')->group(function (){
-        Route::post('patient', 'Auth@registerPatient')->name('patient');
-        Route::post('doctor', 'Auth@registerDoctor')->name('doctor');
-        Route::post('nurse', 'Auth@registerNurse')->name('nurse');
-        Route::post('manager', 'Auth@registerManager')->name('manager');
-    });
-    Route::middleware('auth:api')->group(function(){
-        Route::post('/logout', 'Auth@logout')->name('logout');
-        Route::post('/me', 'Auth@me')->name('me');
-    });
+Route::middleware('sessions')->get('/session/all', function(Request $request){
+    return $request->session()->all();
 });
-Route::middleware('auth:api')->namespace('Api')->group(function(){
+Route::middleware('sessions')->get('/session/clear', function(Request $request){
+    $request->session()->flush();
+    return $request->session()->all();
 });
-// system apis
-Route::name('api.panel.')->group(function(){
-    Route::post('/units', 'Api\Panel@units')->name('units');
+Route::namespace('Api')->middleware('sessions')->group(function (){
+    Route::prefix('auth')->group(function(){
+        Route::post('/send-token', 'Authorizaition@sendToken')->name('token.send');
+        Route::post('/verify-token', 'Authorizaition@verifyToken')->name('token.verify');
+        Route::middleware('auth:api')->group(function(){
+            Route::post('/logout', 'Authorizaition@logout')->name('logout');
+            Route::get('/profile', 'Profile@get')->name('profile.get');
+            Route::post('/profile', 'Profile@edit')->name('profile.edit');
+        });
+    });
 });
