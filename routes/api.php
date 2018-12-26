@@ -23,10 +23,10 @@ Route::namespace('Api')->middleware('sessions')->group(function (){
     Route::prefix('auth')->group(function(){
         Route::post('/send-token', 'Authorizaition@sendToken')->name('token.send');
         Route::post('/verify-token', 'Authorizaition@verifyToken')->name('token.verify');
-        Route::middleware('auth:api')->group(function(){
-            Route::post('/logout', 'Authorizaition@logout')->name('logout');
-            Route::get('/profile', 'Profile@get')->name('profile.get');
-            Route::post('/profile', 'Profile@edit')->name('profile.edit');
-        });
+    });
+    Route::middleware('auth:api')->group(function(){
+        Route::post('/auth/logout', 'Authorizaition@logout')->name('logout');
+        Route::get('/profile', 'Profile@get')->name('profile.get');
+        Route::post('/profile', 'Profile@edit')->name('profile.edit');
     });
 });
