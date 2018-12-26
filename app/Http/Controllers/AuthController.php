@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Kavenegar\KavenegarApi;
+use Kavenegar\Exceptions\ApiException;
+use Kavenegar\Exceptions\HttpException;
 use App\User;
 use Auth;
 use App\Models\Patient;

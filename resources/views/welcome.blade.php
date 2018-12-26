@@ -51,7 +51,7 @@
                     <div class="icons">
                         <a href="{{route('search', ['group_code' => 9])}}">
                             <div class="circle-icon">
-                                <img src="{{asset('/imgs/icon/chemistry.svg')}}">
+                                <img src="{{asset('/imgs/icon/fiziyo.svg')}}">
                             </div>
                             مراکز فیزیوتراپی 
                         </a>
@@ -59,7 +59,7 @@
                     <div class="icons">
                         <a href="{{route('search', ['group_code' => 8])}}">
                             <div class="circle-icon">
-                                <img src="{{asset('/imgs/icon/phonendoscope.svg')}}">
+                                <img src="{{asset('/imgs/icon/ortoped.svg')}}">
                             </div>
                             مرکز ارتوپدی
                         </a>

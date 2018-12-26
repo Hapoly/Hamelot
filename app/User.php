@@ -358,6 +358,8 @@ class User extends Authenticatable
     public function save(array $options = []){
         if(!$this->id)
             $this->id = Uuid::generate()->string;
+        if(!$this->slug || $this->slug == '')
+            $this->slug = rand(0, 9999999);
         parent::save($options);
     }
 

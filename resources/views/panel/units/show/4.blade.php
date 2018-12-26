@@ -48,11 +48,13 @@
         </tbody>
       </table>
     </div>
-    @if($unit->has_permission)
-      <div class="row">
+    <div class="row">
+      @if(Auth::user()->can('update', $unit))
         <div class="col-md-6" style="text-align: center">
           <a href="{{route('panel.units.edit', ['unit' => $unit])}}" class="btn btn-primary" role="button">{{__('units.edit')}}</a>
         </div>
+      @endif
+      @if(Auth::user()->can('destroy', $unit))
         <div class="col-md-6" style="text-align: center">
           <form action="{{route('panel.units.destroy', ['unit' => $unit])}}" method="post">
             {{ method_field('DELETE') }}
@@ -60,9 +62,9 @@
             <button type="submit" class="btn btn-danger">حذف</button>
           </form>
         </div>
-      </div>
-    @endif
-    @if(Auth::user()->isPatient())
+      @endif
+    </div>
+    @if(Auth::user()->can('create_demand', $unit))
       <div class="row">
         <div class="col-md-12" style="text-align: center">
           <a class="btn btn-default" href="{{route('unit', ['key' => $unit->slug])}}">{{__('demands.create_visit')}}</a>
@@ -70,54 +72,56 @@
       </div>
     @endif
   </div>
-  <div class="panel panel-default">
-    <div class="panel-heading sub-panel-title">
-      @if($unit->has_permission)
-        <a href="{{route('panel.unit_users.create.secretary', ['unit_id' => $unit->id])}}" class="btn btn-primary sub-panel-add"><i class="fa fa-plus"></i></a>
-      @endif
-      {{__('unit_users.secretaries')}}
-    </div>
-    @if(sizeof($unit->secretaries))
-      <table class="table">
-        <thead>
-          <tr>
-            <th>{{__('users.row')}}</th>
-            <th>{{__('users.first_name')}}</th>
-            <th>{{__('users.last_name')}}</th>
-            <th>{{__('users.group_code')}}</th>
-            <th>{{__('users.status')}}</th>
-            <th>{{__('users.operation')}}</th>
-          </tr>
-        </thead>
-        <tbody>
-          @foreach($unit->secretaries as $index => $user)
-            <tr>
-              <td>{{$index+1}}</td>
-              <td>{{$user->first_name_str}}</td>
-              <td>{{$user->last_name_str}}</td>
-              <td>{{$user->group_str}}</td>
-              <td>{{$user->status_str}}</td>
-              <td>
-                @if($user->permission_to_write_info)
-                  @operation_th(['base' => 'panel.users', 'label' => 'user', 'item' => $user, 'remove_label' => __('users.remove'), 'edit_label' => __('users.edit_str'), 'show_label' => __('users.show')])
-                @else
-                  <a class="btn btn-default" href="{{route('panel.users.show', ['user' => $user])}}">{{__('users.show')}}</a>
-                @endif
-                @if($unit->has_permission)
-                  <a class="btn btn-warning" href="{{route('panel.unit_users.inline_update', ['unit_user' => $user->pivot->id, 'action' => 'cancel'])}}">{{__('unit_users.cancel')}}</a>
-                @endif
-              </td>
-            </tr>
-          @endforeach
-        </tbody>
-      </table>
-    @else
-      <div class="row">
-        <div class="col-md-12" style="text-align: center">
-          {{__('unit_users.not_found')}}
-        </div>
+  @if(Auth::user()->can('see_secretaries', $unit))
+    <div class="panel panel-default">
+      <div class="panel-heading sub-panel-title">
+        @if(Auth::user()->can('add_secretary', $unit))
+          <a href="{{route('panel.unit_users.create.secretary', ['unit_id' => $unit->id])}}" class="btn btn-primary sub-panel-add"><i class="fa fa-plus"></i></a>
+        @endif
+        {{__('unit_users.secretaries')}}
       </div>
-    @endif
-  </div>
+      @if(sizeof($unit->secretaries))
+        <table class="table">
+          <thead>
+            <tr>
+              <th>{{__('users.row')}}</th>
+              <th>{{__('users.first_name')}}</th>
+              <th>{{__('users.last_name')}}</th>
+              <th>{{__('users.group_code')}}</th>
+              <th>{{__('users.status')}}</th>
+              <th>{{__('users.operation')}}</th>
+            </tr>
+          </thead>
+          <tbody>
+            @foreach($unit->secretaries as $index => $user)
+              <tr>
+                <td>{{$index+1}}</td>
+                <td>{{$user->first_name_str}}</td>
+                <td>{{$user->last_name_str}}</td>
+                <td>{{$user->group_str}}</td>
+                <td>{{$user->status_str}}</td>
+                <td>
+                  @if($user->permission_to_write_info)
+                    @operation_th(['base' => 'panel.users', 'label' => 'user', 'item' => $user, 'remove_label' => __('users.remove'), 'edit_label' => __('users.edit_str'), 'show_label' => __('users.show')])
+                  @else
+                    <a class="btn btn-default" href="{{route('panel.users.show', ['user' => $user])}}">{{__('users.show')}}</a>
+                  @endif
+                  @if(Auth::user()->can('add_secretary', $unit))
+                    <a class="btn btn-warning" href="{{route('panel.unit_users.inline_update', ['unit_user' => $user->pivot->id, 'action' => 'cancel'])}}">{{__('unit_users.cancel')}}</a>
+                  @endif
+                </td>
+              </tr>
+            @endforeach
+          </tbody>
+        </table>
+      @else
+        <div class="row">
+          <div class="col-md-12" style="text-align: center">
+            {{__('unit_users.not_found')}}
+          </div>
+        </div>
+      @endif
+    </div>
+  @endif
 </div>
 @endsection
