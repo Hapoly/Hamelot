@@ -378,7 +378,7 @@ hr{
 }
 .pagination {
 	direction: ltr;
-	display: inline-block;
+	display: inline-flex;
 	padding: 30px;
 	padding-top: 50px;
 }
