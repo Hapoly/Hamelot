@@ -36,6 +36,7 @@ class HomeController extends Controller
         $results = Entry::where('title', 'LIKE', "%$term%")->where('public', Entry::T_PUBLIC);
         if($request->input('city_id', '0') != '0')
             $results = $results->where('city_id', $request->city_id);
+        $results = $results->where('group_code', '<>', Entry::CLINIC);
         if($request->has('group_code'))
             $results = $results->where('group_code', $request->group_code);
         $results = $results->paginate(10);

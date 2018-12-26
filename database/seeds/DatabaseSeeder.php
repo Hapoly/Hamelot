@@ -14,7 +14,7 @@ class DatabaseSeeder extends Seeder
         $this->call(Consts::class);
         $this->call(Provinces::class);
         $this->call(Cities::class);
-        // $this->call(Users::class);
+        $this->call(Users::class);
         // $this->call(Addresses::class);
         // $this->call(Units::class);
         // $this->call(UnitUsers::class);

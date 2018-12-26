@@ -139,8 +139,6 @@ class Unit extends UModel{
             'lat'           => $this->lat,
             'city_id'       => $this->city_id,
             'province_id'   => $this->city->province_id,
-            'phone'         => $this->phone,
-            'mobile'        => $this->mobile,
             
             'group_code'    => $this->group_code_to_gc[$this->group_code],
             'type'          => $this->type,
