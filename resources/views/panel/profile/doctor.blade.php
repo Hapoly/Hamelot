@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     @form_edit(['post' => true, 'action' => route('panel.profile.doctor'), 'title' => __('users.profile_edit')])
-        @input_image(['name' => 'profile', 'label' => __('users.profile'), 'col' => 12])
+        @input_image(['name' => 'profile', 'label' => __('users.profile'), 'col' => 12, 'value' => Auth::user()->doctor->profile_url])
         @input_text(['name' => 'email', 'label' => __('users.email'), 'value' => old('email', Auth::user()->email_str), 'row' => true])
         @input_text(['name' => 'first_name', 'label' => __('users.first_name'), 'value' => old('first_name', Auth::user()->first_name_item), 'row' => true])
         @input_text(['name' => 'last_name', 'label' => __('users.last_name'), 'value' => old('last_name', Auth::user()->last_name_item), 'row' => true])
