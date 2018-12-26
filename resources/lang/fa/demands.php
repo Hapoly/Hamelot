@@ -10,6 +10,7 @@ return [
     'create'            => 'تقاضای جدید',
     'create_unit_user'  => 'دریافت نوبت ویزیت',
     'create_unit'       => 'درخواست خدمات',
+    'create_visit'      => 'نوبت ویزیت جدید',
     'edit'              => 'ویرایش',
     'show'              => 'نمایش',
     'remove'            => 'حذف',

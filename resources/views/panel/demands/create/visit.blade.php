@@ -1,5 +1,5 @@
 @extends('layouts.main')
-@section('title', __('demands.create_title'))
+@section('title', __('demands.create_visit'))
 @section('content')
 <?php
   use App\Models\Address;

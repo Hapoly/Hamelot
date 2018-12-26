@@ -65,8 +65,57 @@
             </div>
             @if(!$bid->permission_to_operate_bid)
             <div class="col-md-6" style="text-align: center">
-              <a href="{{route('panel.bids.inline_update', ['bid' => $bid, 'action' => 'cancel'])}}" class="btn btn-danger" role="button">{{__('bids.cancel')}}</a>
-              <a href="{{route('panel.bids.inline_update', ['bid' => $bid, 'action' => 'finish'])}}" class="btn btn-info" role="button">{{__('bids.finish')}}</a>
+              
+              <div class="modal fade" id="cancelModal" tabindex="-1" role="dialog" aria-labelledby="closeCancelModal" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="closeCancelModal">پایان</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      @if(Auth::user()->isPatient())
+                        آیا مطمئن هستید که می‌خواهید به این نوبت ویزیت خاتمه دهید؟ باقی هزینه را باید آنلاین پرداخت کنید.
+                      @else
+                        آیا مطمئن هستید که می‌خواهید به این نوبت ویزیت خاتمه دهید؟ ابتدا بیمار باید هزینه ویزیت را نقدی پرداخت کند. در صورتی که دکمه پایان را بزنید، سیستم فرض می کند که بیمار هزینه ویزیت را نقدا پرداخت کرده است.
+                      @endif
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-default" data-dismiss="modal">انصراف</button>
+                      <a href="{{route('panel.bids.inline_update', ['bid' => $bid, 'action' => 'cancel'])}}" class="btn btn-danger">لغو</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#cancelModal">
+                {{__('bids.cancel')}}
+              </button>
+
+              <div class="modal fade" id="finishModal" tabindex="-1" role="dialog" aria-labelledby="closeFinishModal" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="closeFinishModal">پایان</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                        آیا مطمئن هستید که می‌خواهید به این نوبت ویزیت خاتمه دهید؟ باقی هزینه را باید آنلاین پرداخت کنید.
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">انصراف</button>
+                      <a href="{{route('panel.bids.inline_update', ['bid' => $bid, 'action' => 'finish'])}}" class="btn btn-primary">پایان</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <button type="button" class="btn btn-info" data-toggle="modal" data-target="#finishModal">
+                {{__('bids.finish')}}
+              </button>
+              
               @if($bid->status != Bid::ACCEPTED_PAID_ALL)
                 <!-- <a href="{{route('panel.bids.inline_update', ['bid' => $bid, 'action' => 'pay_remain'])}}" class="btn btn-info" role="button">{{__('bids.pay_remain')}}</a> -->
               @endif
@@ -79,8 +128,57 @@
             </div>
             @if(!$bid->permission_to_operate_bid)
             <div class="col-md-6" style="text-align: center">
-              <a href="{{route('panel.bids.inline_update', ['bid' => $bid, 'action' => 'cancel'])}}" class="btn btn-danger" role="button">{{__('bids.cancel')}}</a>
-              <a href="{{route('panel.bids.inline_update', ['bid' => $bid, 'action' => 'finish'])}}" class="btn btn-info" role="button">{{__('bids.finish_offline')}}</a>
+              <div class="modal fade" id="cancelModal" tabindex="-1" role="dialog" aria-labelledby="closeCancelModal" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="closeCancelModal">پایان</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      آیا مطمئن هستید که می‌خواهید به این نوبت ویزیت خاتمه دهید؟ ابتدا بیمار باید هزینه ویزیت را نقدی پرداخت کند. در صورتی که دکمه پایان را بزنید، سیستم فرض می کند که بیمار هزینه ویزیت را نقدا پرداخت کرده است.
+                      <form method="GET" action="{{route('panel.bids.inline_update', ['bid' => $bid])}}">
+                        <div class="row">
+                          <input hidden name="action" value="cancel" />
+                          @input_text(['name' => 'description', 'value' => old('description', ''), 'label' => __('bids.description'), 'required' => false])
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-default" data-dismiss="modal">انصراف</button>
+                      <button class="btn btn-danger" type="submit">لغو</a>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#cancelModal">
+                {{__('bids.cancel')}}
+              </button>
+
+              <div class="modal fade" id="finishModal" tabindex="-1" role="dialog" aria-labelledby="closeFinishModal" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="closeFinishModal">پایان</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                    آیا مطمئن هستید که می‌خواهید به این نوبت ویزیت خاتمه دهید؟ ابتدا بیمار باید هزینه ویزیت را نقدی پرداخت کند. در صورتی که دکمه پایان را بزنید، سیستم فرض می کند که بیمار هزینه ویزیت را نقدا پرداخت کرده است.
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">انصراف</button>
+                      <a href="{{route('panel.bids.inline_update', ['bid' => $bid, 'action' => 'finish'])}}" class="btn btn-primary">پایان</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <button type="button" class="btn btn-info" data-toggle="modal" data-target="#finishModal">
+                {{__('bids.finish_offline')}}
+              </button>
             </div>
             @endif
           @endif

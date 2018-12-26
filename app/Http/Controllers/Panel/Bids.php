@@ -21,10 +21,8 @@ class Bids extends Controller{
     public function index(Request $request){
         $bids = Bid::fetch();
         $links = '';
-        $sort = $request->input('sort', '###');
+        $sort = $request->input('sort', 'date');
 
-        if($request->has('sort'))
-            $bids = $bids->orderBy($request->input('sort'), 'desc');
         if($request->has('day')){
             $time = Time::jmktime(0, 0, 0, $request->day, $request->month, $request->year);
             $bids = $bids->where('date', '>', $time)->where('date', '<', $time + 24*3600);
@@ -34,6 +32,7 @@ class Bids extends Controller{
                 return $query->where('phone', 'LIKE', '%'.$request->input('phone').'%');
             });
         }
+        $bids = $bids->orderBy('created_at', 'desc')->orderBy('date', 'desc');
         $bids = $bids->paginate(10);
 
         
@@ -127,9 +126,12 @@ class Bids extends Controller{
                         'pay_type'  => Transaction::ONLINE_PAY,
                         'target'    => $bid->id,
                         'authority' => 'NuLL',
+                        'date'      => time(),
                     ]);
                 }
                 $bid->status = Bid::CANCELED;
+                if($request->input('description', '') != '')
+                    $bid->description = $request->input('description');
                 $bid->save();
                 return redirect()->back();
             case 'finish':
