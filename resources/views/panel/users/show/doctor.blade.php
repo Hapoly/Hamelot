@@ -41,7 +41,7 @@
         </tbody>
       </table>
     </div>
-    @if($user->permission_to_write_info)
+    @if(Auth::user()->can('write_info', $user))
       <div class="row">
         <div class="col-md-6" style="text-align: center">
           <a href="{{route('panel.users.edit', ['user' => $user])}}" class="btn btn-primary" id="edit" role="button">{{__('users.edit.general')}}</a>
@@ -68,10 +68,10 @@
     </div>
     @endif
   </div>
-  @if($user->permission_to_read_units)
+  @if(Auth::user()->can('read_units', $user))
     <div class="panel panel-default">
       <div class="sub-panel-title panel-heading">
-        @if($user->permission_to_write_units)
+        @if(Auth::user()->can('write_units', $user))
           <a href="{{route('panel.unit_users.create.member', ['user_id' => $user->id])}}" class="btn btn-primary sub-panel-add"><i class="fa fa-plus"></i></a>
         @endif
         {{__('units.index_title')}}

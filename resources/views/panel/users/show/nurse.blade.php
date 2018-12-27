@@ -41,7 +41,7 @@
         </tbody>
       </table>
     </div>
-    @if($user->permission_to_write_info)
+    @if(Auth::user()->can('write_info', $user))
       <div class="row">
         <div class="col-md-6" style="text-align: center">
           <a href="{{route('panel.users.edit', ['user' => $user])}}" class="btn btn-primary" id="edit" role="button">{{__('users.edit.general')}}</a>

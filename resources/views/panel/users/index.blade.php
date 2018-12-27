@@ -95,7 +95,7 @@
                   </td>
                 @else
                   <td>
-                    @if($user->permission_to_write_info)
+                    @if(Auth::user()->can('write_info', $user))
                       <a href="{{route('panel.users.edit', ['user' => $user])}}" class="btn btn-primary">{{__('users.edit_str')}}</a>
                     @endif
                     <a href="{{route('panel.users.show', ['user' => $user])}}" class="btn btn-default">{{__('users.show')}}</a>

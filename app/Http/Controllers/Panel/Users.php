@@ -107,7 +107,7 @@ class Users extends Controller{
     ]);
   }
   public function show(User $user){
-    if(!$user->permission_to_read_info)
+    if(!Auth::user()->can('read_info', $user))
       abort(404);
     switch($user->group_code){
       case User::G_ADMIN:
@@ -306,7 +306,7 @@ class Users extends Controller{
    * edit users
    */
   public function edit(User $user){
-    if(!($user->permission_to_write_info))
+    if(!(Auth::user()->can('write_info', $user)))
       abort(403);
     switch($user->group_code){
       case User::G_ADMIN:
