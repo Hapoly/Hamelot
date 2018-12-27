@@ -237,14 +237,6 @@ class Unit extends UModel{
         else
             return $this->requests()->where('user_id', Auth::user()->id)->first() != null;
     }
-    public function getCanJoinAttribute(){
-        if(Auth::user()->isManager())
-            return $this->requests()->where('user_id', Auth::user()->id)->first() == null;
-        else if(Auth::user()->isAdmin() || Auth::user()->isPatient())
-            return false;
-        else
-            return $this->requests()->where('user_id', Auth::user()->id)->first() == null;
-    }
     public function getJoinedStatusAttribute(){
         return $this->requests()->where('user_id', Auth::user()->id)->first()->status;
     }

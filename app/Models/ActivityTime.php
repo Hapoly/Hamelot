@@ -69,19 +69,6 @@ class ActivityTime extends UModel
             });
     }
 
-    public function getPermissionToWriteAttribute(){
-        if(Auth::user()->isAdmin())
-            return true;
-        if(Auth::user()->isManager()){
-            return $this->unit_user->whereHas('unit', function($query){
-                return $query->whereHas('managers', function($query){
-                    return $query->where('users.id', Auth::user()->id);
-                });
-            })->first() != null;
-        }else
-            return $this->unit_user->user_id == Auth::user()->id;
-    }
-
     const AUTO_FILL_TRUE = 1;
     const AUTO_FILL_FALSE = 0;
     public function getAutoFillStrAttribute(){

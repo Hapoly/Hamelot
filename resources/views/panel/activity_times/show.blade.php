@@ -52,16 +52,20 @@
       </table>
     </div>
     <div class="row">
-      <div class="col-md-6" style="text-align: center">
-        <a href="{{route('panel.activity-times.edit', ['activity_time' => $activity_time])}}" class="btn btn-primary" role="button">{{__('activity_times.edit')}}</a>
-      </div>
-      <div class="col-md-6" style="text-align: center">
-        <form action="{{route('panel.activity-times.destroy', ['activity_time' => $activity_time])}}" method="post">
-          {{ method_field('DELETE') }}
-          {{ csrf_field() }}
-          <button type="submit" class="btn btn-danger">حذف</button>
-        </form>
-      </div>
+      @if(Auth::user()->can('modify', $activity_time))
+        <div class="col-md-6" style="text-align: center">
+          <a href="{{route('panel.activity-times.edit', ['activity_time' => $activity_time])}}" class="btn btn-primary" role="button">{{__('activity_times.edit')}}</a>
+        </div>
+      @endif
+      @if(Auth::user()->can('destroy', $activity_time))
+        <div class="col-md-6" style="text-align: center">
+          <form action="{{route('panel.activity-times.destroy', ['activity_time' => $activity_time])}}" method="post">
+            {{ method_field('DELETE') }}
+            {{ csrf_field() }}
+            <button type="submit" class="btn btn-danger">حذف</button>
+          </form>
+        </div>
+      @endif
     </div>
   </div>
 </div>

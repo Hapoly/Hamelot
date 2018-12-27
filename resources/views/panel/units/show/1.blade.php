@@ -270,7 +270,7 @@
                   </td>
                 @elseif(Auth::user()->isDoctor() || Auth::user()->isNurse())
                   <td>{{$sub_unit->joined_status_str}}</td>
-                  @if($sub_unit->can_join)
+                  @if(Auth::user()->can('join', $unit))
                     <td><a class="btn btn-primary" href="{{route('panel.unit_users.send', ['user' => Auth::user(), 'unit' => $sub_unit])}}">{{ __('unit_users.send') }}</a></td>
                   @else
                     <td>-</td>

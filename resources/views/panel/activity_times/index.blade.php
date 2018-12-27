@@ -58,7 +58,7 @@
         @endif
         <td>{{$activity_time->time_str}}</td>
         <td>{{$activity_time->auto_fill_str}}</td>
-        @if($activity_time->permission_to_write)
+        @if(Auth::user()->can('modify', $activity_time))
           <td>
             @operation_th(['base' => 'panel.activity-times', 'label' => 'activity_time', 'item' => $activity_time, 'remove_label' => __('activity_times.remove'), 'edit_label' => __('activity_times.edit'), 'show_label' => __('activity_times.show')])
           </td>
