@@ -4,7 +4,7 @@
 <div class="container">
   @form_create(['action' => route('panel.units.store'), 'title' => __('units.create')])
     @input_text(['name' => 'title', 'row' => true, 'value' => old('title', ''), 'label' => __('units.title'), 'required' => true])
-    @input_text(['name' => 'slug', 'row' => true, 'value' => old('slug', ''), 'label' => __('units.slug'), 'required' => true])
+    @input_text(['name' => 'slug', 'value' => old('slug', ''), 'label' => __('units.slug'), 'required' => true, 'row' => true, 'placeholder' => "فقط اعداد و حروف لاتین"])
     <?php
         $parent_id_rows = [
           [
@@ -47,6 +47,9 @@
           [ 'value' => 7, 'label' => __('units.group_code_str.7') ],
           [ 'value' => 8, 'label' => __('units.group_code_str.8') ],
           [ 'value' => 9, 'label' => __('units.group_code_str.9') ],
+          [ 'value' => 10, 'label' => __('units.group_code_str.10') ],
+          [ 'value' => 11, 'label' => __('units.group_code_str.11') ],
+          [ 'value' => 12, 'label' => __('units.group_code_str.12') ],
         ];
     ?>
     @input_select(['name' => 'group_code', 'value' => old('group_code', ''), 'label' => __('units.group_code'), 'required' => true, 'rows' => $group_code_rows, 'row' => true])

@@ -110,7 +110,10 @@ class AuthController extends Controller{
                         ]);
                     }
                     Auth::login($user);
-                    return redirect()->intended();
+                    if($user->group_code != User::G_PATIENT)
+                        return redirect()->route('home');
+                    else
+                        return redirect()->intended();
                 }
             case User::G_DOCTOR:
             case User::G_NURSE:
