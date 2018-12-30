@@ -18,7 +18,6 @@
             @switch($result->group_code)
                 @case(Entry::HOSPITAL)
                 @case(Entry::DEPARTMENT)
-                {{ /* @case(Entry::CLINIC) */ }}
                 @case(Entry::POLICLINIC)
                 @case(Entry::ORTOPED)
                 @case(Entry::FIZIOTORAPHY)
