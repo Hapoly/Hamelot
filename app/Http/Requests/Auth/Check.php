@@ -28,6 +28,7 @@ class Check extends PersianFormRequest
         return [
             'token'     => ['required_if:action,check', new Token(request()->get('token'))],
             'action'    => ['required', 'string'],
+            'terms'     => 'required|accepted',
         ];
     }
 }
