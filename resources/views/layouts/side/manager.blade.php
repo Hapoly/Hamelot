@@ -22,6 +22,20 @@
 		</ul>
 	</li>
 	<li>
+		<a href="#activity-times" data-toggle="collapse" aria-expanded="false">
+			<i class="fa fa-calendar-check-o" aria-hidden="false"></i>
+			<span>زمان‌های فعالیت </span>
+		</a>
+		<ul class="collapse list-unstyled" id="activity-times">
+			<li>
+				<a href="{{route('panel.activity-times.create')}}">زمان فعالیت جدید </a>
+			</li>
+			<li>
+				<a href="{{route('panel.activity-times.index')}}">زمان‌های فعالیت </a>
+			</li>
+		</ul>
+	</li>
+	<li>
 		<a href="#unit-user-requests" data-toggle="collapse" aria-expanded="false">
 			<i class="fa fa-user-md" aria-hidden="false"></i>
 			<span>
@@ -82,20 +96,6 @@
 			</li>
 			<li>
 				<a href="{{route('panel.bank-accounts.index')}}">حساب‌ها</a>
-			</li>
-		</ul>
-	</li>
-	<li>
-		<a href="#activity-times" data-toggle="collapse" aria-expanded="false">
-			<i class="fa fa-calendar-check-o" aria-hidden="false"></i>
-			<span>زمان‌های فعالیت </span>
-		</a>
-		<ul class="collapse list-unstyled" id="activity-times">
-			<li>
-				<a href="{{route('panel.activity-times.create')}}">زمان فعالیت جدید </a>
-			</li>
-			<li>
-				<a href="{{route('panel.activity-times.index')}}">زمان‌های فعالیت </a>
 			</li>
 		</ul>
 	</li>

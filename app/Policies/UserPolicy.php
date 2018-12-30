@@ -61,7 +61,7 @@ class UserPolicy
         else if($target->id == $user->id)
             return true;
         else if($user->isManager() || $user->isDoctor() || $user->isNurse())
-            return ($target->units()->whereHas('managers', function($query){
+            return ($target->units()->whereHas('managers', function($query) use ($user){
                 return $query->where('users.id', $user->id);
             })->first()) != null;
         return false;
