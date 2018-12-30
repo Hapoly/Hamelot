@@ -67,6 +67,7 @@ class AuthController extends Controller{
 
     public function token(Request $request){
         // return $request->session()->all();
+        $request->session()->forget('accepted_terms');
         if(User::where('phone', $request->session()->get('auth.phone'))->first() != null)
             $request->session()->put('accepted_terms', true);
         return view('auth.login.token', ['phone' => $request->session()->get('auth.phone')]);
