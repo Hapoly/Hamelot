@@ -14,6 +14,12 @@ class UserPolicy
      *
      * @return void
      */
+    public function destroy(User $user, User $target){
+        return $user->isAdmin();
+    }
+    public function update(User $user, User $target){
+        return $user->isAdmin();
+    }
     public function read_info(User $user, User $target){
         if($user->isAdmin())
             return true;
