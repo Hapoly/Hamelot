@@ -11,7 +11,7 @@
         </div>
     @endif
     <div class="col-md-{{isset($col)?9:10}}">
-        <input id="{{$name}}" style="{{isset($col)?'width: 87%': ''}}" type="{{isset($type)? $type: 'text'}}" class="form-control {{ $errors->has($name) ? ' is-invalid' : '' }}" name="{{$name}}" value="{{$value}}" {{isset($required)?($required? 'required': ''): ''}} autofocus>
+        <input id="{{$name}}" style="{{isset($col)?'width: 87%': ''}}" type="{{isset($type)? $type: 'text'}}" class="form-control {{ $errors->has($name) ? ' is-invalid' : '' }}" name="{{$name}}" value="{{$value}}" {{isset($required)?($required? 'required': ''): ''}} placeholder="{{isset($placeholder)?$placeholder:''}}" autofocus>
         @if ($errors->has($name))
             <span class="invalid-feedback">
             <strong>{{ $errors->first($name) }}</strong>

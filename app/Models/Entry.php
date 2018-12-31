@@ -32,6 +32,7 @@ class Entry extends UModel
     const FIZIOTORAPHY  = 9;
     const MASSAGE       = 10;
     const WORKOLOGHY    = 11;
+    const PHOTOLOGY     = 12;
     
     public function getGroupCodeStrAttribute(){
         return __('entries.group_code_str.' . $this->group_code);

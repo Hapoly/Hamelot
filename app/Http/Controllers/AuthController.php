@@ -67,6 +67,9 @@ class AuthController extends Controller{
 
     public function token(Request $request){
         // return $request->session()->all();
+        $request->session()->forget('accepted_terms');
+        if(User::where('phone', $request->session()->get('auth.phone'))->first() != null)
+            $request->session()->put('accepted_terms', true);
         return view('auth.login.token', ['phone' => $request->session()->get('auth.phone')]);
     }
     public function check(CheckRequest $request){
@@ -107,7 +110,10 @@ class AuthController extends Controller{
                         ]);
                     }
                     Auth::login($user);
-                    return redirect()->intended();
+                    if($user->group_code != User::G_PATIENT)
+                        return redirect()->route('home');
+                    else
+                        return redirect()->intended();
                 }
             case User::G_DOCTOR:
             case User::G_NURSE:

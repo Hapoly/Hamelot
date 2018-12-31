@@ -4,12 +4,6 @@
 ?>
 <ul class="list-unstyled components">
 	<li>
-		<a href="{{route('show.user', ['username' => Auth::user()->username])}}" aria-expanded="false">
-			<i class="fa fa-user" aria-hidden="false"></i>
-			<span>صفحه عمومی من</span>
-		</a>
-	</li>
-	<li>
 		<a href="{{route('home')}}">
 			<i class="fa fa-dashboard" aria-hidden="false"></i>
 			<span>پیشخوان</span>
@@ -19,12 +13,26 @@
 		<a href="#healthunitmenu" data-toggle="collapse" aria-expanded="false">
 			<i class="fa fa-hospital-o" aria-hidden="false"></i>
 			<span>
-			واحد‌های درمانی
+			مراکز درمانی
 			</span>
 		</a>
 		<ul class="collapse list-unstyled" id="healthunitmenu">
-			<li><a href="{{route('panel.units.index')}}">لیست واحدها</a></li>
-			<li><a href="{{route('panel.units.create')}}">واحد جدید</a></li>
+			<li><a href="{{route('panel.units.index')}}">لیست مراکز</a></li>
+			<li><a href="{{route('panel.units.create')}}">مراکز جدید</a></li>
+		</ul>
+	</li>
+	<li>
+		<a href="#activity-times" data-toggle="collapse" aria-expanded="false">
+			<i class="fa fa-calendar-check-o" aria-hidden="false"></i>
+			<span>زمان‌های فعالیت </span>
+		</a>
+		<ul class="collapse list-unstyled" id="activity-times">
+			<li>
+				<a href="{{route('panel.activity-times.create')}}">زمان فعالیت جدید </a>
+			</li>
+			<li>
+				<a href="{{route('panel.activity-times.index')}}">زمان‌های فعالیت </a>
+			</li>
 		</ul>
 	</li>
 	<li>
@@ -88,20 +96,6 @@
 			</li>
 			<li>
 				<a href="{{route('panel.bank-accounts.index')}}">حساب‌ها</a>
-			</li>
-		</ul>
-	</li>
-	<li>
-		<a href="#activity-times" data-toggle="collapse" aria-expanded="false">
-			<i class="fa fa-calendar-check-o" aria-hidden="false"></i>
-			<span>زمان‌های فعالیت </span>
-		</a>
-		<ul class="collapse list-unstyled" id="activity-times">
-			<li>
-				<a href="{{route('panel.activity-times.create')}}">زمان فعالیت جدید </a>
-			</li>
-			<li>
-				<a href="{{route('panel.activity-times.index')}}">زمان‌های فعالیت </a>
 			</li>
 		</ul>
 	</li>

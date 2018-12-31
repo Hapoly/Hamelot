@@ -4,7 +4,7 @@
 <div class="container">
   @form_edit(['action' => route('panel.units.update', ['unit' => $unit]), 'title' => __('units.edit')])
     @input_text(['name' => 'title', 'value' => old('title', $unit->title), 'label' => __('units.title'), 'required' => true, 'row' => true])
-    @input_text(['name' => 'slug', 'value' => old('slug', $unit->slug), 'label' => __('units.slug'), 'required' => true, 'row' => true])
+    @input_text(['name' => 'slug', 'value' => old('slug', $unit->slug), 'label' => __('units.slug'), 'required' => true, 'row' => true, 'placeholder' => 'فقط اعداد و حروف لاتین استفاده شود'])
     <?php
         $parent_id_rows = [
           [
@@ -55,6 +55,9 @@
         [ 'value' => 7, 'label' => __('units.group_code_str.7') ],
         [ 'value' => 8, 'label' => __('units.group_code_str.8') ],
         [ 'value' => 9, 'label' => __('units.group_code_str.9') ],
+        [ 'value' => 10, 'label' => __('units.group_code_str.10') ],
+        [ 'value' => 11, 'label' => __('units.group_code_str.11') ],
+        [ 'value' => 12, 'label' => __('units.group_code_str.12') ],
       ];
     ?>
     @input_select(['name' => 'group_code', 'value' => old('group_code', $unit->group_code), 'label' => __('units.group_code'), 'required' => true, 'rows' => $group_code_rows, 'row' => true])

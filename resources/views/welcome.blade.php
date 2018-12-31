@@ -41,7 +41,7 @@
                 <div class="flex-container">
                     
                     <div class="icons">
-                        <a href="{{route('search', ['group_code' => 5])}}">
+                        <a href="{{route('search', ['group_code' => 6])}}">
                             <div class="circle-icon">
                                 <img src="{{asset('/imgs/icon/hospital.svg')}}">
                             </div>

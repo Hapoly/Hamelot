@@ -10,6 +10,11 @@
                         {{__('auth.resent')}}
                     </div>
                 @endif
+                @if ($errors->has('terms'))
+                    <div class="alert alert-danger" style="text-align: right" role="alert">
+                        لطفا شرایط و ضوابطنامه را خوانده و گزینه آنرا تیک بزنید
+                    </div>
+                @endif
                 <form class="login-form"method="POST" action="{{ route('check') }}">
                     @csrf
                     <p style="text-align: justify; direction: rtl;">{{__('auth.entered_phone', ['phone' => $phone])}}</p>
@@ -19,7 +24,7 @@
                             <input id="token" type="text" class="form-control{{ ($errors->has('token') || session('register.token_mismatch')) ? ' is-invalid' : '' }}" name="token" value="{{ old('token') }}" autofocus>
                             @if (sizeof($errors->all())>0)
                                 <span class="invalid-feedback" style="display: grid;">
-                                    <strong>{{ $errors->first() }}</strong>
+                                    <strong>{{ $errors->first('token') }}</strong>
                                 </span>
                             @endif
                             @if(session('failed'))
@@ -32,6 +37,16 @@
                             @endif
                         </div>
                     </div>
+                    @if(session('accepted_terms', false))
+                        <input hidden name="terms" value="on" />
+                    @else
+                        <div class="form-group row" style="padding-right: 15px;">
+                            <input class="form-check-input" style="position: inherit; margin-left: 10px;" type="checkbox" name="terms">
+                            <label class="form-check-label" for="defaultCheck1">
+                                <a href="{{route('terms')}}">شرایط و ضوابط</a> را خوانده‌ام و آنهارا قبول کرده‌ام.
+                            </label>
+                        </div>
+                    @endif
                     <div class="form-group row mb-0">
                         <div class="col-md-12" style="text-align: center;">
                             <button type="submit" name="action" value="check" class="btn btn-primary">
