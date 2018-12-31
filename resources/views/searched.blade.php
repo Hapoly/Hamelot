@@ -48,31 +48,33 @@
                         </div>
                     </div>
                     @break
-                @case(Entry::DOCTOR)
-                    <div class="col-md-4">
-                        <div class="searched-card">
-                            <img src="{{$result->user->doctor->profile_url}}" class="search-img">
-                            <h5 class="center">
-                                {{$result->user->full_name}}
-                            </h5>
-                            <!-- <div class="star-rating">
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star"></span>
-                                <span class="fa fa-star"></span>
-                            </div> -->
-                            <span class="center">
-                                {{$result->user->field_str}} - {{$result->user->degree_str}}
-                            </span>
-                            <span class="center">
-                                کد نظام‌پزشکی: {{$result->user->msc_str}}
-                            </span>
-                            <a href="{{route('show.user', ['slug' => $result->slug])}}" class="btn see-more-btn center">
-                                مشاهده صفحه
-                            </a>
+                @case(Entry::CLINIC)
+                    @if(sizeof($result->unit->members) > 0)
+                        <div class="col-md-4">
+                            <div class="searched-card">
+                                <img src="{{$result->unit->members[0]->doctor->profile_url}}" class="search-img">
+                                <h5 class="center">
+                                    {{$result->unit->members[0]->full_name}}
+                                </h5>
+                                <!-- <div class="star-rating">
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star"></span>
+                                    <span class="fa fa-star"></span>
+                                </div> -->
+                                <span class="center">
+                                    {{$result->unit->members[0]->field_str}} - {{$result->unit->members[0]->degree_str}}
+                                </span>
+                                <span class="center">
+                                    کد نظام‌پزشکی: {{$result->unit->members[0]->msc_str}}
+                                </span>
+                                <a href="{{route('show.unit', ['slug' => $result->slug])}}" class="btn see-more-btn center">
+                                    مشاهده صفحه
+                                </a>
+                            </div>
                         </div>
-                    </div>
+                    @endif
                 @break
                 @case(Entry::NURSE)
                     <div class="col-md-4">
