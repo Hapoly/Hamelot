@@ -228,3 +228,16 @@ Route::get('/user/{username}', 'GeneralController@showUser')->name('show.user');
 Route::get('/unit/{key}', 'GeneralController@showUnit')->name('show.unit');
 if(env('APP_DEBUG', false))
     Route::get('/session/all', 'GeneralController@sessionAll')->name('session.all');
+
+
+
+
+
+    // simti
+    Route::get('pay/s',function(){
+        return view('payment.successful');
+    });
+
+    Route::get('pay/f',function(){
+        return view('payment.fail');
+    });
