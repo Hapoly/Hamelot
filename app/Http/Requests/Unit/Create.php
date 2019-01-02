@@ -28,11 +28,11 @@ class Create extends PersianFormRequest
     public function rules(){
         return [
             'title'         => 'required|string',
-            'slug'          => 'required|string|max:32|min:4|regex:/[A-Z,a-z,1-9]*/i|unique:units',
+            'slug'          => 'required|string|max:32|min:4|regex:/[A-Z,a-z,1-9]*/i|unique:units|unique:entries',
             'address'       => 'required|string',
             'mobile'        => ['required', new NotRegistered(User::G_SECRETARY), new Phone],
             'phone'         => 'required|string',
-            // 'image'         => 'required|image',
+            'image'         => 'nullable|image',
             'lon'           => 'required|string',
             'lat'           => 'required|string',
             'city_id'       => ['required', new UUID],

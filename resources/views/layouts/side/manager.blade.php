@@ -18,7 +18,7 @@
 		</a>
 		<ul class="collapse list-unstyled" id="healthunitmenu">
 			<li><a href="{{route('panel.units.index')}}">لیست مراکز</a></li>
-			<li><a href="{{route('panel.units.create')}}">مراکز جدید</a></li>
+			<li><a href="{{route('panel.units.create')}}">مرکزدرمانی جدید</a></li>
 		</ul>
 	</li>
 	<li>

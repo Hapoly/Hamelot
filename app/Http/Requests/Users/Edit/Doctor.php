@@ -6,6 +6,7 @@ use App\Http\Requests\PersianFormRequest;
 use Illuminate\Validation\Rule;
 use App\Rules\UUID;
 use App\Rules\Phone;
+use App\Models\Entry;
 use Auth;
 class Doctor extends PersianFormRequest
 {
@@ -26,10 +27,11 @@ class Doctor extends PersianFormRequest
     public function rules()
     {
         $user_id = $this->route('user')->id;
+        $entry_id = Entry::where('target_id', $unit_id)->first()->id;
         $data = [
             'first_name'    => 'required|string',
             'last_name'     => 'required|string',
-            'slug'          => ['required', 'string', 'max:64', 'min:6', Rule::unique('users')->ignore($user_id)],
+            'slug'          => ['required', 'string', Rule::unique('users')->ignore($user_id), Rule::unique('entries')->ignore($entry_id),],
             'gender'        => 'required|numeric',
             'profile'       => 'image',
             'public'        => 'required|numeric',

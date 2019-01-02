@@ -9,6 +9,7 @@ use App\Rules\UUID;
 use App\Rules\NotRegistered;
 use App\Rules\Phone;
 use App\User;
+use App\Models\Entry;
 
 class Edit extends PersianFormRequest
 {
@@ -29,6 +30,7 @@ class Edit extends PersianFormRequest
      */
     public function rules(Request $request){
         $unit_id = $this->route('unit')->id;
+        $entry_id = Entry::where('target_id', $unit_id)->first()->id;
         // die($unit_id);
         return [
             'title'         => 'required|string',
@@ -39,6 +41,7 @@ class Edit extends PersianFormRequest
                                     'min:4', 
                                     'regex:/[A-Z,a-z,1-9]*/i',
                                     Rule::unique('units')->ignore($unit_id),
+                                    Rule::unique('entries')->ignore($entry_id),
                                 ],
             'address'       => 'required|string',
             'phone'         => 'required|string',
@@ -47,6 +50,7 @@ class Edit extends PersianFormRequest
             'lat'           => 'required|string',
             'city_id'       => ['required', new UUID],
             'parent_id'     => ['required', 'string'],
+            'image'         => 'nullable|image',
 
             'status'        => 'required|numeric',
             'public'        => 'required|numeric',

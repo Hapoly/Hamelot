@@ -20,7 +20,6 @@
         }
     ?>
     @input_select(['name' => 'parent_id', 'value' => old('parent_id', $unit->parent_id), 'label' => __('units.parent_id'), 'required' => true, 'rows' => $parent_id_rows, 'row' => true])
-    @input_text(['name' => 'slug', 'value' => old('slug', $unit->slug), 'label' => __('units.slug'), 'required' => true, 'row' => true])
     @input_text(['name' => 'address', 'value' => old('address', $unit->address), 'label' => __('units.address'), 'required' => true, 'row' => true])
     @input_text(['name' => 'phone', 'value' => old('phone', $unit->phone), 'label' => __('units.phone'), 'required' => false, 'row' => true])
     @input_text(['name' => 'mobile', 'value' => old('mobile', $unit->mobile), 'label' => __('units.mobile'), 'required' => false, 'row' => true])
@@ -56,8 +55,6 @@
         [ 'value' => 8, 'label' => __('units.group_code_str.8') ],
         [ 'value' => 9, 'label' => __('units.group_code_str.9') ],
         [ 'value' => 10, 'label' => __('units.group_code_str.10') ],
-        [ 'value' => 11, 'label' => __('units.group_code_str.11') ],
-        [ 'value' => 12, 'label' => __('units.group_code_str.12') ],
       ];
     ?>
     @input_select(['name' => 'group_code', 'value' => old('group_code', $unit->group_code), 'label' => __('units.group_code'), 'required' => true, 'rows' => $group_code_rows, 'row' => true])

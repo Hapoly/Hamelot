@@ -26,7 +26,7 @@ class Secretary extends PersianFormRequest
     public function rules()
     {
         $data = [
-            'phone'         => ['required', new Phone, 'unique:users'],
+            'phone'         => ['required', new Phone, 'unique:users', 'unique:entries'],
             'email'         => 'nullable|email',
             'first_name'    => 'required|string',
             'last_name'     => 'required|string',

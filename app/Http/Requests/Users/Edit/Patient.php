@@ -5,6 +5,7 @@ namespace App\Http\Requests\Users\Edit;
 use App\Http\Requests\PersianFormRequest;
 use Illuminate\Validation\Rule;
 use App\Rules\Phone;
+use App\Models\Entry;
 use Auth;
 
 class Patient extends PersianFormRequest
@@ -26,6 +27,7 @@ class Patient extends PersianFormRequest
     public function rules()
     {
         $user_id = $this->route('user')->id;
+        $entry_id = Entry::where('target_id', $unit_id)->first()->id;
         return [
             'first_name'    => 'required|string',
             'last_name'     => 'required|string',
@@ -34,6 +36,7 @@ class Patient extends PersianFormRequest
             'birth_year'    => 'required|numeric|min:1300|max:1400',
             'birth_month'   => 'required|numeric|min:1|max:12',
             'birth_day'     => 'required|numeric|min:1|max:31',
+            'slug'          => ['required', 'string', Rule::unique('users')->ignore($user_id), Rule::unique('entries')->ignore($entry_id),],
         ];
         if(Auth::user()->isAdmin()){
             $data['status'] = 'required|numeric';
