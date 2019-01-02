@@ -136,8 +136,8 @@
                 </p>
             </div>
             <div class="btn-group">
-                <button><a href="#">بازگشت به بات</a></button>
-                <button>ارتباط با پشتیبانی</button>
+                <button><a href="https://telegram.me/DoctorSoalBot">بازگشت به بات</a></button>
+                <button><a href="https://t.me/drsoal_supporter">ارتباط با پشتیبانی</a></button>
             </div>
         </section>
     </main>
