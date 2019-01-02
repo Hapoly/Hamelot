@@ -29,6 +29,7 @@ class User extends Resource{
                 $data['fields'] = $this->fields;
                 $data['start_year'] = $this->doctor->start_year;
                 $data['profile_url'] = $this->doctor->profile_url;
+                $data['gender'] = $this->doctor->gender;
                 break;
             case UserModel::G_PATIENT:
                 $data['gender'] = $this->patient->gender;
