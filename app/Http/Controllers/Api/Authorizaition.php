@@ -71,6 +71,7 @@ class Authorizaition extends Controller{
     public function verifyToken(VerifyTokenRequest $request){
         $phone = $request->session()->get('auth.phone', 'NuLL');
         $user = User::where('phone', $phone)->first();
+        return 'test';
         if(!$user){
             $group_code = $request->session()->get('auth.group_code');
             $user = User::create([
@@ -88,12 +89,6 @@ class Authorizaition extends Controller{
                         'user_id'   => $user->id,
                     ]);
                     break;
-            }
-        }else{
-            if($user->group_code != $request->session()->get('auth.group_code')){
-                return response()->json([
-                    'message'   => 'another user with another group_code has been authorized',
-                ], 401);
             }
         }
         $request->session()->flush();

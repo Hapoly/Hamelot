@@ -27,6 +27,7 @@ class CreateActivityTimesTable extends Migration
             $table->integer('default_price')->default(0);
             $table->integer('default_deposit')->default(0);
             $table->integer('default_demand_time')->default(0);
+            $table->smallInteger('type')->default(1);
             $table->timestamps();
         });
     }

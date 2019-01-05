@@ -18,7 +18,7 @@ class ActivityTime extends UModel
     protected $primary = 'id';
     protected $table = 'activity_times';
     protected $fillable = [
-        'day_of_week', 'unit_user_id', 
+        'day_of_week', 'unit_user_id', 'type',
         'start_time', 'finish_time', 'just_in_unit_visit',
         'demand_limit', 'default_price', 'default_deposit', 'default_demand_time', 'auto_fill', 
         'status'];
@@ -106,5 +106,11 @@ class ActivityTime extends UModel
     const IN_UNIT       = 3;
     public function getJustInUnitVistStrAttribute(){
         return __('activity_times.just_in_unit_visit_str.' . $this->just_in_unit_visit);
+    }
+
+    const NORMAL        = 1;
+    const VISIT         = 2;
+    public function getTypeStrAttribute(){
+      return __('activity_times.type_str.' . $this->type);
     }
 }

@@ -37,6 +37,7 @@ class Create extends PersianFormRequest
             'default_deposit'       => 'required_if:auto_fill,1|numeric',
             'demand_limit'          => 'required_if:auto_fill,1|numeric',
             'default_demand_time'   => 'required_if:auto_fill,1|numeric',
+            'type'                  => 'required|numeric|in:1,2',
         ];
     }
 }

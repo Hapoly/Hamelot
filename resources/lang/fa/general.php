@@ -6,7 +6,7 @@ return [
         'patient'   => 'ورود کاربر',
         'doctor'    => 'ورود پزشک',
         'nurse'     => 'ورود پرستار',
-        'manager'   => 'ورود مدیر',
+        'manager'   => 'ورود مراکز',
         'secretary' => 'ورود منشی',
     ],
     'logout'    => 'خروج',

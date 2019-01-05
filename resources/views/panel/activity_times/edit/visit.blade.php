@@ -1,9 +1,6 @@
 @extends('layouts.main')
 @section('title', __('activity_times.create'))
 @section('content')
-@php
-  use App\Models\Activitytime;
-@endphp
 <div class="container">
   @form_create(['action' => route('panel.activity-times.store'), 'title' => __('activity_times.create')])
     @php
@@ -39,7 +36,6 @@
     <input hidden name="just_in_unit_visit" value="3" />
     <input hidden name="default_deposit" value="0" />
     <input hidden name="default_demand_time" value="0" />
-    <input hidden name="type" value="{{ActivityTime::VISIT}}" />
     @input_currency(['help' => __('activity_times.deafult_price_description'), 'name' => 'default_price', 'value' => old('default_price', 1000), 'label' => __('activity_times.default_price'), 'row' => true, 'required' => true, 'min' => 0, 'max' => 9999999, 'step' => 1, 'placeholder' => __('general.tmn')])
     @input_number(['help' => __('activity_times.deamnd_limit_description'), 'name' => 'demand_limit', 'value' => old('demand_limit', 0), 'label' => __('activity_times.demand_limit'), 'row' => true, 'required' => true, 'min' => 0, 'max' => 1000, 'placeholder' => 'نفر'])
     @submit_row(['value' => 'new', 'label' => __('activity_times.save')])
