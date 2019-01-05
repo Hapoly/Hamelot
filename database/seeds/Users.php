@@ -120,6 +120,7 @@ class Users extends Seeder
                     'default_deposit'       => 0,
                     'default_demand_time'   => 0,
                     'demand_limit'          => 0,
+                    'type'                  => ActivityTime::VISIT,
                 ]);
             }
         }

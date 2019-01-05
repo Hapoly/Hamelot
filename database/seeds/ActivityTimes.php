@@ -25,6 +25,7 @@ class ActivityTimes extends Seeder
                 'default_deposit'       => 10000,
                 'default_demand_time'   => 0,
                 'auto_fill'             => 1,
+                'type'                  => ActivityTime::VISIT,
             ];
             for($i=1; $i<=7; $i++){
                 $default_data['day_of_week'] = $i;

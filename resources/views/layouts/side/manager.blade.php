@@ -31,6 +31,9 @@
 				<a href="{{route('panel.activity-times.create')}}">زمان فعالیت جدید </a>
 			</li>
 			<li>
+				<a href="{{route('panel.activity-times.create_visit')}}">زمان نوبت دهی جدید </a>
+			</li>
+			<li>
 				<a href="{{route('panel.activity-times.index')}}">زمان‌های فعالیت </a>
 			</li>
 		</ul>
