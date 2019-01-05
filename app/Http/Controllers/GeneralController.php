@@ -21,7 +21,7 @@ class GeneralController extends Controller{
         $unit = Unit::where('slug', $slug)->firstOrFail();
         $activity_times = $unit->activity_times($request->input('time', 0));
         $unit->activity_times = $activity_times;
-        return view('general.show.unit', [
+        return view('general.show.unit.' . $unit->group_code, [
             'unit'      => $unit,
             'offset'    => $request->input('time', time())
         ]);
