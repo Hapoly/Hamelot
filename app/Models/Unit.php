@@ -131,7 +131,7 @@ class Unit extends UModel{
         parent::save($options);
 
 
-        $entry = Entry::where('target_id', $this->id)->where('group_code', $this->group_code_to_gc[$this->group_code])->first();
+        $entry = Entry::where('target_id', $this->id)->first();
         $data = [
             'target_id'     => $this->id,
             'title'         => $this->title,
