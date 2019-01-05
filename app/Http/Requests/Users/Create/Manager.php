@@ -28,7 +28,7 @@ class Manager extends PersianFormRequest
         $data = [
             'first_name'    => 'required|string',
             'last_name'     => 'required|string',
-            'phone'         => ['required', new Phone, 'unique:users', 'unique:entries'],
+            'phone'         => ['required', new Phone, 'unique:users'],
             'email'         => 'nullable|email',
         ];
         if(Auth::user()->isAdmin())

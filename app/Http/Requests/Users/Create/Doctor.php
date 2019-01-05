@@ -29,11 +29,11 @@ class Doctor extends PersianFormRequest
         $data = [
             'first_name'    => 'required|string',
             'last_name'     => 'required|string',
-            'slug'          => 'required|string|max:64|min:6|unique:users',
+            'slug'          => 'required|string|max:64|min:6|unique:users|unique:entries',
             'gender'        => 'required|numeric',
             'profile'       => 'image',
             'public'        => 'required|numeric',
-            'phone'         => ['required', new Phone, 'unique:users', 'unique:entries'],
+            'phone'         => ['required', new Phone, 'unique:users'],
             'msc'           => 'required|string|max:16',
             'email'         => 'nullable|email',
         ];
