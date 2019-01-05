@@ -10,21 +10,38 @@
       <table class="table table-striped">
         <tbody>
           <tr>
-            <td>{{__('bids.description')}}</td>
+            <td>توضیحات</td>
             <td>{{$bid->description_str}}</td>
           </tr>
           <tr>
-            <td>{{__('demands.patient_id')}}</td>
-            <td>{{$bid->demand->patient->full_name}}</td>
-          </tr>
-          <tr>
-            <td>{{__('bids.price')}}</td>
+            <td>هزینه ویزیت</td>
             <td>{{$bid->price_str}}</td>
           </tr>
-          <tr>
-            <td>{{__('bids.deposit')}}</td>
-            <td>{{$bid->deposit_str}}</td>
-          </tr>
+          @if(!Auth::user()->isPatient())
+            <tr>
+              <td>نام بیمار</td>
+              <td>{{$bid->demand->patient->full_name}}</td>
+            </tr>
+            <tr>
+              <td>شماره تماس بیمار</td>
+              <td>{{$bid->demand->patient->phone}}</td>
+            </tr>
+          @else
+            <tr>
+              <td>نام پزشک</td>
+              <td>{{$bid->user->full_name}}</td>
+            </tr>
+            <tr>
+              <td>تخضض ها</td>
+              <td>{{$bid->user->fields_str}}</td>
+            </tr>
+          @endif
+          @if($bid->deposit > 0)
+            <tr>
+              <td>بیعانه</td>
+              <td>{{$bid->deposit_str}}</td>
+            </tr>
+          @endif
           <tr>
             <td>{{__('bids.status')}}</td>
             <td>{{$bid->status_str}}</td>
@@ -33,10 +50,12 @@
             <td>{{__('bids.date')}}</td>
             <td>{{$bid->date_str}}</td>
           </tr>
-          <tr>
-            <td>{{__('bids.demand_id')}}</td>
-            <td><a href="{{route('panel.demands.show', ['demand' => $bid->demand])}}">{{$bid->demand->description_str}}</a></td>
-          </tr>
+          @if($bid->demand->description != 'NuLL')
+            <tr>
+              <td>{{__('bids.demand_id')}}</td>
+              <td><a href="{{route('panel.demands.show', ['demand' => $bid->demand])}}">{{$bid->demand->description_str}}</a></td>
+            </tr>
+          @endif
           <tr>
             <td>{{__('bids.status')}}</td>
             <td>{{$bid->status_str}}</td>
@@ -60,8 +79,8 @@
         @if(!$bid->finished)
           @if(Auth::user()->isPatient())
             <div class="col-md-6" style="text-align: center">
-              <a href="{{route('panel.users.show', ['user' => $bid->demand->user])}}" class="btn btn-default" role="button">{{__('bids.show_user')}}</a>
-              <a href="{{route('panel.units.show', ['unit' => $bid->demand->unit])}}" class="btn btn-default" role="button">{{__('bids.show_unit')}}</a>
+              <a href="{{route('show.user', ['slug' => $bid->demand->user->slug])}}" class="btn btn-default" role="button">{{__('bids.show_user')}}</a>
+              <a href="{{route('show.unit', ['slug' => $bid->demand->unit->slug])}}" class="btn btn-default" role="button">{{__('bids.show_unit')}}</a>
             </div>
             @if(!$bid->permission_to_operate_bid)
             <div class="col-md-6" style="text-align: center">
@@ -77,9 +96,9 @@
                     </div>
                     <div class="modal-body">
                       @if(Auth::user()->isPatient())
-                        آیا مطمئن هستید که می‌خواهید به این نوبت ویزیت خاتمه دهید؟ باقی هزینه را باید آنلاین پرداخت کنید.
+                        آیا مطمئن هستید که می خواهید این نوبت ویزیت را کنسل کنید؟ در صورت کنسل شدن آن دیگر نمیتوانید آنرا برگردانید
                       @else
-                        آیا مطمئن هستید که می‌خواهید به این نوبت ویزیت خاتمه دهید؟ ابتدا بیمار باید هزینه ویزیت را نقدی پرداخت کند. در صورتی که دکمه پایان را بزنید، سیستم فرض می کند که بیمار هزینه ویزیت را نقدا پرداخت کرده است.
+                        آیا مطمئن هستید که می خواهید این نوبت ویزیت را لغو کنید؟ برای اطمینان قبل از لغو آن با بیمار تماس بگیرید. شماره تماس: {{$bid->demand->patient->phone}}
                       @endif
                     </div>
                     <div class="modal-footer">
