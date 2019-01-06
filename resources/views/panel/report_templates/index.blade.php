@@ -3,7 +3,9 @@
 @section('content')
 <div class="row" style="margin-bottom:50px;">
   <div class="col-md-4 col-sm-3">
-  <a href="{{route('panel.report_templates.create')}}" class="btn add"> قالب جدید</a>
+  @if(Auth::user()->isAdmin())
+     <a href="{{route('panel.report_templates.create')}}" class="btn add"> قالب جدید</a>
+  @endif
   </div>
     <div class="col-md-8 col-sm-9">
       <form class="navbar-form" role="search" style="margin:auto;width:100%;direction:ltr;float:right" action="{{route('panel.report_templates.index',['sort' => $sort])}}" method="get">
