@@ -31,48 +31,88 @@
     </div>
     
     <div id="ex">
-            <h1 class="team-title">
-                اعضای تیم
-            </h1>
-            <div class="team-member">
-                <div class="row">
-                    <div class="col-md-7">
-                        <h3 class="member-name">
-                            علیرضا دربندی
-                        </h3>
-                        <p class="member-job">
-                            توسعه دهنده وب
-                        </p>
-                        <p class="member-job">
-                            Back-End Developer
-                        </p>
-                    </div>
-                    <div class="col-md-5 team-img-col">
-                        <img src="/imgs/reza.jpg" class="team-img reza-img">
-                    </div>
+        <h1 class="team-title">
+            اعضای تیم
+        </h1>
+        <div class="team-member">
+            <div class="row">
+                <div class="col-md-7">
+                    <h3 class="member-name">
+                        مهدی مرتضوی
+                    </h3>
+                    <p class="member-job">
+قراردادها، کارهای حقوقی و مذاکره ها رو من انجام می دم. حساب کتاب با پزشک ها و پیگیری کارای اداری سیستم به عهده من هست.
+                    </p>
+                </div>
+                <div class="col-md-5 team-img-col">
+                    <img src="{{asset('members/mehdi.jpg')}}" class="team-img reza-img">
                 </div>
             </div>
-            
-            <hr>
-            
-            <div class="team-member">
-                <div class="row">
-                    <div class="col-md-5">
-                        <img src="/imgs/sadaf.jpg" class="team-img sadaf-img">
-                    </div>
-                    <div class="col-md-7">
-                        <h3 class="member-name">
-                            صدف نجفی خواه
-                        </h3>
-                        <p class="member-job">
-                            توسعه دهنده وب
-                        </p>
-                        <p class="member-job">
-                            Front-End Developer
-                        </p>
-                    </div>
+        </div>
+        <hr>
+        <div class="team-member">
+            <div class="row">
+                <div class="col-md-7">
+                    <h3 class="member-name">
+                        نوید رضادوست
+                    </h3>
+                    <p class="member-job">
+من کارهای اجرایی تیم رو پیگیری می کنم. با پزشک ها مصاحبه می کنم. محتوی توی سایت و بلاگ می ذارم و رادیو رو می گردونم و از بازار خبر دارم
+                    </p>
+                </div>
+                <div class="col-md-5 team-img-col">
+                    <img src="{{asset('members/navid.jpg')}}" class="team-img reza-img">
                 </div>
             </div>
+        </div>
+        <hr>
+        <div class="team-member">
+            <div class="row">
+                <div class="col-md-7">
+                    <h3 class="member-name">
+                        فرزین میرزایی
+                    </h3>
+                    <p class="member-job">
+من برنامه نویس موبایل تیم هستم. همینطور به مدیریت کارهای بقیه بچه های تیم و تعیین و زمانبندی وظایفشون مشغولم
+                    </p>
+                </div>
+                <div class="col-md-5 team-img-col">
+                    <img src="{{asset('members/farzin.jpg')}}" class="team-img reza-img">
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="team-member">
+            <div class="row">
+                <div class="col-md-7">
+                    <h3 class="member-name">
+                        ایمان خالق پرست
+                    </h3>
+                    <p class="member-job">
+من برنامه نویس تعاملی تیم هستم. روی فیچرها کار سایت کار می کنم. توی وقت اضافه هم به تمیزکاری ظاهر سایت و کارای جزئی می پردازم.
+                    </p>
+                </div>
+                <div class="col-md-5 team-img-col">
+                    <img src="{{asset('members/shayan.jpg')}}" class="team-img reza-img">
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="team-member">
+            <div class="row">
+                <div class="col-md-7">
+                    <h3 class="member-name">
+                        علیرضا دربندی
+                    </h3>
+                    <p class="member-job">
+من توسعه دهنده هسته پروژه هستم. برنامه نویسی هسته پروژه رو انجام می دم و مستندات کتابخونه ها رو می نویسم.
+                    </p>
+                </div>
+                <div class="col-md-5 team-img-col">
+                    <img src="{{asset('members/reza.jpg')}}" class="team-img reza-img">
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 @endsection
