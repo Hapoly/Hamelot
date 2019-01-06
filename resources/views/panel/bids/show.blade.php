@@ -89,14 +89,14 @@
                 <div class="modal-dialog" role="document">
                   <div class="modal-content">
                     <div class="modal-header">
-                      <h5 class="modal-title" id="closeCancelModal">پایان</h5>
+                      <h5 class="modal-title" id="closeCancelModal">لغو نوبت</h5>
                       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                       </button>
                     </div>
                     <div class="modal-body">
                       @if(Auth::user()->isPatient())
-                        آیا مطمئن هستید که می خواهید این نوبت ویزیت را کنسل کنید؟ در صورت کنسل شدن آن دیگر نمیتوانید آنرا برگردانید
+                        ایا مطمعن هستید که میخواهید نوبت خود را لغو کنید؟
                       @else
                         آیا مطمئن هستید که می خواهید این نوبت ویزیت را لغو کنید؟ برای اطمینان قبل از لغو آن با بیمار تماس بگیرید. شماره تماس: {{$bid->demand->patient->phone}}
                       @endif

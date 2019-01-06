@@ -183,7 +183,7 @@ class Demands extends Controller{
             $bid->unit_id = $demand->unit_id;
             $bid->user_id = $demand->user_id;
             $bid->status = Bid::ACCEPTED;
-            $bid->description = env('BID_DEFAULT_DESCRIPTION');
+            $bid->description = 'DEFAULT';
             $bid->unit_accepted = 1;
             $bid->user_accepted = 1;
             $bid->patient_accepted = 0;
@@ -219,7 +219,7 @@ class Demands extends Controller{
             $bid->unit_id = $demand->unit_id;
             $bid->user_id = $demand->user_id;
             $bid->status = Bid::PENDING;
-            $bid->description = env('BID_DEFAULT_DESCRIPTION');
+            $bid->description = 'DEFAULT';
             $bid->unit_accepted = 1;
             $bid->user_accepted = 1;
             $bid->patient_accepted = 0;

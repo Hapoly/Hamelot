@@ -75,7 +75,7 @@ return [
     'members'           => 'کادر پرسنل',
 
     'no_access'         => ' - ',
-    'slug'              => 'نام اختصاری',
+    'slug'              => 'نام کاربری',
 
     'doctor'            => [
         'full_name'     => 'پزشک',

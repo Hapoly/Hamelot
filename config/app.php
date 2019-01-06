@@ -253,7 +253,6 @@ return [
             'COMISSION_PERCENT',
             'KAVENEGAR_API_TOKEN',
             'KAVENEGAR_PATTERN',
-            'BID_DEFAULT_DESCRIPTION',
         ],
         '_SERVER' => [
             
@@ -298,7 +297,6 @@ return [
             'COMISSION_PERCENT',
             'KAVENEGAR_API_TOKEN',
             'KAVENEGAR_PATTERN',
-            'BID_DEFAULT_DESCRIPTION',
         ],
         '_POST' => [
             'APP_NAME',
@@ -342,7 +340,6 @@ return [
             'COMISSION_PERCENT',
             'KAVENEGAR_API_TOKEN',
             'KAVENEGAR_PATTERN',
-            'BID_DEFAULT_DESCRIPTION',
         ],
     ],
 ];
