@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@sestion('title', 'درباره ما')
+@section('title', 'درباره ما')
 @section('content')
 <div class="container">
     <div class="about-sec">
