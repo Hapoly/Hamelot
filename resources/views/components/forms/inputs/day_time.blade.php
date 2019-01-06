@@ -30,8 +30,8 @@
                     name="{{$name}}minute" 
                     value="{{$minute}}"
                     {{isset($required)? 'required': ''}}
-                    {{isset($max)? " max=$max": ''}}
-                    {{isset($min)? " min=$min": ''}}
+                    max="59"
+                    min="0"
                     {{isset($placeholder)? " placeholder=$placeholder": ''}}
             />
             @if ($errors->has($name . 'minute'))
@@ -50,8 +50,8 @@
                     name="{{$name}}hour" 
                     value="{{$hour}}"
                     {{isset($required)? 'required': ''}}
-                    {{isset($max)? " max=$max": ''}}
-                    {{isset($min)? " min=$min": ''}}
+                    max="24"
+                    min="0"
                     {{isset($placeholder)? " placeholder=$placeholder": ''}}
             />
             @if ($errors->has($name . 'hour'))
