@@ -111,8 +111,7 @@
               <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#cancelModal">
                 {{__('bids.cancel')}}
               </button>
-
-              <div class="modal fade" id="finishModal" tabindex="-1" role="dialog" aria-labelledby="closeFinishModal" aria-hidden="true">
+              {{-- <div class="modal fade" id="finishModal" tabindex="-1" role="dialog" aria-labelledby="closeFinishModal" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                   <div class="modal-content">
                     <div class="modal-header">
@@ -133,8 +132,7 @@
               </div>
               <button type="button" class="btn btn-info" data-toggle="modal" data-target="#finishModal">
                 {{__('bids.finish')}}
-              </button>
-              
+              </button> --}}
               @if($bid->status != Bid::ACCEPTED_PAID_ALL)
                 <!-- <a href="{{route('panel.bids.inline_update', ['bid' => $bid, 'action' => 'pay_remain'])}}" class="btn btn-info" role="button">{{__('bids.pay_remain')}}</a> -->
               @endif

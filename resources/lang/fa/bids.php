@@ -57,7 +57,7 @@ return [
 
 
     'cancel'            => 'لغو نوبت',
-    'finish_offline'    => 'باقی هزینه در محل پرداخت شد',
+    'finish_offline'    => 'تایید حضور بیمار',
     'pay_remain'        => 'پرداخت آنلاین باقی هزینه',
     'show_patient'      => 'نمایش متقاضی',
     'add_experiment'    => 'افزودن گزارش',
