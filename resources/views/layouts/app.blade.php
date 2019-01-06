@@ -75,6 +75,7 @@
                             <li><a class="nav-link" href="{{ route('login', ['group' => \App\User::G_DOCTOR]) }}">{{ __('general.login.doctor') }}</a></li>
                             <li><a class="nav-link" href="{{ route('login', ['group' => \App\User::G_SECRETARY]) }}">{{ __('general.login.secretary') }}</a></li>
                             <li><a class="nav-link" href="{{ route('login', ['group' => \App\User::G_MANAGER]) }}">{{ __('general.login.manager') }}</a></li>
+                            <li><a class="nav-link" href="{{route('about')}}">درباره ما</a></li>
                             <!-- <li><a class="nav-link" href="{{ route('about') }}">درباره ما</a></li> -->
                             <!-- <li><a class="nav-link" href="{{ route('tour') }}"> الان شروع کن!</a></li> -->
                         @else
