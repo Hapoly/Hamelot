@@ -5,6 +5,7 @@
     @form_create(['action' => route('panel.users.store.doctor'), 'title' => __('users.create.doctor')])
         @input_image(['name' => 'profile', 'label' => __('users.profile'), 'col' => 12])
         @input_text(['name' => 'phone', 'label' => __('users.phone'), 'value' => old('phone'), 'row' => true])
+        @input_text(['name' => 'email', 'label' => __('users.email'), 'value' => old('email'), 'row' => true, 'placeholder' => 'اختیاری'])
         @input_text(['name' => 'first_name', 'label' => __('users.first_name'), 'value' => old('first_name'), 'row' => true])
         @input_text(['name' => 'last_name', 'label' => __('users.last_name'), 'value' => old('last_name'), 'row' => true])
         @input_text(['name' => 'slug', 'label' => __('users.slug'), 'value' => old('slug'), 'row' => true])
