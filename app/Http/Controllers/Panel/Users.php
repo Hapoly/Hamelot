@@ -204,7 +204,10 @@ class Users extends Controller{
         return redirect()->route('panel.units.show', ['unit_id' => $request->unit_id]);
       }
     }
-    return redirect()->route('panel.users.show', ['user' => $user]);
+    if(Auth::user()->can('read_info', $user))
+      return redirect()->route('panel.users.show', ['user' => $user]);
+    else if($request->has('unit_id'))
+      return redirect()->route('panel.units.show', ['unit' => $request->unit_id]);
   }
 
   public function storeDoctor(DoctorCreateRequest $request){
