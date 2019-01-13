@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
   @form_create(['action' => route('panel.units.store'), 'title' => __('units.create_clinic')])
-    @input_text(['name' => 'title', 'value' => old('title', ''), 'label' => __('units.title'), 'required' => true, 'row' => true])
+    <input hidden name="title" value="{{Auth::user()->full_name}}" />
     @input_text(['name' => 'slug', 'value' => old('slug', ''), 'label' => __('units.slug'), 'required' => true, 'row' => true, 'placeholder' => 'فقط اعداد و حروف لاتین استفاده شود'])
     <input hidden name="parent_id" value="0" />
     @input_text(['name' => 'address', 'value' => old('address', ''), 'label' => __('units.address'), 'required' => true, 'row' => true])
