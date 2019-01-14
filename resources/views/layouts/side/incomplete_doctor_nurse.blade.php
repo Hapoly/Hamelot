@@ -1,5 +1,11 @@
 <ul class="list-unstyled components">
 	<li>
+		<a href="{{route('welcome')}}">
+			<i class="fa fa-home" aria-hidden="false"></i>
+			<span>صفحه اصلی</span>
+		</a>
+	</li>
+	<li>
 		<a href="#healthunitmenu" data-toggle="collapse" aria-expanded="false">
 			<i class="fa fa-hospital-o" aria-hidden="false"></i>
 			<span>

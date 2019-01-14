@@ -26,7 +26,7 @@ class Bid extends UModel {
   public function getDescriptionStrAttribute() {
     if ($this->description == 'NuLL') {
       if (Auth::check()) {
-        if(Auth::isPatient())
+        if(Auth::user()->isPatient())
           return 'لطفا 10 دقیقه قبل از زمان مقرر شده در مرکز حضور داشته باشید. باتشکر.';
         else
           return 'بیمار ده دقیقه قبل از زمان مقرر شده در مرکز حضور خواهد داشت. باتشکر.';
@@ -37,7 +37,7 @@ class Bid extends UModel {
       return $this->description;
     }
     if (Auth::check()) {
-      if (Auth::isPatient()) {
+      if (Auth::user()->isPatient()) {
         if ($this->description == 'NuLL') {
           return 'بدون توضیحات';
         } else {

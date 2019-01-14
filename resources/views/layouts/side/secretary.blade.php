@@ -4,6 +4,12 @@
 ?>
 <ul class="list-unstyled components">
 	<li>
+		<a href="{{route('welcome')}}">
+			<i class="fa fa-home" aria-hidden="false"></i>
+			<span>صفحه اصلی</span>
+		</a>
+	</li>
+	<li>
 		<a href="{{route('home')}}">
 			<i class="fa fa-dashboard" aria-hidden="false"></i>
 			<span>پیشخوان</span>

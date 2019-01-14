@@ -4,6 +4,12 @@
 ?>
 <ul class="list-unstyled components">
 	<li>
+		<a href="{{route('welcome')}}">
+			<i class="fa fa-home" aria-hidden="false"></i>
+			<span>صفحه اصلی</span>
+		</a>
+	</li>
+	<li>
 		<a href="{{route('show.user', ['slug' => Auth::user()->slug])}}" aria-expanded="false">
 			<i class="fa fa-user" aria-hidden="false"></i>
 			<span>صفحه عمومی من</span>
