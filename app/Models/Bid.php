@@ -26,10 +26,12 @@ class Bid extends UModel {
   public function getDescriptionStrAttribute() {
     if ($this->description == 'NuLL') {
       if (Auth::check()) {
-        if(Auth::user()->isPatient())
+        if (Auth::user()->isPatient()) {
           return 'لطفا 10 دقیقه قبل از زمان مقرر شده در مرکز حضور داشته باشید. باتشکر.';
-        else
+        } else {
           return 'بیمار ده دقیقه قبل از زمان مقرر شده در مرکز حضور خواهد داشت. باتشکر.';
+        }
+
       } else {
         return ' - ';
       }
@@ -108,7 +110,11 @@ class Bid extends UModel {
 
   // date_str
   public function getDateStrAttribute() {
-    return Time::jdate('H:i d F Y', $this->date);
+    return Time::jdate('d F Y ساعت H:i', $this->date);
+  }
+  // created_at_str
+  public function getCreatedAtStrAttribute(){
+    return Time::jdate('d F y ساعت H:i', strtotime($this->created_at));
   }
 
   // permission_to_operate_bid
@@ -179,5 +185,14 @@ class Bid extends UModel {
   public function remain_paid() {
     $this->status = Bid::ACCEPTED_PAID_ALL;
     $this->save();
+  }
+
+  public static function opens() {
+    return Bid::whereNotIn('status', [
+      Bid::PENDING,
+      Bid::DONE,
+      Bid::CANCELED,
+      Bid::ACCEPTED_PAID_ALL,
+    ]);
   }
 }

@@ -48,7 +48,11 @@ class Unit extends UModel {
 
   public function getCompleteTitleAttribute() {
     if ($this->parent_id == '0') {
-      return $this->title;
+      if ($this->group_code == Unit::CLINIC) {
+        return 'مطب دکتر ' . $this->title;
+      } else {
+        return $this->title;
+      }
     } else {
       return $this->title . ' - ' . $this->parent->title;
     }
