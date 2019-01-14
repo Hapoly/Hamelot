@@ -16,6 +16,8 @@ class CreateFieldTemplatesTable extends Migration {
       $table->primary('id');
       $table->string('title', 45);
       $table->string('description', 500);
+      $table->smallInteger('type');
+      $table->string('unit', 32)->default('NuLL');
       $table->smallInteger('status')->default(1);
       $table->timestamps();
     });

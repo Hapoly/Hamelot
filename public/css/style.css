@@ -672,6 +672,9 @@ h2, h3, h4{
 .label-col{
     float: right;
 }
+.search-box {
+  text-align: right;
+}
 .search-container button {
     float: none;
     display: block;

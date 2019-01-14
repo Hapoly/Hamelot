@@ -85,6 +85,13 @@
 			<li>
 				<a href="{{route('panel.report_templates.create')}}"> قالب جدید</a>
 			</li>
+      <hr style="margin: 0px;">
+			<li>
+				<a href="{{route('panel.field_templates.index')}}"> لیست فیلدها</a>
+			</li>
+			<li>
+				<a href="{{route('panel.field_templates.create')}}"> فیلد جدید</a>
+			</li>
 		</ul>
 	</li>
 	<li>
