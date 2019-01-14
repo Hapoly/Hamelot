@@ -63,8 +63,8 @@ function add_range(){
   $("#ranges").append(
       "<div class='col-md-12' id='range-"+last_range_index+"' >"+
       " <div class='panel panel-default create-card' style='margin-top:30px; background: #EEE; border-color: #EEE;' >"+
-      "  <span class='closebtn' onclick='remove_range("+last_range_index+")'>&times;</span>"+ 
-      "  <div class='row'>"+
+      "  <span class='closebtn' onclick='remove_range("+last_range_index+")'>&times;</span>"+
+      "  <div class='form-group row create-form'>"+
       "    <div class='col-md-12'>"+
       "      <div class='form-group test-in create-form' >"+
       "        <div class='col-md-10'>"+
@@ -73,51 +73,60 @@ function add_range(){
       "        <label for='value' class='col-md-2 col-form-label text-center'>مقدار</label>"+
       "      </div>"+
       "    </div>"+
-      "    <div class='form-group row create-form'>"+
-      "      <div class='col-md-12'>"+
-      "        <div class='form-group test-in'>"+
-      "          <div class='col-md-10'>"+
-      "            <select class='form-control type' id='type-"+last_range_index+"' data-label='quantity-"+last_range_index+"' style='width:90%;text-align:center'>"+
-      "              <option value='1'>{{__('reports.type_str.1')}}</option>"+
-      "              <option value='2'>{{__('reports.type_str.2')}}</option>"+
-      "              <option value='3'>{{__('reports.type_str.3')}}</option>"+
-      "              <option value='4'>{{__('reports.type_str.4')}}</option>"+
-      "              <option value='5'>{{__('reports.type_str.5')}}</option>"+
-      "            </select>"+
-      "          </div>"+
-      "          <label for='type' class='col-md-2 col-form-label text-center'>{{__('reports.type')}}</label>"+
-      "        </div>"+
-      "      </div>"+
-      "    </div>"+
+      "  </div>"+
+      "  <div class='form-group row create-form'>"+
       "    <div class='col-md-12'>"+
-      "      <div class='form-group test-in create-form' >"+
-      "        <div class='col-md-10'>"+
-      "          <input type='text' class='form-control' name='labels[]' style='width:90%;'>"+
+      "      <div class='form-group test-in'>"+
+      "        <div class='col-md-10' style='padding-right: 25px;'>"+
+      "          <select class='form-control name='genders[]' style='width:88%; text-align:center'>"+
+      "            <option value='1'>تمام جنسیت‌ها</option>"+
+      "            <option value='2'>مذکر</option>"+
+      "            <option value='3'>مونث</option>"+
+      "          </select>"+
       "        </div>"+
-      "        <label  class='col-md-2 col-form-label text-center'>{{__('reports.label')}}</label>"+
-      "      </div>"+
-      "    </div>"+
-      "    <div class='col-md-12'>"+
-      "      <div class='form-group test-in create-form' >"+
-      "        <div class='col-md-10'>"+
-      "          <input id='quantity-"+last_range_index+"' type='text' class='form-control' name='quantities[]' style='width:90%;'>"+
-      "        </div>"+
-      "        <label for='quantity-"+last_range_index+"' class='col-md-2 col-form-label text-center'>{{__('reports.quantity')}}</label>"+
-      "      </div>"+
-      "    </div>"+
-      "    <div class='form-group create-form'>"+
-      "      <div class='col-md-12'>"+
-      "        <div class='form-group test-in'>"+
-      "          <div class='col-md-10'>"+
-      "            <div class='form-group'>"+
-      "              <textarea class='form-control' rows='3' id='descriptions' name='descriptions[]' style='width:90%'></textarea>"+
-      "            </div>"+
-      "          </div>"+
-      "          <label for='status' class='col-md-2 col-form-label text-center'>{{__('reports.description')}}</label>"+
-      "        </div>"+
+      "        <label for='type' class='col-md-2 col-form-label text-center'>جنسیت</label>"+
       "      </div>"+
       "    </div>"+
       "  </div>"+
+      "  <div class='form-group row create-form'>"+
+      "   <div class='col-md-12'>"+
+      "     <div class='form-group test-in create-form' >"+
+      "       <div class='col-md-10'>"+
+      "         <input id='value' type='text' class='form-control' name='min_ages[]' style='width:90%;'>"+
+      "       </div>"+
+      "       <label for='value' class='col-md-2 col-form-label text-center'>حداقل سن</label>"+
+      "     </div>"+
+      "   </div>"+
+      " </div>"+
+      " <div class='form-group row create-form'>"+
+      "   <div class='col-md-12'>"+
+      "     <div class='form-group test-in create-form' >"+
+      "       <div class='col-md-10'>"+
+      "         <input id='value' type='text' class='form-control' name='max_ages[]' style='width:90%;'>"+
+      "       </div>"+
+      "       <label for='value' class='col-md-2 col-form-label text-center'>حداکثر سن</label>"+
+      "     </div>"+
+      "   </div>"+
+      " </div>"+
+      " <div class='form-group row create-form'>"+
+      "   <div class='col-md-12'>"+
+      "     <div class='form-group test-in create-form' >"+
+      "       <div class='col-md-10'>"+
+      "         <input id='value' type='text' class='form-control' name='min_weights[]' style='width:90%;'>"+
+      "       </div>"+
+      "       <label for='value' class='col-md-2 col-form-label text-center'>حداقل وزن(کیلوگرم)</label>"+
+      "     </div>"+
+      "   </div>"+
+      " </div>"+
+      " <div class='form-group row create-form'>"+
+      "   <div class='col-md-12'>"+
+      "     <div class='form-group test-in create-form' >"+
+      "       <div class='col-md-10'>"+
+      "         <input id='value' type='text' class='form-control' name='max_weights[]' style='width:90%;'>"+
+      "       </div>"+
+      "       <label for='value' class='col-md-2 col-form-label text-center'>حداکثر وزن(کیلوگرم</label>"+
+      "     </div>"+
+      "   </div>"+
       " </div>"+
       "</div>"
   );
