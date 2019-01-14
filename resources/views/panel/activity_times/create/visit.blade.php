@@ -2,7 +2,7 @@
 @section('title', __('activity_times.create'))
 @section('content')
 @php
-  use App\Models\Activitytime;
+  use App\Models\ActivityTime;
 @endphp
 <div class="container">
   @form_create(['action' => route('panel.activity-times.store'), 'title' => __('activity_times.create')])

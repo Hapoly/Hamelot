@@ -28,7 +28,7 @@
                                 جستجو
                             </button> -->
                             <div class="input-group">
-                                <input type="text" class="form-control" placeholder="جستجوی  پزشک ، بیمارستان ، درمانگاه  ">
+                                <input type="text" class="form-control" name="term" placeholder="جستجوی  پزشک ، بیمارستان ، درمانگاه  ">
                                 <div class="input-group-append">
                                     <button type="submit" class="btn search-btns" type="button">
                                         <i class="fa fa-search"></i>

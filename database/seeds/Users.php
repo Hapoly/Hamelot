@@ -50,12 +50,13 @@ class Users extends Seeder
         ]);
         /* doctors */
         for($j=0; $j<25; $j++){
-            $id = User::create([
+            $user = User::create([
                 'phone'         => '0921' . rand(1000000, 9999999),
                 'first_name'    => $first_names[rand(0, sizeof($first_names)-1)],
                 'last_name'     => $last_names[rand(0, sizeof($last_names)-1)],
                 'group_code'    => User::G_DOCTOR,
-            ])->id;
+            ]);
+            $id = $user->id;
             Doctor::create([
                 'msc'           => rand(100000, 999999),
                 'start_year'    => rand(1380, 1392),
@@ -75,7 +76,7 @@ class Users extends Seeder
                 $address .= $address_parts[rand(0, sizeof($address_parts)-1)];
             $city = $cities[rand(0, sizeof($cities)-1)];
             $unit = Unit::create([
-                'title'         => 'test',
+                'title'         => $user->full_name,
                 'address'       => $address,
                 'city_id'       => $city->id,
                 'lon'           => $city->lon,

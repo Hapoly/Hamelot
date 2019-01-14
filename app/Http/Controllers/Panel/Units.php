@@ -113,6 +113,8 @@ class Units extends Controller{
       $inputs['image'] = Storage::disk('public')->put('/units', $request->file('image'));
     $inputs['phone'] = $this->replace_digits($inputs['phone']);
     $inputs['mobile'] = $this->replace_digits($inputs['mobile']);
+    if($inputs['group_code'] == Unit::CLINIC)
+      $inputs['title'] = Auth::user()->full_name;
     $unit = Unit::create($inputs);
 
     if($inputs['group_code'] == Unit::CLINIC){

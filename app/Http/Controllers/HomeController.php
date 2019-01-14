@@ -39,7 +39,7 @@ class HomeController extends Controller
         $results = $results->where('group_code', '<>', Entry::DOCTOR);
         if($request->has('group_code'))
             $results = $results->where('group_code', $request->group_code);
-        $results = $results->paginate(10);
+        $results = $results->paginate(9);
         return view('searched', [
             'results'   => $results,
             'term'      => $term,
