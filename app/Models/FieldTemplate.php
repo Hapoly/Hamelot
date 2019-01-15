@@ -13,7 +13,7 @@ class FieldTemplate extends UModel {
   public $incrementing = false;
   protected $primary = 'id';
   protected $table = 'field_templates';
-  protected $fillable = ['title', 'description', 'status'];
+  protected $fillable = ['title', 'description', 'status', 'type', 'unit'];
 
   public function report_templates() {
     return $this->belongsToMany('App\Models\ReportTemplate', 'report_fields', 'field_id', 'report_id');
@@ -24,4 +24,9 @@ class FieldTemplate extends UModel {
   public function getStatusStrAttribute() {
     return __('field_templates.status_str' . $this->status);
   }
+
+  const NUMBER = 1;
+  const TEXT = 2;
+  const DECIMAL = 3;
+  const IMAGE = 4;
 }

@@ -49,12 +49,12 @@ class FieldTemplates extends Controller {
     return view('panel.field_templates.create');
   }
   public function store(FieldTemplateCreateRequest $request) {
-    $report_template = new FieldTemplate;
-    $report_template->fill($request->only([
-      'title', 'description', 'status',
+    $field_template = new FieldTemplate;
+    $field_template->fill($request->only([
+      'title', 'description', 'unit', 'type', 'status'
     ]))->save();
-    // $report_template->saveFields($request);
-    
+    // $field_template->saveFields($request);
+    return $field_template;
     return redirect()->route('panel.field_templates.show', ['report_template' => $report_template]);
   }
   public function edit(FieldTemplate $report_template) {

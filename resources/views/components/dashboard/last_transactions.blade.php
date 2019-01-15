@@ -39,9 +39,6 @@
                     @if($transaction->can_modify && $transaction->type == Transaction::WITHDRAW)
                         <a class="btn btn-primary" href="{{route('panel.transactions.edit.withdraw', ['transaction' => $transaction])}}">{{__('transactions.edit')}}</a>
                     @endif
-                    @if($transaction->can_delete)
-                        <a class="btn btn-danger" href="{{route('panel.transactions.destroy', ['transaction' => $transaction])}}">{{__('transactions.destroy')}}</a>
-                    @endif
                     <a class="btn btn-default" href="{{route('panel.transactions.show', ['transaction' => $transaction])}}">{{__('transactions.show')}}</a>
                 </td>
                 </tr>

@@ -25,6 +25,16 @@ class FieldCreate extends PersianFormRequest {
       'title' => 'required|string|max:100',
       'description' => 'required|string|max:500',
       'status' => 'required|numeric|in:1,2',
+      'type' => 'required|numeric',
+      'unit' => 'required|string|max:20',
+
+      'values.*' => 'required|string|max:500',
+      'descriptions.*' => 'required|string|max:500',
+      'min_ages.*' => 'required|numeric',
+      'max_ages.*' => 'required|numeric',
+      'min_weights.*' => 'required|numeric',
+      'max_weights.*' => 'required|numeric',
+      'genders.*' => 'required|numeric|in:1,2,3',
     ];
   }
 }
