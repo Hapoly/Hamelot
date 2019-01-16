@@ -218,6 +218,11 @@ Route::middleware('auth')->group(function () {
   Route::get('/home', 'HomeController@home')->name('home');
 });
 
+Route::prefix('/fields')->name('fields.')->group(function(){
+  Route::get('/', 'GeneralController@indexFields')->name('index');
+  Route::get('/result', 'GeneralController@resultFields')->name('result');
+});
+
 Route::get('/', 'HomeController@index')->name('welcome');
 Route::get('/terms', 'HomeController@terms')->name('terms');
 
