@@ -17,6 +17,7 @@ class CreateReportTemplatesTable extends Migration {
       $table->string('title', 100);
       $table->string('description', 500);
       $table->smallInteger('status')->default(1);
+      $table->smallInteger('public')->default(1);
       $table->timestamps();
     });
   }

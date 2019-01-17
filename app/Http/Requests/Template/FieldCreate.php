@@ -23,17 +23,18 @@ class FieldCreate extends PersianFormRequest {
   public function rules() {
     return [
       'title' => 'required|string|max:100',
-      'description' => 'required|string|max:500',
+      'description' => 'required|string|max:1000',
       'status' => 'required|numeric|in:1,2',
       'type' => 'required|numeric',
       'unit' => 'required|string|max:20',
 
       'values.*' => 'required|string|max:500',
-      'descriptions.*' => 'required|string|max:500',
-      'min_ages.*' => 'required|numeric',
-      'max_ages.*' => 'required|numeric',
-      'min_weights.*' => 'required|numeric',
-      'max_weights.*' => 'required|numeric',
+      'modes.*' => 'required|numeric|in:1,2',
+      'descriptions.*' => 'required|string|max:1000',
+      'min_ages.*' => 'nullable|numeric',
+      'max_ages.*' => 'nullable|numeric',
+      'min_weights.*' => 'nullable|numeric',
+      'max_weights.*' => 'nullable|numeric',
       'genders.*' => 'required|numeric|in:1,2,3',
     ];
   }

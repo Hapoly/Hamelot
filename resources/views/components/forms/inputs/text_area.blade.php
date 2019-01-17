@@ -11,7 +11,7 @@
         </span>
       </div>
     @endif
-    <textarea id="{{$name}}" style="{{isset($col)?'width: 87%': 'width: 93%'}}" class="form-control {{ $errors->has($name) ? ' is-invalid' : '' }}" name="{{$name}}" {{isset($required)?($required? 'required': ''): ''}} placeholder="{{isset($placeholder)?$placeholder:''}}">{{$value}}</textarea>
+    <textarea id="{{$name}}" style="{{isset($col)?'width: 87%': 'width: 93%'}}" class="form-control {{ $errors->has($name) ? ' is-invalid' : '' }}" name="{{$name}}" {{isset($required)?($required? 'required': ''): ''}} placeholder="{{isset($placeholder)?$placeholder:''}}" rows="{{isset($lines)? $lines: 3}}">{{$value}}</textarea>
     @if ($errors->has($name))
       <span class="invalid-feedback">
       <strong>{{ $errors->first($name) }}</strong>

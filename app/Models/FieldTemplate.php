@@ -22,11 +22,18 @@ class FieldTemplate extends UModel {
   const ACTIVE = 1;
   const INACTIVE = 2;
   public function getStatusStrAttribute() {
-    return __('field_templates.status_str' . $this->status);
+    return __('field_templates.status_str.' . $this->status);
   }
 
   const NUMBER = 1;
   const TEXT = 2;
   const DECIMAL = 3;
   const IMAGE = 4;
+  public function getTypeStrAttribute(){
+    return __('field_templates.type_str.' . $this->type);
+  }
+
+  public function ranges(){
+    return $this->hasMany('App\Models\FieldRange');
+  }
 }

@@ -14,14 +14,15 @@ class CreateFieldRangesTable extends Migration {
     Schema::create('field_ranges', function (Blueprint $table) {
       $table->uuid('id');
       $table->primary('id');
+      $table->smallInteger('mode');
       $table->string('value', 500);
       $table->integer('min_age')->default(0);
       $table->integer('max_age')->default(0);
       $table->integer('min_weight')->default(0);
       $table->integer('max_weight')->default(0);
       $table->smallInteger('gender')->default(1);
-      $table->integer('field_template_id')->index();
-      $table->string('description', 500);
+      $table->uuid('field_template_id')->index();
+      $table->string('description', 1000);
       $table->timestamps();
     });
   }

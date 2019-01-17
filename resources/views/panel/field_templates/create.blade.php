@@ -5,7 +5,7 @@
   @form_create(['action' => route('panel.field_templates.store'), 'title' => 'فیلد جدید', 'row' => true])
     @input_text(['name' => 'title', 'value' => old('title', ''), 'label' => 'عنوان', 'required' => true, 'row' => true])
     @input_text(['name' => 'unit', 'value' => old('unit', ''), 'label' => 'واحد', 'required' => true, 'row' => true])
-    @input_text_area(['name' => 'description', 'value' => old('description', ''), 'label' => 'توضیحات', 'required' => true, 'row' => true])
+    @input_text_area(['name' => 'description', 'value' => old('description', ''), 'label' => 'توضیحات', 'required' => true, 'row' => true, 'lines' => 5])
     @php
       $type_rows = [];
       foreach(__('field_templates.type_str') as $key=>$value)
@@ -45,6 +45,24 @@
             </div>
             <div class='form-group row create-form'>
               <div class='col-md-12'>
+                <div class='form-group test-in'>
+                  <div class='col-md-10' style='padding-right: 25px;'>
+                    <select class='form-control' name='modes[]' style='width:88%; text-align:center'>
+                      <option value='1' {{old('modes.' . $i) == 1? 'selected': ''}} >حد بالا</option>
+                      <option value='2' {{old('modes.' . $i) == 2? 'selected': ''}} >حد پایین</option>
+                    </select>
+                    @if($errors->has('modes.' . $i))
+                      <span class="invalid-feedback">
+                        <strong>حد بالا یا پایین باید مشخص شود</strong>
+                      </span>
+                    @endif
+                  </div>
+                  <label for='type' class='col-md-2 col-form-label text-center'>حد</label>
+                </div>
+              </div>
+            </div>
+            <div class='form-group row create-form'>
+              <div class='col-md-12'>
                 <div class='form-group test-in create-form' >
                   <div class='col-md-10'>
                     <input id='value' type='text' class='form-control' name='descriptions[]' value="{{old('descriptions.' . $i)}}" style='width:90%;'>
@@ -54,7 +72,7 @@
                       </span>
                     @endif
                   </div>
-                  <label for='value' class='col-md-2 col-form-label text-center'>مقدار</label>
+                  <label for='value' class='col-md-2 col-form-label text-center'>توضیحات</label>
                 </div>
               </div>
             </div>
@@ -167,6 +185,19 @@ function add_range(){
       "          <input id='value' type='text' class='form-control' name='values[]' style='width:90%;'>"+
       "        </div>"+
       "        <label for='value' class='col-md-2 col-form-label text-center'>مقدار</label>"+
+      "      </div>"+
+      "    </div>"+
+      "  </div>"+
+      "  <div class='form-group row create-form'>"+
+      "    <div class='col-md-12'>"+
+      "      <div class='form-group test-in'>"+
+      "        <div class='col-md-10' style='padding-right: 25px;'>"+
+      "          <select class='form-control' name='modes[]' style='width:88%; text-align:center'>"+
+      "            <option value='1'>حدبالا</option>"+
+      "            <option value='2'>حدپایین</option>"+
+      "          </select>"+
+      "        </div>"+
+      "        <label for='type' class='col-md-2 col-form-label text-center'>حد</label>"+
       "      </div>"+
       "    </div>"+
       "  </div>"+

@@ -15,7 +15,7 @@ class CreateFieldTemplatesTable extends Migration {
       $table->uuid('id');
       $table->primary('id');
       $table->string('title', 45);
-      $table->string('description', 500);
+      $table->string('description', 1000);
       $table->smallInteger('type');
       $table->string('unit', 32)->default('NuLL');
       $table->smallInteger('status')->default(1);
