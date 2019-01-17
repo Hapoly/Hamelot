@@ -5,7 +5,7 @@ namespace App\Http\Requests\Template;
 use App\Http\Requests\PersianFormRequest;
 use Auth;
 
-class ResportEdit extends PersianFormRequest {
+class ReportEdit extends PersianFormRequest {
   /**
    * Determine if the user is authorized to make this request.
    *
@@ -25,6 +25,7 @@ class ResportEdit extends PersianFormRequest {
       'title' => 'required|string|max:100',
       'description' => 'required|string|max:500',
       'status' => 'required|numeric|in:1,2',
+      'fields' => 'required|string',
     ];
   }
 }

@@ -13,55 +13,46 @@
       <table class="table table-striped">
         <tbody>
           <tr>
-            <td>{{__('reports.title')}}</td>
+            <th>عنوان</th>
             <td>{{$report_template->title}}</td>
           </tr>
           <tr>
-            <td>{{__('reports.description')}}</td>
+            <th>توضیحات</th>
             <td>{{$report_template->description}}</td>
           </tr>
           <tr>
-            <td>{{__('reports.status')}}</td>
+            <th>وضعیت</th>
             <td>{{$report_template->status_str}}</td>
           </tr>
         </tbody>
       </table>
     </div>
-    @if(Auth::user()->isAdmin())
-      <div class="row">
-        <div class="col-md-6" style="text-align: center">
-          <a href="{{route('panel.report_templates.edit', ['report_template' => $report_template])}}" class="btn btn-primary" role="button">{{__('reports.edit')}}</a>
-          <a href="{{route('panel.experiments.create', ['report_template' => $report_template])}}" class="btn btn-info" role="button">{{__('experiments.create')}}</a>
-        </div>
-        <div class="col-md-6" style="text-align: center">
-          <form action="{{route('panel.report_templates.destroy', ['report_template' => $report_template])}}" method="post">
-            {{ method_field('DELETE') }}
-            {{ csrf_field() }}
-            <button type="submit" class="btn btn-danger">حذف</button>
-          </form>
-        </div>
+    <div class="row">
+      <div class="col-md-6" style="text-align: center">
+        <a href="{{route('panel.report_templates.edit', ['report_template' => $report_template])}}" class="btn btn-primary" role="button">ویرایش</a>
       </div>
-    @else
-      <div class="row">
-        <div class="col-md-6" style="text-align: center">
-          <a href="{{route('panel.experiments.create', ['report_template' => $report_template])}}" class="btn btn-info" role="button">{{__('experiments.create')}}</a>
-        </div>
+      <div class="col-md-6" style="text-align: center">
+        <form action="{{route('panel.report_templates.destroy', ['report_template' => $report_template])}}" method="post">
+          {{ method_field('DELETE') }}
+          {{ csrf_field() }}
+          <button type="submit" class="btn btn-danger">حذف</button>
+        </form>
       </div>
-    @endif
+    </div>
   </div>
   <div class="panel panel-default">
     <div class="panel-heading sub-panel-title">
-      {{__('reports.fields')}}
+      فیلدها
     </div>
     @if(sizeof($report_template->fields))
       <table class="table">
         <thead>
           <tr>
-            <th>{{__('reports.row')}}</th>
-            <th>{{__('reports.title')}}</th>
-            <th>{{__('reports.type')}}</th>
-            <th>{{__('reports.quantity')}}</th>
-            <th>{{__('reports.description')}}</th>
+            <th>ردیف</th>
+            <th>عنوان</th>
+            <th>نوع</th>
+            <th>واحد</th>
+            <th>عملیات</th>
           </tr>
         </thead>
         <tbody>
@@ -70,8 +61,11 @@
               <td>{{$i+1}}</td>
               <td>{{$field->title}}</td>
               <td>{{$field->type_str}}</td>
-              <td>{{$field->quantity_str}}</td>
-              <td>{{$field->description}}</td>
+              <td>{{$field->unit}}</td>
+              <td>
+                <a class="btn btn-default" href="{{route('panel.field_templates.show', ['field_template' => $field])}}">مشاهده</a>
+                <a class="btn btn-warning" href="{{route('panel.report_fields.remove', ['report_field' => $field->pivot->id])}}">حذف</a>
+              </td>
             </tr>
           @endforeach
         </tbody>
@@ -79,7 +73,7 @@
     @else
       <div class="row">
         <div class="col-md-12" style="text-align: center">
-          {{__('reports.field_not_found')}}
+          این آزمایش هیچ فیلدی ندارد
         </div>
       </div>
     @endif

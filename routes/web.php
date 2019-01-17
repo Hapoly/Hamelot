@@ -23,6 +23,9 @@ Route::middleware(['auth'])->namespace('Panel')->prefix('panel')->name('panel.')
     'bids' => 'Bids',
     'bank-accounts' => 'BankAccounts',
   ]);
+  Route::prefix('report-fields')->name('report_fields.')->group(function(){
+    Route::get('remove/{report_field}', 'ReportTemplates@removeField')->name('remove');
+  });
   Route::get('/activity-times/create/visit', 'ActivityTimes@createVisit')->name('activity-times.create_visit');
   Route::prefix('units')->name('units.')->group(function () {
     Route::get('/create/clinic', 'Units@createClinic')->name('create.clinic');
@@ -47,7 +50,6 @@ Route::middleware(['auth'])->namespace('Panel')->prefix('panel')->name('panel.')
       Route::get('/{experiment}', 'Experiments@show')->name('show');
       Route::get('/', 'Experiments@index')->name('index');
     });
-
     Route::prefix('unit-users')->name('unit_users.')->group(function () {
       Route::get('/', 'UnitUsers@index')->name('index');
     });
@@ -125,6 +127,7 @@ Route::middleware(['auth'])->namespace('Panel')->prefix('panel')->name('panel.')
       Route::get('/doctor', 'Search@doctorFields')->name('doctor');
       Route::get('/nurse', 'Search@nurseFields')->name('nurse');
     });
+    Route::get('/field-templates', 'Search@fieldTemplates')->name('field_templates');
   });
   Route::prefix('demands')->name('demands.')->group(function () {
     Route::prefix('create')->name('create.')->group(function () {

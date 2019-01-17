@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Template\ReportCreate as ReportTemplateCreateRequest;
 use App\Http\Requests\Template\ReportEdit as ReportTemplateEditRequest;
 use App\Models\ReportTemplate;
+use App\Models\ReportField;
+use App\Models\FieldTemplate;
 use Illuminate\Http\Request;
 use URL;
 
@@ -53,17 +55,42 @@ class ReportTemplates extends Controller {
     $report_template->fill($request->only([
       'title', 'description', 'status',
     ]))->save();
-    // $report_template->saveFields($request);
     
+    $field_titles = explode(', ', $request->input('fields', ''));
+    foreach($field_titles as $field_title){
+      $field_title = str_replace(',', '', $field_title);
+      $field_template = FieldTemplate::where('title', 'LIKE', '%'.$field_title.'%')->first();
+      if($field_template){
+        if(ReportField::where('field_id', $field_template->id)->where('report_id', $report_template->id)->first() == null)
+          ReportField::create([
+            'field_id' => $field_template->id,
+            'report_id' => $report_template->id,
+          ]);
+      }
+    }
     return redirect()->route('panel.report_templates.show', ['report_template' => $report_template]);
   }
   public function edit(ReportTemplate $report_template) {
     return view('panel.report_templates.edit', ['report_template' => $report_template]);
   }
   public function update(ReportTemplateEditRequest $request, ReportTemplate $report_template) {
-    $inputs = $request->all();
-    $report_template->fill($inputs)->save();
-    $report_template->saveFields($request);
+    $report_template->fill($request->only([
+      'title', 'description', 'status',
+    ]))->save();
+    
+    Reportfield::where('report_id', $report_template->id)->delete();
+    $field_titles = explode(', ', $request->input('fields', ''));
+    foreach($field_titles as $field_title){
+      $field_title = str_replace(',', '', $field_title);
+      $field_template = FieldTemplate::where('title', 'LIKE', '%'.$field_title.'%')->first();
+      if($field_template){
+        if(ReportField::where('field_id', $field_template->id)->where('report_id', $report_template->id)->first() == null)
+          ReportField::create([
+            'field_id' => $field_template->id,
+            'report_id' => $report_template->id,
+          ]);
+      }
+    }
     return redirect()->route('panel.report_templates.show', ['report_template' => $report_template]);
   }
   public function destroy(ReportTemplate $report_template) {
@@ -73,6 +100,10 @@ class ReportTemplates extends Controller {
     } else {
       return redirect()->back();
     }
+  }
 
+  public function removeField(Request $request, ReportField $report_field){
+    $report_field->delete();
+    return redirect()->back();
   }
 }
