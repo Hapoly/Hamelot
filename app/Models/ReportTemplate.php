@@ -67,6 +67,7 @@ class ReportTemplate extends UModel {
 
   public function delete() {
     ReportField::where('report_id', $this->id)->delete();
+    Entry::where('target_id', $this->id)->delete();
     parent::delete();
   }
 }
