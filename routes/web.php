@@ -235,6 +235,9 @@ Route::get('/search', 'HomeController@search')->name('search');
 
 Route::get('/user/{username}', 'GeneralController@showUser')->name('show.user');
 Route::get('/unit/{key}', 'GeneralController@showUnit')->name('show.unit');
+Route::get('/field/{key}', 'GeneralController@showField')->name('show.field');
+Route::get('/report/{key}', 'GeneralController@showReport')->name('show.report');
+
 if (env('APP_DEBUG', false)) {
   Route::get('/session/all', 'GeneralController@sessionAll')->name('session.all');
 }

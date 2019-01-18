@@ -102,6 +102,44 @@
                         </div>
                     </div>
                 @break
+                @case(Entry::FIELD_TEMPLATE)
+                    <div class="col-md-4">
+                        <div class="searched-card">
+                            <img src="{{url('/imgs/010-reports.svg')}}" class="search-img">
+                            <h5 class="center">
+                                {{$result->title}}
+                            </h5>
+                            <span class="center">
+                                واحد: {{$result->field_template->unit}}
+                            </span>
+                            <span class="center">
+                                نوع: {{$result->field_template->type_str}}
+                            </span>
+                            <a href="{{route('show.field', ['slug' => $result->slug])}}" class="btn see-more-btn center">
+                                مشاهده جزئیات
+                            </a>
+                        </div>
+                    </div>
+                @break
+                @case(Entry::REPORT_TEMPLATE)
+                    <div class="col-md-4">
+                        <div class="searched-card">
+                            <img src="{{url('/imgs/010-reports.svg')}}" class="search-img">
+                            <h5 class="center">
+                                {{$result->title}}
+                            </h5>
+                            <span class="center">
+                                -
+                            </span>
+                            <span class="center">
+                                -
+                            </span>
+                            <a href="{{route('show.report', ['slug' => $result->slug])}}" class="btn see-more-btn center">
+                                مشاهده جزئیات
+                            </a>
+                        </div>
+                    </div>
+                @break
             @endswitch
         @endforeach
         <!-- <div class="col-md-4">

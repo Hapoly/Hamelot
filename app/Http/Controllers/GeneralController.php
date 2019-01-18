@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Drivers\Time;
+use App\Models\FieldTemplate;
+use App\Models\ReportTemplate;
 use App\Models\Unit;
 use App\User;
 use Illuminate\Http\Request;
@@ -27,14 +29,23 @@ class GeneralController extends Controller {
     ]);
   }
 
+  public function showField(Request $request, $slug) {
+    $field_template = FieldTemplate::where('id', $slug)->firstOrFail();
+    return view('fields.field', ['field_template' => $field_template]);
+  }
+  public function showReport(Request $request, $slug) {
+    $report_template = ReportTemplate::where('id', $slug)->firstOrFail();
+    return view('fields.report', ['report_template' => $report_template]);
+  }
+
   public function sessionAll(Request $request) {
     return $request->session()->all();
   }
 
-  public function indexFields(Request $request){
+  public function indexFields(Request $request) {
     return view('fields.index');
   }
-  public function resultFields(Request $request){
+  public function resultFields(Request $request) {
     return view('fields.result');
   }
 }
