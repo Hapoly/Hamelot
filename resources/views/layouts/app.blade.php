@@ -67,35 +67,36 @@
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav ml-auto">
-                        <!-- Authentication Links -->
-                        @guest
-                            <li><a class="nav-link" href="{{ route('welcome') }}">صفحه اصلی</a></li>
-                            <li><a class="nav-link" href="https://blog.doctorsoal.com">بلاگ</a></li>
-                            <li><a class="nav-link" href="{{ route('login', ['group' => \App\User::G_PATIENT]) }}">{{ __('general.login.patient') }}</a></li>
-                            <li><a class="nav-link" href="{{ route('login', ['group' => \App\User::G_DOCTOR]) }}">{{ __('general.login.doctor') }}</a></li>
-                            <li><a class="nav-link" href="{{ route('login', ['group' => \App\User::G_SECRETARY]) }}">{{ __('general.login.secretary') }}</a></li>
-                            <li><a class="nav-link" href="{{ route('login', ['group' => \App\User::G_MANAGER]) }}">{{ __('general.login.manager') }}</a></li>
-                            <li><a class="nav-link" href="{{route('about')}}">درباره ما</a></li>
-                            <!-- <li><a class="nav-link" href="{{ route('about') }}">درباره ما</a></li> -->
-                            <!-- <li><a class="nav-link" href="{{ route('tour') }}"> الان شروع کن!</a></li> -->
-                        @else
-                            <li><a class="nav-link" href="{{ route('welcome') }}">صفحه اصلی</a></li>
-                            <li><a class="nav-link" href="https://blog.doctorsoal.com">بلاگ</a></li>
-                            <li><a class="nav-link" href="{{route('panel.profile')}}">پروفایل من</a></li>
-                            <li><a class="nav-link" href="{{route('home')}}">پیشخوان</a></li>
-                            <li><a class="nav-link" href="{{ route('logout') }}"
-                                onclick="event.preventDefault();
-                                                document.getElementById('logout-form').submit();">
-                                    {{ __('general.logout') }}
-                                </a>
+                  <ul class="navbar-nav ml-auto">
+                    <!-- Authentication Links -->
+                    @guest
+                      <li><a class="nav-link" href="{{ route('welcome') }}">صفحه اصلی</a></li>
+                      <li><a class="nav-link" href="https://blog.doctorsoal.com">بلاگ</a></li>
+                      <li><a class="nav-link" href="{{ route('login', ['group' => \App\User::G_PATIENT]) }}">{{ __('general.login.patient') }}</a></li>
+                      <li><a class="nav-link" href="{{ route('login', ['group' => \App\User::G_DOCTOR]) }}">{{ __('general.login.doctor') }}</a></li>
+                      <li><a class="nav-link" href="{{ route('login', ['group' => \App\User::G_SECRETARY]) }}">{{ __('general.login.secretary') }}</a></li>
+                      <li><a class="nav-link" href="{{ route('login', ['group' => \App\User::G_MANAGER]) }}">{{ __('general.login.manager') }}</a></li>
+                      <li><a class="nav-link" href="{{route('about')}}">درباره ما</a></li>
+                      <li><a class="nav-link" href="{{route('fields.index')}}">آزمایش‌خوانی</a></li>
+                      <!-- <li><a class="nav-link" href="{{ route('tour') }}"> الان شروع کن!</a></li> -->
+                    @else
+                      <li><a class="nav-link" href="{{ route('welcome') }}">صفحه اصلی</a></li>
+                      <li><a class="nav-link" href="https://blog.doctorsoal.com">بلاگ</a></li>
+                      <li><a class="nav-link" href="{{route('panel.profile')}}">پروفایل من</a></li>
+                      <li><a class="nav-link" href="{{route('home')}}">پیشخوان</a></li>
+                      <li><a class="nav-link" href="{{route('fields.index')}}">آزمایش‌خوانی</a></li>
+                      <li><a class="nav-link" href="{{ route('logout') }}"
+                        onclick="event.preventDefault();
+                                        document.getElementById('logout-form').submit();">
+                            {{ __('general.logout') }}
+                        </a>
 
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                    @csrf
-                                </form>
-                            </li>
-                        @endguest
-                    </ul>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            @csrf
+                        </form>
+                      </li>
+                    @endguest
+                  </ul>
                 </div>
             </div>
         </nav>

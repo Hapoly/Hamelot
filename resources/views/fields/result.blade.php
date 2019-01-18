@@ -5,270 +5,32 @@
   <div class="row" style="direction: rtl;">
     <div class="col-md-12">
       <div class="row">
-        <div class="col-md-4 col-sm-6">
-          <div class="card" style="margin-top: 10px;">
-            <div class="card-body">
-              <div class="row">
-                <div class="col-md-12" style="text-align: center;">
-                  <h3>CBC</h3>
+        @foreach($fields as $field)
+          <div class="col-md-4 col-sm-6">
+            <div class="card" style="margin-top: 10px;">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-md-12" style="text-align: center;">
+                    <a style="color: black;" href="{{route('show.field', ['field_template' => $field])}}"><h3>{{$field->title}}</h3></a>
+                  </div>
                 </div>
-              </div>
-              <div class="row">
-                <div class="col-md-12" style="text-align: right;">
-                  سی بی سی یا میزان مشارکت پلاکت ها در انعقاد خون به مقدار هورمون سیتوزین مربوط است که در خون فرد بالغ باید به اندازه ای موجود باشد که زخم های سطحی را در مدت کوتاهی لخته کند و ...
+                <div class="row">
+                  <div class="col-md-12" style="text-align: right;">
+                    واحد: {{$field->unit}}
+                  </div>
                 </div>
-              </div>
-              <div class="row">
-                <div class="col-md-12" style="margin-top: 15px; text-align: right;">آزمایشات:</div>
-                <div class="col-md-12" style="margin-top: 5px;">
-                  <a class="primary-btn"><span>CBC</span></a>
-                  <a class="primary-btn"><span>Blood Bombarow</span></a>
-                  <a class="primary-btn"><span>کلسیم</span></a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4 col-sm-6">
-          <div class="card" style="margin-top: 10px;">
-            <div class="card-body">
-              <div class="row">
-                <div class="col-md-12" style="text-align: center;">
-                  <h3>CBC</h3>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-12" style="text-align: right;">
-                  سی بی سی یا میزان مشارکت پلاکت ها در انعقاد خون به مقدار هورمون سیتوزین مربوط است که در خون فرد بالغ باید به اندازه ای موجود باشد که زخم های سطحی را در مدت کوتاهی لخته کند و ...
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-12" style="margin-top: 15px; text-align: right;">آزمایشات:</div>
-                <div class="col-md-12" style="margin-top: 5px;">
-                  <a class="primary-btn"><span>CBC</span></a>
-                  <a class="primary-btn"><span>Blood Bombarow</span></a>
-                  <a class="primary-btn"><span>کلسیم</span></a>
+                <div class="row">
+                  <div class="col-md-12" style="margin-top: 15px; text-align: right;">آزمایشات:</div>
+                  <div class="col-md-12" style="margin-top: 5px;">
+                    @foreach($field->report_templates as $report)
+                      <a href="{{route('show.report', ['report_template' => $report])}}" class="primary-btn"><span>{{$report->title}}</span></a>
+                    @endforeach
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-        <div class="col-md-4 col-sm-6">
-          <div class="card" style="margin-top: 10px;">
-            <div class="card-body">
-              <div class="row">
-                <div class="col-md-12" style="text-align: center;">
-                  <h3>CBC</h3>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-12" style="text-align: right;">
-                  سی بی سی یا میزان مشارکت پلاکت ها در انعقاد خون به مقدار هورمون سیتوزین مربوط است که در خون فرد بالغ باید به اندازه ای موجود باشد که زخم های سطحی را در مدت کوتاهی لخته کند و ...
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-12" style="margin-top: 15px; text-align: right;">آزمایشات:</div>
-                <div class="col-md-12" style="margin-top: 5px;">
-                  <a class="primary-btn"><span>CBC</span></a>
-                  <a class="primary-btn"><span>Blood Bombarow</span></a>
-                  <a class="primary-btn"><span>کلسیم</span></a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4 col-sm-6">
-          <div class="card" style="margin-top: 10px;">
-            <div class="card-body">
-              <div class="row">
-                <div class="col-md-12" style="text-align: center;">
-                  <h3>CBC</h3>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-12" style="text-align: right;">
-                  سی بی سی یا میزان مشارکت پلاکت ها در انعقاد خون به مقدار هورمون سیتوزین مربوط است که در خون فرد بالغ باید به اندازه ای موجود باشد که زخم های سطحی را در مدت کوتاهی لخته کند و ...
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-12" style="margin-top: 15px; text-align: right;">آزمایشات:</div>
-                <div class="col-md-12" style="margin-top: 5px;">
-                  <a class="primary-btn"><span>CBC</span></a>
-                  <a class="primary-btn"><span>Blood Bombarow</span></a>
-                  <a class="primary-btn"><span>کلسیم</span></a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4 col-sm-6">
-          <div class="card" style="margin-top: 10px;">
-            <div class="card-body">
-              <div class="row">
-                <div class="col-md-12" style="text-align: center;">
-                  <h3>CBC</h3>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-12" style="text-align: right;">
-                  سی بی سی یا میزان مشارکت پلاکت ها در انعقاد خون به مقدار هورمون سیتوزین مربوط است که در خون فرد بالغ باید به اندازه ای موجود باشد که زخم های سطحی را در مدت کوتاهی لخته کند و ...
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-12" style="margin-top: 15px; text-align: right;">آزمایشات:</div>
-                <div class="col-md-12" style="margin-top: 5px;">
-                  <a class="primary-btn"><span>CBC</span></a>
-                  <a class="primary-btn"><span>Blood Bombarow</span></a>
-                  <a class="primary-btn"><span>کلسیم</span></a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4 col-sm-6">
-          <div class="card" style="margin-top: 10px;">
-            <div class="card-body">
-              <div class="row">
-                <div class="col-md-12" style="text-align: center;">
-                  <h3>CBC</h3>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-12" style="text-align: right;">
-                  سی بی سی یا میزان مشارکت پلاکت ها در انعقاد خون به مقدار هورمون سیتوزین مربوط است که در خون فرد بالغ باید به اندازه ای موجود باشد که زخم های سطحی را در مدت کوتاهی لخته کند و ...
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-12" style="margin-top: 15px; text-align: right;">آزمایشات:</div>
-                <div class="col-md-12" style="margin-top: 5px;">
-                  <a class="primary-btn"><span>CBC</span></a>
-                  <a class="primary-btn"><span>Blood Bombarow</span></a>
-                  <a class="primary-btn"><span>کلسیم</span></a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4 col-sm-6">
-          <div class="card" style="margin-top: 10px;">
-            <div class="card-body">
-              <div class="row">
-                <div class="col-md-12" style="text-align: center;">
-                  <h3>CBC</h3>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-12" style="text-align: right;">
-                  سی بی سی یا میزان مشارکت پلاکت ها در انعقاد خون به مقدار هورمون سیتوزین مربوط است که در خون فرد بالغ باید به اندازه ای موجود باشد که زخم های سطحی را در مدت کوتاهی لخته کند و ...
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-12" style="margin-top: 15px; text-align: right;">آزمایشات:</div>
-                <div class="col-md-12" style="margin-top: 5px;">
-                  <a class="primary-btn"><span>CBC</span></a>
-                  <a class="primary-btn"><span>Blood Bombarow</span></a>
-                  <a class="primary-btn"><span>کلسیم</span></a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4 col-sm-6">
-          <div class="card" style="margin-top: 10px;">
-            <div class="card-body">
-              <div class="row">
-                <div class="col-md-12" style="text-align: center;">
-                  <h3>CBC</h3>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-12" style="text-align: right;">
-                  سی بی سی یا میزان مشارکت پلاکت ها در انعقاد خون به مقدار هورمون سیتوزین مربوط است که در خون فرد بالغ باید به اندازه ای موجود باشد که زخم های سطحی را در مدت کوتاهی لخته کند و ...
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-12" style="margin-top: 15px; text-align: right;">آزمایشات:</div>
-                <div class="col-md-12" style="margin-top: 5px;">
-                  <a class="primary-btn"><span>CBC</span></a>
-                  <a class="primary-btn"><span>Blood Bombarow</span></a>
-                  <a class="primary-btn"><span>کلسیم</span></a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4 col-sm-6">
-          <div class="card" style="margin-top: 10px;">
-            <div class="card-body">
-              <div class="row">
-                <div class="col-md-12" style="text-align: center;">
-                  <h3>CBC</h3>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-12" style="text-align: right;">
-                  سی بی سی یا میزان مشارکت پلاکت ها در انعقاد خون به مقدار هورمون سیتوزین مربوط است که در خون فرد بالغ باید به اندازه ای موجود باشد که زخم های سطحی را در مدت کوتاهی لخته کند و ...
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-12" style="margin-top: 15px; text-align: right;">آزمایشات:</div>
-                <div class="col-md-12" style="margin-top: 5px;">
-                  <a class="primary-btn"><span>CBC</span></a>
-                  <a class="primary-btn"><span>Blood Bombarow</span></a>
-                  <a class="primary-btn"><span>کلسیم</span></a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4 col-sm-6">
-          <div class="card" style="margin-top: 10px;">
-            <div class="card-body">
-              <div class="row">
-                <div class="col-md-12" style="text-align: center;">
-                  <h3>CBC</h3>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-12" style="text-align: right;">
-                  سی بی سی یا میزان مشارکت پلاکت ها در انعقاد خون به مقدار هورمون سیتوزین مربوط است که در خون فرد بالغ باید به اندازه ای موجود باشد که زخم های سطحی را در مدت کوتاهی لخته کند و ...
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-12" style="margin-top: 15px; text-align: right;">آزمایشات:</div>
-                <div class="col-md-12" style="margin-top: 5px;">
-                  <a class="primary-btn"><span>CBC</span></a>
-                  <a class="primary-btn"><span>Blood Bombarow</span></a>
-                  <a class="primary-btn"><span>کلسیم</span></a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4 col-sm-6">
-          <div class="card" style="margin-top: 10px;">
-            <div class="card-body">
-              <div class="row">
-                <div class="col-md-12" style="text-align: center;">
-                  <h3>CBC</h3>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-12" style="text-align: right;">
-                  سی بی سی یا میزان مشارکت پلاکت ها در انعقاد خون به مقدار هورمون سیتوزین مربوط است که در خون فرد بالغ باید به اندازه ای موجود باشد که زخم های سطحی را در مدت کوتاهی لخته کند و ...
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-12" style="margin-top: 15px; text-align: right;">آزمایشات:</div>
-                <div class="col-md-12" style="margin-top: 5px;">
-                  <a class="primary-btn"><span>CBC</span></a>
-                  <a class="primary-btn"><span>Blood Bombarow</span></a>
-                  <a class="primary-btn"><span>کلسیم</span></a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+        @endforeach
       </div>
     </div>
   </div>

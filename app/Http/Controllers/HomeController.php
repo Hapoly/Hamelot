@@ -37,6 +37,8 @@ class HomeController extends Controller
         if($request->input('city_id', '0') != '0')
             $results = $results->where('city_id', $request->city_id);
         $results = $results->where('group_code', '<>', Entry::DOCTOR);
+        $results = $results->where('group_code', '<>', Entry::FIELD_TEMPLATE);
+        $results = $results->where('group_code', '<>', Entry::REPORT_TEMPLATE);
         if($request->has('group_code'))
             $results = $results->where('group_code', $request->group_code);
         $results = $results->paginate(9);

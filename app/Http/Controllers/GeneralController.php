@@ -46,6 +46,8 @@ class GeneralController extends Controller {
     return view('fields.index');
   }
   public function resultFields(Request $request) {
-    return view('fields.result');
+    return view('fields.result', [
+      'fields' => FieldTemplate::where('title', 'LIKE', '%'.$request->term.'%')->orWhere('description', 'LIKE', '%'.$request->term.'%')->get(),
+    ]);
   }
 }
