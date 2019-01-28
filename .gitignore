@@ -18,3 +18,5 @@ yarn-error.log
 /public/units
 .rnd
 tests/Browser/screenshots/
+laravel-echo-server.*
+package-lock.json

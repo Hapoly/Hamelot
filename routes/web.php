@@ -204,19 +204,8 @@ Route::middleware('guest')->group(function () {
   Route::get('/token', 'AuthController@token')->name('token');
   Route::post('/check', 'AuthController@check')->name('check');
 });
-Route::prefix('register')->name('register.')->group(function () {
-  Route::get('/doctor', 'AuthController@registerDoctor')->name('doctor');
-  Route::get('/nurse', 'AuthController@registerNuese')->name('nuese');
-});
-Route::prefix('store')->name('store.')->group(function () {
-  Route::post('/doctor', 'AuthController@storeDoctor')->name('doctor');
-  Route::post('/nurse', 'AuthController@storeNuese')->name('nuese');
-});
 
 Route::post('/logout', 'AuthController@logout')->name('logout');
-
-Route::get('/doctor', 'AuthController@registerDoctor')->name('register.doctor');
-
 Route::middleware('auth')->group(function () {
   Route::get('/home', 'HomeController@home')->name('home');
 });
@@ -242,11 +231,18 @@ if (env('APP_DEBUG', false)) {
   Route::get('/session/all', 'GeneralController@sessionAll')->name('session.all');
 }
 
-// simti
+// bot payment
 Route::get('pay/s', function () {
   return view('payment.successful');
 });
-
 Route::get('pay/f', function () {
   return view('payment.fail');
+});
+
+// temp online chat
+Route::get('/chatroom', function() {
+  return view('chat.room');
+});
+Route::get('/new-message', function(){
+  broadcast(new \App\Events\NewMessage);
 });
