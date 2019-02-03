@@ -240,9 +240,10 @@ Route::get('pay/f', function () {
 });
 
 // temp online chat
-Route::get('/chatroom', function() {
-  return view('chat.room');
-});
-Route::get('/new-message', function(){
-  broadcast(new \App\Events\NewMessage);
+Route::prefix('chat')->name('chat.')->namespace('Chat')->middleware('auth')->group(function(){
+  Route::get('info', 'General@info')->name('info');
+  Route::get('/new-message', 'General@newMessage')->name('new_message');
+  Route::get('/chatroom', function() {
+    return view('chat.room');
+  });
 });

@@ -16,12 +16,17 @@ class NewMessage implements ShouldBroadcast {
    *
    * @return void
    */
-  private $data = 'null';
-  public function __construct() {
-    $this->data = time();
+  private $name = 'null';
+  private $message = 'null';
+  public function __construct($name, $message) {
+    $this->name = $name;
+    $this->message = $message;
   }
   public function broadcastWith() {
-    return ['id' => $this->data];
+    return [
+      'name' => $this->name,
+      'message' => $this->message,
+    ];
   }
   /**
    * Get the channels the event should broadcast on.

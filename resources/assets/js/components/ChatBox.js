@@ -1,12 +1,27 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
+import {getInfo, sendMessage} from '../drivers/chat';
 export default class ChatBox extends Component {
   constructor() {
     super();
-    console.log('tests');
-    window.Echo.channel(`messages`).listen('NewMessage', (e) => {
-      console.log(e);
+    this.state = {
+      info: {},
+      messages: [
+      ],
+    }
+    window.Echo.channel(`messages`).listen('NewMessage', (message) => {
+      const messages = this.state.messages;
+      messages.push(message);
+      this.setState(messages);
     });
+    getInfo((info) => {
+      this.setState({info});
+    }, () => {      
+    })
+    this.sendMessage = () => {
+      const text = document.getElementById('text').value
+      sendMessage(`${this.state.info.first_name}  ${this.state.info.last_name}`, text, () => {}, () => {})
+    }
   }
   render() {
     return (
@@ -14,8 +29,29 @@ export default class ChatBox extends Component {
         <div className="row justify-content-center">
           <div className="col-md-12">
             <div className="card">
-              <div className="card-header">Temp Room</div>
-              <div className="card-body">This is the timer value: 2</div>
+              {this.state.info.first_name == null?
+                <div className="card-header">Temp Room </div>:
+                <div className="card-header">Temp Room ({this.state.info.first_name + ' ' + this.state.info.last_name})</div>
+              }
+              <div className="card-body">
+                <div className="row">
+                  <div className="col-md-12">
+                    <input id="text" placeholder="write something" />
+                    <button onClick={this.sendMessage} className="btn btn-primary">send</button>
+                  </div>
+                </div>
+                <div className="row">
+                  <div className="col-md-12 message">
+                    {this.state.messages.map((item, index) => ( 
+                      <div className="row" key={index}>
+                        <div className="col-md-12">
+                          <b>{item.name}:</b> {item.message}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>

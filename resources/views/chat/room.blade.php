@@ -23,15 +23,19 @@
       .card-header {
         font-size: 18px;
         text-align: right;
-        direction: rtl;
+        direction: ltr;
       }
       .card-body {
         font-size: 14px;
         text-align: right;
-        direction: rtl;
+        direction: ltr;
       }
       .card {
         width: 100%;
+      }
+      .message {
+        direction: ltr;
+        text-align: left;
       }
     </style>
     <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
