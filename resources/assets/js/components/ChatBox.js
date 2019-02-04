@@ -8,12 +8,13 @@ export default class ChatBox extends Component {
       info: {},
       messages: [
       ],
-    }
-    window.Echo.channel(`messages`).listen('NewMessage', (message) => {
+    };
+    window.Echo.private(`messages`).listen('.text-message', (message) => {
       const messages = this.state.messages;
       messages.push(message);
       this.setState(messages);
     });
+    
     getInfo((info) => {
       this.setState({info});
     }, () => {      
@@ -21,6 +22,9 @@ export default class ChatBox extends Component {
     this.sendMessage = () => {
       const text = document.getElementById('text').value
       sendMessage(`${this.state.info.first_name}  ${this.state.info.last_name}`, text, () => {}, () => {})
+    }
+    this.input_changed = () => {
+      console.log(`I'm Typing...`);
     }
   }
   render() {
@@ -36,7 +40,7 @@ export default class ChatBox extends Component {
               <div className="card-body">
                 <div className="row">
                   <div className="col-md-12">
-                    <input id="text" placeholder="write something" />
+                    <input id="text" placeholder="write something" onChange={this.input_changed}/>
                     <button onClick={this.sendMessage} className="btn btn-primary">send</button>
                   </div>
                 </div>

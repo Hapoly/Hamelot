@@ -23,7 +23,7 @@ Route::middleware(['auth'])->namespace('Panel')->prefix('panel')->name('panel.')
     'bids' => 'Bids',
     'bank-accounts' => 'BankAccounts',
   ]);
-  Route::prefix('report-fields')->name('report_fields.')->group(function(){
+  Route::prefix('report-fields')->name('report_fields.')->group(function () {
     Route::get('remove/{report_field}', 'ReportTemplates@removeField')->name('remove');
   });
   Route::get('/activity-times/create/visit', 'ActivityTimes@createVisit')->name('activity-times.create_visit');
@@ -210,7 +210,7 @@ Route::middleware('auth')->group(function () {
   Route::get('/home', 'HomeController@home')->name('home');
 });
 
-Route::prefix('/fields')->name('fields.')->group(function(){
+Route::prefix('/fields')->name('fields.')->group(function () {
   Route::get('/', 'GeneralController@indexFields')->name('index');
   Route::get('/result', 'GeneralController@resultFields')->name('result');
 });
@@ -239,11 +239,45 @@ Route::get('pay/f', function () {
   return view('payment.fail');
 });
 
-// temp online chat
-Route::prefix('chat')->name('chat.')->namespace('Chat')->middleware('auth')->group(function(){
+// conversations on web
+Route::prefix('chat')->name('chat.')->namespace('Chat')->middleware('auth')->group(function () {
   Route::get('info', 'General@info')->name('info');
-  Route::get('/new-message', 'General@newMessage')->name('new_message');
-  Route::get('/chatroom', function() {
+  Route::prefix('conversations')->name('conversations.')->group(function () {
+    Route::post('/createGroup', 'Conversations@createGroup')->name('createGroup');
+    Route::post('/createPrivate', 'Conversations@createPrivate')->name('createPrivate');
+    Route::post('/createChannel', 'Conversations@createChannel')->name('createChannel');
+    Route::post('/edit', 'Conversations@edit')->name('edit');
+    Route::post('/remove', 'Conversations@remove')->name('remove');
+    Route::get('/list', 'Conversations@list')->name('list');
+  });
+  Route::prefix('messages')->name('messages.')->group(function(){
+    Route::get('/updates', 'Messages@getUpdates')->name('updates');
+    Route::prefix('create')->name('create.')->group(function(){
+      Route::post('/text', 'Messages@createText')->name('text');
+      Route::post('/pic', 'Messages@createPic')->name('pic');
+      Route::post('/voice', 'Messages@createVoice')->name('voice');
+      Route::post('/video', 'Messages@createVideo')->name('video');
+      Route::post('/file', 'Messages@createFile')->name('file');
+      Route::post('/action', 'Messages@createAction')->name('action');
+    });
+    Route::prefix('edit')->name('edit.')->group(function(){
+      Route::post('/text', 'Messages@editText')->name('text');
+      Route::post('/pic', 'Messages@editPic')->name('pic');
+      Route::post('/voice', 'Messages@editVoice')->name('voice');
+      Route::post('/video', 'Messages@editVideo')->name('video');
+      Route::post('/file', 'Messages@editFile')->name('file');
+      Route::post('/action', 'Messages@editAction')->name('action');
+    });
+    Route::post('/remove', 'Messages@remove')->name('remove');
+  });
+  Route::prefix('members')->name('members.')->group(function(){
+    Route::post('/conversation', 'Members@conversation')->name('conversation');
+    Route::post('/count', 'Members@count')->name('count');
+    Route::post('/add', 'Members@add')->name('add');
+    Route::post('/kick', 'Members@kick')->name('kick');
+    Route::post('/modify', 'Members@modify')->name('modify');
+  });
+  Route::get('/chatroom', function () {
     return view('chat.room');
   });
 });
