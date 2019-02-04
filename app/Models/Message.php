@@ -5,6 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
 class Message extends Model {
+  /**
+   * Indicates if the IDs are auto-incrementing.
+   *
+   * @var bool
+   */
+  public $incrementing = false;
   protected $primary = 'id';
   protected $table = 'messages';
   protected $fillable = ['type', 'body', 'status', 'member_id', 'conversation_id'];

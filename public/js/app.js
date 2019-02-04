@@ -46190,6 +46190,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__drivers_chat__ = __webpack_require__(93);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__drivers_chat___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__drivers_chat__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__drivers_profile__ = __webpack_require__(99);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__drivers_profile___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__drivers_profile__);
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -46197,6 +46199,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
 
 
 
@@ -46220,7 +46223,7 @@ var ChatBox = function (_Component) {
       _this.setState(messages);
     });
 
-    Object(__WEBPACK_IMPORTED_MODULE_2__drivers_chat__["getInfo"])(function (info) {
+    Object(__WEBPACK_IMPORTED_MODULE_3__drivers_profile__["getInfo"])(function (info) {
       _this.setState({ info: info });
     }, function () {});
     _this.sendMessage = function () {
@@ -69575,6 +69578,56 @@ module.exports = {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 95 */,
+/* 96 */,
+/* 97 */,
+/* 98 */,
+/* 99 */
+/***/ (function(module, exports) {
+
+var getCookie = function getCookie(cname) {
+  var name = cname + "=";
+  var decodedCookie = decodeURIComponent(document.cookie);
+  var ca = decodedCookie.split(';');
+  for (var i = 0; i < ca.length; i++) {
+    var c = ca[i];
+    while (c.charAt(0) == ' ') {
+      c = c.substring(1);
+    }
+    if (c.indexOf(name) == 0) {
+      return c.substring(name.length, c.length);
+    }
+  }
+  return "";
+};
+
+var getInfo = function getInfo(resolve, reject) {
+  var token = getCookie('auth_token');
+  var data = JSON.stringify(false);
+  var xhr = new XMLHttpRequest();
+  xhr.withCredentials = true;
+
+  xhr.addEventListener("readystatechange", function () {
+    if (this.readyState === this.DONE) {
+      resolve(JSON.parse(this.responseText));
+    } else {
+      reject();
+    }
+  });
+
+  xhr.open("GET", "http://localhost:8000/api/profile/");
+  xhr.setRequestHeader("accept", "application/json");
+  xhr.setRequestHeader("authorization", 'Bearer ' + token);
+  xhr.setRequestHeader("content-type", "application/json");
+
+  xhr.send(data);
+};
+
+module.exports = {
+  getInfo: getInfo
+};
 
 /***/ })
 /******/ ]);

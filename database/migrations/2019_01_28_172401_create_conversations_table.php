@@ -16,6 +16,8 @@ class CreateConversationsTable extends Migration {
       $table->string('title', 100)->default('DEFAULT');
       $table->string('description', 500)->default('DEFAULT');
       $table->smallInteger('status')->default(1);
+      $table->smallInteger('type')->default(1);
+      $table->uuid('target')->default('NuLL');
       $table->timestamps();
     });
   }

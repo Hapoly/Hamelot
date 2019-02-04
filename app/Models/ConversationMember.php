@@ -5,6 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
 class ConversationMember extends Model {
+  /**
+   * Indicates if the IDs are auto-incrementing.
+   *
+   * @var bool
+   */
+  public $incrementing = false;
   protected $primary = 'id';
   protected $table = 'conversation_members';
   protected $fillable = ['user_id', 'conversation_id', 'status', 'last_online', 'status'];

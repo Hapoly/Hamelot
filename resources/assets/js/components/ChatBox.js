@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import {getInfo, sendMessage} from '../drivers/chat';
+import {sendMessage} from '../drivers/chat';
+import {getInfo} from '../drivers/profile';
 export default class ChatBox extends Component {
   constructor() {
     super();

@@ -12,7 +12,7 @@ class General extends Controller {
     return Auth::user();
   }
 
-  public function newMessage(Request $request){
-    broadcast(new \App\Events\NewMessage($request->name, $request->message));
-  }
+  // public function newMessage(Request $request){
+  //   broadcast(new \App\Events\NewMessage($request->name, $request->message));
+  // }
 }

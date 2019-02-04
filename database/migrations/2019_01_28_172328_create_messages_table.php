@@ -12,7 +12,8 @@ class CreateMessagesTable extends Migration {
    */
   public function up() {
     Schema::create('messages', function (Blueprint $table) {
-      $table->increments('id');
+      $table->uuid('id');
+      $table->primary('id');
       $table->integer('member_id')->index();
       $table->integer('conversation_id')->index();
       $table->smallInteger('type')->default(1);

@@ -12,10 +12,11 @@ class CreateConversationMembersTable extends Migration {
    */
   public function up() {
     Schema::create('conversation_members', function (Blueprint $table) {
-      $table->increments('id');
-      $table->integer('user_id')->index();
+      $table->uuid('id');
+      $table->primary('id');
+      $table->uuid('user_id')->index();
       $table->integer('conversation_id')->index();
-      $table->integer('last_read')->index();
+      $table->integer('last_read')->datetime();
       $table->integer('last_online')->default(0);
       $table->smallInteger('status')->default(1);
       $table->timestamps();
